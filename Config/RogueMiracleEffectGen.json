@@ -1,0 +1,318 @@
+{
+    "Miracles": {
+        "8": {
+            "MiracleId": 8,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        631010,
+                        0
+                    ]
+                }
+            }
+        },
+        "14": {
+            "MiracleId": 14,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        631004,
+                        3
+                    ]
+                },
+                "3": {
+                    "EffectId": 3,
+                    "Type": "CurMoney",
+                    "DynamicKey": "ItemNumber"
+                }
+            }
+        },
+        "19": {
+            "MiracleId": 19,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        631012,
+                        0
+                    ]
+                }
+            }
+        },
+        "57": {
+            "MiracleId": 57,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        631026,
+                        0
+                    ]
+                }
+            }
+        },
+        "59": {
+            "MiracleId": 59,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        631028,
+                        0
+                    ]
+                }
+            }
+        },
+        "62": {
+            "MiracleId": 62,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        631025,
+                        0
+                    ]
+                }
+            }
+        },
+        "68": {
+            "MiracleId": 68,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        631030,
+                        0
+                    ]
+                }
+            }
+        },
+        "71": {
+            "MiracleId": 71,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        631031,
+                        0
+                    ]
+                }
+            }
+        },
+        "104": {
+            "MiracleId": 104,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        620001,
+                        3
+                    ]
+                },
+                "3": {
+                    "EffectId": 3,
+                    "Type": "CurMoney",
+                    "DynamicKey": "_BrokenMiracleNum"
+                }
+            }
+        },
+        "111": {
+            "MiracleId": 111,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        632003,
+                        0
+                    ]
+                }
+            }
+        },
+        "113": {
+            "MiracleId": 113,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        632206,
+                        3
+                    ]
+                },
+                "3": {
+                    "EffectId": 3,
+                    "Type": "UseMoney",
+                    "DynamicKey": "_MoneyUse"
+                },
+                "4": {
+                    "EffectId": 4,
+                    "Type": "OnGetMiracle",
+                    "Params": [
+                        5
+                    ]
+                },
+                "5": {
+                    "EffectId": 5,
+                    "Type": "ChangeItemRatioAndSetVar",
+                    "Params": [
+                        -100
+                    ]
+                }
+            }
+        },
+        "118": {
+            "MiracleId": 118,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        632004,
+                        0
+                    ]
+                }
+            }
+        },
+        "122": {
+            "MiracleId": 122,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        632006,
+                        0
+                    ]
+                },
+                "3": {
+                    "EffectId": 3,
+                    "Type": "BuffTypeNum",
+                    "DynamicKey": "_BuffTypeNum"
+                }
+            }
+        },
+        "3206": {
+            "MiracleId": 3206,
+            "Effects": {
+                "1": {
+                    "EffectId": 1,
+                    "Type": "OnBattleStart",
+                    "Params": [
+                        2
+                    ]
+                },
+                "2": {
+                    "EffectId": 2,
+                    "Type": "AddMazeBuff",
+                    "Params": [
+                        632201,
+                        0
+                    ]
+                }
+            }
+        }
+    }
+}
