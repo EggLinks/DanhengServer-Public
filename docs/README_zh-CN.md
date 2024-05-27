@@ -1,6 +1,6 @@
 # Danheng Server
 
-**__此项目正在开发中!__**
+**__此项目正在开发中！__**
 
 <p align="center">
 <a href="https://visualstudio.com"><img src="https://img.shields.io/badge/Visual%20Studio-000000.svg?style=for-the-badge&logo=visual-studio&logoColor=white" /></a>
@@ -21,11 +21,14 @@
 - [√] **战斗** - 场景技能中有一些错误
 - [√] **场景** - 行走模拟器、交互、正确加载实体
 - [√] **基本的角色培养** - 一些小bug，影响体验不大
-- [√] **任务** - 已完成男主的许多任务，若你选择女主则可能会在某些任务中卡住，需要修复
-- [-] **朋友** - 开发中...
-- [-] **模拟宇宙** - 开发中...
+- [√] **任务** - 某些任务中可能存在一些错误，贝洛伯格主线任务已全数完成，剩余内容正在制作中或是尚未测试，适用于星与穹
+- [√] **朋友**
+- [√] **忘却之庭 & 虚构叙事**
+- [√] **模拟宇宙**
 
-- [ ] **更多**  - Comming soon...
+- [ ] **更多**  - Coming soon...
+
+当新版本之「某动漫游戏」发布时，某些功能将不会在第一时间支援，请持续关注我们的提交内容。 自从2.3版本起，我们建立了适用于Beta版本的私人分支，将在准备完成后第一时间合并至主仓库。
 
 ## 🍗使用&安装
 
@@ -41,7 +44,7 @@
 
 ### 构建
 
-Danhengserver使用Dotnet构建
+DanhengServer 使用 .NET Framework 构建
 
 **前置：**
 
@@ -55,14 +58,14 @@ git clone --recurse-submodules https://github.com/StopWuyu/DanhengServer.git
 cd DanhengServer
 .\dotnet build # 编译
 ```
-##### Linux （Ubuntu20.04）
+##### Linux （Ubuntu 20.04）
 ```shell
 # 添加 Microsoft 包存储库
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 
-# 安装SDK
+# 安装 .NET SDK
 sudo apt-get update && \
   sudo apt-get install -y dotnet-sdk-8.0
 ```

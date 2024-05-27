@@ -1,6 +1,6 @@
 # Danheng S# Danheng Server
 
-**__此專案目前正在開發中!__**
+**__此專案目前尚在開發中！__**
 
 <p align="center">
 <a href="https://visualstudio.com"><img src="https://img.shields.io/badge/Visual%20Studio-000000.svg?style=for-the-badge&logo=visual-studio&logoColor=white" /></a>
@@ -18,15 +18,17 @@
 - [√] **商店**
 - [√] **編隊**
 - [√] **抽卡** - 可自訂機率: )
-- [√] **戰鬥** - 場景技能中有一些錯誤
+- [√] **戰鬥** - 場景技能中有可能存在一些錯誤
 - [√] **場景** - 走路模擬器、互動、正確載入實體
 - [√] **基本的角色培養** - 一些小bug，影響體驗不大
-- [√] **任務** - 已完成男主（穹）的許多任務，若你選擇女主（星）則可能會在某些任務中卡住，需要修復
-- [-] **朋友** - 開發中...
-- [-] **忘卻之庭與虛構敘事** - 開發中...
-- [-] **模擬宇宙** - 開發中...
+- [√] **任務** - 某些任務中可能存在一些錯誤，貝洛伯格主線任務已全數完成，剩餘內容正在製作中或是尚未測試，適用於星與穹
+- [√] **好友**
+- [√] **忘卻之庭 & 虛構敘事**
+- [√] **模擬宇宙**
 
 - [ ] **更多**  - Coming soon...
+
+當新版本之「某動漫遊戲」發佈時，某些功能將不會在第一時間支援，請持續關注我們的提交內容。自從2.3版本起，我們建立了適用於Beta版本的私人分支，將在準備完成後第一時間合併至主倉庫。
 
 ## 🍗使用&安裝
 
@@ -42,7 +44,7 @@
 
 ### 構建
 
-Danhengserver使用Dotnet構建
+DanhengServer 使用 .NET Framework 構建
 
 **前置：**
 
@@ -56,14 +58,14 @@ git clone --recurse-submodules https://github.com/EggLinks/DanhengServer.git
 cd DanhengServer
 .\dotnet build # 編譯
 ```
-##### Linux （Ubuntu20.04）
+##### Linux （Ubuntu 20.04）
 ```shell
 # 添加 Microsoft 包儲存庫
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 
-# 安裝SDK
+# 安裝 .NET SDK
 sudo apt-get update && \
   sudo apt-get install -y dotnet-sdk-8.0
 ```

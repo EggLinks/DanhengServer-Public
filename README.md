@@ -1,6 +1,6 @@
 # Danheng Server
 
-**__This project is under development! Some game technique cannot run correctly!__**
+**__This project is under development! Some game technique might not correctly!__**
 
 <p align="center">
 <a href="https://visualstudio.com"><img src="https://img.shields.io/badge/Visual%20Studio-000000.svg?style=for-the-badge&logo=visual-studio&logoColor=white" /></a>
@@ -20,13 +20,15 @@
 - [√] **Gacha** - Custom probability : )
 - [√] **Battle** - Some errors are exist among scene skills
 - [√] **Scene** - Walking simulator, interaction, correct loading of entities
-- [√] **Basic character development** - Some minor bugs that don't significantly affect the experience
-- [√] **Quests** - Many quests involving the male Trailblazer (Caelus) have been completed. If you choose the female Trailblazer (Stelle), you may stuck in certain quests and need to be repaired
-- [-] **Friends** - Under development
-- [-] **Memory of Chaos and Pure Fiction** - Under development
-- [-] **Simulated Universe** - Under development
+- [√] **Basic character development** - Some minor bugs that don't significantly affect the playing experience
+- [√] **Quests** - Some issues are exist among some quests. Storyline for Belobog has been completed, others remain WIP or untested, working for both Caelus and Stelle.
+- [√] **Friends**
+- [√] **Forgotten Hall & Pure Fiction**
+- [√] **Simulated Universe**
 
 - [ ] **More**  - Coming soon
+
+Some functions for the game might not support at the first time when new "Anime Game" version drops, please stay tune to our new commit. Since version 2.3, we've created a private fork which supports beta version, and will merge to main branch asap when it's ready.
 
 ## 🍗 Use & Installation
 
@@ -40,7 +42,7 @@
 
 ### Build
 
-Danheng server is built using Dotnet Framework
+DanhengServer is built using .NET Framework
 
 **Requirement: **
 
@@ -53,6 +55,24 @@ Danheng server is built using Dotnet Framework
 git clone --recurse-submodules https://github.com/EggLinks/DanhengServer.git
 cd DanhengServer
 dotnet build # compile
+```
+##### Linux （Ubuntu 20.04）
+```shell
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+
+# Install .NET SDK
+sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-8.0
+```
+
+- Compile and run environment
+```shell
+git clone --recurse-submodules https://github.com/EggLinks/DanhengServer.git
+cd DanhengServer
+.\dotnet build # compile
+./Gameserver
 ```
 
 ## ❓ Help
