@@ -11,7 +11,7 @@
   <a href="https://discord.gg/xRtZsmHBVj"><img src="https://img.shields.io/badge/Discord%20Server-000000.svg?style=for-the-badge&logo=Discord&logoColor=white" /></a>
 </p>
 
-[EN](README.md) | [簡中](docs/README_zh-CN.md) | [繁中](docs/README_zh-CN.md) | [JP](docs/README_ja-JP.md)
+[EN](README.md) | [简中](docs/README_zh-CN.md) | [繁中](docs/README_zh-CN.md) | [JP](docs/README_ja-JP.md)
 
 ## 💡 Function
 
@@ -34,7 +34,7 @@ Some functions for the game might not support at the first time when new "Anime 
 
 ### Quick Start
 
-1. Download the executable file from [Action](https://github.com/EggLinks/DanhengServer/actions)
+1. Download the executable file from [Action](https://github.com/EggLink/DanhengServer-Public/actions)
 2. Open the downloaded `DanhengServer.zip` and extract it to any folder __*preferably an English path__
    (Optional) Download the `certificate.p12` from the WebServer folder of the source code to enable HTTPS mode, ensuring a more secure traffic
 3. Run GameServer.exe

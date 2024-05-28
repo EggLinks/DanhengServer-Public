@@ -11,7 +11,7 @@
   <a href="https://discord.gg/xRtZsmHBVj"><img src="https://img.shields.io/badge/Discord%20Server-000000.svg?style=for-the-badge&logo=Discord&logoColor=white" /></a>
 </p>
 
-[EN](../README.md) | [簡中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
+[EN](../README.md) | [简中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
 
 ## 💡功能
 
@@ -34,7 +34,7 @@
 
 ### 快速啟動
 
-1. 在 [Action](https://github.com/StopWuyu/DanhengServer/actions) 下載可執行文件
+1. 在 [Action](https://github.com/EggLink/DanhengServer-Public/actions) 下載可執行文件
 2. 打開下載完成的 `DanhengServer.zip` 解解壓至任意資料夹 __*最好是英文路徑*__
 
 > (可選) 在原始碼的WebServer資料夾中下載 `certificate.p12` 使其以HTTPS模式啟動 讓你的傳輸更加安全: )
