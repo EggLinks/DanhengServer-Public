@@ -3,6 +3,10 @@
 
 name: .NET
 
+permissions:
+  actions: write
+  contents: write
+
 on:
   push:
     branches: [ "master" ]
@@ -12,7 +16,6 @@ on:
     paths: [ "**.cs" ]
   workflow_dispatch:
   
-
 jobs:
   build:
 
@@ -56,5 +59,22 @@ jobs:
         name: DanhengServer-linux-arm64
         path: Release\linux-arm64
 
-
-          
+    - name: Cleanup old artifacts
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const runId = process.env.GITHUB_RUN_ID;
+          const artifacts = await github.actions.listArtifactsForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+          });
+          for (const artifact of artifacts.data.artifacts) {
+            if (artifact.workflow_run.id.toString() !== runId) {
+              await github.actions.deleteArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: artifact.id,
+              });
+            }
+          }
