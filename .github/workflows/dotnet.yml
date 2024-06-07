@@ -1,0 +1,80 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+permissions:
+  actions: write
+  contents: write
+
+on:
+  push:
+    branches: [ "master" ]
+    paths: [ "**.cs" ]
+  pull_request:
+    branches: [ "master" ]
+    paths: [ "**.cs" ]
+  workflow_dispatch:
+  
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Publish win-x64
+      run: dotnet publish Program\Program.csproj -o Release\win-x64 -r win-x64 --framework net8.0 -p:PublishSingleFile=true
+
+    - name: Publish linux-x64
+      run: dotnet publish Program\Program.csproj -o Release\linux-x64 -r linux-x64 --framework net8.0 -p:PublishSingleFile=true
+
+    - name: Publish linux-arm64
+      run: dotnet publish Program\Program.csproj -o Release\linux-arm64 -r linux-arm64 --framework net8.0 -p:PublishSingleFile=true
+
+    - name: Upload win-x64 Build Artifact
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: DanhengServer-win-64
+        path: Release\win-x64
+
+    - name: Upload linux-x64 Build Artifact
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: DanhengServer-linux-x64
+        path: Release\linux-x64
+
+    - name: Upload linux-arm64 Build Artifact
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: DanhengServer-linux-arm64
+        path: Release\linux-arm64
+
+    - name: Cleanup old artifacts
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const runId = process.env.GITHUB_RUN_ID;
+          const artifacts = await github.actions.listArtifactsForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+          });
+          for (const artifact of artifacts.data.artifacts) {
+            if (artifact.workflow_run.id.toString() !== runId) {
+              await github.actions.deleteArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: artifact.id,
+              });
+            }
+          }
