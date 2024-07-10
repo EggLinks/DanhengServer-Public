@@ -105,7 +105,7 @@ cd DanhengServer
         "expireTimeStamp": ***
     }
   }
-  ```
+```
 —(2)提出命令インタフェース:http://127.0.0.1:8080/muip/exec_cmd(支持ポスト/ get)
 - -必伝パラメータ1:SessionId(ライセンスインターフェース要求後に取得します)
 - -必須引数2:Command(実行するコマンドをrsaPublicKey[ライセンスインターフェース取得]でRSA[pacs#1]で暗号化します)
@@ -120,7 +120,7 @@ cd DanhengServer
           "message": "*** //base64编码后
       }
     }
-    ```
+```
 —(3)サーバーの状態をインタフェース:http://127.0.0.1:8080/muip/server_information(支持get)だけ
 - -必伝パラメータ1:SessionId(ライセンスインターフェース要求後に取得します)
 - -リターン例です:
@@ -143,7 +143,7 @@ cd DanhengServer
          "programUsedMemory": 323
       }
     }
-    ```
+```
 —(4)プレイヤー情報を盗み出すインタフェース:http://127.0.0.1:8080/muip/player_information(支持get)だけ
 - -必伝パラメータ1:SessionId(ライセンスインターフェース要求後に取得します)
 - -必伝パラメーター2:Uid(プレイヤーUid)
@@ -170,7 +170,7 @@ cd DanhengServer
           "acceptedSubMissionIdList": Array[169]
       }
   }
-  ```
+```
 
 ## ❕️トラブルシューティング
 
