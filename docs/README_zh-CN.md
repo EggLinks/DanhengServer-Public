@@ -90,9 +90,9 @@ cd DanhengServer
 - 自2.3版本开始，支持外部API调用接口
 - 总接口为Dispatch接口加上入口，比如你的Dispatch为 http://127.0.0.1:8080，请求参数和返回都为json格式
 - (1)授权接口: http://127.0.0.1:8080/muip/auth_admin (支持POST/GET)
- - -必传参数1：admin_key (在config.php的MuipServer/AdminKey配置)
- - -必传参数2：key_type (类型，比如PEM)
-- -返回示例：
+   - -必传参数1：admin_key (在config.php的MuipServer/AdminKey配置)
+   - -必传参数2：key_type (类型，比如PEM)
+  - -返回示例：
   ```json
   {
     "code": 0,
