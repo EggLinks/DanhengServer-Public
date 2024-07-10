@@ -107,7 +107,7 @@ cd DanhengServer
 - (2)提交命令接口: http://127.0.0.1:8080/muip/exec_cmd (支持POST/GET)
   - -必传参数1：SessionId (在授权接口请求后获得)
   - -必传参数2：Command (需要执行的命令经过rsaPublicKey[授权接口获取]下RSA[pacs#1]加密)
-  - -必传参数2：TargetUid (执行命令的玩家UID)
+  - -必传参数3：TargetUid (执行命令的玩家UID)
   - -返回示例：
     ```json
     {
