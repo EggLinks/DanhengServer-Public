@@ -11,7 +11,7 @@
   <a href="https://discord.gg/xRtZsmHBVj"><img src="https://img.shields.io/badge/Discord%20Server-000000.svg?style=for-the-badge&logo=Discord&logoColor=white" /></a>
 </p>
 
-[EN](../README.md) | [簡中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
+[EN](../README.md) | [简中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
 
 ## 💡功能
 
@@ -34,7 +34,7 @@
 
 ### 快速启动
 
-1. 在 [Action](https://github.com/StopWuyu/DanhengServer/actions) 下载可执行文件
+1. 在 [Action](https://github.com/EggLink/DanhengServer-Public/actions) 下载可执行文件
 2. 打开下载完成的 `DanhengServer.zip` 解压至任意文件夹 __*最好是英文路径*__
 
 > (可选) 在源代码的WebServer文件夹中下载 `certificate.p12` 使得以HTTPS模式启动 让你的传输更安全: )
@@ -54,7 +54,7 @@ DanhengServer 使用 .NET Framework 构建
 ##### Windows
 
 ```shell
-git clone --recurse-submodules https://github.com/StopWuyu/DanhengServer.git
+git clone --recurse-submodules https://github.com/EggLink/DanhengServer-Public.git
 cd DanhengServer
 .\dotnet build # 编译
 ```
@@ -72,7 +72,7 @@ sudo apt-get update && \
 
 - 编译并运行环境
 ```shell
-git clone --recurse-submodules https://github.com/StopWuyu/DanhengServer.git
+git clone --recurse-submodules https://github.com/EggLink/DanhengServer-Public.git
 cd DanhengServer
 .\dotnet build # 编译
 ./Gameserver
