@@ -28,8 +28,8 @@ namespace EggLink.DanhengServer.Database.ChessRogue
             {
                 BranchId = (uint)BranchId,
                 SurfaceList = { Surfaces.Select(x => new ChessRogueDiceSurfaceInfo() { Index = (uint)x.Key, SurfaceId = (uint)x.Value }) },
-                //AreaId = (uint)AreaId,
-                //DifficultyLevel = (uint)DifficultyLevel,
+                AreaId = (uint)AreaId,
+                DifficultyLevel = (uint)DifficultyLevel,
             };
         }
     }

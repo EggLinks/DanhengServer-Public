@@ -11,7 +11,11 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Scene
     {
         public PacketGetSceneMapInfoScRsp(GetSceneMapInfoCsReq req, PlayerInstance player) : base(CmdIds.GetSceneMapInfoScRsp)
         {
-            var rsp = new GetSceneMapInfoScRsp();
+            var rsp = new GetSceneMapInfoScRsp()
+            {
+                CGIIIEKIDJE = req.CGIIIEKIDJE,
+            };
+
             foreach (var entry in req.EntryIdList)
             {
                 var mazeMap = new SceneMapInfo()

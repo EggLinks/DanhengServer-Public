@@ -25,7 +25,7 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChVSb2d1ZVRhbGVudEluZm8ucHJvdG8aEVJvZ3VlVGFsZW50LnByb3RvIjoK",
-            "D1JvZ3VlVGFsZW50SW5mbxInChFyb2d1ZV90YWxlbnRfbGlzdBgPIAMoCzIM",
+            "D1JvZ3VlVGFsZW50SW5mbxInChFyb2d1ZV90YWxlbnRfbGlzdBgJIAMoCzIM",
             "LlJvZ3VlVGFsZW50Qh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9i",
             "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
@@ -84,9 +84,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "rogue_talent_list" field.</summary>
-    public const int RogueTalentListFieldNumber = 15;
+    public const int RogueTalentListFieldNumber = 9;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.RogueTalent> _repeated_rogueTalentList_codec
-        = pb::FieldCodec.ForMessage(122, global::EggLink.DanhengServer.Proto.RogueTalent.Parser);
+        = pb::FieldCodec.ForMessage(74, global::EggLink.DanhengServer.Proto.RogueTalent.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueTalent> rogueTalentList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueTalent>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -187,7 +187,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 122: {
+          case 74: {
             rogueTalentList_.AddEntriesFrom(input, _repeated_rogueTalentList_codec);
             break;
           }
@@ -206,7 +206,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 122: {
+          case 74: {
             rogueTalentList_.AddEntriesFrom(ref input, _repeated_rogueTalentList_codec);
             break;
           }

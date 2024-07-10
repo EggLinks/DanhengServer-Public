@@ -19,7 +19,7 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Others
                 BeginTime = Extensions.GetUnixSec(),
                 EndTime = Extensions.GetUnixSec() + 3600,
                 ConfigId = 1,
-                CHJOJJLOBEI = ConfigManager.Config.ServerOption.ServerAnnounce.AnnounceContent,
+                CHJPFPLHJBJ = ConfigManager.Config.ServerOption.ServerAnnounce.AnnounceContent,
             });
 
             if (ConfigManager.Config.ServerOption.ServerAnnounce.EnableAnnounce)

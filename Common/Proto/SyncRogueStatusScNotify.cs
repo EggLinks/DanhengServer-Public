@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ch1TeW5jUm9ndWVTdGF0dXNTY05vdGlmeS5wcm90bxoRUm9ndWVTdGF0dXMu",
-            "cHJvdG8iTAoXU3luY1JvZ3VlU3RhdHVzU2NOb3RpZnkSHAoGc3RhdHVzGA8g",
-            "ASgOMgwuUm9ndWVTdGF0dXMSEwoLQU5IUE5DTk5FSUcYBSABKAhCHqoCG0Vn",
+            "cHJvdG8iTAoXU3luY1JvZ3VlU3RhdHVzU2NOb3RpZnkSHAoGc3RhdHVzGAog",
+            "ASgOMgwuUm9ndWVTdGF0dXMSEwoLRUlFTEdOREdER04YByABKAhCHqoCG0Vn",
             "Z0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RogueStatusReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SyncRogueStatusScNotify), global::EggLink.DanhengServer.Proto.SyncRogueStatusScNotify.Parser, new[]{ "Status", "ANHPNCNNEIG" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SyncRogueStatusScNotify), global::EggLink.DanhengServer.Proto.SyncRogueStatusScNotify.Parser, new[]{ "Status", "EIELGNDGDGN" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,7 +74,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SyncRogueStatusScNotify(SyncRogueStatusScNotify other) : this() {
       status_ = other.status_;
-      aNHPNCNNEIG_ = other.aNHPNCNNEIG_;
+      eIELGNDGDGN_ = other.eIELGNDGDGN_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,7 +85,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 15;
+    public const int StatusFieldNumber = 10;
     private global::EggLink.DanhengServer.Proto.RogueStatus status_ = global::EggLink.DanhengServer.Proto.RogueStatus.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -96,15 +96,15 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "ANHPNCNNEIG" field.</summary>
-    public const int ANHPNCNNEIGFieldNumber = 5;
-    private bool aNHPNCNNEIG_;
+    /// <summary>Field number for the "EIELGNDGDGN" field.</summary>
+    public const int EIELGNDGDGNFieldNumber = 7;
+    private bool eIELGNDGDGN_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool ANHPNCNNEIG {
-      get { return aNHPNCNNEIG_; }
+    public bool EIELGNDGDGN {
+      get { return eIELGNDGDGN_; }
       set {
-        aNHPNCNNEIG_ = value;
+        eIELGNDGDGN_ = value;
       }
     }
 
@@ -124,7 +124,7 @@ namespace EggLink.DanhengServer.Proto {
         return true;
       }
       if (Status != other.Status) return false;
-      if (ANHPNCNNEIG != other.ANHPNCNNEIG) return false;
+      if (EIELGNDGDGN != other.EIELGNDGDGN) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -133,7 +133,7 @@ namespace EggLink.DanhengServer.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) hash ^= Status.GetHashCode();
-      if (ANHPNCNNEIG != false) hash ^= ANHPNCNNEIG.GetHashCode();
+      if (EIELGNDGDGN != false) hash ^= EIELGNDGDGN.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -152,12 +152,12 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ANHPNCNNEIG != false) {
-        output.WriteRawTag(40);
-        output.WriteBool(ANHPNCNNEIG);
+      if (EIELGNDGDGN != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(EIELGNDGDGN);
       }
       if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(80);
         output.WriteEnum((int) Status);
       }
       if (_unknownFields != null) {
@@ -170,12 +170,12 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ANHPNCNNEIG != false) {
-        output.WriteRawTag(40);
-        output.WriteBool(ANHPNCNNEIG);
+      if (EIELGNDGDGN != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(EIELGNDGDGN);
       }
       if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(80);
         output.WriteEnum((int) Status);
       }
       if (_unknownFields != null) {
@@ -191,7 +191,7 @@ namespace EggLink.DanhengServer.Proto {
       if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
       }
-      if (ANHPNCNNEIG != false) {
+      if (EIELGNDGDGN != false) {
         size += 1 + 1;
       }
       if (_unknownFields != null) {
@@ -209,8 +209,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other.Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
         Status = other.Status;
       }
-      if (other.ANHPNCNNEIG != false) {
-        ANHPNCNNEIG = other.ANHPNCNNEIG;
+      if (other.EIELGNDGDGN != false) {
+        EIELGNDGDGN = other.EIELGNDGDGN;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -227,11 +227,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 40: {
-            ANHPNCNNEIG = input.ReadBool();
+          case 56: {
+            EIELGNDGDGN = input.ReadBool();
             break;
           }
-          case 120: {
+          case 80: {
             Status = (global::EggLink.DanhengServer.Proto.RogueStatus) input.ReadEnum();
             break;
           }
@@ -250,11 +250,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 40: {
-            ANHPNCNNEIG = input.ReadBool();
+          case 56: {
+            EIELGNDGDGN = input.ReadBool();
             break;
           }
-          case 120: {
+          case 80: {
             Status = (global::EggLink.DanhengServer.Proto.RogueStatus) input.ReadEnum();
             break;
           }

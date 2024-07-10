@@ -25,7 +25,7 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChVHYW1lTWlyYWNsZUluZm8ucHJvdG8aFlJvZ3VlTWlyYWNsZUluZm8ucHJv",
-            "dG8iPwoPR2FtZU1pcmFjbGVJbmZvEiwKEWdhbWVfbWlyYWNsZV9pbmZvGAog",
+            "dG8iPwoPR2FtZU1pcmFjbGVJbmZvEiwKEWdhbWVfbWlyYWNsZV9pbmZvGAgg",
             "ASgLMhEuUm9ndWVNaXJhY2xlSW5mb0IeqgIbRWdnTGluay5EYW5oZW5nU2Vy",
             "dmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
@@ -84,7 +84,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "game_miracle_info" field.</summary>
-    public const int GameMiracleInfo_FieldNumber = 10;
+    public const int GameMiracleInfo_FieldNumber = 8;
     private global::EggLink.DanhengServer.Proto.RogueMiracleInfo gameMiracleInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -138,7 +138,7 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (gameMiracleInfo_ != null) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(66);
         output.WriteMessage(GameMiracleInfo_);
       }
       if (_unknownFields != null) {
@@ -152,7 +152,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (gameMiracleInfo_ != null) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(66);
         output.WriteMessage(GameMiracleInfo_);
       }
       if (_unknownFields != null) {
@@ -201,7 +201,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 82: {
+          case 66: {
             if (gameMiracleInfo_ == null) {
               GameMiracleInfo_ = new global::EggLink.DanhengServer.Proto.RogueMiracleInfo();
             }
@@ -223,7 +223,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 82: {
+          case 66: {
             if (gameMiracleInfo_ == null) {
               GameMiracleInfo_ = new global::EggLink.DanhengServer.Proto.RogueMiracleInfo();
             }

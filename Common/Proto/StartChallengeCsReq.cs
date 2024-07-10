@@ -25,14 +25,15 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChlTdGFydENoYWxsZW5nZUNzUmVxLnByb3RvGh1TdGFydENoYWxsZW5nZVN0",
-            "b3J5SW5mby5wcm90byJaChNTdGFydENoYWxsZW5nZUNzUmVxEi0KC3BsYXll",
-            "cl9pbmZvGAkgASgLMhguU3RhcnRDaGFsbGVuZ2VTdG9yeUluZm8SFAoMY2hh",
-            "bGxlbmdlX2lkGAYgASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJv",
-            "dG9iBnByb3RvMw=="));
+            "b3J5SW5mby5wcm90byJ+ChNTdGFydENoYWxsZW5nZUNzUmVxEhAKCHRlYW1f",
+            "dHdvGA4gAygNEhQKDGNoYWxsZW5nZV9pZBgPIAEoDRItCgtwbGF5ZXJfaW5m",
+            "bxgDIAEoCzIYLlN0YXJ0Q2hhbGxlbmdlU3RvcnlJbmZvEhAKCHRlYW1fb25l",
+            "GAcgAygNQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.StartChallengeStoryInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.StartChallengeCsReq), global::EggLink.DanhengServer.Proto.StartChallengeCsReq.Parser, new[]{ "PlayerInfo", "ChallengeId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.StartChallengeCsReq), global::EggLink.DanhengServer.Proto.StartChallengeCsReq.Parser, new[]{ "TeamTwo", "ChallengeId", "PlayerInfo", "TeamOne" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,8 +75,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public StartChallengeCsReq(StartChallengeCsReq other) : this() {
-      playerInfo_ = other.playerInfo_ != null ? other.playerInfo_.Clone() : null;
+      teamTwo_ = other.teamTwo_.Clone();
       challengeId_ = other.challengeId_;
+      playerInfo_ = other.playerInfo_ != null ? other.playerInfo_.Clone() : null;
+      teamOne_ = other.teamOne_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,8 +88,31 @@ namespace EggLink.DanhengServer.Proto {
       return new StartChallengeCsReq(this);
     }
 
+    /// <summary>Field number for the "team_two" field.</summary>
+    public const int TeamTwoFieldNumber = 14;
+    private static readonly pb::FieldCodec<uint> _repeated_teamTwo_codec
+        = pb::FieldCodec.ForUInt32(114);
+    private readonly pbc::RepeatedField<uint> teamTwo_ = new pbc::RepeatedField<uint>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<uint> TeamTwo {
+      get { return teamTwo_; }
+    }
+
+    /// <summary>Field number for the "challenge_id" field.</summary>
+    public const int ChallengeIdFieldNumber = 15;
+    private uint challengeId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint ChallengeId {
+      get { return challengeId_; }
+      set {
+        challengeId_ = value;
+      }
+    }
+
     /// <summary>Field number for the "player_info" field.</summary>
-    public const int PlayerInfoFieldNumber = 9;
+    public const int PlayerInfoFieldNumber = 3;
     private global::EggLink.DanhengServer.Proto.StartChallengeStoryInfo playerInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -97,16 +123,15 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "challenge_id" field.</summary>
-    public const int ChallengeIdFieldNumber = 6;
-    private uint challengeId_;
+    /// <summary>Field number for the "team_one" field.</summary>
+    public const int TeamOneFieldNumber = 7;
+    private static readonly pb::FieldCodec<uint> _repeated_teamOne_codec
+        = pb::FieldCodec.ForUInt32(58);
+    private readonly pbc::RepeatedField<uint> teamOne_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint ChallengeId {
-      get { return challengeId_; }
-      set {
-        challengeId_ = value;
-      }
+    public pbc::RepeatedField<uint> TeamOne {
+      get { return teamOne_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -124,8 +149,10 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(PlayerInfo, other.PlayerInfo)) return false;
+      if(!teamTwo_.Equals(other.teamTwo_)) return false;
       if (ChallengeId != other.ChallengeId) return false;
+      if (!object.Equals(PlayerInfo, other.PlayerInfo)) return false;
+      if(!teamOne_.Equals(other.teamOne_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -133,8 +160,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerInfo_ != null) hash ^= PlayerInfo.GetHashCode();
+      hash ^= teamTwo_.GetHashCode();
       if (ChallengeId != 0) hash ^= ChallengeId.GetHashCode();
+      if (playerInfo_ != null) hash ^= PlayerInfo.GetHashCode();
+      hash ^= teamOne_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -153,13 +182,15 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ChallengeId != 0) {
-        output.WriteRawTag(48);
-        output.WriteUInt32(ChallengeId);
-      }
       if (playerInfo_ != null) {
-        output.WriteRawTag(74);
+        output.WriteRawTag(26);
         output.WriteMessage(PlayerInfo);
+      }
+      teamOne_.WriteTo(output, _repeated_teamOne_codec);
+      teamTwo_.WriteTo(output, _repeated_teamTwo_codec);
+      if (ChallengeId != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(ChallengeId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -171,13 +202,15 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ChallengeId != 0) {
-        output.WriteRawTag(48);
-        output.WriteUInt32(ChallengeId);
-      }
       if (playerInfo_ != null) {
-        output.WriteRawTag(74);
+        output.WriteRawTag(26);
         output.WriteMessage(PlayerInfo);
+      }
+      teamOne_.WriteTo(ref output, _repeated_teamOne_codec);
+      teamTwo_.WriteTo(ref output, _repeated_teamTwo_codec);
+      if (ChallengeId != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(ChallengeId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -189,12 +222,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (playerInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerInfo);
-      }
+      size += teamTwo_.CalculateSize(_repeated_teamTwo_codec);
       if (ChallengeId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ChallengeId);
       }
+      if (playerInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerInfo);
+      }
+      size += teamOne_.CalculateSize(_repeated_teamOne_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -207,15 +242,17 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
+      teamTwo_.Add(other.teamTwo_);
+      if (other.ChallengeId != 0) {
+        ChallengeId = other.ChallengeId;
+      }
       if (other.playerInfo_ != null) {
         if (playerInfo_ == null) {
           PlayerInfo = new global::EggLink.DanhengServer.Proto.StartChallengeStoryInfo();
         }
         PlayerInfo.MergeFrom(other.PlayerInfo);
       }
-      if (other.ChallengeId != 0) {
-        ChallengeId = other.ChallengeId;
-      }
+      teamOne_.Add(other.teamOne_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -231,15 +268,25 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 48: {
-            ChallengeId = input.ReadUInt32();
-            break;
-          }
-          case 74: {
+          case 26: {
             if (playerInfo_ == null) {
               PlayerInfo = new global::EggLink.DanhengServer.Proto.StartChallengeStoryInfo();
             }
             input.ReadMessage(PlayerInfo);
+            break;
+          }
+          case 58:
+          case 56: {
+            teamOne_.AddEntriesFrom(input, _repeated_teamOne_codec);
+            break;
+          }
+          case 114:
+          case 112: {
+            teamTwo_.AddEntriesFrom(input, _repeated_teamTwo_codec);
+            break;
+          }
+          case 120: {
+            ChallengeId = input.ReadUInt32();
             break;
           }
         }
@@ -257,15 +304,25 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 48: {
-            ChallengeId = input.ReadUInt32();
-            break;
-          }
-          case 74: {
+          case 26: {
             if (playerInfo_ == null) {
               PlayerInfo = new global::EggLink.DanhengServer.Proto.StartChallengeStoryInfo();
             }
             input.ReadMessage(PlayerInfo);
+            break;
+          }
+          case 58:
+          case 56: {
+            teamOne_.AddEntriesFrom(ref input, _repeated_teamOne_codec);
+            break;
+          }
+          case 114:
+          case 112: {
+            teamTwo_.AddEntriesFrom(ref input, _repeated_teamTwo_codec);
+            break;
+          }
+          case 120: {
+            ChallengeId = input.ReadUInt32();
             break;
           }
         }

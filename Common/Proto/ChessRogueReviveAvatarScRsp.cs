@@ -24,16 +24,15 @@ namespace EggLink.DanhengServer.Proto {
     static ChessRogueReviveAvatarScRspReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiFDaGVzc1JvZ3VlUmV2aXZlQXZhdGFyU2NSc3AucHJvdG8aG1JvZ3VlQXZh",
-            "dGFyUmV2aXZlQ29zdC5wcm90byJ4ChtDaGVzc1JvZ3VlUmV2aXZlQXZhdGFy",
-            "U2NSc3ASKwoLcmV2aXZlX2luZm8YASABKAsyFi5Sb2d1ZUF2YXRhclJldml2",
-            "ZUNvc3QSGwoTYmFzZV9hdmF0YXJfaWRfbGlzdBgNIAMoDRIPCgdyZXRjb2Rl",
-            "GAggASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3Rv",
-            "Mw=="));
+            "CiFDaGVzc1JvZ3VlUmV2aXZlQXZhdGFyU2NSc3AucHJvdG8aEUlCSEZJR0RI",
+            "RUxPLnByb3RvIm4KG0NoZXNzUm9ndWVSZXZpdmVBdmF0YXJTY1JzcBIbChNi",
+            "YXNlX2F2YXRhcl9pZF9saXN0GAYgAygNEiEKC3Jldml2ZV9pbmZvGA8gASgL",
+            "MgwuSUJIRklHREhFTE8SDwoHcmV0Y29kZRgHIAEoDUIeqgIbRWdnTGluay5E",
+            "YW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RogueAvatarReviveCostReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.IBHFIGDHELOReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueReviveAvatarScRsp), global::EggLink.DanhengServer.Proto.ChessRogueReviveAvatarScRsp.Parser, new[]{ "ReviveInfo", "BaseAvatarIdList", "Retcode" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueReviveAvatarScRsp), global::EggLink.DanhengServer.Proto.ChessRogueReviveAvatarScRsp.Parser, new[]{ "BaseAvatarIdList", "ReviveInfo", "Retcode" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,8 +74,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ChessRogueReviveAvatarScRsp(ChessRogueReviveAvatarScRsp other) : this() {
-      reviveInfo_ = other.reviveInfo_ != null ? other.reviveInfo_.Clone() : null;
       baseAvatarIdList_ = other.baseAvatarIdList_.Clone();
+      reviveInfo_ = other.reviveInfo_ != null ? other.reviveInfo_.Clone() : null;
       retcode_ = other.retcode_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -87,22 +86,10 @@ namespace EggLink.DanhengServer.Proto {
       return new ChessRogueReviveAvatarScRsp(this);
     }
 
-    /// <summary>Field number for the "revive_info" field.</summary>
-    public const int ReviveInfoFieldNumber = 1;
-    private global::EggLink.DanhengServer.Proto.RogueAvatarReviveCost reviveInfo_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.RogueAvatarReviveCost ReviveInfo {
-      get { return reviveInfo_; }
-      set {
-        reviveInfo_ = value;
-      }
-    }
-
     /// <summary>Field number for the "base_avatar_id_list" field.</summary>
-    public const int BaseAvatarIdListFieldNumber = 13;
+    public const int BaseAvatarIdListFieldNumber = 6;
     private static readonly pb::FieldCodec<uint> _repeated_baseAvatarIdList_codec
-        = pb::FieldCodec.ForUInt32(106);
+        = pb::FieldCodec.ForUInt32(50);
     private readonly pbc::RepeatedField<uint> baseAvatarIdList_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -110,8 +97,20 @@ namespace EggLink.DanhengServer.Proto {
       get { return baseAvatarIdList_; }
     }
 
+    /// <summary>Field number for the "revive_info" field.</summary>
+    public const int ReviveInfoFieldNumber = 15;
+    private global::EggLink.DanhengServer.Proto.IBHFIGDHELO reviveInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.IBHFIGDHELO ReviveInfo {
+      get { return reviveInfo_; }
+      set {
+        reviveInfo_ = value;
+      }
+    }
+
     /// <summary>Field number for the "retcode" field.</summary>
-    public const int RetcodeFieldNumber = 8;
+    public const int RetcodeFieldNumber = 7;
     private uint retcode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -137,8 +136,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(ReviveInfo, other.ReviveInfo)) return false;
       if(!baseAvatarIdList_.Equals(other.baseAvatarIdList_)) return false;
+      if (!object.Equals(ReviveInfo, other.ReviveInfo)) return false;
       if (Retcode != other.Retcode) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -147,8 +146,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (reviveInfo_ != null) hash ^= ReviveInfo.GetHashCode();
       hash ^= baseAvatarIdList_.GetHashCode();
+      if (reviveInfo_ != null) hash ^= ReviveInfo.GetHashCode();
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -168,15 +167,15 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (reviveInfo_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(ReviveInfo);
-      }
+      baseAvatarIdList_.WriteTo(output, _repeated_baseAvatarIdList_codec);
       if (Retcode != 0) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(56);
         output.WriteUInt32(Retcode);
       }
-      baseAvatarIdList_.WriteTo(output, _repeated_baseAvatarIdList_codec);
+      if (reviveInfo_ != null) {
+        output.WriteRawTag(122);
+        output.WriteMessage(ReviveInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -187,15 +186,15 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (reviveInfo_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(ReviveInfo);
-      }
+      baseAvatarIdList_.WriteTo(ref output, _repeated_baseAvatarIdList_codec);
       if (Retcode != 0) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(56);
         output.WriteUInt32(Retcode);
       }
-      baseAvatarIdList_.WriteTo(ref output, _repeated_baseAvatarIdList_codec);
+      if (reviveInfo_ != null) {
+        output.WriteRawTag(122);
+        output.WriteMessage(ReviveInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -206,10 +205,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      size += baseAvatarIdList_.CalculateSize(_repeated_baseAvatarIdList_codec);
       if (reviveInfo_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ReviveInfo);
       }
-      size += baseAvatarIdList_.CalculateSize(_repeated_baseAvatarIdList_codec);
       if (Retcode != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
       }
@@ -225,13 +224,13 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
+      baseAvatarIdList_.Add(other.baseAvatarIdList_);
       if (other.reviveInfo_ != null) {
         if (reviveInfo_ == null) {
-          ReviveInfo = new global::EggLink.DanhengServer.Proto.RogueAvatarReviveCost();
+          ReviveInfo = new global::EggLink.DanhengServer.Proto.IBHFIGDHELO();
         }
         ReviveInfo.MergeFrom(other.ReviveInfo);
       }
-      baseAvatarIdList_.Add(other.baseAvatarIdList_);
       if (other.Retcode != 0) {
         Retcode = other.Retcode;
       }
@@ -250,20 +249,20 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            if (reviveInfo_ == null) {
-              ReviveInfo = new global::EggLink.DanhengServer.Proto.RogueAvatarReviveCost();
-            }
-            input.ReadMessage(ReviveInfo);
+          case 50:
+          case 48: {
+            baseAvatarIdList_.AddEntriesFrom(input, _repeated_baseAvatarIdList_codec);
             break;
           }
-          case 64: {
+          case 56: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 106:
-          case 104: {
-            baseAvatarIdList_.AddEntriesFrom(input, _repeated_baseAvatarIdList_codec);
+          case 122: {
+            if (reviveInfo_ == null) {
+              ReviveInfo = new global::EggLink.DanhengServer.Proto.IBHFIGDHELO();
+            }
+            input.ReadMessage(ReviveInfo);
             break;
           }
         }
@@ -281,20 +280,20 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            if (reviveInfo_ == null) {
-              ReviveInfo = new global::EggLink.DanhengServer.Proto.RogueAvatarReviveCost();
-            }
-            input.ReadMessage(ReviveInfo);
+          case 50:
+          case 48: {
+            baseAvatarIdList_.AddEntriesFrom(ref input, _repeated_baseAvatarIdList_codec);
             break;
           }
-          case 64: {
+          case 56: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 106:
-          case 104: {
-            baseAvatarIdList_.AddEntriesFrom(ref input, _repeated_baseAvatarIdList_codec);
+          case 122: {
+            if (reviveInfo_ == null) {
+              ReviveInfo = new global::EggLink.DanhengServer.Proto.IBHFIGDHELO();
+            }
+            input.ReadMessage(ReviveInfo);
             break;
           }
         }

@@ -415,20 +415,20 @@ namespace EggLink.DanhengServer.Game.Rogue
             return instance;
         }
 
-        public void HandleSelectOption(int eventId, int entityId)
+        public void HandleSelectOption(int eventUniqueId, int optionId)
         {
-            var entity = Player.SceneInstance!.Entities[entityId];
+            var entity = Player.SceneInstance!.Entities.Values.FirstOrDefault(x => x is RogueNpc npc && npc.RogueEvent?.EventUniqueId == eventUniqueId);
             if (entity is not RogueNpc npc)
             {
                 return;
             }
 
-            EventManager?.SelectOption(npc.RogueEvent!, eventId);
+            EventManager?.SelectOption(npc.RogueEvent!, optionId);
         }
 
-        public void HandleFinishDialogueGroup(int entityId)
+        public void HandleFinishDialogueGroup(int eventUniqueId)
         {
-            Player.SceneInstance!.Entities.TryGetValue(entityId, out var entity);
+            var entity = Player.SceneInstance!.Entities.Values.FirstOrDefault(x => x is RogueNpc npc && npc.RogueEvent?.EventUniqueId == eventUniqueId);
             if (entity == null || entity is not RogueNpc npc)
             {
                 return;

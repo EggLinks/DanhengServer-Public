@@ -24,12 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static PlayerStateTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChVQbGF5ZXJTdGF0ZVR5cGUucHJvdG8qtQEKD1BsYXllclN0YXRlVHlwZRIW",
+            "ChVQbGF5ZXJTdGF0ZVR5cGUucHJvdG8q6gEKD1BsYXllclN0YXRlVHlwZRIW",
             "ChJQTEFZSU5HX1NUQVRFX05PTkUQABIYChRQTEFZSU5HX1JPR1VFX0NPU01P",
             "UxABEhcKE1BMQVlJTkdfUk9HVUVfQ0hFU1MQAhIcChhQTEFZSU5HX1JPR1VF",
             "X0NIRVNTX05PVVMQAxIcChhQTEFZSU5HX0NIQUxMRU5HRV9NRU1PUlkQBBIb",
-            "ChdQTEFZSU5HX0NIQUxMRU5HRV9TVE9SWRAFQh6qAhtFZ2dMaW5rLkRhbmhl",
-            "bmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "ChdQTEFZSU5HX0NIQUxMRU5HRV9TVE9SWRAFEhoKFlBMQVlJTkdfQ0hBTExF",
+            "TkdFX0JPU1MQBhIXChNQTEFZSU5HX1JPR1VFX1RPVVJOEAdCHqoCG0VnZ0xp",
+            "bmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::EggLink.DanhengServer.Proto.PlayerStateType), }, null, null));
@@ -45,6 +46,8 @@ namespace EggLink.DanhengServer.Proto {
     [pbr::OriginalName("PLAYING_ROGUE_CHESS_NOUS")] PlayingRogueChessNous = 3,
     [pbr::OriginalName("PLAYING_CHALLENGE_MEMORY")] PlayingChallengeMemory = 4,
     [pbr::OriginalName("PLAYING_CHALLENGE_STORY")] PlayingChallengeStory = 5,
+    [pbr::OriginalName("PLAYING_CHALLENGE_BOSS")] PlayingChallengeBoss = 6,
+    [pbr::OriginalName("PLAYING_ROGUE_TOURN")] PlayingRogueTourn = 7,
   }
 
   #endregion

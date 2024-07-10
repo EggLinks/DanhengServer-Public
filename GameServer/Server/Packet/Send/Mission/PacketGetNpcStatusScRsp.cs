@@ -19,10 +19,10 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Mission
 
             foreach (var item in GameData.MessageContactsConfigData.Values)
             {
-                proto.JAJDMCBPMAI.Add(new NpcStatus()
+                proto.NpcStatusList.Add(new NpcStatus()
                 {
                     NpcId = (uint)item.ID,
-                    PCNPBFJAIHL = player.MessageManager!.GetMessageGroup(item.ID).Count > 0
+                    IsFinish = player.MessageManager!.GetMessageGroup(item.ID).Count > 0
                 });
             }
 

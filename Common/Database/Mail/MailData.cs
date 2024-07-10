@@ -40,7 +40,7 @@ namespace EggLink.DanhengServer.Database.Mail
             {
                 Id = (uint)MailID,
                 Sender = SenderName,
-                Content = Content,
+                MessageText = Content,
                 MailType = IsStar ? MailType.Star : MailType.Normal,
                 ExpireTime = ExpireTime,
                 IsRead = IsRead,

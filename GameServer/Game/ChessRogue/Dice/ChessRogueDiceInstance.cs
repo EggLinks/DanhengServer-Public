@@ -42,11 +42,11 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Dice
                 RerollTimes = (uint)RerollTimes,
                 CurBranchId = (uint)DiceData.BranchId,
                 DiceType = ChessRogueDiceType.ChessRogueDiceEditable,
-                IsValid = true,
+                OPIIBFEJFHD = true,
                 CurSurfaceIndex = (uint)(index > 0 ? index : 0),
-                DisplayId = (uint)(CurSurfaceId > 0 ? GameData.RogueNousDiceSurfaceData[CurSurfaceId].Sort : 0),
-                IsDone = true,
-                PLBMKOAJKPN = new() { AJMBPPEHCNJ = { } },
+                //DisplayId = (uint)(CurSurfaceId > 0 ? GameData.RogueNousDiceSurfaceData[CurSurfaceId].Sort : 0),
+                CanRerollDice = RerollTimes > 0,
+                BDMBIDHFKJF = new() { HNHONCDLMEE = { } },
             };
         }
     }

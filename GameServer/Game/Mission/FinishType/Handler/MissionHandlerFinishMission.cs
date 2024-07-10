@@ -19,7 +19,7 @@ namespace EggLink.DanhengServer.Game.Mission.FinishType.Handler
         public override void HandleFinishType(PlayerInstance player, SubMissionInfo info, object? arg)
         {
             var send = true;
-            foreach (var mainMissionId in info.ParamIntList)
+            foreach (var mainMissionId in info.ParamIntList ?? [])
             {
                 if (player.MissionManager!.GetMainMissionStatus(mainMissionId) != MissionPhaseEnum.Finish)
                 {

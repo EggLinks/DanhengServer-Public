@@ -26,14 +26,14 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "ChZQbGF5ZXJBc3Npc3RJbmZvLnByb3RvGh1EaXNwbGF5QXZhdGFyRGV0YWls",
             "SW5mby5wcm90bxoWUGxheWVyU2ltcGxlSW5mby5wcm90byJrChBQbGF5ZXJB",
-            "c3Npc3RJbmZvEi8KDWFzc2lzdF9hdmF0YXIYCiABKAsyGC5EaXNwbGF5QXZh",
-            "dGFyRGV0YWlsSW5mbxImCgtwbGF5ZXJfaW5mbxgPIAEoCzIRLlBsYXllclNp",
-            "bXBsZUluZm9CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJv",
+            "c3Npc3RJbmZvEiYKC3BsYXllcl9pbmZvGAggASgLMhEuUGxheWVyU2ltcGxl",
+            "SW5mbxIvCg1hc3Npc3RfYXZhdGFyGAwgASgLMhguRGlzcGxheUF2YXRhckRl",
+            "dGFpbEluZm9CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJv",
             "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.PlayerSimpleInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PlayerAssistInfo), global::EggLink.DanhengServer.Proto.PlayerAssistInfo.Parser, new[]{ "AssistAvatar", "PlayerInfo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PlayerAssistInfo), global::EggLink.DanhengServer.Proto.PlayerAssistInfo.Parser, new[]{ "PlayerInfo", "AssistAvatar" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,8 +75,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PlayerAssistInfo(PlayerAssistInfo other) : this() {
-      assistAvatar_ = other.assistAvatar_ != null ? other.assistAvatar_.Clone() : null;
       playerInfo_ = other.playerInfo_ != null ? other.playerInfo_.Clone() : null;
+      assistAvatar_ = other.assistAvatar_ != null ? other.assistAvatar_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -86,20 +86,8 @@ namespace EggLink.DanhengServer.Proto {
       return new PlayerAssistInfo(this);
     }
 
-    /// <summary>Field number for the "assist_avatar" field.</summary>
-    public const int AssistAvatarFieldNumber = 10;
-    private global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo assistAvatar_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo AssistAvatar {
-      get { return assistAvatar_; }
-      set {
-        assistAvatar_ = value;
-      }
-    }
-
     /// <summary>Field number for the "player_info" field.</summary>
-    public const int PlayerInfoFieldNumber = 15;
+    public const int PlayerInfoFieldNumber = 8;
     private global::EggLink.DanhengServer.Proto.PlayerSimpleInfo playerInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -107,6 +95,18 @@ namespace EggLink.DanhengServer.Proto {
       get { return playerInfo_; }
       set {
         playerInfo_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "assist_avatar" field.</summary>
+    public const int AssistAvatarFieldNumber = 12;
+    private global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo assistAvatar_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo AssistAvatar {
+      get { return assistAvatar_; }
+      set {
+        assistAvatar_ = value;
       }
     }
 
@@ -125,8 +125,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(AssistAvatar, other.AssistAvatar)) return false;
       if (!object.Equals(PlayerInfo, other.PlayerInfo)) return false;
+      if (!object.Equals(AssistAvatar, other.AssistAvatar)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -134,8 +134,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (assistAvatar_ != null) hash ^= AssistAvatar.GetHashCode();
       if (playerInfo_ != null) hash ^= PlayerInfo.GetHashCode();
+      if (assistAvatar_ != null) hash ^= AssistAvatar.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -154,13 +154,13 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (assistAvatar_ != null) {
-        output.WriteRawTag(82);
-        output.WriteMessage(AssistAvatar);
-      }
       if (playerInfo_ != null) {
-        output.WriteRawTag(122);
+        output.WriteRawTag(66);
         output.WriteMessage(PlayerInfo);
+      }
+      if (assistAvatar_ != null) {
+        output.WriteRawTag(98);
+        output.WriteMessage(AssistAvatar);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -172,13 +172,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (assistAvatar_ != null) {
-        output.WriteRawTag(82);
-        output.WriteMessage(AssistAvatar);
-      }
       if (playerInfo_ != null) {
-        output.WriteRawTag(122);
+        output.WriteRawTag(66);
         output.WriteMessage(PlayerInfo);
+      }
+      if (assistAvatar_ != null) {
+        output.WriteRawTag(98);
+        output.WriteMessage(AssistAvatar);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -190,11 +190,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (assistAvatar_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(AssistAvatar);
-      }
       if (playerInfo_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerInfo);
+      }
+      if (assistAvatar_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(AssistAvatar);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -208,17 +208,17 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.assistAvatar_ != null) {
-        if (assistAvatar_ == null) {
-          AssistAvatar = new global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo();
-        }
-        AssistAvatar.MergeFrom(other.AssistAvatar);
-      }
       if (other.playerInfo_ != null) {
         if (playerInfo_ == null) {
           PlayerInfo = new global::EggLink.DanhengServer.Proto.PlayerSimpleInfo();
         }
         PlayerInfo.MergeFrom(other.PlayerInfo);
+      }
+      if (other.assistAvatar_ != null) {
+        if (assistAvatar_ == null) {
+          AssistAvatar = new global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo();
+        }
+        AssistAvatar.MergeFrom(other.AssistAvatar);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -235,18 +235,18 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 82: {
-            if (assistAvatar_ == null) {
-              AssistAvatar = new global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo();
-            }
-            input.ReadMessage(AssistAvatar);
-            break;
-          }
-          case 122: {
+          case 66: {
             if (playerInfo_ == null) {
               PlayerInfo = new global::EggLink.DanhengServer.Proto.PlayerSimpleInfo();
             }
             input.ReadMessage(PlayerInfo);
+            break;
+          }
+          case 98: {
+            if (assistAvatar_ == null) {
+              AssistAvatar = new global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo();
+            }
+            input.ReadMessage(AssistAvatar);
             break;
           }
         }
@@ -264,18 +264,18 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 82: {
-            if (assistAvatar_ == null) {
-              AssistAvatar = new global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo();
-            }
-            input.ReadMessage(AssistAvatar);
-            break;
-          }
-          case 122: {
+          case 66: {
             if (playerInfo_ == null) {
               PlayerInfo = new global::EggLink.DanhengServer.Proto.PlayerSimpleInfo();
             }
             input.ReadMessage(PlayerInfo);
+            break;
+          }
+          case 98: {
+            if (assistAvatar_ == null) {
+              AssistAvatar = new global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo();
+            }
+            input.ReadMessage(AssistAvatar);
             break;
           }
         }

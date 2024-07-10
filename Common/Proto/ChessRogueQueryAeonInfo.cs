@@ -26,7 +26,7 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "Ch1DaGVzc1JvZ3VlUXVlcnlBZW9uSW5mby5wcm90bxoZQ2hlc3NSb2d1ZVF1",
             "ZXJ5QWVvbi5wcm90byJCChdDaGVzc1JvZ3VlUXVlcnlBZW9uSW5mbxInCglh",
-            "ZW9uX2xpc3QYDSADKAsyFC5DaGVzc1JvZ3VlUXVlcnlBZW9uQh6qAhtFZ2dM",
+            "ZW9uX2xpc3QYAiADKAsyFC5DaGVzc1JvZ3VlUXVlcnlBZW9uQh6qAhtFZ2dM",
             "aW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChessRogueQueryAeonReflection.Descriptor, },
@@ -84,9 +84,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "aeon_list" field.</summary>
-    public const int AeonListFieldNumber = 13;
+    public const int AeonListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.ChessRogueQueryAeon> _repeated_aeonList_codec
-        = pb::FieldCodec.ForMessage(106, global::EggLink.DanhengServer.Proto.ChessRogueQueryAeon.Parser);
+        = pb::FieldCodec.ForMessage(18, global::EggLink.DanhengServer.Proto.ChessRogueQueryAeon.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueQueryAeon> aeonList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueQueryAeon>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -187,7 +187,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 106: {
+          case 18: {
             aeonList_.AddEntriesFrom(input, _repeated_aeonList_codec);
             break;
           }
@@ -206,7 +206,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 106: {
+          case 18: {
             aeonList_.AddEntriesFrom(ref input, _repeated_aeonList_codec);
             break;
           }

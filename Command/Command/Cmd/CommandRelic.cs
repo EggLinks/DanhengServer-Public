@@ -139,7 +139,7 @@ namespace EggLink.DanhengServer.Command.Cmd
 
             for (var i = 0; i < amount; i++)
             {
-                player.InventoryManager!.AddItem(itemData);
+                player.InventoryManager!.AddItem(itemData, notify: false);
             }
 
             arg.SendMsg(I18nManager.Translate("Game.Command.Relic.RelicGiven", player.Uid.ToString(), amount.ToString(), itemConfigExcel.Name ?? itemData.ItemId.ToString(), itemData.MainAffix.ToString()));

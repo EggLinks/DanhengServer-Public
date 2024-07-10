@@ -24,15 +24,16 @@ namespace EggLink.DanhengServer.Proto {
     static ExtraLineupTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChVFeHRyYUxpbmV1cFR5cGUucHJvdG8qvQIKD0V4dHJhTGluZXVwVHlwZRIP",
+            "ChVFeHRyYUxpbmV1cFR5cGUucHJvdG8q7QIKD0V4dHJhTGluZXVwVHlwZRIP",
             "CgtMSU5FVVBfTk9ORRAAEhQKEExJTkVVUF9DSEFMTEVOR0UQARIQCgxMSU5F",
             "VVBfUk9HVUUQAhIWChJMSU5FVVBfQ0hBTExFTkdFXzIQAxIWChJMSU5FVVBf",
             "Q0hBTExFTkdFXzMQBBIaChZMSU5FVVBfUk9HVUVfQ0hBTExFTkdFEAUSFgoS",
             "TElORVVQX1NUQUdFX1RSSUFMEAYSFgoSTElORVVQX1JPR1VFX1RSSUFMEAcS",
             "EwoPTElORVVQX0FDVElWSVRZEAgSFgoSTElORVVQX0JPWElOR19DTFVCEAkS",
             "GwoXTElORVVQX1RSRUFTVVJFX0RVTkdFT04QCxIWChJMSU5FVVBfQ0hFU1Nf",
-            "Uk9HVUUQDBITCg9MSU5FVVBfSEVMSU9CVVMQDUIeqgIbRWdnTGluay5EYW5o",
-            "ZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
+            "Uk9HVUUQDBITCg9MSU5FVVBfSEVMSU9CVVMQDRIWChJMSU5FVVBfVE9VUk5f",
+            "Uk9HVUUQDhIWChJMSU5FVVBfUkVMSUNfUk9HVUUQD0IeqgIbRWdnTGluay5E",
+            "YW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::EggLink.DanhengServer.Proto.ExtraLineupType), }, null, null));
@@ -55,6 +56,8 @@ namespace EggLink.DanhengServer.Proto {
     [pbr::OriginalName("LINEUP_TREASURE_DUNGEON")] LineupTreasureDungeon = 11,
     [pbr::OriginalName("LINEUP_CHESS_ROGUE")] LineupChessRogue = 12,
     [pbr::OriginalName("LINEUP_HELIOBUS")] LineupHeliobus = 13,
+    [pbr::OriginalName("LINEUP_TOURN_ROGUE")] LineupTournRogue = 14,
+    [pbr::OriginalName("LINEUP_RELIC_ROGUE")] LineupRelicRogue = 15,
   }
 
   #endregion

@@ -24,14 +24,14 @@ namespace EggLink.DanhengServer.Proto {
     static CityShopInfoScNotifyReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpDaXR5U2hvcEluZm9TY05vdGlmeS5wcm90byJfChRDaXR5U2hvcEluZm9T",
-            "Y05vdGlmeRINCgVsZXZlbBgDIAEoDRIPCgdzaG9wX2lkGAEgASgNEgsKA2V4",
-            "cBgFIAEoDRIaChJ0YWtlbl9sZXZlbF9yZXdhcmQYCSABKARCHqoCG0VnZ0xp",
-            "bmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
+            "ChpDaXR5U2hvcEluZm9TY05vdGlmeS5wcm90byJdChRDaXR5U2hvcEluZm9T",
+            "Y05vdGlmeRILCgNleHAYCCABKA0SDQoFbGV2ZWwYDCABKA0SGAoQVGFrZW5M",
+            "ZXZlbHJld2FyZBgFIAEoBBIPCgdzaG9wX2lkGAkgASgNQh6qAhtFZ2dMaW5r",
+            "LkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.CityShopInfoScNotify), global::EggLink.DanhengServer.Proto.CityShopInfoScNotify.Parser, new[]{ "Level", "ShopId", "Exp", "TakenLevelReward" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.CityShopInfoScNotify), global::EggLink.DanhengServer.Proto.CityShopInfoScNotify.Parser, new[]{ "Exp", "Level", "TakenLevelreward", "ShopId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,10 +73,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CityShopInfoScNotify(CityShopInfoScNotify other) : this() {
-      level_ = other.level_;
-      shopId_ = other.shopId_;
       exp_ = other.exp_;
-      takenLevelReward_ = other.takenLevelReward_;
+      level_ = other.level_;
+      takenLevelreward_ = other.takenLevelreward_;
+      shopId_ = other.shopId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -86,32 +86,8 @@ namespace EggLink.DanhengServer.Proto {
       return new CityShopInfoScNotify(this);
     }
 
-    /// <summary>Field number for the "level" field.</summary>
-    public const int LevelFieldNumber = 3;
-    private uint level_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint Level {
-      get { return level_; }
-      set {
-        level_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "shop_id" field.</summary>
-    public const int ShopIdFieldNumber = 1;
-    private uint shopId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint ShopId {
-      get { return shopId_; }
-      set {
-        shopId_ = value;
-      }
-    }
-
     /// <summary>Field number for the "exp" field.</summary>
-    public const int ExpFieldNumber = 5;
+    public const int ExpFieldNumber = 8;
     private uint exp_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -122,15 +98,39 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "taken_level_reward" field.</summary>
-    public const int TakenLevelRewardFieldNumber = 9;
-    private ulong takenLevelReward_;
+    /// <summary>Field number for the "level" field.</summary>
+    public const int LevelFieldNumber = 12;
+    private uint level_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ulong TakenLevelReward {
-      get { return takenLevelReward_; }
+    public uint Level {
+      get { return level_; }
       set {
-        takenLevelReward_ = value;
+        level_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "TakenLevelreward" field.</summary>
+    public const int TakenLevelrewardFieldNumber = 5;
+    private ulong takenLevelreward_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong TakenLevelreward {
+      get { return takenLevelreward_; }
+      set {
+        takenLevelreward_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "shop_id" field.</summary>
+    public const int ShopIdFieldNumber = 9;
+    private uint shopId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint ShopId {
+      get { return shopId_; }
+      set {
+        shopId_ = value;
       }
     }
 
@@ -149,10 +149,10 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Level != other.Level) return false;
-      if (ShopId != other.ShopId) return false;
       if (Exp != other.Exp) return false;
-      if (TakenLevelReward != other.TakenLevelReward) return false;
+      if (Level != other.Level) return false;
+      if (TakenLevelreward != other.TakenLevelreward) return false;
+      if (ShopId != other.ShopId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -160,10 +160,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Level != 0) hash ^= Level.GetHashCode();
-      if (ShopId != 0) hash ^= ShopId.GetHashCode();
       if (Exp != 0) hash ^= Exp.GetHashCode();
-      if (TakenLevelReward != 0UL) hash ^= TakenLevelReward.GetHashCode();
+      if (Level != 0) hash ^= Level.GetHashCode();
+      if (TakenLevelreward != 0UL) hash ^= TakenLevelreward.GetHashCode();
+      if (ShopId != 0) hash ^= ShopId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -182,21 +182,21 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (TakenLevelreward != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(TakenLevelreward);
+      }
+      if (Exp != 0) {
+        output.WriteRawTag(64);
+        output.WriteUInt32(Exp);
+      }
       if (ShopId != 0) {
-        output.WriteRawTag(8);
+        output.WriteRawTag(72);
         output.WriteUInt32(ShopId);
       }
       if (Level != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(96);
         output.WriteUInt32(Level);
-      }
-      if (Exp != 0) {
-        output.WriteRawTag(40);
-        output.WriteUInt32(Exp);
-      }
-      if (TakenLevelReward != 0UL) {
-        output.WriteRawTag(72);
-        output.WriteUInt64(TakenLevelReward);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -208,21 +208,21 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (TakenLevelreward != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(TakenLevelreward);
+      }
+      if (Exp != 0) {
+        output.WriteRawTag(64);
+        output.WriteUInt32(Exp);
+      }
       if (ShopId != 0) {
-        output.WriteRawTag(8);
+        output.WriteRawTag(72);
         output.WriteUInt32(ShopId);
       }
       if (Level != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(96);
         output.WriteUInt32(Level);
-      }
-      if (Exp != 0) {
-        output.WriteRawTag(40);
-        output.WriteUInt32(Exp);
-      }
-      if (TakenLevelReward != 0UL) {
-        output.WriteRawTag(72);
-        output.WriteUInt64(TakenLevelReward);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -234,17 +234,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Level != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Level);
-      }
-      if (ShopId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ShopId);
-      }
       if (Exp != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Exp);
       }
-      if (TakenLevelReward != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(TakenLevelReward);
+      if (Level != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Level);
+      }
+      if (TakenLevelreward != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(TakenLevelreward);
+      }
+      if (ShopId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ShopId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -258,17 +258,17 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.Level != 0) {
-        Level = other.Level;
-      }
-      if (other.ShopId != 0) {
-        ShopId = other.ShopId;
-      }
       if (other.Exp != 0) {
         Exp = other.Exp;
       }
-      if (other.TakenLevelReward != 0UL) {
-        TakenLevelReward = other.TakenLevelReward;
+      if (other.Level != 0) {
+        Level = other.Level;
+      }
+      if (other.TakenLevelreward != 0UL) {
+        TakenLevelreward = other.TakenLevelreward;
+      }
+      if (other.ShopId != 0) {
+        ShopId = other.ShopId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -285,20 +285,20 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            ShopId = input.ReadUInt32();
-            break;
-          }
-          case 24: {
-            Level = input.ReadUInt32();
-            break;
-          }
           case 40: {
+            TakenLevelreward = input.ReadUInt64();
+            break;
+          }
+          case 64: {
             Exp = input.ReadUInt32();
             break;
           }
           case 72: {
-            TakenLevelReward = input.ReadUInt64();
+            ShopId = input.ReadUInt32();
+            break;
+          }
+          case 96: {
+            Level = input.ReadUInt32();
             break;
           }
         }
@@ -316,20 +316,20 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            ShopId = input.ReadUInt32();
-            break;
-          }
-          case 24: {
-            Level = input.ReadUInt32();
-            break;
-          }
           case 40: {
+            TakenLevelreward = input.ReadUInt64();
+            break;
+          }
+          case 64: {
             Exp = input.ReadUInt32();
             break;
           }
           case 72: {
-            TakenLevelReward = input.ReadUInt64();
+            ShopId = input.ReadUInt32();
+            break;
+          }
+          case 96: {
+            Level = input.ReadUInt32();
             break;
           }
         }

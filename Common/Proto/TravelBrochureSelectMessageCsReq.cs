@@ -24,14 +24,14 @@ namespace EggLink.DanhengServer.Proto {
     static TravelBrochureSelectMessageCsReqReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiZUcmF2ZWxCcm9jaHVyZVNlbGVjdE1lc3NhZ2VDc1JlcS5wcm90byJJCiBU",
-            "cmF2ZWxCcm9jaHVyZVNlbGVjdE1lc3NhZ2VDc1JlcRIQCghkaWFyeV9pZBgM",
-            "IAEoDRITCgtFR0lHRkdQSkRERxgGIAEoDUIeqgIbRWdnTGluay5EYW5oZW5n",
-            "U2VydmVyLlByb3RvYgZwcm90bzM="));
+            "CiZUcmF2ZWxCcm9jaHVyZVNlbGVjdE1lc3NhZ2VDc1JlcS5wcm90byJMCiBU",
+            "cmF2ZWxCcm9jaHVyZVNlbGVjdE1lc3NhZ2VDc1JlcRITCgtPR0hGS0RBTkJO",
+            "ShgPIAEoDRITCgtFQkpLSERBSUtDSxgBIAEoDUIeqgIbRWdnTGluay5EYW5o",
+            "ZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.TravelBrochureSelectMessageCsReq), global::EggLink.DanhengServer.Proto.TravelBrochureSelectMessageCsReq.Parser, new[]{ "DiaryId", "EGIGFGPJDDG" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.TravelBrochureSelectMessageCsReq), global::EggLink.DanhengServer.Proto.TravelBrochureSelectMessageCsReq.Parser, new[]{ "OGHFKDANBNJ", "EBJKHDAIKCK" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,8 +73,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public TravelBrochureSelectMessageCsReq(TravelBrochureSelectMessageCsReq other) : this() {
-      diaryId_ = other.diaryId_;
-      eGIGFGPJDDG_ = other.eGIGFGPJDDG_;
+      oGHFKDANBNJ_ = other.oGHFKDANBNJ_;
+      eBJKHDAIKCK_ = other.eBJKHDAIKCK_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -84,27 +84,27 @@ namespace EggLink.DanhengServer.Proto {
       return new TravelBrochureSelectMessageCsReq(this);
     }
 
-    /// <summary>Field number for the "diary_id" field.</summary>
-    public const int DiaryIdFieldNumber = 12;
-    private uint diaryId_;
+    /// <summary>Field number for the "OGHFKDANBNJ" field.</summary>
+    public const int OGHFKDANBNJFieldNumber = 15;
+    private uint oGHFKDANBNJ_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint DiaryId {
-      get { return diaryId_; }
+    public uint OGHFKDANBNJ {
+      get { return oGHFKDANBNJ_; }
       set {
-        diaryId_ = value;
+        oGHFKDANBNJ_ = value;
       }
     }
 
-    /// <summary>Field number for the "EGIGFGPJDDG" field.</summary>
-    public const int EGIGFGPJDDGFieldNumber = 6;
-    private uint eGIGFGPJDDG_;
+    /// <summary>Field number for the "EBJKHDAIKCK" field.</summary>
+    public const int EBJKHDAIKCKFieldNumber = 1;
+    private uint eBJKHDAIKCK_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint EGIGFGPJDDG {
-      get { return eGIGFGPJDDG_; }
+    public uint EBJKHDAIKCK {
+      get { return eBJKHDAIKCK_; }
       set {
-        eGIGFGPJDDG_ = value;
+        eBJKHDAIKCK_ = value;
       }
     }
 
@@ -123,8 +123,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (DiaryId != other.DiaryId) return false;
-      if (EGIGFGPJDDG != other.EGIGFGPJDDG) return false;
+      if (OGHFKDANBNJ != other.OGHFKDANBNJ) return false;
+      if (EBJKHDAIKCK != other.EBJKHDAIKCK) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -132,8 +132,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (DiaryId != 0) hash ^= DiaryId.GetHashCode();
-      if (EGIGFGPJDDG != 0) hash ^= EGIGFGPJDDG.GetHashCode();
+      if (OGHFKDANBNJ != 0) hash ^= OGHFKDANBNJ.GetHashCode();
+      if (EBJKHDAIKCK != 0) hash ^= EBJKHDAIKCK.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -152,13 +152,13 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (EGIGFGPJDDG != 0) {
-        output.WriteRawTag(48);
-        output.WriteUInt32(EGIGFGPJDDG);
+      if (EBJKHDAIKCK != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(EBJKHDAIKCK);
       }
-      if (DiaryId != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(DiaryId);
+      if (OGHFKDANBNJ != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(OGHFKDANBNJ);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -170,13 +170,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (EGIGFGPJDDG != 0) {
-        output.WriteRawTag(48);
-        output.WriteUInt32(EGIGFGPJDDG);
+      if (EBJKHDAIKCK != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(EBJKHDAIKCK);
       }
-      if (DiaryId != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(DiaryId);
+      if (OGHFKDANBNJ != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(OGHFKDANBNJ);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -188,11 +188,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (DiaryId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DiaryId);
+      if (OGHFKDANBNJ != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(OGHFKDANBNJ);
       }
-      if (EGIGFGPJDDG != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EGIGFGPJDDG);
+      if (EBJKHDAIKCK != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EBJKHDAIKCK);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -206,11 +206,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.DiaryId != 0) {
-        DiaryId = other.DiaryId;
+      if (other.OGHFKDANBNJ != 0) {
+        OGHFKDANBNJ = other.OGHFKDANBNJ;
       }
-      if (other.EGIGFGPJDDG != 0) {
-        EGIGFGPJDDG = other.EGIGFGPJDDG;
+      if (other.EBJKHDAIKCK != 0) {
+        EBJKHDAIKCK = other.EBJKHDAIKCK;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -227,12 +227,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 48: {
-            EGIGFGPJDDG = input.ReadUInt32();
+          case 8: {
+            EBJKHDAIKCK = input.ReadUInt32();
             break;
           }
-          case 96: {
-            DiaryId = input.ReadUInt32();
+          case 120: {
+            OGHFKDANBNJ = input.ReadUInt32();
             break;
           }
         }
@@ -250,12 +250,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 48: {
-            EGIGFGPJDDG = input.ReadUInt32();
+          case 8: {
+            EBJKHDAIKCK = input.ReadUInt32();
             break;
           }
-          case 96: {
-            DiaryId = input.ReadUInt32();
+          case 120: {
+            OGHFKDANBNJ = input.ReadUInt32();
             break;
           }
         }

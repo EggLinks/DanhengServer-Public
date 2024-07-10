@@ -44,7 +44,7 @@ namespace EggLink.DanhengServer.Game.Scene.Entity
             }
 
             // save
-            if (Group.SaveType != SaveTypeEnum.Save)
+            if (Group.SaveType == SaveTypeEnum.Reset)
             {
                 return;
             }

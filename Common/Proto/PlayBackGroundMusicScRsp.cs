@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ch5QbGF5QmFja0dyb3VuZE11c2ljU2NSc3AucHJvdG8iXAoYUGxheUJhY2tH",
-            "cm91bmRNdXNpY1NjUnNwEhUKDXBsYXlfbXVzaWNfaWQYByABKA0SGAoQY3Vy",
-            "cmVudF9tdXNpY19pZBgCIAEoDRIPCgdyZXRjb2RlGA8gASgNQh6qAhtFZ2dM",
+            "cm91bmRNdXNpY1NjUnNwEg8KB3JldGNvZGUYCSABKA0SGAoQY3VycmVudF9t",
+            "dXNpY19pZBgEIAEoDRIVCg1wbGF5X211c2ljX2lkGA8gASgNQh6qAhtFZ2dM",
             "aW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PlayBackGroundMusicScRsp), global::EggLink.DanhengServer.Proto.PlayBackGroundMusicScRsp.Parser, new[]{ "PlayMusicId", "CurrentMusicId", "Retcode" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PlayBackGroundMusicScRsp), global::EggLink.DanhengServer.Proto.PlayBackGroundMusicScRsp.Parser, new[]{ "Retcode", "CurrentMusicId", "PlayMusicId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,9 +73,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PlayBackGroundMusicScRsp(PlayBackGroundMusicScRsp other) : this() {
-      playMusicId_ = other.playMusicId_;
-      currentMusicId_ = other.currentMusicId_;
       retcode_ = other.retcode_;
+      currentMusicId_ = other.currentMusicId_;
+      playMusicId_ = other.playMusicId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,20 +85,20 @@ namespace EggLink.DanhengServer.Proto {
       return new PlayBackGroundMusicScRsp(this);
     }
 
-    /// <summary>Field number for the "play_music_id" field.</summary>
-    public const int PlayMusicIdFieldNumber = 7;
-    private uint playMusicId_;
+    /// <summary>Field number for the "retcode" field.</summary>
+    public const int RetcodeFieldNumber = 9;
+    private uint retcode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint PlayMusicId {
-      get { return playMusicId_; }
+    public uint Retcode {
+      get { return retcode_; }
       set {
-        playMusicId_ = value;
+        retcode_ = value;
       }
     }
 
     /// <summary>Field number for the "current_music_id" field.</summary>
-    public const int CurrentMusicIdFieldNumber = 2;
+    public const int CurrentMusicIdFieldNumber = 4;
     private uint currentMusicId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -109,15 +109,15 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "retcode" field.</summary>
-    public const int RetcodeFieldNumber = 15;
-    private uint retcode_;
+    /// <summary>Field number for the "play_music_id" field.</summary>
+    public const int PlayMusicIdFieldNumber = 15;
+    private uint playMusicId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint Retcode {
-      get { return retcode_; }
+    public uint PlayMusicId {
+      get { return playMusicId_; }
       set {
-        retcode_ = value;
+        playMusicId_ = value;
       }
     }
 
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (PlayMusicId != other.PlayMusicId) return false;
-      if (CurrentMusicId != other.CurrentMusicId) return false;
       if (Retcode != other.Retcode) return false;
+      if (CurrentMusicId != other.CurrentMusicId) return false;
+      if (PlayMusicId != other.PlayMusicId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +146,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (PlayMusicId != 0) hash ^= PlayMusicId.GetHashCode();
-      if (CurrentMusicId != 0) hash ^= CurrentMusicId.GetHashCode();
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
+      if (CurrentMusicId != 0) hash ^= CurrentMusicId.GetHashCode();
+      if (PlayMusicId != 0) hash ^= PlayMusicId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -168,16 +168,16 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (CurrentMusicId != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(32);
         output.WriteUInt32(CurrentMusicId);
       }
-      if (PlayMusicId != 0) {
-        output.WriteRawTag(56);
-        output.WriteUInt32(PlayMusicId);
-      }
       if (Retcode != 0) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(72);
         output.WriteUInt32(Retcode);
+      }
+      if (PlayMusicId != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(PlayMusicId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -190,16 +190,16 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (CurrentMusicId != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(32);
         output.WriteUInt32(CurrentMusicId);
       }
-      if (PlayMusicId != 0) {
-        output.WriteRawTag(56);
-        output.WriteUInt32(PlayMusicId);
-      }
       if (Retcode != 0) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(72);
         output.WriteUInt32(Retcode);
+      }
+      if (PlayMusicId != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(PlayMusicId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -211,14 +211,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (PlayMusicId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PlayMusicId);
+      if (Retcode != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
       }
       if (CurrentMusicId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentMusicId);
       }
-      if (Retcode != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
+      if (PlayMusicId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PlayMusicId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -232,14 +232,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.PlayMusicId != 0) {
-        PlayMusicId = other.PlayMusicId;
+      if (other.Retcode != 0) {
+        Retcode = other.Retcode;
       }
       if (other.CurrentMusicId != 0) {
         CurrentMusicId = other.CurrentMusicId;
       }
-      if (other.Retcode != 0) {
-        Retcode = other.Retcode;
+      if (other.PlayMusicId != 0) {
+        PlayMusicId = other.PlayMusicId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -256,16 +256,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 16: {
+          case 32: {
             CurrentMusicId = input.ReadUInt32();
             break;
           }
-          case 56: {
-            PlayMusicId = input.ReadUInt32();
+          case 72: {
+            Retcode = input.ReadUInt32();
             break;
           }
           case 120: {
-            Retcode = input.ReadUInt32();
+            PlayMusicId = input.ReadUInt32();
             break;
           }
         }
@@ -283,16 +283,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 16: {
+          case 32: {
             CurrentMusicId = input.ReadUInt32();
             break;
           }
-          case 56: {
-            PlayMusicId = input.ReadUInt32();
+          case 72: {
+            Retcode = input.ReadUInt32();
             break;
           }
           case 120: {
-            Retcode = input.ReadUInt32();
+            PlayMusicId = input.ReadUInt32();
             break;
           }
         }

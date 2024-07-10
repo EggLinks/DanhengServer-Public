@@ -25,14 +25,15 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChRDaGVzc1JvZ3VlRGljZS5wcm90bxofQ2hlc3NSb2d1ZURpY2VTdXJmYWNl",
-            "SW5mby5wcm90byJ/Cg5DaGVzc1JvZ3VlRGljZRIRCglicmFuY2hfaWQYBSAB",
-            "KA0SGAoQZGlmZmljdWx0eV9sZXZlbBgEIAEoDRIvCgtTdXJmYWNlTGlzdBgP",
-            "IAMoCzIaLkNoZXNzUm9ndWVEaWNlU3VyZmFjZUluZm8SDwoHYXJlYV9pZBgB",
-            "IAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
+            "SW5mby5wcm90byKAAQoOQ2hlc3NSb2d1ZURpY2USGAoQZGlmZmljdWx0eV9s",
+            "ZXZlbBgPIAEoDRIRCglicmFuY2hfaWQYDSABKA0SMAoMc3VyZmFjZV9saXN0",
+            "GAUgAygLMhouQ2hlc3NSb2d1ZURpY2VTdXJmYWNlSW5mbxIPCgdhcmVhX2lk",
+            "GAEgASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChessRogueDiceSurfaceInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueDice), global::EggLink.DanhengServer.Proto.ChessRogueDice.Parser, new[]{ "BranchId", "DifficultyLevel", "SurfaceList", "AreaId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueDice), global::EggLink.DanhengServer.Proto.ChessRogueDice.Parser, new[]{ "DifficultyLevel", "BranchId", "SurfaceList", "AreaId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,8 +75,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ChessRogueDice(ChessRogueDice other) : this() {
-      branchId_ = other.branchId_;
       difficultyLevel_ = other.difficultyLevel_;
+      branchId_ = other.branchId_;
       surfaceList_ = other.surfaceList_.Clone();
       areaId_ = other.areaId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -87,20 +88,8 @@ namespace EggLink.DanhengServer.Proto {
       return new ChessRogueDice(this);
     }
 
-    /// <summary>Field number for the "branch_id" field.</summary>
-    public const int BranchIdFieldNumber = 5;
-    private uint branchId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint BranchId {
-      get { return branchId_; }
-      set {
-        branchId_ = value;
-      }
-    }
-
     /// <summary>Field number for the "difficulty_level" field.</summary>
-    public const int DifficultyLevelFieldNumber = 4;
+    public const int DifficultyLevelFieldNumber = 15;
     private uint difficultyLevel_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -111,10 +100,22 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "SurfaceList" field.</summary>
-    public const int SurfaceListFieldNumber = 15;
+    /// <summary>Field number for the "branch_id" field.</summary>
+    public const int BranchIdFieldNumber = 13;
+    private uint branchId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint BranchId {
+      get { return branchId_; }
+      set {
+        branchId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "surface_list" field.</summary>
+    public const int SurfaceListFieldNumber = 5;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.ChessRogueDiceSurfaceInfo> _repeated_surfaceList_codec
-        = pb::FieldCodec.ForMessage(122, global::EggLink.DanhengServer.Proto.ChessRogueDiceSurfaceInfo.Parser);
+        = pb::FieldCodec.ForMessage(42, global::EggLink.DanhengServer.Proto.ChessRogueDiceSurfaceInfo.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueDiceSurfaceInfo> surfaceList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueDiceSurfaceInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -149,8 +150,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (BranchId != other.BranchId) return false;
       if (DifficultyLevel != other.DifficultyLevel) return false;
+      if (BranchId != other.BranchId) return false;
       if(!surfaceList_.Equals(other.surfaceList_)) return false;
       if (AreaId != other.AreaId) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -160,8 +161,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (BranchId != 0) hash ^= BranchId.GetHashCode();
       if (DifficultyLevel != 0) hash ^= DifficultyLevel.GetHashCode();
+      if (BranchId != 0) hash ^= BranchId.GetHashCode();
       hash ^= surfaceList_.GetHashCode();
       if (AreaId != 0) hash ^= AreaId.GetHashCode();
       if (_unknownFields != null) {
@@ -186,15 +187,15 @@ namespace EggLink.DanhengServer.Proto {
         output.WriteRawTag(8);
         output.WriteUInt32(AreaId);
       }
-      if (DifficultyLevel != 0) {
-        output.WriteRawTag(32);
-        output.WriteUInt32(DifficultyLevel);
-      }
+      surfaceList_.WriteTo(output, _repeated_surfaceList_codec);
       if (BranchId != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(104);
         output.WriteUInt32(BranchId);
       }
-      surfaceList_.WriteTo(output, _repeated_surfaceList_codec);
+      if (DifficultyLevel != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(DifficultyLevel);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -209,15 +210,15 @@ namespace EggLink.DanhengServer.Proto {
         output.WriteRawTag(8);
         output.WriteUInt32(AreaId);
       }
-      if (DifficultyLevel != 0) {
-        output.WriteRawTag(32);
-        output.WriteUInt32(DifficultyLevel);
-      }
+      surfaceList_.WriteTo(ref output, _repeated_surfaceList_codec);
       if (BranchId != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(104);
         output.WriteUInt32(BranchId);
       }
-      surfaceList_.WriteTo(ref output, _repeated_surfaceList_codec);
+      if (DifficultyLevel != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(DifficultyLevel);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -228,11 +229,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (BranchId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BranchId);
-      }
       if (DifficultyLevel != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DifficultyLevel);
+      }
+      if (BranchId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BranchId);
       }
       size += surfaceList_.CalculateSize(_repeated_surfaceList_codec);
       if (AreaId != 0) {
@@ -250,11 +251,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.BranchId != 0) {
-        BranchId = other.BranchId;
-      }
       if (other.DifficultyLevel != 0) {
         DifficultyLevel = other.DifficultyLevel;
+      }
+      if (other.BranchId != 0) {
+        BranchId = other.BranchId;
       }
       surfaceList_.Add(other.surfaceList_);
       if (other.AreaId != 0) {
@@ -279,16 +280,16 @@ namespace EggLink.DanhengServer.Proto {
             AreaId = input.ReadUInt32();
             break;
           }
-          case 32: {
-            DifficultyLevel = input.ReadUInt32();
+          case 42: {
+            surfaceList_.AddEntriesFrom(input, _repeated_surfaceList_codec);
             break;
           }
-          case 40: {
+          case 104: {
             BranchId = input.ReadUInt32();
             break;
           }
-          case 122: {
-            surfaceList_.AddEntriesFrom(input, _repeated_surfaceList_codec);
+          case 120: {
+            DifficultyLevel = input.ReadUInt32();
             break;
           }
         }
@@ -310,16 +311,16 @@ namespace EggLink.DanhengServer.Proto {
             AreaId = input.ReadUInt32();
             break;
           }
-          case 32: {
-            DifficultyLevel = input.ReadUInt32();
+          case 42: {
+            surfaceList_.AddEntriesFrom(ref input, _repeated_surfaceList_codec);
             break;
           }
-          case 40: {
+          case 104: {
             BranchId = input.ReadUInt32();
             break;
           }
-          case 122: {
-            surfaceList_.AddEntriesFrom(ref input, _repeated_surfaceList_codec);
+          case 120: {
+            DifficultyLevel = input.ReadUInt32();
             break;
           }
         }

@@ -25,7 +25,7 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChdDaGVzc1JvZ3VlTWlyYWNsZS5wcm90bxoWR2FtZVJvZ3VlTWlyYWNsZS5w",
-            "cm90byI8ChFDaGVzc1JvZ3VlTWlyYWNsZRInCgxtaXJhY2xlX2xpc3QYCyAD",
+            "cm90byI8ChFDaGVzc1JvZ3VlTWlyYWNsZRInCgxtaXJhY2xlX2xpc3QYDCAD",
             "KAsyES5HYW1lUm9ndWVNaXJhY2xlQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2",
             "ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
@@ -84,9 +84,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "miracle_list" field.</summary>
-    public const int MiracleListFieldNumber = 11;
+    public const int MiracleListFieldNumber = 12;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.GameRogueMiracle> _repeated_miracleList_codec
-        = pb::FieldCodec.ForMessage(90, global::EggLink.DanhengServer.Proto.GameRogueMiracle.Parser);
+        = pb::FieldCodec.ForMessage(98, global::EggLink.DanhengServer.Proto.GameRogueMiracle.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.GameRogueMiracle> miracleList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.GameRogueMiracle>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -187,7 +187,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 90: {
+          case 98: {
             miracleList_.AddEntriesFrom(input, _repeated_miracleList_codec);
             break;
           }
@@ -206,7 +206,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 90: {
+          case 98: {
             miracleList_.AddEntriesFrom(ref input, _repeated_miracleList_codec);
             break;
           }

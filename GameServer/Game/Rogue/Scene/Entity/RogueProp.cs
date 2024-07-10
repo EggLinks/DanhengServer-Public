@@ -47,7 +47,7 @@ namespace EggLink.DanhengServer.Game.Rogue.Scene.Entity
                 {
                     ChessRogueInfo = new()
                     {
-                        EnterNextLayer = IsLastRoom,
+                        EnterNextCell = !IsLastRoom,
                     }
                 };
             }

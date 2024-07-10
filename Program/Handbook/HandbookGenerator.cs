@@ -1,4 +1,5 @@
 ﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Internationalization;
 using EggLink.DanhengServer.Program;
 using EggLink.DanhengServer.Util;
 using Newtonsoft.Json;
@@ -83,8 +84,8 @@ namespace EggLink.DanhengServer.Handbook
             foreach (var cmd in EntryPoint.CommandManager.CommandInfo)
             {
                 builder.Append("Command: " + cmd.Key);
-                builder.Append(" --- Description: " + cmd.Value.Description);
-                builder.Append(" --- Usage: " + cmd.Value.Usage);
+                builder.Append(" --- Description: " + I18nManager.Translate(cmd.Value.Description));
+                builder.Append(" --- Usage: " + I18nManager.Translate(cmd.Value.Usage));
                 builder.AppendLine();
             }
         }

@@ -25,17 +25,19 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChpQdW5rTG9yZEJhdHRsZVJlY29yZC5wcm90bxoaUHVua0xvcmRCYXR0bGVB",
-            "dmF0YXIucHJvdG8i9QEKFFB1bmtMb3JkQmF0dGxlUmVjb3JkEgsKA3VpZBgB",
-            "IAEoDRIRCglkYW1hZ2VfaHAYAiABKA0SFAoMaXNfZmluYWxfaGl0GAMgASgI",
-            "EhsKE292ZXJfa2lsbF9kYW1hZ2VfaHAYBCABKA0SGQoRYmF0dGxlX3JlcGxh",
-            "eV9rZXkYBSABKAkSKgoLYXZhdGFyX2xpc3QYBiADKAsyFS5QdW5rTG9yZEJh",
-            "dHRsZUF2YXRhchIUCgxhc3Npc3Rfc2NvcmUYByABKA0SFAoMZGFtYWdlX3Nj",
-            "b3JlGAggASgNEhcKD2ZpbmFsX2hpdF9zY29yZRgJIAEoDUIeqgIbRWdnTGlu",
-            "ay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
+            "dmF0YXIucHJvdG8iywIKFFB1bmtMb3JkQmF0dGxlUmVjb3JkEhYKDlVpZEZp",
+            "ZWxkTnVtYmVyGAEgASgNEhsKE0RhbWFnZUhwRmllbGROdW1iZXIYAiABKA0S",
+            "HQoVSXNGaW5hbEhpdEZpZWxkTnVtYmVyGAMgASgIEiMKG092ZXJLaWxsRGFt",
+            "YWdlSHBGaWVsZE51bWJlchgEIAEoDRIiChpCYXR0bGVSZXBsYXlLZXlGaWVs",
+            "ZE51bWJlchgFIAEoCRI0ChVBdmF0YXJMaXN0RmllbGROdW1iZXIYBiADKAsy",
+            "FS5QdW5rTG9yZEJhdHRsZUF2YXRhchIeChZBc3Npc3RTY29yZUZpZWxkTnVt",
+            "YmVyGAcgASgNEh4KFkRhbWFnZVNjb3JlRmllbGROdW1iZXIYCCABKA0SIAoY",
+            "RmluYWxIaXRTY29yZUZpZWxkTnVtYmVyGAkgASgNQh6qAhtFZ2dMaW5rLkRh",
+            "bmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.PunkLordBattleAvatarReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PunkLordBattleRecord), global::EggLink.DanhengServer.Proto.PunkLordBattleRecord.Parser, new[]{ "Uid", "DamageHp", "IsFinalHit", "OverKillDamageHp", "BattleReplayKey", "AvatarList", "AssistScore", "DamageScore", "FinalHitScore" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PunkLordBattleRecord), global::EggLink.DanhengServer.Proto.PunkLordBattleRecord.Parser, new[]{ "UidFieldNumber", "DamageHpFieldNumber", "IsFinalHitFieldNumber", "OverKillDamageHpFieldNumber", "BattleReplayKeyFieldNumber", "AvatarListFieldNumber", "AssistScoreFieldNumber", "DamageScoreFieldNumber", "FinalHitScoreFieldNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -77,15 +79,15 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PunkLordBattleRecord(PunkLordBattleRecord other) : this() {
-      uid_ = other.uid_;
-      damageHp_ = other.damageHp_;
-      isFinalHit_ = other.isFinalHit_;
-      overKillDamageHp_ = other.overKillDamageHp_;
-      battleReplayKey_ = other.battleReplayKey_;
-      avatarList_ = other.avatarList_.Clone();
-      assistScore_ = other.assistScore_;
-      damageScore_ = other.damageScore_;
-      finalHitScore_ = other.finalHitScore_;
+      uidFieldNumber_ = other.uidFieldNumber_;
+      damageHpFieldNumber_ = other.damageHpFieldNumber_;
+      isFinalHitFieldNumber_ = other.isFinalHitFieldNumber_;
+      overKillDamageHpFieldNumber_ = other.overKillDamageHpFieldNumber_;
+      battleReplayKeyFieldNumber_ = other.battleReplayKeyFieldNumber_;
+      avatarListFieldNumber_ = other.avatarListFieldNumber_.Clone();
+      assistScoreFieldNumber_ = other.assistScoreFieldNumber_;
+      damageScoreFieldNumber_ = other.damageScoreFieldNumber_;
+      finalHitScoreFieldNumber_ = other.finalHitScoreFieldNumber_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -95,110 +97,110 @@ namespace EggLink.DanhengServer.Proto {
       return new PunkLordBattleRecord(this);
     }
 
-    /// <summary>Field number for the "uid" field.</summary>
-    public const int UidFieldNumber = 1;
-    private uint uid_;
+    /// <summary>Field number for the "UidFieldNumber" field.</summary>
+    public const int UidFieldNumberFieldNumber = 1;
+    private uint uidFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint Uid {
-      get { return uid_; }
+    public uint UidFieldNumber {
+      get { return uidFieldNumber_; }
       set {
-        uid_ = value;
+        uidFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "damage_hp" field.</summary>
-    public const int DamageHpFieldNumber = 2;
-    private uint damageHp_;
+    /// <summary>Field number for the "DamageHpFieldNumber" field.</summary>
+    public const int DamageHpFieldNumberFieldNumber = 2;
+    private uint damageHpFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint DamageHp {
-      get { return damageHp_; }
+    public uint DamageHpFieldNumber {
+      get { return damageHpFieldNumber_; }
       set {
-        damageHp_ = value;
+        damageHpFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "is_final_hit" field.</summary>
-    public const int IsFinalHitFieldNumber = 3;
-    private bool isFinalHit_;
+    /// <summary>Field number for the "IsFinalHitFieldNumber" field.</summary>
+    public const int IsFinalHitFieldNumberFieldNumber = 3;
+    private bool isFinalHitFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsFinalHit {
-      get { return isFinalHit_; }
+    public bool IsFinalHitFieldNumber {
+      get { return isFinalHitFieldNumber_; }
       set {
-        isFinalHit_ = value;
+        isFinalHitFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "over_kill_damage_hp" field.</summary>
-    public const int OverKillDamageHpFieldNumber = 4;
-    private uint overKillDamageHp_;
+    /// <summary>Field number for the "OverKillDamageHpFieldNumber" field.</summary>
+    public const int OverKillDamageHpFieldNumberFieldNumber = 4;
+    private uint overKillDamageHpFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint OverKillDamageHp {
-      get { return overKillDamageHp_; }
+    public uint OverKillDamageHpFieldNumber {
+      get { return overKillDamageHpFieldNumber_; }
       set {
-        overKillDamageHp_ = value;
+        overKillDamageHpFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "battle_replay_key" field.</summary>
-    public const int BattleReplayKeyFieldNumber = 5;
-    private string battleReplayKey_ = "";
+    /// <summary>Field number for the "BattleReplayKeyFieldNumber" field.</summary>
+    public const int BattleReplayKeyFieldNumberFieldNumber = 5;
+    private string battleReplayKeyFieldNumber_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string BattleReplayKey {
-      get { return battleReplayKey_; }
+    public string BattleReplayKeyFieldNumber {
+      get { return battleReplayKeyFieldNumber_; }
       set {
-        battleReplayKey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        battleReplayKeyFieldNumber_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "avatar_list" field.</summary>
-    public const int AvatarListFieldNumber = 6;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar> _repeated_avatarList_codec
+    /// <summary>Field number for the "AvatarListFieldNumber" field.</summary>
+    public const int AvatarListFieldNumberFieldNumber = 6;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar> _repeated_avatarListFieldNumber_codec
         = pb::FieldCodec.ForMessage(50, global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar> avatarList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar>();
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar> avatarListFieldNumber_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar> AvatarList {
-      get { return avatarList_; }
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.PunkLordBattleAvatar> AvatarListFieldNumber {
+      get { return avatarListFieldNumber_; }
     }
 
-    /// <summary>Field number for the "assist_score" field.</summary>
-    public const int AssistScoreFieldNumber = 7;
-    private uint assistScore_;
+    /// <summary>Field number for the "AssistScoreFieldNumber" field.</summary>
+    public const int AssistScoreFieldNumberFieldNumber = 7;
+    private uint assistScoreFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint AssistScore {
-      get { return assistScore_; }
+    public uint AssistScoreFieldNumber {
+      get { return assistScoreFieldNumber_; }
       set {
-        assistScore_ = value;
+        assistScoreFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "damage_score" field.</summary>
-    public const int DamageScoreFieldNumber = 8;
-    private uint damageScore_;
+    /// <summary>Field number for the "DamageScoreFieldNumber" field.</summary>
+    public const int DamageScoreFieldNumberFieldNumber = 8;
+    private uint damageScoreFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint DamageScore {
-      get { return damageScore_; }
+    public uint DamageScoreFieldNumber {
+      get { return damageScoreFieldNumber_; }
       set {
-        damageScore_ = value;
+        damageScoreFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "final_hit_score" field.</summary>
-    public const int FinalHitScoreFieldNumber = 9;
-    private uint finalHitScore_;
+    /// <summary>Field number for the "FinalHitScoreFieldNumber" field.</summary>
+    public const int FinalHitScoreFieldNumberFieldNumber = 9;
+    private uint finalHitScoreFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint FinalHitScore {
-      get { return finalHitScore_; }
+    public uint FinalHitScoreFieldNumber {
+      get { return finalHitScoreFieldNumber_; }
       set {
-        finalHitScore_ = value;
+        finalHitScoreFieldNumber_ = value;
       }
     }
 
@@ -217,15 +219,15 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Uid != other.Uid) return false;
-      if (DamageHp != other.DamageHp) return false;
-      if (IsFinalHit != other.IsFinalHit) return false;
-      if (OverKillDamageHp != other.OverKillDamageHp) return false;
-      if (BattleReplayKey != other.BattleReplayKey) return false;
-      if(!avatarList_.Equals(other.avatarList_)) return false;
-      if (AssistScore != other.AssistScore) return false;
-      if (DamageScore != other.DamageScore) return false;
-      if (FinalHitScore != other.FinalHitScore) return false;
+      if (UidFieldNumber != other.UidFieldNumber) return false;
+      if (DamageHpFieldNumber != other.DamageHpFieldNumber) return false;
+      if (IsFinalHitFieldNumber != other.IsFinalHitFieldNumber) return false;
+      if (OverKillDamageHpFieldNumber != other.OverKillDamageHpFieldNumber) return false;
+      if (BattleReplayKeyFieldNumber != other.BattleReplayKeyFieldNumber) return false;
+      if(!avatarListFieldNumber_.Equals(other.avatarListFieldNumber_)) return false;
+      if (AssistScoreFieldNumber != other.AssistScoreFieldNumber) return false;
+      if (DamageScoreFieldNumber != other.DamageScoreFieldNumber) return false;
+      if (FinalHitScoreFieldNumber != other.FinalHitScoreFieldNumber) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -233,15 +235,15 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Uid != 0) hash ^= Uid.GetHashCode();
-      if (DamageHp != 0) hash ^= DamageHp.GetHashCode();
-      if (IsFinalHit != false) hash ^= IsFinalHit.GetHashCode();
-      if (OverKillDamageHp != 0) hash ^= OverKillDamageHp.GetHashCode();
-      if (BattleReplayKey.Length != 0) hash ^= BattleReplayKey.GetHashCode();
-      hash ^= avatarList_.GetHashCode();
-      if (AssistScore != 0) hash ^= AssistScore.GetHashCode();
-      if (DamageScore != 0) hash ^= DamageScore.GetHashCode();
-      if (FinalHitScore != 0) hash ^= FinalHitScore.GetHashCode();
+      if (UidFieldNumber != 0) hash ^= UidFieldNumber.GetHashCode();
+      if (DamageHpFieldNumber != 0) hash ^= DamageHpFieldNumber.GetHashCode();
+      if (IsFinalHitFieldNumber != false) hash ^= IsFinalHitFieldNumber.GetHashCode();
+      if (OverKillDamageHpFieldNumber != 0) hash ^= OverKillDamageHpFieldNumber.GetHashCode();
+      if (BattleReplayKeyFieldNumber.Length != 0) hash ^= BattleReplayKeyFieldNumber.GetHashCode();
+      hash ^= avatarListFieldNumber_.GetHashCode();
+      if (AssistScoreFieldNumber != 0) hash ^= AssistScoreFieldNumber.GetHashCode();
+      if (DamageScoreFieldNumber != 0) hash ^= DamageScoreFieldNumber.GetHashCode();
+      if (FinalHitScoreFieldNumber != 0) hash ^= FinalHitScoreFieldNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -260,38 +262,38 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Uid != 0) {
+      if (UidFieldNumber != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt32(Uid);
+        output.WriteUInt32(UidFieldNumber);
       }
-      if (DamageHp != 0) {
+      if (DamageHpFieldNumber != 0) {
         output.WriteRawTag(16);
-        output.WriteUInt32(DamageHp);
+        output.WriteUInt32(DamageHpFieldNumber);
       }
-      if (IsFinalHit != false) {
+      if (IsFinalHitFieldNumber != false) {
         output.WriteRawTag(24);
-        output.WriteBool(IsFinalHit);
+        output.WriteBool(IsFinalHitFieldNumber);
       }
-      if (OverKillDamageHp != 0) {
+      if (OverKillDamageHpFieldNumber != 0) {
         output.WriteRawTag(32);
-        output.WriteUInt32(OverKillDamageHp);
+        output.WriteUInt32(OverKillDamageHpFieldNumber);
       }
-      if (BattleReplayKey.Length != 0) {
+      if (BattleReplayKeyFieldNumber.Length != 0) {
         output.WriteRawTag(42);
-        output.WriteString(BattleReplayKey);
+        output.WriteString(BattleReplayKeyFieldNumber);
       }
-      avatarList_.WriteTo(output, _repeated_avatarList_codec);
-      if (AssistScore != 0) {
+      avatarListFieldNumber_.WriteTo(output, _repeated_avatarListFieldNumber_codec);
+      if (AssistScoreFieldNumber != 0) {
         output.WriteRawTag(56);
-        output.WriteUInt32(AssistScore);
+        output.WriteUInt32(AssistScoreFieldNumber);
       }
-      if (DamageScore != 0) {
+      if (DamageScoreFieldNumber != 0) {
         output.WriteRawTag(64);
-        output.WriteUInt32(DamageScore);
+        output.WriteUInt32(DamageScoreFieldNumber);
       }
-      if (FinalHitScore != 0) {
+      if (FinalHitScoreFieldNumber != 0) {
         output.WriteRawTag(72);
-        output.WriteUInt32(FinalHitScore);
+        output.WriteUInt32(FinalHitScoreFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -303,38 +305,38 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Uid != 0) {
+      if (UidFieldNumber != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt32(Uid);
+        output.WriteUInt32(UidFieldNumber);
       }
-      if (DamageHp != 0) {
+      if (DamageHpFieldNumber != 0) {
         output.WriteRawTag(16);
-        output.WriteUInt32(DamageHp);
+        output.WriteUInt32(DamageHpFieldNumber);
       }
-      if (IsFinalHit != false) {
+      if (IsFinalHitFieldNumber != false) {
         output.WriteRawTag(24);
-        output.WriteBool(IsFinalHit);
+        output.WriteBool(IsFinalHitFieldNumber);
       }
-      if (OverKillDamageHp != 0) {
+      if (OverKillDamageHpFieldNumber != 0) {
         output.WriteRawTag(32);
-        output.WriteUInt32(OverKillDamageHp);
+        output.WriteUInt32(OverKillDamageHpFieldNumber);
       }
-      if (BattleReplayKey.Length != 0) {
+      if (BattleReplayKeyFieldNumber.Length != 0) {
         output.WriteRawTag(42);
-        output.WriteString(BattleReplayKey);
+        output.WriteString(BattleReplayKeyFieldNumber);
       }
-      avatarList_.WriteTo(ref output, _repeated_avatarList_codec);
-      if (AssistScore != 0) {
+      avatarListFieldNumber_.WriteTo(ref output, _repeated_avatarListFieldNumber_codec);
+      if (AssistScoreFieldNumber != 0) {
         output.WriteRawTag(56);
-        output.WriteUInt32(AssistScore);
+        output.WriteUInt32(AssistScoreFieldNumber);
       }
-      if (DamageScore != 0) {
+      if (DamageScoreFieldNumber != 0) {
         output.WriteRawTag(64);
-        output.WriteUInt32(DamageScore);
+        output.WriteUInt32(DamageScoreFieldNumber);
       }
-      if (FinalHitScore != 0) {
+      if (FinalHitScoreFieldNumber != 0) {
         output.WriteRawTag(72);
-        output.WriteUInt32(FinalHitScore);
+        output.WriteUInt32(FinalHitScoreFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -346,30 +348,30 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Uid != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Uid);
+      if (UidFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UidFieldNumber);
       }
-      if (DamageHp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DamageHp);
+      if (DamageHpFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DamageHpFieldNumber);
       }
-      if (IsFinalHit != false) {
+      if (IsFinalHitFieldNumber != false) {
         size += 1 + 1;
       }
-      if (OverKillDamageHp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(OverKillDamageHp);
+      if (OverKillDamageHpFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(OverKillDamageHpFieldNumber);
       }
-      if (BattleReplayKey.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(BattleReplayKey);
+      if (BattleReplayKeyFieldNumber.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(BattleReplayKeyFieldNumber);
       }
-      size += avatarList_.CalculateSize(_repeated_avatarList_codec);
-      if (AssistScore != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AssistScore);
+      size += avatarListFieldNumber_.CalculateSize(_repeated_avatarListFieldNumber_codec);
+      if (AssistScoreFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AssistScoreFieldNumber);
       }
-      if (DamageScore != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DamageScore);
+      if (DamageScoreFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DamageScoreFieldNumber);
       }
-      if (FinalHitScore != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(FinalHitScore);
+      if (FinalHitScoreFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(FinalHitScoreFieldNumber);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -383,30 +385,30 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.Uid != 0) {
-        Uid = other.Uid;
+      if (other.UidFieldNumber != 0) {
+        UidFieldNumber = other.UidFieldNumber;
       }
-      if (other.DamageHp != 0) {
-        DamageHp = other.DamageHp;
+      if (other.DamageHpFieldNumber != 0) {
+        DamageHpFieldNumber = other.DamageHpFieldNumber;
       }
-      if (other.IsFinalHit != false) {
-        IsFinalHit = other.IsFinalHit;
+      if (other.IsFinalHitFieldNumber != false) {
+        IsFinalHitFieldNumber = other.IsFinalHitFieldNumber;
       }
-      if (other.OverKillDamageHp != 0) {
-        OverKillDamageHp = other.OverKillDamageHp;
+      if (other.OverKillDamageHpFieldNumber != 0) {
+        OverKillDamageHpFieldNumber = other.OverKillDamageHpFieldNumber;
       }
-      if (other.BattleReplayKey.Length != 0) {
-        BattleReplayKey = other.BattleReplayKey;
+      if (other.BattleReplayKeyFieldNumber.Length != 0) {
+        BattleReplayKeyFieldNumber = other.BattleReplayKeyFieldNumber;
       }
-      avatarList_.Add(other.avatarList_);
-      if (other.AssistScore != 0) {
-        AssistScore = other.AssistScore;
+      avatarListFieldNumber_.Add(other.avatarListFieldNumber_);
+      if (other.AssistScoreFieldNumber != 0) {
+        AssistScoreFieldNumber = other.AssistScoreFieldNumber;
       }
-      if (other.DamageScore != 0) {
-        DamageScore = other.DamageScore;
+      if (other.DamageScoreFieldNumber != 0) {
+        DamageScoreFieldNumber = other.DamageScoreFieldNumber;
       }
-      if (other.FinalHitScore != 0) {
-        FinalHitScore = other.FinalHitScore;
+      if (other.FinalHitScoreFieldNumber != 0) {
+        FinalHitScoreFieldNumber = other.FinalHitScoreFieldNumber;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -424,39 +426,39 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Uid = input.ReadUInt32();
+            UidFieldNumber = input.ReadUInt32();
             break;
           }
           case 16: {
-            DamageHp = input.ReadUInt32();
+            DamageHpFieldNumber = input.ReadUInt32();
             break;
           }
           case 24: {
-            IsFinalHit = input.ReadBool();
+            IsFinalHitFieldNumber = input.ReadBool();
             break;
           }
           case 32: {
-            OverKillDamageHp = input.ReadUInt32();
+            OverKillDamageHpFieldNumber = input.ReadUInt32();
             break;
           }
           case 42: {
-            BattleReplayKey = input.ReadString();
+            BattleReplayKeyFieldNumber = input.ReadString();
             break;
           }
           case 50: {
-            avatarList_.AddEntriesFrom(input, _repeated_avatarList_codec);
+            avatarListFieldNumber_.AddEntriesFrom(input, _repeated_avatarListFieldNumber_codec);
             break;
           }
           case 56: {
-            AssistScore = input.ReadUInt32();
+            AssistScoreFieldNumber = input.ReadUInt32();
             break;
           }
           case 64: {
-            DamageScore = input.ReadUInt32();
+            DamageScoreFieldNumber = input.ReadUInt32();
             break;
           }
           case 72: {
-            FinalHitScore = input.ReadUInt32();
+            FinalHitScoreFieldNumber = input.ReadUInt32();
             break;
           }
         }
@@ -475,39 +477,39 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            Uid = input.ReadUInt32();
+            UidFieldNumber = input.ReadUInt32();
             break;
           }
           case 16: {
-            DamageHp = input.ReadUInt32();
+            DamageHpFieldNumber = input.ReadUInt32();
             break;
           }
           case 24: {
-            IsFinalHit = input.ReadBool();
+            IsFinalHitFieldNumber = input.ReadBool();
             break;
           }
           case 32: {
-            OverKillDamageHp = input.ReadUInt32();
+            OverKillDamageHpFieldNumber = input.ReadUInt32();
             break;
           }
           case 42: {
-            BattleReplayKey = input.ReadString();
+            BattleReplayKeyFieldNumber = input.ReadString();
             break;
           }
           case 50: {
-            avatarList_.AddEntriesFrom(ref input, _repeated_avatarList_codec);
+            avatarListFieldNumber_.AddEntriesFrom(ref input, _repeated_avatarListFieldNumber_codec);
             break;
           }
           case 56: {
-            AssistScore = input.ReadUInt32();
+            AssistScoreFieldNumber = input.ReadUInt32();
             break;
           }
           case 64: {
-            DamageScore = input.ReadUInt32();
+            DamageScoreFieldNumber = input.ReadUInt32();
             break;
           }
           case 72: {
-            FinalHitScore = input.ReadUInt32();
+            FinalHitScoreFieldNumber = input.ReadUInt32();
             break;
           }
         }

@@ -25,15 +25,15 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ch9HZXRTcHJpbmdSZWNvdmVyRGF0YVNjUnNwLnByb3RvGhJIZWFsUG9vbElu",
-            "Zm8ucHJvdG8aGVNwcmluZ1JlY292ZXJDb25maWcucHJvdG8iiAEKGUdldFNw",
-            "cmluZ1JlY292ZXJEYXRhU2NSc3ASMwoVc3ByaW5nX3JlY292ZXJfY29uZmln",
-            "GAMgASgLMhQuU3ByaW5nUmVjb3ZlckNvbmZpZxIPCgdyZXRjb2RlGA8gASgN",
-            "EiUKDmhlYWxfcG9vbF9pbmZvGAYgASgLMg0uSGVhbFBvb2xJbmZvQh6qAhtF",
-            "Z2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "Zm8ucHJvdG8aGVNwcmluZ1JlY292ZXJDb25maWcucHJvdG8iewoZR2V0U3By",
+            "aW5nUmVjb3ZlckRhdGFTY1JzcBIpCgtKTE1MRktCTUpOTBgNIAEoCzIULlNw",
+            "cmluZ1JlY292ZXJDb25maWcSIgoLS01OQ0FQSlBHRFAYDCABKAsyDS5IZWFs",
+            "UG9vbEluZm8SDwoHcmV0Y29kZRgCIAEoDUIeqgIbRWdnTGluay5EYW5oZW5n",
+            "U2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.HealPoolInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.SpringRecoverConfigReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetSpringRecoverDataScRsp), global::EggLink.DanhengServer.Proto.GetSpringRecoverDataScRsp.Parser, new[]{ "SpringRecoverConfig", "Retcode", "HealPoolInfo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetSpringRecoverDataScRsp), global::EggLink.DanhengServer.Proto.GetSpringRecoverDataScRsp.Parser, new[]{ "JLMLFKBMJNL", "KMNCAPJPGDP", "Retcode" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,9 +75,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public GetSpringRecoverDataScRsp(GetSpringRecoverDataScRsp other) : this() {
-      springRecoverConfig_ = other.springRecoverConfig_ != null ? other.springRecoverConfig_.Clone() : null;
+      jLMLFKBMJNL_ = other.jLMLFKBMJNL_ != null ? other.jLMLFKBMJNL_.Clone() : null;
+      kMNCAPJPGDP_ = other.kMNCAPJPGDP_ != null ? other.kMNCAPJPGDP_.Clone() : null;
       retcode_ = other.retcode_;
-      healPoolInfo_ = other.healPoolInfo_ != null ? other.healPoolInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -87,20 +87,32 @@ namespace EggLink.DanhengServer.Proto {
       return new GetSpringRecoverDataScRsp(this);
     }
 
-    /// <summary>Field number for the "spring_recover_config" field.</summary>
-    public const int SpringRecoverConfigFieldNumber = 3;
-    private global::EggLink.DanhengServer.Proto.SpringRecoverConfig springRecoverConfig_;
+    /// <summary>Field number for the "JLMLFKBMJNL" field.</summary>
+    public const int JLMLFKBMJNLFieldNumber = 13;
+    private global::EggLink.DanhengServer.Proto.SpringRecoverConfig jLMLFKBMJNL_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.SpringRecoverConfig SpringRecoverConfig {
-      get { return springRecoverConfig_; }
+    public global::EggLink.DanhengServer.Proto.SpringRecoverConfig JLMLFKBMJNL {
+      get { return jLMLFKBMJNL_; }
       set {
-        springRecoverConfig_ = value;
+        jLMLFKBMJNL_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "KMNCAPJPGDP" field.</summary>
+    public const int KMNCAPJPGDPFieldNumber = 12;
+    private global::EggLink.DanhengServer.Proto.HealPoolInfo kMNCAPJPGDP_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.HealPoolInfo KMNCAPJPGDP {
+      get { return kMNCAPJPGDP_; }
+      set {
+        kMNCAPJPGDP_ = value;
       }
     }
 
     /// <summary>Field number for the "retcode" field.</summary>
-    public const int RetcodeFieldNumber = 15;
+    public const int RetcodeFieldNumber = 2;
     private uint retcode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -108,18 +120,6 @@ namespace EggLink.DanhengServer.Proto {
       get { return retcode_; }
       set {
         retcode_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "heal_pool_info" field.</summary>
-    public const int HealPoolInfoFieldNumber = 6;
-    private global::EggLink.DanhengServer.Proto.HealPoolInfo healPoolInfo_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.HealPoolInfo HealPoolInfo {
-      get { return healPoolInfo_; }
-      set {
-        healPoolInfo_ = value;
       }
     }
 
@@ -138,9 +138,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(SpringRecoverConfig, other.SpringRecoverConfig)) return false;
+      if (!object.Equals(JLMLFKBMJNL, other.JLMLFKBMJNL)) return false;
+      if (!object.Equals(KMNCAPJPGDP, other.KMNCAPJPGDP)) return false;
       if (Retcode != other.Retcode) return false;
-      if (!object.Equals(HealPoolInfo, other.HealPoolInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -148,9 +148,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (springRecoverConfig_ != null) hash ^= SpringRecoverConfig.GetHashCode();
+      if (jLMLFKBMJNL_ != null) hash ^= JLMLFKBMJNL.GetHashCode();
+      if (kMNCAPJPGDP_ != null) hash ^= KMNCAPJPGDP.GetHashCode();
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
-      if (healPoolInfo_ != null) hash ^= HealPoolInfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -169,17 +169,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (springRecoverConfig_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(SpringRecoverConfig);
-      }
-      if (healPoolInfo_ != null) {
-        output.WriteRawTag(50);
-        output.WriteMessage(HealPoolInfo);
-      }
       if (Retcode != 0) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(16);
         output.WriteUInt32(Retcode);
+      }
+      if (kMNCAPJPGDP_ != null) {
+        output.WriteRawTag(98);
+        output.WriteMessage(KMNCAPJPGDP);
+      }
+      if (jLMLFKBMJNL_ != null) {
+        output.WriteRawTag(106);
+        output.WriteMessage(JLMLFKBMJNL);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -191,17 +191,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (springRecoverConfig_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(SpringRecoverConfig);
-      }
-      if (healPoolInfo_ != null) {
-        output.WriteRawTag(50);
-        output.WriteMessage(HealPoolInfo);
-      }
       if (Retcode != 0) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(16);
         output.WriteUInt32(Retcode);
+      }
+      if (kMNCAPJPGDP_ != null) {
+        output.WriteRawTag(98);
+        output.WriteMessage(KMNCAPJPGDP);
+      }
+      if (jLMLFKBMJNL_ != null) {
+        output.WriteRawTag(106);
+        output.WriteMessage(JLMLFKBMJNL);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -213,14 +213,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (springRecoverConfig_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SpringRecoverConfig);
+      if (jLMLFKBMJNL_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(JLMLFKBMJNL);
+      }
+      if (kMNCAPJPGDP_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(KMNCAPJPGDP);
       }
       if (Retcode != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
-      }
-      if (healPoolInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HealPoolInfo);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -234,20 +234,20 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.springRecoverConfig_ != null) {
-        if (springRecoverConfig_ == null) {
-          SpringRecoverConfig = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
+      if (other.jLMLFKBMJNL_ != null) {
+        if (jLMLFKBMJNL_ == null) {
+          JLMLFKBMJNL = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
         }
-        SpringRecoverConfig.MergeFrom(other.SpringRecoverConfig);
+        JLMLFKBMJNL.MergeFrom(other.JLMLFKBMJNL);
+      }
+      if (other.kMNCAPJPGDP_ != null) {
+        if (kMNCAPJPGDP_ == null) {
+          KMNCAPJPGDP = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
+        }
+        KMNCAPJPGDP.MergeFrom(other.KMNCAPJPGDP);
       }
       if (other.Retcode != 0) {
         Retcode = other.Retcode;
-      }
-      if (other.healPoolInfo_ != null) {
-        if (healPoolInfo_ == null) {
-          HealPoolInfo = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
-        }
-        HealPoolInfo.MergeFrom(other.HealPoolInfo);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -264,22 +264,22 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 26: {
-            if (springRecoverConfig_ == null) {
-              SpringRecoverConfig = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
-            }
-            input.ReadMessage(SpringRecoverConfig);
-            break;
-          }
-          case 50: {
-            if (healPoolInfo_ == null) {
-              HealPoolInfo = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
-            }
-            input.ReadMessage(HealPoolInfo);
-            break;
-          }
-          case 120: {
+          case 16: {
             Retcode = input.ReadUInt32();
+            break;
+          }
+          case 98: {
+            if (kMNCAPJPGDP_ == null) {
+              KMNCAPJPGDP = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
+            }
+            input.ReadMessage(KMNCAPJPGDP);
+            break;
+          }
+          case 106: {
+            if (jLMLFKBMJNL_ == null) {
+              JLMLFKBMJNL = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
+            }
+            input.ReadMessage(JLMLFKBMJNL);
             break;
           }
         }
@@ -297,22 +297,22 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 26: {
-            if (springRecoverConfig_ == null) {
-              SpringRecoverConfig = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
-            }
-            input.ReadMessage(SpringRecoverConfig);
-            break;
-          }
-          case 50: {
-            if (healPoolInfo_ == null) {
-              HealPoolInfo = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
-            }
-            input.ReadMessage(HealPoolInfo);
-            break;
-          }
-          case 120: {
+          case 16: {
             Retcode = input.ReadUInt32();
+            break;
+          }
+          case 98: {
+            if (kMNCAPJPGDP_ == null) {
+              KMNCAPJPGDP = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
+            }
+            input.ReadMessage(KMNCAPJPGDP);
+            break;
+          }
+          case 106: {
+            if (jLMLFKBMJNL_ == null) {
+              JLMLFKBMJNL = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
+            }
+            input.ReadMessage(JLMLFKBMJNL);
             break;
           }
         }

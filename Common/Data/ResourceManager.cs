@@ -8,6 +8,8 @@ using EggLink.DanhengServer.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using EggLink.DanhengServer.Data.Custom;
+using EggLink.DanhengServer.Data.Excel;
+using EggLink.DanhengServer.Enums.Rogue;
 
 namespace EggLink.DanhengServer.Data
 {
@@ -22,15 +24,13 @@ namespace EggLink.DanhengServer.Data
             LoadMazeSkill();
             LoadDialogueInfo();
             LoadPerformanceInfo();
+            LoadRogueChestMapInfo();
             GameData.ActivityConfig = LoadCustomFile<ActivityConfig>("Activity", "ActivityConfig") ?? new();
             GameData.BannersConfig = LoadCustomFile<BannersConfig>("Banner", "Banners") ?? new();
             GameData.RogueMapGenData = LoadCustomFile<Dictionary<int, List<int>>>("Rogue Map", "RogueMapGen") ?? [];
             GameData.RogueMiracleGroupData = LoadCustomFile<Dictionary<int, List<int>>>("Rogue Miracle Group", "RogueMiracleGroup") ?? [];
             GameData.RogueMiracleEffectData = LoadCustomFile<RogueMiracleEffectConfig>("Rogue Miracle Effect", "RogueMiracleEffectGen") ?? new();
-            GameData.ChessRogueLayerGenData = LoadCustomFile<Dictionary<int, Dictionary<int, List<int>>>>("Chess Rogue Layer", "ChessRogueLayerGen") ?? [];
-            GameData.ChessRogueRoomGenData = LoadCustomFile<Dictionary<int, ChessRogueRoomConfig>>("Chess Rogue Map", "ChessRogueMapGen") ?? [];
-            GameData.ChessRogueContentGenData = LoadCustomFile<Dictionary<int, List<int>>>("Chess Rogue Content", "ChessRogueContentGen") ?? [];
-            GameData.ChessRogueCellGenData = LoadCustomFile<Dictionary<int, ChessRogueCellConfig>>("Chess Rogue Cell", "ChessRogueRoomGen") ?? [];
+            LoadChessRogueRoomData();
         }
 
         public static void LoadExcel()
@@ -124,12 +124,12 @@ namespace EggLink.DanhengServer.Data
         public static void LoadFloorInfo()
         {
             Logger.Info("Loading floor files...");
-            DirectoryInfo directory = new(ConfigManager.Config.Path.ResourcePath + "/Config/LevelOutput/Floor/");
+            DirectoryInfo directory = new(ConfigManager.Config.Path.ResourcePath + "/Config/LevelOutput/RuntimeFloor/");
             bool missingGroupInfos = false;
 
             if (!directory.Exists)
             {
-                Logger.Warn($"Floor infos are missing, please check your resources folder: {ConfigManager.Config.Path.ResourcePath}/Config/LevelOutput/Floor. Teleports and natural world spawns may not work!");
+                Logger.Warn($"Floor infos are missing, please check your resources folder: {ConfigManager.Config.Path.ResourcePath}/Config/LevelOutput/RuntimeFloor. Teleports and natural world spawns may not work!");
                 return;
             }
             // Load floor infos
@@ -151,7 +151,7 @@ namespace EggLink.DanhengServer.Data
 
             foreach (var info in GameData.FloorInfoData.Values)
             {
-                foreach (var groupInfo in info.GroupList)
+                foreach (var groupInfo in info.GroupInstanceList)
                 {
                     if (groupInfo.IsDelete) { continue; }
                     FileInfo file = new(ConfigManager.Config.Path.ResourcePath + "/" + groupInfo.GroupPath);
@@ -165,7 +165,8 @@ namespace EggLink.DanhengServer.Data
                         if (group != null)
                         {
                             group.Id = groupInfo.ID;
-                            info.Groups.Add(groupInfo.ID, group);
+                            if (!info.Groups.ContainsKey(groupInfo.ID))
+                                info.Groups.Add(groupInfo.ID, group);
                             group.Load();
                         }
                     } catch (Exception ex)
@@ -180,7 +181,7 @@ namespace EggLink.DanhengServer.Data
                 info.OnLoad();
             }
             if (missingGroupInfos)
-                Logger.Warn($"Group infos are missing, please check your resources folder: {ConfigManager.Config.Path.ResourcePath}/Config/LevelOutput/Group. Teleports, monster battles, and natural world spawns may not work!");
+                Logger.Warn($"Group infos are missing, please check your resources folder: {ConfigManager.Config.Path.ResourcePath}/Config/LevelOutput/SharedRuntimeGroup. Teleports, monster battles, and natural world spawns may not work!");
 
             Logger.Info("Loaded " + GameData.FloorInfoData.Count + " floor infos.");
         }
@@ -313,9 +314,11 @@ namespace EggLink.DanhengServer.Data
         public static void LoadMazeSkill()
         {
             var count = 0;
-            foreach (var avatar in GameData.AvatarConfigData.Values)
+            foreach (var adventure in GameData.AdventurePlayerData.Values)
             {
-                var path = ConfigManager.Config.Path.ResourcePath + "/Config/ConfigAdventureAbility/LocalPlayer/LocalPlayer_" + avatar.NameKey + "_Ability.json";
+                var avatar = GameData.AvatarConfigData[adventure.AvatarID];
+                var adventurePath = adventure.PlayerJsonPath.Replace("_Config.json", "_Ability.json").Replace("ConfigCharacter", "ConfigAdventureAbility");
+                var path = ConfigManager.Config.Path.ResourcePath + "/" + adventurePath;
                 var file = new FileInfo(path);
                 if (!file.Exists) continue;
                 try
@@ -326,12 +329,13 @@ namespace EggLink.DanhengServer.Data
                     var skillAbilityInfo = JsonConvert.DeserializeObject<SkillAbilityInfo>(text);
                     skillAbilityInfo?.Loaded(avatar);
                     count += skillAbilityInfo == null ? 0 : 1;
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Logger.Error("Error in reading " + file.Name, ex);
                 }
             }
-            if (count < GameData.AvatarConfigData.Count)
+            if (count < GameData.AdventurePlayerData.Count)
             {
                 Logger.Warn("Maze skill infos are missing, please check your resources folder: " + ConfigManager.Config.Path.ResourcePath + "/Config/ConfigAdventureAbility/LocalPlayer. Maze skills may not work!");
             }
@@ -418,6 +422,135 @@ namespace EggLink.DanhengServer.Data
             }
 
             Logger.Info("Loaded " + count + " performance infos.");
+        }
+
+        public static void LoadRogueChestMapInfo()
+        {
+            var count = 0;
+            var boardList = new List<RogueDLCChessBoardExcel>();
+            foreach (var nousMap in GameData.RogueNousChessBoardData.Values)
+            {
+                boardList.AddRange(nousMap);
+            }
+
+            foreach (var nousMap in GameData.RogueSwarmChessBoardData.Values)
+            {
+                boardList.AddRange(nousMap);
+            }
+
+            foreach (var board in boardList)
+            {
+                if (board.ChessBoardConfiguration == "")
+                {
+                    count++;
+                    continue;
+                }
+
+                var path = ConfigManager.Config.Path.ResourcePath + "/" + board.ChessBoardConfiguration;
+
+                var file = new FileInfo(path);
+                if (!file.Exists) continue;
+                try
+                {
+                    using var reader = file.OpenRead();
+                    using StreamReader reader2 = new(reader);
+                    var text = reader2.ReadToEnd();
+                    var map = JsonConvert.DeserializeObject<RogueChestMapInfo>(text);
+                    if (map != null)
+                    {
+                        board.MapInfo = map;
+                        count++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Error in reading " + file.Name, ex);
+                }
+            }
+
+            if (count < boardList.Count)
+            {
+                Logger.Warn("Chess board infos are missing, please check your resources folder: " + ConfigManager.Config.Path.ResourcePath + "/Config/Gameplays/RogueDLC. Chess rogue may not work!");
+            }
+
+            Logger.Info("Loaded " + count + " board infos.");
+        }
+
+        public static void LoadChessRogueRoomData()
+        {
+            var count = 0;
+
+            FileInfo file = new(ConfigManager.Config.Path.ConfigPath + $"/ChessRogueRoomGen.json");
+            List<ChessRogueRoomConfig>? customFile = default;
+            if (!file.Exists)
+            {
+                Logger.Warn($"Banner infos are missing, please check your resources folder: {ConfigManager.Config.Path.ConfigPath}/ChessRogueRoomGen.json. Chess Rogue may not work!");
+                return;
+            }
+            try
+            {
+                using var reader = file.OpenRead();
+                using StreamReader reader2 = new(reader);
+                var text = reader2.ReadToEnd();
+                var json = JsonConvert.DeserializeObject<List<ChessRogueRoomConfig>>(text);
+                customFile = json;
+
+                foreach (var room in customFile!)
+                {
+                    if (room.BlockType == RogueDLCBlockTypeEnum.MonsterNormal)
+                    {
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterNormal, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterSwarm, room);
+                        count += 2;
+                    }
+                    else if (room.BlockType == RogueDLCBlockTypeEnum.MonsterBoss)
+                    {
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterBoss, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterNousBoss, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterSwarmBoss, room);
+                        count += 3;
+                    }
+                    else if (room.BlockType == RogueDLCBlockTypeEnum.Event)
+                    {
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.Event, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.Reward, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.Adventure, room);  // adventure is not this type
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.NousSpecialEvent, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.SwarmEvent, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.NousEvent, room);
+                        count += 6;
+                    }
+                    else if (room.BlockType == RogueDLCBlockTypeEnum.Trade)
+                    {
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.Trade, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.BlackMarket, room);
+                        count += 2;
+                    }
+                    else
+                    {
+                        AddRoomToGameData(room.BlockType, room);
+                        count++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error in reading " + file.Name, ex);
+            }
+
+            Logger.Info("Loaded " + count + " room infos.");
+        }
+
+        public static void AddRoomToGameData(RogueDLCBlockTypeEnum type, ChessRogueRoomConfig room)
+        {
+            if (GameData.ChessRogueRoomData.TryGetValue(type, out var list))
+            {
+                list.Add(room);
+            }
+            else
+            {
+                GameData.ChessRogueRoomData.Add(type, [room]);
+            }
         }
     }
 }

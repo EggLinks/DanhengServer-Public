@@ -25,8 +25,8 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiFTdGFydENoYWxsZW5nZVN0b3J5QnVmZkluZm8ucHJvdG8iTQobU3RhcnRD",
-            "aGFsbGVuZ2VTdG9yeUJ1ZmZJbmZvEhYKDnN0b3J5X2J1ZmZfb25lGAkgASgN",
-            "EhYKDnN0b3J5X2J1ZmZfdHdvGAggASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdT",
+            "aGFsbGVuZ2VTdG9yeUJ1ZmZJbmZvEhYKDnN0b3J5X2J1ZmZfb25lGAogASgN",
+            "EhYKDnN0b3J5X2J1ZmZfdHdvGAcgASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdT",
             "ZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
@@ -85,7 +85,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "story_buff_one" field.</summary>
-    public const int StoryBuffOneFieldNumber = 9;
+    public const int StoryBuffOneFieldNumber = 10;
     private uint storyBuffOne_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -97,7 +97,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "story_buff_two" field.</summary>
-    public const int StoryBuffTwoFieldNumber = 8;
+    public const int StoryBuffTwoFieldNumber = 7;
     private uint storyBuffTwo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -153,11 +153,11 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (StoryBuffTwo != 0) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(56);
         output.WriteUInt32(StoryBuffTwo);
       }
       if (StoryBuffOne != 0) {
-        output.WriteRawTag(72);
+        output.WriteRawTag(80);
         output.WriteUInt32(StoryBuffOne);
       }
       if (_unknownFields != null) {
@@ -171,11 +171,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (StoryBuffTwo != 0) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(56);
         output.WriteUInt32(StoryBuffTwo);
       }
       if (StoryBuffOne != 0) {
-        output.WriteRawTag(72);
+        output.WriteRawTag(80);
         output.WriteUInt32(StoryBuffOne);
       }
       if (_unknownFields != null) {
@@ -227,11 +227,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 64: {
+          case 56: {
             StoryBuffTwo = input.ReadUInt32();
             break;
           }
-          case 72: {
+          case 80: {
             StoryBuffOne = input.ReadUInt32();
             break;
           }
@@ -250,11 +250,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 64: {
+          case 56: {
             StoryBuffTwo = input.ReadUInt32();
             break;
           }
-          case 72: {
+          case 80: {
             StoryBuffOne = input.ReadUInt32();
             break;
           }

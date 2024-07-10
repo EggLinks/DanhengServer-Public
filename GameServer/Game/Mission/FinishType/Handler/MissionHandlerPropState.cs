@@ -56,6 +56,10 @@ namespace EggLink.DanhengServer.Game.Mission.FinishType.Handler
                 if (p.PropInfo.ID == info.ParamInt2 && (int)p.State == info.ParamInt3)
                 {
                     player.MissionManager!.FinishSubMission(info.ID);
+                } 
+                else if (info.ParamInt3 == (int)PropStateEnum.CheckPointDisable || info.ParamInt3 == (int)PropStateEnum.CheckPointEnable)
+                {
+                    player.MissionManager!.FinishSubMission(info.ID);
                 }
             }
         }

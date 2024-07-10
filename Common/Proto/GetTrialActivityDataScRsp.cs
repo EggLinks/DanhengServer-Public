@@ -25,14 +25,14 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ch9HZXRUcmlhbEFjdGl2aXR5RGF0YVNjUnNwLnByb3RvGhdUcmlhbEFjdGl2",
-            "aXR5SW5mby5wcm90byJqChlHZXRUcmlhbEFjdGl2aXR5RGF0YVNjUnNwEhMK",
-            "C0xFUExFQkZJT0JQGAggASgNEg8KB3JldGNvZGUYCSABKA0SJwoLQ01DUEdO",
-            "UEFCTkQYCyADKAsyEi5UcmlhbEFjdGl2aXR5SW5mb0IeqgIbRWdnTGluay5E",
-            "YW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
+            "aXR5SW5mby5wcm90byJyChlHZXRUcmlhbEFjdGl2aXR5RGF0YVNjUnNwEg8K",
+            "B3JldGNvZGUYAiABKA0SEwoLQk9LRUVPRkxITVAYCSABKA0SLwoTdHJpYWxf",
+            "YWN0aXZpdHlfbGlzdBgIIAMoCzISLlRyaWFsQWN0aXZpdHlJbmZvQh6qAhtF",
+            "Z2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.TrialActivityInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetTrialActivityDataScRsp), global::EggLink.DanhengServer.Proto.GetTrialActivityDataScRsp.Parser, new[]{ "LEPLEBFIOBP", "Retcode", "CMCPGNPABND" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetTrialActivityDataScRsp), global::EggLink.DanhengServer.Proto.GetTrialActivityDataScRsp.Parser, new[]{ "Retcode", "BOKEEOFLHMP", "TrialActivityList" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,9 +74,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public GetTrialActivityDataScRsp(GetTrialActivityDataScRsp other) : this() {
-      lEPLEBFIOBP_ = other.lEPLEBFIOBP_;
       retcode_ = other.retcode_;
-      cMCPGNPABND_ = other.cMCPGNPABND_.Clone();
+      bOKEEOFLHMP_ = other.bOKEEOFLHMP_;
+      trialActivityList_ = other.trialActivityList_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -86,20 +86,8 @@ namespace EggLink.DanhengServer.Proto {
       return new GetTrialActivityDataScRsp(this);
     }
 
-    /// <summary>Field number for the "LEPLEBFIOBP" field.</summary>
-    public const int LEPLEBFIOBPFieldNumber = 8;
-    private uint lEPLEBFIOBP_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint LEPLEBFIOBP {
-      get { return lEPLEBFIOBP_; }
-      set {
-        lEPLEBFIOBP_ = value;
-      }
-    }
-
     /// <summary>Field number for the "retcode" field.</summary>
-    public const int RetcodeFieldNumber = 9;
+    public const int RetcodeFieldNumber = 2;
     private uint retcode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -110,15 +98,27 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "CMCPGNPABND" field.</summary>
-    public const int CMCPGNPABNDFieldNumber = 11;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.TrialActivityInfo> _repeated_cMCPGNPABND_codec
-        = pb::FieldCodec.ForMessage(90, global::EggLink.DanhengServer.Proto.TrialActivityInfo.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.TrialActivityInfo> cMCPGNPABND_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.TrialActivityInfo>();
+    /// <summary>Field number for the "BOKEEOFLHMP" field.</summary>
+    public const int BOKEEOFLHMPFieldNumber = 9;
+    private uint bOKEEOFLHMP_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.TrialActivityInfo> CMCPGNPABND {
-      get { return cMCPGNPABND_; }
+    public uint BOKEEOFLHMP {
+      get { return bOKEEOFLHMP_; }
+      set {
+        bOKEEOFLHMP_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "trial_activity_list" field.</summary>
+    public const int TrialActivityListFieldNumber = 8;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.TrialActivityInfo> _repeated_trialActivityList_codec
+        = pb::FieldCodec.ForMessage(66, global::EggLink.DanhengServer.Proto.TrialActivityInfo.Parser);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.TrialActivityInfo> trialActivityList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.TrialActivityInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.TrialActivityInfo> TrialActivityList {
+      get { return trialActivityList_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (LEPLEBFIOBP != other.LEPLEBFIOBP) return false;
       if (Retcode != other.Retcode) return false;
-      if(!cMCPGNPABND_.Equals(other.cMCPGNPABND_)) return false;
+      if (BOKEEOFLHMP != other.BOKEEOFLHMP) return false;
+      if(!trialActivityList_.Equals(other.trialActivityList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +146,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (LEPLEBFIOBP != 0) hash ^= LEPLEBFIOBP.GetHashCode();
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
-      hash ^= cMCPGNPABND_.GetHashCode();
+      if (BOKEEOFLHMP != 0) hash ^= BOKEEOFLHMP.GetHashCode();
+      hash ^= trialActivityList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,15 +167,15 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (LEPLEBFIOBP != 0) {
-        output.WriteRawTag(64);
-        output.WriteUInt32(LEPLEBFIOBP);
-      }
       if (Retcode != 0) {
-        output.WriteRawTag(72);
+        output.WriteRawTag(16);
         output.WriteUInt32(Retcode);
       }
-      cMCPGNPABND_.WriteTo(output, _repeated_cMCPGNPABND_codec);
+      trialActivityList_.WriteTo(output, _repeated_trialActivityList_codec);
+      if (BOKEEOFLHMP != 0) {
+        output.WriteRawTag(72);
+        output.WriteUInt32(BOKEEOFLHMP);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -186,15 +186,15 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (LEPLEBFIOBP != 0) {
-        output.WriteRawTag(64);
-        output.WriteUInt32(LEPLEBFIOBP);
-      }
       if (Retcode != 0) {
-        output.WriteRawTag(72);
+        output.WriteRawTag(16);
         output.WriteUInt32(Retcode);
       }
-      cMCPGNPABND_.WriteTo(ref output, _repeated_cMCPGNPABND_codec);
+      trialActivityList_.WriteTo(ref output, _repeated_trialActivityList_codec);
+      if (BOKEEOFLHMP != 0) {
+        output.WriteRawTag(72);
+        output.WriteUInt32(BOKEEOFLHMP);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -205,13 +205,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (LEPLEBFIOBP != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(LEPLEBFIOBP);
-      }
       if (Retcode != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
       }
-      size += cMCPGNPABND_.CalculateSize(_repeated_cMCPGNPABND_codec);
+      if (BOKEEOFLHMP != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BOKEEOFLHMP);
+      }
+      size += trialActivityList_.CalculateSize(_repeated_trialActivityList_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -224,13 +224,13 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.LEPLEBFIOBP != 0) {
-        LEPLEBFIOBP = other.LEPLEBFIOBP;
-      }
       if (other.Retcode != 0) {
         Retcode = other.Retcode;
       }
-      cMCPGNPABND_.Add(other.cMCPGNPABND_);
+      if (other.BOKEEOFLHMP != 0) {
+        BOKEEOFLHMP = other.BOKEEOFLHMP;
+      }
+      trialActivityList_.Add(other.trialActivityList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -246,16 +246,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 64: {
-            LEPLEBFIOBP = input.ReadUInt32();
-            break;
-          }
-          case 72: {
+          case 16: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 90: {
-            cMCPGNPABND_.AddEntriesFrom(input, _repeated_cMCPGNPABND_codec);
+          case 66: {
+            trialActivityList_.AddEntriesFrom(input, _repeated_trialActivityList_codec);
+            break;
+          }
+          case 72: {
+            BOKEEOFLHMP = input.ReadUInt32();
             break;
           }
         }
@@ -273,16 +273,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 64: {
-            LEPLEBFIOBP = input.ReadUInt32();
-            break;
-          }
-          case 72: {
+          case 16: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 90: {
-            cMCPGNPABND_.AddEntriesFrom(ref input, _repeated_cMCPGNPABND_codec);
+          case 66: {
+            trialActivityList_.AddEntriesFrom(ref input, _repeated_trialActivityList_codec);
+            break;
+          }
+          case 72: {
+            BOKEEOFLHMP = input.ReadUInt32();
             break;
           }
         }

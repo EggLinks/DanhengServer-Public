@@ -25,14 +25,14 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChlTcHJpbmdSZWNvdmVyQ29uZmlnLnByb3RvGhRBdmF0YXJQcmVzZXRIcC5w",
-            "cm90byJyChNTcHJpbmdSZWNvdmVyQ29uZmlnEhIKCmRlZmF1bHRfaHAYAyAB",
-            "KA0SLgoVYXZhdGFyX3ByZXNldF9ocF9saXN0GAsgAygLMg8uQXZhdGFyUHJl",
-            "c2V0SHASFwoPYXV0b19yZWNvdmVyX2hwGA4gASgIQh6qAhtFZ2dMaW5rLkRh",
-            "bmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "cm90byJlChNTcHJpbmdSZWNvdmVyQ29uZmlnEhMKC0xPT0tHRURCSURJGA4g",
+            "ASgNEhMKC0ZDQkxNUEJPTEFCGAIgASgIEiQKC01BTlBIS0hFRlBDGAcgAygL",
+            "Mg8uQXZhdGFyUHJlc2V0SHBCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Q",
+            "cm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.AvatarPresetHpReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SpringRecoverConfig), global::EggLink.DanhengServer.Proto.SpringRecoverConfig.Parser, new[]{ "DefaultHp", "AvatarPresetHpList", "AutoRecoverHp" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SpringRecoverConfig), global::EggLink.DanhengServer.Proto.SpringRecoverConfig.Parser, new[]{ "LOOKGEDBIDI", "FCBLMPBOLAB", "MANPHKHEFPC" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,9 +74,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SpringRecoverConfig(SpringRecoverConfig other) : this() {
-      defaultHp_ = other.defaultHp_;
-      avatarPresetHpList_ = other.avatarPresetHpList_.Clone();
-      autoRecoverHp_ = other.autoRecoverHp_;
+      lOOKGEDBIDI_ = other.lOOKGEDBIDI_;
+      fCBLMPBOLAB_ = other.fCBLMPBOLAB_;
+      mANPHKHEFPC_ = other.mANPHKHEFPC_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -86,39 +86,39 @@ namespace EggLink.DanhengServer.Proto {
       return new SpringRecoverConfig(this);
     }
 
-    /// <summary>Field number for the "default_hp" field.</summary>
-    public const int DefaultHpFieldNumber = 3;
-    private uint defaultHp_;
+    /// <summary>Field number for the "LOOKGEDBIDI" field.</summary>
+    public const int LOOKGEDBIDIFieldNumber = 14;
+    private uint lOOKGEDBIDI_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint DefaultHp {
-      get { return defaultHp_; }
+    public uint LOOKGEDBIDI {
+      get { return lOOKGEDBIDI_; }
       set {
-        defaultHp_ = value;
+        lOOKGEDBIDI_ = value;
       }
     }
 
-    /// <summary>Field number for the "avatar_preset_hp_list" field.</summary>
-    public const int AvatarPresetHpListFieldNumber = 11;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.AvatarPresetHp> _repeated_avatarPresetHpList_codec
-        = pb::FieldCodec.ForMessage(90, global::EggLink.DanhengServer.Proto.AvatarPresetHp.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.AvatarPresetHp> avatarPresetHpList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.AvatarPresetHp>();
+    /// <summary>Field number for the "FCBLMPBOLAB" field.</summary>
+    public const int FCBLMPBOLABFieldNumber = 2;
+    private bool fCBLMPBOLAB_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.AvatarPresetHp> AvatarPresetHpList {
-      get { return avatarPresetHpList_; }
+    public bool FCBLMPBOLAB {
+      get { return fCBLMPBOLAB_; }
+      set {
+        fCBLMPBOLAB_ = value;
+      }
     }
 
-    /// <summary>Field number for the "auto_recover_hp" field.</summary>
-    public const int AutoRecoverHpFieldNumber = 14;
-    private bool autoRecoverHp_;
+    /// <summary>Field number for the "MANPHKHEFPC" field.</summary>
+    public const int MANPHKHEFPCFieldNumber = 7;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.AvatarPresetHp> _repeated_mANPHKHEFPC_codec
+        = pb::FieldCodec.ForMessage(58, global::EggLink.DanhengServer.Proto.AvatarPresetHp.Parser);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.AvatarPresetHp> mANPHKHEFPC_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.AvatarPresetHp>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool AutoRecoverHp {
-      get { return autoRecoverHp_; }
-      set {
-        autoRecoverHp_ = value;
-      }
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.AvatarPresetHp> MANPHKHEFPC {
+      get { return mANPHKHEFPC_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (DefaultHp != other.DefaultHp) return false;
-      if(!avatarPresetHpList_.Equals(other.avatarPresetHpList_)) return false;
-      if (AutoRecoverHp != other.AutoRecoverHp) return false;
+      if (LOOKGEDBIDI != other.LOOKGEDBIDI) return false;
+      if (FCBLMPBOLAB != other.FCBLMPBOLAB) return false;
+      if(!mANPHKHEFPC_.Equals(other.mANPHKHEFPC_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +146,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (DefaultHp != 0) hash ^= DefaultHp.GetHashCode();
-      hash ^= avatarPresetHpList_.GetHashCode();
-      if (AutoRecoverHp != false) hash ^= AutoRecoverHp.GetHashCode();
+      if (LOOKGEDBIDI != 0) hash ^= LOOKGEDBIDI.GetHashCode();
+      if (FCBLMPBOLAB != false) hash ^= FCBLMPBOLAB.GetHashCode();
+      hash ^= mANPHKHEFPC_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,14 +167,14 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (DefaultHp != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(DefaultHp);
+      if (FCBLMPBOLAB != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(FCBLMPBOLAB);
       }
-      avatarPresetHpList_.WriteTo(output, _repeated_avatarPresetHpList_codec);
-      if (AutoRecoverHp != false) {
+      mANPHKHEFPC_.WriteTo(output, _repeated_mANPHKHEFPC_codec);
+      if (LOOKGEDBIDI != 0) {
         output.WriteRawTag(112);
-        output.WriteBool(AutoRecoverHp);
+        output.WriteUInt32(LOOKGEDBIDI);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -186,14 +186,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (DefaultHp != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(DefaultHp);
+      if (FCBLMPBOLAB != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(FCBLMPBOLAB);
       }
-      avatarPresetHpList_.WriteTo(ref output, _repeated_avatarPresetHpList_codec);
-      if (AutoRecoverHp != false) {
+      mANPHKHEFPC_.WriteTo(ref output, _repeated_mANPHKHEFPC_codec);
+      if (LOOKGEDBIDI != 0) {
         output.WriteRawTag(112);
-        output.WriteBool(AutoRecoverHp);
+        output.WriteUInt32(LOOKGEDBIDI);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -205,13 +205,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (DefaultHp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DefaultHp);
+      if (LOOKGEDBIDI != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(LOOKGEDBIDI);
       }
-      size += avatarPresetHpList_.CalculateSize(_repeated_avatarPresetHpList_codec);
-      if (AutoRecoverHp != false) {
+      if (FCBLMPBOLAB != false) {
         size += 1 + 1;
       }
+      size += mANPHKHEFPC_.CalculateSize(_repeated_mANPHKHEFPC_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -224,13 +224,13 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.DefaultHp != 0) {
-        DefaultHp = other.DefaultHp;
+      if (other.LOOKGEDBIDI != 0) {
+        LOOKGEDBIDI = other.LOOKGEDBIDI;
       }
-      avatarPresetHpList_.Add(other.avatarPresetHpList_);
-      if (other.AutoRecoverHp != false) {
-        AutoRecoverHp = other.AutoRecoverHp;
+      if (other.FCBLMPBOLAB != false) {
+        FCBLMPBOLAB = other.FCBLMPBOLAB;
       }
+      mANPHKHEFPC_.Add(other.mANPHKHEFPC_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -246,16 +246,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 24: {
-            DefaultHp = input.ReadUInt32();
+          case 16: {
+            FCBLMPBOLAB = input.ReadBool();
             break;
           }
-          case 90: {
-            avatarPresetHpList_.AddEntriesFrom(input, _repeated_avatarPresetHpList_codec);
+          case 58: {
+            mANPHKHEFPC_.AddEntriesFrom(input, _repeated_mANPHKHEFPC_codec);
             break;
           }
           case 112: {
-            AutoRecoverHp = input.ReadBool();
+            LOOKGEDBIDI = input.ReadUInt32();
             break;
           }
         }
@@ -273,16 +273,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 24: {
-            DefaultHp = input.ReadUInt32();
+          case 16: {
+            FCBLMPBOLAB = input.ReadBool();
             break;
           }
-          case 90: {
-            avatarPresetHpList_.AddEntriesFrom(ref input, _repeated_avatarPresetHpList_codec);
+          case 58: {
+            mANPHKHEFPC_.AddEntriesFrom(ref input, _repeated_mANPHKHEFPC_codec);
             break;
           }
           case 112: {
-            AutoRecoverHp = input.ReadBool();
+            LOOKGEDBIDI = input.ReadUInt32();
             break;
           }
         }

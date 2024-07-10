@@ -14,7 +14,7 @@ namespace EggLink.DanhengServer.Server.Packet
         private const uint TAIL_CONST = 0xd7a152c8;
 
         public ushort CmdId { get; set; } = cmdId;
-        public byte[] Data { get; private set; } = [];
+        public byte[] Data { get; set; } = [];
 
         public void SetData(byte[] data)
         {

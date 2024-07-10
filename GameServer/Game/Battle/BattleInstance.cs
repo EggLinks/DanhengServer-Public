@@ -69,9 +69,10 @@ namespace EggLink.DanhengServer.Game.Battle
 
         public void AddBattleTarget(int key, int targetId, int progress, int totalProgress = 0)
         {
-            if (!BattleTargets.ContainsKey(key))
+            if (!BattleTargets.TryGetValue(key, out BattleTargetList? value))
             {
-                BattleTargets.Add(key, new BattleTargetList());
+                value = new BattleTargetList();
+                BattleTargets.Add(key, value);
             }
 
             var battleTarget = new BattleTarget()
@@ -80,54 +81,50 @@ namespace EggLink.DanhengServer.Game.Battle
                 Progress = (uint)progress,
                 TotalProgress = (uint)totalProgress
             };
-
-            BattleTargets[key].BGNPEBHGELB.Add(battleTarget);
+            value.BattleTargetList_.Add(battleTarget);
         }
 
         public Dictionary<AvatarInfo, AvatarType> GetBattleAvatars()
         {
             var excel = GameData.StageConfigData[StageId];
-            if (excel.TrialAvatarList.Count > 0)
-            {
-                var list = new List<int>();
-                list.AddRange(excel.TrialAvatarList);
+            List<int> list = [.. excel.TrialAvatarList];
 
+            if (list.Count > 0)
+            {
                 if (Player.Data.CurrentGender == Gender.Man)
                 {
                     foreach (var avatar in excel.TrialAvatarList)
                     {
-                        if (avatar.ToString().EndsWith("8002"))
+                        if (avatar > 10000)  // else is Base Avatar
                         {
-                            list.Remove(avatar);
-                        }
-                        if (avatar.ToString().EndsWith("8004"))
-                        {
-                            list.Remove(avatar);
-                        }
-                        if (avatar.ToString().EndsWith("8006"))
-                        {
-                            list.Remove(avatar);
-                        }
-                    }
-                } else
-                {
-                    foreach (var avatar in excel.TrialAvatarList)
-                    {
-                        if (avatar.ToString().EndsWith("8001"))
-                        {
-                            list.Remove(avatar);
-                        }
-                        if (avatar.ToString().EndsWith("8003"))
-                        {
-                            list.Remove(avatar);
-                        }
-                        if (avatar.ToString().EndsWith("8005"))
-                        {
-                            list.Remove(avatar);
+                            if (avatar.ToString().EndsWith("8002") ||
+                                avatar.ToString().EndsWith("8004") ||
+                                avatar.ToString().EndsWith("8006"))
+                            {
+                                list.Remove(avatar);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    foreach (var avatar in excel.TrialAvatarList)
+                    {
+                        if (avatar > 10000)  // else is Base Avatar
+                        {
+                            if (avatar.ToString().EndsWith("8001") ||
+                                avatar.ToString().EndsWith("8003") ||
+                                avatar.ToString().EndsWith("8005"))
+                            {
+                                list.Remove(avatar);
+                            }
+                        }
+                    }
+                }
+            }
 
+            if (list.Count > 0)
+            {
                 Dictionary<AvatarInfo, AvatarType> dict = [];
                 foreach (var avatar in list)
                 {
@@ -135,11 +132,19 @@ namespace EggLink.DanhengServer.Game.Battle
                     if (specialAvatar != null)
                     {
                         dict.Add(specialAvatar.ToAvatarData(Player.Uid), AvatarType.AvatarTrialType);
+                    } 
+                    else
+                    {
+                        var avatarInfo = Player.AvatarManager!.GetAvatar(avatar);
+                        if (avatarInfo != null)
+                        {
+                            dict.Add(avatarInfo, AvatarType.AvatarFormalType);
+                        }
                     }
                 }
 
                 return dict;
-            } 
+            }
             else
             {
                 Dictionary<AvatarInfo, AvatarType> dict = [];
@@ -205,7 +210,7 @@ namespace EggLink.DanhengServer.Game.Battle
 
             foreach (var avatar in GetBattleAvatars())
             {
-                proto.BattleAvatarList.Add(avatar.Key.ToBattleProto(Player.LineupManager!.GetCurLineup()!, Player.InventoryManager!.Data, avatar.Value));
+                proto.AvatarBattleList.Add(avatar.Key.ToBattleProto(Player.LineupManager!.GetCurLineup()!, Player.InventoryManager!.Data, avatar.Value));
             }
 
             foreach (var monster in EntityMonsters)
@@ -232,7 +237,7 @@ namespace EggLink.DanhengServer.Game.Battle
                     if (BattleTargets.ContainsKey(i))
                     {
                         var battleTargetList = BattleTargets[i];
-                        battleTargetEntry.BGNPEBHGELB.AddRange(battleTargetList.BGNPEBHGELB);
+                        battleTargetEntry.BattleTargetList_.AddRange(battleTargetList.BattleTargetList_);
                     }
 
                     proto.BattleTargetInfo.Add((uint)i, battleTargetEntry);

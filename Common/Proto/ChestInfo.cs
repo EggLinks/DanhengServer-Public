@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Cg9DaGVzdEluZm8ucHJvdG8aD0NoZXN0VHlwZS5wcm90byJjCglDaGVzdElu",
-            "Zm8SJwoTbWFwX2luZm9fY2hlc3RfdHlwZRgDIAEoDjIKLkNoZXN0VHlwZRIU",
-            "Cgx0b3RhbF9hbW91bnQYCyABKA0SFwoPdW5sb2NrZWRfYW1vdW50GAIgASgN",
+            "Zm8SFwoPdW5sb2NrZWRfYW1vdW50GAwgASgNEhQKDHRvdGFsX2Ftb3VudBgH",
+            "IAEoDRInChNtYXBfaW5mb19jaGVzdF90eXBlGAggASgOMgouQ2hlc3RUeXBl",
             "Qh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChestTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChestInfo), global::EggLink.DanhengServer.Proto.ChestInfo.Parser, new[]{ "MapInfoChestType", "TotalAmount", "UnlockedAmount" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChestInfo), global::EggLink.DanhengServer.Proto.ChestInfo.Parser, new[]{ "UnlockedAmount", "TotalAmount", "MapInfoChestType" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,9 +73,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ChestInfo(ChestInfo other) : this() {
-      mapInfoChestType_ = other.mapInfoChestType_;
-      totalAmount_ = other.totalAmount_;
       unlockedAmount_ = other.unlockedAmount_;
+      totalAmount_ = other.totalAmount_;
+      mapInfoChestType_ = other.mapInfoChestType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,21 +85,27 @@ namespace EggLink.DanhengServer.Proto {
       return new ChestInfo(this);
     }
 
-    /// <summary>Field number for the "map_info_chest_type" field.</summary>
-    public const int MapInfoChestTypeFieldNumber = 3;
-    private global::EggLink.DanhengServer.Proto.ChestType mapInfoChestType_ = global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone;
+    /// <summary>Field number for the "unlocked_amount" field.</summary>
+    public const int UnlockedAmountFieldNumber = 12;
+    private uint unlockedAmount_;
+    /// <summary>
+    /// 7
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.ChestType MapInfoChestType {
-      get { return mapInfoChestType_; }
+    public uint UnlockedAmount {
+      get { return unlockedAmount_; }
       set {
-        mapInfoChestType_ = value;
+        unlockedAmount_ = value;
       }
     }
 
     /// <summary>Field number for the "total_amount" field.</summary>
-    public const int TotalAmountFieldNumber = 11;
+    public const int TotalAmountFieldNumber = 7;
     private uint totalAmount_;
+    /// <summary>
+    /// 12
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint TotalAmount {
@@ -109,15 +115,15 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "unlocked_amount" field.</summary>
-    public const int UnlockedAmountFieldNumber = 2;
-    private uint unlockedAmount_;
+    /// <summary>Field number for the "map_info_chest_type" field.</summary>
+    public const int MapInfoChestTypeFieldNumber = 8;
+    private global::EggLink.DanhengServer.Proto.ChestType mapInfoChestType_ = global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint UnlockedAmount {
-      get { return unlockedAmount_; }
+    public global::EggLink.DanhengServer.Proto.ChestType MapInfoChestType {
+      get { return mapInfoChestType_; }
       set {
-        unlockedAmount_ = value;
+        mapInfoChestType_ = value;
       }
     }
 
@@ -136,9 +142,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (MapInfoChestType != other.MapInfoChestType) return false;
-      if (TotalAmount != other.TotalAmount) return false;
       if (UnlockedAmount != other.UnlockedAmount) return false;
+      if (TotalAmount != other.TotalAmount) return false;
+      if (MapInfoChestType != other.MapInfoChestType) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +152,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (MapInfoChestType != global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone) hash ^= MapInfoChestType.GetHashCode();
-      if (TotalAmount != 0) hash ^= TotalAmount.GetHashCode();
       if (UnlockedAmount != 0) hash ^= UnlockedAmount.GetHashCode();
+      if (TotalAmount != 0) hash ^= TotalAmount.GetHashCode();
+      if (MapInfoChestType != global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone) hash ^= MapInfoChestType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,17 +173,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (UnlockedAmount != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(UnlockedAmount);
+      if (TotalAmount != 0) {
+        output.WriteRawTag(56);
+        output.WriteUInt32(TotalAmount);
       }
       if (MapInfoChestType != global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(64);
         output.WriteEnum((int) MapInfoChestType);
       }
-      if (TotalAmount != 0) {
-        output.WriteRawTag(88);
-        output.WriteUInt32(TotalAmount);
+      if (UnlockedAmount != 0) {
+        output.WriteRawTag(96);
+        output.WriteUInt32(UnlockedAmount);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -189,17 +195,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (UnlockedAmount != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(UnlockedAmount);
+      if (TotalAmount != 0) {
+        output.WriteRawTag(56);
+        output.WriteUInt32(TotalAmount);
       }
       if (MapInfoChestType != global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(64);
         output.WriteEnum((int) MapInfoChestType);
       }
-      if (TotalAmount != 0) {
-        output.WriteRawTag(88);
-        output.WriteUInt32(TotalAmount);
+      if (UnlockedAmount != 0) {
+        output.WriteRawTag(96);
+        output.WriteUInt32(UnlockedAmount);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -211,14 +217,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (MapInfoChestType != global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MapInfoChestType);
+      if (UnlockedAmount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UnlockedAmount);
       }
       if (TotalAmount != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TotalAmount);
       }
-      if (UnlockedAmount != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UnlockedAmount);
+      if (MapInfoChestType != global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MapInfoChestType);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -232,14 +238,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.MapInfoChestType != global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone) {
-        MapInfoChestType = other.MapInfoChestType;
+      if (other.UnlockedAmount != 0) {
+        UnlockedAmount = other.UnlockedAmount;
       }
       if (other.TotalAmount != 0) {
         TotalAmount = other.TotalAmount;
       }
-      if (other.UnlockedAmount != 0) {
-        UnlockedAmount = other.UnlockedAmount;
+      if (other.MapInfoChestType != global::EggLink.DanhengServer.Proto.ChestType.MapInfoChestTypeNone) {
+        MapInfoChestType = other.MapInfoChestType;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -256,16 +262,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 16: {
-            UnlockedAmount = input.ReadUInt32();
+          case 56: {
+            TotalAmount = input.ReadUInt32();
             break;
           }
-          case 24: {
+          case 64: {
             MapInfoChestType = (global::EggLink.DanhengServer.Proto.ChestType) input.ReadEnum();
             break;
           }
-          case 88: {
-            TotalAmount = input.ReadUInt32();
+          case 96: {
+            UnlockedAmount = input.ReadUInt32();
             break;
           }
         }
@@ -283,16 +289,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 16: {
-            UnlockedAmount = input.ReadUInt32();
+          case 56: {
+            TotalAmount = input.ReadUInt32();
             break;
           }
-          case 24: {
+          case 64: {
             MapInfoChestType = (global::EggLink.DanhengServer.Proto.ChestType) input.ReadEnum();
             break;
           }
-          case 88: {
-            TotalAmount = input.ReadUInt32();
+          case 96: {
+            UnlockedAmount = input.ReadUInt32();
             break;
           }
         }

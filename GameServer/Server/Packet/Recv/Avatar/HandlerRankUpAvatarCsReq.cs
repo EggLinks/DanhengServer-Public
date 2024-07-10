@@ -13,7 +13,7 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Avatar
         public override void OnHandle(Connection connection, byte[] header, byte[] data)
         {
             var req = RankUpAvatarCsReq.Parser.ParseFrom(data);
-            connection.Player!.InventoryManager?.RankUpAvatar((int)req.BaseAvatarId, req.CostData);
+            connection.Player!.InventoryManager?.RankUpAvatar((int)req.DressAvatarId, req.CostData);
             connection.SendPacket(CmdIds.RankUpAvatarScRsp);
         }
     }

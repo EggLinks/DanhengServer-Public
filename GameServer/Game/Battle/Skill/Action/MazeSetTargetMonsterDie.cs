@@ -1,4 +1,5 @@
-﻿using EggLink.DanhengServer.Game.Scene;
+﻿using EggLink.DanhengServer.Enums.Scene;
+using EggLink.DanhengServer.Game.Scene;
 using EggLink.DanhengServer.Game.Scene.Entity;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace EggLink.DanhengServer.Game.Battle.Skill.Action
         {
             foreach (var entity in entities)
             {
-                if (entity.MonsterData.Rank < Enums.MonsterRankEnum.Elite)
+                if (entity.MonsterData.Rank < MonsterRankEnum.Elite)
                 {
                     entity.Kill();
 

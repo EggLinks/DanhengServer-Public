@@ -17,7 +17,7 @@ namespace EggLink.DanhengServer.WebServer.Controllers
             var data = MuipManager.AuthAdminAndCreateSession(req.admin_key, req.key_type);
             if (data == null)
             {
-                return new JsonResult(new AuthAdminKeyResponse(1, "Admin key is invalid!", null));
+                return new JsonResult(new AuthAdminKeyResponse(1, "Admin key is invalid or the function is not enabled!", null));
             }
             return new JsonResult(new AuthAdminKeyResponse(0, "Authorized admin key successfully!", data));
         }
@@ -27,6 +27,20 @@ namespace EggLink.DanhengServer.WebServer.Controllers
         public IActionResult ExecuteCommand([FromBody] AdminExecRequest req)
         {
             var resp = MuipManager.ExecuteCommand(req.SessionId, req.Command, req.TargetUid);
+            return new JsonResult(resp);
+        }
+
+        [HttpGet("/muip/server_information")]
+        public IActionResult GetServerInformation([FromBody] ServerInformationRequest req)
+        {
+            var resp = MuipManager.GetInformation(req.SessionId);
+            return new JsonResult(resp);
+        }
+
+        [HttpGet("/muip/player_information")]
+        public IActionResult GetPlayerInformation([FromBody] PlayerInformationRequest req)
+        {
+            var resp = MuipManager.GetPlayerInformation(req.SessionId, req.Uid);
             return new JsonResult(resp);
         }
     }

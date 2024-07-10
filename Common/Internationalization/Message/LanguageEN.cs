@@ -77,6 +77,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public RogueTextEN Rogue { get; } = new();
         public SceneTextEN Scene { get; } = new();
         public UnlockAllTextEN UnlockAll { get; } = new();
+        public MailTextEN Mail { get; } = new();
     }
 
     #endregion
@@ -278,6 +279,17 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string AllPropsUnlocked { get; } = "All props have been unlocked!";
         public string SceneChanged { get; } = "Entered scene {0}";
         public string SceneReloaded { get; } = "Scene has been reloaded!";
+    }
+
+    /// <summary>
+    /// path: Game.Command.Mail
+    /// </summary>
+    public class MailTextEN
+    {
+        public string Desc { get; } = "Manage player's mails";
+        public string Usage { get; } = "/mail <send [Sender Name] [Title] [Content] [Template ID] [Expire Days] - 發送郵件>/<send [Sender] [Title] [Content] [Template ID] [Expire Days] [Attachments] - 發送帶附件的郵件>";
+        public string MailSent { get; } = "Mail has been sent!";
+        public string MailSentWithAttachment { get; } = "Mail with attachments has been sent!";
     }
 
     #endregion

@@ -24,15 +24,15 @@ namespace EggLink.DanhengServer.Proto {
     static RefreshTriggerByClientScRspReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiFSZWZyZXNoVHJpZ2dlckJ5Q2xpZW50U2NSc3AucHJvdG8ibQobUmVmcmVz",
-            "aFRyaWdnZXJCeUNsaWVudFNjUnNwEhMKC0hNSEZKS0tJSlBBGAQgASgJEhMK",
-            "C0hES0dPTVBDR1BIGAogASgIEhMKC0VQT0dQRkdEQUxQGA0gASgNEg8KB3Jl",
-            "dGNvZGUYCyABKA1CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IG",
-            "cHJvdG8z"));
+            "CiFSZWZyZXNoVHJpZ2dlckJ5Q2xpZW50U2NSc3AucHJvdG8ieAobUmVmcmVz",
+            "aFRyaWdnZXJCeUNsaWVudFNjUnNwEhQKDHRyaWdnZXJfbmFtZRgLIAEoCRIP",
+            "CgdyZXRjb2RlGAkgASgNEhcKD3JlZnJlc2hfdHJpZ2dlchgFIAEoCBIZChF0",
+            "cmlnZ2VyX2VudGl0eV9pZBgEIAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2Vy",
+            "dmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RefreshTriggerByClientScRsp), global::EggLink.DanhengServer.Proto.RefreshTriggerByClientScRsp.Parser, new[]{ "HMHFJKKIJPA", "HDKGOMPCGPH", "EPOGPFGDALP", "Retcode" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RefreshTriggerByClientScRsp), global::EggLink.DanhengServer.Proto.RefreshTriggerByClientScRsp.Parser, new[]{ "TriggerName", "Retcode", "RefreshTrigger", "TriggerEntityId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,10 +74,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RefreshTriggerByClientScRsp(RefreshTriggerByClientScRsp other) : this() {
-      hMHFJKKIJPA_ = other.hMHFJKKIJPA_;
-      hDKGOMPCGPH_ = other.hDKGOMPCGPH_;
-      ePOGPFGDALP_ = other.ePOGPFGDALP_;
+      triggerName_ = other.triggerName_;
       retcode_ = other.retcode_;
+      refreshTrigger_ = other.refreshTrigger_;
+      triggerEntityId_ = other.triggerEntityId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -87,44 +87,20 @@ namespace EggLink.DanhengServer.Proto {
       return new RefreshTriggerByClientScRsp(this);
     }
 
-    /// <summary>Field number for the "HMHFJKKIJPA" field.</summary>
-    public const int HMHFJKKIJPAFieldNumber = 4;
-    private string hMHFJKKIJPA_ = "";
+    /// <summary>Field number for the "trigger_name" field.</summary>
+    public const int TriggerNameFieldNumber = 11;
+    private string triggerName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string HMHFJKKIJPA {
-      get { return hMHFJKKIJPA_; }
+    public string TriggerName {
+      get { return triggerName_; }
       set {
-        hMHFJKKIJPA_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "HDKGOMPCGPH" field.</summary>
-    public const int HDKGOMPCGPHFieldNumber = 10;
-    private bool hDKGOMPCGPH_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool HDKGOMPCGPH {
-      get { return hDKGOMPCGPH_; }
-      set {
-        hDKGOMPCGPH_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "EPOGPFGDALP" field.</summary>
-    public const int EPOGPFGDALPFieldNumber = 13;
-    private uint ePOGPFGDALP_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint EPOGPFGDALP {
-      get { return ePOGPFGDALP_; }
-      set {
-        ePOGPFGDALP_ = value;
+        triggerName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     /// <summary>Field number for the "retcode" field.</summary>
-    public const int RetcodeFieldNumber = 11;
+    public const int RetcodeFieldNumber = 9;
     private uint retcode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -132,6 +108,30 @@ namespace EggLink.DanhengServer.Proto {
       get { return retcode_; }
       set {
         retcode_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "refresh_trigger" field.</summary>
+    public const int RefreshTriggerFieldNumber = 5;
+    private bool refreshTrigger_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool RefreshTrigger {
+      get { return refreshTrigger_; }
+      set {
+        refreshTrigger_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "trigger_entity_id" field.</summary>
+    public const int TriggerEntityIdFieldNumber = 4;
+    private uint triggerEntityId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint TriggerEntityId {
+      get { return triggerEntityId_; }
+      set {
+        triggerEntityId_ = value;
       }
     }
 
@@ -150,10 +150,10 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (HMHFJKKIJPA != other.HMHFJKKIJPA) return false;
-      if (HDKGOMPCGPH != other.HDKGOMPCGPH) return false;
-      if (EPOGPFGDALP != other.EPOGPFGDALP) return false;
+      if (TriggerName != other.TriggerName) return false;
       if (Retcode != other.Retcode) return false;
+      if (RefreshTrigger != other.RefreshTrigger) return false;
+      if (TriggerEntityId != other.TriggerEntityId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -161,10 +161,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (HMHFJKKIJPA.Length != 0) hash ^= HMHFJKKIJPA.GetHashCode();
-      if (HDKGOMPCGPH != false) hash ^= HDKGOMPCGPH.GetHashCode();
-      if (EPOGPFGDALP != 0) hash ^= EPOGPFGDALP.GetHashCode();
+      if (TriggerName.Length != 0) hash ^= TriggerName.GetHashCode();
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
+      if (RefreshTrigger != false) hash ^= RefreshTrigger.GetHashCode();
+      if (TriggerEntityId != 0) hash ^= TriggerEntityId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -183,21 +183,21 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (HMHFJKKIJPA.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(HMHFJKKIJPA);
+      if (TriggerEntityId != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(TriggerEntityId);
       }
-      if (HDKGOMPCGPH != false) {
-        output.WriteRawTag(80);
-        output.WriteBool(HDKGOMPCGPH);
+      if (RefreshTrigger != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(RefreshTrigger);
       }
       if (Retcode != 0) {
-        output.WriteRawTag(88);
+        output.WriteRawTag(72);
         output.WriteUInt32(Retcode);
       }
-      if (EPOGPFGDALP != 0) {
-        output.WriteRawTag(104);
-        output.WriteUInt32(EPOGPFGDALP);
+      if (TriggerName.Length != 0) {
+        output.WriteRawTag(90);
+        output.WriteString(TriggerName);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -209,21 +209,21 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (HMHFJKKIJPA.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(HMHFJKKIJPA);
+      if (TriggerEntityId != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(TriggerEntityId);
       }
-      if (HDKGOMPCGPH != false) {
-        output.WriteRawTag(80);
-        output.WriteBool(HDKGOMPCGPH);
+      if (RefreshTrigger != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(RefreshTrigger);
       }
       if (Retcode != 0) {
-        output.WriteRawTag(88);
+        output.WriteRawTag(72);
         output.WriteUInt32(Retcode);
       }
-      if (EPOGPFGDALP != 0) {
-        output.WriteRawTag(104);
-        output.WriteUInt32(EPOGPFGDALP);
+      if (TriggerName.Length != 0) {
+        output.WriteRawTag(90);
+        output.WriteString(TriggerName);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -235,17 +235,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (HMHFJKKIJPA.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(HMHFJKKIJPA);
-      }
-      if (HDKGOMPCGPH != false) {
-        size += 1 + 1;
-      }
-      if (EPOGPFGDALP != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EPOGPFGDALP);
+      if (TriggerName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TriggerName);
       }
       if (Retcode != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
+      }
+      if (RefreshTrigger != false) {
+        size += 1 + 1;
+      }
+      if (TriggerEntityId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TriggerEntityId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -259,17 +259,17 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.HMHFJKKIJPA.Length != 0) {
-        HMHFJKKIJPA = other.HMHFJKKIJPA;
-      }
-      if (other.HDKGOMPCGPH != false) {
-        HDKGOMPCGPH = other.HDKGOMPCGPH;
-      }
-      if (other.EPOGPFGDALP != 0) {
-        EPOGPFGDALP = other.EPOGPFGDALP;
+      if (other.TriggerName.Length != 0) {
+        TriggerName = other.TriggerName;
       }
       if (other.Retcode != 0) {
         Retcode = other.Retcode;
+      }
+      if (other.RefreshTrigger != false) {
+        RefreshTrigger = other.RefreshTrigger;
+      }
+      if (other.TriggerEntityId != 0) {
+        TriggerEntityId = other.TriggerEntityId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -286,20 +286,20 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 34: {
-            HMHFJKKIJPA = input.ReadString();
+          case 32: {
+            TriggerEntityId = input.ReadUInt32();
             break;
           }
-          case 80: {
-            HDKGOMPCGPH = input.ReadBool();
+          case 40: {
+            RefreshTrigger = input.ReadBool();
             break;
           }
-          case 88: {
+          case 72: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 104: {
-            EPOGPFGDALP = input.ReadUInt32();
+          case 90: {
+            TriggerName = input.ReadString();
             break;
           }
         }
@@ -317,20 +317,20 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 34: {
-            HMHFJKKIJPA = input.ReadString();
+          case 32: {
+            TriggerEntityId = input.ReadUInt32();
             break;
           }
-          case 80: {
-            HDKGOMPCGPH = input.ReadBool();
+          case 40: {
+            RefreshTrigger = input.ReadBool();
             break;
           }
-          case 88: {
+          case 72: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 104: {
-            EPOGPFGDALP = input.ReadUInt32();
+          case 90: {
+            TriggerName = input.ReadString();
             break;
           }
         }

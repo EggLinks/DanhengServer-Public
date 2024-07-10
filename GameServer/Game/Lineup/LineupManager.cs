@@ -55,19 +55,19 @@ namespace EggLink.DanhengServer.Game.Lineup
             var avatarList = new List<AvatarSceneInfo>();
             foreach (var avatar in lineup.BaseAvatars!)
             {
-                Proto.AvatarType avatarType = Proto.AvatarType.AvatarFormalType;
+                AvatarType avatarType = AvatarType.AvatarFormalType;
                 Database.Avatar.AvatarInfo? avatarInfo = null;
                 if (avatar.SpecialAvatarId > 0)
                 {
                     GameData.SpecialAvatarData.TryGetValue(avatar.SpecialAvatarId, out var specialAvatar);
                     if (specialAvatar == null) continue;
-                    avatarType = Proto.AvatarType.AvatarTrialType;
+                    avatarType = AvatarType.AvatarTrialType;
                     avatarInfo = specialAvatar.ToAvatarData(Player.Uid);
                 }
                 else if (avatar.AssistUid > 0)
                 {
                     var avatarStorage = DatabaseHelper.Instance?.GetInstance<Database.Avatar.AvatarData>(avatar.AssistUid);
-                    avatarType = Proto.AvatarType.AvatarAssistType;
+                    avatarType = AvatarType.AvatarAssistType;
                     if (avatarStorage == null) continue;
                     foreach (var avatarData in avatarStorage.Avatars!)
                     {
@@ -191,13 +191,30 @@ namespace EggLink.DanhengServer.Game.Lineup
                 return;
             }
             LineupData.Lineups.TryGetValue(lineupIndex, out LineupInfo? lineup);
+
             if (lineup == null)
             {
+                var baseAvatarId = avatarId;
+                var specialAvatarId = avatarId * 10 + Player.Data.WorldLevel;
+                GameData.SpecialAvatarData.TryGetValue(specialAvatarId, out var specialAvatar);
+                if (specialAvatar != null)
+                {
+                    baseAvatarId = specialAvatar.AvatarID;
+                }
+                else
+                {
+                    specialAvatarId = 0;
+                    if (baseAvatarId > 8000)
+                    {
+                        baseAvatarId = 8001;
+                    }
+                }
+
                 lineup = new()
                 {
                     Name = "",
                     LineupType = 0,
-                    BaseAvatars = [new() { BaseAvatarId = avatarId }],
+                    BaseAvatars = [new() { BaseAvatarId = baseAvatarId, SpecialAvatarId = specialAvatarId }],
                     LineupData = LineupData,
                     AvatarData = Player.AvatarManager!.AvatarData,
                 };
@@ -208,10 +225,27 @@ namespace EggLink.DanhengServer.Game.Lineup
                 {
                     return;
                 }
-                lineup.BaseAvatars?.Add(new() { BaseAvatarId = avatarId });
+
+                var baseAvatarId = avatarId;
+                var specialAvatarId = avatarId * 10 + Player.Data.WorldLevel;
+                GameData.SpecialAvatarData.TryGetValue(specialAvatarId, out var specialAvatar);
+                if (specialAvatar != null)
+                {
+                    baseAvatarId = specialAvatar.AvatarID;
+                }
+                else
+                {
+                    specialAvatarId = 0;
+                    if (baseAvatarId > 8000)
+                    {
+                        baseAvatarId = 8001;
+                    }
+                }
+
+                lineup.BaseAvatars?.Add(new() { BaseAvatarId = baseAvatarId, SpecialAvatarId = specialAvatarId });
                 LineupData.Lineups[lineupIndex] = lineup;
             }
-            DatabaseHelper.Instance?.UpdateInstance(LineupData);
+
             if (sendPacket)
             {
                 if (lineupIndex == LineupData.GetCurLineupIndex())
@@ -333,7 +367,7 @@ namespace EggLink.DanhengServer.Game.Lineup
             {
                 AddAvatar(index, avatar, false);
             }
-            DatabaseHelper.Instance?.UpdateInstance(LineupData);
+
             if (index == LineupData.GetCurLineupIndex())
             {
                 Player.SceneInstance?.SyncLineup();
@@ -369,7 +403,7 @@ namespace EggLink.DanhengServer.Game.Lineup
             {
                 AddAvatar(index, (int)avatar.Id, false);
             }
-            DatabaseHelper.Instance?.UpdateInstance(LineupData);
+
             if (index == LineupData.GetCurLineupIndex())
             {
                 Player.SceneInstance?.SyncLineup();

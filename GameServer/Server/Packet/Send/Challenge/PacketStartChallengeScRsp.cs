@@ -24,11 +24,8 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Challenge
             if (player.ChallengeManager!.ChallengeInstance != null)
             {
                 proto.CurChallenge = player.ChallengeManager.ChallengeInstance.ToProto();
-                proto.Lineup = player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge)!.ToProto(); // Deprecated in 2.3
-                proto.Scene = player.SceneInstance!.ToProto();
-                // Early implementation for 2.3
-                /* proto.LineupList.Add(player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge)!.ToProto());
-                proto.Lineup.Add(player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge2)!.ToProto()); */
+                proto.LineupList.Add(player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge)!.ToProto());
+                proto.LineupList.Add(player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge2)!.ToProto());
             }
             else
             {

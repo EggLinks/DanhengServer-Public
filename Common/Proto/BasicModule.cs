@@ -24,13 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static BasicModuleReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFCYXNpY01vZHVsZS5wcm90byIzCgtCYXNpY01vZHVsZRITCgtJQklQT0dQ",
-            "Rk5FRxgPIAEoDRIPCgdzdGFtaW5hGAQgASgNQh6qAhtFZ2dMaW5rLkRhbmhl",
+            "ChFCYXNpY01vZHVsZS5wcm90byIzCgtCYXNpY01vZHVsZRITCgtMUERJRE1B",
+            "R0ZQQhgOIAEoDRIPCgdzdGFtaW5hGA0gASgNQh6qAhtFZ2dMaW5rLkRhbmhl",
             "bmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.BasicModule), global::EggLink.DanhengServer.Proto.BasicModule.Parser, new[]{ "IBIPOGPFNEG", "Stamina" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.BasicModule), global::EggLink.DanhengServer.Proto.BasicModule.Parser, new[]{ "LPDIDMAGFPB", "Stamina" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,7 +72,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BasicModule(BasicModule other) : this() {
-      iBIPOGPFNEG_ = other.iBIPOGPFNEG_;
+      lPDIDMAGFPB_ = other.lPDIDMAGFPB_;
       stamina_ = other.stamina_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -83,20 +83,20 @@ namespace EggLink.DanhengServer.Proto {
       return new BasicModule(this);
     }
 
-    /// <summary>Field number for the "IBIPOGPFNEG" field.</summary>
-    public const int IBIPOGPFNEGFieldNumber = 15;
-    private uint iBIPOGPFNEG_;
+    /// <summary>Field number for the "LPDIDMAGFPB" field.</summary>
+    public const int LPDIDMAGFPBFieldNumber = 14;
+    private uint lPDIDMAGFPB_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint IBIPOGPFNEG {
-      get { return iBIPOGPFNEG_; }
+    public uint LPDIDMAGFPB {
+      get { return lPDIDMAGFPB_; }
       set {
-        iBIPOGPFNEG_ = value;
+        lPDIDMAGFPB_ = value;
       }
     }
 
     /// <summary>Field number for the "stamina" field.</summary>
-    public const int StaminaFieldNumber = 4;
+    public const int StaminaFieldNumber = 13;
     private uint stamina_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -122,7 +122,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (IBIPOGPFNEG != other.IBIPOGPFNEG) return false;
+      if (LPDIDMAGFPB != other.LPDIDMAGFPB) return false;
       if (Stamina != other.Stamina) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -131,7 +131,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (IBIPOGPFNEG != 0) hash ^= IBIPOGPFNEG.GetHashCode();
+      if (LPDIDMAGFPB != 0) hash ^= LPDIDMAGFPB.GetHashCode();
       if (Stamina != 0) hash ^= Stamina.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -152,12 +152,12 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (Stamina != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(104);
         output.WriteUInt32(Stamina);
       }
-      if (IBIPOGPFNEG != 0) {
-        output.WriteRawTag(120);
-        output.WriteUInt32(IBIPOGPFNEG);
+      if (LPDIDMAGFPB != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(LPDIDMAGFPB);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -170,12 +170,12 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (Stamina != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(104);
         output.WriteUInt32(Stamina);
       }
-      if (IBIPOGPFNEG != 0) {
-        output.WriteRawTag(120);
-        output.WriteUInt32(IBIPOGPFNEG);
+      if (LPDIDMAGFPB != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(LPDIDMAGFPB);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -187,8 +187,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (IBIPOGPFNEG != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(IBIPOGPFNEG);
+      if (LPDIDMAGFPB != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(LPDIDMAGFPB);
       }
       if (Stamina != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Stamina);
@@ -205,8 +205,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.IBIPOGPFNEG != 0) {
-        IBIPOGPFNEG = other.IBIPOGPFNEG;
+      if (other.LPDIDMAGFPB != 0) {
+        LPDIDMAGFPB = other.LPDIDMAGFPB;
       }
       if (other.Stamina != 0) {
         Stamina = other.Stamina;
@@ -226,12 +226,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 32: {
+          case 104: {
             Stamina = input.ReadUInt32();
             break;
           }
-          case 120: {
-            IBIPOGPFNEG = input.ReadUInt32();
+          case 112: {
+            LPDIDMAGFPB = input.ReadUInt32();
             break;
           }
         }
@@ -249,12 +249,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 32: {
+          case 104: {
             Stamina = input.ReadUInt32();
             break;
           }
-          case 120: {
-            IBIPOGPFNEG = input.ReadUInt32();
+          case 112: {
+            LPDIDMAGFPB = input.ReadUInt32();
             break;
           }
         }

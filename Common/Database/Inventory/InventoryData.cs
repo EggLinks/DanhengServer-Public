@@ -7,6 +7,7 @@ using SqlSugar;
 
 namespace EggLink.DanhengServer.Database.Inventory
 {
+    [SugarTable("InventoryData")]
     public class InventoryData : BaseDatabaseDataHelper
     {
         [SugarColumn(IsJson = true)]

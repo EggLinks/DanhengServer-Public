@@ -147,7 +147,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
         {
             var info = new ChessRogueGetInfo
             {
-                AeonInfo = ToAeonInfo(),
+                ChessAeonInfo = ToAeonInfo(),
                 DiceInfo = ToDiceInfo(),
                 RogueTalentInfo = ToTalentInfo(),
                 RogueDifficultyInfo = new(),
@@ -161,7 +161,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
             foreach (var item in GameData.RogueNousDifficultyLevelData.Keys)
             {
-                info.RogueDifficultyInfo.DifficultyId.Add((uint)item);
+                info.RogueDifficultyInfo.QueryDifficultyIdList.Add((uint)item);
             }
 
             return info;
@@ -172,19 +172,17 @@ namespace EggLink.DanhengServer.Game.ChessRogue
             if (RogueInstance != null) return RogueInstance.ToProto();
             var info = new ChessRogueCurrentInfo
             {
-                RogueVersionId = 201,
+                RogueSubMode = 201,
                 LevelInfo = ToLevelInfo(),
                 RogueAeonInfo = ToRogueAeonInfo(),
                 RogueDiceInfo = ToRogueDiceInfo(),
                 RogueDifficultyInfo = new(),
                 GameMiracleInfo = new() { MiracleInfo = new() },  // needed for avoiding null reference exception （below 4 lines）
-                RogueBuffInfo = new() { BuffInfo = new() },
+                RogueBuffInfo = new() { RogueDlcMazeBuffInfo = new() },
                 PendingAction = new(),
                 RogueLineupInfo = ToLineupInfo(),
                 RogueVirtualItem = new(),
             };
-
-            info.RogueCurrentInfo.AddRange(ToGameInfo());
 
             return info;
         }
@@ -193,7 +191,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
         {
             var info = new ChessRogueQueryInfo
             {
-                AeonInfo = ToAeonInfo(),
+                ChessAeonInfo = ToAeonInfo(),
                 RogueTalentInfo = ToTalentInfo(),
                 RogueDifficultyInfo = new(),
                 DiceInfo = ToDiceInfo(),
@@ -207,7 +205,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
             foreach (var item in GameData.RogueNousDifficultyLevelData.Keys)
             {
-                info.RogueDifficultyInfo.DifficultyId.Add((uint)item);
+                info.RogueDifficultyInfo.QueryDifficultyIdList.Add((uint)item);
             }
 
             return info;
@@ -220,7 +218,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
                 AreaInfo = new()
                 {
                     Cell = new(),
-                    DOKMJNIHNOO = new(),
+                    NFPIJHGAEGM = new(),
                 }
             };
 
@@ -253,7 +251,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
         {
             var proto = new ChessRogueAeonInfo()
             {
-                AeonInfo = ToAeonInfo(),
+                ChessAeonInfo = ToAeonInfo(),
             };
 
 
@@ -285,50 +283,16 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
             for (var i = 1; i < 7; i++)
             {
-                proto.LAHGNGJAOFH.Add((uint)i, i % 3 == 0);
+                proto.GEMMFOEDJJA.Add((uint)i, i % 3 == 0);
             }
-            proto.LAHGNGJAOFH[5] = true;
+            proto.GEMMFOEDJJA[5] = true;
 
             return proto;
         }
 
         public ChessRogueDiceInfo ToRogueDiceInfo()
         {
-            var proto = new ChessRogueDiceInfo()
-            {
-                IsValid = true,
-            };
-
-            return proto;
-        }
-
-        public List<ChessRogueGameInfo> ToGameInfo()
-        {
-            var proto = new List<ChessRogueGameInfo>
-            {
-                new()
-                {
-                    RogueAeonInfo = new()
-                },
-                new()
-                {
-                    GameItemInfo = new()
-                },
-                new()
-                {
-                    GameMiracleInfo = new()
-                    {
-                        MiracleInfo = new()
-                    }
-                },
-                new()
-                {
-                    RogueBuffInfo = new()
-                    {
-                        BuffInfo = new()
-                    }
-                }
-            };
+            var proto = new ChessRogueDiceInfo();
 
             return proto;
         }
@@ -360,7 +324,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
             {
                 ReviveInfo = new()
                 {
-                    RogueReviveCost = new()
+                    GameItemInfo = new()
                 }
             };
 

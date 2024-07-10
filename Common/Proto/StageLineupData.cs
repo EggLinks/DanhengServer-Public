@@ -24,13 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static StageLineupDataReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChVTdGFnZUxpbmV1cERhdGEucHJvdG8iOgoPU3RhZ2VMaW5ldXBEYXRhEhIK",
-            "CnN0YWdlX3R5cGUYCSABKA0SEwoLS0VNQlBPS0hBT00YDyABKA1CHqoCG0Vn",
-            "Z0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
+            "ChVTdGFnZUxpbmV1cERhdGEucHJvdG8iOwoPU3RhZ2VMaW5ldXBEYXRhEhMK",
+            "C01BT0lFRU1ES0FPGA8gASgNEhMKC0FIS0lPR01JTExOGAEgASgNQh6qAhtF",
+            "Z2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.StageLineupData), global::EggLink.DanhengServer.Proto.StageLineupData.Parser, new[]{ "StageType", "KEMBPOKHAOM" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.StageLineupData), global::EggLink.DanhengServer.Proto.StageLineupData.Parser, new[]{ "MAOIEEMDKAO", "AHKIOGMILLN" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,8 +72,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public StageLineupData(StageLineupData other) : this() {
-      stageType_ = other.stageType_;
-      kEMBPOKHAOM_ = other.kEMBPOKHAOM_;
+      mAOIEEMDKAO_ = other.mAOIEEMDKAO_;
+      aHKIOGMILLN_ = other.aHKIOGMILLN_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -83,27 +83,27 @@ namespace EggLink.DanhengServer.Proto {
       return new StageLineupData(this);
     }
 
-    /// <summary>Field number for the "stage_type" field.</summary>
-    public const int StageTypeFieldNumber = 9;
-    private uint stageType_;
+    /// <summary>Field number for the "MAOIEEMDKAO" field.</summary>
+    public const int MAOIEEMDKAOFieldNumber = 15;
+    private uint mAOIEEMDKAO_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint StageType {
-      get { return stageType_; }
+    public uint MAOIEEMDKAO {
+      get { return mAOIEEMDKAO_; }
       set {
-        stageType_ = value;
+        mAOIEEMDKAO_ = value;
       }
     }
 
-    /// <summary>Field number for the "KEMBPOKHAOM" field.</summary>
-    public const int KEMBPOKHAOMFieldNumber = 15;
-    private uint kEMBPOKHAOM_;
+    /// <summary>Field number for the "AHKIOGMILLN" field.</summary>
+    public const int AHKIOGMILLNFieldNumber = 1;
+    private uint aHKIOGMILLN_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint KEMBPOKHAOM {
-      get { return kEMBPOKHAOM_; }
+    public uint AHKIOGMILLN {
+      get { return aHKIOGMILLN_; }
       set {
-        kEMBPOKHAOM_ = value;
+        aHKIOGMILLN_ = value;
       }
     }
 
@@ -122,8 +122,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (StageType != other.StageType) return false;
-      if (KEMBPOKHAOM != other.KEMBPOKHAOM) return false;
+      if (MAOIEEMDKAO != other.MAOIEEMDKAO) return false;
+      if (AHKIOGMILLN != other.AHKIOGMILLN) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -131,8 +131,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (StageType != 0) hash ^= StageType.GetHashCode();
-      if (KEMBPOKHAOM != 0) hash ^= KEMBPOKHAOM.GetHashCode();
+      if (MAOIEEMDKAO != 0) hash ^= MAOIEEMDKAO.GetHashCode();
+      if (AHKIOGMILLN != 0) hash ^= AHKIOGMILLN.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -151,13 +151,13 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (StageType != 0) {
-        output.WriteRawTag(72);
-        output.WriteUInt32(StageType);
+      if (AHKIOGMILLN != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(AHKIOGMILLN);
       }
-      if (KEMBPOKHAOM != 0) {
+      if (MAOIEEMDKAO != 0) {
         output.WriteRawTag(120);
-        output.WriteUInt32(KEMBPOKHAOM);
+        output.WriteUInt32(MAOIEEMDKAO);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -169,13 +169,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (StageType != 0) {
-        output.WriteRawTag(72);
-        output.WriteUInt32(StageType);
+      if (AHKIOGMILLN != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(AHKIOGMILLN);
       }
-      if (KEMBPOKHAOM != 0) {
+      if (MAOIEEMDKAO != 0) {
         output.WriteRawTag(120);
-        output.WriteUInt32(KEMBPOKHAOM);
+        output.WriteUInt32(MAOIEEMDKAO);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -187,11 +187,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (StageType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(StageType);
+      if (MAOIEEMDKAO != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MAOIEEMDKAO);
       }
-      if (KEMBPOKHAOM != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(KEMBPOKHAOM);
+      if (AHKIOGMILLN != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AHKIOGMILLN);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -205,11 +205,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.StageType != 0) {
-        StageType = other.StageType;
+      if (other.MAOIEEMDKAO != 0) {
+        MAOIEEMDKAO = other.MAOIEEMDKAO;
       }
-      if (other.KEMBPOKHAOM != 0) {
-        KEMBPOKHAOM = other.KEMBPOKHAOM;
+      if (other.AHKIOGMILLN != 0) {
+        AHKIOGMILLN = other.AHKIOGMILLN;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -226,12 +226,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 72: {
-            StageType = input.ReadUInt32();
+          case 8: {
+            AHKIOGMILLN = input.ReadUInt32();
             break;
           }
           case 120: {
-            KEMBPOKHAOM = input.ReadUInt32();
+            MAOIEEMDKAO = input.ReadUInt32();
             break;
           }
         }
@@ -249,12 +249,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 72: {
-            StageType = input.ReadUInt32();
+          case 8: {
+            AHKIOGMILLN = input.ReadUInt32();
             break;
           }
           case 120: {
-            KEMBPOKHAOM = input.ReadUInt32();
+            MAOIEEMDKAO = input.ReadUInt32();
             break;
           }
         }

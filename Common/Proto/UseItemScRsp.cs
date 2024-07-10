@@ -24,16 +24,16 @@ namespace EggLink.DanhengServer.Proto {
     static UseItemScRspReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJVc2VJdGVtU2NSc3AucHJvdG8aDkl0ZW1MaXN0LnByb3RvIqABCgxVc2VJ",
-            "dGVtU2NSc3ASEwoLTkFBSFBPRU1DSEQYDyABKA0SEwoLSU5OQ0NQT05ISUwY",
-            "CiABKA0SIAoYbW9udGhfY2FyZF9vdXRfZGF0ZV90aW1lGAUgASgEEh4KC3Jl",
-            "dHVybl9kYXRhGAcgASgLMgkuSXRlbUxpc3QSEwoLT0lQRUJITEtIUEUYDCAB",
-            "KA0SDwoHcmV0Y29kZRgNIAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVy",
-            "LlByb3RvYgZwcm90bzM="));
+            "ChJVc2VJdGVtU2NSc3AucHJvdG8aDkl0ZW1MaXN0LnByb3RvIpYBCgxVc2VJ",
+            "dGVtU2NSc3ASEwoLdXNlX2l0ZW1faWQYBiABKA0SHgoLcmV0dXJuX2RhdGEY",
+            "BCABKAsyCS5JdGVtTGlzdBIPCgdyZXRjb2RlGAkgASgNEhMKC0dHS0VNTkdH",
+            "QkhGGA4gASgEEhYKDnVzZV9pdGVtX2NvdW50GA0gASgNEhMKC09HTUtMTURB",
+            "TklHGA8gASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ItemListReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.UseItemScRsp), global::EggLink.DanhengServer.Proto.UseItemScRsp.Parser, new[]{ "NAAHPOEMCHD", "INNCCPONHIL", "MonthCardOutDateTime", "ReturnData", "OIPEBHLKHPE", "Retcode" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.UseItemScRsp), global::EggLink.DanhengServer.Proto.UseItemScRsp.Parser, new[]{ "UseItemId", "ReturnData", "Retcode", "GGKEMNGGBHF", "UseItemCount", "OGMKLMDANIG" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,12 +75,12 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UseItemScRsp(UseItemScRsp other) : this() {
-      nAAHPOEMCHD_ = other.nAAHPOEMCHD_;
-      iNNCCPONHIL_ = other.iNNCCPONHIL_;
-      monthCardOutDateTime_ = other.monthCardOutDateTime_;
+      useItemId_ = other.useItemId_;
       returnData_ = other.returnData_ != null ? other.returnData_.Clone() : null;
-      oIPEBHLKHPE_ = other.oIPEBHLKHPE_;
       retcode_ = other.retcode_;
+      gGKEMNGGBHF_ = other.gGKEMNGGBHF_;
+      useItemCount_ = other.useItemCount_;
+      oGMKLMDANIG_ = other.oGMKLMDANIG_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -90,44 +90,20 @@ namespace EggLink.DanhengServer.Proto {
       return new UseItemScRsp(this);
     }
 
-    /// <summary>Field number for the "NAAHPOEMCHD" field.</summary>
-    public const int NAAHPOEMCHDFieldNumber = 15;
-    private uint nAAHPOEMCHD_;
+    /// <summary>Field number for the "use_item_id" field.</summary>
+    public const int UseItemIdFieldNumber = 6;
+    private uint useItemId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint NAAHPOEMCHD {
-      get { return nAAHPOEMCHD_; }
+    public uint UseItemId {
+      get { return useItemId_; }
       set {
-        nAAHPOEMCHD_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "INNCCPONHIL" field.</summary>
-    public const int INNCCPONHILFieldNumber = 10;
-    private uint iNNCCPONHIL_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint INNCCPONHIL {
-      get { return iNNCCPONHIL_; }
-      set {
-        iNNCCPONHIL_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "month_card_out_date_time" field.</summary>
-    public const int MonthCardOutDateTimeFieldNumber = 5;
-    private ulong monthCardOutDateTime_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ulong MonthCardOutDateTime {
-      get { return monthCardOutDateTime_; }
-      set {
-        monthCardOutDateTime_ = value;
+        useItemId_ = value;
       }
     }
 
     /// <summary>Field number for the "return_data" field.</summary>
-    public const int ReturnDataFieldNumber = 7;
+    public const int ReturnDataFieldNumber = 4;
     private global::EggLink.DanhengServer.Proto.ItemList returnData_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -138,20 +114,8 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "OIPEBHLKHPE" field.</summary>
-    public const int OIPEBHLKHPEFieldNumber = 12;
-    private uint oIPEBHLKHPE_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint OIPEBHLKHPE {
-      get { return oIPEBHLKHPE_; }
-      set {
-        oIPEBHLKHPE_ = value;
-      }
-    }
-
     /// <summary>Field number for the "retcode" field.</summary>
-    public const int RetcodeFieldNumber = 13;
+    public const int RetcodeFieldNumber = 9;
     private uint retcode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -159,6 +123,42 @@ namespace EggLink.DanhengServer.Proto {
       get { return retcode_; }
       set {
         retcode_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "GGKEMNGGBHF" field.</summary>
+    public const int GGKEMNGGBHFFieldNumber = 14;
+    private ulong gGKEMNGGBHF_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong GGKEMNGGBHF {
+      get { return gGKEMNGGBHF_; }
+      set {
+        gGKEMNGGBHF_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "use_item_count" field.</summary>
+    public const int UseItemCountFieldNumber = 13;
+    private uint useItemCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint UseItemCount {
+      get { return useItemCount_; }
+      set {
+        useItemCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "OGMKLMDANIG" field.</summary>
+    public const int OGMKLMDANIGFieldNumber = 15;
+    private uint oGMKLMDANIG_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint OGMKLMDANIG {
+      get { return oGMKLMDANIG_; }
+      set {
+        oGMKLMDANIG_ = value;
       }
     }
 
@@ -177,12 +177,12 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (NAAHPOEMCHD != other.NAAHPOEMCHD) return false;
-      if (INNCCPONHIL != other.INNCCPONHIL) return false;
-      if (MonthCardOutDateTime != other.MonthCardOutDateTime) return false;
+      if (UseItemId != other.UseItemId) return false;
       if (!object.Equals(ReturnData, other.ReturnData)) return false;
-      if (OIPEBHLKHPE != other.OIPEBHLKHPE) return false;
       if (Retcode != other.Retcode) return false;
+      if (GGKEMNGGBHF != other.GGKEMNGGBHF) return false;
+      if (UseItemCount != other.UseItemCount) return false;
+      if (OGMKLMDANIG != other.OGMKLMDANIG) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -190,12 +190,12 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (NAAHPOEMCHD != 0) hash ^= NAAHPOEMCHD.GetHashCode();
-      if (INNCCPONHIL != 0) hash ^= INNCCPONHIL.GetHashCode();
-      if (MonthCardOutDateTime != 0UL) hash ^= MonthCardOutDateTime.GetHashCode();
+      if (UseItemId != 0) hash ^= UseItemId.GetHashCode();
       if (returnData_ != null) hash ^= ReturnData.GetHashCode();
-      if (OIPEBHLKHPE != 0) hash ^= OIPEBHLKHPE.GetHashCode();
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
+      if (GGKEMNGGBHF != 0UL) hash ^= GGKEMNGGBHF.GetHashCode();
+      if (UseItemCount != 0) hash ^= UseItemCount.GetHashCode();
+      if (OGMKLMDANIG != 0) hash ^= OGMKLMDANIG.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -214,29 +214,29 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (MonthCardOutDateTime != 0UL) {
-        output.WriteRawTag(40);
-        output.WriteUInt64(MonthCardOutDateTime);
-      }
       if (returnData_ != null) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(34);
         output.WriteMessage(ReturnData);
       }
-      if (INNCCPONHIL != 0) {
-        output.WriteRawTag(80);
-        output.WriteUInt32(INNCCPONHIL);
-      }
-      if (OIPEBHLKHPE != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(OIPEBHLKHPE);
+      if (UseItemId != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(UseItemId);
       }
       if (Retcode != 0) {
-        output.WriteRawTag(104);
+        output.WriteRawTag(72);
         output.WriteUInt32(Retcode);
       }
-      if (NAAHPOEMCHD != 0) {
+      if (UseItemCount != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(UseItemCount);
+      }
+      if (GGKEMNGGBHF != 0UL) {
+        output.WriteRawTag(112);
+        output.WriteUInt64(GGKEMNGGBHF);
+      }
+      if (OGMKLMDANIG != 0) {
         output.WriteRawTag(120);
-        output.WriteUInt32(NAAHPOEMCHD);
+        output.WriteUInt32(OGMKLMDANIG);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -248,29 +248,29 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (MonthCardOutDateTime != 0UL) {
-        output.WriteRawTag(40);
-        output.WriteUInt64(MonthCardOutDateTime);
-      }
       if (returnData_ != null) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(34);
         output.WriteMessage(ReturnData);
       }
-      if (INNCCPONHIL != 0) {
-        output.WriteRawTag(80);
-        output.WriteUInt32(INNCCPONHIL);
-      }
-      if (OIPEBHLKHPE != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(OIPEBHLKHPE);
+      if (UseItemId != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(UseItemId);
       }
       if (Retcode != 0) {
-        output.WriteRawTag(104);
+        output.WriteRawTag(72);
         output.WriteUInt32(Retcode);
       }
-      if (NAAHPOEMCHD != 0) {
+      if (UseItemCount != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(UseItemCount);
+      }
+      if (GGKEMNGGBHF != 0UL) {
+        output.WriteRawTag(112);
+        output.WriteUInt64(GGKEMNGGBHF);
+      }
+      if (OGMKLMDANIG != 0) {
         output.WriteRawTag(120);
-        output.WriteUInt32(NAAHPOEMCHD);
+        output.WriteUInt32(OGMKLMDANIG);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -282,23 +282,23 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (NAAHPOEMCHD != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(NAAHPOEMCHD);
-      }
-      if (INNCCPONHIL != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(INNCCPONHIL);
-      }
-      if (MonthCardOutDateTime != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MonthCardOutDateTime);
+      if (UseItemId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UseItemId);
       }
       if (returnData_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ReturnData);
       }
-      if (OIPEBHLKHPE != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(OIPEBHLKHPE);
-      }
       if (Retcode != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
+      }
+      if (GGKEMNGGBHF != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(GGKEMNGGBHF);
+      }
+      if (UseItemCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UseItemCount);
+      }
+      if (OGMKLMDANIG != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(OGMKLMDANIG);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -312,14 +312,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.NAAHPOEMCHD != 0) {
-        NAAHPOEMCHD = other.NAAHPOEMCHD;
-      }
-      if (other.INNCCPONHIL != 0) {
-        INNCCPONHIL = other.INNCCPONHIL;
-      }
-      if (other.MonthCardOutDateTime != 0UL) {
-        MonthCardOutDateTime = other.MonthCardOutDateTime;
+      if (other.UseItemId != 0) {
+        UseItemId = other.UseItemId;
       }
       if (other.returnData_ != null) {
         if (returnData_ == null) {
@@ -327,11 +321,17 @@ namespace EggLink.DanhengServer.Proto {
         }
         ReturnData.MergeFrom(other.ReturnData);
       }
-      if (other.OIPEBHLKHPE != 0) {
-        OIPEBHLKHPE = other.OIPEBHLKHPE;
-      }
       if (other.Retcode != 0) {
         Retcode = other.Retcode;
+      }
+      if (other.GGKEMNGGBHF != 0UL) {
+        GGKEMNGGBHF = other.GGKEMNGGBHF;
+      }
+      if (other.UseItemCount != 0) {
+        UseItemCount = other.UseItemCount;
+      }
+      if (other.OGMKLMDANIG != 0) {
+        OGMKLMDANIG = other.OGMKLMDANIG;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -348,31 +348,31 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 40: {
-            MonthCardOutDateTime = input.ReadUInt64();
-            break;
-          }
-          case 58: {
+          case 34: {
             if (returnData_ == null) {
               ReturnData = new global::EggLink.DanhengServer.Proto.ItemList();
             }
             input.ReadMessage(ReturnData);
             break;
           }
-          case 80: {
-            INNCCPONHIL = input.ReadUInt32();
+          case 48: {
+            UseItemId = input.ReadUInt32();
             break;
           }
-          case 96: {
-            OIPEBHLKHPE = input.ReadUInt32();
-            break;
-          }
-          case 104: {
+          case 72: {
             Retcode = input.ReadUInt32();
             break;
           }
+          case 104: {
+            UseItemCount = input.ReadUInt32();
+            break;
+          }
+          case 112: {
+            GGKEMNGGBHF = input.ReadUInt64();
+            break;
+          }
           case 120: {
-            NAAHPOEMCHD = input.ReadUInt32();
+            OGMKLMDANIG = input.ReadUInt32();
             break;
           }
         }
@@ -390,31 +390,31 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 40: {
-            MonthCardOutDateTime = input.ReadUInt64();
-            break;
-          }
-          case 58: {
+          case 34: {
             if (returnData_ == null) {
               ReturnData = new global::EggLink.DanhengServer.Proto.ItemList();
             }
             input.ReadMessage(ReturnData);
             break;
           }
-          case 80: {
-            INNCCPONHIL = input.ReadUInt32();
+          case 48: {
+            UseItemId = input.ReadUInt32();
             break;
           }
-          case 96: {
-            OIPEBHLKHPE = input.ReadUInt32();
-            break;
-          }
-          case 104: {
+          case 72: {
             Retcode = input.ReadUInt32();
             break;
           }
+          case 104: {
+            UseItemCount = input.ReadUInt32();
+            break;
+          }
+          case 112: {
+            GGKEMNGGBHF = input.ReadUInt64();
+            break;
+          }
           case 120: {
-            NAAHPOEMCHD = input.ReadUInt32();
+            OGMKLMDANIG = input.ReadUInt32();
             break;
           }
         }

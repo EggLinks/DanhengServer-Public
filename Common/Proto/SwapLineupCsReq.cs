@@ -25,15 +25,15 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChVTd2FwTGluZXVwQ3NSZXEucHJvdG8aFUV4dHJhTGluZXVwVHlwZS5wcm90",
-            "byKXAQoPU3dhcExpbmV1cENzUmVxEhAKCHBsYW5lX2lkGAQgASgNEhAKCGRz",
-            "dF9zbG90GAUgASgNEg0KBWluZGV4GAIgASgNEhAKCHNyY19zbG90GA8gASgN",
-            "EhIKCmlzX3ZpcnR1YWwYASABKAgSKwoRZXh0cmFfbGluZXVwX3R5cGUYByAB",
-            "KA4yEC5FeHRyYUxpbmV1cFR5cGVCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZl",
+            "byKXAQoPU3dhcExpbmV1cENzUmVxEisKEWV4dHJhX2xpbmV1cF90eXBlGAwg",
+            "ASgOMhAuRXh0cmFMaW5ldXBUeXBlEhAKCHBsYW5lX2lkGAggASgNEg0KBWlu",
+            "ZGV4GAQgASgNEhAKCHNyY19zbG90GAMgASgNEhIKCmlzX3ZpcnR1YWwYCiAB",
+            "KAgSEAoIZHN0X3Nsb3QYCSABKA1CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZl",
             "ci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ExtraLineupTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SwapLineupCsReq), global::EggLink.DanhengServer.Proto.SwapLineupCsReq.Parser, new[]{ "PlaneId", "DstSlot", "Index", "SrcSlot", "IsVirtual", "ExtraLineupType" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SwapLineupCsReq), global::EggLink.DanhengServer.Proto.SwapLineupCsReq.Parser, new[]{ "ExtraLineupType", "PlaneId", "Index", "SrcSlot", "IsVirtual", "DstSlot" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,12 +75,12 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SwapLineupCsReq(SwapLineupCsReq other) : this() {
+      extraLineupType_ = other.extraLineupType_;
       planeId_ = other.planeId_;
-      dstSlot_ = other.dstSlot_;
       index_ = other.index_;
       srcSlot_ = other.srcSlot_;
       isVirtual_ = other.isVirtual_;
-      extraLineupType_ = other.extraLineupType_;
+      dstSlot_ = other.dstSlot_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -90,8 +90,20 @@ namespace EggLink.DanhengServer.Proto {
       return new SwapLineupCsReq(this);
     }
 
+    /// <summary>Field number for the "extra_lineup_type" field.</summary>
+    public const int ExtraLineupTypeFieldNumber = 12;
+    private global::EggLink.DanhengServer.Proto.ExtraLineupType extraLineupType_ = global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.ExtraLineupType ExtraLineupType {
+      get { return extraLineupType_; }
+      set {
+        extraLineupType_ = value;
+      }
+    }
+
     /// <summary>Field number for the "plane_id" field.</summary>
-    public const int PlaneIdFieldNumber = 4;
+    public const int PlaneIdFieldNumber = 8;
     private uint planeId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -102,20 +114,8 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "dst_slot" field.</summary>
-    public const int DstSlotFieldNumber = 5;
-    private uint dstSlot_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint DstSlot {
-      get { return dstSlot_; }
-      set {
-        dstSlot_ = value;
-      }
-    }
-
     /// <summary>Field number for the "index" field.</summary>
-    public const int IndexFieldNumber = 2;
+    public const int IndexFieldNumber = 4;
     private uint index_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -127,8 +127,11 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "src_slot" field.</summary>
-    public const int SrcSlotFieldNumber = 15;
+    public const int SrcSlotFieldNumber = 3;
     private uint srcSlot_;
+    /// <summary>
+    /// 9
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint SrcSlot {
@@ -139,7 +142,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "is_virtual" field.</summary>
-    public const int IsVirtualFieldNumber = 1;
+    public const int IsVirtualFieldNumber = 10;
     private bool isVirtual_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -150,15 +153,18 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "extra_lineup_type" field.</summary>
-    public const int ExtraLineupTypeFieldNumber = 7;
-    private global::EggLink.DanhengServer.Proto.ExtraLineupType extraLineupType_ = global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone;
+    /// <summary>Field number for the "dst_slot" field.</summary>
+    public const int DstSlotFieldNumber = 9;
+    private uint dstSlot_;
+    /// <summary>
+    /// 3
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.ExtraLineupType ExtraLineupType {
-      get { return extraLineupType_; }
+    public uint DstSlot {
+      get { return dstSlot_; }
       set {
-        extraLineupType_ = value;
+        dstSlot_ = value;
       }
     }
 
@@ -177,12 +183,12 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (ExtraLineupType != other.ExtraLineupType) return false;
       if (PlaneId != other.PlaneId) return false;
-      if (DstSlot != other.DstSlot) return false;
       if (Index != other.Index) return false;
       if (SrcSlot != other.SrcSlot) return false;
       if (IsVirtual != other.IsVirtual) return false;
-      if (ExtraLineupType != other.ExtraLineupType) return false;
+      if (DstSlot != other.DstSlot) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -190,12 +196,12 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) hash ^= ExtraLineupType.GetHashCode();
       if (PlaneId != 0) hash ^= PlaneId.GetHashCode();
-      if (DstSlot != 0) hash ^= DstSlot.GetHashCode();
       if (Index != 0) hash ^= Index.GetHashCode();
       if (SrcSlot != 0) hash ^= SrcSlot.GetHashCode();
       if (IsVirtual != false) hash ^= IsVirtual.GetHashCode();
-      if (ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) hash ^= ExtraLineupType.GetHashCode();
+      if (DstSlot != 0) hash ^= DstSlot.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -214,29 +220,29 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (IsVirtual != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(IsVirtual);
+      if (SrcSlot != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(SrcSlot);
       }
       if (Index != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(32);
         output.WriteUInt32(Index);
       }
       if (PlaneId != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(64);
         output.WriteUInt32(PlaneId);
       }
       if (DstSlot != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(72);
         output.WriteUInt32(DstSlot);
       }
-      if (ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) {
-        output.WriteRawTag(56);
-        output.WriteEnum((int) ExtraLineupType);
+      if (IsVirtual != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsVirtual);
       }
-      if (SrcSlot != 0) {
-        output.WriteRawTag(120);
-        output.WriteUInt32(SrcSlot);
+      if (ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) {
+        output.WriteRawTag(96);
+        output.WriteEnum((int) ExtraLineupType);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -248,29 +254,29 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (IsVirtual != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(IsVirtual);
+      if (SrcSlot != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(SrcSlot);
       }
       if (Index != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(32);
         output.WriteUInt32(Index);
       }
       if (PlaneId != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(64);
         output.WriteUInt32(PlaneId);
       }
       if (DstSlot != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(72);
         output.WriteUInt32(DstSlot);
       }
-      if (ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) {
-        output.WriteRawTag(56);
-        output.WriteEnum((int) ExtraLineupType);
+      if (IsVirtual != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsVirtual);
       }
-      if (SrcSlot != 0) {
-        output.WriteRawTag(120);
-        output.WriteUInt32(SrcSlot);
+      if (ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) {
+        output.WriteRawTag(96);
+        output.WriteEnum((int) ExtraLineupType);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -282,11 +288,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ExtraLineupType);
+      }
       if (PlaneId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PlaneId);
-      }
-      if (DstSlot != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DstSlot);
       }
       if (Index != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Index);
@@ -297,8 +303,8 @@ namespace EggLink.DanhengServer.Proto {
       if (IsVirtual != false) {
         size += 1 + 1;
       }
-      if (ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ExtraLineupType);
+      if (DstSlot != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DstSlot);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -312,11 +318,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
+      if (other.ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) {
+        ExtraLineupType = other.ExtraLineupType;
+      }
       if (other.PlaneId != 0) {
         PlaneId = other.PlaneId;
-      }
-      if (other.DstSlot != 0) {
-        DstSlot = other.DstSlot;
       }
       if (other.Index != 0) {
         Index = other.Index;
@@ -327,8 +333,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other.IsVirtual != false) {
         IsVirtual = other.IsVirtual;
       }
-      if (other.ExtraLineupType != global::EggLink.DanhengServer.Proto.ExtraLineupType.LineupNone) {
-        ExtraLineupType = other.ExtraLineupType;
+      if (other.DstSlot != 0) {
+        DstSlot = other.DstSlot;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -345,28 +351,28 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            IsVirtual = input.ReadBool();
-            break;
-          }
-          case 16: {
-            Index = input.ReadUInt32();
+          case 24: {
+            SrcSlot = input.ReadUInt32();
             break;
           }
           case 32: {
+            Index = input.ReadUInt32();
+            break;
+          }
+          case 64: {
             PlaneId = input.ReadUInt32();
             break;
           }
-          case 40: {
+          case 72: {
             DstSlot = input.ReadUInt32();
             break;
           }
-          case 56: {
-            ExtraLineupType = (global::EggLink.DanhengServer.Proto.ExtraLineupType) input.ReadEnum();
+          case 80: {
+            IsVirtual = input.ReadBool();
             break;
           }
-          case 120: {
-            SrcSlot = input.ReadUInt32();
+          case 96: {
+            ExtraLineupType = (global::EggLink.DanhengServer.Proto.ExtraLineupType) input.ReadEnum();
             break;
           }
         }
@@ -384,28 +390,28 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            IsVirtual = input.ReadBool();
-            break;
-          }
-          case 16: {
-            Index = input.ReadUInt32();
+          case 24: {
+            SrcSlot = input.ReadUInt32();
             break;
           }
           case 32: {
+            Index = input.ReadUInt32();
+            break;
+          }
+          case 64: {
             PlaneId = input.ReadUInt32();
             break;
           }
-          case 40: {
+          case 72: {
             DstSlot = input.ReadUInt32();
             break;
           }
-          case 56: {
-            ExtraLineupType = (global::EggLink.DanhengServer.Proto.ExtraLineupType) input.ReadEnum();
+          case 80: {
+            IsVirtual = input.ReadBool();
             break;
           }
-          case 120: {
-            SrcSlot = input.ReadUInt32();
+          case 96: {
+            ExtraLineupType = (global::EggLink.DanhengServer.Proto.ExtraLineupType) input.ReadEnum();
             break;
           }
         }

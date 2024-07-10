@@ -24,17 +24,17 @@ namespace EggLink.DanhengServer.Proto {
     static PlayerHeroBasicTypeInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch1QbGF5ZXJIZXJvQmFzaWNUeXBlSW5mby5wcm90bxoVQXZhdGFyU2tpbGxU",
-            "cmVlLnByb3RvGhNIZXJvQmFzaWNUeXBlLnByb3RvGhBFcXVpcFJlbGljLnBy",
-            "b3RvIrIBChdQbGF5ZXJIZXJvQmFzaWNUeXBlSW5mbxITCgtJR0JFQlBKSkpJ",
-            "SBgLIAEoDRIpCg9za2lsbF90cmVlX2xpc3QYDCADKAsyEC5BdmF0YXJTa2ls",
-            "bFRyZWUSIgoKYmFzaWNfdHlwZRgOIAEoDjIOLkhlcm9CYXNpY1R5cGUSJQoQ",
-            "ZXF1aXBfcmVsaWNfbGlzdBgHIAMoCzILLkVxdWlwUmVsaWMSDAoEcmFuaxgG",
+            "Ch1QbGF5ZXJIZXJvQmFzaWNUeXBlSW5mby5wcm90bxoQRXF1aXBSZWxpYy5w",
+            "cm90bxoTSGVyb0Jhc2ljVHlwZS5wcm90bxoVQXZhdGFyU2tpbGxUcmVlLnBy",
+            "b3RvIrIBChdQbGF5ZXJIZXJvQmFzaWNUeXBlSW5mbxIMCgRyYW5rGA4gASgN",
+            "EikKD3NraWxsX3RyZWVfbGlzdBgGIAMoCzIQLkF2YXRhclNraWxsVHJlZRIi",
+            "CgpiYXNpY190eXBlGAQgASgOMg4uSGVyb0Jhc2ljVHlwZRIlChBlcXVpcF9y",
+            "ZWxpY19saXN0GAcgAygLMgsuRXF1aXBSZWxpYxITCgtJS0xOT1BFUEJLTBgF",
             "IAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.AvatarSkillTreeReflection.Descriptor, global::EggLink.DanhengServer.Proto.HeroBasicTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.EquipRelicReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.EquipRelicReflection.Descriptor, global::EggLink.DanhengServer.Proto.HeroBasicTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.AvatarSkillTreeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PlayerHeroBasicTypeInfo), global::EggLink.DanhengServer.Proto.PlayerHeroBasicTypeInfo.Parser, new[]{ "IGBEBPJJJIH", "SkillTreeList", "BasicType", "EquipRelicList", "Rank" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PlayerHeroBasicTypeInfo), global::EggLink.DanhengServer.Proto.PlayerHeroBasicTypeInfo.Parser, new[]{ "Rank", "SkillTreeList", "BasicType", "EquipRelicList", "IKLNOPEPBKL" }, null, null, null, null)
           }));
     }
     #endregion
@@ -76,11 +76,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PlayerHeroBasicTypeInfo(PlayerHeroBasicTypeInfo other) : this() {
-      iGBEBPJJJIH_ = other.iGBEBPJJJIH_;
+      rank_ = other.rank_;
       skillTreeList_ = other.skillTreeList_.Clone();
       basicType_ = other.basicType_;
       equipRelicList_ = other.equipRelicList_.Clone();
-      rank_ = other.rank_;
+      iKLNOPEPBKL_ = other.iKLNOPEPBKL_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -90,22 +90,22 @@ namespace EggLink.DanhengServer.Proto {
       return new PlayerHeroBasicTypeInfo(this);
     }
 
-    /// <summary>Field number for the "IGBEBPJJJIH" field.</summary>
-    public const int IGBEBPJJJIHFieldNumber = 11;
-    private uint iGBEBPJJJIH_;
+    /// <summary>Field number for the "rank" field.</summary>
+    public const int RankFieldNumber = 14;
+    private uint rank_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint IGBEBPJJJIH {
-      get { return iGBEBPJJJIH_; }
+    public uint Rank {
+      get { return rank_; }
       set {
-        iGBEBPJJJIH_ = value;
+        rank_ = value;
       }
     }
 
     /// <summary>Field number for the "skill_tree_list" field.</summary>
-    public const int SkillTreeListFieldNumber = 12;
+    public const int SkillTreeListFieldNumber = 6;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.AvatarSkillTree> _repeated_skillTreeList_codec
-        = pb::FieldCodec.ForMessage(98, global::EggLink.DanhengServer.Proto.AvatarSkillTree.Parser);
+        = pb::FieldCodec.ForMessage(50, global::EggLink.DanhengServer.Proto.AvatarSkillTree.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.AvatarSkillTree> skillTreeList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.AvatarSkillTree>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -114,7 +114,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "basic_type" field.</summary>
-    public const int BasicTypeFieldNumber = 14;
+    public const int BasicTypeFieldNumber = 4;
     private global::EggLink.DanhengServer.Proto.HeroBasicType basicType_ = global::EggLink.DanhengServer.Proto.HeroBasicType.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -136,15 +136,15 @@ namespace EggLink.DanhengServer.Proto {
       get { return equipRelicList_; }
     }
 
-    /// <summary>Field number for the "rank" field.</summary>
-    public const int RankFieldNumber = 6;
-    private uint rank_;
+    /// <summary>Field number for the "IKLNOPEPBKL" field.</summary>
+    public const int IKLNOPEPBKLFieldNumber = 5;
+    private uint iKLNOPEPBKL_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint Rank {
-      get { return rank_; }
+    public uint IKLNOPEPBKL {
+      get { return iKLNOPEPBKL_; }
       set {
-        rank_ = value;
+        iKLNOPEPBKL_ = value;
       }
     }
 
@@ -163,11 +163,11 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (IGBEBPJJJIH != other.IGBEBPJJJIH) return false;
+      if (Rank != other.Rank) return false;
       if(!skillTreeList_.Equals(other.skillTreeList_)) return false;
       if (BasicType != other.BasicType) return false;
       if(!equipRelicList_.Equals(other.equipRelicList_)) return false;
-      if (Rank != other.Rank) return false;
+      if (IKLNOPEPBKL != other.IKLNOPEPBKL) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -175,11 +175,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (IGBEBPJJJIH != 0) hash ^= IGBEBPJJJIH.GetHashCode();
+      if (Rank != 0) hash ^= Rank.GetHashCode();
       hash ^= skillTreeList_.GetHashCode();
       if (BasicType != global::EggLink.DanhengServer.Proto.HeroBasicType.None) hash ^= BasicType.GetHashCode();
       hash ^= equipRelicList_.GetHashCode();
-      if (Rank != 0) hash ^= Rank.GetHashCode();
+      if (IKLNOPEPBKL != 0) hash ^= IKLNOPEPBKL.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -198,19 +198,19 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Rank != 0) {
-        output.WriteRawTag(48);
-        output.WriteUInt32(Rank);
+      if (BasicType != global::EggLink.DanhengServer.Proto.HeroBasicType.None) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) BasicType);
       }
-      equipRelicList_.WriteTo(output, _repeated_equipRelicList_codec);
-      if (IGBEBPJJJIH != 0) {
-        output.WriteRawTag(88);
-        output.WriteUInt32(IGBEBPJJJIH);
+      if (IKLNOPEPBKL != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(IKLNOPEPBKL);
       }
       skillTreeList_.WriteTo(output, _repeated_skillTreeList_codec);
-      if (BasicType != global::EggLink.DanhengServer.Proto.HeroBasicType.None) {
+      equipRelicList_.WriteTo(output, _repeated_equipRelicList_codec);
+      if (Rank != 0) {
         output.WriteRawTag(112);
-        output.WriteEnum((int) BasicType);
+        output.WriteUInt32(Rank);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -222,19 +222,19 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Rank != 0) {
-        output.WriteRawTag(48);
-        output.WriteUInt32(Rank);
+      if (BasicType != global::EggLink.DanhengServer.Proto.HeroBasicType.None) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) BasicType);
       }
-      equipRelicList_.WriteTo(ref output, _repeated_equipRelicList_codec);
-      if (IGBEBPJJJIH != 0) {
-        output.WriteRawTag(88);
-        output.WriteUInt32(IGBEBPJJJIH);
+      if (IKLNOPEPBKL != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(IKLNOPEPBKL);
       }
       skillTreeList_.WriteTo(ref output, _repeated_skillTreeList_codec);
-      if (BasicType != global::EggLink.DanhengServer.Proto.HeroBasicType.None) {
+      equipRelicList_.WriteTo(ref output, _repeated_equipRelicList_codec);
+      if (Rank != 0) {
         output.WriteRawTag(112);
-        output.WriteEnum((int) BasicType);
+        output.WriteUInt32(Rank);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -246,16 +246,16 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (IGBEBPJJJIH != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(IGBEBPJJJIH);
+      if (Rank != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Rank);
       }
       size += skillTreeList_.CalculateSize(_repeated_skillTreeList_codec);
       if (BasicType != global::EggLink.DanhengServer.Proto.HeroBasicType.None) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) BasicType);
       }
       size += equipRelicList_.CalculateSize(_repeated_equipRelicList_codec);
-      if (Rank != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Rank);
+      if (IKLNOPEPBKL != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(IKLNOPEPBKL);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -269,16 +269,16 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.IGBEBPJJJIH != 0) {
-        IGBEBPJJJIH = other.IGBEBPJJJIH;
+      if (other.Rank != 0) {
+        Rank = other.Rank;
       }
       skillTreeList_.Add(other.skillTreeList_);
       if (other.BasicType != global::EggLink.DanhengServer.Proto.HeroBasicType.None) {
         BasicType = other.BasicType;
       }
       equipRelicList_.Add(other.equipRelicList_);
-      if (other.Rank != 0) {
-        Rank = other.Rank;
+      if (other.IKLNOPEPBKL != 0) {
+        IKLNOPEPBKL = other.IKLNOPEPBKL;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -295,24 +295,24 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 48: {
-            Rank = input.ReadUInt32();
+          case 32: {
+            BasicType = (global::EggLink.DanhengServer.Proto.HeroBasicType) input.ReadEnum();
+            break;
+          }
+          case 40: {
+            IKLNOPEPBKL = input.ReadUInt32();
+            break;
+          }
+          case 50: {
+            skillTreeList_.AddEntriesFrom(input, _repeated_skillTreeList_codec);
             break;
           }
           case 58: {
             equipRelicList_.AddEntriesFrom(input, _repeated_equipRelicList_codec);
             break;
           }
-          case 88: {
-            IGBEBPJJJIH = input.ReadUInt32();
-            break;
-          }
-          case 98: {
-            skillTreeList_.AddEntriesFrom(input, _repeated_skillTreeList_codec);
-            break;
-          }
           case 112: {
-            BasicType = (global::EggLink.DanhengServer.Proto.HeroBasicType) input.ReadEnum();
+            Rank = input.ReadUInt32();
             break;
           }
         }
@@ -330,24 +330,24 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 48: {
-            Rank = input.ReadUInt32();
+          case 32: {
+            BasicType = (global::EggLink.DanhengServer.Proto.HeroBasicType) input.ReadEnum();
+            break;
+          }
+          case 40: {
+            IKLNOPEPBKL = input.ReadUInt32();
+            break;
+          }
+          case 50: {
+            skillTreeList_.AddEntriesFrom(ref input, _repeated_skillTreeList_codec);
             break;
           }
           case 58: {
             equipRelicList_.AddEntriesFrom(ref input, _repeated_equipRelicList_codec);
             break;
           }
-          case 88: {
-            IGBEBPJJJIH = input.ReadUInt32();
-            break;
-          }
-          case 98: {
-            skillTreeList_.AddEntriesFrom(ref input, _repeated_skillTreeList_codec);
-            break;
-          }
           case 112: {
-            BasicType = (global::EggLink.DanhengServer.Proto.HeroBasicType) input.ReadEnum();
+            Rank = input.ReadUInt32();
             break;
           }
         }

@@ -25,7 +25,7 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChNNYXplUHJvcFN0YXRlLnByb3RvIkMKDU1hemVQcm9wU3RhdGUSEAoIZ3Jv",
-            "dXBfaWQYDyABKA0SEQoJY29uZmlnX2lkGAEgASgNEg0KBXN0YXRlGAwgASgN",
+            "dXBfaWQYBiABKA0SEQoJY29uZmlnX2lkGAMgASgNEg0KBXN0YXRlGAEgASgN",
             "Qh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
@@ -85,7 +85,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "group_id" field.</summary>
-    public const int GroupIdFieldNumber = 15;
+    public const int GroupIdFieldNumber = 6;
     private uint groupId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -97,7 +97,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "config_id" field.</summary>
-    public const int ConfigIdFieldNumber = 1;
+    public const int ConfigIdFieldNumber = 3;
     private uint configId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -109,7 +109,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "state" field.</summary>
-    public const int StateFieldNumber = 12;
+    public const int StateFieldNumber = 1;
     private uint state_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -166,16 +166,16 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ConfigId != 0) {
-        output.WriteRawTag(8);
-        output.WriteUInt32(ConfigId);
-      }
       if (State != 0) {
-        output.WriteRawTag(96);
+        output.WriteRawTag(8);
         output.WriteUInt32(State);
       }
+      if (ConfigId != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(ConfigId);
+      }
       if (GroupId != 0) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(48);
         output.WriteUInt32(GroupId);
       }
       if (_unknownFields != null) {
@@ -188,16 +188,16 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ConfigId != 0) {
-        output.WriteRawTag(8);
-        output.WriteUInt32(ConfigId);
-      }
       if (State != 0) {
-        output.WriteRawTag(96);
+        output.WriteRawTag(8);
         output.WriteUInt32(State);
       }
+      if (ConfigId != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(ConfigId);
+      }
       if (GroupId != 0) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(48);
         output.WriteUInt32(GroupId);
       }
       if (_unknownFields != null) {
@@ -256,14 +256,14 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            ConfigId = input.ReadUInt32();
-            break;
-          }
-          case 96: {
             State = input.ReadUInt32();
             break;
           }
-          case 120: {
+          case 24: {
+            ConfigId = input.ReadUInt32();
+            break;
+          }
+          case 48: {
             GroupId = input.ReadUInt32();
             break;
           }
@@ -283,14 +283,14 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            ConfigId = input.ReadUInt32();
-            break;
-          }
-          case 96: {
             State = input.ReadUInt32();
             break;
           }
-          case 120: {
+          case 24: {
+            ConfigId = input.ReadUInt32();
+            break;
+          }
+          case 48: {
             GroupId = input.ReadUInt32();
             break;
           }

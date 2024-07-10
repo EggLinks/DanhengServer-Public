@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChlSb2d1ZVVubG9ja1Byb2dyZXNzLnByb3RvIkoKE1JvZ3VlVW5sb2NrUHJv",
-            "Z3Jlc3MSEQoJdW5sb2NrX2lkGA0gASgNEg4KBmZpbmlzaBgPIAEoCBIQCghw",
-            "cm9ncmVzcxgJIAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3Rv",
+            "Z3Jlc3MSDgoGZmluaXNoGAEgASgIEhAKCHByb2dyZXNzGA8gASgNEhEKCXVu",
+            "bG9ja19pZBgEIAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3Rv",
             "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RogueUnlockProgress), global::EggLink.DanhengServer.Proto.RogueUnlockProgress.Parser, new[]{ "UnlockId", "Finish", "Progress" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RogueUnlockProgress), global::EggLink.DanhengServer.Proto.RogueUnlockProgress.Parser, new[]{ "Finish", "Progress", "UnlockId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,9 +73,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RogueUnlockProgress(RogueUnlockProgress other) : this() {
-      unlockId_ = other.unlockId_;
       finish_ = other.finish_;
       progress_ = other.progress_;
+      unlockId_ = other.unlockId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,20 +85,8 @@ namespace EggLink.DanhengServer.Proto {
       return new RogueUnlockProgress(this);
     }
 
-    /// <summary>Field number for the "unlock_id" field.</summary>
-    public const int UnlockIdFieldNumber = 13;
-    private uint unlockId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint UnlockId {
-      get { return unlockId_; }
-      set {
-        unlockId_ = value;
-      }
-    }
-
     /// <summary>Field number for the "finish" field.</summary>
-    public const int FinishFieldNumber = 15;
+    public const int FinishFieldNumber = 1;
     private bool finish_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -110,7 +98,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "progress" field.</summary>
-    public const int ProgressFieldNumber = 9;
+    public const int ProgressFieldNumber = 15;
     private uint progress_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -118,6 +106,18 @@ namespace EggLink.DanhengServer.Proto {
       get { return progress_; }
       set {
         progress_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "unlock_id" field.</summary>
+    public const int UnlockIdFieldNumber = 4;
+    private uint unlockId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint UnlockId {
+      get { return unlockId_; }
+      set {
+        unlockId_ = value;
       }
     }
 
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (UnlockId != other.UnlockId) return false;
       if (Finish != other.Finish) return false;
       if (Progress != other.Progress) return false;
+      if (UnlockId != other.UnlockId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +146,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (UnlockId != 0) hash ^= UnlockId.GetHashCode();
       if (Finish != false) hash ^= Finish.GetHashCode();
       if (Progress != 0) hash ^= Progress.GetHashCode();
+      if (UnlockId != 0) hash ^= UnlockId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,17 +167,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Progress != 0) {
-        output.WriteRawTag(72);
-        output.WriteUInt32(Progress);
+      if (Finish != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Finish);
       }
       if (UnlockId != 0) {
-        output.WriteRawTag(104);
+        output.WriteRawTag(32);
         output.WriteUInt32(UnlockId);
       }
-      if (Finish != false) {
+      if (Progress != 0) {
         output.WriteRawTag(120);
-        output.WriteBool(Finish);
+        output.WriteUInt32(Progress);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -189,17 +189,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Progress != 0) {
-        output.WriteRawTag(72);
-        output.WriteUInt32(Progress);
+      if (Finish != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Finish);
       }
       if (UnlockId != 0) {
-        output.WriteRawTag(104);
+        output.WriteRawTag(32);
         output.WriteUInt32(UnlockId);
       }
-      if (Finish != false) {
+      if (Progress != 0) {
         output.WriteRawTag(120);
-        output.WriteBool(Finish);
+        output.WriteUInt32(Progress);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -211,14 +211,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (UnlockId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UnlockId);
-      }
       if (Finish != false) {
         size += 1 + 1;
       }
       if (Progress != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Progress);
+      }
+      if (UnlockId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UnlockId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -232,14 +232,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.UnlockId != 0) {
-        UnlockId = other.UnlockId;
-      }
       if (other.Finish != false) {
         Finish = other.Finish;
       }
       if (other.Progress != 0) {
         Progress = other.Progress;
+      }
+      if (other.UnlockId != 0) {
+        UnlockId = other.UnlockId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -256,16 +256,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 72: {
-            Progress = input.ReadUInt32();
+          case 8: {
+            Finish = input.ReadBool();
             break;
           }
-          case 104: {
+          case 32: {
             UnlockId = input.ReadUInt32();
             break;
           }
           case 120: {
-            Finish = input.ReadBool();
+            Progress = input.ReadUInt32();
             break;
           }
         }
@@ -283,16 +283,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 72: {
-            Progress = input.ReadUInt32();
+          case 8: {
+            Finish = input.ReadBool();
             break;
           }
-          case 104: {
+          case 32: {
             UnlockId = input.ReadUInt32();
             break;
           }
           case 120: {
-            Finish = input.ReadBool();
+            Progress = input.ReadUInt32();
             break;
           }
         }

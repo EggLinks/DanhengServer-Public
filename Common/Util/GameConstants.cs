@@ -14,6 +14,7 @@
         public const int MAX_LINEUP_COUNT = 9;
 
         public static readonly List<int> UpgradeWorldLevel = [20, 30, 40, 50, 60, 65];
+        public static readonly List<int> AllowedChessRogueEntranceId = [8020701, 8020901, 8020401, 8020201];
 
         public const int AMBUSH_BUFF_ID = 1000102;
 

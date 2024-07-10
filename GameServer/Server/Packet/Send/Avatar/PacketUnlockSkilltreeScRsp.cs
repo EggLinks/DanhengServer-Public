@@ -19,11 +19,10 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Avatar
             SetData(proto);
         }
 
-        public PacketUnlockSkilltreeScRsp(uint avatarId, uint pointId, uint level) : base(CmdIds.UnlockSkilltreeScRsp)
+        public PacketUnlockSkilltreeScRsp(uint pointId, uint level) : base(CmdIds.UnlockSkilltreeScRsp)
         {
             var proto = new UnlockSkilltreeScRsp
             {
-                BaseAvatarId = avatarId,
                 PointId = pointId,
                 Level = level,
             };

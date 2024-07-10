@@ -3,6 +3,8 @@ using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Database;
 using EggLink.DanhengServer.Database.Avatar;
 using EggLink.DanhengServer.Game.Player;
+using EggLink.DanhengServer.Proto;
+using EggLink.DanhengServer.Server.Packet.Send.Avatar;
 using EggLink.DanhengServer.Server.Packet.Send.Player;
 using EggLink.DanhengServer.Util;
 
@@ -22,7 +24,7 @@ namespace EggLink.DanhengServer.Game.Avatar
             }
         }
 
-        public AvatarConfigExcel? AddAvatar(int avatarId, bool sync = true)
+        public AvatarConfigExcel? AddAvatar(int avatarId, bool sync = true, bool notify = true)
         {
             GameData.AvatarConfigData.TryGetValue(avatarId, out AvatarConfigExcel? avatarExcel);
             if (avatarExcel == null)
@@ -50,6 +52,11 @@ namespace EggLink.DanhengServer.Game.Avatar
 
             if (sync)
                 Player.SendPacket(new PacketPlayerSyncScNotify(avatar));
+
+            if (notify)
+            {
+                Player.SendPacket(new PacketAddAvatarScNotify(avatar.GetBaseAvatarId()));
+            }
 
             return avatarExcel;
         }

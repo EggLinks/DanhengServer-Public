@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EggLink.DanhengServer.Enums.Rogue;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +12,17 @@ namespace EggLink.DanhengServer.Data.Custom
     public class ChessRogueRoomConfig
     {
         public int EntranceId { get; set; }
-        public List<int> Groups { get; set; } = [];
-        public Dictionary<int, ChessRogueRoom> CellGroup { get; set; } = [];
-    }
+        public int RoomPrefix { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public RogueDLCBlockTypeEnum BlockType { get; set; }
+        public int AnchorGroup { get; set; }
+        public int AnchorId { get; set; }
 
-    public class ChessRogueRoom
-    {
-        public List<int> Groups { get; set; } = [];
-        public bool IsBoss { get; set; } = false;
-        public bool IsLastBoss { get; set; } = false;
+        public List<int> DefaultLoadBasicGroup { get; set; } = [];
+        public List<int> DefaultLoadGroup { get; set; } = [];
+        public List<int> DoubleEventLoadGroup { get; set; } = [];  // override DefaultLoadGroup
+        public List<int> SelectEventLoadGroup { get; set; } = [];  // override DefaultLoadGroup
+
+        public List<int> SubMonsterGroup { get; set; } = [];  // combine with DefaultLoadGroup
     }
 }

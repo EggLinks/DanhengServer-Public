@@ -26,13 +26,13 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "Ch1TY2VuZUVudGl0eU1vdmVTY05vdGlmeS5wcm90bxoQTW90aW9uSW5mby5w",
             "cm90byJ3ChdTY2VuZUVudGl0eU1vdmVTY05vdGlmeRIRCgllbnRpdHlfaWQY",
-            "DyABKA0SEAoIZW50cnlfaWQYDSABKA0SGwoGbW90aW9uGAwgASgLMgsuTW90",
-            "aW9uSW5mbxIaChJjbGllbnRfcG9zX3ZlcnNpb24YCCABKA1CHqoCG0VnZ0xp",
+            "AyABKA0SGwoGbW90aW9uGAQgASgLMgsuTW90aW9uSW5mbxIQCghlbnRyeV9p",
+            "ZBgOIAEoDRIaChJjbGllbnRfcG9zX3ZlcnNpb24YBSABKA1CHqoCG0VnZ0xp",
             "bmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.MotionInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SceneEntityMoveScNotify), global::EggLink.DanhengServer.Proto.SceneEntityMoveScNotify.Parser, new[]{ "EntityId", "EntryId", "Motion", "ClientPosVersion" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SceneEntityMoveScNotify), global::EggLink.DanhengServer.Proto.SceneEntityMoveScNotify.Parser, new[]{ "EntityId", "Motion", "EntryId", "ClientPosVersion" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,8 +75,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SceneEntityMoveScNotify(SceneEntityMoveScNotify other) : this() {
       entityId_ = other.entityId_;
-      entryId_ = other.entryId_;
       motion_ = other.motion_ != null ? other.motion_.Clone() : null;
+      entryId_ = other.entryId_;
       clientPosVersion_ = other.clientPosVersion_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -88,7 +88,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "entity_id" field.</summary>
-    public const int EntityIdFieldNumber = 15;
+    public const int EntityIdFieldNumber = 3;
     private uint entityId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -99,20 +99,8 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "entry_id" field.</summary>
-    public const int EntryIdFieldNumber = 13;
-    private uint entryId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint EntryId {
-      get { return entryId_; }
-      set {
-        entryId_ = value;
-      }
-    }
-
     /// <summary>Field number for the "motion" field.</summary>
-    public const int MotionFieldNumber = 12;
+    public const int MotionFieldNumber = 4;
     private global::EggLink.DanhengServer.Proto.MotionInfo motion_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -123,8 +111,20 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
+    /// <summary>Field number for the "entry_id" field.</summary>
+    public const int EntryIdFieldNumber = 14;
+    private uint entryId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint EntryId {
+      get { return entryId_; }
+      set {
+        entryId_ = value;
+      }
+    }
+
     /// <summary>Field number for the "client_pos_version" field.</summary>
-    public const int ClientPosVersionFieldNumber = 8;
+    public const int ClientPosVersionFieldNumber = 5;
     private uint clientPosVersion_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -151,8 +151,8 @@ namespace EggLink.DanhengServer.Proto {
         return true;
       }
       if (EntityId != other.EntityId) return false;
-      if (EntryId != other.EntryId) return false;
       if (!object.Equals(Motion, other.Motion)) return false;
+      if (EntryId != other.EntryId) return false;
       if (ClientPosVersion != other.ClientPosVersion) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -162,8 +162,8 @@ namespace EggLink.DanhengServer.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (EntityId != 0) hash ^= EntityId.GetHashCode();
-      if (EntryId != 0) hash ^= EntryId.GetHashCode();
       if (motion_ != null) hash ^= Motion.GetHashCode();
+      if (EntryId != 0) hash ^= EntryId.GetHashCode();
       if (ClientPosVersion != 0) hash ^= ClientPosVersion.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -183,21 +183,21 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ClientPosVersion != 0) {
-        output.WriteRawTag(64);
-        output.WriteUInt32(ClientPosVersion);
+      if (EntityId != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(EntityId);
       }
       if (motion_ != null) {
-        output.WriteRawTag(98);
+        output.WriteRawTag(34);
         output.WriteMessage(Motion);
       }
-      if (EntryId != 0) {
-        output.WriteRawTag(104);
-        output.WriteUInt32(EntryId);
+      if (ClientPosVersion != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(ClientPosVersion);
       }
-      if (EntityId != 0) {
-        output.WriteRawTag(120);
-        output.WriteUInt32(EntityId);
+      if (EntryId != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(EntryId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -209,21 +209,21 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ClientPosVersion != 0) {
-        output.WriteRawTag(64);
-        output.WriteUInt32(ClientPosVersion);
+      if (EntityId != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(EntityId);
       }
       if (motion_ != null) {
-        output.WriteRawTag(98);
+        output.WriteRawTag(34);
         output.WriteMessage(Motion);
       }
-      if (EntryId != 0) {
-        output.WriteRawTag(104);
-        output.WriteUInt32(EntryId);
+      if (ClientPosVersion != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(ClientPosVersion);
       }
-      if (EntityId != 0) {
-        output.WriteRawTag(120);
-        output.WriteUInt32(EntityId);
+      if (EntryId != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(EntryId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -238,11 +238,11 @@ namespace EggLink.DanhengServer.Proto {
       if (EntityId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EntityId);
       }
-      if (EntryId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EntryId);
-      }
       if (motion_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Motion);
+      }
+      if (EntryId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EntryId);
       }
       if (ClientPosVersion != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ClientPosVersion);
@@ -262,14 +262,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other.EntityId != 0) {
         EntityId = other.EntityId;
       }
-      if (other.EntryId != 0) {
-        EntryId = other.EntryId;
-      }
       if (other.motion_ != null) {
         if (motion_ == null) {
           Motion = new global::EggLink.DanhengServer.Proto.MotionInfo();
         }
         Motion.MergeFrom(other.Motion);
+      }
+      if (other.EntryId != 0) {
+        EntryId = other.EntryId;
       }
       if (other.ClientPosVersion != 0) {
         ClientPosVersion = other.ClientPosVersion;
@@ -289,23 +289,23 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 64: {
-            ClientPosVersion = input.ReadUInt32();
+          case 24: {
+            EntityId = input.ReadUInt32();
             break;
           }
-          case 98: {
+          case 34: {
             if (motion_ == null) {
               Motion = new global::EggLink.DanhengServer.Proto.MotionInfo();
             }
             input.ReadMessage(Motion);
             break;
           }
-          case 104: {
-            EntryId = input.ReadUInt32();
+          case 40: {
+            ClientPosVersion = input.ReadUInt32();
             break;
           }
-          case 120: {
-            EntityId = input.ReadUInt32();
+          case 112: {
+            EntryId = input.ReadUInt32();
             break;
           }
         }
@@ -323,23 +323,23 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 64: {
-            ClientPosVersion = input.ReadUInt32();
+          case 24: {
+            EntityId = input.ReadUInt32();
             break;
           }
-          case 98: {
+          case 34: {
             if (motion_ == null) {
               Motion = new global::EggLink.DanhengServer.Proto.MotionInfo();
             }
             input.ReadMessage(Motion);
             break;
           }
-          case 104: {
-            EntryId = input.ReadUInt32();
+          case 40: {
+            ClientPosVersion = input.ReadUInt32();
             break;
           }
-          case 120: {
-            EntityId = input.ReadUInt32();
+          case 112: {
+            EntryId = input.ReadUInt32();
             break;
           }
         }

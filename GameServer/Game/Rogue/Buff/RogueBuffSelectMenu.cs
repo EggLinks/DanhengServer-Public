@@ -34,10 +34,10 @@ namespace EggLink.DanhengServer.Game.Rogue.Buff
             {
                 if (buff.RogueBuffType == rogue.RogueBuffType)
                 {
-                    list.Add(buff, (int)(20 / buff.RogueBuffRarity * 2.5));
+                    list.Add(buff, (int)(20 / (int)buff.RogueBuffCategory * 2.5));
                 } else
                 {
-                    list.Add(buff, (int)(20 / buff.RogueBuffRarity * 0.7));
+                    list.Add(buff, (int)(20 / (int)buff.RogueBuffCategory * 0.7));
                 }
             }
             var result = new List<RogueBuffExcel>();

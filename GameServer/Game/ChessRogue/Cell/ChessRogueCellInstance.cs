@@ -1,6 +1,8 @@
 ﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Data.Config;
 using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
+using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
 using System;
@@ -13,40 +15,46 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Cell
 {
     public class ChessRogueCellInstance
     {
-        public int CellType { get; set; }
-        public int Column { get; set; }
-        public int Row { get; set; }
+        public RogueDLCBlockTypeEnum CellType { get; set; }
+        public int PosY { get; set; }
+        public int PosX { get; set; }
+        public int CellId { get; set; }
         public int RoomId { get; set; }
         public int Layer { get; set; } = 1;
         public int MapId { get; set; }
         public ChessRogueInstance Instance { get; set; }
         public ChessRogueBoardCellStatus CellStatus { get; set; } = ChessRogueBoardCellStatus.Idle;
         public ChessRogueRoomConfig? RoomConfig { get; set; }
-        public ChessRogueCellConfig? CellConfig { get; set; }
         public int SelectMonsterId { get; set; }
 
         public List<int> SelectedDecayId { get; set; } = [];
 
         public List<ChessRogueCellAdvanceInfo> CellAdvanceInfo { get; set; } = [];
         
-        public ChessRogueCellInstance(ChessRogueInstance instance)
+        public ChessRogueCellInstance(ChessRogueInstance instance, RogueChestGridItem item)
         {
             Instance = instance;
             Layer = instance.Layers.IndexOf(instance.CurLayer) + 1;
+            var list = new RandomList<RogueDLCBlockTypeEnum>();
+            list.Add(RogueDLCBlockTypeEnum.MonsterNormal, 8);
+            list.Add(RogueDLCBlockTypeEnum.Reward, 4);
+            list.Add(RogueDLCBlockTypeEnum.Event, 6);
+            list.Add(RogueDLCBlockTypeEnum.NousSpecialEvent, 4);
+            list.Add(RogueDLCBlockTypeEnum.NousEvent, 2);
 
-            var list = new RandomList<int>();
-            list.Add(3, 8);
-            list.Add(7, 4);
-            list.Add(8, 6);
-            list.Add(17, 4);
-            list.Add(16, 2);
-
-            CellType = list.GetRandom();
+            if (item.BlockTypeList.Count > 0)
+            {
+                CellType = item.BlockTypeList.RandomElement();
+            }
+            else
+            {
+                CellType = list.GetRandom();
+            }
         }
 
         public void Init()
         {
-            if (CellType == 11)
+            if (CellType == RogueDLCBlockTypeEnum.MonsterBoss)
             {
                 // boss
                 if (Layer == 1)
@@ -96,7 +104,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Cell
                     });
                 }
             }
-            else if (CellType == 15)
+            else if (CellType == RogueDLCBlockTypeEnum.MonsterNousBoss || CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
             {
                 // last boss
                 CellAdvanceInfo.Add(new ChessRogueCellAdvanceInfo()
@@ -138,60 +146,38 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Cell
             return null;
         }
 
-        public int GetCellId() => Column * 100 + Row;
+        public int GetCellId() => CellId;
 
         public int GetEntryId()
         {
-            List<int> mapList = [];
-            foreach (var cell in GameData.ChessRogueCellGenData)
+            if (RoomConfig == null)
             {
-                var cellType = int.Parse(cell.Key.ToString().Substring(3, 2));
-                if (cellType != CellType) continue;
-
-                var mapId = int.Parse(cell.Key.ToString()[..3]);
-                mapList.SafeAdd(mapId);
-            }
-
-            MapId = mapList.RandomElement();
-            RoomConfig = GameData.ChessRogueRoomGenData[MapId];
-
-            var randomList = new List<int>();
-            foreach (var key in GameData.ChessRogueCellGenData.Keys)
-            {
-                if (key.ToString().StartsWith($"{MapId * 100 + CellType}"))
+                var pool = GameData.ChessRogueRoomData[CellType].FindAll(x => x.EntranceId == Instance.LayerMap).ToList();
+                RoomConfig = pool.RandomElement();
+                if (Instance.FirstEnterBattle && CellType == RogueDLCBlockTypeEnum.MonsterNormal)
                 {
-                    randomList.Add(key);
+                    do
+                    {
+                        RoomConfig = pool.RandomElement();
+                    } while (RoomConfig.SubMonsterGroup.Count == 0);  // make sure the room has sub monster
+                    Instance.FirstEnterBattle = false;
                 }
+                RoomId = RoomConfig.RoomPrefix * 10000 + (int) CellType * 100 + Random.Shared.Next(1, 10);  // find a better way to generate room id
             }
-
-            RoomId = randomList.RandomElement();
-            CellConfig = GameData.ChessRogueCellGenData[RoomId];
-
             return RoomConfig.EntranceId;
         }
 
         public int GetRow()
         {
-            if (Column == 0 || Column == 4 || Column == 2)
-            {
-                return Row * 2;
-            }
-            else if (Column == 1 || Column == 3)
-            {
-                return Row * 2 + 1;
-            }
-            return Row;
+            return PosX;
         }
 
         public List<int> GetLoadGroupList()
         {
             var groupList = new List<int>();
-            if (RoomConfig!.CellGroup.TryGetValue(CellType, out ChessRogueRoom? value))
-            {
-                groupList.AddRange(value.Groups);
-            }
-            groupList.AddRange(CellConfig?.Groups ?? []);
-            groupList.AddRange(RoomConfig.Groups);
+            groupList.AddRange(RoomConfig!.DefaultLoadBasicGroup);
+            groupList.AddRange(RoomConfig.DefaultLoadGroup);
+            groupList.AddRange(RoomConfig.SubMonsterGroup);
 
             return groupList;
         }
@@ -201,18 +187,18 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Cell
             var info = new ChessRogueCell()
             {
                 CellStatus = CellStatus,
-                Column = (uint)Column,
+                PosY = (uint)PosY,
                 Id = (uint)GetCellId(),
                 CellType = (uint)CellType,
-                IsValid = true,
+                IsUnlock = true,
                 RoomId = (uint)RoomId,
-                KJMDBCKGFAM = true,
-                Row = (uint)GetRow(),
+                MGEHIHCCHHO = true,
+                PosX = (uint)GetRow(),
             };
 
             if (CellAdvanceInfo.Count > 0)
             {
-                info.AdvanceInfo = new()
+                info.PlayerInfo = new()
                 {
                     BossInfo = new()
                     {
@@ -223,7 +209,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Cell
 
                 if (SelectedDecayId.Count > 0)
                 {
-                    info.AdvanceInfo.SelectBossInfo = new()
+                    info.PlayerInfo.SelectBossInfo = new()
                     {
                         SelectDecayId = { SelectedDecayId.Select(x => (uint)x).ToList() }
                     };

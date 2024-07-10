@@ -18,16 +18,18 @@ namespace EggLink.DanhengServer.Game.Mission.FinishType.Handler
 
         public override void HandleFinishType(PlayerInstance player, SubMissionInfo info, object? arg)
         {
-            if (arg != null && arg is int i)
+            var finishCount = 0;
+            foreach (var raidId in info.ParamIntList ?? [])
             {
-                foreach (var raidId in info.ParamIntList ?? [])
+                if (player.RaidManager!.GetRaidStatus(raidId) == Proto.RaidStatus.Finish)
                 {
-                    if (raidId == i)
-                    {
-                        player.MissionManager!.FinishSubMission(info.ID);
-                        break;
-                    }
+                    finishCount++;
                 }
+            }
+
+            if (finishCount >= info.Progress)
+            {
+                player.MissionManager!.FinishSubMission(info.ID);
             }
         }
     }

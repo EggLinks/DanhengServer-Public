@@ -59,7 +59,7 @@ namespace EggLink.DanhengServer.Server
 
         public static Connection? GetActiveConnection(int uid)
         {
-            var con = Connections.Values.FirstOrDefault(c => c.Player?.Uid == uid && c.State == SessionState.ACTIVE);
+            var con = Connections.Values.FirstOrDefault(c => c.Player?.Uid == uid && c.State == SessionStateEnum.ACTIVE);
             return con;
         }
 

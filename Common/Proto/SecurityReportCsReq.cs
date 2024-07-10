@@ -24,13 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static SecurityReportCsReqReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChlTZWN1cml0eVJlcG9ydENzUmVxLnByb3RvIjEKE1NlY3VyaXR5UmVwb3J0",
-            "Q3NSZXESGgoScmVwb3J0X2luZm9ybWF0aW9uGAEgASgJQh6qAhtFZ2dMaW5r",
-            "LkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "ChlTZWN1cml0eVJlcG9ydENzUmVxLnByb3RvIioKE1NlY3VyaXR5UmVwb3J0",
+            "Q3NSZXESEwoLSkxFRk1JSUJBTkYYASABKAlCHqoCG0VnZ0xpbmsuRGFuaGVu",
+            "Z1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SecurityReportCsReq), global::EggLink.DanhengServer.Proto.SecurityReportCsReq.Parser, new[]{ "ReportInformation" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SecurityReportCsReq), global::EggLink.DanhengServer.Proto.SecurityReportCsReq.Parser, new[]{ "JLEFMIIBANF" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,7 +72,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SecurityReportCsReq(SecurityReportCsReq other) : this() {
-      reportInformation_ = other.reportInformation_;
+      jLEFMIIBANF_ = other.jLEFMIIBANF_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -82,15 +82,15 @@ namespace EggLink.DanhengServer.Proto {
       return new SecurityReportCsReq(this);
     }
 
-    /// <summary>Field number for the "report_information" field.</summary>
-    public const int ReportInformationFieldNumber = 1;
-    private string reportInformation_ = "";
+    /// <summary>Field number for the "JLEFMIIBANF" field.</summary>
+    public const int JLEFMIIBANFFieldNumber = 1;
+    private string jLEFMIIBANF_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string ReportInformation {
-      get { return reportInformation_; }
+    public string JLEFMIIBANF {
+      get { return jLEFMIIBANF_; }
       set {
-        reportInformation_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        jLEFMIIBANF_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -109,7 +109,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ReportInformation != other.ReportInformation) return false;
+      if (JLEFMIIBANF != other.JLEFMIIBANF) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -117,7 +117,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (ReportInformation.Length != 0) hash ^= ReportInformation.GetHashCode();
+      if (JLEFMIIBANF.Length != 0) hash ^= JLEFMIIBANF.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ReportInformation.Length != 0) {
+      if (JLEFMIIBANF.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(ReportInformation);
+        output.WriteString(JLEFMIIBANF);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -150,9 +150,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ReportInformation.Length != 0) {
+      if (JLEFMIIBANF.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(ReportInformation);
+        output.WriteString(JLEFMIIBANF);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -164,8 +164,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (ReportInformation.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ReportInformation);
+      if (JLEFMIIBANF.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(JLEFMIIBANF);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -179,8 +179,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.ReportInformation.Length != 0) {
-        ReportInformation = other.ReportInformation;
+      if (other.JLEFMIIBANF.Length != 0) {
+        JLEFMIIBANF = other.JLEFMIIBANF;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -198,7 +198,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            ReportInformation = input.ReadString();
+            JLEFMIIBANF = input.ReadString();
             break;
           }
         }
@@ -217,7 +217,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            ReportInformation = input.ReadString();
+            JLEFMIIBANF = input.ReadString();
             break;
           }
         }

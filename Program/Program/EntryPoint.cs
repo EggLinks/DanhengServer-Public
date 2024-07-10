@@ -13,6 +13,7 @@ using EggLink.DanhengServer.Command;
 using EggLink.DanhengServer.Server.Packet;
 using EggLink.DanhengServer.GameServer.Command;
 using EggLink.DanhengServer.WebServer.Server;
+using EggLink.DanhengServer.Enums;
 
 namespace EggLink.DanhengServer.Program
 {
@@ -139,6 +140,40 @@ namespace EggLink.DanhengServer.Program
             };
 
             MuipManager.OnExecuteCommand += CommandManager.HandleCommand;
+            MuipManager.OnGetServerInformation += x =>
+            {
+                foreach (var con in Listener.Connections.Values)
+                {
+                    if (con.Player != null)
+                    {
+                        x.Add(con.Player.Uid, con.Player.Data);
+                    }
+                }
+            };
+            MuipManager.OnGetPlayerStatus += (int uid, out PlayerStatusEnum status) =>
+            {
+                foreach (var con in Listener.Connections.Values)
+                {
+                    if (con.Player != null && con.Player.Uid == uid)
+                    {
+                        if (con.Player.RogueManager?.GetRogueInstance() != null)
+                        {
+                            status = PlayerStatusEnum.Rogue;
+                        }
+                        else if (con.Player.ChallengeManager?.ChallengeInstance != null)
+                        {
+                            status = PlayerStatusEnum.Challenge;
+                        }
+                        else
+                        {
+                            status = PlayerStatusEnum.Explore;
+                        }
+                        return;
+                    }
+                }
+
+                status = PlayerStatusEnum.Offline;
+            };
 
             // generate the handbook
             HandbookGenerator.Generate();

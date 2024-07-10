@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using EggLink.DanhengServer.Game.Rogue;
 using EggLink.DanhengServer.Util;
+using EggLink.DanhengServer.Enums.Rogue;
+using EggLink.DanhengServer.Data.Excel;
 
 namespace EggLink.DanhengServer.Game.ChessRogue.Cell
 {
@@ -29,6 +31,10 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Cell
                     continue;
                 }
                 if (instance.CurCell!.GetLoadGroupList().Contains(group.Id))
+                {
+                    LoadGroup(group);
+                }
+                else if (group.Category == GroupCategoryEnum.Normal)
                 {
                     LoadGroup(group);
                 }
@@ -89,20 +95,33 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Cell
             var room = instance.CurCell;
             if (room == null) return null;
             int monsterId;
-
+            RogueMonsterExcel? rogueMonster;
             if (room.SelectMonsterId > 0)
             {
                 monsterId = room.SelectMonsterId;
+
+                GameData.RogueMonsterData.TryGetValue(monsterId * 10 + 1, out rogueMonster);
+                if (rogueMonster == null) return null;
             }
             else
             {
-                GameData.ChessRogueContentGenData.TryGetValue(group.Id, out var content);
-                if (content == null) return null;
-                monsterId = content.RandomElement();
-            }
+                List<MonsterRankEnum> allowedRank = [];
+                if (room.CellType == RogueDLCBlockTypeEnum.MonsterElite)
+                {
+                    allowedRank.Add(MonsterRankEnum.Elite);
+                } else
+                {
+                    allowedRank.Add(MonsterRankEnum.Minion);
+                    allowedRank.Add(MonsterRankEnum.MinionLv2);
+                }
 
-            GameData.RogueMonsterData.TryGetValue(monsterId * 10 + 1, out var rogueMonster);
-            if (rogueMonster == null) return null;
+                NPCMonsterDataExcel? data;
+                do
+                {
+                    rogueMonster = GameData.RogueMonsterData.Values.ToList().RandomElement();
+                    GameData.NpcMonsterDataData.TryGetValue(rogueMonster.NpcMonsterID, out data);
+                } while (data == null || !allowedRank.Contains(data.Rank));
+            }
 
             GameData.NpcMonsterDataData.TryGetValue(rogueMonster.NpcMonsterID, out var excel);
             if (excel == null) return null;
@@ -132,10 +151,10 @@ namespace EggLink.DanhengServer.Game.ChessRogue.Cell
             {
                 prop.SetState(PropStateEnum.CustomState02);
                 prop.IsChessRogue = true;
-                if (instance.CurCell!.CellType == 11 || instance.CurCell.CellType == 15)
+                if (instance.CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterBoss || instance.CurCell.CellType == RogueDLCBlockTypeEnum.MonsterNousBoss || instance.CurCell.CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
                 {
                     prop.SetState(PropStateEnum.CustomState04);
-                    if (instance.CurCell!.CellType == 11)
+                    if (instance.CurCell!.CellType != RogueDLCBlockTypeEnum.MonsterBoss)
                     {
                         prop.IsLastRoom = true;
                     }

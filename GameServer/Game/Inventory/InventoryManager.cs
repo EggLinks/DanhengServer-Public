@@ -1,5 +1,6 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Database;
+using EggLink.DanhengServer.Database.Avatar;
 using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.Enums.Item;
 using EggLink.DanhengServer.Game.Player;
@@ -140,8 +141,8 @@ namespace EggLink.DanhengServer.Game.Inventory
                     }
                     else
                     {
-                        Player.AddAvatar(itemId, sync);
-                        AddItem(itemId + 200000, 1);
+                        Player.AddAvatar(itemId, sync, notify);
+                        AddItem(itemId + 200000, 1, false);
                     }
                     break;
                 default:
@@ -215,17 +216,44 @@ namespace EggLink.DanhengServer.Game.Inventory
             return item;
         }
 
-        public void RemoveItem(int itemId, int count, int uniqueId = 0)
+        public List<ItemData> RemoveItems(List<(int itemId, int count, int uniqueId)> items, bool sync = true)
+        {
+            List<ItemData> removedItems = new List<ItemData>();
+            foreach (var item in items)
+            {
+                var removedItem = RemoveItem(item.itemId, item.count, item.uniqueId, sync: false);
+                if (removedItem != null)
+                {
+                    removedItems.Add(removedItem);
+                }
+            }
+            if (sync && removedItems.Count > 0)
+            {
+                Player.SendPacket(new PacketPlayerSyncScNotify(removedItems));
+            }
+            DatabaseHelper.Instance?.UpdateInstance(Data);
+            return removedItems;
+        }
+
+        public ItemData? RemoveItem(int itemId, int count, int uniqueId = 0, bool sync = true)
         {
             GameData.ItemConfigData.TryGetValue(itemId, out var itemConfig);
-            if (itemConfig == null) return;
+            if (itemConfig == null)
+            {
+                return null;
+            }
+
             ItemData? itemData = null;
+
             switch (itemConfig.ItemMainType)
             {
                 case ItemMainTypeEnum.Material:
                 case ItemMainTypeEnum.Mission:
                     var item = Data.MaterialItems.Find(x => x.ItemId == itemId);
-                    if (item == null) return;
+                    if (item == null)
+                    {
+                        return null;
+                    }
                     item.Count -= count;
                     if (item.Count <= 0)
                     {
@@ -239,32 +267,53 @@ namespace EggLink.DanhengServer.Game.Inventory
                     {
                         case 1:
                             Player.Data.Hcoin -= count;
+                            itemData = new ItemData { ItemId = itemId, Count = count };
                             break;
                         case 2:
                             Player.Data.Scoin -= count;
+                            itemData = new ItemData { ItemId = itemId, Count = count };
                             break;
                         case 3:
                             Player.Data.Mcoin -= count;
+                            itemData = new ItemData { ItemId = itemId, Count = count };
                             break;
                         case 32:
                             Player.Data.TalentPoints -= count;
+                            itemData = new ItemData { ItemId = itemId, Count = count };
                             break;
                     }
-                    Player.SendPacket(new PacketPlayerSyncScNotify(Player.ToProto()));
+                    if (sync && itemData != null)
+                    {
+                        Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
+                    }
                     break;
                 case ItemMainTypeEnum.Equipment:
                     var equipment = Data.EquipmentItems.Find(x => x.UniqueId == uniqueId);
-                    if (equipment == null) return;
+                    if (equipment == null)
+                    {
+                        return null;
+                    }
                     Data.EquipmentItems.Remove(equipment);
                     equipment.Count = 0;
                     itemData = equipment;
                     break;
+                case ItemMainTypeEnum.Relic:
+                    var relic = Data.RelicItems.Find(x => x.UniqueId == uniqueId);
+                    if (relic == null)
+                    {
+                        return null;
+                    }
+                    Data.RelicItems.Remove(relic);
+                    relic.Count = 0;
+                    itemData = relic;
+                    break;
             }
-            if (itemData != null)
+            if (itemData != null && sync)
             {
                 Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
             }
             DatabaseHelper.Instance?.UpdateInstance(Data);
+            return itemData;
         }
 
         public ItemData? GetItem(int itemId)
@@ -429,52 +478,55 @@ namespace EggLink.DanhengServer.Game.Inventory
 
         public List<ItemData> SellItem(ItemCostData costData)
         {
-            List<ItemData> items = [];
-            Dictionary<int, int> ItemMap = [];
+            List<ItemData> items = new List<ItemData>();
+            Dictionary<int, int> itemMap = new Dictionary<int, int>();
+            List<(int itemId, int count, int uniqueId)> removeItems = new List<(int itemId, int count, int uniqueId)>();
+
             foreach (var cost in costData.ItemList)
             {
                 if (cost.EquipmentUniqueId != 0)  // equipment
                 {
                     var itemData = Data.EquipmentItems.Find(x => x.UniqueId == cost.EquipmentUniqueId);
                     if (itemData == null) continue;
-                    RemoveItem(itemData.ItemId, 1, (int)cost.EquipmentUniqueId);
+                    removeItems.Add((itemData.ItemId, 1, (int)cost.EquipmentUniqueId));
                     GameData.ItemConfigData.TryGetValue(itemData.ItemId, out var itemConfig);
                     if (itemConfig == null) continue;
                     foreach (var returnItem in itemConfig.ReturnItemIDList)  // return items
                     {
-                        if (!ItemMap.ContainsKey(returnItem.ItemID))
+                        if (!itemMap.ContainsKey(returnItem.ItemID))
                         {
-                            ItemMap[returnItem.ItemID] = 0;
+                            itemMap[returnItem.ItemID] = 0;
                         }
-                        ItemMap[returnItem.ItemID] += returnItem.ItemNum;
+                        itemMap[returnItem.ItemID] += returnItem.ItemNum;
                     }
                 }
                 else if (cost.RelicUniqueId != 0)  // relic
                 {
                     var itemData = Data.RelicItems.Find(x => x.UniqueId == cost.RelicUniqueId);
                     if (itemData == null) continue;
-                    RemoveItem(itemData.ItemId, 1, (int)cost.RelicUniqueId);
+                    removeItems.Add((itemData.ItemId, 1, (int)cost.RelicUniqueId));
                     GameData.ItemConfigData.TryGetValue(itemData.ItemId, out var itemConfig);
                     if (itemConfig == null) continue;
                     foreach (var returnItem in itemConfig.ReturnItemIDList)  // return items
                     {
-                        if (!ItemMap.ContainsKey(returnItem.ItemID))
+                        if (!itemMap.ContainsKey(returnItem.ItemID))
                         {
-                            ItemMap[returnItem.ItemID] = 0;
+                            itemMap[returnItem.ItemID] = 0;
                         }
-                        ItemMap[returnItem.ItemID] += returnItem.ItemNum;
+                        itemMap[returnItem.ItemID] += returnItem.ItemNum;
                     }
                 }
                 else
                 {
-                    RemoveItem((int)cost.PileItem.ItemId, (int)cost.PileItem.ItemNum);
+                    removeItems.Add(((int)cost.PileItem.ItemId, (int)cost.PileItem.ItemNum, 0));
                 }
             }
 
-            foreach (var itemInfo in ItemMap)
+            var removedItems = RemoveItems(removeItems);
+
+            foreach (var itemInfo in itemMap)
             {
                 var item = AddItem(itemInfo.Key, itemInfo.Value, false);
-
                 if (item != null)
                 {
                     items.Add(item);
@@ -758,6 +810,55 @@ namespace EggLink.DanhengServer.Game.Inventory
             return list;
         }
 
+        public Boolean promoteAvatar(int avatarId) {
+            // Get avatar
+            AvatarInfo avatarData = Player.AvatarManager!.GetAvatar(avatarId)!;
+            if (avatarData == null || avatarData.Excel == null || avatarData.Promotion >= avatarData.Excel.MaxPromotion) return false;
+            
+            // Get promotion data
+            Data.Excel.AvatarPromotionConfigExcel promotion = GameData.AvatarPromotionConfigData.Values.FirstOrDefault(x => x.AvatarID == avatarId && x.Promotion == avatarData.Promotion)!;
+
+            // Sanity check
+            if ((promotion == null) || avatarData.Level < promotion.MaxLevel || Player.Data.Level < promotion.PlayerLevelRequire || Player.Data.WorldLevel < promotion.WorldLevelRequire) {
+                return false;
+            }
+
+            // Pay items
+            foreach (var cost in promotion.PromotionCostList) {
+                Player.InventoryManager!.RemoveItem(cost.ItemID, cost.ItemNum);
+            }
+
+            // Promote
+            avatarData.Promotion = avatarData.Promotion + 1;
+
+            // Send packets
+            Player.SendPacket(new PacketPlayerSyncScNotify(avatarData));
+            return true;
+        }
+        public bool PromoteEquipment(int equipmentUniqueId)
+        {
+            var equipmentData = Player.InventoryManager!.Data.EquipmentItems.FirstOrDefault(x => x.UniqueId == equipmentUniqueId);
+            if (equipmentData == null || equipmentData.Promotion >= GameData.EquipmentConfigData[equipmentData.ItemId].MaxPromotion) return false;
+
+            var promotionConfig = GameData.EquipmentPromotionConfigData.Values
+                .FirstOrDefault(x => x.EquipmentID == equipmentData.ItemId && x.Promotion == equipmentData.Promotion);
+
+            if (promotionConfig == null || equipmentData.Level < promotionConfig.MaxLevel || Player.Data.WorldLevel < promotionConfig.WorldLevelRequire)
+            {
+                return false;
+            }
+
+            foreach (var cost in promotionConfig.PromotionCostList)
+            {
+                Player.InventoryManager!.RemoveItem(cost.ItemID, cost.ItemNum);
+            }
+
+            equipmentData.Promotion++;
+            DatabaseHelper.Instance!.UpdateInstance(Player.InventoryManager.Data);
+            Player.SendPacket(new PacketPlayerSyncScNotify(equipmentData));
+
+            return true;
+        }
         public List<ItemData> LevelUpRelic(int uniqueId, ItemCostData costData)
         {
             var relicItem = Data.RelicItems.Find(x => x.UniqueId == uniqueId);

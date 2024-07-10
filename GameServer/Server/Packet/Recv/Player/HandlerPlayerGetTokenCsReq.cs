@@ -32,7 +32,7 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Player
                 prev.Stop();
             }
 
-            connection.State = SessionState.WAITING_FOR_LOGIN;
+            connection.State = SessionStateEnum.WAITING_FOR_LOGIN;
             var pd = DatabaseHelper.Instance?.GetInstance<PlayerData>(int.Parse(req.AccountUid));
             if (pd == null)
                 connection.Player = new PlayerInstance(int.Parse(req.AccountUid));

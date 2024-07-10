@@ -7,6 +7,7 @@ using EggLink.DanhengServer.Enums;
 using EggLink.DanhengServer.Enums.Item;
 using EggLink.DanhengServer.Game.Player;
 using EggLink.DanhengServer.Proto;
+using EggLink.DanhengServer.Server.Packet.Send.Player;
 using System.Numerics;
 
 namespace EggLink.DanhengServer.Game.Gacha
@@ -141,6 +142,7 @@ namespace EggLink.DanhengServer.Game.Gacha
                 items.Add(item);
             }
             var gachaItems = new List<GachaItem>();
+            var syncItems = new List<ItemData>();
             // get rarity of item
             foreach (var item in items)
             {
@@ -228,7 +230,12 @@ namespace EggLink.DanhengServer.Game.Gacha
                 {
                     dirt += 20;
                 }
-                Player.InventoryManager?.AddItem(item, 1, false);
+                var i = Player.InventoryManager?.AddItem(item, 1, false, sync: false, returnRaw: true);
+                if (i != null)
+                {
+                    syncItems.Add(i);
+                }
+
                 gachaItem.GachaItem_ = new()
                 {
                     ItemId = (uint)item,
@@ -240,7 +247,19 @@ namespace EggLink.DanhengServer.Game.Gacha
                 var tokenItem = new ItemList();
                 if (dirt > 0)
                 {
-                    Player.InventoryManager?.AddItem(251, dirt, false);
+                    var it = Player.InventoryManager?.AddItem(251, dirt, false, sync: false, returnRaw: true);
+                    if (it != null)
+                    {
+                        var oldItem = syncItems.Find(x => x.ItemId == 251);
+                        if (oldItem == null)
+                        {
+                            syncItems.Add(it);
+                        }
+                        else
+                        {
+                            oldItem.Count = it.Count;
+                        }
+                    }
                     tokenItem.ItemList_.Add(new Item()
                     {
                         ItemId = 251,
@@ -250,7 +269,19 @@ namespace EggLink.DanhengServer.Game.Gacha
 
                 if (star > 0)
                 {
-                    Player.InventoryManager?.AddItem(252, star, false);
+                    var it = Player.InventoryManager?.AddItem(252, star, false, sync: false, returnRaw: true);
+                    if (it != null)
+                    {
+                        var oldItem = syncItems.Find(x => x.ItemId == 252);
+                        if (oldItem == null)
+                        {
+                            syncItems.Add(it);
+                        }
+                        else
+                        {
+                            oldItem.Count = it.Count;
+                        }
+                    }
                     tokenItem.ItemList_.Add(new Item()
                     {
                         ItemId = 252,
@@ -261,24 +292,26 @@ namespace EggLink.DanhengServer.Game.Gacha
 
                 gachaItems.Add(gachaItem);
             }
+            Player.SendPacket(new PacketPlayerSyncScNotify(syncItems));
             var proto = new DoGachaScRsp()
             {
                 GachaId = (uint)bannerId,
                 GachaNum = (uint)times,
             };
             proto.GachaItemList.AddRange(gachaItems);
-            DatabaseHelper.Instance?.UpdateInstance(GachaData);
-            DatabaseHelper.Instance?.UpdateInstance(Player.InventoryManager!.Data);
 
             return proto;
         }
 
         public GetGachaInfoScRsp ToProto()
         {
-            var proto = new GetGachaInfoScRsp();
+            var proto = new GetGachaInfoScRsp()
+            {
+                GachaRandom = (uint)Random.Shared.Next(1000, 1999),
+            };
             foreach (var banner in GameData.BannersConfig.Banners)
             {
-                proto.GachaInfoList.Add(banner.ToInfo(GetGoldAvatars(), GetPurpleAvatars(), GetPurpleWeapons(), GetGoldWeapons()));
+                proto.GachaInfoList.Add(banner.ToInfo(GetGoldAvatars()));
             }
             return proto;
         }

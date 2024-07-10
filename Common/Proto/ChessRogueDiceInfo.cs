@@ -24,25 +24,25 @@ namespace EggLink.DanhengServer.Proto {
     static ChessRogueDiceInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChhDaGVzc1JvZ3VlRGljZUluZm8ucHJvdG8aGkNoZXNzUm9ndWVEaWNlU3Rh",
-            "dHVzLnByb3RvGhRDaGVzc1JvZ3VlRGljZS5wcm90bxoRQ0ZHSUxIQ0tFQ0ku",
-            "cHJvdG8aGENoZXNzUm9ndWVEaWNlVHlwZS5wcm90bxoRREFORUVITUtES04u",
-            "cHJvdG8i0AMKEkNoZXNzUm9ndWVEaWNlSW5mbxImCglkaWNlX3R5cGUYByAB",
-            "KA4yEy5DaGVzc1JvZ3VlRGljZVR5cGUSEQoJYnJhbmNoX2lkGAsgASgNEioK",
-            "C2RpY2Vfc3RhdHVzGAEgASgOMhUuQ2hlc3NSb2d1ZURpY2VTdGF0dXMSEwoL",
-            "UE5BQU9BRkZDTUYYDCABKA0SDwoHaXNfZG9uZRgKIAEoCBIiCgtQTEJNS09B",
-            "SktQThikCCABKAsyDC5EQU5FRUhNS0RLThIeCgRkaWNlGMMMIAEoCzIPLkNo",
-            "ZXNzUm9ndWVEaWNlEhQKDHJlcm9sbF90aW1lcxgFIAEoDRIZChFjdXJfc3Vy",
-            "ZmFjZV9pbmRleBgCIAEoDRITCgtjaGVhdF90aW1lcxgJIAEoDRISCgpkaXNw",
-            "bGF5X2lkGAQgASgNEhQKC0NHRENMR0dGTUpLGP8IIAMoDRIWCg5jdXJfc3Vy",
-            "ZmFjZV9pZBgNIAEoDRIhCgtHTENBQUdLRFBFRRhRIAEoCzIMLkNGR0lMSENL",
-            "RUNJEhEKCGlzX3ZhbGlkGLsCIAEoCBIVCg1jdXJfYnJhbmNoX2lkGAggASgN",
-            "EhQKC0dDT01OTkxJQ0VMGLwFIAEoBUIeqgIbRWdnTGluay5EYW5oZW5nU2Vy",
-            "dmVyLlByb3RvYgZwcm90bzM="));
+            "ChhDaGVzc1JvZ3VlRGljZUluZm8ucHJvdG8aGENoZXNzUm9ndWVEaWNlVHlw",
+            "ZS5wcm90bxoUQ2hlc3NSb2d1ZURpY2UucHJvdG8aGkNoZXNzUm9ndWVEaWNl",
+            "U3RhdHVzLnByb3RvGhFLRUdQQUlFSkJHRS5wcm90bxoRTE5PUE1QUEFCS0ou",
+            "cHJvdG8i3QMKEkNoZXNzUm9ndWVEaWNlSW5mbxIUCgxyZXJvbGxfdGltZXMY",
+            "BiABKA0SEwoLT1BJSUJGRUpGSEQYDSABKAgSEwoLTk5MR0ZHRktHQkUYDCAB",
+            "KA0SIgoLSVBGQ0xCQ05HQUEY6QogASgLMgwuTE5PUE1QUEFCS0oSHgoEZGlj",
+            "ZRjmCyABKAsyDy5DaGVzc1JvZ3VlRGljZRIZChFjdXJfc3VyZmFjZV9pbmRl",
+            "eBgJIAEoDRIYCg9jYW5fcmVyb2xsX2RpY2UY+AMgASgIEhYKDmN1cl9zdXJm",
+            "YWNlX2lkGAMgASgNEhMKC2NoZWF0X3RpbWVzGA4gASgNEhQKC0FLTUVFREJC",
+            "RE5JGIwNIAMoDRIRCglicmFuY2hfaWQYCCABKA0SIgoLQkRNQklESEZLSkYY",
+            "ywYgASgLMgwuS0VHUEFJRUpCR0USJgoJZGljZV90eXBlGAEgASgOMhMuQ2hl",
+            "c3NSb2d1ZURpY2VUeXBlEhQKC09KSkhLREFLQkdQGNYDIAEoBRITCgtGTEZB",
+            "R0RGR1BNQxgFIAEoDRIqCgtkaWNlX3N0YXR1cxgLIAEoDjIVLkNoZXNzUm9n",
+            "dWVEaWNlU3RhdHVzEhUKDWN1cl9icmFuY2hfaWQYCiABKA1CHqoCG0VnZ0xp",
+            "bmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChessRogueDiceStatusReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRogueDiceReflection.Descriptor, global::EggLink.DanhengServer.Proto.CFGILHCKECIReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRogueDiceTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.DANEEHMKDKNReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChessRogueDiceTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRogueDiceReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRogueDiceStatusReflection.Descriptor, global::EggLink.DanhengServer.Proto.KEGPAIEJBGEReflection.Descriptor, global::EggLink.DanhengServer.Proto.LNOPMPPABKJReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueDiceInfo), global::EggLink.DanhengServer.Proto.ChessRogueDiceInfo.Parser, new[]{ "DiceType", "BranchId", "DiceStatus", "PNAAOAFFCMF", "IsDone", "PLBMKOAJKPN", "Dice", "RerollTimes", "CurSurfaceIndex", "CheatTimes", "DisplayId", "CGDCLGGFMJK", "CurSurfaceId", "GLCAAGKDPEE", "IsValid", "CurBranchId", "GCOMNNLICEL" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueDiceInfo), global::EggLink.DanhengServer.Proto.ChessRogueDiceInfo.Parser, new[]{ "RerollTimes", "OPIIBFEJFHD", "NNLGFGFKGBE", "IPFCLBCNGAA", "Dice", "CurSurfaceIndex", "CanRerollDice", "CurSurfaceId", "CheatTimes", "AKMEEDBBDNI", "BranchId", "BDMBIDHFKJF", "DiceType", "OJJHKDAKBGP", "FLFAGDFGPMC", "DiceStatus", "CurBranchId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -84,23 +84,23 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ChessRogueDiceInfo(ChessRogueDiceInfo other) : this() {
-      diceType_ = other.diceType_;
-      branchId_ = other.branchId_;
-      diceStatus_ = other.diceStatus_;
-      pNAAOAFFCMF_ = other.pNAAOAFFCMF_;
-      isDone_ = other.isDone_;
-      pLBMKOAJKPN_ = other.pLBMKOAJKPN_ != null ? other.pLBMKOAJKPN_.Clone() : null;
-      dice_ = other.dice_ != null ? other.dice_.Clone() : null;
       rerollTimes_ = other.rerollTimes_;
+      oPIIBFEJFHD_ = other.oPIIBFEJFHD_;
+      nNLGFGFKGBE_ = other.nNLGFGFKGBE_;
+      iPFCLBCNGAA_ = other.iPFCLBCNGAA_ != null ? other.iPFCLBCNGAA_.Clone() : null;
+      dice_ = other.dice_ != null ? other.dice_.Clone() : null;
       curSurfaceIndex_ = other.curSurfaceIndex_;
-      cheatTimes_ = other.cheatTimes_;
-      displayId_ = other.displayId_;
-      cGDCLGGFMJK_ = other.cGDCLGGFMJK_.Clone();
+      canRerollDice_ = other.canRerollDice_;
       curSurfaceId_ = other.curSurfaceId_;
-      gLCAAGKDPEE_ = other.gLCAAGKDPEE_ != null ? other.gLCAAGKDPEE_.Clone() : null;
-      isValid_ = other.isValid_;
+      cheatTimes_ = other.cheatTimes_;
+      aKMEEDBBDNI_ = other.aKMEEDBBDNI_.Clone();
+      branchId_ = other.branchId_;
+      bDMBIDHFKJF_ = other.bDMBIDHFKJF_ != null ? other.bDMBIDHFKJF_.Clone() : null;
+      diceType_ = other.diceType_;
+      oJJHKDAKBGP_ = other.oJJHKDAKBGP_;
+      fLFAGDFGPMC_ = other.fLFAGDFGPMC_;
+      diceStatus_ = other.diceStatus_;
       curBranchId_ = other.curBranchId_;
-      gCOMNNLICEL_ = other.gCOMNNLICEL_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -110,92 +110,8 @@ namespace EggLink.DanhengServer.Proto {
       return new ChessRogueDiceInfo(this);
     }
 
-    /// <summary>Field number for the "dice_type" field.</summary>
-    public const int DiceTypeFieldNumber = 7;
-    private global::EggLink.DanhengServer.Proto.ChessRogueDiceType diceType_ = global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.ChessRogueDiceType DiceType {
-      get { return diceType_; }
-      set {
-        diceType_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "branch_id" field.</summary>
-    public const int BranchIdFieldNumber = 11;
-    private uint branchId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint BranchId {
-      get { return branchId_; }
-      set {
-        branchId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "dice_status" field.</summary>
-    public const int DiceStatusFieldNumber = 1;
-    private global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus diceStatus_ = global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus DiceStatus {
-      get { return diceStatus_; }
-      set {
-        diceStatus_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "PNAAOAFFCMF" field.</summary>
-    public const int PNAAOAFFCMFFieldNumber = 12;
-    private uint pNAAOAFFCMF_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint PNAAOAFFCMF {
-      get { return pNAAOAFFCMF_; }
-      set {
-        pNAAOAFFCMF_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "is_done" field.</summary>
-    public const int IsDoneFieldNumber = 10;
-    private bool isDone_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsDone {
-      get { return isDone_; }
-      set {
-        isDone_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "PLBMKOAJKPN" field.</summary>
-    public const int PLBMKOAJKPNFieldNumber = 1060;
-    private global::EggLink.DanhengServer.Proto.DANEEHMKDKN pLBMKOAJKPN_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.DANEEHMKDKN PLBMKOAJKPN {
-      get { return pLBMKOAJKPN_; }
-      set {
-        pLBMKOAJKPN_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "dice" field.</summary>
-    public const int DiceFieldNumber = 1603;
-    private global::EggLink.DanhengServer.Proto.ChessRogueDice dice_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.ChessRogueDice Dice {
-      get { return dice_; }
-      set {
-        dice_ = value;
-      }
-    }
-
     /// <summary>Field number for the "reroll_times" field.</summary>
-    public const int RerollTimesFieldNumber = 5;
+    public const int RerollTimesFieldNumber = 6;
     private uint rerollTimes_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -206,8 +122,56 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
+    /// <summary>Field number for the "OPIIBFEJFHD" field.</summary>
+    public const int OPIIBFEJFHDFieldNumber = 13;
+    private bool oPIIBFEJFHD_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool OPIIBFEJFHD {
+      get { return oPIIBFEJFHD_; }
+      set {
+        oPIIBFEJFHD_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "NNLGFGFKGBE" field.</summary>
+    public const int NNLGFGFKGBEFieldNumber = 12;
+    private uint nNLGFGFKGBE_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint NNLGFGFKGBE {
+      get { return nNLGFGFKGBE_; }
+      set {
+        nNLGFGFKGBE_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "IPFCLBCNGAA" field.</summary>
+    public const int IPFCLBCNGAAFieldNumber = 1385;
+    private global::EggLink.DanhengServer.Proto.LNOPMPPABKJ iPFCLBCNGAA_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.LNOPMPPABKJ IPFCLBCNGAA {
+      get { return iPFCLBCNGAA_; }
+      set {
+        iPFCLBCNGAA_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dice" field.</summary>
+    public const int DiceFieldNumber = 1510;
+    private global::EggLink.DanhengServer.Proto.ChessRogueDice dice_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.ChessRogueDice Dice {
+      get { return dice_; }
+      set {
+        dice_ = value;
+      }
+    }
+
     /// <summary>Field number for the "cur_surface_index" field.</summary>
-    public const int CurSurfaceIndexFieldNumber = 2;
+    public const int CurSurfaceIndexFieldNumber = 9;
     private uint curSurfaceIndex_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -218,43 +182,20 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "cheat_times" field.</summary>
-    public const int CheatTimesFieldNumber = 9;
-    private uint cheatTimes_;
+    /// <summary>Field number for the "can_reroll_dice" field.</summary>
+    public const int CanRerollDiceFieldNumber = 504;
+    private bool canRerollDice_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CheatTimes {
-      get { return cheatTimes_; }
+    public bool CanRerollDice {
+      get { return canRerollDice_; }
       set {
-        cheatTimes_ = value;
+        canRerollDice_ = value;
       }
-    }
-
-    /// <summary>Field number for the "display_id" field.</summary>
-    public const int DisplayIdFieldNumber = 4;
-    private uint displayId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint DisplayId {
-      get { return displayId_; }
-      set {
-        displayId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "CGDCLGGFMJK" field.</summary>
-    public const int CGDCLGGFMJKFieldNumber = 1151;
-    private static readonly pb::FieldCodec<uint> _repeated_cGDCLGGFMJK_codec
-        = pb::FieldCodec.ForUInt32(9210);
-    private readonly pbc::RepeatedField<uint> cGDCLGGFMJK_ = new pbc::RepeatedField<uint>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<uint> CGDCLGGFMJK {
-      get { return cGDCLGGFMJK_; }
     }
 
     /// <summary>Field number for the "cur_surface_id" field.</summary>
-    public const int CurSurfaceIdFieldNumber = 13;
+    public const int CurSurfaceIdFieldNumber = 3;
     private uint curSurfaceId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -265,32 +206,103 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "GLCAAGKDPEE" field.</summary>
-    public const int GLCAAGKDPEEFieldNumber = 81;
-    private global::EggLink.DanhengServer.Proto.CFGILHCKECI gLCAAGKDPEE_;
+    /// <summary>Field number for the "cheat_times" field.</summary>
+    public const int CheatTimesFieldNumber = 14;
+    private uint cheatTimes_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.CFGILHCKECI GLCAAGKDPEE {
-      get { return gLCAAGKDPEE_; }
+    public uint CheatTimes {
+      get { return cheatTimes_; }
       set {
-        gLCAAGKDPEE_ = value;
+        cheatTimes_ = value;
       }
     }
 
-    /// <summary>Field number for the "is_valid" field.</summary>
-    public const int IsValidFieldNumber = 315;
-    private bool isValid_;
+    /// <summary>Field number for the "AKMEEDBBDNI" field.</summary>
+    public const int AKMEEDBBDNIFieldNumber = 1676;
+    private static readonly pb::FieldCodec<uint> _repeated_aKMEEDBBDNI_codec
+        = pb::FieldCodec.ForUInt32(13410);
+    private readonly pbc::RepeatedField<uint> aKMEEDBBDNI_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsValid {
-      get { return isValid_; }
+    public pbc::RepeatedField<uint> AKMEEDBBDNI {
+      get { return aKMEEDBBDNI_; }
+    }
+
+    /// <summary>Field number for the "branch_id" field.</summary>
+    public const int BranchIdFieldNumber = 8;
+    private uint branchId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint BranchId {
+      get { return branchId_; }
       set {
-        isValid_ = value;
+        branchId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "BDMBIDHFKJF" field.</summary>
+    public const int BDMBIDHFKJFFieldNumber = 843;
+    private global::EggLink.DanhengServer.Proto.KEGPAIEJBGE bDMBIDHFKJF_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.KEGPAIEJBGE BDMBIDHFKJF {
+      get { return bDMBIDHFKJF_; }
+      set {
+        bDMBIDHFKJF_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dice_type" field.</summary>
+    public const int DiceTypeFieldNumber = 1;
+    private global::EggLink.DanhengServer.Proto.ChessRogueDiceType diceType_ = global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.ChessRogueDiceType DiceType {
+      get { return diceType_; }
+      set {
+        diceType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "OJJHKDAKBGP" field.</summary>
+    public const int OJJHKDAKBGPFieldNumber = 470;
+    private int oJJHKDAKBGP_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int OJJHKDAKBGP {
+      get { return oJJHKDAKBGP_; }
+      set {
+        oJJHKDAKBGP_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "FLFAGDFGPMC" field.</summary>
+    public const int FLFAGDFGPMCFieldNumber = 5;
+    private uint fLFAGDFGPMC_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint FLFAGDFGPMC {
+      get { return fLFAGDFGPMC_; }
+      set {
+        fLFAGDFGPMC_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dice_status" field.</summary>
+    public const int DiceStatusFieldNumber = 11;
+    private global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus diceStatus_ = global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus DiceStatus {
+      get { return diceStatus_; }
+      set {
+        diceStatus_ = value;
       }
     }
 
     /// <summary>Field number for the "cur_branch_id" field.</summary>
-    public const int CurBranchIdFieldNumber = 8;
+    public const int CurBranchIdFieldNumber = 10;
     private uint curBranchId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -298,18 +310,6 @@ namespace EggLink.DanhengServer.Proto {
       get { return curBranchId_; }
       set {
         curBranchId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "GCOMNNLICEL" field.</summary>
-    public const int GCOMNNLICELFieldNumber = 700;
-    private int gCOMNNLICEL_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int GCOMNNLICEL {
-      get { return gCOMNNLICEL_; }
-      set {
-        gCOMNNLICEL_ = value;
       }
     }
 
@@ -328,23 +328,23 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (DiceType != other.DiceType) return false;
-      if (BranchId != other.BranchId) return false;
-      if (DiceStatus != other.DiceStatus) return false;
-      if (PNAAOAFFCMF != other.PNAAOAFFCMF) return false;
-      if (IsDone != other.IsDone) return false;
-      if (!object.Equals(PLBMKOAJKPN, other.PLBMKOAJKPN)) return false;
-      if (!object.Equals(Dice, other.Dice)) return false;
       if (RerollTimes != other.RerollTimes) return false;
+      if (OPIIBFEJFHD != other.OPIIBFEJFHD) return false;
+      if (NNLGFGFKGBE != other.NNLGFGFKGBE) return false;
+      if (!object.Equals(IPFCLBCNGAA, other.IPFCLBCNGAA)) return false;
+      if (!object.Equals(Dice, other.Dice)) return false;
       if (CurSurfaceIndex != other.CurSurfaceIndex) return false;
-      if (CheatTimes != other.CheatTimes) return false;
-      if (DisplayId != other.DisplayId) return false;
-      if(!cGDCLGGFMJK_.Equals(other.cGDCLGGFMJK_)) return false;
+      if (CanRerollDice != other.CanRerollDice) return false;
       if (CurSurfaceId != other.CurSurfaceId) return false;
-      if (!object.Equals(GLCAAGKDPEE, other.GLCAAGKDPEE)) return false;
-      if (IsValid != other.IsValid) return false;
+      if (CheatTimes != other.CheatTimes) return false;
+      if(!aKMEEDBBDNI_.Equals(other.aKMEEDBBDNI_)) return false;
+      if (BranchId != other.BranchId) return false;
+      if (!object.Equals(BDMBIDHFKJF, other.BDMBIDHFKJF)) return false;
+      if (DiceType != other.DiceType) return false;
+      if (OJJHKDAKBGP != other.OJJHKDAKBGP) return false;
+      if (FLFAGDFGPMC != other.FLFAGDFGPMC) return false;
+      if (DiceStatus != other.DiceStatus) return false;
       if (CurBranchId != other.CurBranchId) return false;
-      if (GCOMNNLICEL != other.GCOMNNLICEL) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -352,23 +352,23 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (DiceType != global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed) hash ^= DiceType.GetHashCode();
-      if (BranchId != 0) hash ^= BranchId.GetHashCode();
-      if (DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) hash ^= DiceStatus.GetHashCode();
-      if (PNAAOAFFCMF != 0) hash ^= PNAAOAFFCMF.GetHashCode();
-      if (IsDone != false) hash ^= IsDone.GetHashCode();
-      if (pLBMKOAJKPN_ != null) hash ^= PLBMKOAJKPN.GetHashCode();
-      if (dice_ != null) hash ^= Dice.GetHashCode();
       if (RerollTimes != 0) hash ^= RerollTimes.GetHashCode();
+      if (OPIIBFEJFHD != false) hash ^= OPIIBFEJFHD.GetHashCode();
+      if (NNLGFGFKGBE != 0) hash ^= NNLGFGFKGBE.GetHashCode();
+      if (iPFCLBCNGAA_ != null) hash ^= IPFCLBCNGAA.GetHashCode();
+      if (dice_ != null) hash ^= Dice.GetHashCode();
       if (CurSurfaceIndex != 0) hash ^= CurSurfaceIndex.GetHashCode();
-      if (CheatTimes != 0) hash ^= CheatTimes.GetHashCode();
-      if (DisplayId != 0) hash ^= DisplayId.GetHashCode();
-      hash ^= cGDCLGGFMJK_.GetHashCode();
+      if (CanRerollDice != false) hash ^= CanRerollDice.GetHashCode();
       if (CurSurfaceId != 0) hash ^= CurSurfaceId.GetHashCode();
-      if (gLCAAGKDPEE_ != null) hash ^= GLCAAGKDPEE.GetHashCode();
-      if (IsValid != false) hash ^= IsValid.GetHashCode();
+      if (CheatTimes != 0) hash ^= CheatTimes.GetHashCode();
+      hash ^= aKMEEDBBDNI_.GetHashCode();
+      if (BranchId != 0) hash ^= BranchId.GetHashCode();
+      if (bDMBIDHFKJF_ != null) hash ^= BDMBIDHFKJF.GetHashCode();
+      if (DiceType != global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed) hash ^= DiceType.GetHashCode();
+      if (OJJHKDAKBGP != 0) hash ^= OJJHKDAKBGP.GetHashCode();
+      if (FLFAGDFGPMC != 0) hash ^= FLFAGDFGPMC.GetHashCode();
+      if (DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) hash ^= DiceStatus.GetHashCode();
       if (CurBranchId != 0) hash ^= CurBranchId.GetHashCode();
-      if (GCOMNNLICEL != 0) hash ^= GCOMNNLICEL.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -387,71 +387,71 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) DiceStatus);
-      }
-      if (CurSurfaceIndex != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(CurSurfaceIndex);
-      }
-      if (DisplayId != 0) {
-        output.WriteRawTag(32);
-        output.WriteUInt32(DisplayId);
-      }
-      if (RerollTimes != 0) {
-        output.WriteRawTag(40);
-        output.WriteUInt32(RerollTimes);
-      }
       if (DiceType != global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed) {
-        output.WriteRawTag(56);
+        output.WriteRawTag(8);
         output.WriteEnum((int) DiceType);
       }
-      if (CurBranchId != 0) {
-        output.WriteRawTag(64);
-        output.WriteUInt32(CurBranchId);
-      }
-      if (CheatTimes != 0) {
-        output.WriteRawTag(72);
-        output.WriteUInt32(CheatTimes);
-      }
-      if (IsDone != false) {
-        output.WriteRawTag(80);
-        output.WriteBool(IsDone);
-      }
-      if (BranchId != 0) {
-        output.WriteRawTag(88);
-        output.WriteUInt32(BranchId);
-      }
-      if (PNAAOAFFCMF != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(PNAAOAFFCMF);
-      }
       if (CurSurfaceId != 0) {
-        output.WriteRawTag(104);
+        output.WriteRawTag(24);
         output.WriteUInt32(CurSurfaceId);
       }
-      if (gLCAAGKDPEE_ != null) {
-        output.WriteRawTag(138, 5);
-        output.WriteMessage(GLCAAGKDPEE);
+      if (FLFAGDFGPMC != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(FLFAGDFGPMC);
       }
-      if (IsValid != false) {
-        output.WriteRawTag(216, 19);
-        output.WriteBool(IsValid);
+      if (RerollTimes != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(RerollTimes);
       }
-      if (GCOMNNLICEL != 0) {
-        output.WriteRawTag(224, 43);
-        output.WriteInt32(GCOMNNLICEL);
+      if (BranchId != 0) {
+        output.WriteRawTag(64);
+        output.WriteUInt32(BranchId);
       }
-      if (pLBMKOAJKPN_ != null) {
-        output.WriteRawTag(162, 66);
-        output.WriteMessage(PLBMKOAJKPN);
+      if (CurSurfaceIndex != 0) {
+        output.WriteRawTag(72);
+        output.WriteUInt32(CurSurfaceIndex);
       }
-      cGDCLGGFMJK_.WriteTo(output, _repeated_cGDCLGGFMJK_codec);
+      if (CurBranchId != 0) {
+        output.WriteRawTag(80);
+        output.WriteUInt32(CurBranchId);
+      }
+      if (DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) {
+        output.WriteRawTag(88);
+        output.WriteEnum((int) DiceStatus);
+      }
+      if (NNLGFGFKGBE != 0) {
+        output.WriteRawTag(96);
+        output.WriteUInt32(NNLGFGFKGBE);
+      }
+      if (OPIIBFEJFHD != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(OPIIBFEJFHD);
+      }
+      if (CheatTimes != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(CheatTimes);
+      }
+      if (OJJHKDAKBGP != 0) {
+        output.WriteRawTag(176, 29);
+        output.WriteInt32(OJJHKDAKBGP);
+      }
+      if (CanRerollDice != false) {
+        output.WriteRawTag(192, 31);
+        output.WriteBool(CanRerollDice);
+      }
+      if (bDMBIDHFKJF_ != null) {
+        output.WriteRawTag(218, 52);
+        output.WriteMessage(BDMBIDHFKJF);
+      }
+      if (iPFCLBCNGAA_ != null) {
+        output.WriteRawTag(202, 86);
+        output.WriteMessage(IPFCLBCNGAA);
+      }
       if (dice_ != null) {
-        output.WriteRawTag(154, 100);
+        output.WriteRawTag(178, 94);
         output.WriteMessage(Dice);
       }
+      aKMEEDBBDNI_.WriteTo(output, _repeated_aKMEEDBBDNI_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -462,71 +462,71 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) DiceStatus);
-      }
-      if (CurSurfaceIndex != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(CurSurfaceIndex);
-      }
-      if (DisplayId != 0) {
-        output.WriteRawTag(32);
-        output.WriteUInt32(DisplayId);
-      }
-      if (RerollTimes != 0) {
-        output.WriteRawTag(40);
-        output.WriteUInt32(RerollTimes);
-      }
       if (DiceType != global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed) {
-        output.WriteRawTag(56);
+        output.WriteRawTag(8);
         output.WriteEnum((int) DiceType);
       }
-      if (CurBranchId != 0) {
-        output.WriteRawTag(64);
-        output.WriteUInt32(CurBranchId);
-      }
-      if (CheatTimes != 0) {
-        output.WriteRawTag(72);
-        output.WriteUInt32(CheatTimes);
-      }
-      if (IsDone != false) {
-        output.WriteRawTag(80);
-        output.WriteBool(IsDone);
-      }
-      if (BranchId != 0) {
-        output.WriteRawTag(88);
-        output.WriteUInt32(BranchId);
-      }
-      if (PNAAOAFFCMF != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(PNAAOAFFCMF);
-      }
       if (CurSurfaceId != 0) {
-        output.WriteRawTag(104);
+        output.WriteRawTag(24);
         output.WriteUInt32(CurSurfaceId);
       }
-      if (gLCAAGKDPEE_ != null) {
-        output.WriteRawTag(138, 5);
-        output.WriteMessage(GLCAAGKDPEE);
+      if (FLFAGDFGPMC != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(FLFAGDFGPMC);
       }
-      if (IsValid != false) {
-        output.WriteRawTag(216, 19);
-        output.WriteBool(IsValid);
+      if (RerollTimes != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(RerollTimes);
       }
-      if (GCOMNNLICEL != 0) {
-        output.WriteRawTag(224, 43);
-        output.WriteInt32(GCOMNNLICEL);
+      if (BranchId != 0) {
+        output.WriteRawTag(64);
+        output.WriteUInt32(BranchId);
       }
-      if (pLBMKOAJKPN_ != null) {
-        output.WriteRawTag(162, 66);
-        output.WriteMessage(PLBMKOAJKPN);
+      if (CurSurfaceIndex != 0) {
+        output.WriteRawTag(72);
+        output.WriteUInt32(CurSurfaceIndex);
       }
-      cGDCLGGFMJK_.WriteTo(ref output, _repeated_cGDCLGGFMJK_codec);
+      if (CurBranchId != 0) {
+        output.WriteRawTag(80);
+        output.WriteUInt32(CurBranchId);
+      }
+      if (DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) {
+        output.WriteRawTag(88);
+        output.WriteEnum((int) DiceStatus);
+      }
+      if (NNLGFGFKGBE != 0) {
+        output.WriteRawTag(96);
+        output.WriteUInt32(NNLGFGFKGBE);
+      }
+      if (OPIIBFEJFHD != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(OPIIBFEJFHD);
+      }
+      if (CheatTimes != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(CheatTimes);
+      }
+      if (OJJHKDAKBGP != 0) {
+        output.WriteRawTag(176, 29);
+        output.WriteInt32(OJJHKDAKBGP);
+      }
+      if (CanRerollDice != false) {
+        output.WriteRawTag(192, 31);
+        output.WriteBool(CanRerollDice);
+      }
+      if (bDMBIDHFKJF_ != null) {
+        output.WriteRawTag(218, 52);
+        output.WriteMessage(BDMBIDHFKJF);
+      }
+      if (iPFCLBCNGAA_ != null) {
+        output.WriteRawTag(202, 86);
+        output.WriteMessage(IPFCLBCNGAA);
+      }
       if (dice_ != null) {
-        output.WriteRawTag(154, 100);
+        output.WriteRawTag(178, 94);
         output.WriteMessage(Dice);
       }
+      aKMEEDBBDNI_.WriteTo(ref output, _repeated_aKMEEDBBDNI_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -537,54 +537,54 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (DiceType != global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) DiceType);
+      if (RerollTimes != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RerollTimes);
       }
-      if (BranchId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BranchId);
-      }
-      if (DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) DiceStatus);
-      }
-      if (PNAAOAFFCMF != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PNAAOAFFCMF);
-      }
-      if (IsDone != false) {
+      if (OPIIBFEJFHD != false) {
         size += 1 + 1;
       }
-      if (pLBMKOAJKPN_ != null) {
-        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PLBMKOAJKPN);
+      if (NNLGFGFKGBE != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(NNLGFGFKGBE);
+      }
+      if (iPFCLBCNGAA_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(IPFCLBCNGAA);
       }
       if (dice_ != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(Dice);
       }
-      if (RerollTimes != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RerollTimes);
-      }
       if (CurSurfaceIndex != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurSurfaceIndex);
+      }
+      if (CanRerollDice != false) {
+        size += 2 + 1;
+      }
+      if (CurSurfaceId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurSurfaceId);
       }
       if (CheatTimes != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CheatTimes);
       }
-      if (DisplayId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DisplayId);
+      size += aKMEEDBBDNI_.CalculateSize(_repeated_aKMEEDBBDNI_codec);
+      if (BranchId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BranchId);
       }
-      size += cGDCLGGFMJK_.CalculateSize(_repeated_cGDCLGGFMJK_codec);
-      if (CurSurfaceId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurSurfaceId);
+      if (bDMBIDHFKJF_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(BDMBIDHFKJF);
       }
-      if (gLCAAGKDPEE_ != null) {
-        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GLCAAGKDPEE);
+      if (DiceType != global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) DiceType);
       }
-      if (IsValid != false) {
-        size += 2 + 1;
+      if (OJJHKDAKBGP != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(OJJHKDAKBGP);
+      }
+      if (FLFAGDFGPMC != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(FLFAGDFGPMC);
+      }
+      if (DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) DiceStatus);
       }
       if (CurBranchId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurBranchId);
-      }
-      if (GCOMNNLICEL != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeInt32Size(GCOMNNLICEL);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -598,26 +598,20 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.DiceType != global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed) {
-        DiceType = other.DiceType;
+      if (other.RerollTimes != 0) {
+        RerollTimes = other.RerollTimes;
       }
-      if (other.BranchId != 0) {
-        BranchId = other.BranchId;
+      if (other.OPIIBFEJFHD != false) {
+        OPIIBFEJFHD = other.OPIIBFEJFHD;
       }
-      if (other.DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) {
-        DiceStatus = other.DiceStatus;
+      if (other.NNLGFGFKGBE != 0) {
+        NNLGFGFKGBE = other.NNLGFGFKGBE;
       }
-      if (other.PNAAOAFFCMF != 0) {
-        PNAAOAFFCMF = other.PNAAOAFFCMF;
-      }
-      if (other.IsDone != false) {
-        IsDone = other.IsDone;
-      }
-      if (other.pLBMKOAJKPN_ != null) {
-        if (pLBMKOAJKPN_ == null) {
-          PLBMKOAJKPN = new global::EggLink.DanhengServer.Proto.DANEEHMKDKN();
+      if (other.iPFCLBCNGAA_ != null) {
+        if (iPFCLBCNGAA_ == null) {
+          IPFCLBCNGAA = new global::EggLink.DanhengServer.Proto.LNOPMPPABKJ();
         }
-        PLBMKOAJKPN.MergeFrom(other.PLBMKOAJKPN);
+        IPFCLBCNGAA.MergeFrom(other.IPFCLBCNGAA);
       }
       if (other.dice_ != null) {
         if (dice_ == null) {
@@ -625,36 +619,42 @@ namespace EggLink.DanhengServer.Proto {
         }
         Dice.MergeFrom(other.Dice);
       }
-      if (other.RerollTimes != 0) {
-        RerollTimes = other.RerollTimes;
-      }
       if (other.CurSurfaceIndex != 0) {
         CurSurfaceIndex = other.CurSurfaceIndex;
+      }
+      if (other.CanRerollDice != false) {
+        CanRerollDice = other.CanRerollDice;
+      }
+      if (other.CurSurfaceId != 0) {
+        CurSurfaceId = other.CurSurfaceId;
       }
       if (other.CheatTimes != 0) {
         CheatTimes = other.CheatTimes;
       }
-      if (other.DisplayId != 0) {
-        DisplayId = other.DisplayId;
+      aKMEEDBBDNI_.Add(other.aKMEEDBBDNI_);
+      if (other.BranchId != 0) {
+        BranchId = other.BranchId;
       }
-      cGDCLGGFMJK_.Add(other.cGDCLGGFMJK_);
-      if (other.CurSurfaceId != 0) {
-        CurSurfaceId = other.CurSurfaceId;
-      }
-      if (other.gLCAAGKDPEE_ != null) {
-        if (gLCAAGKDPEE_ == null) {
-          GLCAAGKDPEE = new global::EggLink.DanhengServer.Proto.CFGILHCKECI();
+      if (other.bDMBIDHFKJF_ != null) {
+        if (bDMBIDHFKJF_ == null) {
+          BDMBIDHFKJF = new global::EggLink.DanhengServer.Proto.KEGPAIEJBGE();
         }
-        GLCAAGKDPEE.MergeFrom(other.GLCAAGKDPEE);
+        BDMBIDHFKJF.MergeFrom(other.BDMBIDHFKJF);
       }
-      if (other.IsValid != false) {
-        IsValid = other.IsValid;
+      if (other.DiceType != global::EggLink.DanhengServer.Proto.ChessRogueDiceType.ChessRogueDiceFixed) {
+        DiceType = other.DiceType;
+      }
+      if (other.OJJHKDAKBGP != 0) {
+        OJJHKDAKBGP = other.OJJHKDAKBGP;
+      }
+      if (other.FLFAGDFGPMC != 0) {
+        FLFAGDFGPMC = other.FLFAGDFGPMC;
+      }
+      if (other.DiceStatus != global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus.ChessRogueDiceIdle) {
+        DiceStatus = other.DiceStatus;
       }
       if (other.CurBranchId != 0) {
         CurBranchId = other.CurBranchId;
-      }
-      if (other.GCOMNNLICEL != 0) {
-        GCOMNNLICEL = other.GCOMNNLICEL;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -672,81 +672,81 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            DiceStatus = (global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus) input.ReadEnum();
-            break;
-          }
-          case 16: {
-            CurSurfaceIndex = input.ReadUInt32();
-            break;
-          }
-          case 32: {
-            DisplayId = input.ReadUInt32();
-            break;
-          }
-          case 40: {
-            RerollTimes = input.ReadUInt32();
-            break;
-          }
-          case 56: {
             DiceType = (global::EggLink.DanhengServer.Proto.ChessRogueDiceType) input.ReadEnum();
             break;
           }
-          case 64: {
-            CurBranchId = input.ReadUInt32();
-            break;
-          }
-          case 72: {
-            CheatTimes = input.ReadUInt32();
-            break;
-          }
-          case 80: {
-            IsDone = input.ReadBool();
-            break;
-          }
-          case 88: {
-            BranchId = input.ReadUInt32();
-            break;
-          }
-          case 96: {
-            PNAAOAFFCMF = input.ReadUInt32();
-            break;
-          }
-          case 104: {
+          case 24: {
             CurSurfaceId = input.ReadUInt32();
             break;
           }
-          case 650: {
-            if (gLCAAGKDPEE_ == null) {
-              GLCAAGKDPEE = new global::EggLink.DanhengServer.Proto.CFGILHCKECI();
+          case 40: {
+            FLFAGDFGPMC = input.ReadUInt32();
+            break;
+          }
+          case 48: {
+            RerollTimes = input.ReadUInt32();
+            break;
+          }
+          case 64: {
+            BranchId = input.ReadUInt32();
+            break;
+          }
+          case 72: {
+            CurSurfaceIndex = input.ReadUInt32();
+            break;
+          }
+          case 80: {
+            CurBranchId = input.ReadUInt32();
+            break;
+          }
+          case 88: {
+            DiceStatus = (global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus) input.ReadEnum();
+            break;
+          }
+          case 96: {
+            NNLGFGFKGBE = input.ReadUInt32();
+            break;
+          }
+          case 104: {
+            OPIIBFEJFHD = input.ReadBool();
+            break;
+          }
+          case 112: {
+            CheatTimes = input.ReadUInt32();
+            break;
+          }
+          case 3760: {
+            OJJHKDAKBGP = input.ReadInt32();
+            break;
+          }
+          case 4032: {
+            CanRerollDice = input.ReadBool();
+            break;
+          }
+          case 6746: {
+            if (bDMBIDHFKJF_ == null) {
+              BDMBIDHFKJF = new global::EggLink.DanhengServer.Proto.KEGPAIEJBGE();
             }
-            input.ReadMessage(GLCAAGKDPEE);
+            input.ReadMessage(BDMBIDHFKJF);
             break;
           }
-          case 2520: {
-            IsValid = input.ReadBool();
-            break;
-          }
-          case 5600: {
-            GCOMNNLICEL = input.ReadInt32();
-            break;
-          }
-          case 8482: {
-            if (pLBMKOAJKPN_ == null) {
-              PLBMKOAJKPN = new global::EggLink.DanhengServer.Proto.DANEEHMKDKN();
+          case 11082: {
+            if (iPFCLBCNGAA_ == null) {
+              IPFCLBCNGAA = new global::EggLink.DanhengServer.Proto.LNOPMPPABKJ();
             }
-            input.ReadMessage(PLBMKOAJKPN);
+            input.ReadMessage(IPFCLBCNGAA);
             break;
           }
-          case 9210:
-          case 9208: {
-            cGDCLGGFMJK_.AddEntriesFrom(input, _repeated_cGDCLGGFMJK_codec);
-            break;
-          }
-          case 12826: {
+          case 12082: {
             if (dice_ == null) {
               Dice = new global::EggLink.DanhengServer.Proto.ChessRogueDice();
             }
             input.ReadMessage(Dice);
+            break;
+          }
+          case 13410:
+          case 13408: {
+            aKMEEDBBDNI_.AddEntriesFrom(input, _repeated_aKMEEDBBDNI_codec);
             break;
           }
         }
@@ -765,81 +765,81 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            DiceStatus = (global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus) input.ReadEnum();
-            break;
-          }
-          case 16: {
-            CurSurfaceIndex = input.ReadUInt32();
-            break;
-          }
-          case 32: {
-            DisplayId = input.ReadUInt32();
-            break;
-          }
-          case 40: {
-            RerollTimes = input.ReadUInt32();
-            break;
-          }
-          case 56: {
             DiceType = (global::EggLink.DanhengServer.Proto.ChessRogueDiceType) input.ReadEnum();
             break;
           }
-          case 64: {
-            CurBranchId = input.ReadUInt32();
-            break;
-          }
-          case 72: {
-            CheatTimes = input.ReadUInt32();
-            break;
-          }
-          case 80: {
-            IsDone = input.ReadBool();
-            break;
-          }
-          case 88: {
-            BranchId = input.ReadUInt32();
-            break;
-          }
-          case 96: {
-            PNAAOAFFCMF = input.ReadUInt32();
-            break;
-          }
-          case 104: {
+          case 24: {
             CurSurfaceId = input.ReadUInt32();
             break;
           }
-          case 650: {
-            if (gLCAAGKDPEE_ == null) {
-              GLCAAGKDPEE = new global::EggLink.DanhengServer.Proto.CFGILHCKECI();
+          case 40: {
+            FLFAGDFGPMC = input.ReadUInt32();
+            break;
+          }
+          case 48: {
+            RerollTimes = input.ReadUInt32();
+            break;
+          }
+          case 64: {
+            BranchId = input.ReadUInt32();
+            break;
+          }
+          case 72: {
+            CurSurfaceIndex = input.ReadUInt32();
+            break;
+          }
+          case 80: {
+            CurBranchId = input.ReadUInt32();
+            break;
+          }
+          case 88: {
+            DiceStatus = (global::EggLink.DanhengServer.Proto.ChessRogueDiceStatus) input.ReadEnum();
+            break;
+          }
+          case 96: {
+            NNLGFGFKGBE = input.ReadUInt32();
+            break;
+          }
+          case 104: {
+            OPIIBFEJFHD = input.ReadBool();
+            break;
+          }
+          case 112: {
+            CheatTimes = input.ReadUInt32();
+            break;
+          }
+          case 3760: {
+            OJJHKDAKBGP = input.ReadInt32();
+            break;
+          }
+          case 4032: {
+            CanRerollDice = input.ReadBool();
+            break;
+          }
+          case 6746: {
+            if (bDMBIDHFKJF_ == null) {
+              BDMBIDHFKJF = new global::EggLink.DanhengServer.Proto.KEGPAIEJBGE();
             }
-            input.ReadMessage(GLCAAGKDPEE);
+            input.ReadMessage(BDMBIDHFKJF);
             break;
           }
-          case 2520: {
-            IsValid = input.ReadBool();
-            break;
-          }
-          case 5600: {
-            GCOMNNLICEL = input.ReadInt32();
-            break;
-          }
-          case 8482: {
-            if (pLBMKOAJKPN_ == null) {
-              PLBMKOAJKPN = new global::EggLink.DanhengServer.Proto.DANEEHMKDKN();
+          case 11082: {
+            if (iPFCLBCNGAA_ == null) {
+              IPFCLBCNGAA = new global::EggLink.DanhengServer.Proto.LNOPMPPABKJ();
             }
-            input.ReadMessage(PLBMKOAJKPN);
+            input.ReadMessage(IPFCLBCNGAA);
             break;
           }
-          case 9210:
-          case 9208: {
-            cGDCLGGFMJK_.AddEntriesFrom(ref input, _repeated_cGDCLGGFMJK_codec);
-            break;
-          }
-          case 12826: {
+          case 12082: {
             if (dice_ == null) {
               Dice = new global::EggLink.DanhengServer.Proto.ChessRogueDice();
             }
             input.ReadMessage(Dice);
+            break;
+          }
+          case 13410:
+          case 13408: {
+            aKMEEDBBDNI_.AddEntriesFrom(ref input, _repeated_aKMEEDBBDNI_codec);
             break;
           }
         }

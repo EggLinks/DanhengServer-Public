@@ -14,7 +14,7 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Rogue
         {
             var req = RogueNpcDisappearCsReq.Parser.ParseFrom(data);
 
-            connection.Player!.RogueManager!.GetRogueInstance()?.HandleNpcDisappear((int)req.EntityId);
+            connection.Player!.RogueManager!.GetRogueInstance()?.HandleNpcDisappear((int)req.DisappearNpcEntityId);
 
             connection.SendPacket(CmdIds.RogueNpcDisappearScRsp);
         }

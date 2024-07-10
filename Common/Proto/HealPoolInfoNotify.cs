@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChhIZWFsUG9vbEluZm9Ob3RpZnkucHJvdG8aEkhlYWxQb29sSW5mby5wcm90",
-            "byI7ChJIZWFsUG9vbEluZm9Ob3RpZnkSJQoOaGVhbF9wb29sX2luZm8YDCAB",
-            "KAsyDS5IZWFsUG9vbEluZm9CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Q",
-            "cm90b2IGcHJvdG8z"));
+            "byI4ChJIZWFsUG9vbEluZm9Ob3RpZnkSIgoLS01OQ0FQSlBHRFAYDCABKAsy",
+            "DS5IZWFsUG9vbEluZm9CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90",
+            "b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.HealPoolInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.HealPoolInfoNotify), global::EggLink.DanhengServer.Proto.HealPoolInfoNotify.Parser, new[]{ "HealPoolInfo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.HealPoolInfoNotify), global::EggLink.DanhengServer.Proto.HealPoolInfoNotify.Parser, new[]{ "KMNCAPJPGDP" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,7 +73,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public HealPoolInfoNotify(HealPoolInfoNotify other) : this() {
-      healPoolInfo_ = other.healPoolInfo_ != null ? other.healPoolInfo_.Clone() : null;
+      kMNCAPJPGDP_ = other.kMNCAPJPGDP_ != null ? other.kMNCAPJPGDP_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -83,15 +83,15 @@ namespace EggLink.DanhengServer.Proto {
       return new HealPoolInfoNotify(this);
     }
 
-    /// <summary>Field number for the "heal_pool_info" field.</summary>
-    public const int HealPoolInfoFieldNumber = 12;
-    private global::EggLink.DanhengServer.Proto.HealPoolInfo healPoolInfo_;
+    /// <summary>Field number for the "KMNCAPJPGDP" field.</summary>
+    public const int KMNCAPJPGDPFieldNumber = 12;
+    private global::EggLink.DanhengServer.Proto.HealPoolInfo kMNCAPJPGDP_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.HealPoolInfo HealPoolInfo {
-      get { return healPoolInfo_; }
+    public global::EggLink.DanhengServer.Proto.HealPoolInfo KMNCAPJPGDP {
+      get { return kMNCAPJPGDP_; }
       set {
-        healPoolInfo_ = value;
+        kMNCAPJPGDP_ = value;
       }
     }
 
@@ -110,7 +110,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(HealPoolInfo, other.HealPoolInfo)) return false;
+      if (!object.Equals(KMNCAPJPGDP, other.KMNCAPJPGDP)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -118,7 +118,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (healPoolInfo_ != null) hash ^= HealPoolInfo.GetHashCode();
+      if (kMNCAPJPGDP_ != null) hash ^= KMNCAPJPGDP.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -137,9 +137,9 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (healPoolInfo_ != null) {
+      if (kMNCAPJPGDP_ != null) {
         output.WriteRawTag(98);
-        output.WriteMessage(HealPoolInfo);
+        output.WriteMessage(KMNCAPJPGDP);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -151,9 +151,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (healPoolInfo_ != null) {
+      if (kMNCAPJPGDP_ != null) {
         output.WriteRawTag(98);
-        output.WriteMessage(HealPoolInfo);
+        output.WriteMessage(KMNCAPJPGDP);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -165,8 +165,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (healPoolInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HealPoolInfo);
+      if (kMNCAPJPGDP_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(KMNCAPJPGDP);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -180,11 +180,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.healPoolInfo_ != null) {
-        if (healPoolInfo_ == null) {
-          HealPoolInfo = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
+      if (other.kMNCAPJPGDP_ != null) {
+        if (kMNCAPJPGDP_ == null) {
+          KMNCAPJPGDP = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
         }
-        HealPoolInfo.MergeFrom(other.HealPoolInfo);
+        KMNCAPJPGDP.MergeFrom(other.KMNCAPJPGDP);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -202,10 +202,10 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 98: {
-            if (healPoolInfo_ == null) {
-              HealPoolInfo = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
+            if (kMNCAPJPGDP_ == null) {
+              KMNCAPJPGDP = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
             }
-            input.ReadMessage(HealPoolInfo);
+            input.ReadMessage(KMNCAPJPGDP);
             break;
           }
         }
@@ -224,10 +224,10 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 98: {
-            if (healPoolInfo_ == null) {
-              HealPoolInfo = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
+            if (kMNCAPJPGDP_ == null) {
+              KMNCAPJPGDP = new global::EggLink.DanhengServer.Proto.HealPoolInfo();
             }
-            input.ReadMessage(HealPoolInfo);
+            input.ReadMessage(KMNCAPJPGDP);
             break;
           }
         }

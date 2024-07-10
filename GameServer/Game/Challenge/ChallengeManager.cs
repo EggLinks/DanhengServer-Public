@@ -21,7 +21,7 @@ namespace EggLink.DanhengServer.Game.Challenge
 
         #region Management
 
-        public void StartChallenge(int challengeId, StartChallengeStoryBuffInfo? storyBuffs)
+        public void StartChallenge(int challengeId, StartChallengeStoryBuffInfo? storyBuffs, StartChallengeBossBuffInfo? bossBuffs)
         {
             // Get challenge excel
             if (!GameData.ChallengeConfigData.TryGetValue(challengeId, out ChallengeConfigExcel? value))
@@ -111,12 +111,11 @@ namespace EggLink.DanhengServer.Game.Challenge
                 instance.StoryBuffs.Add((int)storyBuffs.StoryBuffTwo);
             }
 
-            // Early implementation for 2.3
-            /* if (BossBuffs != null)
+            if (bossBuffs != null)
             {
-                instance.AddBossBuff((int)BossBuffs.BossBuffOne);
-                instance.AddBossBuff((int)BossBuffs.BossBuffTwo);
-            } */
+                instance.BossBuffs.Add((int)bossBuffs.StoryBuffOne);
+                instance.BossBuffs.Add((int)bossBuffs.StoryBuffTwo);
+            }
 
             // Send packet
             Player.SendPacket(new PacketStartChallengeScRsp(Player));

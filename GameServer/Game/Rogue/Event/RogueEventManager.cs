@@ -1,6 +1,7 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.Game.Player;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.Rogue;
 using EggLink.DanhengServer.Server.Packet.Send.Rogue;
 using Google.Protobuf.WellKnownTypes;
 using System;
@@ -55,7 +56,7 @@ namespace EggLink.DanhengServer.Game.Rogue.Event
         public void AddEvent(RogueEventInstance eventInstance)
         {
             RunningEvent.Add(eventInstance);
-            Player.SendPacket(new PacketSyncRogueDialogueEventDataScNotify(eventInstance));
+            Player.SendPacket(new PacketSyncRogueCommonDialogueDataScNotify(eventInstance));
         }
 
         public void RemoveEvent(RogueEventInstance eventInstance)
@@ -108,19 +109,20 @@ namespace EggLink.DanhengServer.Game.Rogue.Event
 
         public void SelectOption(RogueEventInstance eventInstance, int optionId)
         {
-            eventInstance.SelectIds.Add(optionId);
+            eventInstance.SelectedOptionId = optionId;
             var option = eventInstance.Options.Find(x => x.OptionId == optionId);
             if (option == null)
             {
-                Player.SendPacket(new PacketSelectRogueDialogueEventScRsp());
+                Player.SendPacket(new PacketSelectRogueCommonDialogueOptionScRsp());
                 return;
             }
             GameData.DialogueEventData.TryGetValue(option.OptionId, out var dialogueEvent);
             if (dialogueEvent == null)
             {
-                Player.SendPacket(new PacketSelectRogueDialogueEventScRsp());
+                Player.SendPacket(new PacketSelectRogueCommonDialogueOptionScRsp());
                 return;
             }
+            option.IsSelected = true;
 
             List<int> Param = dialogueEvent.RogueEffectParamList;
             if (option.ArgId > 0)
@@ -155,7 +157,8 @@ namespace EggLink.DanhengServer.Game.Rogue.Event
             }
 
             // send rsp
-            Player.SendPacket(new PacketSelectRogueDialogueEventScRsp(eventInstance));
+            Player.SendPacket(new PacketSyncRogueCommonDialogueOptionFinishScNotify(eventInstance));
+            Player.SendPacket(new PacketSelectRogueCommonDialogueOptionScRsp(eventInstance));
         }
     }
 }

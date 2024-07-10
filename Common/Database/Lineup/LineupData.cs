@@ -1,5 +1,6 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Database.Avatar;
+using EggLink.DanhengServer.Database.Mission;
 using EggLink.DanhengServer.Database.Player;
 using EggLink.DanhengServer.Proto;
 using Newtonsoft.Json;
@@ -31,7 +32,7 @@ namespace EggLink.DanhengServer.Database.Lineup
         public string? Name { get; set; }
         public int LineupType { get; set; }
         public int LeaderAvatarId { get; set; }
-        public List<AvatarInfo>? BaseAvatars { get; set; }
+        public List<LineupAvatarInfo>? BaseAvatars { get; set; }
         public int Mp { get; set; } = 5;
 
         [JsonIgnore()]
@@ -110,10 +111,12 @@ namespace EggLink.DanhengServer.Database.Lineup
                 ExtraLineupType = (ExtraLineupType)LineupType,
                 Index = (uint)(LineupData?.Lineups?.Values.ToList().IndexOf(this) ?? 0),
             };
+
             if (LineupType != (int)ExtraLineupType.LineupNone)
             {
                 info.Index = (uint)(LineupType + 10);
             }
+
             if (BaseAvatars?.Find(item => item.BaseAvatarId == LeaderAvatarId) != null)  // find leader,if not exist,set to 0
             {
                 info.LeaderSlot = (uint)BaseAvatars.IndexOf(BaseAvatars.Find(item => item.BaseAvatarId == LeaderAvatarId)!);
@@ -147,11 +150,24 @@ namespace EggLink.DanhengServer.Database.Lineup
                 }
             }
 
+            var storyId = DatabaseHelper.Instance!.GetInstance<StoryLineData>(AvatarData!.Uid)?.CurStoryLineId;
+            if (storyId != null && storyId != 0)
+            {
+                info.GameStoryLineId = (uint)storyId;
+                BaseAvatars?.ForEach(item =>
+                {
+                    if (item.SpecialAvatarId != 0)
+                    {
+                        info.StoryLineBaseAvatarIdList.Add((uint)item.BaseAvatarId);
+                    }
+                });
+            }
+
             return info;
         }
     }
 
-    public class AvatarInfo
+    public class LineupAvatarInfo
     {
         public int BaseAvatarId { get; set; }
         public int AssistUid { get; set; }

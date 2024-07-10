@@ -49,11 +49,13 @@ namespace EggLink.DanhengServer.Data.Custom
                     if (RateUpItems5.Contains(item))
                     {
                         data.LastWeaponGachaFailed = false;
-                    } else
+                    }
+                    else
                     {
                         data.LastWeaponGachaFailed = true;
                     }
-                } else if (GachaType == GachaTypeEnum.AvatarUp)
+                }
+                else if (GachaType == GachaTypeEnum.AvatarUp)
                 {
                     item = GetRateUpItem5(goldAvatars, data.LastAvatarGachaFailed);
                     if (RateUpItems5.Contains(item))
@@ -64,11 +66,13 @@ namespace EggLink.DanhengServer.Data.Custom
                     {
                         data.LastAvatarGachaFailed = true;
                     }
-                } else
+                }
+                else
                 {
                     item = GetRateUpItem5(allGoldItems, false);
                 }
-            } else
+            }
+            else
             {
                 // 4 - 3 star
                 if (IsRate4() || data.LastGachaPurpleFailedCount >= 10)
@@ -76,12 +80,14 @@ namespace EggLink.DanhengServer.Data.Custom
                     if (IsRateUp4())
                     {
                         item = RateUpItems4[random.Next(0, RateUpItems4.Count)];
-                    } else
+                    }
+                    else
                     {
                         item = allNormalItems[random.Next(0, allNormalItems.Count)];
                     }
                     data.LastGachaPurpleFailedCount = 0;
-                } else
+                }
+                else
                 {
                     item = blueWeapons[random.Next(0, blueWeapons.Count)];
                     data.LastGachaPurpleFailedCount += 1;
@@ -122,13 +128,14 @@ namespace EggLink.DanhengServer.Data.Custom
             if (IsEvent() || forceUp)
             {
                 return RateUpItems5[random.Next(0, RateUpItems5.Count)];
-            } else
+            }
+            else
             {
                 return gold[random.Next(0, gold.Count)];
             }
         }
 
-        public GachaInfo ToInfo(List<int> goldAvatar, List<int> purpleAvatar, List<int> purpleWeapon, List<int> goldWeapon)
+        public GachaInfo ToInfo(List<int> goldAvatar)
         {
             var info = new GachaInfo()
             {
@@ -144,26 +151,34 @@ namespace EggLink.DanhengServer.Data.Custom
             }
             if (GachaId == 1001)
             {
-                info.PrizeItemList.AddRange(goldAvatar.Select(id => (uint)id));
-                info.PrizeItemList.AddRange(purpleAvatar.Select(id => (uint)id));
-                info.PrizeItemList.AddRange(goldWeapon.Select(id => (uint)id));
-                info.PrizeItemList.AddRange(purpleWeapon.Select(id => (uint)id));
-                info.KEPNKIIHNNN = new()
+                if (RateUpItems4.Count > 0)
                 {
-                    IFABBNPKEOM = true  // TODO: Implement this
-                };
-            } 
-            else
-            {
+                    info.ItemDetailList.AddRange(RateUpItems4.Select(id => (uint)id));
+                }
+
                 if (RateUpItems5.Count > 0)
                 {
                     info.PrizeItemList.AddRange(RateUpItems5.Select(id => (uint)id));
                     info.ItemDetailList.AddRange(RateUpItems5.Select(id => (uint)id));
                 }
 
+                info.GachaCeiling = new()
+                {
+                    IsClaimed = true,  // TODO: Implement this
+                    AvatarList = { goldAvatar.Select(id => new GachaCeilingAvatar() { AvatarId = (uint)id }) }
+                };
+            }
+            else
+            {
                 if (RateUpItems4.Count > 0)
                 {
-                    info.PrizeItemList.AddRange(RateUpItems4.Select(id => (uint)id));
+                    info.ItemDetailList.AddRange(RateUpItems4.Select(id => (uint)id));
+                }
+
+                if (RateUpItems5.Count > 0)
+                {
+                    info.PrizeItemList.AddRange(RateUpItems5.Select(id => (uint)id));
+                    info.ItemDetailList.AddRange(RateUpItems5.Select(id => (uint)id));
                 }
             }
 

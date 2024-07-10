@@ -33,7 +33,7 @@ namespace EggLink.DanhengServer.Game.Rogue.Buff
             });
         }
 
-        public int EnhanceCost => 100 + ((BuffExcel.RogueBuffRarity - 1) * 30);
+        public int EnhanceCost => 100 + (((int)BuffExcel.RogueBuffCategory - 1) * 30);
 
         public RogueBuff ToProto() => new()
         {

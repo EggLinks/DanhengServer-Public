@@ -26,7 +26,7 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "CiZTeW5jRW50aXR5QnVmZkNoYW5nZUxpc3RTY05vdGlmeS5wcm90bxoWRW50",
             "aXR5QnVmZkNoYW5nZS5wcm90byJWCiBTeW5jRW50aXR5QnVmZkNoYW5nZUxp",
-            "c3RTY05vdGlmeRIyChdlbnRpdHlfYnVmZl9jaGFuZ2VfbGlzdBgDIAMoCzIR",
+            "c3RTY05vdGlmeRIyChdlbnRpdHlfYnVmZl9jaGFuZ2VfbGlzdBgIIAMoCzIR",
             "LkVudGl0eUJ1ZmZDaGFuZ2VCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Q",
             "cm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
@@ -85,9 +85,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "entity_buff_change_list" field.</summary>
-    public const int EntityBuffChangeListFieldNumber = 3;
+    public const int EntityBuffChangeListFieldNumber = 8;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.EntityBuffChange> _repeated_entityBuffChangeList_codec
-        = pb::FieldCodec.ForMessage(26, global::EggLink.DanhengServer.Proto.EntityBuffChange.Parser);
+        = pb::FieldCodec.ForMessage(66, global::EggLink.DanhengServer.Proto.EntityBuffChange.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EntityBuffChange> entityBuffChangeList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EntityBuffChange>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -188,7 +188,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 26: {
+          case 66: {
             entityBuffChangeList_.AddEntriesFrom(input, _repeated_entityBuffChangeList_codec);
             break;
           }
@@ -207,7 +207,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 26: {
+          case 66: {
             entityBuffChangeList_.AddEntriesFrom(ref input, _repeated_entityBuffChangeList_codec);
             break;
           }

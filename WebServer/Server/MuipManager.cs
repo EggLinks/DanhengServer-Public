@@ -7,6 +7,14 @@ using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.X509;
 using System.Text;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using EggLink.DanhengServer.Database.Player;
+using EggLink.DanhengServer.Database;
+using EggLink.DanhengServer.Database.Avatar;
+using EggLink.DanhengServer.Database.Mission;
+using EggLink.DanhengServer.Enums;
+using Spectre.Console;
 
 namespace EggLink.DanhengServer.WebServer.Server
 {
@@ -14,6 +22,10 @@ namespace EggLink.DanhengServer.WebServer.Server
     {
         public delegate void ExecuteCommandDelegate(string message, MuipCommandSender sender);
         public static event ExecuteCommandDelegate? OnExecuteCommand;
+        public delegate void ServerInformationDelegate(Dictionary<int, PlayerData> resultData);
+        public static event ServerInformationDelegate? OnGetServerInformation;
+        public delegate void GetPlayerStatusDelegate(int uid, out PlayerStatusEnum status);
+        public static event GetPlayerStatusDelegate? OnGetPlayerStatus;
 
         public static string RsaPublicKey { get; private set; } = "";
         public static string RsaPrivateKey { get; private set; } = "";
@@ -22,7 +34,7 @@ namespace EggLink.DanhengServer.WebServer.Server
 
         public static AuthAdminKeyData? AuthAdminAndCreateSession(string key, string key_type)
         {
-            if (ConfigManager.Config.MuipServer.AdminKey != key)
+            if (ConfigManager.Config.MuipServer.AdminKey == "" || ConfigManager.Config.MuipServer.AdminKey != key)
             {
                 return null;
             }
@@ -113,6 +125,108 @@ namespace EggLink.DanhengServer.WebServer.Server
             return new(2, "Session not found!");
         }
 
+        public static ServerInformationResponse GetInformation(string sessionId)
+        {
+            if (Sessions.TryGetValue(sessionId, out MuipSession? value))
+            {
+                var session = value;
+                if (session.ExpireTimeStamp < DateTime.Now.ToUnixSec())
+                {
+                    Sessions.Remove(sessionId);
+                    return new(1, "Session has expired!", null);
+                }
+                Process currentProcess = Process.GetCurrentProcess();
+
+                long currentProcessMemory = currentProcess.WorkingSet64;
+
+                // get system info
+                var totalMemory = -1f;
+                var availableMemory = -1f;
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    totalMemory = GetTotalMemoryWindows();
+                    availableMemory = GetAvailableMemoryWindows();
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    totalMemory = GetTotalMemoryLinux();
+                    availableMemory = GetAvailableMemoryLinux();
+                }
+
+                var result = new Dictionary<int, PlayerData>();
+                var sync = Task.Run(() => OnGetServerInformation?.Invoke(result));
+
+                sync.Wait();
+
+                return new(0, "Success", new()
+                {
+                    ServerTime = DateTime.Now.ToUnixSec(),
+                    MaxMemory = totalMemory,
+                    ProgramUsedMemory = currentProcessMemory / 1024 / 1024,
+                    UsedMemory = totalMemory - availableMemory,
+                    OnlinePlayers = result.Values.Select(x => new SimplePlayerInformationData()
+                    {
+                        Name = x.Name ?? "",
+                        HeadIconId = x.HeadIcon,
+                        Uid = x.Uid
+                    }).ToList(),
+                });
+            }
+            return new(2, "Session not found!", null);
+        }
+
+        public static PlayerInformationResponse GetPlayerInformation(string sessionId, int uid)
+        {
+            if (Sessions.TryGetValue(sessionId, out MuipSession? value))
+            {
+                var session = value;
+                if (session.ExpireTimeStamp < DateTime.Now.ToUnixSec())
+                {
+                    Sessions.Remove(sessionId);
+                    return new(1, "Session has expired!", null);
+                }
+
+                var result = new Dictionary<int, PlayerData>();
+                var sync = Task.Run(() => OnGetServerInformation?.Invoke(result));
+
+                sync.Wait();
+
+                result.TryGetValue(uid, out var player);
+                if (player == null) return new(2, "Player not exist or is offline!", null);
+
+                var status = PlayerStatusEnum.Offline;
+
+                var statusSync = Task.Run(() => OnGetPlayerStatus?.Invoke(player.Uid, out status));
+
+                statusSync.Wait();
+
+                var avatarData = DatabaseHelper.Instance!.GetInstance<AvatarData>(player.Uid)!;
+                var missionData = DatabaseHelper.Instance!.GetInstance<MissionData>(player.Uid)!;
+
+                return new(0, "Success", new()
+                {
+                    Uid = player.Uid,
+                    Name = player.Name ?? "",
+                    Signature = player.Signature ?? "",
+                    Stamina = player.Stamina,
+                    RecoveryStamina = (int)player.StaminaReserve,
+                    HeadIconId = player.HeadIcon,
+                    CurFloorId = player.FloorId,
+                    CurPlaneId = player.PlaneId,
+                    AssistAvatarList = avatarData.AssistAvatars,
+                    DisplayAvatarList = avatarData.DisplayAvatars,
+                    AcceptedSubMissionIdList = missionData.RunningSubMissionIds,
+                    AcceptedMainMissionIdList = missionData.RunningMainMissionIds,
+                    FinishedMainMissionIdList = missionData.FinishedMainMissionIds,
+                    FinishedSubMissionIdList = missionData.FinishedSubMissionIds,
+                    PlayerStatus = status
+                });
+            }
+            return new(3, "Session not found!", null);
+        }
+
+        #region Tools
+
         /// <summary>
         /// get rsa key pair
         /// </summary>
@@ -167,5 +281,57 @@ namespace EggLink.DanhengServer.WebServer.Server
 
             return result;
         }
+
+        public static float GetTotalMemoryWindows()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                var searcher = new System.Management.ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+                foreach (var obj in searcher.Get())
+                {
+                    var memory = Convert.ToUInt64(obj["TotalPhysicalMemory"]);
+                    return memory / 1024 / 1024;
+                }
+            }
+            return 0;
+        }
+
+        public static float GetAvailableMemoryWindows()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                var pc = new PerformanceCounter("Memory", "Available MBytes");
+                return pc.NextValue();
+            }
+            return 0;
+        }
+
+        public static float GetTotalMemoryLinux()
+        {
+            string[] lines = File.ReadAllLines("/proc/meminfo");
+            foreach (string line in lines)
+            {
+                if (line.StartsWith("MemTotal"))
+                {
+                    return float.Parse(line.Split(':')[1].Trim().Split(' ')[0]) / 1024;
+                }
+            }
+            return 0;
+        }
+
+        public static float GetAvailableMemoryLinux()
+        {
+            string[] lines = File.ReadAllLines("/proc/meminfo");
+            foreach (string line in lines)
+            {
+                if (line.StartsWith("MemAvailable"))
+                {
+                    return float.Parse(line.Split(':')[1].Trim().Split(' ')[0]) / 1024;
+                }
+            }
+            return 0;
+        }
+
+        #endregion
     }
 }

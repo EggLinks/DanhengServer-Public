@@ -13,6 +13,8 @@ namespace EggLink.DanhengServer.Data.Excel
         public int AvatarID { get; set; } = 0;
         public HashName AvatarName { get; set; } = new();
         public int ExpGroup { get; set; } = 0;
+        public int MaxPromotion { get; set; } = 0;
+        public int MaxRank { get; set; } = 0;
         public List<int> RankIDList { get; set; } = [];
         public string? JsonPath { get; set; } = "";
 

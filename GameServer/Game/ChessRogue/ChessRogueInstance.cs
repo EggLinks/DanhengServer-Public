@@ -1,5 +1,6 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Data.Excel;
+using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.Game.Battle;
 using EggLink.DanhengServer.Game.ChessRogue.Cell;
 using EggLink.DanhengServer.Game.ChessRogue.Dice;
@@ -28,9 +29,12 @@ namespace EggLink.DanhengServer.Game.ChessRogue
         public int StartCell { get; set; } = 0;
 
         public List<int> Layers { get; set; } = [];
-        public Dictionary<int, List<int>>? CurLayerData { get; set; }
         public int CurLayer { get; set; } = 0;
+        public RogueDLCChessBoardExcel? CurBoardExcel { get; set; }
         public ChessRogueLevelStatusType CurLevelStatus { get; set; } = ChessRogueLevelStatusType.ChessRogueLevelProcessing;
+
+        public bool FirstEnterBattle { get; set; } = true;
+        public int LayerMap { get; set; } = 0;
 
         public int ActionPoint { get; set; } = 15;
 
@@ -78,7 +82,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
         public override void RollBuff(int amount)
         {
-            if (CurCell!.CellType == 11)
+            if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterBoss)
             {
                 RollBuff(amount, 100003, 2);  // boss room
                 RollMiracle(1);
@@ -182,56 +186,38 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
         public void GenerateLayer()
         {
-            GameData.ChessRogueLayerGenData.TryGetValue(CurLayer, out var layerGenData);
-            if (layerGenData == null)
-            {
-                return;
-            }
+            var level = Layers.IndexOf(CurLayer) + 1;
+            FirstEnterBattle = true;
 
-            CurLayerData = layerGenData;
+            LayerMap = GameConstants.AllowedChessRogueEntranceId.RandomElement();
+
+            if (RogueVersionId == 201)
+            {
+                CurBoardExcel = GameData.RogueSwarmChessBoardData[level].RandomElement();
+            } else
+            {
+                CurBoardExcel = GameData.RogueNousChessBoardData[level].RandomElement();
+            }
 
             RogueCells.Clear();
             CurCell = null;
 
-            foreach (var column in layerGenData)
+            StartCell = CurBoardExcel.MapInfo!.StartGridItemID;
+
+            foreach (var item in CurBoardExcel.MapInfo!.RogueChestGridItemMap)
             {
-                if (column.Key == -1)
+                var cell = new ChessRogueCellInstance(this, item.Value)
                 {
-                    continue;
-                }
-                foreach (var row in column.Value)
-                {
-                    var cell = new ChessRogueCellInstance(this)
-                    {
-                        Column = column.Key,
-                        Row = row,
-                    };
-                    RogueCells.Add(column.Key * 100 + row, cell);
+                    PosY = item.Value.PosY,
+                    PosX = item.Value.PosX,
+                    CellId = item.Key,
+                };
+                RogueCells.Add(item.Key, cell);
 
-                    if (column.Key == 2 && column.Value.IndexOf(row) == 0)
-                    {
-                        if (Layers.IndexOf(CurLayer) == 0)
-                        {
-                            cell.CellType = 3;
-                        } else
-                        {
-                            cell.CellType = 2;
-                        }
-                        StartCell = column.Key * 100 + row;
-                    }
-
-                    if (column.Key == 2 && column.Value.IndexOf(row) == column.Value.Count - 1)  // last cell
-                    {
-                        if (Layers.IndexOf(CurLayer) == Layers.Count - 1)
-                        {
-                            cell.CellType = 15;
-                        } else
-                        {
-                            cell.CellType = 11;
-                        }
-                        cell.Init();
-                    }
-                }
+                //if (cell.GetCellId() == CurBoardExcel.MapInfo!.EndGridItemID)  // last cell
+                //{
+                    cell.Init();
+                //}
             }
         }
 
@@ -257,15 +243,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
                 CurCell = cell;
                 cell.CellStatus = ChessRogueBoardCellStatus.Finish;
 
-                Player.EnterScene(cell.GetEntryId(), 0, false);
-                Player.MoveTo(new EntityMotion()
-                {
-                    Motion = new()
-                    {
-                        Rot = cell.CellConfig!.ToRotation().ToProto(),
-                        Pos = cell.CellConfig!.ToPosition().ToProto(),
-                    }
-                });
+                Player.EnterMissionScene(cell.GetEntryId(), cell.RoomConfig!.AnchorGroup, cell.RoomConfig!.AnchorId, false);
 
                 HistoryCell.Add(cell);
 
@@ -285,7 +263,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
             cell.CellStatus = ChessRogueBoardCellStatus.Selected;
 
-            Player.SendPacket(new PacketChessRogueCellUpdateNotify(cell, CurLayerData![-1][0]));
+            Player.SendPacket(new PacketChessRogueCellUpdateNotify(cell, CurBoardExcel?.ChessBoardID ?? 0));
             CostActionPoint(1);
 
             Player.SendPacket(new PacketChessRogueSelectCellScRsp(cellId));
@@ -402,12 +380,12 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
             CalculateDifficulty(battle);
 
-            if (CurCell!.CellType == 15)
+            if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterNousBoss || CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
             {
                 var buffList = new List<int>();
                 foreach (var buff in BossBuff)
                 {
-                    if (buff.EffectType == Enums.Rogue.BossDecayEffectTypeEnum.AddMazeBuffList)
+                    if (buff.EffectType == BossDecayEffectTypeEnum.AddMazeBuffList)
                     {
                         buffList.SafeAddRange(buff.EffectParamList);  // add buff
                     } else
@@ -500,11 +478,11 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
             RollBuff(battle.Stages.Count);
 
-            if (CurCell!.CellType == 11)
+            if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterBoss)
             {
                 Player.SendPacket(new PacketChessRogueLayerAccountInfoNotify(this));
             }
-            else if (CurCell!.CellType == 15)
+            else if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterNousBoss || CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
             {
                 CurLevelStatus = ChessRogueLevelStatusType.ChessRogueLevelFinish;
                 Player.SendPacket(new PacketChessRogueLayerAccountInfoNotify(this));
@@ -521,7 +499,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
                 GameMiracleInfo = ToMiracleInfo(),
                 RogueBuffInfo = ToBuffInfo(),
                 RogueAeonInfo = ToAeonInfo(),
-                RogueVersionId = (uint)RogueVersionId,
+                RogueSubMode = (uint)RogueVersionId,
                 RogueDiceInfo = DiceInstance.ToProto(),
                 RogueLineupInfo = ToLineupInfo(),
                 RogueDifficultyInfo = ToDifficultyInfo(),
@@ -537,7 +515,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
                 proto.PendingAction = new();
             }
 
-            proto.RogueCurrentInfo.AddRange(ToGameInfo());
+            proto.RogueCurrentGameInfo.AddRange(ToGameInfo());
 
             return proto;
         }
@@ -557,10 +535,10 @@ namespace EggLink.DanhengServer.Game.ChessRogue
         {
             var proto = new ChessRogueQueryGameInfo()
             {
-                RogueVersionId = (uint)RogueVersionId,
+                RogueSubMode = (uint)RogueVersionId,
             };
 
-            proto.RogueCurrentInfo.AddRange(ToGameInfo());
+            proto.RogueCurrentGameInfo.AddRange(ToGameInfo());
 
             return proto;
         }
@@ -577,14 +555,14 @@ namespace EggLink.DanhengServer.Game.ChessRogue
             return proto;
         }
 
-        public ChessRogueBuffInfo ToBuffInfo()
+        public RogueDLCBuffInfo ToBuffInfo()
         {
-            var proto = new ChessRogueBuffInfo()
+            var proto = new RogueDLCBuffInfo()
             {
-                BuffInfo = new()
+                RogueDlcMazeBuffInfo = new()
             };
 
-            proto.BuffInfo.BuffList.AddRange(RogueBuffs.Select(x => x.ToCommonProto()).ToList());
+            proto.RogueDlcMazeBuffInfo.BuffList.AddRange(RogueBuffs.Select(x => x.ToCommonProto()).ToList());
 
             return proto;
         }
@@ -615,7 +593,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
             {
                 ReviveInfo = new()
                 {
-                    RogueReviveCost = new()
+                    GameItemInfo = new()
                     {
                         ItemList = { new ItemCost()
                         {
@@ -631,7 +609,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
             foreach (var avatar in CurLineup!.BaseAvatars!)
             {
-                proto.AvatarList.Add(new ChessRogueLineupAvatarInfo()
+                proto.ChessAvatarList.Add(new ChessRogueLineupAvatarInfo()
                 {
                     AvatarId = (uint)avatar.BaseAvatarId,
                 });
@@ -640,18 +618,18 @@ namespace EggLink.DanhengServer.Game.ChessRogue
             return proto;
         }
 
-        public ChessRogueGameItemInfo ToGameItemInfo()
+        public RogueGameItemInfo ToGameItemInfo()
         {
-            var proto = new ChessRogueGameItemInfo();
+            var proto = new RogueGameItemInfo();
 
-            proto.ItemMap.Add(31, (uint)CurMoney);
+            proto.VirtualItem.Add(31, (uint)CurMoney);
 
             return proto;
         }
 
-        public List<ChessRogueGameInfo> ToGameInfo()
+        public List<RogueGameInfo> ToGameInfo()
         {
-            var proto = new List<ChessRogueGameInfo>
+            var proto = new List<RogueGameInfo>
             {
                 new()
                 {
@@ -663,7 +641,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
                 },
                 new()
                 {
-                    GameItemInfo = ToGameItemInfo()
+
                 },
                 new()
                 {
@@ -684,19 +662,19 @@ namespace EggLink.DanhengServer.Game.ChessRogue
 
             foreach (var level in DifficultyLevel)
             {
-                proto.DifficultyId.Add((uint)level.DifficultyID);
+                proto.ChessDifficultyId.Add((uint)level.DifficultyID);
             }
 
             return proto;
         }
 
-        public ChessRogueDifficultyLevelInfo ToDifficultyLevelInfo()
+        public RogueDifficultyLevelInfo ToDifficultyLevelInfo()
         {
-            var proto = new ChessRogueDifficultyLevelInfo();
+            var proto = new RogueDifficultyLevelInfo();
 
             foreach (var level in DifficultyLevel)
             {
-                proto.DifficultyId.Add((uint)level.DifficultyID);
+                proto.ChessDifficultyId.Add((uint)level.DifficultyID);
             }
 
             return proto;
@@ -717,9 +695,16 @@ namespace EggLink.DanhengServer.Game.ChessRogue
             {
                 if (cell.Value.CellStatus == ChessRogueBoardCellStatus.Idle)
                 {
-                    if (cell.Value.Column == CurCell!.Column - 1 || cell.Value.Column == CurCell!.Column || cell.Value.Column == CurCell!.Column + 1)
+                    if (cell.Value.PosY == CurCell!.PosY - 1 || cell.Value.PosY == CurCell!.PosY + 1)
                     {
-                        if (cell.Value.Row == CurCell!.Row || cell.Value.Row == CurCell!.Row + 1)
+                        if (cell.Value.PosX == CurCell!.PosX || cell.Value.PosX == CurCell!.PosX + 1)
+                        {
+                            canSelected.Add((uint)cell.Value.GetCellId());
+                        }
+                    }
+                    if (cell.Value.PosY == CurCell!.PosY)
+                    {
+                        if (cell.Value.PosX == CurCell!.PosX + 2)
                         {
                             canSelected.Add((uint)cell.Value.GetCellId());
                         }
@@ -737,7 +722,7 @@ namespace EggLink.DanhengServer.Game.ChessRogue
                 {
                     LayerStatus = ChessRogueBoardCellStatus.Processing,
                     CurId = (uint)CurCell!.GetCellId(),
-                    BoardId = (uint)CurLayerData![-1][0],
+                    CurBoardId = (uint)(CurBoardExcel?.ChessBoardID ?? 0),
                     Cell = new()
                     {
                         CellList = { RogueCells.Select(x => x.Value.ToProto()).ToList() }
@@ -754,11 +739,11 @@ namespace EggLink.DanhengServer.Game.ChessRogue
         {
             var info = new ChessRogueFinishInfo()
             {
-                AreaId = (uint)AreaExcel.AreaID,
+                EndAreaId = (uint)AreaExcel.AreaID,
                 CurLayerId = (uint)CurLayer,
                 CurLineup = CurLineup!.ToProto(),
-                DifficultyLevel = uint.Parse(AreaExcel.AreaID.ToString().Substring(AreaExcel.AreaID.ToString().Length - 1, 1)),
-                RogueVersionId = (uint)RogueVersionId,
+                AreaDifficultyLevel = uint.Parse(AreaExcel.AreaID.ToString().Substring(AreaExcel.AreaID.ToString().Length - 1, 1)),
+                RogueSubMode = (uint)RogueVersionId,
                 RogueBuffInfo = new()
                 {
                     BuffList = { RogueBuffs.Select(x => x.ToCommonProto()) }

@@ -4,7 +4,7 @@ namespace EggLink.DanhengServer.Enums
 {
     public enum MissionPhaseEnum
     {
-        Doing = 0,
+        Accept = 0,
         Finish = 1,
         None = 3,
         Cancel = 4,
@@ -17,7 +17,7 @@ namespace EggLink.DanhengServer.Enums
             return status switch
             {
                 MissionPhaseEnum.None => MissionStatus.MissionNone,
-                MissionPhaseEnum.Doing => MissionStatus.MissionDoing,
+                MissionPhaseEnum.Accept => MissionStatus.MissionDoing,
                 MissionPhaseEnum.Finish => MissionStatus.MissionFinish,
                 MissionPhaseEnum.Cancel => MissionStatus.MissionNone,
                 _ => MissionStatus.MissionNone,

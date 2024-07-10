@@ -24,14 +24,14 @@ namespace EggLink.DanhengServer.Proto {
     static DoGachaInRollShopCsReqReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChxEb0dhY2hhSW5Sb2xsU2hvcENzUmVxLnByb3RvIlcKFkRvR2FjaGFJblJv",
-            "bGxTaG9wQ3NSZXESEwoLRVBHQUxOR0xGSUoYBiABKA0SEwoLSUxKR0hLRkRB",
-            "RUgYDSABKA0SEwoLQUxESEhGR01NR1AYDiABKA1CHqoCG0VnZ0xpbmsuRGFu",
-            "aGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
+            "ChxEb0dhY2hhSW5Sb2xsU2hvcENzUmVxLnByb3RvIlkKFkRvR2FjaGFJblJv",
+            "bGxTaG9wQ3NSZXESFAoMcm9sbF9zaG9wX2lkGAEgASgNEhMKC0pMTE9ERkZK",
+            "R0RNGAUgASgNEhQKDGdhY2hhX3JhbmRvbRgOIAEoDUIeqgIbRWdnTGluay5E",
+            "YW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.DoGachaInRollShopCsReq), global::EggLink.DanhengServer.Proto.DoGachaInRollShopCsReq.Parser, new[]{ "EPGALNGLFIJ", "ILJGHKFDAEH", "ALDHHFGMMGP" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.DoGachaInRollShopCsReq), global::EggLink.DanhengServer.Proto.DoGachaInRollShopCsReq.Parser, new[]{ "RollShopId", "JLLODFFJGDM", "GachaRandom" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,9 +73,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DoGachaInRollShopCsReq(DoGachaInRollShopCsReq other) : this() {
-      ePGALNGLFIJ_ = other.ePGALNGLFIJ_;
-      iLJGHKFDAEH_ = other.iLJGHKFDAEH_;
-      aLDHHFGMMGP_ = other.aLDHHFGMMGP_;
+      rollShopId_ = other.rollShopId_;
+      jLLODFFJGDM_ = other.jLLODFFJGDM_;
+      gachaRandom_ = other.gachaRandom_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,39 +85,39 @@ namespace EggLink.DanhengServer.Proto {
       return new DoGachaInRollShopCsReq(this);
     }
 
-    /// <summary>Field number for the "EPGALNGLFIJ" field.</summary>
-    public const int EPGALNGLFIJFieldNumber = 6;
-    private uint ePGALNGLFIJ_;
+    /// <summary>Field number for the "roll_shop_id" field.</summary>
+    public const int RollShopIdFieldNumber = 1;
+    private uint rollShopId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint EPGALNGLFIJ {
-      get { return ePGALNGLFIJ_; }
+    public uint RollShopId {
+      get { return rollShopId_; }
       set {
-        ePGALNGLFIJ_ = value;
+        rollShopId_ = value;
       }
     }
 
-    /// <summary>Field number for the "ILJGHKFDAEH" field.</summary>
-    public const int ILJGHKFDAEHFieldNumber = 13;
-    private uint iLJGHKFDAEH_;
+    /// <summary>Field number for the "JLLODFFJGDM" field.</summary>
+    public const int JLLODFFJGDMFieldNumber = 5;
+    private uint jLLODFFJGDM_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint ILJGHKFDAEH {
-      get { return iLJGHKFDAEH_; }
+    public uint JLLODFFJGDM {
+      get { return jLLODFFJGDM_; }
       set {
-        iLJGHKFDAEH_ = value;
+        jLLODFFJGDM_ = value;
       }
     }
 
-    /// <summary>Field number for the "ALDHHFGMMGP" field.</summary>
-    public const int ALDHHFGMMGPFieldNumber = 14;
-    private uint aLDHHFGMMGP_;
+    /// <summary>Field number for the "gacha_random" field.</summary>
+    public const int GachaRandomFieldNumber = 14;
+    private uint gachaRandom_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint ALDHHFGMMGP {
-      get { return aLDHHFGMMGP_; }
+    public uint GachaRandom {
+      get { return gachaRandom_; }
       set {
-        aLDHHFGMMGP_ = value;
+        gachaRandom_ = value;
       }
     }
 
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (EPGALNGLFIJ != other.EPGALNGLFIJ) return false;
-      if (ILJGHKFDAEH != other.ILJGHKFDAEH) return false;
-      if (ALDHHFGMMGP != other.ALDHHFGMMGP) return false;
+      if (RollShopId != other.RollShopId) return false;
+      if (JLLODFFJGDM != other.JLLODFFJGDM) return false;
+      if (GachaRandom != other.GachaRandom) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +146,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (EPGALNGLFIJ != 0) hash ^= EPGALNGLFIJ.GetHashCode();
-      if (ILJGHKFDAEH != 0) hash ^= ILJGHKFDAEH.GetHashCode();
-      if (ALDHHFGMMGP != 0) hash ^= ALDHHFGMMGP.GetHashCode();
+      if (RollShopId != 0) hash ^= RollShopId.GetHashCode();
+      if (JLLODFFJGDM != 0) hash ^= JLLODFFJGDM.GetHashCode();
+      if (GachaRandom != 0) hash ^= GachaRandom.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,17 +167,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (EPGALNGLFIJ != 0) {
-        output.WriteRawTag(48);
-        output.WriteUInt32(EPGALNGLFIJ);
+      if (RollShopId != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(RollShopId);
       }
-      if (ILJGHKFDAEH != 0) {
-        output.WriteRawTag(104);
-        output.WriteUInt32(ILJGHKFDAEH);
+      if (JLLODFFJGDM != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(JLLODFFJGDM);
       }
-      if (ALDHHFGMMGP != 0) {
+      if (GachaRandom != 0) {
         output.WriteRawTag(112);
-        output.WriteUInt32(ALDHHFGMMGP);
+        output.WriteUInt32(GachaRandom);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -189,17 +189,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (EPGALNGLFIJ != 0) {
-        output.WriteRawTag(48);
-        output.WriteUInt32(EPGALNGLFIJ);
+      if (RollShopId != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(RollShopId);
       }
-      if (ILJGHKFDAEH != 0) {
-        output.WriteRawTag(104);
-        output.WriteUInt32(ILJGHKFDAEH);
+      if (JLLODFFJGDM != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(JLLODFFJGDM);
       }
-      if (ALDHHFGMMGP != 0) {
+      if (GachaRandom != 0) {
         output.WriteRawTag(112);
-        output.WriteUInt32(ALDHHFGMMGP);
+        output.WriteUInt32(GachaRandom);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -211,14 +211,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (EPGALNGLFIJ != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EPGALNGLFIJ);
+      if (RollShopId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RollShopId);
       }
-      if (ILJGHKFDAEH != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ILJGHKFDAEH);
+      if (JLLODFFJGDM != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(JLLODFFJGDM);
       }
-      if (ALDHHFGMMGP != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ALDHHFGMMGP);
+      if (GachaRandom != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(GachaRandom);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -232,14 +232,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.EPGALNGLFIJ != 0) {
-        EPGALNGLFIJ = other.EPGALNGLFIJ;
+      if (other.RollShopId != 0) {
+        RollShopId = other.RollShopId;
       }
-      if (other.ILJGHKFDAEH != 0) {
-        ILJGHKFDAEH = other.ILJGHKFDAEH;
+      if (other.JLLODFFJGDM != 0) {
+        JLLODFFJGDM = other.JLLODFFJGDM;
       }
-      if (other.ALDHHFGMMGP != 0) {
-        ALDHHFGMMGP = other.ALDHHFGMMGP;
+      if (other.GachaRandom != 0) {
+        GachaRandom = other.GachaRandom;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -256,16 +256,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 48: {
-            EPGALNGLFIJ = input.ReadUInt32();
+          case 8: {
+            RollShopId = input.ReadUInt32();
             break;
           }
-          case 104: {
-            ILJGHKFDAEH = input.ReadUInt32();
+          case 40: {
+            JLLODFFJGDM = input.ReadUInt32();
             break;
           }
           case 112: {
-            ALDHHFGMMGP = input.ReadUInt32();
+            GachaRandom = input.ReadUInt32();
             break;
           }
         }
@@ -283,16 +283,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 48: {
-            EPGALNGLFIJ = input.ReadUInt32();
+          case 8: {
+            RollShopId = input.ReadUInt32();
             break;
           }
-          case 104: {
-            ILJGHKFDAEH = input.ReadUInt32();
+          case 40: {
+            JLLODFFJGDM = input.ReadUInt32();
             break;
           }
           case 112: {
-            ALDHHFGMMGP = input.ReadUInt32();
+            GachaRandom = input.ReadUInt32();
             break;
           }
         }

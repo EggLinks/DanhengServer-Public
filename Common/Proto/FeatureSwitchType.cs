@@ -24,7 +24,7 @@ namespace EggLink.DanhengServer.Proto {
     static FeatureSwitchTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdGZWF0dXJlU3dpdGNoVHlwZS5wcm90byr7CwoRRmVhdHVyZVN3aXRjaFR5",
+            "ChdGZWF0dXJlU3dpdGNoVHlwZS5wcm90byqtDQoRRmVhdHVyZVN3aXRjaFR5",
             "cGUSFwoTRkVBVFVSRV9TV0lUQ0hfTk9ORRAAEhcKE0ZFQVRVUkVfU1dJVENI",
             "X1NIT1AQARIeChpGRUFUVVJFX1NXSVRDSF9MSU5FVVBfTkFNRRACEiAKHEZF",
             "QVRVUkVfU1dJVENIX1JFQ0hBUkdFX1NIT1AQAxIbChdGRUFUVVJFX1NXSVRD",
@@ -58,8 +58,12 @@ namespace EggLink.DanhengServer.Proto {
             "T05PUE9MWV9PUFRJT05fUkFUSU8QKRItCilGRUFUVVJFX1NXSVRDSF9NT05P",
             "UE9MWV9HRVRfUkFGRkxFX1RJQ0tFVBAqEi4KKkZFQVRVUkVfU1dJVENIX01P",
             "Tk9QT0xZX1RBS0VfUkFGRkxFX1JFV0FSRBArEi0KKUZFQVRVUkVfU1dJVENI",
-            "X0NIQUxMRU5HRV9SRUNPTU1FTkRfTElORVVQECxCHqoCG0VnZ0xpbmsuRGFu",
-            "aGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
+            "X0NIQUxMRU5HRV9SRUNPTU1FTkRfTElORVVQECwSKAokRkVBVFVSRV9TV0lU",
+            "Q0hfUFNOX01FTUJFUl9TSElQX0NIRUNLEC0SKwonRkVBVFVSRV9TV0lUQ0hf",
+            "UExBWUVSX0JPQVJEX0RFVkVMT1BNRU5UEC4SFgoSRkVBVFVSRV9TV0lUQ0hf",
+            "UFZQEC8SHQoZRkVBVFVSRV9TV0lUQ0hfUk9HVUVfTU9ERRAwEiIKHkZFQVRV",
+            "UkVfU1dJVENIX1JPR1VFX1RPVVJOX1VHQxAxQh6qAhtFZ2dMaW5rLkRhbmhl",
+            "bmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::EggLink.DanhengServer.Proto.FeatureSwitchType), }, null, null));
@@ -114,6 +118,11 @@ namespace EggLink.DanhengServer.Proto {
     [pbr::OriginalName("FEATURE_SWITCH_MONOPOLY_GET_RAFFLE_TICKET")] FeatureSwitchMonopolyGetRaffleTicket = 42,
     [pbr::OriginalName("FEATURE_SWITCH_MONOPOLY_TAKE_RAFFLE_REWARD")] FeatureSwitchMonopolyTakeRaffleReward = 43,
     [pbr::OriginalName("FEATURE_SWITCH_CHALLENGE_RECOMMEND_LINEUP")] FeatureSwitchChallengeRecommendLineup = 44,
+    [pbr::OriginalName("FEATURE_SWITCH_PSN_MEMBER_SHIP_CHECK")] FeatureSwitchPsnMemberShipCheck = 45,
+    [pbr::OriginalName("FEATURE_SWITCH_PLAYER_BOARD_DEVELOPMENT")] FeatureSwitchPlayerBoardDevelopment = 46,
+    [pbr::OriginalName("FEATURE_SWITCH_PVP")] FeatureSwitchPvp = 47,
+    [pbr::OriginalName("FEATURE_SWITCH_ROGUE_MODE")] FeatureSwitchRogueMode = 48,
+    [pbr::OriginalName("FEATURE_SWITCH_ROGUE_TOURN_UGC")] FeatureSwitchRogueTournUgc = 49,
   }
 
   #endregion

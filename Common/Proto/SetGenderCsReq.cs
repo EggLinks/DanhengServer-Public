@@ -25,7 +25,7 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChRTZXRHZW5kZXJDc1JlcS5wcm90bxoMR2VuZGVyLnByb3RvIikKDlNldEdl",
-            "bmRlckNzUmVxEhcKBmdlbmRlchgPIAEoDjIHLkdlbmRlckIeqgIbRWdnTGlu",
+            "bmRlckNzUmVxEhcKBmdlbmRlchgCIAEoDjIHLkdlbmRlckIeqgIbRWdnTGlu",
             "ay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.GenderReflection.Descriptor, },
@@ -83,7 +83,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "gender" field.</summary>
-    public const int GenderFieldNumber = 15;
+    public const int GenderFieldNumber = 2;
     private global::EggLink.DanhengServer.Proto.Gender gender_ = global::EggLink.DanhengServer.Proto.Gender.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -137,7 +137,7 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (Gender != global::EggLink.DanhengServer.Proto.Gender.None) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(16);
         output.WriteEnum((int) Gender);
       }
       if (_unknownFields != null) {
@@ -151,7 +151,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (Gender != global::EggLink.DanhengServer.Proto.Gender.None) {
-        output.WriteRawTag(120);
+        output.WriteRawTag(16);
         output.WriteEnum((int) Gender);
       }
       if (_unknownFields != null) {
@@ -197,7 +197,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 120: {
+          case 16: {
             Gender = (global::EggLink.DanhengServer.Proto.Gender) input.ReadEnum();
             break;
           }
@@ -216,7 +216,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 120: {
+          case 16: {
             Gender = (global::EggLink.DanhengServer.Proto.Gender) input.ReadEnum();
             break;
           }

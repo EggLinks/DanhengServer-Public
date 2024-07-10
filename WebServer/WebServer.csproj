@@ -19,6 +19,7 @@
     <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.8" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.143" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 

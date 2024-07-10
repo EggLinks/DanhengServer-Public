@@ -24,14 +24,15 @@ namespace EggLink.DanhengServer.Proto {
     static EvolveBuildGearDamageInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch9Fdm9sdmVCdWlsZEdlYXJEYW1hZ2VJbmZvLnByb3RvIk8KGUV2b2x2ZUJ1",
-            "aWxkR2VhckRhbWFnZUluZm8SDwoHZ2Vhcl9pZBgBIAEoDRIOCgZkYW1hZ2UY",
-            "AiABKAESEQoJaHBfZGFtYWdlGAMgASgBQh6qAhtFZ2dMaW5rLkRhbmhlbmdT",
-            "ZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "Ch9Fdm9sdmVCdWlsZEdlYXJEYW1hZ2VJbmZvLnByb3RvIm4KGUV2b2x2ZUJ1",
+            "aWxkR2VhckRhbWFnZUluZm8SGQoRR2VhcklkRmllbGROdW1iZXIYASABKA0S",
+            "GQoRRGFtYWdlRmllbGROdW1iZXIYAiABKAESGwoTSHBEYW1hZ2VGaWVsZE51",
+            "bWJlchgDIAEoAUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo), global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo.Parser, new[]{ "GearId", "Damage", "HpDamage" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo), global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo.Parser, new[]{ "GearIdFieldNumber", "DamageFieldNumber", "HpDamageFieldNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,9 +74,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public EvolveBuildGearDamageInfo(EvolveBuildGearDamageInfo other) : this() {
-      gearId_ = other.gearId_;
-      damage_ = other.damage_;
-      hpDamage_ = other.hpDamage_;
+      gearIdFieldNumber_ = other.gearIdFieldNumber_;
+      damageFieldNumber_ = other.damageFieldNumber_;
+      hpDamageFieldNumber_ = other.hpDamageFieldNumber_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,39 +86,39 @@ namespace EggLink.DanhengServer.Proto {
       return new EvolveBuildGearDamageInfo(this);
     }
 
-    /// <summary>Field number for the "gear_id" field.</summary>
-    public const int GearIdFieldNumber = 1;
-    private uint gearId_;
+    /// <summary>Field number for the "GearIdFieldNumber" field.</summary>
+    public const int GearIdFieldNumberFieldNumber = 1;
+    private uint gearIdFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint GearId {
-      get { return gearId_; }
+    public uint GearIdFieldNumber {
+      get { return gearIdFieldNumber_; }
       set {
-        gearId_ = value;
+        gearIdFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "damage" field.</summary>
-    public const int DamageFieldNumber = 2;
-    private double damage_;
+    /// <summary>Field number for the "DamageFieldNumber" field.</summary>
+    public const int DamageFieldNumberFieldNumber = 2;
+    private double damageFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public double Damage {
-      get { return damage_; }
+    public double DamageFieldNumber {
+      get { return damageFieldNumber_; }
       set {
-        damage_ = value;
+        damageFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "hp_damage" field.</summary>
-    public const int HpDamageFieldNumber = 3;
-    private double hpDamage_;
+    /// <summary>Field number for the "HpDamageFieldNumber" field.</summary>
+    public const int HpDamageFieldNumberFieldNumber = 3;
+    private double hpDamageFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public double HpDamage {
-      get { return hpDamage_; }
+    public double HpDamageFieldNumber {
+      get { return hpDamageFieldNumber_; }
       set {
-        hpDamage_ = value;
+        hpDamageFieldNumber_ = value;
       }
     }
 
@@ -136,9 +137,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (GearId != other.GearId) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Damage, other.Damage)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(HpDamage, other.HpDamage)) return false;
+      if (GearIdFieldNumber != other.GearIdFieldNumber) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(DamageFieldNumber, other.DamageFieldNumber)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(HpDamageFieldNumber, other.HpDamageFieldNumber)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +147,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (GearId != 0) hash ^= GearId.GetHashCode();
-      if (Damage != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Damage);
-      if (HpDamage != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(HpDamage);
+      if (GearIdFieldNumber != 0) hash ^= GearIdFieldNumber.GetHashCode();
+      if (DamageFieldNumber != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(DamageFieldNumber);
+      if (HpDamageFieldNumber != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(HpDamageFieldNumber);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,17 +168,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (GearId != 0) {
+      if (GearIdFieldNumber != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt32(GearId);
+        output.WriteUInt32(GearIdFieldNumber);
       }
-      if (Damage != 0D) {
+      if (DamageFieldNumber != 0D) {
         output.WriteRawTag(17);
-        output.WriteDouble(Damage);
+        output.WriteDouble(DamageFieldNumber);
       }
-      if (HpDamage != 0D) {
+      if (HpDamageFieldNumber != 0D) {
         output.WriteRawTag(25);
-        output.WriteDouble(HpDamage);
+        output.WriteDouble(HpDamageFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -189,17 +190,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (GearId != 0) {
+      if (GearIdFieldNumber != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt32(GearId);
+        output.WriteUInt32(GearIdFieldNumber);
       }
-      if (Damage != 0D) {
+      if (DamageFieldNumber != 0D) {
         output.WriteRawTag(17);
-        output.WriteDouble(Damage);
+        output.WriteDouble(DamageFieldNumber);
       }
-      if (HpDamage != 0D) {
+      if (HpDamageFieldNumber != 0D) {
         output.WriteRawTag(25);
-        output.WriteDouble(HpDamage);
+        output.WriteDouble(HpDamageFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -211,13 +212,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (GearId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(GearId);
+      if (GearIdFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(GearIdFieldNumber);
       }
-      if (Damage != 0D) {
+      if (DamageFieldNumber != 0D) {
         size += 1 + 8;
       }
-      if (HpDamage != 0D) {
+      if (HpDamageFieldNumber != 0D) {
         size += 1 + 8;
       }
       if (_unknownFields != null) {
@@ -232,14 +233,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.GearId != 0) {
-        GearId = other.GearId;
+      if (other.GearIdFieldNumber != 0) {
+        GearIdFieldNumber = other.GearIdFieldNumber;
       }
-      if (other.Damage != 0D) {
-        Damage = other.Damage;
+      if (other.DamageFieldNumber != 0D) {
+        DamageFieldNumber = other.DamageFieldNumber;
       }
-      if (other.HpDamage != 0D) {
-        HpDamage = other.HpDamage;
+      if (other.HpDamageFieldNumber != 0D) {
+        HpDamageFieldNumber = other.HpDamageFieldNumber;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -257,15 +258,15 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            GearId = input.ReadUInt32();
+            GearIdFieldNumber = input.ReadUInt32();
             break;
           }
           case 17: {
-            Damage = input.ReadDouble();
+            DamageFieldNumber = input.ReadDouble();
             break;
           }
           case 25: {
-            HpDamage = input.ReadDouble();
+            HpDamageFieldNumber = input.ReadDouble();
             break;
           }
         }
@@ -284,15 +285,15 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            GearId = input.ReadUInt32();
+            GearIdFieldNumber = input.ReadUInt32();
             break;
           }
           case 17: {
-            Damage = input.ReadDouble();
+            DamageFieldNumber = input.ReadDouble();
             break;
           }
           case 25: {
-            HpDamage = input.ReadDouble();
+            HpDamageFieldNumber = input.ReadDouble();
             break;
           }
         }

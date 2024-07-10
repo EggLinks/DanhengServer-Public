@@ -25,15 +25,15 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChdGZWF0dXJlU3dpdGNoSW5mby5wcm90bxoYRmVhdHVyZVN3aXRjaFBhcmFt",
-            "LnByb3RvGhdGZWF0dXJlU3dpdGNoVHlwZS5wcm90byJ2ChFGZWF0dXJlU3dp",
-            "dGNoSW5mbxIgCgR0eXBlGAEgASgOMhIuRmVhdHVyZVN3aXRjaFR5cGUSKAoL",
-            "c3dpdGNoX2xpc3QYAiADKAsyEy5GZWF0dXJlU3dpdGNoUGFyYW0SFQoNaXNf",
-            "YWxsX2Nsb3NlZBgDIAEoCEIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlBy",
-            "b3RvYgZwcm90bzM="));
+            "LnByb3RvGhdGZWF0dXJlU3dpdGNoVHlwZS5wcm90byKUAQoRRmVhdHVyZVN3",
+            "aXRjaEluZm8SKwoPVHlwZUZpZWxkTnVtYmVyGAEgASgOMhIuRmVhdHVyZVN3",
+            "aXRjaFR5cGUSMgoVU3dpdGNoTGlzdEZpZWxkTnVtYmVyGAIgAygLMhMuRmVh",
+            "dHVyZVN3aXRjaFBhcmFtEh4KFklzQWxsQ2xvc2VkRmllbGROdW1iZXIYAyAB",
+            "KAhCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.FeatureSwitchParamReflection.Descriptor, global::EggLink.DanhengServer.Proto.FeatureSwitchTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.FeatureSwitchInfo), global::EggLink.DanhengServer.Proto.FeatureSwitchInfo.Parser, new[]{ "Type", "SwitchList", "IsAllClosed" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.FeatureSwitchInfo), global::EggLink.DanhengServer.Proto.FeatureSwitchInfo.Parser, new[]{ "TypeFieldNumber", "SwitchListFieldNumber", "IsAllClosedFieldNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,9 +75,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FeatureSwitchInfo(FeatureSwitchInfo other) : this() {
-      type_ = other.type_;
-      switchList_ = other.switchList_.Clone();
-      isAllClosed_ = other.isAllClosed_;
+      typeFieldNumber_ = other.typeFieldNumber_;
+      switchListFieldNumber_ = other.switchListFieldNumber_.Clone();
+      isAllClosedFieldNumber_ = other.isAllClosedFieldNumber_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -87,38 +87,38 @@ namespace EggLink.DanhengServer.Proto {
       return new FeatureSwitchInfo(this);
     }
 
-    /// <summary>Field number for the "type" field.</summary>
-    public const int TypeFieldNumber = 1;
-    private global::EggLink.DanhengServer.Proto.FeatureSwitchType type_ = global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone;
+    /// <summary>Field number for the "TypeFieldNumber" field.</summary>
+    public const int TypeFieldNumberFieldNumber = 1;
+    private global::EggLink.DanhengServer.Proto.FeatureSwitchType typeFieldNumber_ = global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.FeatureSwitchType Type {
-      get { return type_; }
+    public global::EggLink.DanhengServer.Proto.FeatureSwitchType TypeFieldNumber {
+      get { return typeFieldNumber_; }
       set {
-        type_ = value;
+        typeFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "switch_list" field.</summary>
-    public const int SwitchListFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.FeatureSwitchParam> _repeated_switchList_codec
+    /// <summary>Field number for the "SwitchListFieldNumber" field.</summary>
+    public const int SwitchListFieldNumberFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.FeatureSwitchParam> _repeated_switchListFieldNumber_codec
         = pb::FieldCodec.ForMessage(18, global::EggLink.DanhengServer.Proto.FeatureSwitchParam.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.FeatureSwitchParam> switchList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.FeatureSwitchParam>();
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.FeatureSwitchParam> switchListFieldNumber_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.FeatureSwitchParam>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.FeatureSwitchParam> SwitchList {
-      get { return switchList_; }
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.FeatureSwitchParam> SwitchListFieldNumber {
+      get { return switchListFieldNumber_; }
     }
 
-    /// <summary>Field number for the "is_all_closed" field.</summary>
-    public const int IsAllClosedFieldNumber = 3;
-    private bool isAllClosed_;
+    /// <summary>Field number for the "IsAllClosedFieldNumber" field.</summary>
+    public const int IsAllClosedFieldNumberFieldNumber = 3;
+    private bool isAllClosedFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsAllClosed {
-      get { return isAllClosed_; }
+    public bool IsAllClosedFieldNumber {
+      get { return isAllClosedFieldNumber_; }
       set {
-        isAllClosed_ = value;
+        isAllClosedFieldNumber_ = value;
       }
     }
 
@@ -137,9 +137,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Type != other.Type) return false;
-      if(!switchList_.Equals(other.switchList_)) return false;
-      if (IsAllClosed != other.IsAllClosed) return false;
+      if (TypeFieldNumber != other.TypeFieldNumber) return false;
+      if(!switchListFieldNumber_.Equals(other.switchListFieldNumber_)) return false;
+      if (IsAllClosedFieldNumber != other.IsAllClosedFieldNumber) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -147,9 +147,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Type != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) hash ^= Type.GetHashCode();
-      hash ^= switchList_.GetHashCode();
-      if (IsAllClosed != false) hash ^= IsAllClosed.GetHashCode();
+      if (TypeFieldNumber != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) hash ^= TypeFieldNumber.GetHashCode();
+      hash ^= switchListFieldNumber_.GetHashCode();
+      if (IsAllClosedFieldNumber != false) hash ^= IsAllClosedFieldNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -168,14 +168,14 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Type != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) {
+      if (TypeFieldNumber != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) Type);
+        output.WriteEnum((int) TypeFieldNumber);
       }
-      switchList_.WriteTo(output, _repeated_switchList_codec);
-      if (IsAllClosed != false) {
+      switchListFieldNumber_.WriteTo(output, _repeated_switchListFieldNumber_codec);
+      if (IsAllClosedFieldNumber != false) {
         output.WriteRawTag(24);
-        output.WriteBool(IsAllClosed);
+        output.WriteBool(IsAllClosedFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -187,14 +187,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Type != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) {
+      if (TypeFieldNumber != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) Type);
+        output.WriteEnum((int) TypeFieldNumber);
       }
-      switchList_.WriteTo(ref output, _repeated_switchList_codec);
-      if (IsAllClosed != false) {
+      switchListFieldNumber_.WriteTo(ref output, _repeated_switchListFieldNumber_codec);
+      if (IsAllClosedFieldNumber != false) {
         output.WriteRawTag(24);
-        output.WriteBool(IsAllClosed);
+        output.WriteBool(IsAllClosedFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -206,11 +206,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Type != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+      if (TypeFieldNumber != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) TypeFieldNumber);
       }
-      size += switchList_.CalculateSize(_repeated_switchList_codec);
-      if (IsAllClosed != false) {
+      size += switchListFieldNumber_.CalculateSize(_repeated_switchListFieldNumber_codec);
+      if (IsAllClosedFieldNumber != false) {
         size += 1 + 1;
       }
       if (_unknownFields != null) {
@@ -225,12 +225,12 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.Type != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) {
-        Type = other.Type;
+      if (other.TypeFieldNumber != global::EggLink.DanhengServer.Proto.FeatureSwitchType.FeatureSwitchNone) {
+        TypeFieldNumber = other.TypeFieldNumber;
       }
-      switchList_.Add(other.switchList_);
-      if (other.IsAllClosed != false) {
-        IsAllClosed = other.IsAllClosed;
+      switchListFieldNumber_.Add(other.switchListFieldNumber_);
+      if (other.IsAllClosedFieldNumber != false) {
+        IsAllClosedFieldNumber = other.IsAllClosedFieldNumber;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -248,15 +248,15 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Type = (global::EggLink.DanhengServer.Proto.FeatureSwitchType) input.ReadEnum();
+            TypeFieldNumber = (global::EggLink.DanhengServer.Proto.FeatureSwitchType) input.ReadEnum();
             break;
           }
           case 18: {
-            switchList_.AddEntriesFrom(input, _repeated_switchList_codec);
+            switchListFieldNumber_.AddEntriesFrom(input, _repeated_switchListFieldNumber_codec);
             break;
           }
           case 24: {
-            IsAllClosed = input.ReadBool();
+            IsAllClosedFieldNumber = input.ReadBool();
             break;
           }
         }
@@ -275,15 +275,15 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            Type = (global::EggLink.DanhengServer.Proto.FeatureSwitchType) input.ReadEnum();
+            TypeFieldNumber = (global::EggLink.DanhengServer.Proto.FeatureSwitchType) input.ReadEnum();
             break;
           }
           case 18: {
-            switchList_.AddEntriesFrom(ref input, _repeated_switchList_codec);
+            switchListFieldNumber_.AddEntriesFrom(ref input, _repeated_switchListFieldNumber_codec);
             break;
           }
           case 24: {
-            IsAllClosed = input.ReadBool();
+            IsAllClosedFieldNumber = input.ReadBool();
             break;
           }
         }

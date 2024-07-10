@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiZTY2VuZVVwZGF0ZVBvc2l0aW9uVmVyc2lvbk5vdGlmeS5wcm90byI3CiBT",
-            "Y2VuZVVwZGF0ZVBvc2l0aW9uVmVyc2lvbk5vdGlmeRITCgtMSURPRElMRlBO",
-            "ThgEIAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90",
+            "Y2VuZVVwZGF0ZVBvc2l0aW9uVmVyc2lvbk5vdGlmeRITCgtwb3NfdmVyc2lv",
+            "bhgNIAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90",
             "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SceneUpdatePositionVersionNotify), global::EggLink.DanhengServer.Proto.SceneUpdatePositionVersionNotify.Parser, new[]{ "LIDODILFPNN" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SceneUpdatePositionVersionNotify), global::EggLink.DanhengServer.Proto.SceneUpdatePositionVersionNotify.Parser, new[]{ "PosVersion" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,7 +73,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SceneUpdatePositionVersionNotify(SceneUpdatePositionVersionNotify other) : this() {
-      lIDODILFPNN_ = other.lIDODILFPNN_;
+      posVersion_ = other.posVersion_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -83,15 +83,15 @@ namespace EggLink.DanhengServer.Proto {
       return new SceneUpdatePositionVersionNotify(this);
     }
 
-    /// <summary>Field number for the "LIDODILFPNN" field.</summary>
-    public const int LIDODILFPNNFieldNumber = 4;
-    private uint lIDODILFPNN_;
+    /// <summary>Field number for the "pos_version" field.</summary>
+    public const int PosVersionFieldNumber = 13;
+    private uint posVersion_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint LIDODILFPNN {
-      get { return lIDODILFPNN_; }
+    public uint PosVersion {
+      get { return posVersion_; }
       set {
-        lIDODILFPNN_ = value;
+        posVersion_ = value;
       }
     }
 
@@ -110,7 +110,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (LIDODILFPNN != other.LIDODILFPNN) return false;
+      if (PosVersion != other.PosVersion) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -118,7 +118,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (LIDODILFPNN != 0) hash ^= LIDODILFPNN.GetHashCode();
+      if (PosVersion != 0) hash ^= PosVersion.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -137,9 +137,9 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (LIDODILFPNN != 0) {
-        output.WriteRawTag(32);
-        output.WriteUInt32(LIDODILFPNN);
+      if (PosVersion != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(PosVersion);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -151,9 +151,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (LIDODILFPNN != 0) {
-        output.WriteRawTag(32);
-        output.WriteUInt32(LIDODILFPNN);
+      if (PosVersion != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(PosVersion);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -165,8 +165,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (LIDODILFPNN != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(LIDODILFPNN);
+      if (PosVersion != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PosVersion);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -180,8 +180,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.LIDODILFPNN != 0) {
-        LIDODILFPNN = other.LIDODILFPNN;
+      if (other.PosVersion != 0) {
+        PosVersion = other.PosVersion;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -198,8 +198,8 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 32: {
-            LIDODILFPNN = input.ReadUInt32();
+          case 104: {
+            PosVersion = input.ReadUInt32();
             break;
           }
         }
@@ -217,8 +217,8 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 32: {
-            LIDODILFPNN = input.ReadUInt32();
+          case 104: {
+            PosVersion = input.ReadUInt32();
             break;
           }
         }

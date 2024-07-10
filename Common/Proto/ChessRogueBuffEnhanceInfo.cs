@@ -26,7 +26,7 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "Ch9DaGVzc1JvZ3VlQnVmZkVuaGFuY2VJbmZvLnByb3RvGhtDaGVzc1JvZ3Vl",
             "QnVmZkVuaGFuY2UucHJvdG8iSQoZQ2hlc3NSb2d1ZUJ1ZmZFbmhhbmNlSW5m",
-            "bxIsCgxlbmhhbmNlX2luZm8YDiADKAsyFi5DaGVzc1JvZ3VlQnVmZkVuaGFu",
+            "bxIsCgxlbmhhbmNlX2luZm8YDCADKAsyFi5DaGVzc1JvZ3VlQnVmZkVuaGFu",
             "Y2VCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChessRogueBuffEnhanceReflection.Descriptor, },
@@ -84,9 +84,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "enhance_info" field.</summary>
-    public const int EnhanceInfoFieldNumber = 14;
+    public const int EnhanceInfoFieldNumber = 12;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.ChessRogueBuffEnhance> _repeated_enhanceInfo_codec
-        = pb::FieldCodec.ForMessage(114, global::EggLink.DanhengServer.Proto.ChessRogueBuffEnhance.Parser);
+        = pb::FieldCodec.ForMessage(98, global::EggLink.DanhengServer.Proto.ChessRogueBuffEnhance.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueBuffEnhance> enhanceInfo_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueBuffEnhance>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -187,7 +187,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 114: {
+          case 98: {
             enhanceInfo_.AddEntriesFrom(input, _repeated_enhanceInfo_codec);
             break;
           }
@@ -206,7 +206,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 114: {
+          case 98: {
             enhanceInfo_.AddEntriesFrom(ref input, _repeated_enhanceInfo_codec);
             break;
           }

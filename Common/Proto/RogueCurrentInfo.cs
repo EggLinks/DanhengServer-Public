@@ -24,26 +24,26 @@ namespace EggLink.DanhengServer.Proto {
     static RogueCurrentInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChZSb2d1ZUN1cnJlbnRJbmZvLnByb3RvGhVSb2d1ZU1vZHVsZUluZm8ucHJv",
-            "dG8aEkdhbWVBZW9uSW5mby5wcm90bxoSUm9ndWVNYXBJbmZvLnByb3RvGhFS",
-            "b2d1ZVN0YXR1cy5wcm90bxoeUm9ndWVDb21tb25QZW5kaW5nQWN0aW9uLnBy",
-            "b3RvGhZSb2d1ZVZpcnR1YWxJdGVtLnByb3RvGhVSb2d1ZUxpbmV1cEluZm8u",
-            "cHJvdG8aE1JvZ3VlQnVmZkluZm8ucHJvdG8aFUdhbWVNaXJhY2xlSW5mby5w",
-            "cm90byKVAwoQUm9ndWVDdXJyZW50SW5mbxImCg9yb2d1ZV9hZW9uX2luZm8Y",
-            "AyABKAsyDS5HYW1lQWVvbkluZm8SKwoRZ2FtZV9taXJhY2xlX2luZm8YAiAB",
-            "KAsyEC5HYW1lTWlyYWNsZUluZm8SKwoRcm9ndWVfbGluZXVwX2luZm8YBiAB",
-            "KAsyEC5Sb2d1ZUxpbmV1cEluZm8SHAoGc3RhdHVzGAcgASgOMgwuUm9ndWVT",
-            "dGF0dXMSHwoIbWFwX2luZm8YCSABKAsyDS5Sb2d1ZU1hcEluZm8SMQoOcGVu",
-            "ZGluZ19hY3Rpb24YCCABKAsyGS5Sb2d1ZUNvbW1vblBlbmRpbmdBY3Rpb24S",
-            "DgoGaXNfd2luGAUgASgIEiUKC21vZHVsZV9pbmZvGAsgASgLMhAuUm9ndWVN",
-            "b2R1bGVJbmZvEi0KEnJvZ3VlX3ZpcnR1YWxfaXRlbRgKIAEoCzIRLlJvZ3Vl",
-            "VmlydHVhbEl0ZW0SJwoPcm9ndWVfYnVmZl9pbmZvGA4gASgLMg4uUm9ndWVC",
-            "dWZmSW5mb0IeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90",
+            "ChZSb2d1ZUN1cnJlbnRJbmZvLnByb3RvGhJHYW1lQWVvbkluZm8ucHJvdG8a",
+            "FVJvZ3VlTGluZXVwSW5mby5wcm90bxoWUm9ndWVWaXJ0dWFsSXRlbS5wcm90",
+            "bxoSUm9ndWVNYXBJbmZvLnByb3RvGhVHYW1lTWlyYWNsZUluZm8ucHJvdG8a",
+            "E1JvZ3VlQnVmZkluZm8ucHJvdG8aEVJvZ3VlU3RhdHVzLnByb3RvGhVSb2d1",
+            "ZU1vZHVsZUluZm8ucHJvdG8aHlJvZ3VlQ29tbW9uUGVuZGluZ0FjdGlvbi5w",
+            "cm90byKVAwoQUm9ndWVDdXJyZW50SW5mbxIOCgZpc193aW4YCSABKAgSJwoP",
+            "cm9ndWVfYnVmZl9pbmZvGAUgASgLMg4uUm9ndWVCdWZmSW5mbxIlCgttb2R1",
+            "bGVfaW5mbxgGIAEoCzIQLlJvZ3VlTW9kdWxlSW5mbxIcCgZzdGF0dXMYDSAB",
+            "KA4yDC5Sb2d1ZVN0YXR1cxIrChFyb2d1ZV9saW5ldXBfaW5mbxgLIAEoCzIQ",
+            "LlJvZ3VlTGluZXVwSW5mbxIfCghtYXBfaW5mbxgEIAEoCzINLlJvZ3VlTWFw",
+            "SW5mbxImCg9yb2d1ZV9hZW9uX2luZm8YDyABKAsyDS5HYW1lQWVvbkluZm8S",
+            "LQoScm9ndWVfdmlydHVhbF9pdGVtGAogASgLMhEuUm9ndWVWaXJ0dWFsSXRl",
+            "bRIxCg5wZW5kaW5nX2FjdGlvbhgCIAEoCzIZLlJvZ3VlQ29tbW9uUGVuZGlu",
+            "Z0FjdGlvbhIrChFnYW1lX21pcmFjbGVfaW5mbxgIIAEoCzIQLkdhbWVNaXJh",
+            "Y2xlSW5mb0IeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90",
             "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RogueModuleInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.GameAeonInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueMapInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueStatusReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueCommonPendingActionReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueVirtualItemReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueLineupInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueBuffInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.GameMiracleInfoReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.GameAeonInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueLineupInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueVirtualItemReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueMapInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.GameMiracleInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueBuffInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueStatusReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueModuleInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueCommonPendingActionReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RogueCurrentInfo), global::EggLink.DanhengServer.Proto.RogueCurrentInfo.Parser, new[]{ "RogueAeonInfo", "GameMiracleInfo", "RogueLineupInfo", "Status", "MapInfo", "PendingAction", "IsWin", "ModuleInfo", "RogueVirtualItem", "RogueBuffInfo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RogueCurrentInfo), global::EggLink.DanhengServer.Proto.RogueCurrentInfo.Parser, new[]{ "IsWin", "RogueBuffInfo", "ModuleInfo", "Status", "RogueLineupInfo", "MapInfo", "RogueAeonInfo", "RogueVirtualItem", "PendingAction", "GameMiracleInfo" }, null, null, null, null)
           }));
     }
     #endregion
@@ -85,16 +85,16 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RogueCurrentInfo(RogueCurrentInfo other) : this() {
-      rogueAeonInfo_ = other.rogueAeonInfo_ != null ? other.rogueAeonInfo_.Clone() : null;
-      gameMiracleInfo_ = other.gameMiracleInfo_ != null ? other.gameMiracleInfo_.Clone() : null;
-      rogueLineupInfo_ = other.rogueLineupInfo_ != null ? other.rogueLineupInfo_.Clone() : null;
-      status_ = other.status_;
-      mapInfo_ = other.mapInfo_ != null ? other.mapInfo_.Clone() : null;
-      pendingAction_ = other.pendingAction_ != null ? other.pendingAction_.Clone() : null;
       isWin_ = other.isWin_;
-      moduleInfo_ = other.moduleInfo_ != null ? other.moduleInfo_.Clone() : null;
-      rogueVirtualItem_ = other.rogueVirtualItem_ != null ? other.rogueVirtualItem_.Clone() : null;
       rogueBuffInfo_ = other.rogueBuffInfo_ != null ? other.rogueBuffInfo_.Clone() : null;
+      moduleInfo_ = other.moduleInfo_ != null ? other.moduleInfo_.Clone() : null;
+      status_ = other.status_;
+      rogueLineupInfo_ = other.rogueLineupInfo_ != null ? other.rogueLineupInfo_.Clone() : null;
+      mapInfo_ = other.mapInfo_ != null ? other.mapInfo_.Clone() : null;
+      rogueAeonInfo_ = other.rogueAeonInfo_ != null ? other.rogueAeonInfo_.Clone() : null;
+      rogueVirtualItem_ = other.rogueVirtualItem_ != null ? other.rogueVirtualItem_.Clone() : null;
+      pendingAction_ = other.pendingAction_ != null ? other.pendingAction_.Clone() : null;
+      gameMiracleInfo_ = other.gameMiracleInfo_ != null ? other.gameMiracleInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -104,80 +104,8 @@ namespace EggLink.DanhengServer.Proto {
       return new RogueCurrentInfo(this);
     }
 
-    /// <summary>Field number for the "rogue_aeon_info" field.</summary>
-    public const int RogueAeonInfoFieldNumber = 3;
-    private global::EggLink.DanhengServer.Proto.GameAeonInfo rogueAeonInfo_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.GameAeonInfo RogueAeonInfo {
-      get { return rogueAeonInfo_; }
-      set {
-        rogueAeonInfo_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "game_miracle_info" field.</summary>
-    public const int GameMiracleInfoFieldNumber = 2;
-    private global::EggLink.DanhengServer.Proto.GameMiracleInfo gameMiracleInfo_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.GameMiracleInfo GameMiracleInfo {
-      get { return gameMiracleInfo_; }
-      set {
-        gameMiracleInfo_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "rogue_lineup_info" field.</summary>
-    public const int RogueLineupInfoFieldNumber = 6;
-    private global::EggLink.DanhengServer.Proto.RogueLineupInfo rogueLineupInfo_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.RogueLineupInfo RogueLineupInfo {
-      get { return rogueLineupInfo_; }
-      set {
-        rogueLineupInfo_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 7;
-    private global::EggLink.DanhengServer.Proto.RogueStatus status_ = global::EggLink.DanhengServer.Proto.RogueStatus.None;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.RogueStatus Status {
-      get { return status_; }
-      set {
-        status_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "map_info" field.</summary>
-    public const int MapInfoFieldNumber = 9;
-    private global::EggLink.DanhengServer.Proto.RogueMapInfo mapInfo_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.RogueMapInfo MapInfo {
-      get { return mapInfo_; }
-      set {
-        mapInfo_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "pending_action" field.</summary>
-    public const int PendingActionFieldNumber = 8;
-    private global::EggLink.DanhengServer.Proto.RogueCommonPendingAction pendingAction_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.RogueCommonPendingAction PendingAction {
-      get { return pendingAction_; }
-      set {
-        pendingAction_ = value;
-      }
-    }
-
     /// <summary>Field number for the "is_win" field.</summary>
-    public const int IsWinFieldNumber = 5;
+    public const int IsWinFieldNumber = 9;
     private bool isWin_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -188,8 +116,20 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
+    /// <summary>Field number for the "rogue_buff_info" field.</summary>
+    public const int RogueBuffInfoFieldNumber = 5;
+    private global::EggLink.DanhengServer.Proto.RogueBuffInfo rogueBuffInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.RogueBuffInfo RogueBuffInfo {
+      get { return rogueBuffInfo_; }
+      set {
+        rogueBuffInfo_ = value;
+      }
+    }
+
     /// <summary>Field number for the "module_info" field.</summary>
-    public const int ModuleInfoFieldNumber = 11;
+    public const int ModuleInfoFieldNumber = 6;
     private global::EggLink.DanhengServer.Proto.RogueModuleInfo moduleInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -197,6 +137,54 @@ namespace EggLink.DanhengServer.Proto {
       get { return moduleInfo_; }
       set {
         moduleInfo_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 13;
+    private global::EggLink.DanhengServer.Proto.RogueStatus status_ = global::EggLink.DanhengServer.Proto.RogueStatus.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.RogueStatus Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "rogue_lineup_info" field.</summary>
+    public const int RogueLineupInfoFieldNumber = 11;
+    private global::EggLink.DanhengServer.Proto.RogueLineupInfo rogueLineupInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.RogueLineupInfo RogueLineupInfo {
+      get { return rogueLineupInfo_; }
+      set {
+        rogueLineupInfo_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "map_info" field.</summary>
+    public const int MapInfoFieldNumber = 4;
+    private global::EggLink.DanhengServer.Proto.RogueMapInfo mapInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.RogueMapInfo MapInfo {
+      get { return mapInfo_; }
+      set {
+        mapInfo_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "rogue_aeon_info" field.</summary>
+    public const int RogueAeonInfoFieldNumber = 15;
+    private global::EggLink.DanhengServer.Proto.GameAeonInfo rogueAeonInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.GameAeonInfo RogueAeonInfo {
+      get { return rogueAeonInfo_; }
+      set {
+        rogueAeonInfo_ = value;
       }
     }
 
@@ -212,15 +200,27 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "rogue_buff_info" field.</summary>
-    public const int RogueBuffInfoFieldNumber = 14;
-    private global::EggLink.DanhengServer.Proto.RogueBuffInfo rogueBuffInfo_;
+    /// <summary>Field number for the "pending_action" field.</summary>
+    public const int PendingActionFieldNumber = 2;
+    private global::EggLink.DanhengServer.Proto.RogueCommonPendingAction pendingAction_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.RogueBuffInfo RogueBuffInfo {
-      get { return rogueBuffInfo_; }
+    public global::EggLink.DanhengServer.Proto.RogueCommonPendingAction PendingAction {
+      get { return pendingAction_; }
       set {
-        rogueBuffInfo_ = value;
+        pendingAction_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "game_miracle_info" field.</summary>
+    public const int GameMiracleInfoFieldNumber = 8;
+    private global::EggLink.DanhengServer.Proto.GameMiracleInfo gameMiracleInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.GameMiracleInfo GameMiracleInfo {
+      get { return gameMiracleInfo_; }
+      set {
+        gameMiracleInfo_ = value;
       }
     }
 
@@ -239,16 +239,16 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(RogueAeonInfo, other.RogueAeonInfo)) return false;
-      if (!object.Equals(GameMiracleInfo, other.GameMiracleInfo)) return false;
-      if (!object.Equals(RogueLineupInfo, other.RogueLineupInfo)) return false;
-      if (Status != other.Status) return false;
-      if (!object.Equals(MapInfo, other.MapInfo)) return false;
-      if (!object.Equals(PendingAction, other.PendingAction)) return false;
       if (IsWin != other.IsWin) return false;
-      if (!object.Equals(ModuleInfo, other.ModuleInfo)) return false;
-      if (!object.Equals(RogueVirtualItem, other.RogueVirtualItem)) return false;
       if (!object.Equals(RogueBuffInfo, other.RogueBuffInfo)) return false;
+      if (!object.Equals(ModuleInfo, other.ModuleInfo)) return false;
+      if (Status != other.Status) return false;
+      if (!object.Equals(RogueLineupInfo, other.RogueLineupInfo)) return false;
+      if (!object.Equals(MapInfo, other.MapInfo)) return false;
+      if (!object.Equals(RogueAeonInfo, other.RogueAeonInfo)) return false;
+      if (!object.Equals(RogueVirtualItem, other.RogueVirtualItem)) return false;
+      if (!object.Equals(PendingAction, other.PendingAction)) return false;
+      if (!object.Equals(GameMiracleInfo, other.GameMiracleInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -256,16 +256,16 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (rogueAeonInfo_ != null) hash ^= RogueAeonInfo.GetHashCode();
-      if (gameMiracleInfo_ != null) hash ^= GameMiracleInfo.GetHashCode();
-      if (rogueLineupInfo_ != null) hash ^= RogueLineupInfo.GetHashCode();
-      if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) hash ^= Status.GetHashCode();
-      if (mapInfo_ != null) hash ^= MapInfo.GetHashCode();
-      if (pendingAction_ != null) hash ^= PendingAction.GetHashCode();
       if (IsWin != false) hash ^= IsWin.GetHashCode();
-      if (moduleInfo_ != null) hash ^= ModuleInfo.GetHashCode();
-      if (rogueVirtualItem_ != null) hash ^= RogueVirtualItem.GetHashCode();
       if (rogueBuffInfo_ != null) hash ^= RogueBuffInfo.GetHashCode();
+      if (moduleInfo_ != null) hash ^= ModuleInfo.GetHashCode();
+      if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) hash ^= Status.GetHashCode();
+      if (rogueLineupInfo_ != null) hash ^= RogueLineupInfo.GetHashCode();
+      if (mapInfo_ != null) hash ^= MapInfo.GetHashCode();
+      if (rogueAeonInfo_ != null) hash ^= RogueAeonInfo.GetHashCode();
+      if (rogueVirtualItem_ != null) hash ^= RogueVirtualItem.GetHashCode();
+      if (pendingAction_ != null) hash ^= PendingAction.GetHashCode();
+      if (gameMiracleInfo_ != null) hash ^= GameMiracleInfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -284,45 +284,45 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (gameMiracleInfo_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(GameMiracleInfo);
-      }
-      if (rogueAeonInfo_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(RogueAeonInfo);
-      }
-      if (IsWin != false) {
-        output.WriteRawTag(40);
-        output.WriteBool(IsWin);
-      }
-      if (rogueLineupInfo_ != null) {
-        output.WriteRawTag(50);
-        output.WriteMessage(RogueLineupInfo);
-      }
-      if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
-        output.WriteRawTag(56);
-        output.WriteEnum((int) Status);
-      }
       if (pendingAction_ != null) {
-        output.WriteRawTag(66);
+        output.WriteRawTag(18);
         output.WriteMessage(PendingAction);
       }
       if (mapInfo_ != null) {
-        output.WriteRawTag(74);
+        output.WriteRawTag(34);
         output.WriteMessage(MapInfo);
+      }
+      if (rogueBuffInfo_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(RogueBuffInfo);
+      }
+      if (moduleInfo_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(ModuleInfo);
+      }
+      if (gameMiracleInfo_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(GameMiracleInfo);
+      }
+      if (IsWin != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(IsWin);
       }
       if (rogueVirtualItem_ != null) {
         output.WriteRawTag(82);
         output.WriteMessage(RogueVirtualItem);
       }
-      if (moduleInfo_ != null) {
+      if (rogueLineupInfo_ != null) {
         output.WriteRawTag(90);
-        output.WriteMessage(ModuleInfo);
+        output.WriteMessage(RogueLineupInfo);
       }
-      if (rogueBuffInfo_ != null) {
-        output.WriteRawTag(114);
-        output.WriteMessage(RogueBuffInfo);
+      if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
+        output.WriteRawTag(104);
+        output.WriteEnum((int) Status);
+      }
+      if (rogueAeonInfo_ != null) {
+        output.WriteRawTag(122);
+        output.WriteMessage(RogueAeonInfo);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -334,45 +334,45 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (gameMiracleInfo_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(GameMiracleInfo);
-      }
-      if (rogueAeonInfo_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(RogueAeonInfo);
-      }
-      if (IsWin != false) {
-        output.WriteRawTag(40);
-        output.WriteBool(IsWin);
-      }
-      if (rogueLineupInfo_ != null) {
-        output.WriteRawTag(50);
-        output.WriteMessage(RogueLineupInfo);
-      }
-      if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
-        output.WriteRawTag(56);
-        output.WriteEnum((int) Status);
-      }
       if (pendingAction_ != null) {
-        output.WriteRawTag(66);
+        output.WriteRawTag(18);
         output.WriteMessage(PendingAction);
       }
       if (mapInfo_ != null) {
-        output.WriteRawTag(74);
+        output.WriteRawTag(34);
         output.WriteMessage(MapInfo);
+      }
+      if (rogueBuffInfo_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(RogueBuffInfo);
+      }
+      if (moduleInfo_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(ModuleInfo);
+      }
+      if (gameMiracleInfo_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(GameMiracleInfo);
+      }
+      if (IsWin != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(IsWin);
       }
       if (rogueVirtualItem_ != null) {
         output.WriteRawTag(82);
         output.WriteMessage(RogueVirtualItem);
       }
-      if (moduleInfo_ != null) {
+      if (rogueLineupInfo_ != null) {
         output.WriteRawTag(90);
-        output.WriteMessage(ModuleInfo);
+        output.WriteMessage(RogueLineupInfo);
       }
-      if (rogueBuffInfo_ != null) {
-        output.WriteRawTag(114);
-        output.WriteMessage(RogueBuffInfo);
+      if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
+        output.WriteRawTag(104);
+        output.WriteEnum((int) Status);
+      }
+      if (rogueAeonInfo_ != null) {
+        output.WriteRawTag(122);
+        output.WriteMessage(RogueAeonInfo);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -384,35 +384,35 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (rogueAeonInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RogueAeonInfo);
-      }
-      if (gameMiracleInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GameMiracleInfo);
-      }
-      if (rogueLineupInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RogueLineupInfo);
-      }
-      if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
-      }
-      if (mapInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MapInfo);
-      }
-      if (pendingAction_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PendingAction);
-      }
       if (IsWin != false) {
         size += 1 + 1;
+      }
+      if (rogueBuffInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RogueBuffInfo);
       }
       if (moduleInfo_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ModuleInfo);
       }
+      if (Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      }
+      if (rogueLineupInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RogueLineupInfo);
+      }
+      if (mapInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MapInfo);
+      }
+      if (rogueAeonInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RogueAeonInfo);
+      }
       if (rogueVirtualItem_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(RogueVirtualItem);
       }
-      if (rogueBuffInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RogueBuffInfo);
+      if (pendingAction_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PendingAction);
+      }
+      if (gameMiracleInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GameMiracleInfo);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -426,41 +426,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.rogueAeonInfo_ != null) {
-        if (rogueAeonInfo_ == null) {
-          RogueAeonInfo = new global::EggLink.DanhengServer.Proto.GameAeonInfo();
-        }
-        RogueAeonInfo.MergeFrom(other.RogueAeonInfo);
-      }
-      if (other.gameMiracleInfo_ != null) {
-        if (gameMiracleInfo_ == null) {
-          GameMiracleInfo = new global::EggLink.DanhengServer.Proto.GameMiracleInfo();
-        }
-        GameMiracleInfo.MergeFrom(other.GameMiracleInfo);
-      }
-      if (other.rogueLineupInfo_ != null) {
-        if (rogueLineupInfo_ == null) {
-          RogueLineupInfo = new global::EggLink.DanhengServer.Proto.RogueLineupInfo();
-        }
-        RogueLineupInfo.MergeFrom(other.RogueLineupInfo);
-      }
-      if (other.Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
-        Status = other.Status;
-      }
-      if (other.mapInfo_ != null) {
-        if (mapInfo_ == null) {
-          MapInfo = new global::EggLink.DanhengServer.Proto.RogueMapInfo();
-        }
-        MapInfo.MergeFrom(other.MapInfo);
-      }
-      if (other.pendingAction_ != null) {
-        if (pendingAction_ == null) {
-          PendingAction = new global::EggLink.DanhengServer.Proto.RogueCommonPendingAction();
-        }
-        PendingAction.MergeFrom(other.PendingAction);
-      }
       if (other.IsWin != false) {
         IsWin = other.IsWin;
+      }
+      if (other.rogueBuffInfo_ != null) {
+        if (rogueBuffInfo_ == null) {
+          RogueBuffInfo = new global::EggLink.DanhengServer.Proto.RogueBuffInfo();
+        }
+        RogueBuffInfo.MergeFrom(other.RogueBuffInfo);
       }
       if (other.moduleInfo_ != null) {
         if (moduleInfo_ == null) {
@@ -468,17 +441,44 @@ namespace EggLink.DanhengServer.Proto {
         }
         ModuleInfo.MergeFrom(other.ModuleInfo);
       }
+      if (other.Status != global::EggLink.DanhengServer.Proto.RogueStatus.None) {
+        Status = other.Status;
+      }
+      if (other.rogueLineupInfo_ != null) {
+        if (rogueLineupInfo_ == null) {
+          RogueLineupInfo = new global::EggLink.DanhengServer.Proto.RogueLineupInfo();
+        }
+        RogueLineupInfo.MergeFrom(other.RogueLineupInfo);
+      }
+      if (other.mapInfo_ != null) {
+        if (mapInfo_ == null) {
+          MapInfo = new global::EggLink.DanhengServer.Proto.RogueMapInfo();
+        }
+        MapInfo.MergeFrom(other.MapInfo);
+      }
+      if (other.rogueAeonInfo_ != null) {
+        if (rogueAeonInfo_ == null) {
+          RogueAeonInfo = new global::EggLink.DanhengServer.Proto.GameAeonInfo();
+        }
+        RogueAeonInfo.MergeFrom(other.RogueAeonInfo);
+      }
       if (other.rogueVirtualItem_ != null) {
         if (rogueVirtualItem_ == null) {
           RogueVirtualItem = new global::EggLink.DanhengServer.Proto.RogueVirtualItem();
         }
         RogueVirtualItem.MergeFrom(other.RogueVirtualItem);
       }
-      if (other.rogueBuffInfo_ != null) {
-        if (rogueBuffInfo_ == null) {
-          RogueBuffInfo = new global::EggLink.DanhengServer.Proto.RogueBuffInfo();
+      if (other.pendingAction_ != null) {
+        if (pendingAction_ == null) {
+          PendingAction = new global::EggLink.DanhengServer.Proto.RogueCommonPendingAction();
         }
-        RogueBuffInfo.MergeFrom(other.RogueBuffInfo);
+        PendingAction.MergeFrom(other.PendingAction);
+      }
+      if (other.gameMiracleInfo_ != null) {
+        if (gameMiracleInfo_ == null) {
+          GameMiracleInfo = new global::EggLink.DanhengServer.Proto.GameMiracleInfo();
+        }
+        GameMiracleInfo.MergeFrom(other.GameMiracleInfo);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -496,46 +496,42 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 18: {
-            if (gameMiracleInfo_ == null) {
-              GameMiracleInfo = new global::EggLink.DanhengServer.Proto.GameMiracleInfo();
-            }
-            input.ReadMessage(GameMiracleInfo);
-            break;
-          }
-          case 26: {
-            if (rogueAeonInfo_ == null) {
-              RogueAeonInfo = new global::EggLink.DanhengServer.Proto.GameAeonInfo();
-            }
-            input.ReadMessage(RogueAeonInfo);
-            break;
-          }
-          case 40: {
-            IsWin = input.ReadBool();
-            break;
-          }
-          case 50: {
-            if (rogueLineupInfo_ == null) {
-              RogueLineupInfo = new global::EggLink.DanhengServer.Proto.RogueLineupInfo();
-            }
-            input.ReadMessage(RogueLineupInfo);
-            break;
-          }
-          case 56: {
-            Status = (global::EggLink.DanhengServer.Proto.RogueStatus) input.ReadEnum();
-            break;
-          }
-          case 66: {
             if (pendingAction_ == null) {
               PendingAction = new global::EggLink.DanhengServer.Proto.RogueCommonPendingAction();
             }
             input.ReadMessage(PendingAction);
             break;
           }
-          case 74: {
+          case 34: {
             if (mapInfo_ == null) {
               MapInfo = new global::EggLink.DanhengServer.Proto.RogueMapInfo();
             }
             input.ReadMessage(MapInfo);
+            break;
+          }
+          case 42: {
+            if (rogueBuffInfo_ == null) {
+              RogueBuffInfo = new global::EggLink.DanhengServer.Proto.RogueBuffInfo();
+            }
+            input.ReadMessage(RogueBuffInfo);
+            break;
+          }
+          case 50: {
+            if (moduleInfo_ == null) {
+              ModuleInfo = new global::EggLink.DanhengServer.Proto.RogueModuleInfo();
+            }
+            input.ReadMessage(ModuleInfo);
+            break;
+          }
+          case 66: {
+            if (gameMiracleInfo_ == null) {
+              GameMiracleInfo = new global::EggLink.DanhengServer.Proto.GameMiracleInfo();
+            }
+            input.ReadMessage(GameMiracleInfo);
+            break;
+          }
+          case 72: {
+            IsWin = input.ReadBool();
             break;
           }
           case 82: {
@@ -546,17 +542,21 @@ namespace EggLink.DanhengServer.Proto {
             break;
           }
           case 90: {
-            if (moduleInfo_ == null) {
-              ModuleInfo = new global::EggLink.DanhengServer.Proto.RogueModuleInfo();
+            if (rogueLineupInfo_ == null) {
+              RogueLineupInfo = new global::EggLink.DanhengServer.Proto.RogueLineupInfo();
             }
-            input.ReadMessage(ModuleInfo);
+            input.ReadMessage(RogueLineupInfo);
             break;
           }
-          case 114: {
-            if (rogueBuffInfo_ == null) {
-              RogueBuffInfo = new global::EggLink.DanhengServer.Proto.RogueBuffInfo();
+          case 104: {
+            Status = (global::EggLink.DanhengServer.Proto.RogueStatus) input.ReadEnum();
+            break;
+          }
+          case 122: {
+            if (rogueAeonInfo_ == null) {
+              RogueAeonInfo = new global::EggLink.DanhengServer.Proto.GameAeonInfo();
             }
-            input.ReadMessage(RogueBuffInfo);
+            input.ReadMessage(RogueAeonInfo);
             break;
           }
         }
@@ -575,46 +575,42 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 18: {
-            if (gameMiracleInfo_ == null) {
-              GameMiracleInfo = new global::EggLink.DanhengServer.Proto.GameMiracleInfo();
-            }
-            input.ReadMessage(GameMiracleInfo);
-            break;
-          }
-          case 26: {
-            if (rogueAeonInfo_ == null) {
-              RogueAeonInfo = new global::EggLink.DanhengServer.Proto.GameAeonInfo();
-            }
-            input.ReadMessage(RogueAeonInfo);
-            break;
-          }
-          case 40: {
-            IsWin = input.ReadBool();
-            break;
-          }
-          case 50: {
-            if (rogueLineupInfo_ == null) {
-              RogueLineupInfo = new global::EggLink.DanhengServer.Proto.RogueLineupInfo();
-            }
-            input.ReadMessage(RogueLineupInfo);
-            break;
-          }
-          case 56: {
-            Status = (global::EggLink.DanhengServer.Proto.RogueStatus) input.ReadEnum();
-            break;
-          }
-          case 66: {
             if (pendingAction_ == null) {
               PendingAction = new global::EggLink.DanhengServer.Proto.RogueCommonPendingAction();
             }
             input.ReadMessage(PendingAction);
             break;
           }
-          case 74: {
+          case 34: {
             if (mapInfo_ == null) {
               MapInfo = new global::EggLink.DanhengServer.Proto.RogueMapInfo();
             }
             input.ReadMessage(MapInfo);
+            break;
+          }
+          case 42: {
+            if (rogueBuffInfo_ == null) {
+              RogueBuffInfo = new global::EggLink.DanhengServer.Proto.RogueBuffInfo();
+            }
+            input.ReadMessage(RogueBuffInfo);
+            break;
+          }
+          case 50: {
+            if (moduleInfo_ == null) {
+              ModuleInfo = new global::EggLink.DanhengServer.Proto.RogueModuleInfo();
+            }
+            input.ReadMessage(ModuleInfo);
+            break;
+          }
+          case 66: {
+            if (gameMiracleInfo_ == null) {
+              GameMiracleInfo = new global::EggLink.DanhengServer.Proto.GameMiracleInfo();
+            }
+            input.ReadMessage(GameMiracleInfo);
+            break;
+          }
+          case 72: {
+            IsWin = input.ReadBool();
             break;
           }
           case 82: {
@@ -625,17 +621,21 @@ namespace EggLink.DanhengServer.Proto {
             break;
           }
           case 90: {
-            if (moduleInfo_ == null) {
-              ModuleInfo = new global::EggLink.DanhengServer.Proto.RogueModuleInfo();
+            if (rogueLineupInfo_ == null) {
+              RogueLineupInfo = new global::EggLink.DanhengServer.Proto.RogueLineupInfo();
             }
-            input.ReadMessage(ModuleInfo);
+            input.ReadMessage(RogueLineupInfo);
             break;
           }
-          case 114: {
-            if (rogueBuffInfo_ == null) {
-              RogueBuffInfo = new global::EggLink.DanhengServer.Proto.RogueBuffInfo();
+          case 104: {
+            Status = (global::EggLink.DanhengServer.Proto.RogueStatus) input.ReadEnum();
+            break;
+          }
+          case 122: {
+            if (rogueAeonInfo_ == null) {
+              RogueAeonInfo = new global::EggLink.DanhengServer.Proto.GameAeonInfo();
             }
-            input.ReadMessage(RogueBuffInfo);
+            input.ReadMessage(RogueAeonInfo);
             break;
           }
         }

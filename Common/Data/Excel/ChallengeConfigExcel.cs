@@ -2,7 +2,7 @@
 
 namespace EggLink.DanhengServer.Data.Excel
 {
-    [ResourceEntity("ChallengeMazeConfig.json,ChallengeStoryMazeConfig.json",
+    [ResourceEntity("ChallengeMazeConfig.json,ChallengeStoryMazeConfig.json,ChallengeBossMazeConfig.json",
         isMultifile: true)]
     public class ChallengeConfigExcel : ExcelResource
     {
@@ -32,6 +32,8 @@ namespace EggLink.DanhengServer.Data.Excel
         public Dictionary<int, ChallengeMonsterInfo> ChallengeMonsters2 { get; set; } = new();
         [JsonIgnore]
         public ChallengeStoryExtraExcel? StoryExcel;
+        [JsonIgnore]
+        public ChallengeBossExtraExcel? BossExcel;
 
         public override int GetId()
         {
@@ -43,10 +45,20 @@ namespace EggLink.DanhengServer.Data.Excel
             return StoryExcel != null;
         }
 
+        public bool IsBoss()
+        {
+            return BossExcel != null;
+        }
+
         public void SetStoryExcel(ChallengeStoryExtraExcel storyExcel)
         {
             StoryExcel = storyExcel;
             ChallengeCountDown = storyExcel.TurnLimit;
+        }
+
+        public void SetBossExcel(ChallengeBossExtraExcel bossExcel)
+        {
+            BossExcel = bossExcel;
         }
 
         public override void Loaded()

@@ -9,7 +9,7 @@ namespace EggLink.DanhengServer.Data.Excel
     [ResourceEntity("RogueHandBookEvent.json")]
     public class RogueHandBookEventExcel : ExcelResource
     {
-        public int EventID { get; set; }
+        public int EventHandbookID { get; set; }
         public HashName EventTitle { get; set; } = new();
 
         public int EventReward { get; set; }
@@ -17,7 +17,7 @@ namespace EggLink.DanhengServer.Data.Excel
 
         public override int GetId()
         {
-            return EventID;
+            return EventHandbookID;
         }
 
         public override void Loaded()

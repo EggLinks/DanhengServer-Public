@@ -24,14 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static AbilityUseSttReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNBYmlsaXR5VXNlU3R0LnByb3RvIkkKDUFiaWxpdHlVc2VTdHQSEwoLS0lL",
-            "SUhLT0lMQkIYASABKAkSDQoFY291bnQYAiABKA0SFAoMdG90YWxfZGFtYWdl",
-            "GAMgASgBQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3Rv",
-            "Mw=="));
+            "ChNBYmlsaXR5VXNlU3R0LnByb3RvIkgKDUFiaWxpdHlVc2VTdHQSEwoLQ05C",
+            "QUNPTEVFTkUYASABKAkSDQoFY291bnQYAiABKA0SEwoLQ05CTUdFQkpDTEwY",
+            "AyABKAFCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.AbilityUseStt), global::EggLink.DanhengServer.Proto.AbilityUseStt.Parser, new[]{ "KIKIHKOILBB", "Count", "TotalDamage" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.AbilityUseStt), global::EggLink.DanhengServer.Proto.AbilityUseStt.Parser, new[]{ "CNBACOLEENE", "Count", "CNBMGEBJCLL" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,9 +72,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AbilityUseStt(AbilityUseStt other) : this() {
-      kIKIHKOILBB_ = other.kIKIHKOILBB_;
+      cNBACOLEENE_ = other.cNBACOLEENE_;
       count_ = other.count_;
-      totalDamage_ = other.totalDamage_;
+      cNBMGEBJCLL_ = other.cNBMGEBJCLL_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,15 +84,15 @@ namespace EggLink.DanhengServer.Proto {
       return new AbilityUseStt(this);
     }
 
-    /// <summary>Field number for the "KIKIHKOILBB" field.</summary>
-    public const int KIKIHKOILBBFieldNumber = 1;
-    private string kIKIHKOILBB_ = "";
+    /// <summary>Field number for the "CNBACOLEENE" field.</summary>
+    public const int CNBACOLEENEFieldNumber = 1;
+    private string cNBACOLEENE_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string KIKIHKOILBB {
-      get { return kIKIHKOILBB_; }
+    public string CNBACOLEENE {
+      get { return cNBACOLEENE_; }
       set {
-        kIKIHKOILBB_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        cNBACOLEENE_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -109,15 +108,15 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "total_damage" field.</summary>
-    public const int TotalDamageFieldNumber = 3;
-    private double totalDamage_;
+    /// <summary>Field number for the "CNBMGEBJCLL" field.</summary>
+    public const int CNBMGEBJCLLFieldNumber = 3;
+    private double cNBMGEBJCLL_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public double TotalDamage {
-      get { return totalDamage_; }
+    public double CNBMGEBJCLL {
+      get { return cNBMGEBJCLL_; }
       set {
-        totalDamage_ = value;
+        cNBMGEBJCLL_ = value;
       }
     }
 
@@ -136,9 +135,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (KIKIHKOILBB != other.KIKIHKOILBB) return false;
+      if (CNBACOLEENE != other.CNBACOLEENE) return false;
       if (Count != other.Count) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(TotalDamage, other.TotalDamage)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(CNBMGEBJCLL, other.CNBMGEBJCLL)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +145,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (KIKIHKOILBB.Length != 0) hash ^= KIKIHKOILBB.GetHashCode();
+      if (CNBACOLEENE.Length != 0) hash ^= CNBACOLEENE.GetHashCode();
       if (Count != 0) hash ^= Count.GetHashCode();
-      if (TotalDamage != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(TotalDamage);
+      if (CNBMGEBJCLL != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(CNBMGEBJCLL);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,17 +166,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (KIKIHKOILBB.Length != 0) {
+      if (CNBACOLEENE.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(KIKIHKOILBB);
+        output.WriteString(CNBACOLEENE);
       }
       if (Count != 0) {
         output.WriteRawTag(16);
         output.WriteUInt32(Count);
       }
-      if (TotalDamage != 0D) {
+      if (CNBMGEBJCLL != 0D) {
         output.WriteRawTag(25);
-        output.WriteDouble(TotalDamage);
+        output.WriteDouble(CNBMGEBJCLL);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -189,17 +188,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (KIKIHKOILBB.Length != 0) {
+      if (CNBACOLEENE.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(KIKIHKOILBB);
+        output.WriteString(CNBACOLEENE);
       }
       if (Count != 0) {
         output.WriteRawTag(16);
         output.WriteUInt32(Count);
       }
-      if (TotalDamage != 0D) {
+      if (CNBMGEBJCLL != 0D) {
         output.WriteRawTag(25);
-        output.WriteDouble(TotalDamage);
+        output.WriteDouble(CNBMGEBJCLL);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -211,13 +210,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (KIKIHKOILBB.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(KIKIHKOILBB);
+      if (CNBACOLEENE.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CNBACOLEENE);
       }
       if (Count != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Count);
       }
-      if (TotalDamage != 0D) {
+      if (CNBMGEBJCLL != 0D) {
         size += 1 + 8;
       }
       if (_unknownFields != null) {
@@ -232,14 +231,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.KIKIHKOILBB.Length != 0) {
-        KIKIHKOILBB = other.KIKIHKOILBB;
+      if (other.CNBACOLEENE.Length != 0) {
+        CNBACOLEENE = other.CNBACOLEENE;
       }
       if (other.Count != 0) {
         Count = other.Count;
       }
-      if (other.TotalDamage != 0D) {
-        TotalDamage = other.TotalDamage;
+      if (other.CNBMGEBJCLL != 0D) {
+        CNBMGEBJCLL = other.CNBMGEBJCLL;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -257,7 +256,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            KIKIHKOILBB = input.ReadString();
+            CNBACOLEENE = input.ReadString();
             break;
           }
           case 16: {
@@ -265,7 +264,7 @@ namespace EggLink.DanhengServer.Proto {
             break;
           }
           case 25: {
-            TotalDamage = input.ReadDouble();
+            CNBMGEBJCLL = input.ReadDouble();
             break;
           }
         }
@@ -284,7 +283,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            KIKIHKOILBB = input.ReadString();
+            CNBACOLEENE = input.ReadString();
             break;
           }
           case 16: {
@@ -292,7 +291,7 @@ namespace EggLink.DanhengServer.Proto {
             break;
           }
           case 25: {
-            TotalDamage = input.ReadDouble();
+            CNBMGEBJCLL = input.ReadDouble();
             break;
           }
         }

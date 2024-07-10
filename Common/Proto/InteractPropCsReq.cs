@@ -25,12 +25,12 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChdJbnRlcmFjdFByb3BDc1JlcS5wcm90byJAChFJbnRlcmFjdFByb3BDc1Jl",
-            "cRITCgtpbnRlcmFjdF9pZBgKIAEoDRIWCg5wcm9wX2VudGl0eV9pZBgLIAEo",
+            "cRIWCg5wcm9wX2VudGl0eV9pZBgJIAEoDRITCgtpbnRlcmFjdF9pZBgNIAEo",
             "DUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.InteractPropCsReq), global::EggLink.DanhengServer.Proto.InteractPropCsReq.Parser, new[]{ "InteractId", "PropEntityId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.InteractPropCsReq), global::EggLink.DanhengServer.Proto.InteractPropCsReq.Parser, new[]{ "PropEntityId", "InteractId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,8 +72,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public InteractPropCsReq(InteractPropCsReq other) : this() {
-      interactId_ = other.interactId_;
       propEntityId_ = other.propEntityId_;
+      interactId_ = other.interactId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -83,20 +83,8 @@ namespace EggLink.DanhengServer.Proto {
       return new InteractPropCsReq(this);
     }
 
-    /// <summary>Field number for the "interact_id" field.</summary>
-    public const int InteractIdFieldNumber = 10;
-    private uint interactId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint InteractId {
-      get { return interactId_; }
-      set {
-        interactId_ = value;
-      }
-    }
-
     /// <summary>Field number for the "prop_entity_id" field.</summary>
-    public const int PropEntityIdFieldNumber = 11;
+    public const int PropEntityIdFieldNumber = 9;
     private uint propEntityId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -104,6 +92,18 @@ namespace EggLink.DanhengServer.Proto {
       get { return propEntityId_; }
       set {
         propEntityId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "interact_id" field.</summary>
+    public const int InteractIdFieldNumber = 13;
+    private uint interactId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint InteractId {
+      get { return interactId_; }
+      set {
+        interactId_ = value;
       }
     }
 
@@ -122,8 +122,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (InteractId != other.InteractId) return false;
       if (PropEntityId != other.PropEntityId) return false;
+      if (InteractId != other.InteractId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -131,8 +131,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (InteractId != 0) hash ^= InteractId.GetHashCode();
       if (PropEntityId != 0) hash ^= PropEntityId.GetHashCode();
+      if (InteractId != 0) hash ^= InteractId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -151,13 +151,13 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (InteractId != 0) {
-        output.WriteRawTag(80);
-        output.WriteUInt32(InteractId);
-      }
       if (PropEntityId != 0) {
-        output.WriteRawTag(88);
+        output.WriteRawTag(72);
         output.WriteUInt32(PropEntityId);
+      }
+      if (InteractId != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(InteractId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -169,13 +169,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (InteractId != 0) {
-        output.WriteRawTag(80);
-        output.WriteUInt32(InteractId);
-      }
       if (PropEntityId != 0) {
-        output.WriteRawTag(88);
+        output.WriteRawTag(72);
         output.WriteUInt32(PropEntityId);
+      }
+      if (InteractId != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(InteractId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -187,11 +187,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (InteractId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(InteractId);
-      }
       if (PropEntityId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PropEntityId);
+      }
+      if (InteractId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(InteractId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -205,11 +205,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.InteractId != 0) {
-        InteractId = other.InteractId;
-      }
       if (other.PropEntityId != 0) {
         PropEntityId = other.PropEntityId;
+      }
+      if (other.InteractId != 0) {
+        InteractId = other.InteractId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -226,12 +226,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 80: {
-            InteractId = input.ReadUInt32();
+          case 72: {
+            PropEntityId = input.ReadUInt32();
             break;
           }
-          case 88: {
-            PropEntityId = input.ReadUInt32();
+          case 104: {
+            InteractId = input.ReadUInt32();
             break;
           }
         }
@@ -249,12 +249,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 80: {
-            InteractId = input.ReadUInt32();
+          case 72: {
+            PropEntityId = input.ReadUInt32();
             break;
           }
-          case 88: {
-            PropEntityId = input.ReadUInt32();
+          case 104: {
+            InteractId = input.ReadUInt32();
             break;
           }
         }

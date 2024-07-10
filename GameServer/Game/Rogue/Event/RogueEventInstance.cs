@@ -13,7 +13,7 @@ namespace EggLink.DanhengServer.Game.Rogue.Event
         public RogueNpc EventEntity { get; set; } = npc;
         public List<RogueEventParam> Options { get; set; } = optionIds;
         public int EventUniqueId { get; set; } = uniqueId;
-        public List<int> SelectIds { get; set; } = [];
+        public int SelectedOptionId { get; set; } = 0;
 
         public RogueEventInstance(RogueNPCDialogueExcel excel, RogueNpc npc, int uniqueId) : this(excel.RogueNPCID, npc, [], uniqueId)  // check in RogueInstance.cs
         {
@@ -46,21 +46,31 @@ namespace EggLink.DanhengServer.Game.Rogue.Event
             EventEntity.FinishDialogue();
         }
 
-        public DialogueEvent ToProto()
+        public RogueCommonDialogueDataInfo ToProto()
         {
-            var proto = new DialogueEvent()
+            var proto = new RogueCommonDialogueDataInfo()
             {
-                EventId = (uint)EventId,
-                GameModeType = (uint)(EventEntity.Scene.CustomGameModeId > 0 ? EventEntity.Scene.CustomGameModeId : (int)EventEntity.Scene.Excel.PlaneType),
+                DialogueInfo = ToDialogueInfo(),
                 EventUniqueId = (uint)EventUniqueId,
             };
 
             foreach (var option in Options)
             {
-                proto.DialogueEventParamList.Add(option.ToProto());
+                proto.OptionList.Add(option.ToProto());
             }
 
-            proto.DialogueEventIdList.AddRange(SelectIds.Select(x => (uint)x));
+            return proto;
+        }
+
+        public RogueCommonDialogueInfo ToDialogueInfo()
+        {
+            var proto = new RogueCommonDialogueInfo()
+            {
+                DialogueBasicInfo = new()
+                {
+                    EventId = (uint)EventId,
+                }
+            };
 
             return proto;
         }
@@ -71,15 +81,20 @@ namespace EggLink.DanhengServer.Game.Rogue.Event
         public int OptionId { get; set; }
         public int ArgId { get; set; }
         public float Ratio { get; set; }
+        public bool IsSelected { get; set; } = false;
 
-        public RogueDialogueEventParam ToProto()
+        public RogueCommonDialogueOptionInfo ToProto()
         {
-            return new RogueDialogueEventParam()
+            return new RogueCommonDialogueOptionInfo()
             {
-                DialogueEventId = (uint)OptionId,
                 ArgId = (uint)ArgId,
-                Ratio = Ratio,
                 IsValid = true,
+                OptionId = (uint)OptionId,
+                DisplayValue = new()
+                {
+                    FloatValue = Ratio
+                },
+                Confirm = IsSelected,
             };
         }
 

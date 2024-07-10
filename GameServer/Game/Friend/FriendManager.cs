@@ -232,7 +232,7 @@ namespace EggLink.DanhengServer.Game.Friend
                 info.Add(new ChatMessageData()
                 {
                     Timestamp = (ulong)chat.SendTime,
-                    Content = chat.Message,
+                    MessageText = chat.Message,
                     ExtraId = (uint)chat.ExtraId,
                     SenderId = (uint)chat.SendUid,
                     MessageType = chat.ExtraId > 0 ? MsgType.Emoji : MsgType.CustomText,

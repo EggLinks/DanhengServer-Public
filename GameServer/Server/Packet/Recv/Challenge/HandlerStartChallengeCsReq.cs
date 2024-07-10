@@ -15,8 +15,7 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Battle
                 storyBuffInfo = req.PlayerInfo.StoryBuffInfo;
             };
 
-            // Early implementation for 2.3
-            /* StartChallengeBossBuffInfo? bossBuffInfo = null;
+            StartChallengeBossBuffInfo? bossBuffInfo = null;
             if (req.PlayerInfo != null && req.PlayerInfo.BossBuffInfo != null)
             {
                 bossBuffInfo = req.PlayerInfo.BossBuffInfo;
@@ -24,25 +23,15 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Battle
             
             if (req.TeamOne.Count > 0)
             {
-                List<int> team = new();
-                for (int id in req.TeamOne)
-                {
-                    team.Add(id);
-                };
-                connection.Player!.LineupManager!.ReplaceLineup(0, team, ExtraLineupType.LineupChallenge);
+                connection.Player!.LineupManager!.ReplaceLineup(0, req.TeamOne.Select(x => (int)x).ToList(), ExtraLineupType.LineupChallenge);
             }
 
             if (req.TeamTwo.Count > 0)
             {
-                List<int> team = new();
-                for (int id in req.TeamTwo)
-                {
-                    team.Add(id);
-                };
-                connection.Player!.LineupManager!.ReplaceLineup(0, team, ExtraLineupType.LineupChallenge2);
-            } */
+                connection.Player!.LineupManager!.ReplaceLineup(0, req.TeamTwo.Select(x => (int)x).ToList(), ExtraLineupType.LineupChallenge2);
+            }
 
-            connection.Player!.ChallengeManager!.StartChallenge((int)req.ChallengeId, storyBuffInfo/*, bossBuffInfo*/);
+            connection.Player!.ChallengeManager!.StartChallenge((int)req.ChallengeId, storyBuffInfo, bossBuffInfo);
         }
     }
 }

@@ -147,8 +147,8 @@ namespace EggLink.DanhengServer.Game.Rogue.Miracle
             return new()
             {
                 MiracleId = (uint)MiracleId,
-                Durability = (uint)Durability,
-                UsedTimes = (uint)UsedTimes
+                MaxTimes = (uint)Durability,
+                CurTimes = (uint)UsedTimes
             };
         }
 
@@ -157,8 +157,8 @@ namespace EggLink.DanhengServer.Game.Rogue.Miracle
             return new()
             {
                 MiracleId = (uint)MiracleId,
-                Durability = (uint)Durability,
-                UsedTimes = (uint)UsedTimes
+                MaxTimes = (uint)Durability,
+                CurTimes = (uint)UsedTimes
             };
         }
 

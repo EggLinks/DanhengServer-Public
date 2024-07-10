@@ -16,6 +16,8 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Scene
                 Motion = motion,
                 EnergyInfo = new()
                 {
+                    CurNum = 5,
+                    MaxNum = 5,
                 },
             };
 

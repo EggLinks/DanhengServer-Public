@@ -1,6 +1,7 @@
 ﻿using EggLink.DanhengServer.Data.Config;
 using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
+using EggLink.DanhengServer.Enums.Rogue;
 
 namespace EggLink.DanhengServer.Data
 {
@@ -19,6 +20,8 @@ namespace EggLink.DanhengServer.Data
         public static Dictionary<int, AvatarExpItemConfigExcel> AvatarExpItemConfigData { get; private set; } = [];
         public static Dictionary<int, AvatarSkillTreeConfigExcel> AvatarSkillTreeConfigData { get; private set; } = [];
         public static Dictionary<int, ExpTypeExcel> ExpTypeData { get; private set; } = [];
+        public static Dictionary<int, AdventurePlayerExcel> AdventurePlayerData { get; private set; } = [];
+        public static Dictionary<int, SummonUnitExcel> SummonUnitData { get; private set; } = [];
 
         #endregion
 
@@ -47,10 +50,7 @@ namespace EggLink.DanhengServer.Data
         #region ChessRogue
 
         public static Dictionary<int, ActionPointOverdrawExcel> ActionPointOverdrawData { get; private set; } = [];
-        public static Dictionary<int, List<int>> ChessRogueContentGenData { get; set; } = [];
-        public static Dictionary<int, ChessRogueCellConfig> ChessRogueCellGenData { get; set; } = [];
-        public static Dictionary<int, Dictionary<int, List<int>>> ChessRogueLayerGenData { get; set; } = [];
-        public static Dictionary<int, ChessRogueRoomConfig> ChessRogueRoomGenData { get; set; } = [];
+        public static Dictionary<RogueDLCBlockTypeEnum, List<ChessRogueRoomConfig>> ChessRogueRoomData { get; private set; } = [];
         public static Dictionary<int, RogueDLCAreaExcel> RogueDLCAreaData { get; private set; } = [];
         public static Dictionary<int, RogueDLCBossDecayExcel> RogueDLCBossDecayData { get; private set; } = [];
         public static Dictionary<int, RogueDLCBossBpExcel> RogueDLCBossBpData { get; private set; } = [];
@@ -62,6 +62,8 @@ namespace EggLink.DanhengServer.Data
         public static Dictionary<int, RogueNousMainStoryExcel> RogueNousMainStoryData { get; private set; } = [];
         public static Dictionary<int, RogueNousSubStoryExcel> RogueNousSubStoryData { get; private set; } = [];
         public static Dictionary<int, RogueNousTalentExcel> RogueNousTalentData { get; private set; } = [];
+        public static Dictionary<int, List<RogueDLCChessBoardExcel>> RogueSwarmChessBoardData { get; private set; } = [];
+        public static Dictionary<int, List<RogueDLCChessBoardExcel>> RogueNousChessBoardData { get; private set; } = [];
 
         #endregion
 
@@ -82,6 +84,7 @@ namespace EggLink.DanhengServer.Data
         public static Dictionary<int, MazePlaneExcel> MazePlaneData { get; private set; } = [];
         public static Dictionary<int, MazePropExcel> MazePropData { get; private set; } = [];
         public static Dictionary<int, PlaneEventExcel> PlaneEventData { get; private set; } = [];
+        public static Dictionary<int, ContentPackageConfigExcel> ContentPackageConfigData { get; private set; } = [];
 
         #endregion
 
@@ -118,12 +121,16 @@ namespace EggLink.DanhengServer.Data
         public static Dictionary<int, MessageContactsConfigExcel> MessageContactsConfigData { get; private set; } = [];
         public static Dictionary<int, MessageItemConfigExcel> MessageItemConfigData { get; private set; } = [];
         public static Dictionary<int, PerformanceEExcel> PerformanceEData { get; private set; } = [];
+        public static Dictionary<int, StoryLineExcel> StoryLineData { get; private set; } = [];
+        public static Dictionary<int, StroyLineTrialAvatarDataExcel> StroyLineTrialAvatarDataData { get; private set; } = [];
 
         #endregion
 
         #region Item Exchange
 
         public static Dictionary<int, ShopConfigExcel> ShopConfigData { get; private set; } = [];
+        public static Dictionary<int, RollShopConfigExcel> RollShopConfigData { get; private set; } = [];
+        public static Dictionary<int, RollShopRewardExcel> RollShopRewardData { get; private set; } = [];
         public static Dictionary<int, ItemComposeConfigExcel> ItemComposeConfigData { get; private set; } = [];
 
         #endregion

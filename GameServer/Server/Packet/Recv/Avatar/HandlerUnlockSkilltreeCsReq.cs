@@ -40,7 +40,7 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Avatar
             DatabaseHelper.Instance!.UpdateInstance(player.AvatarManager.AvatarData!);
 
             connection.SendPacket(new PacketPlayerSyncScNotify(avatar));
-            connection.SendPacket(new PacketUnlockSkilltreeScRsp((uint)avatar.AvatarId, req.PointId, req.Level));
+            connection.SendPacket(new PacketUnlockSkilltreeScRsp(req.PointId, req.Level));
         }
     }
 }

@@ -15,12 +15,9 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Battle
 
             foreach (var challengeExcel in GameData.ChallengeConfigData.Values)
             {
-                // Skip Apocalyptic Shadow
-                if (challengeExcel.ID > 30000) continue;
-
-                if (player.ChallengeManager!.ChallengeData.History.ContainsKey(challengeExcel.ID))
+                if (player.ChallengeManager?.ChallengeData.History.TryGetValue(challengeExcel.ID, out Database.Challenge.ChallengeHistoryData? value) == true)
                 {
-                    var history = player.ChallengeManager!.ChallengeData.History[challengeExcel.ID];
+                    var history = value;
                     proto.ChallengeList.Add(history.ToProto());
                 }
                 else
@@ -32,7 +29,7 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Battle
                 }
             }
 
-            foreach (var reward in player.ChallengeManager.ChallengeData.TakenRewards.Values)
+            foreach (var reward in player.ChallengeManager?.ChallengeData?.TakenRewards.Values.ToList() ?? [])
             {
                 proto.ChallengeGroupList.Add(reward.ToProto());
             }

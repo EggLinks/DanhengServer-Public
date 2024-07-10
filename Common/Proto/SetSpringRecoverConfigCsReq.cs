@@ -25,14 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiFTZXRTcHJpbmdSZWNvdmVyQ29uZmlnQ3NSZXEucHJvdG8aGVNwcmluZ1Jl",
-            "Y292ZXJDb25maWcucHJvdG8iUgobU2V0U3ByaW5nUmVjb3ZlckNvbmZpZ0Nz",
-            "UmVxEjMKFXNwcmluZ19yZWNvdmVyX2NvbmZpZxgMIAEoCzIULlNwcmluZ1Jl",
-            "Y292ZXJDb25maWdCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IG",
-            "cHJvdG8z"));
+            "Y292ZXJDb25maWcucHJvdG8iSAobU2V0U3ByaW5nUmVjb3ZlckNvbmZpZ0Nz",
+            "UmVxEikKC0pMTUxGS0JNSk5MGAEgASgLMhQuU3ByaW5nUmVjb3ZlckNvbmZp",
+            "Z0IeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.SpringRecoverConfigReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SetSpringRecoverConfigCsReq), global::EggLink.DanhengServer.Proto.SetSpringRecoverConfigCsReq.Parser, new[]{ "SpringRecoverConfig" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SetSpringRecoverConfigCsReq), global::EggLink.DanhengServer.Proto.SetSpringRecoverConfigCsReq.Parser, new[]{ "JLMLFKBMJNL" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,7 +73,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SetSpringRecoverConfigCsReq(SetSpringRecoverConfigCsReq other) : this() {
-      springRecoverConfig_ = other.springRecoverConfig_ != null ? other.springRecoverConfig_.Clone() : null;
+      jLMLFKBMJNL_ = other.jLMLFKBMJNL_ != null ? other.jLMLFKBMJNL_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -84,15 +83,15 @@ namespace EggLink.DanhengServer.Proto {
       return new SetSpringRecoverConfigCsReq(this);
     }
 
-    /// <summary>Field number for the "spring_recover_config" field.</summary>
-    public const int SpringRecoverConfigFieldNumber = 12;
-    private global::EggLink.DanhengServer.Proto.SpringRecoverConfig springRecoverConfig_;
+    /// <summary>Field number for the "JLMLFKBMJNL" field.</summary>
+    public const int JLMLFKBMJNLFieldNumber = 1;
+    private global::EggLink.DanhengServer.Proto.SpringRecoverConfig jLMLFKBMJNL_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.SpringRecoverConfig SpringRecoverConfig {
-      get { return springRecoverConfig_; }
+    public global::EggLink.DanhengServer.Proto.SpringRecoverConfig JLMLFKBMJNL {
+      get { return jLMLFKBMJNL_; }
       set {
-        springRecoverConfig_ = value;
+        jLMLFKBMJNL_ = value;
       }
     }
 
@@ -111,7 +110,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(SpringRecoverConfig, other.SpringRecoverConfig)) return false;
+      if (!object.Equals(JLMLFKBMJNL, other.JLMLFKBMJNL)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -119,7 +118,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (springRecoverConfig_ != null) hash ^= SpringRecoverConfig.GetHashCode();
+      if (jLMLFKBMJNL_ != null) hash ^= JLMLFKBMJNL.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -138,9 +137,9 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (springRecoverConfig_ != null) {
-        output.WriteRawTag(98);
-        output.WriteMessage(SpringRecoverConfig);
+      if (jLMLFKBMJNL_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(JLMLFKBMJNL);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -152,9 +151,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (springRecoverConfig_ != null) {
-        output.WriteRawTag(98);
-        output.WriteMessage(SpringRecoverConfig);
+      if (jLMLFKBMJNL_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(JLMLFKBMJNL);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -166,8 +165,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (springRecoverConfig_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SpringRecoverConfig);
+      if (jLMLFKBMJNL_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(JLMLFKBMJNL);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -181,11 +180,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.springRecoverConfig_ != null) {
-        if (springRecoverConfig_ == null) {
-          SpringRecoverConfig = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
+      if (other.jLMLFKBMJNL_ != null) {
+        if (jLMLFKBMJNL_ == null) {
+          JLMLFKBMJNL = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
         }
-        SpringRecoverConfig.MergeFrom(other.SpringRecoverConfig);
+        JLMLFKBMJNL.MergeFrom(other.JLMLFKBMJNL);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -202,11 +201,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 98: {
-            if (springRecoverConfig_ == null) {
-              SpringRecoverConfig = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
+          case 10: {
+            if (jLMLFKBMJNL_ == null) {
+              JLMLFKBMJNL = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
             }
-            input.ReadMessage(SpringRecoverConfig);
+            input.ReadMessage(JLMLFKBMJNL);
             break;
           }
         }
@@ -224,11 +223,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 98: {
-            if (springRecoverConfig_ == null) {
-              SpringRecoverConfig = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
+          case 10: {
+            if (jLMLFKBMJNL_ == null) {
+              JLMLFKBMJNL = new global::EggLink.DanhengServer.Proto.SpringRecoverConfig();
             }
-            input.ReadMessage(SpringRecoverConfig);
+            input.ReadMessage(JLMLFKBMJNL);
             break;
           }
         }

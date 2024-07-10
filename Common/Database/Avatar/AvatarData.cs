@@ -33,9 +33,9 @@ namespace EggLink.DanhengServer.Database.Avatar
         public int Rewards { get; set; }
         public long Timestamp { get; set; }
         public int CurrentHp { get; set; } = 10000;
-        public int CurrentSp { get; set; } = 10000;
+        public int CurrentSp { get; set; } = 0;
         public int ExtraLineupHp { get; set; } = 10000;
-        public int ExtraLineupSp { get; set; } = 10000;
+        public int ExtraLineupSp { get; set; } = 0;
         public int Rank { get; set; }
         public Dictionary<int, int> SkillTree { get; set; } = [];
         public Dictionary<int, Dictionary<int, int>> SkillTreeExtra { get; set; } = [];  // for hero  heroId -> skillId -> level

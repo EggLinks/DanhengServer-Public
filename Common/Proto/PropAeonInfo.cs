@@ -24,14 +24,14 @@ namespace EggLink.DanhengServer.Proto {
     static PropAeonInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJQcm9wQWVvbkluZm8ucHJvdG8iSwoMUHJvcEFlb25JbmZvEg8KB2FkZF9l",
-            "eHAYCiABKA0SGQoRZGlhbG9ndWVfZ3JvdXBfaWQYCSABKA0SDwoHYWVvbl9p",
-            "ZBgMIAEoDUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90",
-            "bzM="));
+            "ChJQcm9wQWVvbkluZm8ucHJvdG8iXgoMUHJvcEFlb25JbmZvEhkKEUFlb25J",
+            "ZEZpZWxkTnVtYmVyGA0gASgNEhgKEERpYWxvZ3VlZ3JvdXBfaWQYCyABKA0S",
+            "GQoRQWRkRXhwRmllbGROdW1iZXIYBCABKA1CHqoCG0VnZ0xpbmsuRGFuaGVu",
+            "Z1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PropAeonInfo), global::EggLink.DanhengServer.Proto.PropAeonInfo.Parser, new[]{ "AddExp", "DialogueGroupId", "AeonId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PropAeonInfo), global::EggLink.DanhengServer.Proto.PropAeonInfo.Parser, new[]{ "AeonIdFieldNumber", "DialoguegroupId", "AddExpFieldNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,9 +73,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PropAeonInfo(PropAeonInfo other) : this() {
-      addExp_ = other.addExp_;
-      dialogueGroupId_ = other.dialogueGroupId_;
-      aeonId_ = other.aeonId_;
+      aeonIdFieldNumber_ = other.aeonIdFieldNumber_;
+      dialoguegroupId_ = other.dialoguegroupId_;
+      addExpFieldNumber_ = other.addExpFieldNumber_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,39 +85,39 @@ namespace EggLink.DanhengServer.Proto {
       return new PropAeonInfo(this);
     }
 
-    /// <summary>Field number for the "add_exp" field.</summary>
-    public const int AddExpFieldNumber = 10;
-    private uint addExp_;
+    /// <summary>Field number for the "AeonIdFieldNumber" field.</summary>
+    public const int AeonIdFieldNumberFieldNumber = 13;
+    private uint aeonIdFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint AddExp {
-      get { return addExp_; }
+    public uint AeonIdFieldNumber {
+      get { return aeonIdFieldNumber_; }
       set {
-        addExp_ = value;
+        aeonIdFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "dialogue_group_id" field.</summary>
-    public const int DialogueGroupIdFieldNumber = 9;
-    private uint dialogueGroupId_;
+    /// <summary>Field number for the "Dialoguegroup_id" field.</summary>
+    public const int DialoguegroupIdFieldNumber = 11;
+    private uint dialoguegroupId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint DialogueGroupId {
-      get { return dialogueGroupId_; }
+    public uint DialoguegroupId {
+      get { return dialoguegroupId_; }
       set {
-        dialogueGroupId_ = value;
+        dialoguegroupId_ = value;
       }
     }
 
-    /// <summary>Field number for the "aeon_id" field.</summary>
-    public const int AeonIdFieldNumber = 12;
-    private uint aeonId_;
+    /// <summary>Field number for the "AddExpFieldNumber" field.</summary>
+    public const int AddExpFieldNumberFieldNumber = 4;
+    private uint addExpFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint AeonId {
-      get { return aeonId_; }
+    public uint AddExpFieldNumber {
+      get { return addExpFieldNumber_; }
       set {
-        aeonId_ = value;
+        addExpFieldNumber_ = value;
       }
     }
 
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (AddExp != other.AddExp) return false;
-      if (DialogueGroupId != other.DialogueGroupId) return false;
-      if (AeonId != other.AeonId) return false;
+      if (AeonIdFieldNumber != other.AeonIdFieldNumber) return false;
+      if (DialoguegroupId != other.DialoguegroupId) return false;
+      if (AddExpFieldNumber != other.AddExpFieldNumber) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +146,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (AddExp != 0) hash ^= AddExp.GetHashCode();
-      if (DialogueGroupId != 0) hash ^= DialogueGroupId.GetHashCode();
-      if (AeonId != 0) hash ^= AeonId.GetHashCode();
+      if (AeonIdFieldNumber != 0) hash ^= AeonIdFieldNumber.GetHashCode();
+      if (DialoguegroupId != 0) hash ^= DialoguegroupId.GetHashCode();
+      if (AddExpFieldNumber != 0) hash ^= AddExpFieldNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,17 +167,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (DialogueGroupId != 0) {
-        output.WriteRawTag(72);
-        output.WriteUInt32(DialogueGroupId);
+      if (AddExpFieldNumber != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(AddExpFieldNumber);
       }
-      if (AddExp != 0) {
-        output.WriteRawTag(80);
-        output.WriteUInt32(AddExp);
+      if (DialoguegroupId != 0) {
+        output.WriteRawTag(88);
+        output.WriteUInt32(DialoguegroupId);
       }
-      if (AeonId != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(AeonId);
+      if (AeonIdFieldNumber != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(AeonIdFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -189,17 +189,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (DialogueGroupId != 0) {
-        output.WriteRawTag(72);
-        output.WriteUInt32(DialogueGroupId);
+      if (AddExpFieldNumber != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(AddExpFieldNumber);
       }
-      if (AddExp != 0) {
-        output.WriteRawTag(80);
-        output.WriteUInt32(AddExp);
+      if (DialoguegroupId != 0) {
+        output.WriteRawTag(88);
+        output.WriteUInt32(DialoguegroupId);
       }
-      if (AeonId != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(AeonId);
+      if (AeonIdFieldNumber != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(AeonIdFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -211,14 +211,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (AddExp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AddExp);
+      if (AeonIdFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AeonIdFieldNumber);
       }
-      if (DialogueGroupId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DialogueGroupId);
+      if (DialoguegroupId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DialoguegroupId);
       }
-      if (AeonId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AeonId);
+      if (AddExpFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AddExpFieldNumber);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -232,14 +232,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.AddExp != 0) {
-        AddExp = other.AddExp;
+      if (other.AeonIdFieldNumber != 0) {
+        AeonIdFieldNumber = other.AeonIdFieldNumber;
       }
-      if (other.DialogueGroupId != 0) {
-        DialogueGroupId = other.DialogueGroupId;
+      if (other.DialoguegroupId != 0) {
+        DialoguegroupId = other.DialoguegroupId;
       }
-      if (other.AeonId != 0) {
-        AeonId = other.AeonId;
+      if (other.AddExpFieldNumber != 0) {
+        AddExpFieldNumber = other.AddExpFieldNumber;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -256,16 +256,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 72: {
-            DialogueGroupId = input.ReadUInt32();
+          case 32: {
+            AddExpFieldNumber = input.ReadUInt32();
             break;
           }
-          case 80: {
-            AddExp = input.ReadUInt32();
+          case 88: {
+            DialoguegroupId = input.ReadUInt32();
             break;
           }
-          case 96: {
-            AeonId = input.ReadUInt32();
+          case 104: {
+            AeonIdFieldNumber = input.ReadUInt32();
             break;
           }
         }
@@ -283,16 +283,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 72: {
-            DialogueGroupId = input.ReadUInt32();
+          case 32: {
+            AddExpFieldNumber = input.ReadUInt32();
             break;
           }
-          case 80: {
-            AddExp = input.ReadUInt32();
+          case 88: {
+            DialoguegroupId = input.ReadUInt32();
             break;
           }
-          case 96: {
-            AeonId = input.ReadUInt32();
+          case 104: {
+            AeonIdFieldNumber = input.ReadUInt32();
             break;
           }
         }

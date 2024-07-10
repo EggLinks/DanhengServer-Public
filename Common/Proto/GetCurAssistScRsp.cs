@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChdHZXRDdXJBc3Npc3RTY1JzcC5wcm90bxoWUGxheWVyQXNzaXN0SW5mby5w",
-            "cm90byJMChFHZXRDdXJBc3Npc3RTY1JzcBImCgtKS0dJQk5GQkdPTBgKIAEo",
+            "cm90byJMChFHZXRDdXJBc3Npc3RTY1JzcBImCgtERERHUEJBTkNQRxgFIAEo",
             "CzIRLlBsYXllckFzc2lzdEluZm8SDwoHcmV0Y29kZRgPIAEoDUIeqgIbRWdn",
             "TGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.PlayerAssistInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetCurAssistScRsp), global::EggLink.DanhengServer.Proto.GetCurAssistScRsp.Parser, new[]{ "JKGIBNFBGOL", "Retcode" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetCurAssistScRsp), global::EggLink.DanhengServer.Proto.GetCurAssistScRsp.Parser, new[]{ "DDDGPBANCPG", "Retcode" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,7 +73,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public GetCurAssistScRsp(GetCurAssistScRsp other) : this() {
-      jKGIBNFBGOL_ = other.jKGIBNFBGOL_ != null ? other.jKGIBNFBGOL_.Clone() : null;
+      dDDGPBANCPG_ = other.dDDGPBANCPG_ != null ? other.dDDGPBANCPG_.Clone() : null;
       retcode_ = other.retcode_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -84,15 +84,15 @@ namespace EggLink.DanhengServer.Proto {
       return new GetCurAssistScRsp(this);
     }
 
-    /// <summary>Field number for the "JKGIBNFBGOL" field.</summary>
-    public const int JKGIBNFBGOLFieldNumber = 10;
-    private global::EggLink.DanhengServer.Proto.PlayerAssistInfo jKGIBNFBGOL_;
+    /// <summary>Field number for the "DDDGPBANCPG" field.</summary>
+    public const int DDDGPBANCPGFieldNumber = 5;
+    private global::EggLink.DanhengServer.Proto.PlayerAssistInfo dDDGPBANCPG_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.PlayerAssistInfo JKGIBNFBGOL {
-      get { return jKGIBNFBGOL_; }
+    public global::EggLink.DanhengServer.Proto.PlayerAssistInfo DDDGPBANCPG {
+      get { return dDDGPBANCPG_; }
       set {
-        jKGIBNFBGOL_ = value;
+        dDDGPBANCPG_ = value;
       }
     }
 
@@ -123,7 +123,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(JKGIBNFBGOL, other.JKGIBNFBGOL)) return false;
+      if (!object.Equals(DDDGPBANCPG, other.DDDGPBANCPG)) return false;
       if (Retcode != other.Retcode) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -132,7 +132,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (jKGIBNFBGOL_ != null) hash ^= JKGIBNFBGOL.GetHashCode();
+      if (dDDGPBANCPG_ != null) hash ^= DDDGPBANCPG.GetHashCode();
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -152,9 +152,9 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (jKGIBNFBGOL_ != null) {
-        output.WriteRawTag(82);
-        output.WriteMessage(JKGIBNFBGOL);
+      if (dDDGPBANCPG_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(DDDGPBANCPG);
       }
       if (Retcode != 0) {
         output.WriteRawTag(120);
@@ -170,9 +170,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (jKGIBNFBGOL_ != null) {
-        output.WriteRawTag(82);
-        output.WriteMessage(JKGIBNFBGOL);
+      if (dDDGPBANCPG_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(DDDGPBANCPG);
       }
       if (Retcode != 0) {
         output.WriteRawTag(120);
@@ -188,8 +188,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (jKGIBNFBGOL_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(JKGIBNFBGOL);
+      if (dDDGPBANCPG_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(DDDGPBANCPG);
       }
       if (Retcode != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
@@ -206,11 +206,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.jKGIBNFBGOL_ != null) {
-        if (jKGIBNFBGOL_ == null) {
-          JKGIBNFBGOL = new global::EggLink.DanhengServer.Proto.PlayerAssistInfo();
+      if (other.dDDGPBANCPG_ != null) {
+        if (dDDGPBANCPG_ == null) {
+          DDDGPBANCPG = new global::EggLink.DanhengServer.Proto.PlayerAssistInfo();
         }
-        JKGIBNFBGOL.MergeFrom(other.JKGIBNFBGOL);
+        DDDGPBANCPG.MergeFrom(other.DDDGPBANCPG);
       }
       if (other.Retcode != 0) {
         Retcode = other.Retcode;
@@ -230,11 +230,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 82: {
-            if (jKGIBNFBGOL_ == null) {
-              JKGIBNFBGOL = new global::EggLink.DanhengServer.Proto.PlayerAssistInfo();
+          case 42: {
+            if (dDDGPBANCPG_ == null) {
+              DDDGPBANCPG = new global::EggLink.DanhengServer.Proto.PlayerAssistInfo();
             }
-            input.ReadMessage(JKGIBNFBGOL);
+            input.ReadMessage(DDDGPBANCPG);
             break;
           }
           case 120: {
@@ -256,11 +256,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 82: {
-            if (jKGIBNFBGOL_ == null) {
-              JKGIBNFBGOL = new global::EggLink.DanhengServer.Proto.PlayerAssistInfo();
+          case 42: {
+            if (dDDGPBANCPG_ == null) {
+              DDDGPBANCPG = new global::EggLink.DanhengServer.Proto.PlayerAssistInfo();
             }
-            input.ReadMessage(JKGIBNFBGOL);
+            input.ReadMessage(DDDGPBANCPG);
             break;
           }
           case 120: {

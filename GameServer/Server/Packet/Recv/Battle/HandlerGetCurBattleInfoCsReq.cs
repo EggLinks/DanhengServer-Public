@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Battle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Battle
     {
         public override void OnHandle(Connection connection, byte[] header, byte[] data)
         {
-            connection.SendPacket(CmdIds.GetCurBattleInfoScRsp);
+            connection.SendPacket(new PacketGetCurBattleInfoScRsp());
         }
     }
 }

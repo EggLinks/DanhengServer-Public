@@ -24,7 +24,7 @@ namespace EggLink.DanhengServer.Proto {
     static RogueActionSourceReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdSb2d1ZUFjdGlvblNvdXJjZS5wcm90byqEBQoRUm9ndWVBY3Rpb25Tb3Vy",
+            "ChdSb2d1ZUFjdGlvblNvdXJjZS5wcm90byrpBQoRUm9ndWVBY3Rpb25Tb3Vy",
             "Y2USLworUk9HVUVfQ09NTU9OX0FDVElPTl9SRVNVTFRfU09VUkNFX1RZUEVf",
             "Tk9ORRAAEjEKLVJPR1VFX0NPTU1PTl9BQ1RJT05fUkVTVUxUX1NPVVJDRV9U",
             "WVBFX1NFTEVDVBABEjIKLlJPR1VFX0NPTU1PTl9BQ1RJT05fUkVTVUxUX1NP",
@@ -38,8 +38,11 @@ namespace EggLink.DanhengServer.Proto {
             "QUVPThAIEjYKMlJPR1VFX0NPTU1PTl9BQ1RJT05fUkVTVUxUX1NPVVJDRV9U",
             "WVBFX0JPQVJEX0VWRU5UEAkSNQoxUk9HVUVfQ09NTU9OX0FDVElPTl9SRVNV",
             "TFRfU09VUkNFX1RZUEVfTUFaRV9TS0lMTBAKEjoKNlJPR1VFX0NPTU1PTl9B",
-            "Q1RJT05fUkVTVUxUX1NPVVJDRV9UWVBFX0xFVkVMX01FQ0hBTklTTRALQh6q",
-            "AhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "Q1RJT05fUkVTVUxUX1NPVVJDRV9UWVBFX0xFVkVMX01FQ0hBTklTTRALEi8K",
+            "K1JPR1VFX0NPTU1PTl9BQ1RJT05fUkVTVUxUX1NPVVJDRV9UWVBFX0JVRkYQ",
+            "DBIyCi5ST0dVRV9DT01NT05fQUNUSU9OX1JFU1VMVF9TT1VSQ0VfVFlQRV9S",
+            "RUZPUkdFEA1CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJv",
+            "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::EggLink.DanhengServer.Proto.RogueActionSource), }, null, null));
@@ -61,6 +64,8 @@ namespace EggLink.DanhengServer.Proto {
     [pbr::OriginalName("ROGUE_COMMON_ACTION_RESULT_SOURCE_TYPE_BOARD_EVENT")] RogueCommonActionResultSourceTypeBoardEvent = 9,
     [pbr::OriginalName("ROGUE_COMMON_ACTION_RESULT_SOURCE_TYPE_MAZE_SKILL")] RogueCommonActionResultSourceTypeMazeSkill = 10,
     [pbr::OriginalName("ROGUE_COMMON_ACTION_RESULT_SOURCE_TYPE_LEVEL_MECHANISM")] RogueCommonActionResultSourceTypeLevelMechanism = 11,
+    [pbr::OriginalName("ROGUE_COMMON_ACTION_RESULT_SOURCE_TYPE_BUFF")] RogueCommonActionResultSourceTypeBuff = 12,
+    [pbr::OriginalName("ROGUE_COMMON_ACTION_RESULT_SOURCE_TYPE_REFORGE")] RogueCommonActionResultSourceTypeReforge = 13,
   }
 
   #endregion

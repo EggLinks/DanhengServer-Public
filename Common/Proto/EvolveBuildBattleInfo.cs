@@ -24,30 +24,34 @@ namespace EggLink.DanhengServer.Proto {
     static EvolveBuildBattleInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChtFdm9sdmVCdWlsZEJhdHRsZUluZm8ucHJvdG8aEUhLR01CRktOT0tJLnBy",
-            "b3RvGhFNRUxQTEFIS0FORy5wcm90bxoRSUxPRElMSkZQT0MucHJvdG8aH0V2",
-            "b2x2ZUJ1aWxkR2VhckRhbWFnZUluZm8ucHJvdG8aEUlFSE9HT0FKRElBLnBy",
-            "b3RvIqoFChVFdm9sdmVCdWlsZEJhdHRsZUluZm8SFAoMY3VyX2xldmVsX2lk",
-            "GAEgASgNEhIKCmN1cl9wZXJpb2QYAiABKA0SEAoIY3VyX2NvaW4YAyABKA0S",
-            "EQoJY3VyX3Njb3JlGAQgASgNEiYKEHdlYXBvbl9zbG90X2xpc3QYBSADKAsy",
-            "DC5NRUxQTEFIS0FORxIpChNhY2Nlc3Nvcnlfc2xvdF9saXN0GAYgAygLMgwu",
-            "TUVMUExBSEtBTkcSFQoNY3VyX2NhcmRfbGlzdBgHIAMoDRIVCg1iYW5fZ2Vh",
-            "cl9saXN0GAggAygNEiAKCmNvbGxlY3Rpb24YCSABKAsyDC5JTE9ESUxKRlBP",
-            "QxIZChFhbGxvd2VkX2dlYXJfbGlzdBgKIAMoDRIPCgdjdXJfZXhwGAsgASgN",
-            "EhIKCmN1cl9yZXJvbGwYDCABKA0SHQoVY3VyX3RyZWFzdXJlX21pc3NfY250",
-            "GA0gASgNEhYKDnBlcmlvZF9pZF9saXN0GA4gAygNEhkKEWN1cl9nZWFyX2xv",
-            "c3RfY250GA8gASgNEhAKCGN1cl93YXZlGBAgASgNEh0KFWlzX3VubG9ja19n",
-            "ZWFyX3Jlcm9sbBgRIAEoCBIaChJpc191bmxvY2tfZ2Vhcl9iYW4YEiABKAgS",
-            "HwoJY2FyZF9saXN0GBMgAygLMgwuSEtHTUJGS05PS0kSNAoQZ2Vhcl9kYW1h",
-            "Z2VfbGlzdBgUIAMoCzIaLkV2b2x2ZUJ1aWxkR2VhckRhbWFnZUluZm8SEwoL",
-            "c3RhdF9wYXJhbXMYFSADKA0SEQoJaXNfZ2l2ZXVwGBYgASgIEhwKFGN1cl91",
-            "bnVzZWRfcm91bmRfY250GBcgASgNEiMKDXN0YXRfbG9nX2luZm8YGCABKAsy",
-            "DC5JRUhPR09BSkRJQUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3Rv",
-            "YgZwcm90bzM="));
+            "ChtFdm9sdmVCdWlsZEJhdHRsZUluZm8ucHJvdG8aEUVDRElJS0NNT0pPLnBy",
+            "b3RvGhFETENLRUdQSExPSS5wcm90bxofRXZvbHZlQnVpbGRHZWFyRGFtYWdl",
+            "SW5mby5wcm90bxoRQkxBQkhGTElNSUgucHJvdG8aEU1MRElCRE9GSkZOLnBy",
+            "b3RvIvUGChVFdm9sdmVCdWlsZEJhdHRsZUluZm8SHQoVQ3VyTGV2ZWxJZEZp",
+            "ZWxkTnVtYmVyGAEgASgNEhwKFEN1clBlcmlvZEZpZWxkTnVtYmVyGAIgASgN",
+            "EhoKEkN1ckNvaW5GaWVsZE51bWJlchgDIAEoDRIvChlXZWFwb25TbG90TGlz",
+            "dEZpZWxkTnVtYmVyGAQgAygLMgwuRExDS0VHUEhMT0kSMgocQWNjZXNzb3J5",
+            "U2xvdExpc3RGaWVsZE51bWJlchgFIAMoCzIMLkRMQ0tFR1BITE9JEh4KFkJh",
+            "bkdlYXJMaXN0RmllbGROdW1iZXIYBiADKA0SKwoVQ29sbGVjdGlvbkZpZWxk",
+            "TnVtYmVyGAcgASgLMgwuTUxESUJET0ZKRk4SIgoaQWxsb3dlZEdlYXJMaXN0",
+            "RmllbGROdW1iZXIYCCADKA0SGQoRQ3VyRXhwRmllbGROdW1iZXIYCSABKA0S",
+            "HAoUQ3VyUmVyb2xsRmllbGROdW1iZXIYCiABKA0SJQodQ3VyVHJlYXN1cmVN",
+            "aXNzQ250RmllbGROdW1iZXIYCyABKA0SHwoXUGVyaW9kSWRMaXN0RmllbGRO",
+            "dW1iZXIYDCADKA0SIQoZQ3VyR2Vhckxvc3RDbnRGaWVsZE51bWJlchgNIAEo",
+            "DRIaChJDdXJXYXZlRmllbGROdW1iZXIYDiABKA0SJQodSXNVbmxvY2tHZWFy",
+            "UmVyb2xsRmllbGROdW1iZXIYDyABKAgSIgoaSXNVbmxvY2tHZWFyQmFuRmll",
+            "bGROdW1iZXIYECABKAgSKQoTQ2FyZExpc3RGaWVsZE51bWJlchgRIAMoCzIM",
+            "LkJMQUJIRkxJTUlIEj0KGUdlYXJEYW1hZ2VMaXN0RmllbGROdW1iZXIYEiAD",
+            "KAsyGi5Fdm9sdmVCdWlsZEdlYXJEYW1hZ2VJbmZvEh0KFVN0YXRQYXJhbXNG",
+            "aWVsZE51bWJlchgTIAMoDRIbChNJc0dpdmV1cEZpZWxkTnVtYmVyGBQgASgI",
+            "EiQKHEN1clVudXNlZFJvdW5kQ250RmllbGROdW1iZXIYFSABKA0SLAoWU3Rh",
+            "dExvZ0luZm9GaWVsZE51bWJlchgWIAEoCzIMLkVDRElJS0NNT0pPEigKIFBl",
+            "cmlvZEZpcnN0UmFuZG9tU2VlZEZpZWxkTnVtYmVyGBcgASgNQh6qAhtFZ2dM",
+            "aW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.HKGMBFKNOKIReflection.Descriptor, global::EggLink.DanhengServer.Proto.MELPLAHKANGReflection.Descriptor, global::EggLink.DanhengServer.Proto.ILODILJFPOCReflection.Descriptor, global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.IEHOGOAJDIAReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ECDIIKCMOJOReflection.Descriptor, global::EggLink.DanhengServer.Proto.DLCKEGPHLOIReflection.Descriptor, global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.BLABHFLIMIHReflection.Descriptor, global::EggLink.DanhengServer.Proto.MLDIBDOFJFNReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.EvolveBuildBattleInfo), global::EggLink.DanhengServer.Proto.EvolveBuildBattleInfo.Parser, new[]{ "CurLevelId", "CurPeriod", "CurCoin", "CurScore", "WeaponSlotList", "AccessorySlotList", "CurCardList", "BanGearList", "Collection", "AllowedGearList", "CurExp", "CurReroll", "CurTreasureMissCnt", "PeriodIdList", "CurGearLostCnt", "CurWave", "IsUnlockGearReroll", "IsUnlockGearBan", "CardList", "GearDamageList", "StatParams", "IsGiveup", "CurUnusedRoundCnt", "StatLogInfo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.EvolveBuildBattleInfo), global::EggLink.DanhengServer.Proto.EvolveBuildBattleInfo.Parser, new[]{ "CurLevelIdFieldNumber", "CurPeriodFieldNumber", "CurCoinFieldNumber", "WeaponSlotListFieldNumber", "AccessorySlotListFieldNumber", "BanGearListFieldNumber", "CollectionFieldNumber", "AllowedGearListFieldNumber", "CurExpFieldNumber", "CurRerollFieldNumber", "CurTreasureMissCntFieldNumber", "PeriodIdListFieldNumber", "CurGearLostCntFieldNumber", "CurWaveFieldNumber", "IsUnlockGearRerollFieldNumber", "IsUnlockGearBanFieldNumber", "CardListFieldNumber", "GearDamageListFieldNumber", "StatParamsFieldNumber", "IsGiveupFieldNumber", "CurUnusedRoundCntFieldNumber", "StatLogInfoFieldNumber", "PeriodFirstRandomSeedFieldNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -89,30 +93,29 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public EvolveBuildBattleInfo(EvolveBuildBattleInfo other) : this() {
-      curLevelId_ = other.curLevelId_;
-      curPeriod_ = other.curPeriod_;
-      curCoin_ = other.curCoin_;
-      curScore_ = other.curScore_;
-      weaponSlotList_ = other.weaponSlotList_.Clone();
-      accessorySlotList_ = other.accessorySlotList_.Clone();
-      curCardList_ = other.curCardList_.Clone();
-      banGearList_ = other.banGearList_.Clone();
-      collection_ = other.collection_ != null ? other.collection_.Clone() : null;
-      allowedGearList_ = other.allowedGearList_.Clone();
-      curExp_ = other.curExp_;
-      curReroll_ = other.curReroll_;
-      curTreasureMissCnt_ = other.curTreasureMissCnt_;
-      periodIdList_ = other.periodIdList_.Clone();
-      curGearLostCnt_ = other.curGearLostCnt_;
-      curWave_ = other.curWave_;
-      isUnlockGearReroll_ = other.isUnlockGearReroll_;
-      isUnlockGearBan_ = other.isUnlockGearBan_;
-      cardList_ = other.cardList_.Clone();
-      gearDamageList_ = other.gearDamageList_.Clone();
-      statParams_ = other.statParams_.Clone();
-      isGiveup_ = other.isGiveup_;
-      curUnusedRoundCnt_ = other.curUnusedRoundCnt_;
-      statLogInfo_ = other.statLogInfo_ != null ? other.statLogInfo_.Clone() : null;
+      curLevelIdFieldNumber_ = other.curLevelIdFieldNumber_;
+      curPeriodFieldNumber_ = other.curPeriodFieldNumber_;
+      curCoinFieldNumber_ = other.curCoinFieldNumber_;
+      weaponSlotListFieldNumber_ = other.weaponSlotListFieldNumber_.Clone();
+      accessorySlotListFieldNumber_ = other.accessorySlotListFieldNumber_.Clone();
+      banGearListFieldNumber_ = other.banGearListFieldNumber_.Clone();
+      collectionFieldNumber_ = other.collectionFieldNumber_ != null ? other.collectionFieldNumber_.Clone() : null;
+      allowedGearListFieldNumber_ = other.allowedGearListFieldNumber_.Clone();
+      curExpFieldNumber_ = other.curExpFieldNumber_;
+      curRerollFieldNumber_ = other.curRerollFieldNumber_;
+      curTreasureMissCntFieldNumber_ = other.curTreasureMissCntFieldNumber_;
+      periodIdListFieldNumber_ = other.periodIdListFieldNumber_.Clone();
+      curGearLostCntFieldNumber_ = other.curGearLostCntFieldNumber_;
+      curWaveFieldNumber_ = other.curWaveFieldNumber_;
+      isUnlockGearRerollFieldNumber_ = other.isUnlockGearRerollFieldNumber_;
+      isUnlockGearBanFieldNumber_ = other.isUnlockGearBanFieldNumber_;
+      cardListFieldNumber_ = other.cardListFieldNumber_.Clone();
+      gearDamageListFieldNumber_ = other.gearDamageListFieldNumber_.Clone();
+      statParamsFieldNumber_ = other.statParamsFieldNumber_.Clone();
+      isGiveupFieldNumber_ = other.isGiveupFieldNumber_;
+      curUnusedRoundCntFieldNumber_ = other.curUnusedRoundCntFieldNumber_;
+      statLogInfoFieldNumber_ = other.statLogInfoFieldNumber_ != null ? other.statLogInfoFieldNumber_.Clone() : null;
+      periodFirstRandomSeedFieldNumber_ = other.periodFirstRandomSeedFieldNumber_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -122,282 +125,271 @@ namespace EggLink.DanhengServer.Proto {
       return new EvolveBuildBattleInfo(this);
     }
 
-    /// <summary>Field number for the "cur_level_id" field.</summary>
-    public const int CurLevelIdFieldNumber = 1;
-    private uint curLevelId_;
+    /// <summary>Field number for the "CurLevelIdFieldNumber" field.</summary>
+    public const int CurLevelIdFieldNumberFieldNumber = 1;
+    private uint curLevelIdFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurLevelId {
-      get { return curLevelId_; }
+    public uint CurLevelIdFieldNumber {
+      get { return curLevelIdFieldNumber_; }
       set {
-        curLevelId_ = value;
+        curLevelIdFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "cur_period" field.</summary>
-    public const int CurPeriodFieldNumber = 2;
-    private uint curPeriod_;
+    /// <summary>Field number for the "CurPeriodFieldNumber" field.</summary>
+    public const int CurPeriodFieldNumberFieldNumber = 2;
+    private uint curPeriodFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurPeriod {
-      get { return curPeriod_; }
+    public uint CurPeriodFieldNumber {
+      get { return curPeriodFieldNumber_; }
       set {
-        curPeriod_ = value;
+        curPeriodFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "cur_coin" field.</summary>
-    public const int CurCoinFieldNumber = 3;
-    private uint curCoin_;
+    /// <summary>Field number for the "CurCoinFieldNumber" field.</summary>
+    public const int CurCoinFieldNumberFieldNumber = 3;
+    private uint curCoinFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurCoin {
-      get { return curCoin_; }
+    public uint CurCoinFieldNumber {
+      get { return curCoinFieldNumber_; }
       set {
-        curCoin_ = value;
+        curCoinFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "cur_score" field.</summary>
-    public const int CurScoreFieldNumber = 4;
-    private uint curScore_;
+    /// <summary>Field number for the "WeaponSlotListFieldNumber" field.</summary>
+    public const int WeaponSlotListFieldNumberFieldNumber = 4;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.DLCKEGPHLOI> _repeated_weaponSlotListFieldNumber_codec
+        = pb::FieldCodec.ForMessage(34, global::EggLink.DanhengServer.Proto.DLCKEGPHLOI.Parser);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.DLCKEGPHLOI> weaponSlotListFieldNumber_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.DLCKEGPHLOI>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurScore {
-      get { return curScore_; }
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.DLCKEGPHLOI> WeaponSlotListFieldNumber {
+      get { return weaponSlotListFieldNumber_; }
+    }
+
+    /// <summary>Field number for the "AccessorySlotListFieldNumber" field.</summary>
+    public const int AccessorySlotListFieldNumberFieldNumber = 5;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.DLCKEGPHLOI> _repeated_accessorySlotListFieldNumber_codec
+        = pb::FieldCodec.ForMessage(42, global::EggLink.DanhengServer.Proto.DLCKEGPHLOI.Parser);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.DLCKEGPHLOI> accessorySlotListFieldNumber_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.DLCKEGPHLOI>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.DLCKEGPHLOI> AccessorySlotListFieldNumber {
+      get { return accessorySlotListFieldNumber_; }
+    }
+
+    /// <summary>Field number for the "BanGearListFieldNumber" field.</summary>
+    public const int BanGearListFieldNumberFieldNumber = 6;
+    private static readonly pb::FieldCodec<uint> _repeated_banGearListFieldNumber_codec
+        = pb::FieldCodec.ForUInt32(50);
+    private readonly pbc::RepeatedField<uint> banGearListFieldNumber_ = new pbc::RepeatedField<uint>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<uint> BanGearListFieldNumber {
+      get { return banGearListFieldNumber_; }
+    }
+
+    /// <summary>Field number for the "CollectionFieldNumber" field.</summary>
+    public const int CollectionFieldNumberFieldNumber = 7;
+    private global::EggLink.DanhengServer.Proto.MLDIBDOFJFN collectionFieldNumber_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.MLDIBDOFJFN CollectionFieldNumber {
+      get { return collectionFieldNumber_; }
       set {
-        curScore_ = value;
+        collectionFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "weapon_slot_list" field.</summary>
-    public const int WeaponSlotListFieldNumber = 5;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.MELPLAHKANG> _repeated_weaponSlotList_codec
-        = pb::FieldCodec.ForMessage(42, global::EggLink.DanhengServer.Proto.MELPLAHKANG.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.MELPLAHKANG> weaponSlotList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.MELPLAHKANG>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.MELPLAHKANG> WeaponSlotList {
-      get { return weaponSlotList_; }
-    }
-
-    /// <summary>Field number for the "accessory_slot_list" field.</summary>
-    public const int AccessorySlotListFieldNumber = 6;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.MELPLAHKANG> _repeated_accessorySlotList_codec
-        = pb::FieldCodec.ForMessage(50, global::EggLink.DanhengServer.Proto.MELPLAHKANG.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.MELPLAHKANG> accessorySlotList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.MELPLAHKANG>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.MELPLAHKANG> AccessorySlotList {
-      get { return accessorySlotList_; }
-    }
-
-    /// <summary>Field number for the "cur_card_list" field.</summary>
-    public const int CurCardListFieldNumber = 7;
-    private static readonly pb::FieldCodec<uint> _repeated_curCardList_codec
-        = pb::FieldCodec.ForUInt32(58);
-    private readonly pbc::RepeatedField<uint> curCardList_ = new pbc::RepeatedField<uint>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<uint> CurCardList {
-      get { return curCardList_; }
-    }
-
-    /// <summary>Field number for the "ban_gear_list" field.</summary>
-    public const int BanGearListFieldNumber = 8;
-    private static readonly pb::FieldCodec<uint> _repeated_banGearList_codec
+    /// <summary>Field number for the "AllowedGearListFieldNumber" field.</summary>
+    public const int AllowedGearListFieldNumberFieldNumber = 8;
+    private static readonly pb::FieldCodec<uint> _repeated_allowedGearListFieldNumber_codec
         = pb::FieldCodec.ForUInt32(66);
-    private readonly pbc::RepeatedField<uint> banGearList_ = new pbc::RepeatedField<uint>();
+    private readonly pbc::RepeatedField<uint> allowedGearListFieldNumber_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<uint> BanGearList {
-      get { return banGearList_; }
+    public pbc::RepeatedField<uint> AllowedGearListFieldNumber {
+      get { return allowedGearListFieldNumber_; }
     }
 
-    /// <summary>Field number for the "collection" field.</summary>
-    public const int CollectionFieldNumber = 9;
-    private global::EggLink.DanhengServer.Proto.ILODILJFPOC collection_;
+    /// <summary>Field number for the "CurExpFieldNumber" field.</summary>
+    public const int CurExpFieldNumberFieldNumber = 9;
+    private uint curExpFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.ILODILJFPOC Collection {
-      get { return collection_; }
+    public uint CurExpFieldNumber {
+      get { return curExpFieldNumber_; }
       set {
-        collection_ = value;
+        curExpFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "allowed_gear_list" field.</summary>
-    public const int AllowedGearListFieldNumber = 10;
-    private static readonly pb::FieldCodec<uint> _repeated_allowedGearList_codec
-        = pb::FieldCodec.ForUInt32(82);
-    private readonly pbc::RepeatedField<uint> allowedGearList_ = new pbc::RepeatedField<uint>();
+    /// <summary>Field number for the "CurRerollFieldNumber" field.</summary>
+    public const int CurRerollFieldNumberFieldNumber = 10;
+    private uint curRerollFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<uint> AllowedGearList {
-      get { return allowedGearList_; }
-    }
-
-    /// <summary>Field number for the "cur_exp" field.</summary>
-    public const int CurExpFieldNumber = 11;
-    private uint curExp_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurExp {
-      get { return curExp_; }
+    public uint CurRerollFieldNumber {
+      get { return curRerollFieldNumber_; }
       set {
-        curExp_ = value;
+        curRerollFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "cur_reroll" field.</summary>
-    public const int CurRerollFieldNumber = 12;
-    private uint curReroll_;
+    /// <summary>Field number for the "CurTreasureMissCntFieldNumber" field.</summary>
+    public const int CurTreasureMissCntFieldNumberFieldNumber = 11;
+    private uint curTreasureMissCntFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurReroll {
-      get { return curReroll_; }
+    public uint CurTreasureMissCntFieldNumber {
+      get { return curTreasureMissCntFieldNumber_; }
       set {
-        curReroll_ = value;
+        curTreasureMissCntFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "cur_treasure_miss_cnt" field.</summary>
-    public const int CurTreasureMissCntFieldNumber = 13;
-    private uint curTreasureMissCnt_;
+    /// <summary>Field number for the "PeriodIdListFieldNumber" field.</summary>
+    public const int PeriodIdListFieldNumberFieldNumber = 12;
+    private static readonly pb::FieldCodec<uint> _repeated_periodIdListFieldNumber_codec
+        = pb::FieldCodec.ForUInt32(98);
+    private readonly pbc::RepeatedField<uint> periodIdListFieldNumber_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurTreasureMissCnt {
-      get { return curTreasureMissCnt_; }
+    public pbc::RepeatedField<uint> PeriodIdListFieldNumber {
+      get { return periodIdListFieldNumber_; }
+    }
+
+    /// <summary>Field number for the "CurGearLostCntFieldNumber" field.</summary>
+    public const int CurGearLostCntFieldNumberFieldNumber = 13;
+    private uint curGearLostCntFieldNumber_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint CurGearLostCntFieldNumber {
+      get { return curGearLostCntFieldNumber_; }
       set {
-        curTreasureMissCnt_ = value;
+        curGearLostCntFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "period_id_list" field.</summary>
-    public const int PeriodIdListFieldNumber = 14;
-    private static readonly pb::FieldCodec<uint> _repeated_periodIdList_codec
-        = pb::FieldCodec.ForUInt32(114);
-    private readonly pbc::RepeatedField<uint> periodIdList_ = new pbc::RepeatedField<uint>();
+    /// <summary>Field number for the "CurWaveFieldNumber" field.</summary>
+    public const int CurWaveFieldNumberFieldNumber = 14;
+    private uint curWaveFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<uint> PeriodIdList {
-      get { return periodIdList_; }
-    }
-
-    /// <summary>Field number for the "cur_gear_lost_cnt" field.</summary>
-    public const int CurGearLostCntFieldNumber = 15;
-    private uint curGearLostCnt_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurGearLostCnt {
-      get { return curGearLostCnt_; }
+    public uint CurWaveFieldNumber {
+      get { return curWaveFieldNumber_; }
       set {
-        curGearLostCnt_ = value;
+        curWaveFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "cur_wave" field.</summary>
-    public const int CurWaveFieldNumber = 16;
-    private uint curWave_;
+    /// <summary>Field number for the "IsUnlockGearRerollFieldNumber" field.</summary>
+    public const int IsUnlockGearRerollFieldNumberFieldNumber = 15;
+    private bool isUnlockGearRerollFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurWave {
-      get { return curWave_; }
+    public bool IsUnlockGearRerollFieldNumber {
+      get { return isUnlockGearRerollFieldNumber_; }
       set {
-        curWave_ = value;
+        isUnlockGearRerollFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "is_unlock_gear_reroll" field.</summary>
-    public const int IsUnlockGearRerollFieldNumber = 17;
-    private bool isUnlockGearReroll_;
+    /// <summary>Field number for the "IsUnlockGearBanFieldNumber" field.</summary>
+    public const int IsUnlockGearBanFieldNumberFieldNumber = 16;
+    private bool isUnlockGearBanFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsUnlockGearReroll {
-      get { return isUnlockGearReroll_; }
+    public bool IsUnlockGearBanFieldNumber {
+      get { return isUnlockGearBanFieldNumber_; }
       set {
-        isUnlockGearReroll_ = value;
+        isUnlockGearBanFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "is_unlock_gear_ban" field.</summary>
-    public const int IsUnlockGearBanFieldNumber = 18;
-    private bool isUnlockGearBan_;
+    /// <summary>Field number for the "CardListFieldNumber" field.</summary>
+    public const int CardListFieldNumberFieldNumber = 17;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.BLABHFLIMIH> _repeated_cardListFieldNumber_codec
+        = pb::FieldCodec.ForMessage(138, global::EggLink.DanhengServer.Proto.BLABHFLIMIH.Parser);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.BLABHFLIMIH> cardListFieldNumber_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.BLABHFLIMIH>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsUnlockGearBan {
-      get { return isUnlockGearBan_; }
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.BLABHFLIMIH> CardListFieldNumber {
+      get { return cardListFieldNumber_; }
+    }
+
+    /// <summary>Field number for the "GearDamageListFieldNumber" field.</summary>
+    public const int GearDamageListFieldNumberFieldNumber = 18;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo> _repeated_gearDamageListFieldNumber_codec
+        = pb::FieldCodec.ForMessage(146, global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo.Parser);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo> gearDamageListFieldNumber_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo> GearDamageListFieldNumber {
+      get { return gearDamageListFieldNumber_; }
+    }
+
+    /// <summary>Field number for the "StatParamsFieldNumber" field.</summary>
+    public const int StatParamsFieldNumberFieldNumber = 19;
+    private static readonly pb::FieldCodec<uint> _repeated_statParamsFieldNumber_codec
+        = pb::FieldCodec.ForUInt32(154);
+    private readonly pbc::RepeatedField<uint> statParamsFieldNumber_ = new pbc::RepeatedField<uint>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<uint> StatParamsFieldNumber {
+      get { return statParamsFieldNumber_; }
+    }
+
+    /// <summary>Field number for the "IsGiveupFieldNumber" field.</summary>
+    public const int IsGiveupFieldNumberFieldNumber = 20;
+    private bool isGiveupFieldNumber_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsGiveupFieldNumber {
+      get { return isGiveupFieldNumber_; }
       set {
-        isUnlockGearBan_ = value;
+        isGiveupFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "card_list" field.</summary>
-    public const int CardListFieldNumber = 19;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.HKGMBFKNOKI> _repeated_cardList_codec
-        = pb::FieldCodec.ForMessage(154, global::EggLink.DanhengServer.Proto.HKGMBFKNOKI.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.HKGMBFKNOKI> cardList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.HKGMBFKNOKI>();
+    /// <summary>Field number for the "CurUnusedRoundCntFieldNumber" field.</summary>
+    public const int CurUnusedRoundCntFieldNumberFieldNumber = 21;
+    private uint curUnusedRoundCntFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.HKGMBFKNOKI> CardList {
-      get { return cardList_; }
-    }
-
-    /// <summary>Field number for the "gear_damage_list" field.</summary>
-    public const int GearDamageListFieldNumber = 20;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo> _repeated_gearDamageList_codec
-        = pb::FieldCodec.ForMessage(162, global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo> gearDamageList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EvolveBuildGearDamageInfo> GearDamageList {
-      get { return gearDamageList_; }
-    }
-
-    /// <summary>Field number for the "stat_params" field.</summary>
-    public const int StatParamsFieldNumber = 21;
-    private static readonly pb::FieldCodec<uint> _repeated_statParams_codec
-        = pb::FieldCodec.ForUInt32(170);
-    private readonly pbc::RepeatedField<uint> statParams_ = new pbc::RepeatedField<uint>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<uint> StatParams {
-      get { return statParams_; }
-    }
-
-    /// <summary>Field number for the "is_giveup" field.</summary>
-    public const int IsGiveupFieldNumber = 22;
-    private bool isGiveup_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsGiveup {
-      get { return isGiveup_; }
+    public uint CurUnusedRoundCntFieldNumber {
+      get { return curUnusedRoundCntFieldNumber_; }
       set {
-        isGiveup_ = value;
+        curUnusedRoundCntFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "cur_unused_round_cnt" field.</summary>
-    public const int CurUnusedRoundCntFieldNumber = 23;
-    private uint curUnusedRoundCnt_;
+    /// <summary>Field number for the "StatLogInfoFieldNumber" field.</summary>
+    public const int StatLogInfoFieldNumberFieldNumber = 22;
+    private global::EggLink.DanhengServer.Proto.ECDIIKCMOJO statLogInfoFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurUnusedRoundCnt {
-      get { return curUnusedRoundCnt_; }
+    public global::EggLink.DanhengServer.Proto.ECDIIKCMOJO StatLogInfoFieldNumber {
+      get { return statLogInfoFieldNumber_; }
       set {
-        curUnusedRoundCnt_ = value;
+        statLogInfoFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "stat_log_info" field.</summary>
-    public const int StatLogInfoFieldNumber = 24;
-    private global::EggLink.DanhengServer.Proto.IEHOGOAJDIA statLogInfo_;
+    /// <summary>Field number for the "PeriodFirstRandomSeedFieldNumber" field.</summary>
+    public const int PeriodFirstRandomSeedFieldNumberFieldNumber = 23;
+    private uint periodFirstRandomSeedFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.IEHOGOAJDIA StatLogInfo {
-      get { return statLogInfo_; }
+    public uint PeriodFirstRandomSeedFieldNumber {
+      get { return periodFirstRandomSeedFieldNumber_; }
       set {
-        statLogInfo_ = value;
+        periodFirstRandomSeedFieldNumber_ = value;
       }
     }
 
@@ -416,30 +408,29 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (CurLevelId != other.CurLevelId) return false;
-      if (CurPeriod != other.CurPeriod) return false;
-      if (CurCoin != other.CurCoin) return false;
-      if (CurScore != other.CurScore) return false;
-      if(!weaponSlotList_.Equals(other.weaponSlotList_)) return false;
-      if(!accessorySlotList_.Equals(other.accessorySlotList_)) return false;
-      if(!curCardList_.Equals(other.curCardList_)) return false;
-      if(!banGearList_.Equals(other.banGearList_)) return false;
-      if (!object.Equals(Collection, other.Collection)) return false;
-      if(!allowedGearList_.Equals(other.allowedGearList_)) return false;
-      if (CurExp != other.CurExp) return false;
-      if (CurReroll != other.CurReroll) return false;
-      if (CurTreasureMissCnt != other.CurTreasureMissCnt) return false;
-      if(!periodIdList_.Equals(other.periodIdList_)) return false;
-      if (CurGearLostCnt != other.CurGearLostCnt) return false;
-      if (CurWave != other.CurWave) return false;
-      if (IsUnlockGearReroll != other.IsUnlockGearReroll) return false;
-      if (IsUnlockGearBan != other.IsUnlockGearBan) return false;
-      if(!cardList_.Equals(other.cardList_)) return false;
-      if(!gearDamageList_.Equals(other.gearDamageList_)) return false;
-      if(!statParams_.Equals(other.statParams_)) return false;
-      if (IsGiveup != other.IsGiveup) return false;
-      if (CurUnusedRoundCnt != other.CurUnusedRoundCnt) return false;
-      if (!object.Equals(StatLogInfo, other.StatLogInfo)) return false;
+      if (CurLevelIdFieldNumber != other.CurLevelIdFieldNumber) return false;
+      if (CurPeriodFieldNumber != other.CurPeriodFieldNumber) return false;
+      if (CurCoinFieldNumber != other.CurCoinFieldNumber) return false;
+      if(!weaponSlotListFieldNumber_.Equals(other.weaponSlotListFieldNumber_)) return false;
+      if(!accessorySlotListFieldNumber_.Equals(other.accessorySlotListFieldNumber_)) return false;
+      if(!banGearListFieldNumber_.Equals(other.banGearListFieldNumber_)) return false;
+      if (!object.Equals(CollectionFieldNumber, other.CollectionFieldNumber)) return false;
+      if(!allowedGearListFieldNumber_.Equals(other.allowedGearListFieldNumber_)) return false;
+      if (CurExpFieldNumber != other.CurExpFieldNumber) return false;
+      if (CurRerollFieldNumber != other.CurRerollFieldNumber) return false;
+      if (CurTreasureMissCntFieldNumber != other.CurTreasureMissCntFieldNumber) return false;
+      if(!periodIdListFieldNumber_.Equals(other.periodIdListFieldNumber_)) return false;
+      if (CurGearLostCntFieldNumber != other.CurGearLostCntFieldNumber) return false;
+      if (CurWaveFieldNumber != other.CurWaveFieldNumber) return false;
+      if (IsUnlockGearRerollFieldNumber != other.IsUnlockGearRerollFieldNumber) return false;
+      if (IsUnlockGearBanFieldNumber != other.IsUnlockGearBanFieldNumber) return false;
+      if(!cardListFieldNumber_.Equals(other.cardListFieldNumber_)) return false;
+      if(!gearDamageListFieldNumber_.Equals(other.gearDamageListFieldNumber_)) return false;
+      if(!statParamsFieldNumber_.Equals(other.statParamsFieldNumber_)) return false;
+      if (IsGiveupFieldNumber != other.IsGiveupFieldNumber) return false;
+      if (CurUnusedRoundCntFieldNumber != other.CurUnusedRoundCntFieldNumber) return false;
+      if (!object.Equals(StatLogInfoFieldNumber, other.StatLogInfoFieldNumber)) return false;
+      if (PeriodFirstRandomSeedFieldNumber != other.PeriodFirstRandomSeedFieldNumber) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -447,30 +438,29 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (CurLevelId != 0) hash ^= CurLevelId.GetHashCode();
-      if (CurPeriod != 0) hash ^= CurPeriod.GetHashCode();
-      if (CurCoin != 0) hash ^= CurCoin.GetHashCode();
-      if (CurScore != 0) hash ^= CurScore.GetHashCode();
-      hash ^= weaponSlotList_.GetHashCode();
-      hash ^= accessorySlotList_.GetHashCode();
-      hash ^= curCardList_.GetHashCode();
-      hash ^= banGearList_.GetHashCode();
-      if (collection_ != null) hash ^= Collection.GetHashCode();
-      hash ^= allowedGearList_.GetHashCode();
-      if (CurExp != 0) hash ^= CurExp.GetHashCode();
-      if (CurReroll != 0) hash ^= CurReroll.GetHashCode();
-      if (CurTreasureMissCnt != 0) hash ^= CurTreasureMissCnt.GetHashCode();
-      hash ^= periodIdList_.GetHashCode();
-      if (CurGearLostCnt != 0) hash ^= CurGearLostCnt.GetHashCode();
-      if (CurWave != 0) hash ^= CurWave.GetHashCode();
-      if (IsUnlockGearReroll != false) hash ^= IsUnlockGearReroll.GetHashCode();
-      if (IsUnlockGearBan != false) hash ^= IsUnlockGearBan.GetHashCode();
-      hash ^= cardList_.GetHashCode();
-      hash ^= gearDamageList_.GetHashCode();
-      hash ^= statParams_.GetHashCode();
-      if (IsGiveup != false) hash ^= IsGiveup.GetHashCode();
-      if (CurUnusedRoundCnt != 0) hash ^= CurUnusedRoundCnt.GetHashCode();
-      if (statLogInfo_ != null) hash ^= StatLogInfo.GetHashCode();
+      if (CurLevelIdFieldNumber != 0) hash ^= CurLevelIdFieldNumber.GetHashCode();
+      if (CurPeriodFieldNumber != 0) hash ^= CurPeriodFieldNumber.GetHashCode();
+      if (CurCoinFieldNumber != 0) hash ^= CurCoinFieldNumber.GetHashCode();
+      hash ^= weaponSlotListFieldNumber_.GetHashCode();
+      hash ^= accessorySlotListFieldNumber_.GetHashCode();
+      hash ^= banGearListFieldNumber_.GetHashCode();
+      if (collectionFieldNumber_ != null) hash ^= CollectionFieldNumber.GetHashCode();
+      hash ^= allowedGearListFieldNumber_.GetHashCode();
+      if (CurExpFieldNumber != 0) hash ^= CurExpFieldNumber.GetHashCode();
+      if (CurRerollFieldNumber != 0) hash ^= CurRerollFieldNumber.GetHashCode();
+      if (CurTreasureMissCntFieldNumber != 0) hash ^= CurTreasureMissCntFieldNumber.GetHashCode();
+      hash ^= periodIdListFieldNumber_.GetHashCode();
+      if (CurGearLostCntFieldNumber != 0) hash ^= CurGearLostCntFieldNumber.GetHashCode();
+      if (CurWaveFieldNumber != 0) hash ^= CurWaveFieldNumber.GetHashCode();
+      if (IsUnlockGearRerollFieldNumber != false) hash ^= IsUnlockGearRerollFieldNumber.GetHashCode();
+      if (IsUnlockGearBanFieldNumber != false) hash ^= IsUnlockGearBanFieldNumber.GetHashCode();
+      hash ^= cardListFieldNumber_.GetHashCode();
+      hash ^= gearDamageListFieldNumber_.GetHashCode();
+      hash ^= statParamsFieldNumber_.GetHashCode();
+      if (IsGiveupFieldNumber != false) hash ^= IsGiveupFieldNumber.GetHashCode();
+      if (CurUnusedRoundCntFieldNumber != 0) hash ^= CurUnusedRoundCntFieldNumber.GetHashCode();
+      if (statLogInfoFieldNumber_ != null) hash ^= StatLogInfoFieldNumber.GetHashCode();
+      if (PeriodFirstRandomSeedFieldNumber != 0) hash ^= PeriodFirstRandomSeedFieldNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -489,74 +479,73 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (CurLevelId != 0) {
+      if (CurLevelIdFieldNumber != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt32(CurLevelId);
+        output.WriteUInt32(CurLevelIdFieldNumber);
       }
-      if (CurPeriod != 0) {
+      if (CurPeriodFieldNumber != 0) {
         output.WriteRawTag(16);
-        output.WriteUInt32(CurPeriod);
+        output.WriteUInt32(CurPeriodFieldNumber);
       }
-      if (CurCoin != 0) {
+      if (CurCoinFieldNumber != 0) {
         output.WriteRawTag(24);
-        output.WriteUInt32(CurCoin);
+        output.WriteUInt32(CurCoinFieldNumber);
       }
-      if (CurScore != 0) {
-        output.WriteRawTag(32);
-        output.WriteUInt32(CurScore);
+      weaponSlotListFieldNumber_.WriteTo(output, _repeated_weaponSlotListFieldNumber_codec);
+      accessorySlotListFieldNumber_.WriteTo(output, _repeated_accessorySlotListFieldNumber_codec);
+      banGearListFieldNumber_.WriteTo(output, _repeated_banGearListFieldNumber_codec);
+      if (collectionFieldNumber_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(CollectionFieldNumber);
       }
-      weaponSlotList_.WriteTo(output, _repeated_weaponSlotList_codec);
-      accessorySlotList_.WriteTo(output, _repeated_accessorySlotList_codec);
-      curCardList_.WriteTo(output, _repeated_curCardList_codec);
-      banGearList_.WriteTo(output, _repeated_banGearList_codec);
-      if (collection_ != null) {
-        output.WriteRawTag(74);
-        output.WriteMessage(Collection);
+      allowedGearListFieldNumber_.WriteTo(output, _repeated_allowedGearListFieldNumber_codec);
+      if (CurExpFieldNumber != 0) {
+        output.WriteRawTag(72);
+        output.WriteUInt32(CurExpFieldNumber);
       }
-      allowedGearList_.WriteTo(output, _repeated_allowedGearList_codec);
-      if (CurExp != 0) {
+      if (CurRerollFieldNumber != 0) {
+        output.WriteRawTag(80);
+        output.WriteUInt32(CurRerollFieldNumber);
+      }
+      if (CurTreasureMissCntFieldNumber != 0) {
         output.WriteRawTag(88);
-        output.WriteUInt32(CurExp);
+        output.WriteUInt32(CurTreasureMissCntFieldNumber);
       }
-      if (CurReroll != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(CurReroll);
-      }
-      if (CurTreasureMissCnt != 0) {
+      periodIdListFieldNumber_.WriteTo(output, _repeated_periodIdListFieldNumber_codec);
+      if (CurGearLostCntFieldNumber != 0) {
         output.WriteRawTag(104);
-        output.WriteUInt32(CurTreasureMissCnt);
+        output.WriteUInt32(CurGearLostCntFieldNumber);
       }
-      periodIdList_.WriteTo(output, _repeated_periodIdList_codec);
-      if (CurGearLostCnt != 0) {
+      if (CurWaveFieldNumber != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(CurWaveFieldNumber);
+      }
+      if (IsUnlockGearRerollFieldNumber != false) {
         output.WriteRawTag(120);
-        output.WriteUInt32(CurGearLostCnt);
+        output.WriteBool(IsUnlockGearRerollFieldNumber);
       }
-      if (CurWave != 0) {
+      if (IsUnlockGearBanFieldNumber != false) {
         output.WriteRawTag(128, 1);
-        output.WriteUInt32(CurWave);
+        output.WriteBool(IsUnlockGearBanFieldNumber);
       }
-      if (IsUnlockGearReroll != false) {
-        output.WriteRawTag(136, 1);
-        output.WriteBool(IsUnlockGearReroll);
+      cardListFieldNumber_.WriteTo(output, _repeated_cardListFieldNumber_codec);
+      gearDamageListFieldNumber_.WriteTo(output, _repeated_gearDamageListFieldNumber_codec);
+      statParamsFieldNumber_.WriteTo(output, _repeated_statParamsFieldNumber_codec);
+      if (IsGiveupFieldNumber != false) {
+        output.WriteRawTag(160, 1);
+        output.WriteBool(IsGiveupFieldNumber);
       }
-      if (IsUnlockGearBan != false) {
-        output.WriteRawTag(144, 1);
-        output.WriteBool(IsUnlockGearBan);
+      if (CurUnusedRoundCntFieldNumber != 0) {
+        output.WriteRawTag(168, 1);
+        output.WriteUInt32(CurUnusedRoundCntFieldNumber);
       }
-      cardList_.WriteTo(output, _repeated_cardList_codec);
-      gearDamageList_.WriteTo(output, _repeated_gearDamageList_codec);
-      statParams_.WriteTo(output, _repeated_statParams_codec);
-      if (IsGiveup != false) {
-        output.WriteRawTag(176, 1);
-        output.WriteBool(IsGiveup);
+      if (statLogInfoFieldNumber_ != null) {
+        output.WriteRawTag(178, 1);
+        output.WriteMessage(StatLogInfoFieldNumber);
       }
-      if (CurUnusedRoundCnt != 0) {
+      if (PeriodFirstRandomSeedFieldNumber != 0) {
         output.WriteRawTag(184, 1);
-        output.WriteUInt32(CurUnusedRoundCnt);
-      }
-      if (statLogInfo_ != null) {
-        output.WriteRawTag(194, 1);
-        output.WriteMessage(StatLogInfo);
+        output.WriteUInt32(PeriodFirstRandomSeedFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -568,74 +557,73 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (CurLevelId != 0) {
+      if (CurLevelIdFieldNumber != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt32(CurLevelId);
+        output.WriteUInt32(CurLevelIdFieldNumber);
       }
-      if (CurPeriod != 0) {
+      if (CurPeriodFieldNumber != 0) {
         output.WriteRawTag(16);
-        output.WriteUInt32(CurPeriod);
+        output.WriteUInt32(CurPeriodFieldNumber);
       }
-      if (CurCoin != 0) {
+      if (CurCoinFieldNumber != 0) {
         output.WriteRawTag(24);
-        output.WriteUInt32(CurCoin);
+        output.WriteUInt32(CurCoinFieldNumber);
       }
-      if (CurScore != 0) {
-        output.WriteRawTag(32);
-        output.WriteUInt32(CurScore);
+      weaponSlotListFieldNumber_.WriteTo(ref output, _repeated_weaponSlotListFieldNumber_codec);
+      accessorySlotListFieldNumber_.WriteTo(ref output, _repeated_accessorySlotListFieldNumber_codec);
+      banGearListFieldNumber_.WriteTo(ref output, _repeated_banGearListFieldNumber_codec);
+      if (collectionFieldNumber_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(CollectionFieldNumber);
       }
-      weaponSlotList_.WriteTo(ref output, _repeated_weaponSlotList_codec);
-      accessorySlotList_.WriteTo(ref output, _repeated_accessorySlotList_codec);
-      curCardList_.WriteTo(ref output, _repeated_curCardList_codec);
-      banGearList_.WriteTo(ref output, _repeated_banGearList_codec);
-      if (collection_ != null) {
-        output.WriteRawTag(74);
-        output.WriteMessage(Collection);
+      allowedGearListFieldNumber_.WriteTo(ref output, _repeated_allowedGearListFieldNumber_codec);
+      if (CurExpFieldNumber != 0) {
+        output.WriteRawTag(72);
+        output.WriteUInt32(CurExpFieldNumber);
       }
-      allowedGearList_.WriteTo(ref output, _repeated_allowedGearList_codec);
-      if (CurExp != 0) {
+      if (CurRerollFieldNumber != 0) {
+        output.WriteRawTag(80);
+        output.WriteUInt32(CurRerollFieldNumber);
+      }
+      if (CurTreasureMissCntFieldNumber != 0) {
         output.WriteRawTag(88);
-        output.WriteUInt32(CurExp);
+        output.WriteUInt32(CurTreasureMissCntFieldNumber);
       }
-      if (CurReroll != 0) {
-        output.WriteRawTag(96);
-        output.WriteUInt32(CurReroll);
-      }
-      if (CurTreasureMissCnt != 0) {
+      periodIdListFieldNumber_.WriteTo(ref output, _repeated_periodIdListFieldNumber_codec);
+      if (CurGearLostCntFieldNumber != 0) {
         output.WriteRawTag(104);
-        output.WriteUInt32(CurTreasureMissCnt);
+        output.WriteUInt32(CurGearLostCntFieldNumber);
       }
-      periodIdList_.WriteTo(ref output, _repeated_periodIdList_codec);
-      if (CurGearLostCnt != 0) {
+      if (CurWaveFieldNumber != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(CurWaveFieldNumber);
+      }
+      if (IsUnlockGearRerollFieldNumber != false) {
         output.WriteRawTag(120);
-        output.WriteUInt32(CurGearLostCnt);
+        output.WriteBool(IsUnlockGearRerollFieldNumber);
       }
-      if (CurWave != 0) {
+      if (IsUnlockGearBanFieldNumber != false) {
         output.WriteRawTag(128, 1);
-        output.WriteUInt32(CurWave);
+        output.WriteBool(IsUnlockGearBanFieldNumber);
       }
-      if (IsUnlockGearReroll != false) {
-        output.WriteRawTag(136, 1);
-        output.WriteBool(IsUnlockGearReroll);
+      cardListFieldNumber_.WriteTo(ref output, _repeated_cardListFieldNumber_codec);
+      gearDamageListFieldNumber_.WriteTo(ref output, _repeated_gearDamageListFieldNumber_codec);
+      statParamsFieldNumber_.WriteTo(ref output, _repeated_statParamsFieldNumber_codec);
+      if (IsGiveupFieldNumber != false) {
+        output.WriteRawTag(160, 1);
+        output.WriteBool(IsGiveupFieldNumber);
       }
-      if (IsUnlockGearBan != false) {
-        output.WriteRawTag(144, 1);
-        output.WriteBool(IsUnlockGearBan);
+      if (CurUnusedRoundCntFieldNumber != 0) {
+        output.WriteRawTag(168, 1);
+        output.WriteUInt32(CurUnusedRoundCntFieldNumber);
       }
-      cardList_.WriteTo(ref output, _repeated_cardList_codec);
-      gearDamageList_.WriteTo(ref output, _repeated_gearDamageList_codec);
-      statParams_.WriteTo(ref output, _repeated_statParams_codec);
-      if (IsGiveup != false) {
-        output.WriteRawTag(176, 1);
-        output.WriteBool(IsGiveup);
+      if (statLogInfoFieldNumber_ != null) {
+        output.WriteRawTag(178, 1);
+        output.WriteMessage(StatLogInfoFieldNumber);
       }
-      if (CurUnusedRoundCnt != 0) {
+      if (PeriodFirstRandomSeedFieldNumber != 0) {
         output.WriteRawTag(184, 1);
-        output.WriteUInt32(CurUnusedRoundCnt);
-      }
-      if (statLogInfo_ != null) {
-        output.WriteRawTag(194, 1);
-        output.WriteMessage(StatLogInfo);
+        output.WriteUInt32(PeriodFirstRandomSeedFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -647,59 +635,58 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (CurLevelId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurLevelId);
+      if (CurLevelIdFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurLevelIdFieldNumber);
       }
-      if (CurPeriod != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurPeriod);
+      if (CurPeriodFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurPeriodFieldNumber);
       }
-      if (CurCoin != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurCoin);
+      if (CurCoinFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurCoinFieldNumber);
       }
-      if (CurScore != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurScore);
+      size += weaponSlotListFieldNumber_.CalculateSize(_repeated_weaponSlotListFieldNumber_codec);
+      size += accessorySlotListFieldNumber_.CalculateSize(_repeated_accessorySlotListFieldNumber_codec);
+      size += banGearListFieldNumber_.CalculateSize(_repeated_banGearListFieldNumber_codec);
+      if (collectionFieldNumber_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CollectionFieldNumber);
       }
-      size += weaponSlotList_.CalculateSize(_repeated_weaponSlotList_codec);
-      size += accessorySlotList_.CalculateSize(_repeated_accessorySlotList_codec);
-      size += curCardList_.CalculateSize(_repeated_curCardList_codec);
-      size += banGearList_.CalculateSize(_repeated_banGearList_codec);
-      if (collection_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Collection);
+      size += allowedGearListFieldNumber_.CalculateSize(_repeated_allowedGearListFieldNumber_codec);
+      if (CurExpFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurExpFieldNumber);
       }
-      size += allowedGearList_.CalculateSize(_repeated_allowedGearList_codec);
-      if (CurExp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurExp);
+      if (CurRerollFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurRerollFieldNumber);
       }
-      if (CurReroll != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurReroll);
+      if (CurTreasureMissCntFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurTreasureMissCntFieldNumber);
       }
-      if (CurTreasureMissCnt != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurTreasureMissCnt);
+      size += periodIdListFieldNumber_.CalculateSize(_repeated_periodIdListFieldNumber_codec);
+      if (CurGearLostCntFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurGearLostCntFieldNumber);
       }
-      size += periodIdList_.CalculateSize(_repeated_periodIdList_codec);
-      if (CurGearLostCnt != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurGearLostCnt);
+      if (CurWaveFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurWaveFieldNumber);
       }
-      if (CurWave != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeUInt32Size(CurWave);
+      if (IsUnlockGearRerollFieldNumber != false) {
+        size += 1 + 1;
       }
-      if (IsUnlockGearReroll != false) {
+      if (IsUnlockGearBanFieldNumber != false) {
         size += 2 + 1;
       }
-      if (IsUnlockGearBan != false) {
+      size += cardListFieldNumber_.CalculateSize(_repeated_cardListFieldNumber_codec);
+      size += gearDamageListFieldNumber_.CalculateSize(_repeated_gearDamageListFieldNumber_codec);
+      size += statParamsFieldNumber_.CalculateSize(_repeated_statParamsFieldNumber_codec);
+      if (IsGiveupFieldNumber != false) {
         size += 2 + 1;
       }
-      size += cardList_.CalculateSize(_repeated_cardList_codec);
-      size += gearDamageList_.CalculateSize(_repeated_gearDamageList_codec);
-      size += statParams_.CalculateSize(_repeated_statParams_codec);
-      if (IsGiveup != false) {
-        size += 2 + 1;
+      if (CurUnusedRoundCntFieldNumber != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeUInt32Size(CurUnusedRoundCntFieldNumber);
       }
-      if (CurUnusedRoundCnt != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeUInt32Size(CurUnusedRoundCnt);
+      if (statLogInfoFieldNumber_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(StatLogInfoFieldNumber);
       }
-      if (statLogInfo_ != null) {
-        size += 2 + pb::CodedOutputStream.ComputeMessageSize(StatLogInfo);
+      if (PeriodFirstRandomSeedFieldNumber != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeUInt32Size(PeriodFirstRandomSeedFieldNumber);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -713,65 +700,64 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.CurLevelId != 0) {
-        CurLevelId = other.CurLevelId;
+      if (other.CurLevelIdFieldNumber != 0) {
+        CurLevelIdFieldNumber = other.CurLevelIdFieldNumber;
       }
-      if (other.CurPeriod != 0) {
-        CurPeriod = other.CurPeriod;
+      if (other.CurPeriodFieldNumber != 0) {
+        CurPeriodFieldNumber = other.CurPeriodFieldNumber;
       }
-      if (other.CurCoin != 0) {
-        CurCoin = other.CurCoin;
+      if (other.CurCoinFieldNumber != 0) {
+        CurCoinFieldNumber = other.CurCoinFieldNumber;
       }
-      if (other.CurScore != 0) {
-        CurScore = other.CurScore;
-      }
-      weaponSlotList_.Add(other.weaponSlotList_);
-      accessorySlotList_.Add(other.accessorySlotList_);
-      curCardList_.Add(other.curCardList_);
-      banGearList_.Add(other.banGearList_);
-      if (other.collection_ != null) {
-        if (collection_ == null) {
-          Collection = new global::EggLink.DanhengServer.Proto.ILODILJFPOC();
+      weaponSlotListFieldNumber_.Add(other.weaponSlotListFieldNumber_);
+      accessorySlotListFieldNumber_.Add(other.accessorySlotListFieldNumber_);
+      banGearListFieldNumber_.Add(other.banGearListFieldNumber_);
+      if (other.collectionFieldNumber_ != null) {
+        if (collectionFieldNumber_ == null) {
+          CollectionFieldNumber = new global::EggLink.DanhengServer.Proto.MLDIBDOFJFN();
         }
-        Collection.MergeFrom(other.Collection);
+        CollectionFieldNumber.MergeFrom(other.CollectionFieldNumber);
       }
-      allowedGearList_.Add(other.allowedGearList_);
-      if (other.CurExp != 0) {
-        CurExp = other.CurExp;
+      allowedGearListFieldNumber_.Add(other.allowedGearListFieldNumber_);
+      if (other.CurExpFieldNumber != 0) {
+        CurExpFieldNumber = other.CurExpFieldNumber;
       }
-      if (other.CurReroll != 0) {
-        CurReroll = other.CurReroll;
+      if (other.CurRerollFieldNumber != 0) {
+        CurRerollFieldNumber = other.CurRerollFieldNumber;
       }
-      if (other.CurTreasureMissCnt != 0) {
-        CurTreasureMissCnt = other.CurTreasureMissCnt;
+      if (other.CurTreasureMissCntFieldNumber != 0) {
+        CurTreasureMissCntFieldNumber = other.CurTreasureMissCntFieldNumber;
       }
-      periodIdList_.Add(other.periodIdList_);
-      if (other.CurGearLostCnt != 0) {
-        CurGearLostCnt = other.CurGearLostCnt;
+      periodIdListFieldNumber_.Add(other.periodIdListFieldNumber_);
+      if (other.CurGearLostCntFieldNumber != 0) {
+        CurGearLostCntFieldNumber = other.CurGearLostCntFieldNumber;
       }
-      if (other.CurWave != 0) {
-        CurWave = other.CurWave;
+      if (other.CurWaveFieldNumber != 0) {
+        CurWaveFieldNumber = other.CurWaveFieldNumber;
       }
-      if (other.IsUnlockGearReroll != false) {
-        IsUnlockGearReroll = other.IsUnlockGearReroll;
+      if (other.IsUnlockGearRerollFieldNumber != false) {
+        IsUnlockGearRerollFieldNumber = other.IsUnlockGearRerollFieldNumber;
       }
-      if (other.IsUnlockGearBan != false) {
-        IsUnlockGearBan = other.IsUnlockGearBan;
+      if (other.IsUnlockGearBanFieldNumber != false) {
+        IsUnlockGearBanFieldNumber = other.IsUnlockGearBanFieldNumber;
       }
-      cardList_.Add(other.cardList_);
-      gearDamageList_.Add(other.gearDamageList_);
-      statParams_.Add(other.statParams_);
-      if (other.IsGiveup != false) {
-        IsGiveup = other.IsGiveup;
+      cardListFieldNumber_.Add(other.cardListFieldNumber_);
+      gearDamageListFieldNumber_.Add(other.gearDamageListFieldNumber_);
+      statParamsFieldNumber_.Add(other.statParamsFieldNumber_);
+      if (other.IsGiveupFieldNumber != false) {
+        IsGiveupFieldNumber = other.IsGiveupFieldNumber;
       }
-      if (other.CurUnusedRoundCnt != 0) {
-        CurUnusedRoundCnt = other.CurUnusedRoundCnt;
+      if (other.CurUnusedRoundCntFieldNumber != 0) {
+        CurUnusedRoundCntFieldNumber = other.CurUnusedRoundCntFieldNumber;
       }
-      if (other.statLogInfo_ != null) {
-        if (statLogInfo_ == null) {
-          StatLogInfo = new global::EggLink.DanhengServer.Proto.IEHOGOAJDIA();
+      if (other.statLogInfoFieldNumber_ != null) {
+        if (statLogInfoFieldNumber_ == null) {
+          StatLogInfoFieldNumber = new global::EggLink.DanhengServer.Proto.ECDIIKCMOJO();
         }
-        StatLogInfo.MergeFrom(other.StatLogInfo);
+        StatLogInfoFieldNumber.MergeFrom(other.StatLogInfoFieldNumber);
+      }
+      if (other.PeriodFirstRandomSeedFieldNumber != 0) {
+        PeriodFirstRandomSeedFieldNumber = other.PeriodFirstRandomSeedFieldNumber;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -789,110 +775,105 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            CurLevelId = input.ReadUInt32();
+            CurLevelIdFieldNumber = input.ReadUInt32();
             break;
           }
           case 16: {
-            CurPeriod = input.ReadUInt32();
+            CurPeriodFieldNumber = input.ReadUInt32();
             break;
           }
           case 24: {
-            CurCoin = input.ReadUInt32();
+            CurCoinFieldNumber = input.ReadUInt32();
             break;
           }
-          case 32: {
-            CurScore = input.ReadUInt32();
+          case 34: {
+            weaponSlotListFieldNumber_.AddEntriesFrom(input, _repeated_weaponSlotListFieldNumber_codec);
             break;
           }
           case 42: {
-            weaponSlotList_.AddEntriesFrom(input, _repeated_weaponSlotList_codec);
+            accessorySlotListFieldNumber_.AddEntriesFrom(input, _repeated_accessorySlotListFieldNumber_codec);
             break;
           }
-          case 50: {
-            accessorySlotList_.AddEntriesFrom(input, _repeated_accessorySlotList_codec);
+          case 50:
+          case 48: {
+            banGearListFieldNumber_.AddEntriesFrom(input, _repeated_banGearListFieldNumber_codec);
             break;
           }
-          case 58:
-          case 56: {
-            curCardList_.AddEntriesFrom(input, _repeated_curCardList_codec);
+          case 58: {
+            if (collectionFieldNumber_ == null) {
+              CollectionFieldNumber = new global::EggLink.DanhengServer.Proto.MLDIBDOFJFN();
+            }
+            input.ReadMessage(CollectionFieldNumber);
             break;
           }
           case 66:
           case 64: {
-            banGearList_.AddEntriesFrom(input, _repeated_banGearList_codec);
+            allowedGearListFieldNumber_.AddEntriesFrom(input, _repeated_allowedGearListFieldNumber_codec);
             break;
           }
-          case 74: {
-            if (collection_ == null) {
-              Collection = new global::EggLink.DanhengServer.Proto.ILODILJFPOC();
-            }
-            input.ReadMessage(Collection);
+          case 72: {
+            CurExpFieldNumber = input.ReadUInt32();
             break;
           }
-          case 82:
           case 80: {
-            allowedGearList_.AddEntriesFrom(input, _repeated_allowedGearList_codec);
+            CurRerollFieldNumber = input.ReadUInt32();
             break;
           }
           case 88: {
-            CurExp = input.ReadUInt32();
+            CurTreasureMissCntFieldNumber = input.ReadUInt32();
             break;
           }
+          case 98:
           case 96: {
-            CurReroll = input.ReadUInt32();
+            periodIdListFieldNumber_.AddEntriesFrom(input, _repeated_periodIdListFieldNumber_codec);
             break;
           }
           case 104: {
-            CurTreasureMissCnt = input.ReadUInt32();
+            CurGearLostCntFieldNumber = input.ReadUInt32();
             break;
           }
-          case 114:
           case 112: {
-            periodIdList_.AddEntriesFrom(input, _repeated_periodIdList_codec);
+            CurWaveFieldNumber = input.ReadUInt32();
             break;
           }
           case 120: {
-            CurGearLostCnt = input.ReadUInt32();
+            IsUnlockGearRerollFieldNumber = input.ReadBool();
             break;
           }
           case 128: {
-            CurWave = input.ReadUInt32();
+            IsUnlockGearBanFieldNumber = input.ReadBool();
             break;
           }
-          case 136: {
-            IsUnlockGearReroll = input.ReadBool();
+          case 138: {
+            cardListFieldNumber_.AddEntriesFrom(input, _repeated_cardListFieldNumber_codec);
             break;
           }
-          case 144: {
-            IsUnlockGearBan = input.ReadBool();
+          case 146: {
+            gearDamageListFieldNumber_.AddEntriesFrom(input, _repeated_gearDamageListFieldNumber_codec);
             break;
           }
-          case 154: {
-            cardList_.AddEntriesFrom(input, _repeated_cardList_codec);
+          case 154:
+          case 152: {
+            statParamsFieldNumber_.AddEntriesFrom(input, _repeated_statParamsFieldNumber_codec);
             break;
           }
-          case 162: {
-            gearDamageList_.AddEntriesFrom(input, _repeated_gearDamageList_codec);
+          case 160: {
+            IsGiveupFieldNumber = input.ReadBool();
             break;
           }
-          case 170:
           case 168: {
-            statParams_.AddEntriesFrom(input, _repeated_statParams_codec);
+            CurUnusedRoundCntFieldNumber = input.ReadUInt32();
             break;
           }
-          case 176: {
-            IsGiveup = input.ReadBool();
+          case 178: {
+            if (statLogInfoFieldNumber_ == null) {
+              StatLogInfoFieldNumber = new global::EggLink.DanhengServer.Proto.ECDIIKCMOJO();
+            }
+            input.ReadMessage(StatLogInfoFieldNumber);
             break;
           }
           case 184: {
-            CurUnusedRoundCnt = input.ReadUInt32();
-            break;
-          }
-          case 194: {
-            if (statLogInfo_ == null) {
-              StatLogInfo = new global::EggLink.DanhengServer.Proto.IEHOGOAJDIA();
-            }
-            input.ReadMessage(StatLogInfo);
+            PeriodFirstRandomSeedFieldNumber = input.ReadUInt32();
             break;
           }
         }
@@ -911,110 +892,105 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            CurLevelId = input.ReadUInt32();
+            CurLevelIdFieldNumber = input.ReadUInt32();
             break;
           }
           case 16: {
-            CurPeriod = input.ReadUInt32();
+            CurPeriodFieldNumber = input.ReadUInt32();
             break;
           }
           case 24: {
-            CurCoin = input.ReadUInt32();
+            CurCoinFieldNumber = input.ReadUInt32();
             break;
           }
-          case 32: {
-            CurScore = input.ReadUInt32();
+          case 34: {
+            weaponSlotListFieldNumber_.AddEntriesFrom(ref input, _repeated_weaponSlotListFieldNumber_codec);
             break;
           }
           case 42: {
-            weaponSlotList_.AddEntriesFrom(ref input, _repeated_weaponSlotList_codec);
+            accessorySlotListFieldNumber_.AddEntriesFrom(ref input, _repeated_accessorySlotListFieldNumber_codec);
             break;
           }
-          case 50: {
-            accessorySlotList_.AddEntriesFrom(ref input, _repeated_accessorySlotList_codec);
+          case 50:
+          case 48: {
+            banGearListFieldNumber_.AddEntriesFrom(ref input, _repeated_banGearListFieldNumber_codec);
             break;
           }
-          case 58:
-          case 56: {
-            curCardList_.AddEntriesFrom(ref input, _repeated_curCardList_codec);
+          case 58: {
+            if (collectionFieldNumber_ == null) {
+              CollectionFieldNumber = new global::EggLink.DanhengServer.Proto.MLDIBDOFJFN();
+            }
+            input.ReadMessage(CollectionFieldNumber);
             break;
           }
           case 66:
           case 64: {
-            banGearList_.AddEntriesFrom(ref input, _repeated_banGearList_codec);
+            allowedGearListFieldNumber_.AddEntriesFrom(ref input, _repeated_allowedGearListFieldNumber_codec);
             break;
           }
-          case 74: {
-            if (collection_ == null) {
-              Collection = new global::EggLink.DanhengServer.Proto.ILODILJFPOC();
-            }
-            input.ReadMessage(Collection);
+          case 72: {
+            CurExpFieldNumber = input.ReadUInt32();
             break;
           }
-          case 82:
           case 80: {
-            allowedGearList_.AddEntriesFrom(ref input, _repeated_allowedGearList_codec);
+            CurRerollFieldNumber = input.ReadUInt32();
             break;
           }
           case 88: {
-            CurExp = input.ReadUInt32();
+            CurTreasureMissCntFieldNumber = input.ReadUInt32();
             break;
           }
+          case 98:
           case 96: {
-            CurReroll = input.ReadUInt32();
+            periodIdListFieldNumber_.AddEntriesFrom(ref input, _repeated_periodIdListFieldNumber_codec);
             break;
           }
           case 104: {
-            CurTreasureMissCnt = input.ReadUInt32();
+            CurGearLostCntFieldNumber = input.ReadUInt32();
             break;
           }
-          case 114:
           case 112: {
-            periodIdList_.AddEntriesFrom(ref input, _repeated_periodIdList_codec);
+            CurWaveFieldNumber = input.ReadUInt32();
             break;
           }
           case 120: {
-            CurGearLostCnt = input.ReadUInt32();
+            IsUnlockGearRerollFieldNumber = input.ReadBool();
             break;
           }
           case 128: {
-            CurWave = input.ReadUInt32();
+            IsUnlockGearBanFieldNumber = input.ReadBool();
             break;
           }
-          case 136: {
-            IsUnlockGearReroll = input.ReadBool();
+          case 138: {
+            cardListFieldNumber_.AddEntriesFrom(ref input, _repeated_cardListFieldNumber_codec);
             break;
           }
-          case 144: {
-            IsUnlockGearBan = input.ReadBool();
+          case 146: {
+            gearDamageListFieldNumber_.AddEntriesFrom(ref input, _repeated_gearDamageListFieldNumber_codec);
             break;
           }
-          case 154: {
-            cardList_.AddEntriesFrom(ref input, _repeated_cardList_codec);
+          case 154:
+          case 152: {
+            statParamsFieldNumber_.AddEntriesFrom(ref input, _repeated_statParamsFieldNumber_codec);
             break;
           }
-          case 162: {
-            gearDamageList_.AddEntriesFrom(ref input, _repeated_gearDamageList_codec);
+          case 160: {
+            IsGiveupFieldNumber = input.ReadBool();
             break;
           }
-          case 170:
           case 168: {
-            statParams_.AddEntriesFrom(ref input, _repeated_statParams_codec);
+            CurUnusedRoundCntFieldNumber = input.ReadUInt32();
             break;
           }
-          case 176: {
-            IsGiveup = input.ReadBool();
+          case 178: {
+            if (statLogInfoFieldNumber_ == null) {
+              StatLogInfoFieldNumber = new global::EggLink.DanhengServer.Proto.ECDIIKCMOJO();
+            }
+            input.ReadMessage(StatLogInfoFieldNumber);
             break;
           }
           case 184: {
-            CurUnusedRoundCnt = input.ReadUInt32();
-            break;
-          }
-          case 194: {
-            if (statLogInfo_ == null) {
-              StatLogInfo = new global::EggLink.DanhengServer.Proto.IEHOGOAJDIA();
-            }
-            input.ReadMessage(StatLogInfo);
+            PeriodFirstRandomSeedFieldNumber = input.ReadUInt32();
             break;
           }
         }

@@ -20,7 +20,7 @@ public partial class Connection
     private readonly KcpConversation Conversation;
     private readonly CancellationTokenSource CancelToken;
     public readonly IPEndPoint RemoteEndPoint;
-    public SessionState State { get; set; } = SessionState.INACTIVE;
+    public SessionStateEnum State { get; set; } = SessionStateEnum.INACTIVE;
     public PlayerInstance? Player { get; set; }
     public static readonly List<int> BANNED_PACKETS = [];
     public bool IsOnline = true;
@@ -42,7 +42,7 @@ public partial class Connection
     private async void Start()
     {
         Logger.Info($"New connection from {RemoteEndPoint}.");
-        State = SessionState.WAITING_FOR_TOKEN;
+        State = SessionStateEnum.WAITING_FOR_TOKEN;
         await ReceiveLoop();
     }
     public void Stop()
@@ -213,12 +213,12 @@ public partial class Connection
         {
             // Handle
             // Make sure session is ready for packets
-            SessionState state = State;
+            SessionStateEnum state = State;
             switch ((int)opcode)
             {
                 case CmdIds.PlayerGetTokenCsReq:
                     {
-                        if (state != SessionState.WAITING_FOR_TOKEN)
+                        if (state != SessionStateEnum.WAITING_FOR_TOKEN)
                         {
                             return true;
                         }
@@ -226,7 +226,7 @@ public partial class Connection
                     }
                 case CmdIds.PlayerLoginCsReq:
                     {
-                        if (state != SessionState.WAITING_FOR_LOGIN)
+                        if (state != SessionStateEnum.WAITING_FOR_LOGIN)
                         {
                             return true;
                         }

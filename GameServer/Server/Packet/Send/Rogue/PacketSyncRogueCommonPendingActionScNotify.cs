@@ -10,12 +10,12 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Rogue
 {
     public class PacketSyncRogueCommonPendingActionScNotify : BasePacket
     {
-        public PacketSyncRogueCommonPendingActionScNotify(RogueActionInstance actionInstance, int rogueVersion) : base(CmdIds.SyncRogueCommonPendingActionScNotify)
+        public PacketSyncRogueCommonPendingActionScNotify(RogueActionInstance actionInstance, int rogueSubmode) : base(CmdIds.SyncRogueCommonPendingActionScNotify)
         {
             var proto = new SyncRogueCommonPendingActionScNotify
             {
                 Action = actionInstance.ToProto(),
-                RogueVersionId = (uint)rogueVersion,
+                RogueSubMode = (uint)rogueSubmode,
             };
 
             SetData(proto);

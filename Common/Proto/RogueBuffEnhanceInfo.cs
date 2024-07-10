@@ -26,7 +26,7 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "ChpSb2d1ZUJ1ZmZFbmhhbmNlSW5mby5wcm90bxoWUm9ndWVCdWZmRW5oYW5j",
             "ZS5wcm90byI/ChRSb2d1ZUJ1ZmZFbmhhbmNlSW5mbxInCgxlbmhhbmNlX2lu",
-            "Zm8YCiADKAsyES5Sb2d1ZUJ1ZmZFbmhhbmNlQh6qAhtFZ2dMaW5rLkRhbmhl",
+            "Zm8YBiADKAsyES5Sb2d1ZUJ1ZmZFbmhhbmNlQh6qAhtFZ2dMaW5rLkRhbmhl",
             "bmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RogueBuffEnhanceReflection.Descriptor, },
@@ -84,9 +84,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "enhance_info" field.</summary>
-    public const int EnhanceInfoFieldNumber = 10;
+    public const int EnhanceInfoFieldNumber = 6;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.RogueBuffEnhance> _repeated_enhanceInfo_codec
-        = pb::FieldCodec.ForMessage(82, global::EggLink.DanhengServer.Proto.RogueBuffEnhance.Parser);
+        = pb::FieldCodec.ForMessage(50, global::EggLink.DanhengServer.Proto.RogueBuffEnhance.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueBuffEnhance> enhanceInfo_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueBuffEnhance>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -187,7 +187,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 82: {
+          case 50: {
             enhanceInfo_.AddEntriesFrom(input, _repeated_enhanceInfo_codec);
             break;
           }
@@ -206,7 +206,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 82: {
+          case 50: {
             enhanceInfo_.AddEntriesFrom(ref input, _repeated_enhanceInfo_codec);
             break;
           }

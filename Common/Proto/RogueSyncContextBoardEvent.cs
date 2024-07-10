@@ -24,14 +24,14 @@ namespace EggLink.DanhengServer.Proto {
     static RogueSyncContextBoardEventReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiBSb2d1ZVN5bmNDb250ZXh0Qm9hcmRFdmVudC5wcm90byJSChpSb2d1ZVN5",
-            "bmNDb250ZXh0Qm9hcmRFdmVudBIcChRtb2RpZmllcl9lZmZlY3RfdHlwZRgE",
-            "IAEoDRIWCg5ib2FyZF9ldmVudF9pZBgPIAEoDUIeqgIbRWdnTGluay5EYW5o",
-            "ZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
+            "CiBSb2d1ZVN5bmNDb250ZXh0Qm9hcmRFdmVudC5wcm90byJkChpSb2d1ZVN5",
+            "bmNDb250ZXh0Qm9hcmRFdmVudBIfChdCb2FyZEV2ZW50SWRGaWVsZE51bWJl",
+            "chgEIAEoDRIlCh1Nb2RpZmllckVmZmVjdFR5cGVGaWVsZE51bWJlchgGIAEo",
+            "DUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RogueSyncContextBoardEvent), global::EggLink.DanhengServer.Proto.RogueSyncContextBoardEvent.Parser, new[]{ "ModifierEffectType", "BoardEventId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RogueSyncContextBoardEvent), global::EggLink.DanhengServer.Proto.RogueSyncContextBoardEvent.Parser, new[]{ "BoardEventIdFieldNumber", "ModifierEffectTypeFieldNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,8 +73,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RogueSyncContextBoardEvent(RogueSyncContextBoardEvent other) : this() {
-      modifierEffectType_ = other.modifierEffectType_;
-      boardEventId_ = other.boardEventId_;
+      boardEventIdFieldNumber_ = other.boardEventIdFieldNumber_;
+      modifierEffectTypeFieldNumber_ = other.modifierEffectTypeFieldNumber_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -84,27 +84,27 @@ namespace EggLink.DanhengServer.Proto {
       return new RogueSyncContextBoardEvent(this);
     }
 
-    /// <summary>Field number for the "modifier_effect_type" field.</summary>
-    public const int ModifierEffectTypeFieldNumber = 4;
-    private uint modifierEffectType_;
+    /// <summary>Field number for the "BoardEventIdFieldNumber" field.</summary>
+    public const int BoardEventIdFieldNumberFieldNumber = 4;
+    private uint boardEventIdFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint ModifierEffectType {
-      get { return modifierEffectType_; }
+    public uint BoardEventIdFieldNumber {
+      get { return boardEventIdFieldNumber_; }
       set {
-        modifierEffectType_ = value;
+        boardEventIdFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "board_event_id" field.</summary>
-    public const int BoardEventIdFieldNumber = 15;
-    private uint boardEventId_;
+    /// <summary>Field number for the "ModifierEffectTypeFieldNumber" field.</summary>
+    public const int ModifierEffectTypeFieldNumberFieldNumber = 6;
+    private uint modifierEffectTypeFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint BoardEventId {
-      get { return boardEventId_; }
+    public uint ModifierEffectTypeFieldNumber {
+      get { return modifierEffectTypeFieldNumber_; }
       set {
-        boardEventId_ = value;
+        modifierEffectTypeFieldNumber_ = value;
       }
     }
 
@@ -123,8 +123,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ModifierEffectType != other.ModifierEffectType) return false;
-      if (BoardEventId != other.BoardEventId) return false;
+      if (BoardEventIdFieldNumber != other.BoardEventIdFieldNumber) return false;
+      if (ModifierEffectTypeFieldNumber != other.ModifierEffectTypeFieldNumber) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -132,8 +132,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (ModifierEffectType != 0) hash ^= ModifierEffectType.GetHashCode();
-      if (BoardEventId != 0) hash ^= BoardEventId.GetHashCode();
+      if (BoardEventIdFieldNumber != 0) hash ^= BoardEventIdFieldNumber.GetHashCode();
+      if (ModifierEffectTypeFieldNumber != 0) hash ^= ModifierEffectTypeFieldNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -152,13 +152,13 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ModifierEffectType != 0) {
+      if (BoardEventIdFieldNumber != 0) {
         output.WriteRawTag(32);
-        output.WriteUInt32(ModifierEffectType);
+        output.WriteUInt32(BoardEventIdFieldNumber);
       }
-      if (BoardEventId != 0) {
-        output.WriteRawTag(120);
-        output.WriteUInt32(BoardEventId);
+      if (ModifierEffectTypeFieldNumber != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(ModifierEffectTypeFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -170,13 +170,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ModifierEffectType != 0) {
+      if (BoardEventIdFieldNumber != 0) {
         output.WriteRawTag(32);
-        output.WriteUInt32(ModifierEffectType);
+        output.WriteUInt32(BoardEventIdFieldNumber);
       }
-      if (BoardEventId != 0) {
-        output.WriteRawTag(120);
-        output.WriteUInt32(BoardEventId);
+      if (ModifierEffectTypeFieldNumber != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(ModifierEffectTypeFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -188,11 +188,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (ModifierEffectType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ModifierEffectType);
+      if (BoardEventIdFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BoardEventIdFieldNumber);
       }
-      if (BoardEventId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BoardEventId);
+      if (ModifierEffectTypeFieldNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ModifierEffectTypeFieldNumber);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -206,11 +206,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.ModifierEffectType != 0) {
-        ModifierEffectType = other.ModifierEffectType;
+      if (other.BoardEventIdFieldNumber != 0) {
+        BoardEventIdFieldNumber = other.BoardEventIdFieldNumber;
       }
-      if (other.BoardEventId != 0) {
-        BoardEventId = other.BoardEventId;
+      if (other.ModifierEffectTypeFieldNumber != 0) {
+        ModifierEffectTypeFieldNumber = other.ModifierEffectTypeFieldNumber;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -228,11 +228,11 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 32: {
-            ModifierEffectType = input.ReadUInt32();
+            BoardEventIdFieldNumber = input.ReadUInt32();
             break;
           }
-          case 120: {
-            BoardEventId = input.ReadUInt32();
+          case 48: {
+            ModifierEffectTypeFieldNumber = input.ReadUInt32();
             break;
           }
         }
@@ -251,11 +251,11 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 32: {
-            ModifierEffectType = input.ReadUInt32();
+            BoardEventIdFieldNumber = input.ReadUInt32();
             break;
           }
-          case 120: {
-            BoardEventId = input.ReadUInt32();
+          case 48: {
+            ModifierEffectTypeFieldNumber = input.ReadUInt32();
             break;
           }
         }

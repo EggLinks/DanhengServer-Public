@@ -38,7 +38,7 @@ namespace EggLink.DanhengServer.Game.Rogue.Scene.Entity
                     {
                         EventId = (uint)RogueNpcId,
                         EventUniqueId = (uint)UniqueId,
-                        //FinishDialogue = IsFinish,
+                        FinishDialogue = IsFinish,
                         //DialogueGroupId = (uint)GroupID
                     }
                 };

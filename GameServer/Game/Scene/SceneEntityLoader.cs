@@ -70,6 +70,18 @@ namespace EggLink.DanhengServer.Game.Scene
                             }
                         }
                     }
+                    else if (group.OwnerMainMissionID != 0 && Scene.Player.MissionManager!.GetMainMissionStatus(group.OwnerMainMissionID) != Enums.MissionPhaseEnum.Accept)
+                    {
+                        foreach (var entity in Scene.Entities.Values)
+                        {
+                            if (entity.GroupID == group.Id)
+                            {
+                                Scene.RemoveEntity(entity, false);
+                                removeList.Add(entity);
+                                refreshed = true;
+                            }
+                        }
+                    }
                 } else  // check if it should be loaded
                 {
                     var groupList = LoadGroup(group);
@@ -79,13 +91,20 @@ namespace EggLink.DanhengServer.Game.Scene
             }
             if (refreshed)
             {
-                Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(addList, removeList));
+                Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(null, removeList));
+                Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(addList, null));
             }
         }
 
         public virtual List<IGameEntity>? LoadGroup(GroupInfo info, bool forceLoad = false)
         {
             var missionData = Scene.Player.MissionManager!.Data;
+
+            if (!(info.OwnerMainMissionID == 0 || Scene.Player.MissionManager!.GetMainMissionStatus(info.OwnerMainMissionID) == Enums.MissionPhaseEnum.Accept))
+            {
+                return null;
+            }
+
             if ((!info.LoadCondition.IsTrue(missionData) || info.UnloadCondition.IsTrue(missionData, false) || info.ForceUnloadCondition.IsTrue(missionData, false)) && !forceLoad)
             {
                 return null;
@@ -234,17 +253,6 @@ namespace EggLink.DanhengServer.Game.Scene
 
             var prop = new EntityProp(Scene, excel, group, info);
 
-            if (prop.PropInfo.PropID == 1003)
-            {
-                if (prop.PropInfo.MappingInfoID == 2220)
-                {
-                    prop.SetState(PropStateEnum.Open);
-                    Scene.AddEntity(prop, sendPacket);
-                }
-            } else
-            {
-                Scene.AddEntity(prop, sendPacket);
-            }
             if (excel.PropType == PropTypeEnum.PROP_SPRING)
             {
                 Scene.HealingSprings.Add(prop);
@@ -259,8 +267,37 @@ namespace EggLink.DanhengServer.Game.Scene
             } 
             else
             {
-                prop.State = info.State;
+                if (Scene.Excel.PlaneType == PlaneTypeEnum.Raid)
+                {
+                    prop.State = info.State;
+                } 
+                else
+                {
+                    // elevator
+                    if (prop.Excel.PropType == PropTypeEnum.PROP_ELEVATOR)
+                    {
+                        prop.State = PropStateEnum.Elevator1;
+                    } 
+                    else
+                    {
+                        prop.State = info.State;
+                    }
+                }
             }
+
+            if (prop.PropInfo.PropID == 1003)
+            {
+                if (prop.PropInfo.MappingInfoID == 2220)
+                {
+                    prop.SetState(PropStateEnum.Open);
+                    Scene.AddEntity(prop, sendPacket);
+                }
+            }
+            else
+            {
+                Scene.AddEntity(prop, sendPacket);
+            }
+
             return prop;
         }
     }

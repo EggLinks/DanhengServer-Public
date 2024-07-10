@@ -24,13 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static DailyRefreshNotifyReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChhEYWlseVJlZnJlc2hOb3RpZnkucHJvdG8iJQoSRGFpbHlSZWZyZXNoTm90",
-            "aWZ5Eg8KB2N1cl9kYXkYDCABKA1CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZl",
-            "ci5Qcm90b2IGcHJvdG8z"));
+            "ChhEYWlseVJlZnJlc2hOb3RpZnkucHJvdG8iKQoSRGFpbHlSZWZyZXNoTm90",
+            "aWZ5EhMKC1BDQ0pES0RFSURMGAwgASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdT",
+            "ZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.DailyRefreshNotify), global::EggLink.DanhengServer.Proto.DailyRefreshNotify.Parser, new[]{ "CurDay" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.DailyRefreshNotify), global::EggLink.DanhengServer.Proto.DailyRefreshNotify.Parser, new[]{ "PCCJDKDEIDL" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,7 +72,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DailyRefreshNotify(DailyRefreshNotify other) : this() {
-      curDay_ = other.curDay_;
+      pCCJDKDEIDL_ = other.pCCJDKDEIDL_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -82,15 +82,15 @@ namespace EggLink.DanhengServer.Proto {
       return new DailyRefreshNotify(this);
     }
 
-    /// <summary>Field number for the "cur_day" field.</summary>
-    public const int CurDayFieldNumber = 12;
-    private uint curDay_;
+    /// <summary>Field number for the "PCCJDKDEIDL" field.</summary>
+    public const int PCCJDKDEIDLFieldNumber = 12;
+    private uint pCCJDKDEIDL_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurDay {
-      get { return curDay_; }
+    public uint PCCJDKDEIDL {
+      get { return pCCJDKDEIDL_; }
       set {
-        curDay_ = value;
+        pCCJDKDEIDL_ = value;
       }
     }
 
@@ -109,7 +109,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (CurDay != other.CurDay) return false;
+      if (PCCJDKDEIDL != other.PCCJDKDEIDL) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -117,7 +117,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (CurDay != 0) hash ^= CurDay.GetHashCode();
+      if (PCCJDKDEIDL != 0) hash ^= PCCJDKDEIDL.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (CurDay != 0) {
+      if (PCCJDKDEIDL != 0) {
         output.WriteRawTag(96);
-        output.WriteUInt32(CurDay);
+        output.WriteUInt32(PCCJDKDEIDL);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -150,9 +150,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (CurDay != 0) {
+      if (PCCJDKDEIDL != 0) {
         output.WriteRawTag(96);
-        output.WriteUInt32(CurDay);
+        output.WriteUInt32(PCCJDKDEIDL);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -164,8 +164,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (CurDay != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurDay);
+      if (PCCJDKDEIDL != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PCCJDKDEIDL);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -179,8 +179,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.CurDay != 0) {
-        CurDay = other.CurDay;
+      if (other.PCCJDKDEIDL != 0) {
+        PCCJDKDEIDL = other.PCCJDKDEIDL;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -198,7 +198,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 96: {
-            CurDay = input.ReadUInt32();
+            PCCJDKDEIDL = input.ReadUInt32();
             break;
           }
         }
@@ -217,7 +217,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 96: {
-            CurDay = input.ReadUInt32();
+            PCCJDKDEIDL = input.ReadUInt32();
             break;
           }
         }

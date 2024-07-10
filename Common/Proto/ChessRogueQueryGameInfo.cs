@@ -24,15 +24,15 @@ namespace EggLink.DanhengServer.Proto {
     static ChessRogueQueryGameInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch1DaGVzc1JvZ3VlUXVlcnlHYW1lSW5mby5wcm90bxoYQ2hlc3NSb2d1ZUdh",
-            "bWVJbmZvLnByb3RvImQKF0NoZXNzUm9ndWVRdWVyeUdhbWVJbmZvEhgKEHJv",
-            "Z3VlX3ZlcnNpb25faWQYCSABKA0SLwoScm9ndWVfY3VycmVudF9pbmZvGA4g",
-            "AygLMhMuQ2hlc3NSb2d1ZUdhbWVJbmZvQh6qAhtFZ2dMaW5rLkRhbmhlbmdT",
-            "ZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "Ch1DaGVzc1JvZ3VlUXVlcnlHYW1lSW5mby5wcm90bxoTUm9ndWVHYW1lSW5m",
+            "by5wcm90byJiChdDaGVzc1JvZ3VlUXVlcnlHYW1lSW5mbxIWCg5yb2d1ZV9z",
+            "dWJfbW9kZRgJIAEoDRIvChdyb2d1ZV9jdXJyZW50X2dhbWVfaW5mbxgNIAMo",
+            "CzIOLlJvZ3VlR2FtZUluZm9CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Q",
+            "cm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChessRogueGameInfoReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RogueGameInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueQueryGameInfo), global::EggLink.DanhengServer.Proto.ChessRogueQueryGameInfo.Parser, new[]{ "RogueVersionId", "RogueCurrentInfo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueQueryGameInfo), global::EggLink.DanhengServer.Proto.ChessRogueQueryGameInfo.Parser, new[]{ "RogueSubMode", "RogueCurrentGameInfo" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,8 +74,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ChessRogueQueryGameInfo(ChessRogueQueryGameInfo other) : this() {
-      rogueVersionId_ = other.rogueVersionId_;
-      rogueCurrentInfo_ = other.rogueCurrentInfo_.Clone();
+      rogueSubMode_ = other.rogueSubMode_;
+      rogueCurrentGameInfo_ = other.rogueCurrentGameInfo_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,27 +85,27 @@ namespace EggLink.DanhengServer.Proto {
       return new ChessRogueQueryGameInfo(this);
     }
 
-    /// <summary>Field number for the "rogue_version_id" field.</summary>
-    public const int RogueVersionIdFieldNumber = 9;
-    private uint rogueVersionId_;
+    /// <summary>Field number for the "rogue_sub_mode" field.</summary>
+    public const int RogueSubModeFieldNumber = 9;
+    private uint rogueSubMode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint RogueVersionId {
-      get { return rogueVersionId_; }
+    public uint RogueSubMode {
+      get { return rogueSubMode_; }
       set {
-        rogueVersionId_ = value;
+        rogueSubMode_ = value;
       }
     }
 
-    /// <summary>Field number for the "rogue_current_info" field.</summary>
-    public const int RogueCurrentInfoFieldNumber = 14;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.ChessRogueGameInfo> _repeated_rogueCurrentInfo_codec
-        = pb::FieldCodec.ForMessage(114, global::EggLink.DanhengServer.Proto.ChessRogueGameInfo.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueGameInfo> rogueCurrentInfo_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueGameInfo>();
+    /// <summary>Field number for the "rogue_current_game_info" field.</summary>
+    public const int RogueCurrentGameInfoFieldNumber = 13;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.RogueGameInfo> _repeated_rogueCurrentGameInfo_codec
+        = pb::FieldCodec.ForMessage(106, global::EggLink.DanhengServer.Proto.RogueGameInfo.Parser);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueGameInfo> rogueCurrentGameInfo_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueGameInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.ChessRogueGameInfo> RogueCurrentInfo {
-      get { return rogueCurrentInfo_; }
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueGameInfo> RogueCurrentGameInfo {
+      get { return rogueCurrentGameInfo_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -123,8 +123,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (RogueVersionId != other.RogueVersionId) return false;
-      if(!rogueCurrentInfo_.Equals(other.rogueCurrentInfo_)) return false;
+      if (RogueSubMode != other.RogueSubMode) return false;
+      if(!rogueCurrentGameInfo_.Equals(other.rogueCurrentGameInfo_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -132,8 +132,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (RogueVersionId != 0) hash ^= RogueVersionId.GetHashCode();
-      hash ^= rogueCurrentInfo_.GetHashCode();
+      if (RogueSubMode != 0) hash ^= RogueSubMode.GetHashCode();
+      hash ^= rogueCurrentGameInfo_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -152,11 +152,11 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (RogueVersionId != 0) {
+      if (RogueSubMode != 0) {
         output.WriteRawTag(72);
-        output.WriteUInt32(RogueVersionId);
+        output.WriteUInt32(RogueSubMode);
       }
-      rogueCurrentInfo_.WriteTo(output, _repeated_rogueCurrentInfo_codec);
+      rogueCurrentGameInfo_.WriteTo(output, _repeated_rogueCurrentGameInfo_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -167,11 +167,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (RogueVersionId != 0) {
+      if (RogueSubMode != 0) {
         output.WriteRawTag(72);
-        output.WriteUInt32(RogueVersionId);
+        output.WriteUInt32(RogueSubMode);
       }
-      rogueCurrentInfo_.WriteTo(ref output, _repeated_rogueCurrentInfo_codec);
+      rogueCurrentGameInfo_.WriteTo(ref output, _repeated_rogueCurrentGameInfo_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -182,10 +182,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (RogueVersionId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RogueVersionId);
+      if (RogueSubMode != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RogueSubMode);
       }
-      size += rogueCurrentInfo_.CalculateSize(_repeated_rogueCurrentInfo_codec);
+      size += rogueCurrentGameInfo_.CalculateSize(_repeated_rogueCurrentGameInfo_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -198,10 +198,10 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.RogueVersionId != 0) {
-        RogueVersionId = other.RogueVersionId;
+      if (other.RogueSubMode != 0) {
+        RogueSubMode = other.RogueSubMode;
       }
-      rogueCurrentInfo_.Add(other.rogueCurrentInfo_);
+      rogueCurrentGameInfo_.Add(other.rogueCurrentGameInfo_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -218,11 +218,11 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 72: {
-            RogueVersionId = input.ReadUInt32();
+            RogueSubMode = input.ReadUInt32();
             break;
           }
-          case 114: {
-            rogueCurrentInfo_.AddEntriesFrom(input, _repeated_rogueCurrentInfo_codec);
+          case 106: {
+            rogueCurrentGameInfo_.AddEntriesFrom(input, _repeated_rogueCurrentGameInfo_codec);
             break;
           }
         }
@@ -241,11 +241,11 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 72: {
-            RogueVersionId = input.ReadUInt32();
+            RogueSubMode = input.ReadUInt32();
             break;
           }
-          case 114: {
-            rogueCurrentInfo_.AddEntriesFrom(ref input, _repeated_rogueCurrentInfo_codec);
+          case 106: {
+            rogueCurrentGameInfo_.AddEntriesFrom(ref input, _repeated_rogueCurrentGameInfo_codec);
             break;
           }
         }

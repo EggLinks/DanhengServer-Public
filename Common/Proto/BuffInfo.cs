@@ -24,17 +24,17 @@ namespace EggLink.DanhengServer.Proto {
     static BuffInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5CdWZmSW5mby5wcm90byLlAQoIQnVmZkluZm8SDQoFY291bnQYASABKA0S",
-            "EwoLYWRkX3RpbWVfbXMYCCABKAQSNAoOZHluYW1pY192YWx1ZXMYBCADKAsy",
-            "HC5CdWZmSW5mby5EeW5hbWljVmFsdWVzRW50cnkSEQoJbGlmZV90aW1lGAkg",
-            "ASgCEg0KBWxldmVsGA4gASgNEhYKDmJhc2VfYXZhdGFyX2lkGAsgASgNEg8K",
-            "B2J1ZmZfaWQYBSABKA0aNAoSRHluYW1pY1ZhbHVlc0VudHJ5EgsKA2tleRgB",
-            "IAEoCRINCgV2YWx1ZRgCIAEoAjoCOAFCHqoCG0VnZ0xpbmsuRGFuaGVuZ1Nl",
-            "cnZlci5Qcm90b2IGcHJvdG8z"));
+            "Cg5CdWZmSW5mby5wcm90byL6AQoIQnVmZkluZm8SDQoFY291bnQYDSABKA0S",
+            "EwoLRUlEUExMTEVMUFAYBiABKA0SEQoJbGlmZV90aW1lGAMgASgCEhYKDmJh",
+            "c2VfYXZhdGFyX2lkGAkgASgNEg8KB2J1ZmZfaWQYBCABKA0SNAoOZHluYW1p",
+            "Y192YWx1ZXMYBSADKAsyHC5CdWZmSW5mby5EeW5hbWljVmFsdWVzRW50cnkS",
+            "EwoLYWRkX3RpbWVfbXMYASABKAQSDQoFbGV2ZWwYDCABKA0aNAoSRHluYW1p",
+            "Y1ZhbHVlc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoAjoCOAFC",
+            "HqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.BuffInfo), global::EggLink.DanhengServer.Proto.BuffInfo.Parser, new[]{ "Count", "AddTimeMs", "DynamicValues", "LifeTime", "Level", "BaseAvatarId", "BuffId" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.BuffInfo), global::EggLink.DanhengServer.Proto.BuffInfo.Parser, new[]{ "Count", "EIDPLLLELPP", "LifeTime", "BaseAvatarId", "BuffId", "DynamicValues", "AddTimeMs", "Level" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
           }));
     }
     #endregion
@@ -77,12 +77,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BuffInfo(BuffInfo other) : this() {
       count_ = other.count_;
-      addTimeMs_ = other.addTimeMs_;
-      dynamicValues_ = other.dynamicValues_.Clone();
+      eIDPLLLELPP_ = other.eIDPLLLELPP_;
       lifeTime_ = other.lifeTime_;
-      level_ = other.level_;
       baseAvatarId_ = other.baseAvatarId_;
       buffId_ = other.buffId_;
+      dynamicValues_ = other.dynamicValues_.Clone();
+      addTimeMs_ = other.addTimeMs_;
+      level_ = other.level_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -93,7 +94,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "count" field.</summary>
-    public const int CountFieldNumber = 1;
+    public const int CountFieldNumber = 13;
     private uint count_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -104,31 +105,20 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "add_time_ms" field.</summary>
-    public const int AddTimeMsFieldNumber = 8;
-    private ulong addTimeMs_;
+    /// <summary>Field number for the "EIDPLLLELPP" field.</summary>
+    public const int EIDPLLLELPPFieldNumber = 6;
+    private uint eIDPLLLELPP_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ulong AddTimeMs {
-      get { return addTimeMs_; }
+    public uint EIDPLLLELPP {
+      get { return eIDPLLLELPP_; }
       set {
-        addTimeMs_ = value;
+        eIDPLLLELPP_ = value;
       }
     }
 
-    /// <summary>Field number for the "dynamic_values" field.</summary>
-    public const int DynamicValuesFieldNumber = 4;
-    private static readonly pbc::MapField<string, float>.Codec _map_dynamicValues_codec
-        = new pbc::MapField<string, float>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForFloat(21, 0F), 34);
-    private readonly pbc::MapField<string, float> dynamicValues_ = new pbc::MapField<string, float>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<string, float> DynamicValues {
-      get { return dynamicValues_; }
-    }
-
     /// <summary>Field number for the "life_time" field.</summary>
-    public const int LifeTimeFieldNumber = 9;
+    public const int LifeTimeFieldNumber = 3;
     private float lifeTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -139,20 +129,8 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "level" field.</summary>
-    public const int LevelFieldNumber = 14;
-    private uint level_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint Level {
-      get { return level_; }
-      set {
-        level_ = value;
-      }
-    }
-
     /// <summary>Field number for the "base_avatar_id" field.</summary>
-    public const int BaseAvatarIdFieldNumber = 11;
+    public const int BaseAvatarIdFieldNumber = 9;
     private uint baseAvatarId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -164,7 +142,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "buff_id" field.</summary>
-    public const int BuffIdFieldNumber = 5;
+    public const int BuffIdFieldNumber = 4;
     private uint buffId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -172,6 +150,41 @@ namespace EggLink.DanhengServer.Proto {
       get { return buffId_; }
       set {
         buffId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dynamic_values" field.</summary>
+    public const int DynamicValuesFieldNumber = 5;
+    private static readonly pbc::MapField<string, float>.Codec _map_dynamicValues_codec
+        = new pbc::MapField<string, float>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForFloat(21, 0F), 42);
+    private readonly pbc::MapField<string, float> dynamicValues_ = new pbc::MapField<string, float>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::MapField<string, float> DynamicValues {
+      get { return dynamicValues_; }
+    }
+
+    /// <summary>Field number for the "add_time_ms" field.</summary>
+    public const int AddTimeMsFieldNumber = 1;
+    private ulong addTimeMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong AddTimeMs {
+      get { return addTimeMs_; }
+      set {
+        addTimeMs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "level" field.</summary>
+    public const int LevelFieldNumber = 12;
+    private uint level_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint Level {
+      get { return level_; }
+      set {
+        level_ = value;
       }
     }
 
@@ -191,12 +204,13 @@ namespace EggLink.DanhengServer.Proto {
         return true;
       }
       if (Count != other.Count) return false;
-      if (AddTimeMs != other.AddTimeMs) return false;
-      if (!DynamicValues.Equals(other.DynamicValues)) return false;
+      if (EIDPLLLELPP != other.EIDPLLLELPP) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(LifeTime, other.LifeTime)) return false;
-      if (Level != other.Level) return false;
       if (BaseAvatarId != other.BaseAvatarId) return false;
       if (BuffId != other.BuffId) return false;
+      if (!DynamicValues.Equals(other.DynamicValues)) return false;
+      if (AddTimeMs != other.AddTimeMs) return false;
+      if (Level != other.Level) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -205,12 +219,13 @@ namespace EggLink.DanhengServer.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (Count != 0) hash ^= Count.GetHashCode();
-      if (AddTimeMs != 0UL) hash ^= AddTimeMs.GetHashCode();
-      hash ^= DynamicValues.GetHashCode();
+      if (EIDPLLLELPP != 0) hash ^= EIDPLLLELPP.GetHashCode();
       if (LifeTime != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(LifeTime);
-      if (Level != 0) hash ^= Level.GetHashCode();
       if (BaseAvatarId != 0) hash ^= BaseAvatarId.GetHashCode();
       if (BuffId != 0) hash ^= BuffId.GetHashCode();
+      hash ^= DynamicValues.GetHashCode();
+      if (AddTimeMs != 0UL) hash ^= AddTimeMs.GetHashCode();
+      if (Level != 0) hash ^= Level.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -229,30 +244,34 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Count != 0) {
-        output.WriteRawTag(8);
-        output.WriteUInt32(Count);
-      }
-      dynamicValues_.WriteTo(output, _map_dynamicValues_codec);
-      if (BuffId != 0) {
-        output.WriteRawTag(40);
-        output.WriteUInt32(BuffId);
-      }
       if (AddTimeMs != 0UL) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(8);
         output.WriteUInt64(AddTimeMs);
       }
       if (LifeTime != 0F) {
-        output.WriteRawTag(77);
+        output.WriteRawTag(29);
         output.WriteFloat(LifeTime);
       }
+      if (BuffId != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(BuffId);
+      }
+      dynamicValues_.WriteTo(output, _map_dynamicValues_codec);
+      if (EIDPLLLELPP != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(EIDPLLLELPP);
+      }
       if (BaseAvatarId != 0) {
-        output.WriteRawTag(88);
+        output.WriteRawTag(72);
         output.WriteUInt32(BaseAvatarId);
       }
       if (Level != 0) {
-        output.WriteRawTag(112);
+        output.WriteRawTag(96);
         output.WriteUInt32(Level);
+      }
+      if (Count != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(Count);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -264,30 +283,34 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Count != 0) {
-        output.WriteRawTag(8);
-        output.WriteUInt32(Count);
-      }
-      dynamicValues_.WriteTo(ref output, _map_dynamicValues_codec);
-      if (BuffId != 0) {
-        output.WriteRawTag(40);
-        output.WriteUInt32(BuffId);
-      }
       if (AddTimeMs != 0UL) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(8);
         output.WriteUInt64(AddTimeMs);
       }
       if (LifeTime != 0F) {
-        output.WriteRawTag(77);
+        output.WriteRawTag(29);
         output.WriteFloat(LifeTime);
       }
+      if (BuffId != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(BuffId);
+      }
+      dynamicValues_.WriteTo(ref output, _map_dynamicValues_codec);
+      if (EIDPLLLELPP != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(EIDPLLLELPP);
+      }
       if (BaseAvatarId != 0) {
-        output.WriteRawTag(88);
+        output.WriteRawTag(72);
         output.WriteUInt32(BaseAvatarId);
       }
       if (Level != 0) {
-        output.WriteRawTag(112);
+        output.WriteRawTag(96);
         output.WriteUInt32(Level);
+      }
+      if (Count != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(Count);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -302,21 +325,24 @@ namespace EggLink.DanhengServer.Proto {
       if (Count != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Count);
       }
-      if (AddTimeMs != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(AddTimeMs);
+      if (EIDPLLLELPP != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EIDPLLLELPP);
       }
-      size += dynamicValues_.CalculateSize(_map_dynamicValues_codec);
       if (LifeTime != 0F) {
         size += 1 + 4;
-      }
-      if (Level != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Level);
       }
       if (BaseAvatarId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BaseAvatarId);
       }
       if (BuffId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BuffId);
+      }
+      size += dynamicValues_.CalculateSize(_map_dynamicValues_codec);
+      if (AddTimeMs != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(AddTimeMs);
+      }
+      if (Level != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Level);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -333,21 +359,24 @@ namespace EggLink.DanhengServer.Proto {
       if (other.Count != 0) {
         Count = other.Count;
       }
-      if (other.AddTimeMs != 0UL) {
-        AddTimeMs = other.AddTimeMs;
+      if (other.EIDPLLLELPP != 0) {
+        EIDPLLLELPP = other.EIDPLLLELPP;
       }
-      dynamicValues_.MergeFrom(other.dynamicValues_);
       if (other.LifeTime != 0F) {
         LifeTime = other.LifeTime;
-      }
-      if (other.Level != 0) {
-        Level = other.Level;
       }
       if (other.BaseAvatarId != 0) {
         BaseAvatarId = other.BaseAvatarId;
       }
       if (other.BuffId != 0) {
         BuffId = other.BuffId;
+      }
+      dynamicValues_.MergeFrom(other.dynamicValues_);
+      if (other.AddTimeMs != 0UL) {
+        AddTimeMs = other.AddTimeMs;
+      }
+      if (other.Level != 0) {
+        Level = other.Level;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -365,31 +394,35 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Count = input.ReadUInt32();
-            break;
-          }
-          case 34: {
-            dynamicValues_.AddEntriesFrom(input, _map_dynamicValues_codec);
-            break;
-          }
-          case 40: {
-            BuffId = input.ReadUInt32();
-            break;
-          }
-          case 64: {
             AddTimeMs = input.ReadUInt64();
             break;
           }
-          case 77: {
+          case 29: {
             LifeTime = input.ReadFloat();
             break;
           }
-          case 88: {
+          case 32: {
+            BuffId = input.ReadUInt32();
+            break;
+          }
+          case 42: {
+            dynamicValues_.AddEntriesFrom(input, _map_dynamicValues_codec);
+            break;
+          }
+          case 48: {
+            EIDPLLLELPP = input.ReadUInt32();
+            break;
+          }
+          case 72: {
             BaseAvatarId = input.ReadUInt32();
             break;
           }
-          case 112: {
+          case 96: {
             Level = input.ReadUInt32();
+            break;
+          }
+          case 104: {
+            Count = input.ReadUInt32();
             break;
           }
         }
@@ -408,31 +441,35 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            Count = input.ReadUInt32();
-            break;
-          }
-          case 34: {
-            dynamicValues_.AddEntriesFrom(ref input, _map_dynamicValues_codec);
-            break;
-          }
-          case 40: {
-            BuffId = input.ReadUInt32();
-            break;
-          }
-          case 64: {
             AddTimeMs = input.ReadUInt64();
             break;
           }
-          case 77: {
+          case 29: {
             LifeTime = input.ReadFloat();
             break;
           }
-          case 88: {
+          case 32: {
+            BuffId = input.ReadUInt32();
+            break;
+          }
+          case 42: {
+            dynamicValues_.AddEntriesFrom(ref input, _map_dynamicValues_codec);
+            break;
+          }
+          case 48: {
+            EIDPLLLELPP = input.ReadUInt32();
+            break;
+          }
+          case 72: {
             BaseAvatarId = input.ReadUInt32();
             break;
           }
-          case 112: {
+          case 96: {
             Level = input.ReadUInt32();
+            break;
+          }
+          case 104: {
+            Count = input.ReadUInt32();
             break;
           }
         }

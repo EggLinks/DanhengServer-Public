@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChpVcGdyYWRlQXJlYVN0YXRDc1JlcS5wcm90bxoOU3RhdFR5cGUucHJvdG8i",
-            "VgoUVXBncmFkZUFyZWFTdGF0Q3NSZXESDQoFbGV2ZWwYByABKA0SHgoLRk9H",
-            "R0xKRVBEREQYAyABKA4yCS5TdGF0VHlwZRIPCgdhcmVhX2lkGA4gASgNQh6q",
+            "VgoUVXBncmFkZUFyZWFTdGF0Q3NSZXESHgoLTVBMTUFBSExIR0QYBSABKA4y",
+            "CS5TdGF0VHlwZRIPCgdhcmVhX2lkGAogASgNEg0KBWxldmVsGA4gASgNQh6q",
             "AhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.StatTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.UpgradeAreaStatCsReq), global::EggLink.DanhengServer.Proto.UpgradeAreaStatCsReq.Parser, new[]{ "Level", "FOGGLJEPDDD", "AreaId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.UpgradeAreaStatCsReq), global::EggLink.DanhengServer.Proto.UpgradeAreaStatCsReq.Parser, new[]{ "MPLMAAHLHGD", "AreaId", "Level" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,9 +73,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UpgradeAreaStatCsReq(UpgradeAreaStatCsReq other) : this() {
-      level_ = other.level_;
-      fOGGLJEPDDD_ = other.fOGGLJEPDDD_;
+      mPLMAAHLHGD_ = other.mPLMAAHLHGD_;
       areaId_ = other.areaId_;
+      level_ = other.level_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,32 +85,20 @@ namespace EggLink.DanhengServer.Proto {
       return new UpgradeAreaStatCsReq(this);
     }
 
-    /// <summary>Field number for the "level" field.</summary>
-    public const int LevelFieldNumber = 7;
-    private uint level_;
+    /// <summary>Field number for the "MPLMAAHLHGD" field.</summary>
+    public const int MPLMAAHLHGDFieldNumber = 5;
+    private global::EggLink.DanhengServer.Proto.StatType mPLMAAHLHGD_ = global::EggLink.DanhengServer.Proto.StatType.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint Level {
-      get { return level_; }
+    public global::EggLink.DanhengServer.Proto.StatType MPLMAAHLHGD {
+      get { return mPLMAAHLHGD_; }
       set {
-        level_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "FOGGLJEPDDD" field.</summary>
-    public const int FOGGLJEPDDDFieldNumber = 3;
-    private global::EggLink.DanhengServer.Proto.StatType fOGGLJEPDDD_ = global::EggLink.DanhengServer.Proto.StatType.None;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.StatType FOGGLJEPDDD {
-      get { return fOGGLJEPDDD_; }
-      set {
-        fOGGLJEPDDD_ = value;
+        mPLMAAHLHGD_ = value;
       }
     }
 
     /// <summary>Field number for the "area_id" field.</summary>
-    public const int AreaIdFieldNumber = 14;
+    public const int AreaIdFieldNumber = 10;
     private uint areaId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -118,6 +106,18 @@ namespace EggLink.DanhengServer.Proto {
       get { return areaId_; }
       set {
         areaId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "level" field.</summary>
+    public const int LevelFieldNumber = 14;
+    private uint level_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint Level {
+      get { return level_; }
+      set {
+        level_ = value;
       }
     }
 
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Level != other.Level) return false;
-      if (FOGGLJEPDDD != other.FOGGLJEPDDD) return false;
+      if (MPLMAAHLHGD != other.MPLMAAHLHGD) return false;
       if (AreaId != other.AreaId) return false;
+      if (Level != other.Level) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -146,9 +146,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Level != 0) hash ^= Level.GetHashCode();
-      if (FOGGLJEPDDD != global::EggLink.DanhengServer.Proto.StatType.None) hash ^= FOGGLJEPDDD.GetHashCode();
+      if (MPLMAAHLHGD != global::EggLink.DanhengServer.Proto.StatType.None) hash ^= MPLMAAHLHGD.GetHashCode();
       if (AreaId != 0) hash ^= AreaId.GetHashCode();
+      if (Level != 0) hash ^= Level.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,17 +167,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (FOGGLJEPDDD != global::EggLink.DanhengServer.Proto.StatType.None) {
-        output.WriteRawTag(24);
-        output.WriteEnum((int) FOGGLJEPDDD);
-      }
-      if (Level != 0) {
-        output.WriteRawTag(56);
-        output.WriteUInt32(Level);
+      if (MPLMAAHLHGD != global::EggLink.DanhengServer.Proto.StatType.None) {
+        output.WriteRawTag(40);
+        output.WriteEnum((int) MPLMAAHLHGD);
       }
       if (AreaId != 0) {
-        output.WriteRawTag(112);
+        output.WriteRawTag(80);
         output.WriteUInt32(AreaId);
+      }
+      if (Level != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(Level);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -189,17 +189,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (FOGGLJEPDDD != global::EggLink.DanhengServer.Proto.StatType.None) {
-        output.WriteRawTag(24);
-        output.WriteEnum((int) FOGGLJEPDDD);
-      }
-      if (Level != 0) {
-        output.WriteRawTag(56);
-        output.WriteUInt32(Level);
+      if (MPLMAAHLHGD != global::EggLink.DanhengServer.Proto.StatType.None) {
+        output.WriteRawTag(40);
+        output.WriteEnum((int) MPLMAAHLHGD);
       }
       if (AreaId != 0) {
-        output.WriteRawTag(112);
+        output.WriteRawTag(80);
         output.WriteUInt32(AreaId);
+      }
+      if (Level != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(Level);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -211,14 +211,14 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Level != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Level);
-      }
-      if (FOGGLJEPDDD != global::EggLink.DanhengServer.Proto.StatType.None) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FOGGLJEPDDD);
+      if (MPLMAAHLHGD != global::EggLink.DanhengServer.Proto.StatType.None) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MPLMAAHLHGD);
       }
       if (AreaId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AreaId);
+      }
+      if (Level != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Level);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -232,14 +232,14 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.Level != 0) {
-        Level = other.Level;
-      }
-      if (other.FOGGLJEPDDD != global::EggLink.DanhengServer.Proto.StatType.None) {
-        FOGGLJEPDDD = other.FOGGLJEPDDD;
+      if (other.MPLMAAHLHGD != global::EggLink.DanhengServer.Proto.StatType.None) {
+        MPLMAAHLHGD = other.MPLMAAHLHGD;
       }
       if (other.AreaId != 0) {
         AreaId = other.AreaId;
+      }
+      if (other.Level != 0) {
+        Level = other.Level;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -256,16 +256,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 24: {
-            FOGGLJEPDDD = (global::EggLink.DanhengServer.Proto.StatType) input.ReadEnum();
+          case 40: {
+            MPLMAAHLHGD = (global::EggLink.DanhengServer.Proto.StatType) input.ReadEnum();
             break;
           }
-          case 56: {
-            Level = input.ReadUInt32();
+          case 80: {
+            AreaId = input.ReadUInt32();
             break;
           }
           case 112: {
-            AreaId = input.ReadUInt32();
+            Level = input.ReadUInt32();
             break;
           }
         }
@@ -283,16 +283,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 24: {
-            FOGGLJEPDDD = (global::EggLink.DanhengServer.Proto.StatType) input.ReadEnum();
+          case 40: {
+            MPLMAAHLHGD = (global::EggLink.DanhengServer.Proto.StatType) input.ReadEnum();
             break;
           }
-          case 56: {
-            Level = input.ReadUInt32();
+          case 80: {
+            AreaId = input.ReadUInt32();
             break;
           }
           case 112: {
-            AreaId = input.ReadUInt32();
+            Level = input.ReadUInt32();
             break;
           }
         }

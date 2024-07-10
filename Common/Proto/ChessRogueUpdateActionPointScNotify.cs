@@ -26,7 +26,7 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "CilDaGVzc1JvZ3VlVXBkYXRlQWN0aW9uUG9pbnRTY05vdGlmeS5wcm90byI7",
             "CiNDaGVzc1JvZ3VlVXBkYXRlQWN0aW9uUG9pbnRTY05vdGlmeRIUCgxhY3Rp",
-            "b25fcG9pbnQYCSABKAVCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90",
+            "b25fcG9pbnQYDyABKAVCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90",
             "b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
@@ -84,7 +84,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "action_point" field.</summary>
-    public const int ActionPointFieldNumber = 9;
+    public const int ActionPointFieldNumber = 15;
     private int actionPoint_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -138,7 +138,7 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (ActionPoint != 0) {
-        output.WriteRawTag(72);
+        output.WriteRawTag(120);
         output.WriteInt32(ActionPoint);
       }
       if (_unknownFields != null) {
@@ -152,7 +152,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (ActionPoint != 0) {
-        output.WriteRawTag(72);
+        output.WriteRawTag(120);
         output.WriteInt32(ActionPoint);
       }
       if (_unknownFields != null) {
@@ -198,7 +198,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 72: {
+          case 120: {
             ActionPoint = input.ReadInt32();
             break;
           }
@@ -217,7 +217,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 72: {
+          case 120: {
             ActionPoint = input.ReadInt32();
             break;
           }

@@ -24,13 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static GetRollShopInfoCsReqReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpHZXRSb2xsU2hvcEluZm9Dc1JlcS5wcm90byIrChRHZXRSb2xsU2hvcElu",
-            "Zm9Dc1JlcRITCgtJTEpHSEtGREFFSBgMIAEoDUIeqgIbRWdnTGluay5EYW5o",
-            "ZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
+            "ChpHZXRSb2xsU2hvcEluZm9Dc1JlcS5wcm90byIsChRHZXRSb2xsU2hvcElu",
+            "Zm9Dc1JlcRIUCgxyb2xsX3Nob3BfaWQYDCABKA1CHqoCG0VnZ0xpbmsuRGFu",
+            "aGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetRollShopInfoCsReq), global::EggLink.DanhengServer.Proto.GetRollShopInfoCsReq.Parser, new[]{ "ILJGHKFDAEH" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetRollShopInfoCsReq), global::EggLink.DanhengServer.Proto.GetRollShopInfoCsReq.Parser, new[]{ "RollShopId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,7 +72,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public GetRollShopInfoCsReq(GetRollShopInfoCsReq other) : this() {
-      iLJGHKFDAEH_ = other.iLJGHKFDAEH_;
+      rollShopId_ = other.rollShopId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -82,15 +82,15 @@ namespace EggLink.DanhengServer.Proto {
       return new GetRollShopInfoCsReq(this);
     }
 
-    /// <summary>Field number for the "ILJGHKFDAEH" field.</summary>
-    public const int ILJGHKFDAEHFieldNumber = 12;
-    private uint iLJGHKFDAEH_;
+    /// <summary>Field number for the "roll_shop_id" field.</summary>
+    public const int RollShopIdFieldNumber = 12;
+    private uint rollShopId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint ILJGHKFDAEH {
-      get { return iLJGHKFDAEH_; }
+    public uint RollShopId {
+      get { return rollShopId_; }
       set {
-        iLJGHKFDAEH_ = value;
+        rollShopId_ = value;
       }
     }
 
@@ -109,7 +109,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ILJGHKFDAEH != other.ILJGHKFDAEH) return false;
+      if (RollShopId != other.RollShopId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -117,7 +117,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (ILJGHKFDAEH != 0) hash ^= ILJGHKFDAEH.GetHashCode();
+      if (RollShopId != 0) hash ^= RollShopId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ILJGHKFDAEH != 0) {
+      if (RollShopId != 0) {
         output.WriteRawTag(96);
-        output.WriteUInt32(ILJGHKFDAEH);
+        output.WriteUInt32(RollShopId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -150,9 +150,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ILJGHKFDAEH != 0) {
+      if (RollShopId != 0) {
         output.WriteRawTag(96);
-        output.WriteUInt32(ILJGHKFDAEH);
+        output.WriteUInt32(RollShopId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -164,8 +164,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (ILJGHKFDAEH != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ILJGHKFDAEH);
+      if (RollShopId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RollShopId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -179,8 +179,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.ILJGHKFDAEH != 0) {
-        ILJGHKFDAEH = other.ILJGHKFDAEH;
+      if (other.RollShopId != 0) {
+        RollShopId = other.RollShopId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -198,7 +198,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 96: {
-            ILJGHKFDAEH = input.ReadUInt32();
+            RollShopId = input.ReadUInt32();
             break;
           }
         }
@@ -217,7 +217,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 96: {
-            ILJGHKFDAEH = input.ReadUInt32();
+            RollShopId = input.ReadUInt32();
             break;
           }
         }

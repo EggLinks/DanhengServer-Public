@@ -394,12 +394,12 @@ namespace EggLink.DanhengServer.Game.Rogue
             return new()
             {
                 ScoreId = (uint)score,
-                TotalScore = (uint)score,
-                PrevRewardInfo = prev,
-                NextRewardInfo = next,
+                //TotalScore = (uint)score,
+                //PrevRewardInfo = prev,
+                //NextRewardInfo = next,
                 AreaId = (uint)AreaExcel.RogueAreaID,
-                FinishedRoomCount = (uint)CurReachedRoom,
-                ReachedRoomCount = (uint)CurReachedRoom,
+                //FinishedRoomCount = (uint)CurReachedRoom,
+                //ReachedRoomCount = (uint)CurReachedRoom,
                 IsWin = IsWin,
                 Record = new()
                 {

@@ -7,7 +7,16 @@
     <Nullable>enable</Nullable>
     <RootNamespace>EggLink.DanhengServer.Program</RootNamespace>
     <AssemblyName>DanhengServer</AssemblyName>
+    <ApplicationIcon>Danheng.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+	  <Content Include="Danheng.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Command\Command.csproj" />

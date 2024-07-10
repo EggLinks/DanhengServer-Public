@@ -15,7 +15,6 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Avatar
             {
                 BaseAvatarId = (uint)avatarId,
                 IsNew = true,
-                Src = AddAvatarSrcState.AddAvatarSrcGacha,
             };
 
             SetData(packet);

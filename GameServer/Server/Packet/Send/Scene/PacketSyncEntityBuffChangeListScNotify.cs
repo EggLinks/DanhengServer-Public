@@ -17,7 +17,7 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Scene
             var change = new EntityBuffChange()
             {
                 EntityId = (uint)entity.EntityID,
-                BuffInfo = buff.ToProto(),
+                BuffChangeInfo = buff.ToProto(),
             };
             proto.EntityBuffChangeList.Add(change);
 
@@ -34,7 +34,7 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Scene
                 var change = new EntityBuffChange()
                 {
                     EntityId = (uint)entity.EntityID,
-                    BuffInfo = buff.ToProto(),
+                    BuffChangeInfo = buff.ToProto(),
                 };
                 proto.EntityBuffChangeList.Add(change);
             }

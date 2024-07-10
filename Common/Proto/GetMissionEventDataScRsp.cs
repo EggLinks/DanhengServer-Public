@@ -25,14 +25,14 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ch5HZXRNaXNzaW9uRXZlbnREYXRhU2NSc3AucHJvdG8aDU1pc3Npb24ucHJv",
-            "dG8ibQoYR2V0TWlzc2lvbkV2ZW50RGF0YVNjUnNwEg8KB3JldGNvZGUYByAB",
-            "KA0SGgoSY2hhbGxlbmdlX2V2ZW50X2lkGAMgASgNEiQKEm1pc3Npb25fZXZl",
-            "bnRfbGlzdBgPIAMoCzIILk1pc3Npb25CHqoCG0VnZ0xpbmsuRGFuaGVuZ1Nl",
+            "dG8ibQoYR2V0TWlzc2lvbkV2ZW50RGF0YVNjUnNwEg8KB3JldGNvZGUYBSAB",
+            "KA0SJAoSbWlzc2lvbl9ldmVudF9saXN0GAkgAygLMgguTWlzc2lvbhIaChJj",
+            "aGFsbGVuZ2VfZXZlbnRfaWQYBCABKA1CHqoCG0VnZ0xpbmsuRGFuaGVuZ1Nl",
             "cnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.MissionReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetMissionEventDataScRsp), global::EggLink.DanhengServer.Proto.GetMissionEventDataScRsp.Parser, new[]{ "Retcode", "ChallengeEventId", "MissionEventList" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetMissionEventDataScRsp), global::EggLink.DanhengServer.Proto.GetMissionEventDataScRsp.Parser, new[]{ "Retcode", "MissionEventList", "ChallengeEventId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,8 +75,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public GetMissionEventDataScRsp(GetMissionEventDataScRsp other) : this() {
       retcode_ = other.retcode_;
-      challengeEventId_ = other.challengeEventId_;
       missionEventList_ = other.missionEventList_.Clone();
+      challengeEventId_ = other.challengeEventId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -87,7 +87,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "retcode" field.</summary>
-    public const int RetcodeFieldNumber = 7;
+    public const int RetcodeFieldNumber = 5;
     private uint retcode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -98,8 +98,19 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
+    /// <summary>Field number for the "mission_event_list" field.</summary>
+    public const int MissionEventListFieldNumber = 9;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.Mission> _repeated_missionEventList_codec
+        = pb::FieldCodec.ForMessage(74, global::EggLink.DanhengServer.Proto.Mission.Parser);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.Mission> missionEventList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.Mission>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.Mission> MissionEventList {
+      get { return missionEventList_; }
+    }
+
     /// <summary>Field number for the "challenge_event_id" field.</summary>
-    public const int ChallengeEventIdFieldNumber = 3;
+    public const int ChallengeEventIdFieldNumber = 4;
     private uint challengeEventId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -108,17 +119,6 @@ namespace EggLink.DanhengServer.Proto {
       set {
         challengeEventId_ = value;
       }
-    }
-
-    /// <summary>Field number for the "mission_event_list" field.</summary>
-    public const int MissionEventListFieldNumber = 15;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.Mission> _repeated_missionEventList_codec
-        = pb::FieldCodec.ForMessage(122, global::EggLink.DanhengServer.Proto.Mission.Parser);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.Mission> missionEventList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.Mission>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.Mission> MissionEventList {
-      get { return missionEventList_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -137,8 +137,8 @@ namespace EggLink.DanhengServer.Proto {
         return true;
       }
       if (Retcode != other.Retcode) return false;
-      if (ChallengeEventId != other.ChallengeEventId) return false;
       if(!missionEventList_.Equals(other.missionEventList_)) return false;
+      if (ChallengeEventId != other.ChallengeEventId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -147,8 +147,8 @@ namespace EggLink.DanhengServer.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
-      if (ChallengeEventId != 0) hash ^= ChallengeEventId.GetHashCode();
       hash ^= missionEventList_.GetHashCode();
+      if (ChallengeEventId != 0) hash ^= ChallengeEventId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -168,11 +168,11 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (ChallengeEventId != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteUInt32(ChallengeEventId);
       }
       if (Retcode != 0) {
-        output.WriteRawTag(56);
+        output.WriteRawTag(40);
         output.WriteUInt32(Retcode);
       }
       missionEventList_.WriteTo(output, _repeated_missionEventList_codec);
@@ -187,11 +187,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (ChallengeEventId != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteUInt32(ChallengeEventId);
       }
       if (Retcode != 0) {
-        output.WriteRawTag(56);
+        output.WriteRawTag(40);
         output.WriteUInt32(Retcode);
       }
       missionEventList_.WriteTo(ref output, _repeated_missionEventList_codec);
@@ -208,10 +208,10 @@ namespace EggLink.DanhengServer.Proto {
       if (Retcode != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
       }
+      size += missionEventList_.CalculateSize(_repeated_missionEventList_codec);
       if (ChallengeEventId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ChallengeEventId);
       }
-      size += missionEventList_.CalculateSize(_repeated_missionEventList_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -227,10 +227,10 @@ namespace EggLink.DanhengServer.Proto {
       if (other.Retcode != 0) {
         Retcode = other.Retcode;
       }
+      missionEventList_.Add(other.missionEventList_);
       if (other.ChallengeEventId != 0) {
         ChallengeEventId = other.ChallengeEventId;
       }
-      missionEventList_.Add(other.missionEventList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -246,15 +246,15 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 24: {
+          case 32: {
             ChallengeEventId = input.ReadUInt32();
             break;
           }
-          case 56: {
+          case 40: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 122: {
+          case 74: {
             missionEventList_.AddEntriesFrom(input, _repeated_missionEventList_codec);
             break;
           }
@@ -273,15 +273,15 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 24: {
+          case 32: {
             ChallengeEventId = input.ReadUInt32();
             break;
           }
-          case 56: {
+          case 40: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 122: {
+          case 74: {
             missionEventList_.AddEntriesFrom(ref input, _repeated_missionEventList_codec);
             break;
           }

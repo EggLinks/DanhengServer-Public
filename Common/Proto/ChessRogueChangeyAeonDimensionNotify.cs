@@ -26,7 +26,7 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "CipDaGVzc1JvZ3VlQ2hhbmdleUFlb25EaW1lbnNpb25Ob3RpZnkucHJvdG8a",
             "GUNoZXNzUm9ndWVRdWVyeUFlb24ucHJvdG8iSgokQ2hlc3NSb2d1ZUNoYW5n",
-            "ZXlBZW9uRGltZW5zaW9uTm90aWZ5EiIKBGluZm8YBiABKAsyFC5DaGVzc1Jv",
+            "ZXlBZW9uRGltZW5zaW9uTm90aWZ5EiIKBGluZm8YCCABKAsyFC5DaGVzc1Jv",
             "Z3VlUXVlcnlBZW9uQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9i",
             "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
@@ -85,7 +85,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "info" field.</summary>
-    public const int InfoFieldNumber = 6;
+    public const int InfoFieldNumber = 8;
     private global::EggLink.DanhengServer.Proto.ChessRogueQueryAeon info_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -139,7 +139,7 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (info_ != null) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(66);
         output.WriteMessage(Info);
       }
       if (_unknownFields != null) {
@@ -153,7 +153,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (info_ != null) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(66);
         output.WriteMessage(Info);
       }
       if (_unknownFields != null) {
@@ -202,7 +202,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 50: {
+          case 66: {
             if (info_ == null) {
               Info = new global::EggLink.DanhengServer.Proto.ChessRogueQueryAeon();
             }
@@ -224,7 +224,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 50: {
+          case 66: {
             if (info_ == null) {
               Info = new global::EggLink.DanhengServer.Proto.ChessRogueQueryAeon();
             }

@@ -9,11 +9,11 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Rogue
 {
     public class PacketSyncRogueCommonActionResultScNotify : BasePacket
     {
-        public PacketSyncRogueCommonActionResultScNotify(int versionId, RogueCommonActionResult result, RogueActionDisplayType displayType = RogueActionDisplayType.RogueCommonActionResultDisplayTypeNone) : base(CmdIds.SyncRogueCommonActionResultScNotify)
+        public PacketSyncRogueCommonActionResultScNotify(int rogueSubmode, RogueCommonActionResult result, RogueActionDisplayType displayType = RogueActionDisplayType.RogueCommonActionResultDisplayTypeNone) : base(CmdIds.SyncRogueCommonActionResultScNotify)
         {
             var proto = new SyncRogueCommonActionResultScNotify
             {
-                RogueVersionId = (uint)versionId,
+                RogueSubMode = (uint)rogueSubmode,
                 DisplayType = displayType
             };
 
@@ -22,11 +22,11 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Rogue
             SetData(proto);
         }
 
-        public PacketSyncRogueCommonActionResultScNotify(int versionId, List<RogueCommonActionResult> results, RogueActionDisplayType displayType = RogueActionDisplayType.RogueCommonActionResultDisplayTypeNone) : base(CmdIds.SyncRogueCommonActionResultScNotify)
+        public PacketSyncRogueCommonActionResultScNotify(int rogueSubmode, List<RogueCommonActionResult> results, RogueActionDisplayType displayType = RogueActionDisplayType.RogueCommonActionResultDisplayTypeNone) : base(CmdIds.SyncRogueCommonActionResultScNotify)
         {
             var proto = new SyncRogueCommonActionResultScNotify
             {
-                RogueVersionId = (uint)versionId,
+                RogueSubMode = (uint)rogueSubmode,
                 DisplayType = displayType
             };
 

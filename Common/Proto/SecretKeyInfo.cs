@@ -25,13 +25,13 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChNTZWNyZXRLZXlJbmZvLnByb3RvGhNTZWNyZXRLZXlUeXBlLnByb3RvIjoK",
-            "DVNlY3JldEtleUluZm8SHAoEdHlwZRgHIAEoDjIOLlNlY3JldEtleVR5cGUS",
-            "CwoDa2V5GA4gASgJQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9i",
+            "DVNlY3JldEtleUluZm8SCwoDa2V5GAsgASgJEhwKBHR5cGUYDSABKA4yDi5T",
+            "ZWNyZXRLZXlUeXBlQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9i",
             "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.SecretKeyTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SecretKeyInfo), global::EggLink.DanhengServer.Proto.SecretKeyInfo.Parser, new[]{ "Type", "Key" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SecretKeyInfo), global::EggLink.DanhengServer.Proto.SecretKeyInfo.Parser, new[]{ "Key", "Type" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,8 +73,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SecretKeyInfo(SecretKeyInfo other) : this() {
-      type_ = other.type_;
       key_ = other.key_;
+      type_ = other.type_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -84,20 +84,8 @@ namespace EggLink.DanhengServer.Proto {
       return new SecretKeyInfo(this);
     }
 
-    /// <summary>Field number for the "type" field.</summary>
-    public const int TypeFieldNumber = 7;
-    private global::EggLink.DanhengServer.Proto.SecretKeyType type_ = global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.SecretKeyType Type {
-      get { return type_; }
-      set {
-        type_ = value;
-      }
-    }
-
     /// <summary>Field number for the "key" field.</summary>
-    public const int KeyFieldNumber = 14;
+    public const int KeyFieldNumber = 11;
     private string key_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -105,6 +93,18 @@ namespace EggLink.DanhengServer.Proto {
       get { return key_; }
       set {
         key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 13;
+    private global::EggLink.DanhengServer.Proto.SecretKeyType type_ = global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::EggLink.DanhengServer.Proto.SecretKeyType Type {
+      get { return type_; }
+      set {
+        type_ = value;
       }
     }
 
@@ -123,8 +123,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Type != other.Type) return false;
       if (Key != other.Key) return false;
+      if (Type != other.Type) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -132,8 +132,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) hash ^= Type.GetHashCode();
       if (Key.Length != 0) hash ^= Key.GetHashCode();
+      if (Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) hash ^= Type.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -152,13 +152,13 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) {
-        output.WriteRawTag(56);
-        output.WriteEnum((int) Type);
-      }
       if (Key.Length != 0) {
-        output.WriteRawTag(114);
+        output.WriteRawTag(90);
         output.WriteString(Key);
+      }
+      if (Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) {
+        output.WriteRawTag(104);
+        output.WriteEnum((int) Type);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -170,13 +170,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) {
-        output.WriteRawTag(56);
-        output.WriteEnum((int) Type);
-      }
       if (Key.Length != 0) {
-        output.WriteRawTag(114);
+        output.WriteRawTag(90);
         output.WriteString(Key);
+      }
+      if (Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) {
+        output.WriteRawTag(104);
+        output.WriteEnum((int) Type);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -188,11 +188,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
-      }
       if (Key.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+      }
+      if (Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -206,11 +206,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) {
-        Type = other.Type;
-      }
       if (other.Key.Length != 0) {
         Key = other.Key;
+      }
+      if (other.Type != global::EggLink.DanhengServer.Proto.SecretKeyType.SecretKeyNone) {
+        Type = other.Type;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -227,12 +227,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 56: {
-            Type = (global::EggLink.DanhengServer.Proto.SecretKeyType) input.ReadEnum();
+          case 90: {
+            Key = input.ReadString();
             break;
           }
-          case 114: {
-            Key = input.ReadString();
+          case 104: {
+            Type = (global::EggLink.DanhengServer.Proto.SecretKeyType) input.ReadEnum();
             break;
           }
         }
@@ -250,12 +250,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 56: {
-            Type = (global::EggLink.DanhengServer.Proto.SecretKeyType) input.ReadEnum();
+          case 90: {
+            Key = input.ReadString();
             break;
           }
-          case 114: {
-            Key = input.ReadString();
+          case 104: {
+            Type = (global::EggLink.DanhengServer.Proto.SecretKeyType) input.ReadEnum();
             break;
           }
         }

@@ -292,11 +292,28 @@ namespace EggLink.DanhengServer.Game.Scene
 
             Player.SceneData!.FloorSavedData.TryGetValue(FloorId, out var floorData);
 
-            if (floorData != null)
+            foreach (var value in FloorInfo?.SavedValues ?? [])
             {
-                foreach (var floor in floorData)
+                if (floorData != null && floorData.TryGetValue(value.Name, out int v))
                 {
-                    sceneInfo.FloorSavedData.Add(floor.Key, floor.Value);
+                    sceneInfo.FloorSavedData[value.Name] = v;
+                }
+                else
+                {
+                    sceneInfo.FloorSavedData[value.Name] = value.DefaultValue;
+                }
+            }
+
+            foreach (var value in FloorInfo?.CustomValues ?? [])
+            {
+                if (floorData != null && floorData.TryGetValue(value.Name, out int v))
+                {
+                    sceneInfo.FloorSavedData[value.Name] = v;
+                }
+                else
+                {
+                    _ = int.TryParse(value.DefaultValue, out int x);
+                    sceneInfo.FloorSavedData[value.Name] = x;
                 }
             }
 

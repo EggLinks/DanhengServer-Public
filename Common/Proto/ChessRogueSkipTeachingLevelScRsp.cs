@@ -25,14 +25,14 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiZDaGVzc1JvZ3VlU2tpcFRlYWNoaW5nTGV2ZWxTY1JzcC5wcm90bxoOSXRl",
-            "bUxpc3QucHJvdG8iWAogQ2hlc3NSb2d1ZVNraXBUZWFjaGluZ0xldmVsU2NS",
-            "c3ASDwoHcmV0Y29kZRgCIAEoDRIjChBza2lwX3Jld2FyZF9saXN0GAkgASgL",
-            "MgkuSXRlbUxpc3RCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IG",
-            "cHJvdG8z"));
+            "bUxpc3QucHJvdG8iYQogQ2hlc3NSb2d1ZVNraXBUZWFjaGluZ0xldmVsU2NS",
+            "c3ASDwoHcmV0Y29kZRgDIAEoDRIsChlTa2lwUmV3YXJkTGlzdEZpZWxkTnVt",
+            "YmVyGA4gASgLMgkuSXRlbUxpc3RCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZl",
+            "ci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ItemListReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueSkipTeachingLevelScRsp), global::EggLink.DanhengServer.Proto.ChessRogueSkipTeachingLevelScRsp.Parser, new[]{ "Retcode", "SkipRewardList" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueSkipTeachingLevelScRsp), global::EggLink.DanhengServer.Proto.ChessRogueSkipTeachingLevelScRsp.Parser, new[]{ "Retcode", "SkipRewardListFieldNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,7 +75,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ChessRogueSkipTeachingLevelScRsp(ChessRogueSkipTeachingLevelScRsp other) : this() {
       retcode_ = other.retcode_;
-      skipRewardList_ = other.skipRewardList_ != null ? other.skipRewardList_.Clone() : null;
+      skipRewardListFieldNumber_ = other.skipRewardListFieldNumber_ != null ? other.skipRewardListFieldNumber_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -86,7 +86,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "retcode" field.</summary>
-    public const int RetcodeFieldNumber = 2;
+    public const int RetcodeFieldNumber = 3;
     private uint retcode_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -97,15 +97,15 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "skip_reward_list" field.</summary>
-    public const int SkipRewardListFieldNumber = 9;
-    private global::EggLink.DanhengServer.Proto.ItemList skipRewardList_;
+    /// <summary>Field number for the "SkipRewardListFieldNumber" field.</summary>
+    public const int SkipRewardListFieldNumberFieldNumber = 14;
+    private global::EggLink.DanhengServer.Proto.ItemList skipRewardListFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.ItemList SkipRewardList {
-      get { return skipRewardList_; }
+    public global::EggLink.DanhengServer.Proto.ItemList SkipRewardListFieldNumber {
+      get { return skipRewardListFieldNumber_; }
       set {
-        skipRewardList_ = value;
+        skipRewardListFieldNumber_ = value;
       }
     }
 
@@ -125,7 +125,7 @@ namespace EggLink.DanhengServer.Proto {
         return true;
       }
       if (Retcode != other.Retcode) return false;
-      if (!object.Equals(SkipRewardList, other.SkipRewardList)) return false;
+      if (!object.Equals(SkipRewardListFieldNumber, other.SkipRewardListFieldNumber)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -134,7 +134,7 @@ namespace EggLink.DanhengServer.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (Retcode != 0) hash ^= Retcode.GetHashCode();
-      if (skipRewardList_ != null) hash ^= SkipRewardList.GetHashCode();
+      if (skipRewardListFieldNumber_ != null) hash ^= SkipRewardListFieldNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -154,12 +154,12 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (Retcode != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(24);
         output.WriteUInt32(Retcode);
       }
-      if (skipRewardList_ != null) {
-        output.WriteRawTag(74);
-        output.WriteMessage(SkipRewardList);
+      if (skipRewardListFieldNumber_ != null) {
+        output.WriteRawTag(114);
+        output.WriteMessage(SkipRewardListFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -172,12 +172,12 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (Retcode != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(24);
         output.WriteUInt32(Retcode);
       }
-      if (skipRewardList_ != null) {
-        output.WriteRawTag(74);
-        output.WriteMessage(SkipRewardList);
+      if (skipRewardListFieldNumber_ != null) {
+        output.WriteRawTag(114);
+        output.WriteMessage(SkipRewardListFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -192,8 +192,8 @@ namespace EggLink.DanhengServer.Proto {
       if (Retcode != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Retcode);
       }
-      if (skipRewardList_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SkipRewardList);
+      if (skipRewardListFieldNumber_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SkipRewardListFieldNumber);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -210,11 +210,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other.Retcode != 0) {
         Retcode = other.Retcode;
       }
-      if (other.skipRewardList_ != null) {
-        if (skipRewardList_ == null) {
-          SkipRewardList = new global::EggLink.DanhengServer.Proto.ItemList();
+      if (other.skipRewardListFieldNumber_ != null) {
+        if (skipRewardListFieldNumber_ == null) {
+          SkipRewardListFieldNumber = new global::EggLink.DanhengServer.Proto.ItemList();
         }
-        SkipRewardList.MergeFrom(other.SkipRewardList);
+        SkipRewardListFieldNumber.MergeFrom(other.SkipRewardListFieldNumber);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -231,15 +231,15 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 16: {
+          case 24: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 74: {
-            if (skipRewardList_ == null) {
-              SkipRewardList = new global::EggLink.DanhengServer.Proto.ItemList();
+          case 114: {
+            if (skipRewardListFieldNumber_ == null) {
+              SkipRewardListFieldNumber = new global::EggLink.DanhengServer.Proto.ItemList();
             }
-            input.ReadMessage(SkipRewardList);
+            input.ReadMessage(SkipRewardListFieldNumber);
             break;
           }
         }
@@ -257,15 +257,15 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 16: {
+          case 24: {
             Retcode = input.ReadUInt32();
             break;
           }
-          case 74: {
-            if (skipRewardList_ == null) {
-              SkipRewardList = new global::EggLink.DanhengServer.Proto.ItemList();
+          case 114: {
+            if (skipRewardListFieldNumber_ == null) {
+              SkipRewardListFieldNumber = new global::EggLink.DanhengServer.Proto.ItemList();
             }
-            input.ReadMessage(SkipRewardList);
+            input.ReadMessage(SkipRewardListFieldNumber);
             break;
           }
         }

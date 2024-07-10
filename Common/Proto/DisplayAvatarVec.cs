@@ -26,7 +26,7 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "ChZEaXNwbGF5QXZhdGFyVmVjLnByb3RvGhdEaXNwbGF5QXZhdGFyRGF0YS5w",
             "cm90byJXChBEaXNwbGF5QXZhdGFyVmVjEi8KE2Rpc3BsYXlfYXZhdGFyX2xp",
-            "c3QYDiADKAsyEi5EaXNwbGF5QXZhdGFyRGF0YRISCgppc19kaXNwbGF5GAUg",
+            "c3QYCyADKAsyEi5EaXNwbGF5QXZhdGFyRGF0YRISCgppc19kaXNwbGF5GAwg",
             "ASgIQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.DisplayAvatarDataReflection.Descriptor, },
@@ -85,9 +85,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "display_avatar_list" field.</summary>
-    public const int DisplayAvatarListFieldNumber = 14;
+    public const int DisplayAvatarListFieldNumber = 11;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.DisplayAvatarData> _repeated_displayAvatarList_codec
-        = pb::FieldCodec.ForMessage(114, global::EggLink.DanhengServer.Proto.DisplayAvatarData.Parser);
+        = pb::FieldCodec.ForMessage(90, global::EggLink.DanhengServer.Proto.DisplayAvatarData.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.DisplayAvatarData> displayAvatarList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.DisplayAvatarData>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -96,7 +96,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "is_display" field.</summary>
-    public const int IsDisplayFieldNumber = 5;
+    public const int IsDisplayFieldNumber = 12;
     private bool isDisplay_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -151,11 +151,11 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      displayAvatarList_.WriteTo(output, _repeated_displayAvatarList_codec);
       if (IsDisplay != false) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(96);
         output.WriteBool(IsDisplay);
       }
-      displayAvatarList_.WriteTo(output, _repeated_displayAvatarList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -166,11 +166,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      displayAvatarList_.WriteTo(ref output, _repeated_displayAvatarList_codec);
       if (IsDisplay != false) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(96);
         output.WriteBool(IsDisplay);
       }
-      displayAvatarList_.WriteTo(ref output, _repeated_displayAvatarList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -216,12 +216,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 40: {
-            IsDisplay = input.ReadBool();
+          case 90: {
+            displayAvatarList_.AddEntriesFrom(input, _repeated_displayAvatarList_codec);
             break;
           }
-          case 114: {
-            displayAvatarList_.AddEntriesFrom(input, _repeated_displayAvatarList_codec);
+          case 96: {
+            IsDisplay = input.ReadBool();
             break;
           }
         }
@@ -239,12 +239,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 40: {
-            IsDisplay = input.ReadBool();
+          case 90: {
+            displayAvatarList_.AddEntriesFrom(ref input, _repeated_displayAvatarList_codec);
             break;
           }
-          case 114: {
-            displayAvatarList_.AddEntriesFrom(ref input, _repeated_displayAvatarList_codec);
+          case 96: {
+            IsDisplay = input.ReadBool();
             break;
           }
         }

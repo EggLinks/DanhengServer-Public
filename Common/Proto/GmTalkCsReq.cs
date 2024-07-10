@@ -24,7 +24,7 @@ namespace EggLink.DanhengServer.Proto {
     static GmTalkCsReqReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFHbVRhbGtDc1JlcS5wcm90byIaCgtHbVRhbGtDc1JlcRILCgNtc2cYDCAB",
+            "ChFHbVRhbGtDc1JlcS5wcm90byIaCgtHbVRhbGtDc1JlcRILCgNtc2cYCSAB",
             "KAlCHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
@@ -82,7 +82,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "msg" field.</summary>
-    public const int MsgFieldNumber = 12;
+    public const int MsgFieldNumber = 9;
     private string msg_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -136,7 +136,7 @@ namespace EggLink.DanhengServer.Proto {
       output.WriteRawMessage(this);
     #else
       if (Msg.Length != 0) {
-        output.WriteRawTag(98);
+        output.WriteRawTag(74);
         output.WriteString(Msg);
       }
       if (_unknownFields != null) {
@@ -150,7 +150,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (Msg.Length != 0) {
-        output.WriteRawTag(98);
+        output.WriteRawTag(74);
         output.WriteString(Msg);
       }
       if (_unknownFields != null) {
@@ -196,7 +196,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 98: {
+          case 74: {
             Msg = input.ReadString();
             break;
           }
@@ -215,7 +215,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 98: {
+          case 74: {
             Msg = input.ReadString();
             break;
           }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EggLink.DanhengServer.Data.Excel.AvatarPromotionConfigExcel;
 
 namespace EggLink.DanhengServer.Data.Excel
 {
@@ -15,7 +16,8 @@ namespace EggLink.DanhengServer.Data.Excel
         public int EquipmentID { get; set; }
         public bool Release { get; set; }
         public int ExpType { get; set; }
-
+        public int MaxPromotion { get; set; } = 0;
+        public int MaxRank { get; set; } = 0;
         [JsonConverter(typeof(StringEnumConverter))]
         public RarityEnum Rarity { get; set; } = 0;
         public override int GetId()

@@ -18,7 +18,8 @@ namespace EggLink.DanhengServer.Data.Config
         public int ID { get; set; }
         public int SummonUnitID { get; set; }
 
-        public bool TriggerBattle { get; set; } = true;
+        // Here's a conflict between Dimbreath's res and Andy's res ( we recommend to use the one from Andy's res )
+        public bool TriggerBattle { get; set; } = false;
 
         public List<TaskInfo> OnAttack { get; set; } = [];
         public List<TaskInfo> OnBattle { get; set; } = [];

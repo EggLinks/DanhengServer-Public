@@ -24,15 +24,15 @@ namespace EggLink.DanhengServer.Proto {
     static SyncLineupNotifyReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChZTeW5jTGluZXVwTm90aWZ5LnByb3RvGhZTeW5jTGluZXVwUmVhc29uLnBy",
-            "b3RvGhBMaW5ldXBJbmZvLnByb3RvIlcKEFN5bmNMaW5ldXBOb3RpZnkSGwoG",
-            "bGluZXVwGAQgASgLMgsuTGluZXVwSW5mbxImCgtyZWFzb25fbGlzdBgJIAMo",
-            "DjIRLlN5bmNMaW5ldXBSZWFzb25CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZl",
+            "ChZTeW5jTGluZXVwTm90aWZ5LnByb3RvGhBMaW5ldXBJbmZvLnByb3RvGhZT",
+            "eW5jTGluZXVwUmVhc29uLnByb3RvIlcKEFN5bmNMaW5ldXBOb3RpZnkSJgoL",
+            "cmVhc29uX2xpc3QYBCADKA4yES5TeW5jTGluZXVwUmVhc29uEhsKBmxpbmV1",
+            "cBgJIAEoCzILLkxpbmV1cEluZm9CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZl",
             "ci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.SyncLineupReasonReflection.Descriptor, global::EggLink.DanhengServer.Proto.LineupInfoReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.LineupInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.SyncLineupReasonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SyncLineupNotify), global::EggLink.DanhengServer.Proto.SyncLineupNotify.Parser, new[]{ "Lineup", "ReasonList" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SyncLineupNotify), global::EggLink.DanhengServer.Proto.SyncLineupNotify.Parser, new[]{ "ReasonList", "Lineup" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,8 +74,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SyncLineupNotify(SyncLineupNotify other) : this() {
-      lineup_ = other.lineup_ != null ? other.lineup_.Clone() : null;
       reasonList_ = other.reasonList_.Clone();
+      lineup_ = other.lineup_ != null ? other.lineup_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -85,8 +85,19 @@ namespace EggLink.DanhengServer.Proto {
       return new SyncLineupNotify(this);
     }
 
+    /// <summary>Field number for the "reason_list" field.</summary>
+    public const int ReasonListFieldNumber = 4;
+    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.SyncLineupReason> _repeated_reasonList_codec
+        = pb::FieldCodec.ForEnum(34, x => (int) x, x => (global::EggLink.DanhengServer.Proto.SyncLineupReason) x);
+    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.SyncLineupReason> reasonList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.SyncLineupReason>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.SyncLineupReason> ReasonList {
+      get { return reasonList_; }
+    }
+
     /// <summary>Field number for the "lineup" field.</summary>
-    public const int LineupFieldNumber = 4;
+    public const int LineupFieldNumber = 9;
     private global::EggLink.DanhengServer.Proto.LineupInfo lineup_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -95,17 +106,6 @@ namespace EggLink.DanhengServer.Proto {
       set {
         lineup_ = value;
       }
-    }
-
-    /// <summary>Field number for the "reason_list" field.</summary>
-    public const int ReasonListFieldNumber = 9;
-    private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.SyncLineupReason> _repeated_reasonList_codec
-        = pb::FieldCodec.ForEnum(74, x => (int) x, x => (global::EggLink.DanhengServer.Proto.SyncLineupReason) x);
-    private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.SyncLineupReason> reasonList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.SyncLineupReason>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::EggLink.DanhengServer.Proto.SyncLineupReason> ReasonList {
-      get { return reasonList_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -123,8 +123,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Lineup, other.Lineup)) return false;
       if(!reasonList_.Equals(other.reasonList_)) return false;
+      if (!object.Equals(Lineup, other.Lineup)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -132,8 +132,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (lineup_ != null) hash ^= Lineup.GetHashCode();
       hash ^= reasonList_.GetHashCode();
+      if (lineup_ != null) hash ^= Lineup.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -152,11 +152,11 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      reasonList_.WriteTo(output, _repeated_reasonList_codec);
       if (lineup_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(74);
         output.WriteMessage(Lineup);
       }
-      reasonList_.WriteTo(output, _repeated_reasonList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -167,11 +167,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      reasonList_.WriteTo(ref output, _repeated_reasonList_codec);
       if (lineup_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(74);
         output.WriteMessage(Lineup);
       }
-      reasonList_.WriteTo(ref output, _repeated_reasonList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -182,10 +182,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      size += reasonList_.CalculateSize(_repeated_reasonList_codec);
       if (lineup_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Lineup);
       }
-      size += reasonList_.CalculateSize(_repeated_reasonList_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -198,13 +198,13 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
+      reasonList_.Add(other.reasonList_);
       if (other.lineup_ != null) {
         if (lineup_ == null) {
           Lineup = new global::EggLink.DanhengServer.Proto.LineupInfo();
         }
         Lineup.MergeFrom(other.Lineup);
       }
-      reasonList_.Add(other.reasonList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -220,16 +220,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 34: {
+          case 34:
+          case 32: {
+            reasonList_.AddEntriesFrom(input, _repeated_reasonList_codec);
+            break;
+          }
+          case 74: {
             if (lineup_ == null) {
               Lineup = new global::EggLink.DanhengServer.Proto.LineupInfo();
             }
             input.ReadMessage(Lineup);
-            break;
-          }
-          case 74:
-          case 72: {
-            reasonList_.AddEntriesFrom(input, _repeated_reasonList_codec);
             break;
           }
         }
@@ -247,16 +247,16 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 34: {
+          case 34:
+          case 32: {
+            reasonList_.AddEntriesFrom(ref input, _repeated_reasonList_codec);
+            break;
+          }
+          case 74: {
             if (lineup_ == null) {
               Lineup = new global::EggLink.DanhengServer.Proto.LineupInfo();
             }
             input.ReadMessage(Lineup);
-            break;
-          }
-          case 74:
-          case 72: {
-            reasonList_.AddEntriesFrom(ref input, _repeated_reasonList_codec);
             break;
           }
         }

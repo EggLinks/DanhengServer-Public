@@ -25,12 +25,12 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChRBdmF0YXJQcmVzZXRIcC5wcm90byI4Cg5BdmF0YXJQcmVzZXRIcBIRCglh",
-            "dmF0YXJfaWQYCCABKA0SEwoLSUhFT0ZGQUdNQkEYAiABKA1CHqoCG0VnZ0xp",
+            "dmF0YXJfaWQYDyABKA0SEwoLR0dHT0tGQ0dBREkYDSABKA1CHqoCG0VnZ0xp",
             "bmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.AvatarPresetHp), global::EggLink.DanhengServer.Proto.AvatarPresetHp.Parser, new[]{ "AvatarId", "IHEOFFAGMBA" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.AvatarPresetHp), global::EggLink.DanhengServer.Proto.AvatarPresetHp.Parser, new[]{ "AvatarId", "GGGOKFCGADI" }, null, null, null, null)
           }));
     }
     #endregion
@@ -73,7 +73,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AvatarPresetHp(AvatarPresetHp other) : this() {
       avatarId_ = other.avatarId_;
-      iHEOFFAGMBA_ = other.iHEOFFAGMBA_;
+      gGGOKFCGADI_ = other.gGGOKFCGADI_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -84,7 +84,7 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "avatar_id" field.</summary>
-    public const int AvatarIdFieldNumber = 8;
+    public const int AvatarIdFieldNumber = 15;
     private uint avatarId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -95,15 +95,15 @@ namespace EggLink.DanhengServer.Proto {
       }
     }
 
-    /// <summary>Field number for the "IHEOFFAGMBA" field.</summary>
-    public const int IHEOFFAGMBAFieldNumber = 2;
-    private uint iHEOFFAGMBA_;
+    /// <summary>Field number for the "GGGOKFCGADI" field.</summary>
+    public const int GGGOKFCGADIFieldNumber = 13;
+    private uint gGGOKFCGADI_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint IHEOFFAGMBA {
-      get { return iHEOFFAGMBA_; }
+    public uint GGGOKFCGADI {
+      get { return gGGOKFCGADI_; }
       set {
-        iHEOFFAGMBA_ = value;
+        gGGOKFCGADI_ = value;
       }
     }
 
@@ -123,7 +123,7 @@ namespace EggLink.DanhengServer.Proto {
         return true;
       }
       if (AvatarId != other.AvatarId) return false;
-      if (IHEOFFAGMBA != other.IHEOFFAGMBA) return false;
+      if (GGGOKFCGADI != other.GGGOKFCGADI) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -132,7 +132,7 @@ namespace EggLink.DanhengServer.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (AvatarId != 0) hash ^= AvatarId.GetHashCode();
-      if (IHEOFFAGMBA != 0) hash ^= IHEOFFAGMBA.GetHashCode();
+      if (GGGOKFCGADI != 0) hash ^= GGGOKFCGADI.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -151,12 +151,12 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (IHEOFFAGMBA != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(IHEOFFAGMBA);
+      if (GGGOKFCGADI != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(GGGOKFCGADI);
       }
       if (AvatarId != 0) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(120);
         output.WriteUInt32(AvatarId);
       }
       if (_unknownFields != null) {
@@ -169,12 +169,12 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (IHEOFFAGMBA != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(IHEOFFAGMBA);
+      if (GGGOKFCGADI != 0) {
+        output.WriteRawTag(104);
+        output.WriteUInt32(GGGOKFCGADI);
       }
       if (AvatarId != 0) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(120);
         output.WriteUInt32(AvatarId);
       }
       if (_unknownFields != null) {
@@ -190,8 +190,8 @@ namespace EggLink.DanhengServer.Proto {
       if (AvatarId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AvatarId);
       }
-      if (IHEOFFAGMBA != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(IHEOFFAGMBA);
+      if (GGGOKFCGADI != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(GGGOKFCGADI);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -208,8 +208,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other.AvatarId != 0) {
         AvatarId = other.AvatarId;
       }
-      if (other.IHEOFFAGMBA != 0) {
-        IHEOFFAGMBA = other.IHEOFFAGMBA;
+      if (other.GGGOKFCGADI != 0) {
+        GGGOKFCGADI = other.GGGOKFCGADI;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -226,11 +226,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 16: {
-            IHEOFFAGMBA = input.ReadUInt32();
+          case 104: {
+            GGGOKFCGADI = input.ReadUInt32();
             break;
           }
-          case 64: {
+          case 120: {
             AvatarId = input.ReadUInt32();
             break;
           }
@@ -249,11 +249,11 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 16: {
-            IHEOFFAGMBA = input.ReadUInt32();
+          case 104: {
+            GGGOKFCGADI = input.ReadUInt32();
             break;
           }
-          case 64: {
+          case 120: {
             AvatarId = input.ReadUInt32();
             break;
           }

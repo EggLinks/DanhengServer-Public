@@ -24,13 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static DressRelicParamReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChVEcmVzc1JlbGljUGFyYW0ucHJvdG8iPgoPRHJlc3NSZWxpY1BhcmFtEhIK",
-            "CnJlbGljX3R5cGUYDSABKA0SFwoPcmVsaWNfdW5pcXVlX2lkGAUgASgNQh6q",
+            "ChVEcmVzc1JlbGljUGFyYW0ucHJvdG8iPgoPRHJlc3NSZWxpY1BhcmFtEhcK",
+            "D3JlbGljX3VuaXF1ZV9pZBgOIAEoDRISCgpyZWxpY190eXBlGA0gASgNQh6q",
             "AhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.DressRelicParam), global::EggLink.DanhengServer.Proto.DressRelicParam.Parser, new[]{ "RelicType", "RelicUniqueId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.DressRelicParam), global::EggLink.DanhengServer.Proto.DressRelicParam.Parser, new[]{ "RelicUniqueId", "RelicType" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,8 +72,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DressRelicParam(DressRelicParam other) : this() {
-      relicType_ = other.relicType_;
       relicUniqueId_ = other.relicUniqueId_;
+      relicType_ = other.relicType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -81,6 +81,18 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DressRelicParam Clone() {
       return new DressRelicParam(this);
+    }
+
+    /// <summary>Field number for the "relic_unique_id" field.</summary>
+    public const int RelicUniqueIdFieldNumber = 14;
+    private uint relicUniqueId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint RelicUniqueId {
+      get { return relicUniqueId_; }
+      set {
+        relicUniqueId_ = value;
+      }
     }
 
     /// <summary>Field number for the "relic_type" field.</summary>
@@ -92,18 +104,6 @@ namespace EggLink.DanhengServer.Proto {
       get { return relicType_; }
       set {
         relicType_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "relic_unique_id" field.</summary>
-    public const int RelicUniqueIdFieldNumber = 5;
-    private uint relicUniqueId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint RelicUniqueId {
-      get { return relicUniqueId_; }
-      set {
-        relicUniqueId_ = value;
       }
     }
 
@@ -122,8 +122,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (RelicType != other.RelicType) return false;
       if (RelicUniqueId != other.RelicUniqueId) return false;
+      if (RelicType != other.RelicType) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -131,8 +131,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (RelicType != 0) hash ^= RelicType.GetHashCode();
       if (RelicUniqueId != 0) hash ^= RelicUniqueId.GetHashCode();
+      if (RelicType != 0) hash ^= RelicType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -151,13 +151,13 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (RelicUniqueId != 0) {
-        output.WriteRawTag(40);
-        output.WriteUInt32(RelicUniqueId);
-      }
       if (RelicType != 0) {
         output.WriteRawTag(104);
         output.WriteUInt32(RelicType);
+      }
+      if (RelicUniqueId != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(RelicUniqueId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -169,13 +169,13 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (RelicUniqueId != 0) {
-        output.WriteRawTag(40);
-        output.WriteUInt32(RelicUniqueId);
-      }
       if (RelicType != 0) {
         output.WriteRawTag(104);
         output.WriteUInt32(RelicType);
+      }
+      if (RelicUniqueId != 0) {
+        output.WriteRawTag(112);
+        output.WriteUInt32(RelicUniqueId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -187,11 +187,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (RelicType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RelicType);
-      }
       if (RelicUniqueId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RelicUniqueId);
+      }
+      if (RelicType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RelicType);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -205,11 +205,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.RelicType != 0) {
-        RelicType = other.RelicType;
-      }
       if (other.RelicUniqueId != 0) {
         RelicUniqueId = other.RelicUniqueId;
+      }
+      if (other.RelicType != 0) {
+        RelicType = other.RelicType;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -226,12 +226,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 40: {
-            RelicUniqueId = input.ReadUInt32();
-            break;
-          }
           case 104: {
             RelicType = input.ReadUInt32();
+            break;
+          }
+          case 112: {
+            RelicUniqueId = input.ReadUInt32();
             break;
           }
         }
@@ -249,12 +249,12 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 40: {
-            RelicUniqueId = input.ReadUInt32();
-            break;
-          }
           case 104: {
             RelicType = input.ReadUInt32();
+            break;
+          }
+          case 112: {
+            RelicUniqueId = input.ReadUInt32();
             break;
           }
         }

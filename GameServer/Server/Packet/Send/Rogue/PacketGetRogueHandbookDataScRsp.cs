@@ -30,7 +30,7 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Rogue
             {
                 if (item.Value.Lv != 1)
                     continue;
-                proto.HandbookInfo.BuffList.Add(new CMIEHNGEDEH()
+                proto.HandbookInfo.BuffList.Add(new IFJPLLMDHPL()
                 {
                     MazeBuffId = (uint)item.Value.ID,
                 });

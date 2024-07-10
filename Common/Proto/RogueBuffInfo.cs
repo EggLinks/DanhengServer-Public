@@ -25,7 +25,7 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChNSb2d1ZUJ1ZmZJbmZvLnByb3RvGg9Sb2d1ZUJ1ZmYucHJvdG8iMwoNUm9n",
-            "dWVCdWZmSW5mbxIiCg5tYXplX2J1ZmZfbGlzdBgIIAMoCzIKLlJvZ3VlQnVm",
+            "dWVCdWZmSW5mbxIiCg5tYXplX2J1ZmZfbGlzdBgBIAMoCzIKLlJvZ3VlQnVm",
             "ZkIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RogueBuffReflection.Descriptor, },
@@ -83,9 +83,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "maze_buff_list" field.</summary>
-    public const int MazeBuffListFieldNumber = 8;
+    public const int MazeBuffListFieldNumber = 1;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.RogueBuff> _repeated_mazeBuffList_codec
-        = pb::FieldCodec.ForMessage(66, global::EggLink.DanhengServer.Proto.RogueBuff.Parser);
+        = pb::FieldCodec.ForMessage(10, global::EggLink.DanhengServer.Proto.RogueBuff.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueBuff> mazeBuffList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.RogueBuff>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -186,7 +186,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 66: {
+          case 10: {
             mazeBuffList_.AddEntriesFrom(input, _repeated_mazeBuffList_codec);
             break;
           }
@@ -205,7 +205,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 66: {
+          case 10: {
             mazeBuffList_.AddEntriesFrom(ref input, _repeated_mazeBuffList_codec);
             break;
           }

@@ -24,13 +24,13 @@ namespace EggLink.DanhengServer.Proto {
     static RogueNpcDisappearCsReqReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChxSb2d1ZU5wY0Rpc2FwcGVhckNzUmVxLnByb3RvIisKFlJvZ3VlTnBjRGlz",
-            "YXBwZWFyQ3NSZXESEQoJZW50aXR5X2lkGAcgASgNQh6qAhtFZ2dMaW5rLkRh",
-            "bmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "ChxSb2d1ZU5wY0Rpc2FwcGVhckNzUmVxLnByb3RvIjkKFlJvZ3VlTnBjRGlz",
+            "YXBwZWFyQ3NSZXESHwoXZGlzYXBwZWFyX25wY19lbnRpdHlfaWQYDyABKA1C",
+            "HqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RogueNpcDisappearCsReq), global::EggLink.DanhengServer.Proto.RogueNpcDisappearCsReq.Parser, new[]{ "EntityId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RogueNpcDisappearCsReq), global::EggLink.DanhengServer.Proto.RogueNpcDisappearCsReq.Parser, new[]{ "DisappearNpcEntityId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,7 +72,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RogueNpcDisappearCsReq(RogueNpcDisappearCsReq other) : this() {
-      entityId_ = other.entityId_;
+      disappearNpcEntityId_ = other.disappearNpcEntityId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -82,15 +82,15 @@ namespace EggLink.DanhengServer.Proto {
       return new RogueNpcDisappearCsReq(this);
     }
 
-    /// <summary>Field number for the "entity_id" field.</summary>
-    public const int EntityIdFieldNumber = 7;
-    private uint entityId_;
+    /// <summary>Field number for the "disappear_npc_entity_id" field.</summary>
+    public const int DisappearNpcEntityIdFieldNumber = 15;
+    private uint disappearNpcEntityId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint EntityId {
-      get { return entityId_; }
+    public uint DisappearNpcEntityId {
+      get { return disappearNpcEntityId_; }
       set {
-        entityId_ = value;
+        disappearNpcEntityId_ = value;
       }
     }
 
@@ -109,7 +109,7 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (EntityId != other.EntityId) return false;
+      if (DisappearNpcEntityId != other.DisappearNpcEntityId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -117,7 +117,7 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (EntityId != 0) hash ^= EntityId.GetHashCode();
+      if (DisappearNpcEntityId != 0) hash ^= DisappearNpcEntityId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -136,9 +136,9 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (EntityId != 0) {
-        output.WriteRawTag(56);
-        output.WriteUInt32(EntityId);
+      if (DisappearNpcEntityId != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(DisappearNpcEntityId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -150,9 +150,9 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (EntityId != 0) {
-        output.WriteRawTag(56);
-        output.WriteUInt32(EntityId);
+      if (DisappearNpcEntityId != 0) {
+        output.WriteRawTag(120);
+        output.WriteUInt32(DisappearNpcEntityId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -164,8 +164,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (EntityId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EntityId);
+      if (DisappearNpcEntityId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DisappearNpcEntityId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -179,8 +179,8 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.EntityId != 0) {
-        EntityId = other.EntityId;
+      if (other.DisappearNpcEntityId != 0) {
+        DisappearNpcEntityId = other.DisappearNpcEntityId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -197,8 +197,8 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 56: {
-            EntityId = input.ReadUInt32();
+          case 120: {
+            DisappearNpcEntityId = input.ReadUInt32();
             break;
           }
         }
@@ -216,8 +216,8 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 56: {
-            EntityId = input.ReadUInt32();
+          case 120: {
+            DisappearNpcEntityId = input.ReadUInt32();
             break;
           }
         }

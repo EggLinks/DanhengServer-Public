@@ -24,15 +24,16 @@ namespace EggLink.DanhengServer.Proto {
     static RechargeSuccNotifyReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChhSZWNoYXJnZVN1Y2NOb3RpZnkucHJvdG8aDkl0ZW1MaXN0LnByb3RvIoEB",
-            "ChJSZWNoYXJnZVN1Y2NOb3RpZnkSHAoJaXRlbV9saXN0GA4gASgLMgkuSXRl",
-            "bUxpc3QSEgoKcHJvZHVjdF9pZBgBIAEoCRIfChdtb250aF9jYXJkX291dGRh",
-            "dGVfdGltZRgHIAEoBBIYChBjaGFubmVsX29yZGVyX25vGAQgASgJQh6qAhtF",
-            "Z2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
+            "ChhSZWNoYXJnZVN1Y2NOb3RpZnkucHJvdG8aDkl0ZW1MaXN0LnByb3RvIqYB",
+            "ChJSZWNoYXJnZVN1Y2NOb3RpZnkSIQoZQ2hhbm5lbE9yZGVyTm9GaWVsZE51",
+            "bWJlchgCIAEoCRIcChRQcm9kdWN0SWRGaWVsZE51bWJlchgEIAEoCRInCh9N",
+            "b250aENhcmRPdXRkYXRlVGltZUZpZWxkTnVtYmVyGAogASgEEiYKE0l0ZW1M",
+            "aXN0RmllbGROdW1iZXIYBiABKAsyCS5JdGVtTGlzdEIeqgIbRWdnTGluay5E",
+            "YW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ItemListReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RechargeSuccNotify), global::EggLink.DanhengServer.Proto.RechargeSuccNotify.Parser, new[]{ "ItemList", "ProductId", "MonthCardOutdateTime", "ChannelOrderNo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.RechargeSuccNotify), global::EggLink.DanhengServer.Proto.RechargeSuccNotify.Parser, new[]{ "ChannelOrderNoFieldNumber", "ProductIdFieldNumber", "MonthCardOutdateTimeFieldNumber", "ItemListFieldNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,10 +75,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RechargeSuccNotify(RechargeSuccNotify other) : this() {
-      itemList_ = other.itemList_ != null ? other.itemList_.Clone() : null;
-      productId_ = other.productId_;
-      monthCardOutdateTime_ = other.monthCardOutdateTime_;
-      channelOrderNo_ = other.channelOrderNo_;
+      channelOrderNoFieldNumber_ = other.channelOrderNoFieldNumber_;
+      productIdFieldNumber_ = other.productIdFieldNumber_;
+      monthCardOutdateTimeFieldNumber_ = other.monthCardOutdateTimeFieldNumber_;
+      itemListFieldNumber_ = other.itemListFieldNumber_ != null ? other.itemListFieldNumber_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -87,51 +88,51 @@ namespace EggLink.DanhengServer.Proto {
       return new RechargeSuccNotify(this);
     }
 
-    /// <summary>Field number for the "item_list" field.</summary>
-    public const int ItemListFieldNumber = 14;
-    private global::EggLink.DanhengServer.Proto.ItemList itemList_;
+    /// <summary>Field number for the "ChannelOrderNoFieldNumber" field.</summary>
+    public const int ChannelOrderNoFieldNumberFieldNumber = 2;
+    private string channelOrderNoFieldNumber_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::EggLink.DanhengServer.Proto.ItemList ItemList {
-      get { return itemList_; }
+    public string ChannelOrderNoFieldNumber {
+      get { return channelOrderNoFieldNumber_; }
       set {
-        itemList_ = value;
+        channelOrderNoFieldNumber_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "product_id" field.</summary>
-    public const int ProductIdFieldNumber = 1;
-    private string productId_ = "";
+    /// <summary>Field number for the "ProductIdFieldNumber" field.</summary>
+    public const int ProductIdFieldNumberFieldNumber = 4;
+    private string productIdFieldNumber_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string ProductId {
-      get { return productId_; }
+    public string ProductIdFieldNumber {
+      get { return productIdFieldNumber_; }
       set {
-        productId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        productIdFieldNumber_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "month_card_outdate_time" field.</summary>
-    public const int MonthCardOutdateTimeFieldNumber = 7;
-    private ulong monthCardOutdateTime_;
+    /// <summary>Field number for the "MonthCardOutdateTimeFieldNumber" field.</summary>
+    public const int MonthCardOutdateTimeFieldNumberFieldNumber = 10;
+    private ulong monthCardOutdateTimeFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ulong MonthCardOutdateTime {
-      get { return monthCardOutdateTime_; }
+    public ulong MonthCardOutdateTimeFieldNumber {
+      get { return monthCardOutdateTimeFieldNumber_; }
       set {
-        monthCardOutdateTime_ = value;
+        monthCardOutdateTimeFieldNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "channel_order_no" field.</summary>
-    public const int ChannelOrderNoFieldNumber = 4;
-    private string channelOrderNo_ = "";
+    /// <summary>Field number for the "ItemListFieldNumber" field.</summary>
+    public const int ItemListFieldNumberFieldNumber = 6;
+    private global::EggLink.DanhengServer.Proto.ItemList itemListFieldNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string ChannelOrderNo {
-      get { return channelOrderNo_; }
+    public global::EggLink.DanhengServer.Proto.ItemList ItemListFieldNumber {
+      get { return itemListFieldNumber_; }
       set {
-        channelOrderNo_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        itemListFieldNumber_ = value;
       }
     }
 
@@ -150,10 +151,10 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(ItemList, other.ItemList)) return false;
-      if (ProductId != other.ProductId) return false;
-      if (MonthCardOutdateTime != other.MonthCardOutdateTime) return false;
-      if (ChannelOrderNo != other.ChannelOrderNo) return false;
+      if (ChannelOrderNoFieldNumber != other.ChannelOrderNoFieldNumber) return false;
+      if (ProductIdFieldNumber != other.ProductIdFieldNumber) return false;
+      if (MonthCardOutdateTimeFieldNumber != other.MonthCardOutdateTimeFieldNumber) return false;
+      if (!object.Equals(ItemListFieldNumber, other.ItemListFieldNumber)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -161,10 +162,10 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (itemList_ != null) hash ^= ItemList.GetHashCode();
-      if (ProductId.Length != 0) hash ^= ProductId.GetHashCode();
-      if (MonthCardOutdateTime != 0UL) hash ^= MonthCardOutdateTime.GetHashCode();
-      if (ChannelOrderNo.Length != 0) hash ^= ChannelOrderNo.GetHashCode();
+      if (ChannelOrderNoFieldNumber.Length != 0) hash ^= ChannelOrderNoFieldNumber.GetHashCode();
+      if (ProductIdFieldNumber.Length != 0) hash ^= ProductIdFieldNumber.GetHashCode();
+      if (MonthCardOutdateTimeFieldNumber != 0UL) hash ^= MonthCardOutdateTimeFieldNumber.GetHashCode();
+      if (itemListFieldNumber_ != null) hash ^= ItemListFieldNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -183,21 +184,21 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ProductId.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(ProductId);
+      if (ChannelOrderNoFieldNumber.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ChannelOrderNoFieldNumber);
       }
-      if (ChannelOrderNo.Length != 0) {
+      if (ProductIdFieldNumber.Length != 0) {
         output.WriteRawTag(34);
-        output.WriteString(ChannelOrderNo);
+        output.WriteString(ProductIdFieldNumber);
       }
-      if (MonthCardOutdateTime != 0UL) {
-        output.WriteRawTag(56);
-        output.WriteUInt64(MonthCardOutdateTime);
+      if (itemListFieldNumber_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(ItemListFieldNumber);
       }
-      if (itemList_ != null) {
-        output.WriteRawTag(114);
-        output.WriteMessage(ItemList);
+      if (MonthCardOutdateTimeFieldNumber != 0UL) {
+        output.WriteRawTag(80);
+        output.WriteUInt64(MonthCardOutdateTimeFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -209,21 +210,21 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ProductId.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(ProductId);
+      if (ChannelOrderNoFieldNumber.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ChannelOrderNoFieldNumber);
       }
-      if (ChannelOrderNo.Length != 0) {
+      if (ProductIdFieldNumber.Length != 0) {
         output.WriteRawTag(34);
-        output.WriteString(ChannelOrderNo);
+        output.WriteString(ProductIdFieldNumber);
       }
-      if (MonthCardOutdateTime != 0UL) {
-        output.WriteRawTag(56);
-        output.WriteUInt64(MonthCardOutdateTime);
+      if (itemListFieldNumber_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(ItemListFieldNumber);
       }
-      if (itemList_ != null) {
-        output.WriteRawTag(114);
-        output.WriteMessage(ItemList);
+      if (MonthCardOutdateTimeFieldNumber != 0UL) {
+        output.WriteRawTag(80);
+        output.WriteUInt64(MonthCardOutdateTimeFieldNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -235,17 +236,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (itemList_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ItemList);
+      if (ChannelOrderNoFieldNumber.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ChannelOrderNoFieldNumber);
       }
-      if (ProductId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ProductId);
+      if (ProductIdFieldNumber.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ProductIdFieldNumber);
       }
-      if (MonthCardOutdateTime != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MonthCardOutdateTime);
+      if (MonthCardOutdateTimeFieldNumber != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MonthCardOutdateTimeFieldNumber);
       }
-      if (ChannelOrderNo.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ChannelOrderNo);
+      if (itemListFieldNumber_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ItemListFieldNumber);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -259,20 +260,20 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.itemList_ != null) {
-        if (itemList_ == null) {
-          ItemList = new global::EggLink.DanhengServer.Proto.ItemList();
+      if (other.ChannelOrderNoFieldNumber.Length != 0) {
+        ChannelOrderNoFieldNumber = other.ChannelOrderNoFieldNumber;
+      }
+      if (other.ProductIdFieldNumber.Length != 0) {
+        ProductIdFieldNumber = other.ProductIdFieldNumber;
+      }
+      if (other.MonthCardOutdateTimeFieldNumber != 0UL) {
+        MonthCardOutdateTimeFieldNumber = other.MonthCardOutdateTimeFieldNumber;
+      }
+      if (other.itemListFieldNumber_ != null) {
+        if (itemListFieldNumber_ == null) {
+          ItemListFieldNumber = new global::EggLink.DanhengServer.Proto.ItemList();
         }
-        ItemList.MergeFrom(other.ItemList);
-      }
-      if (other.ProductId.Length != 0) {
-        ProductId = other.ProductId;
-      }
-      if (other.MonthCardOutdateTime != 0UL) {
-        MonthCardOutdateTime = other.MonthCardOutdateTime;
-      }
-      if (other.ChannelOrderNo.Length != 0) {
-        ChannelOrderNo = other.ChannelOrderNo;
+        ItemListFieldNumber.MergeFrom(other.ItemListFieldNumber);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -289,23 +290,23 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            ProductId = input.ReadString();
+          case 18: {
+            ChannelOrderNoFieldNumber = input.ReadString();
             break;
           }
           case 34: {
-            ChannelOrderNo = input.ReadString();
+            ProductIdFieldNumber = input.ReadString();
             break;
           }
-          case 56: {
-            MonthCardOutdateTime = input.ReadUInt64();
-            break;
-          }
-          case 114: {
-            if (itemList_ == null) {
-              ItemList = new global::EggLink.DanhengServer.Proto.ItemList();
+          case 50: {
+            if (itemListFieldNumber_ == null) {
+              ItemListFieldNumber = new global::EggLink.DanhengServer.Proto.ItemList();
             }
-            input.ReadMessage(ItemList);
+            input.ReadMessage(ItemListFieldNumber);
+            break;
+          }
+          case 80: {
+            MonthCardOutdateTimeFieldNumber = input.ReadUInt64();
             break;
           }
         }
@@ -323,23 +324,23 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            ProductId = input.ReadString();
+          case 18: {
+            ChannelOrderNoFieldNumber = input.ReadString();
             break;
           }
           case 34: {
-            ChannelOrderNo = input.ReadString();
+            ProductIdFieldNumber = input.ReadString();
             break;
           }
-          case 56: {
-            MonthCardOutdateTime = input.ReadUInt64();
-            break;
-          }
-          case 114: {
-            if (itemList_ == null) {
-              ItemList = new global::EggLink.DanhengServer.Proto.ItemList();
+          case 50: {
+            if (itemListFieldNumber_ == null) {
+              ItemListFieldNumber = new global::EggLink.DanhengServer.Proto.ItemList();
             }
-            input.ReadMessage(ItemList);
+            input.ReadMessage(ItemListFieldNumber);
+            break;
+          }
+          case 80: {
+            MonthCardOutdateTimeFieldNumber = input.ReadUInt64();
             break;
           }
         }

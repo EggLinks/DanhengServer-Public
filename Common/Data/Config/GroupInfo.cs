@@ -13,6 +13,8 @@ namespace EggLink.DanhengServer.Data.Config
         public int Id;
         [JsonConverter(typeof(StringEnumConverter))]
         public GroupLoadSideEnum LoadSide { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public GroupCategoryEnum Category { get; set; }
         public bool LoadOnInitial { get; set; }
         public string GroupName { get; set; } = "";
         public LoadCondition LoadCondition { get; set; } = new();
@@ -110,6 +112,6 @@ namespace EggLink.DanhengServer.Data.Config
         public ConditionTypeEnum Type { get; set; } = ConditionTypeEnum.MainMission;
         public int ID { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public MissionPhaseEnum Phase { get; set; } = MissionPhaseEnum.Doing;
+        public MissionPhaseEnum Phase { get; set; } = MissionPhaseEnum.Accept;
     }
 }

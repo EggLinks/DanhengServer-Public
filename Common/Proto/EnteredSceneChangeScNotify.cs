@@ -26,7 +26,7 @@ namespace EggLink.DanhengServer.Proto {
           string.Concat(
             "CiBFbnRlcmVkU2NlbmVDaGFuZ2VTY05vdGlmeS5wcm90bxoSRW50ZXJlZFNj",
             "ZW5lLnByb3RvIkcKGkVudGVyZWRTY2VuZUNoYW5nZVNjTm90aWZ5EikKEmVu",
-            "dGVyZWRfc2NlbmVfbGlzdBgLIAMoCzINLkVudGVyZWRTY2VuZUIeqgIbRWdn",
+            "dGVyZWRfc2NlbmVfbGlzdBgMIAMoCzINLkVudGVyZWRTY2VuZUIeqgIbRWdn",
             "TGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.EnteredSceneReflection.Descriptor, },
@@ -84,9 +84,9 @@ namespace EggLink.DanhengServer.Proto {
     }
 
     /// <summary>Field number for the "entered_scene_list" field.</summary>
-    public const int EnteredSceneListFieldNumber = 11;
+    public const int EnteredSceneListFieldNumber = 12;
     private static readonly pb::FieldCodec<global::EggLink.DanhengServer.Proto.EnteredScene> _repeated_enteredSceneList_codec
-        = pb::FieldCodec.ForMessage(90, global::EggLink.DanhengServer.Proto.EnteredScene.Parser);
+        = pb::FieldCodec.ForMessage(98, global::EggLink.DanhengServer.Proto.EnteredScene.Parser);
     private readonly pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EnteredScene> enteredSceneList_ = new pbc::RepeatedField<global::EggLink.DanhengServer.Proto.EnteredScene>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -187,7 +187,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 90: {
+          case 98: {
             enteredSceneList_.AddEntriesFrom(input, _repeated_enteredSceneList_codec);
             break;
           }
@@ -206,7 +206,7 @@ namespace EggLink.DanhengServer.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 90: {
+          case 98: {
             enteredSceneList_.AddEntriesFrom(ref input, _repeated_enteredSceneList_codec);
             break;
           }
