@@ -39,8 +39,9 @@
 
 > (可選) 在原始碼的WebServer資料夾中下載 `certificate.p12` 使其以HTTPS模式啟動 讓你的傳輸更加安全: )
 
-3. 運行GameServer.exe
-4. 運行代理 啟動遊戲 連結，享受！
+3. 下載Resources並解壓到同目錄下，在項目下載Config並解壓到同目錄下
+4. 運行GameServer.exe
+5. 運行代理 啟動遊戲 連結，享受！
 
 ### 構建
 
@@ -84,6 +85,9 @@ cd DanhengServer
 
 - 支持Android系统
 - 100040119（無法自動完成）（使用 /mission finish 100040119 進行修復）
+
+## 🔗API說明
+[EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-TW.md) | [JP](docs/MuipAPI_ja-JP.md)
 
 ## ❕️故障排除
 
