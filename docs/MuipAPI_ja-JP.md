@@ -1,4 +1,5 @@
-[EN](../MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-CN.md) | [JP](MuipAPI_ja-JP.md)
+[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-TW.md) | [JP](MuipAPI_ja-JP.md)
+
 ##💡API支援です
 
 -バージョン2.3から、外部API呼び出しインタフェースをサポートします。
