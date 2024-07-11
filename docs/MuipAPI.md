@@ -4,11 +4,12 @@
 - For example, your Dispatch is http://127.0.0.1:8080, and the request parameters and returns are in json format
 - (1) Authorization interface: http://127.0.0.1:8080/muip/auth_admin (support POST/GET)
    - -Required parameter 1: admin_key (MuipServer/AdminKey configuration in config.php)
-   - -Required parameter 2: key_type (type, e.g. PEM)
+   - -Required parameter 2: key_type (type, e.g. PEM or XML)
   - -Return example:
   ```json
   {
     "code": 0,
+  //codeResponse: `code`: `0 -> Success` `1 -> Token incorrect or not enable`
     "message": "Authorized admin key successfully!",
     "data": {
         "rsaPublicKey": "***",
@@ -25,6 +26,7 @@
     ```json
     {
       "code": 0,
+    //codeResponse: `code`: `0 -> Success` `1 -> Session expired` `2 -> session not found` `3 -> encryption error`
       "message": "Success",
       "data": {
           "sessionId": "***",
@@ -38,6 +40,7 @@
    ```json
     {
       "code": 0,
+   //codeResponse: `code`: `0 -> Success` `1 -> Session expired` `2 -> session not found` 
       "message": "Success",
       "data": {
           "onlinePlayers": [
@@ -62,6 +65,7 @@
    ```json
     {
       "code": 0,
+   //Response: `code`: `0 -> Success` `1 -> Session expired` `2 -> player not exist` `3 -> session not found` 
       "message": "Success",
       "data": {
           "uid": 10001,
