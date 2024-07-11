@@ -39,7 +39,7 @@
 
 > (オプション) ソースコードのWebServerフォルダに` certificate.p 12 `をダウンロードすることで、HTTPSモードで起動して転送をより安全にすることができます: )
 
-3. Resourcesをダウンロードして同ディレクトリに解凍し、プロジェクトでConfigをダウンロードして同ディレクトリに解凍する
+3. Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData)をダウンロードして同ディレクトリに解凍し`Resources`、プロジェクトでConfigをダウンロードして同ディレクトリに解凍する`Config`
 4. GameServer.exeの実行
 5. エージェント起動ゲームの実行
 
