@@ -39,8 +39,9 @@
 
 > (オプション) ソースコードのWebServerフォルダに` certificate.p 12 `をダウンロードすることで、HTTPSモードで起動して転送をより安全にすることができます: )
 
-3. GameServer.exeの実行
-4. エージェント起動ゲームの実行
+3. Resourcesをダウンロードして同ディレクトリに解凍し、プロジェクトでConfigをダウンロードして同ディレクトリに解凍する
+4. GameServer.exeの実行
+5. エージェント起動ゲームの実行
 
 ### 構築＃コウチク＃
 
@@ -87,7 +88,7 @@ cd DanhengServer
 - アンドロイドシステムのサポート
 - 100040119（自動完了できません）（/mission finish 100040119 を使用した修正）
 
-## 💡API Help
+## 💡インタフェースの説明
 [EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-CN.md) | [JP](docs/MuipAPI_ja-JP.md)
 
 ## ❕️トラブルシューティング
