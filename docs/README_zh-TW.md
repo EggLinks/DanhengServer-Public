@@ -11,7 +11,7 @@
   <a href="https://discord.gg/xRtZsmHBVj"><img src="https://img.shields.io/badge/Discord%20Server-000000.svg?style=for-the-badge&logo=Discord&logoColor=white" /></a>
 </p>
 
-[EN](../README.md) | [简中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
+[EN](../README.md) | [简中](README_zh-CN.md) | [繁中](README_zh-TW.md) | [JP](README_ja-JP.md)
 
 ## 💡功能
 
@@ -87,7 +87,7 @@ cd DanhengServer
 - 100040119（無法自動完成）（使用 /mission finish 100040119 進行修復）
 
 ## 🔗API說明
-[EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-TW.md) | [JP](docs/MuipAPI_ja-JP.md)
+[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-TW.md) | [JP](MuipAPI_ja-JP.md)
 
 ## ❕️故障排除
 
