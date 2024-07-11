@@ -39,7 +39,9 @@
 
 > (オプション) ソースコードのWebServerフォルダに` certificate.p 12 `をダウンロードすることで、HTTPSモードで起動して転送をより安全にすることができます: )
 
-3. Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData)をダウンロードして同ディレクトリに解凍し`Resources`、プロジェクトでConfigをダウンロードして同ディレクトリに解凍する`Config`
+3. Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData)をダウンロードして同ディレクトリに解凍し`Resources`、译文
+
+そしてに[https://github.com/egglinks/danhengserver-resources] (https://github.com/egglinks/danhengserver-resources)ダウンロードして「Resources/Config」にConfigを上書きします。プロジェクトでConfigをダウンロードして同ディレクトリに解凍する`Config`
 4. GameServer.exeの実行
 5. エージェント起動ゲームの実行
 
