@@ -37,7 +37,7 @@ Some functions for the game might not support at the first time when new "Anime 
 1. Download the executable file from [Action](https://github.com/EggLink/DanhengServer-Public/actions)
 2. Open the downloaded `DanhengServer.zip` and extract it to any folder __*preferably an English path__
    (Optional) Download the `certificate.p12` from the WebServer folder of the source code to enable HTTPS mode, ensuring a more secure traffic
-3. Download Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData) and unzip to the same directory `Resources`, then download Configuration from the project and unzip to the same directory`Config`
+3. Download Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData) and unzip to the same directory `Resources`, and Turn to [https://github.com/EggLinks/DanhengServer-Resources](https://github.com/EggLinks/DanhengServer-Resources) download only `Resources/Config` folder, ExcelOutput and other should use Dimbreath's，then download Configuration from the project and unzip to the same directory`Config`
 4. Run GameServer.exe
 5. Run proxy, start the game, and enjoy!
 
