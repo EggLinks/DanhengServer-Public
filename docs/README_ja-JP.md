@@ -89,7 +89,7 @@ cd DanhengServer
 - 100040119（自動完了できません）（/mission finish 100040119 を使用した修正）
 
 ## 💡インタフェースの説明
-[EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-CN.md) | [JP](docs/MuipAPI_ja-JP.md)
+[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-CN.md) | [JP](MuipAPI_ja-JP.md)
 
 ## ❕️トラブルシューティング
 
