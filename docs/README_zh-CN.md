@@ -87,7 +87,7 @@ cd DanhengServer
 - 100040119（无法自动完成）（使用 /mission finish 100040119 进行修复）
 - 
 ## 🔗接口说明
-[EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-TW.md) | [JP](docs/MuipAPI_ja-JP.md)
+[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-TW.md) | [JP](MuipAPI_ja-JP.md)
 
 ## ❕️故障排除
 
