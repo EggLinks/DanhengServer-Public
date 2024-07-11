@@ -1,4 +1,4 @@
-[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-CN.md) | [JP](MuipAPI_ja-JP.md)
+[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-TW.md) | [JP](MuipAPI_ja-JP.md)
 ## 💡API Help
 - Since version 2.3, external APIs are supported
 - For example, your Dispatch is http://127.0.0.1:8080, and the request parameters and returns are in json format
