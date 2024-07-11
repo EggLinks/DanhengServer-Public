@@ -1,4 +1,4 @@
-[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-CN.md) | [JP](MuipAPI_ja-JP.md)
+[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-TW.md) | [JP](MuipAPI_ja-JP.md)
 ## 💡API幫助
 
 - 自2.3版本開始，支持外部API調用接口
