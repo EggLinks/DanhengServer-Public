@@ -39,7 +39,7 @@
 
 > (可选) 在源代码的WebServer文件夹中下载 `certificate.p12` 使得以HTTPS模式启动 让你的传输更安全: )
 
-3. 下载Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData)并解压到同目录下`Resources`，在项目下载Config并解压到同目录下`Config`
+3. 下载Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData)并解压到同目录下`Resources`，然后前往[https://github.com/EggLinks/DanhengServer-Resources](https://github.com/EggLinks/DanhengServer-Resources) 下载后覆盖Config到 `Resources/Config` ,其他的还是用Dimbreath项目的，在项目下载Config并解压到同目录下`Config`
 4. 运行GameServer.exe
 5. 运行代理 启动游戏 链接，享受！
 
