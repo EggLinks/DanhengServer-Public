@@ -11,7 +11,7 @@
   <a href="https://discord.gg/xRtZsmHBVj"><img src="https://img.shields.io/badge/Discord%20Server-000000.svg?style=for-the-badge&logo=Discord&logoColor=white" /></a>
 </p>
 
-[EN](../README.md) | [简中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
+[EN](../README.md) | [简中](README_zh-CN.md) | [繁中](README_zh-TW.md) | [JP](README_ja-JP.md)
 
 ## 💡功能
 
@@ -39,8 +39,9 @@
 
 > (可选) 在源代码的WebServer文件夹中下载 `certificate.p12` 使得以HTTPS模式启动 让你的传输更安全: )
 
-3. 运行GameServer.exe
-4. 运行代理 启动游戏 链接，享受！
+3. 下载Resources并解压到同目录下，在项目下载Config并解压到同目录下
+4. 运行GameServer.exe
+5. 运行代理 启动游戏 链接，享受！
 
 ### 构建
 
@@ -85,8 +86,8 @@ cd DanhengServer
 - 支持安卓系统
 - 100040119（无法自动完成）（使用 /mission finish 100040119 进行修复）
 - 
-## 💡API Help
-[EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-CN.md) | [JP](docs/MuipAPI_ja-JP.md)
+## 🔗接口说明
+[EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-TW.md) | [JP](docs/MuipAPI_ja-JP.md)
 
 ## ❕️故障排除
 
