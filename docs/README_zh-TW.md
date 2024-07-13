@@ -11,7 +11,7 @@
   <a href="https://discord.gg/xRtZsmHBVj"><img src="https://img.shields.io/badge/Discord%20Server-000000.svg?style=for-the-badge&logo=Discord&logoColor=white" /></a>
 </p>
 
-[EN](../README.md) | [簡中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
+[EN](../README.md) | [简中](README_zh-CN.md) | [繁中](README_zh-TW.md) | [JP](README_ja-JP.md)
 
 ## 💡功能
 
@@ -34,13 +34,14 @@
 
 ### 快速啟動
 
-1. 在 [Action](https://github.com/StopWuyu/DanhengServer/actions) 下載可執行文件
+1. 在 [Action](https://github.com/EggLink/DanhengServer-Public/actions) 下載可執行文件
 2. 打開下載完成的 `DanhengServer.zip` 解解壓至任意資料夹 __*最好是英文路徑*__
 
 > (可選) 在原始碼的WebServer資料夾中下載 `certificate.p12` 使其以HTTPS模式啟動 讓你的傳輸更加安全: )
 
-3. 運行GameServer.exe
-4. 運行代理 啟動遊戲 連結，享受！
+3. 下載Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData)並解壓到同目錄下`Resources`，然後前往[https://github.com/EggLinks/DanhengServer-Resources](https://github.com/EggLinks/DanhengServer-Resources) 下載後覆蓋Config到 `Resources/Config` ,其他的還是用Dimbreath項目的，在項目下載Config並解壓到同目錄下`Config`
+4. 運行GameServer.exe
+5. 運行代理 啟動遊戲 連結，享受！
 
 ### 構建
 
@@ -54,7 +55,7 @@ DanhengServer 使用 .NET Framework 構建
 ##### Windows
 
 ```shell
-git clone --recurse-submodules https://github.com/EggLinks/DanhengServer.git
+git clone --recurse-submodules https://github.com/EggLink/DanhengServer-Public.git
 cd DanhengServer
 .\dotnet build # 編譯
 ```
@@ -72,7 +73,7 @@ sudo apt-get update && \
 
 - 編譯並運行環境
 ```shell
-git clone --recurse-submodules https://github.com/EggLinks/DanhengServer.git
+git clone --recurse-submodules https://github.com/EggLink/DanhengServer-Public.git
 cd DanhengServer
 .\dotnet build # 編譯
 ./Gameserver
@@ -84,6 +85,9 @@ cd DanhengServer
 
 - 支持Android系统
 - 100040119（無法自動完成）（使用 /mission finish 100040119 進行修復）
+
+## 🔗API說明
+[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-TW.md) | [JP](MuipAPI_ja-JP.md)
 
 ## ❕️故障排除
 

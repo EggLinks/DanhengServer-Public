@@ -11,7 +11,7 @@
   <a href="https://discord.gg/xRtZsmHBVj"><img src="https://img.shields.io/badge/Discord%20Server-000000.svg?style=for-the-badge&logo=Discord&logoColor=white" /></a>
 </p>
 
-[EN](README.md) | [簡中](docs/README_zh-CN.md) | [繁中](docs/README_zh-CN.md) | [JP](docs/README_ja-JP.md)
+[EN](README.md) | [简中](docs/README_zh-CN.md) | [繁中](docs/README_zh-TW.md) | [JP](docs/README_ja-JP.md)
 
 ## 💡 Function
 
@@ -34,11 +34,12 @@ Some functions for the game might not support at the first time when new "Anime 
 
 ### Quick Start
 
-1. Download the executable file from [Action](https://github.com/EggLinks/DanhengServer/actions)
+1. Download the executable file from [Action](https://github.com/EggLink/DanhengServer-Public/actions)
 2. Open the downloaded `DanhengServer.zip` and extract it to any folder __*preferably an English path__
    (Optional) Download the `certificate.p12` from the WebServer folder of the source code to enable HTTPS mode, ensuring a more secure traffic
-3. Run GameServer.exe
-4. Run proxy, start the game, and enjoy!
+3. Download Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData) and unzip to the same directory `Resources`, and Turn to [https://github.com/EggLinks/DanhengServer-Resources](https://github.com/EggLinks/DanhengServer-Resources) download only `Resources/Config` folder, ExcelOutput and other should use Dimbreath's，then download Configuration from the project and unzip to the same directory`Config`
+4. Run GameServer.exe
+5. Run proxy, start the game, and enjoy!
 
 ### Build
 
@@ -52,7 +53,7 @@ DanhengServer is built using .NET Framework
 ##### Windows
 
 ```shell
-git clone --recurse-submodules https://github.com/EggLinks/DanhengServer.git
+git clone --recurse-submodules https://github.com/EggLink/DanhengServer-Public.git
 cd DanhengServer
 dotnet build # compile
 ```
@@ -69,7 +70,7 @@ sudo apt-get update && \
 
 - Compile and run environment
 ```shell
-git clone --recurse-submodules https://github.com/EggLinks/DanhengServer.git
+git clone --recurse-submodules https://github.com/EggLink/DanhengServer-Public.git
 cd DanhengServer
 .\dotnet build # compile
 ./Gameserver
@@ -78,7 +79,10 @@ cd DanhengServer
 ## ❓ Help
 
 - Support Android system
-- Mission 100040119 (cannot complet automatically) (use /mission finish 100040119 to fix it)
+- Mission 100040119 (cannot complet automatically) (use /mission finish 100040119 to fix it)、
+- 
+## 🔗API Help
+[EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-TW.md) | [JP](docs/MuipAPI_ja-JP.md)
 
 ## ❕️ Troubleshooting
 
