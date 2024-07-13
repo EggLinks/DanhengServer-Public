@@ -24,13 +24,15 @@ namespace EggLink.DanhengServer.Game.Avatar
             }
         }
 
-        public AvatarConfigExcel? AddAvatar(int avatarId, bool sync = true, bool notify = true)
+        public AvatarConfigExcel? AddAvatar(int avatarId, bool sync = true, bool notify = true, bool isGacha = false)
         {
             GameData.AvatarConfigData.TryGetValue(avatarId, out AvatarConfigExcel? avatarExcel);
             if (avatarExcel == null)
             {
                 return null;
             }
+
+            if (AvatarData.Avatars.Find(x => x.AvatarId == avatarId) != null) return null;
 
             var avatar = new AvatarInfo(avatarExcel)
             {
@@ -55,7 +57,7 @@ namespace EggLink.DanhengServer.Game.Avatar
 
             if (notify)
             {
-                Player.SendPacket(new PacketAddAvatarScNotify(avatar.GetBaseAvatarId()));
+                Player.SendPacket(new PacketAddAvatarScNotify(avatar.GetBaseAvatarId(), isGacha));
             }
 
             return avatarExcel;

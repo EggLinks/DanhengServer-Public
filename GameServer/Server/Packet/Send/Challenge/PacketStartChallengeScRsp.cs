@@ -19,6 +19,7 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Challenge
         {
             StartChallengeScRsp proto = new()
             {
+                Scene = player.SceneInstance!.ToProto()
             };
 
             if (player.ChallengeManager!.ChallengeInstance != null)

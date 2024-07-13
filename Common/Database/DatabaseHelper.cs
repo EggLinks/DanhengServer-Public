@@ -1,6 +1,7 @@
 ﻿using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.Database.Mission;
 using EggLink.DanhengServer.Database.Scene;
+using EggLink.DanhengServer.Internationalization;
 using EggLink.DanhengServer.Util;
 using SqlSugar;
 
@@ -23,7 +24,7 @@ namespace EggLink.DanhengServer.Database
 
         public void Initialize()
         {
-            logger.Info("Initializing database...");
+            logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.Database")));
             var config = ConfigManager.Config;
             DbType type;
             string connectionString;
@@ -293,7 +294,7 @@ namespace EggLink.DanhengServer.Database
                     }
                 }
 
-                logger.Info($"Save database. Using {(DateTime.Now - prev).TotalSeconds.ToString()[..4]} seconds.");
+                logger.Info(I18nManager.Translate("Server.ServerInfo.SaveDatabase", (DateTime.Now - prev).TotalSeconds.ToString()[..4]));
 
                 ToSaveUidList.Clear();
             }

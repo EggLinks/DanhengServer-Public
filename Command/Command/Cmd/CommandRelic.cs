@@ -120,7 +120,7 @@ namespace EggLink.DanhengServer.Command.Cmd
             var itemData = new ItemData()
             {
                 ItemId = int.Parse(arg.BasicArgs[0]),
-                Level = Math.Max(Math.Min(level, 15), 1),
+                Level = Math.Max(Math.Min(level, 9999), 1),
                 UniqueId = ++player.InventoryManager!.Data.NextUniqueId,
                 MainAffix = mainAffixId,
                 Count = 1,

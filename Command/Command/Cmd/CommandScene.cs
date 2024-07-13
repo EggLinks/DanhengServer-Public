@@ -130,5 +130,30 @@ namespace EggLink.DanhengServer.Command.Cmd
             player.EnterScene(player.Data.EntryId, 0, true);
             arg.SendMsg(I18nManager.Translate("Game.Command.Scene.SceneReloaded"));
         }
+
+        [CommandMethod("0 reset")]
+        public void ResetFloor(CommandArg arg)
+        {
+            if (arg.Target == null)
+            {
+                arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+                return;
+            }
+
+            var floorId = arg.GetInt(0);
+            if (floorId == 0)
+            {
+                arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+                return;
+            }
+
+            var player = arg.Target!.Player!;
+            if (player.SceneData?.ScenePropData.TryGetValue(floorId, out var _) == true)
+            {
+                player.SceneData.ScenePropData[floorId] = [];
+            }
+
+            arg.SendMsg(I18nManager.Translate("Game.Command.Scene.SceneReset", floorId.ToString()));
+        }
     }
 }

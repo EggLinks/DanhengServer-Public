@@ -1,4 +1,5 @@
-﻿using EggLink.DanhengServer.Plugin.Constructor;
+﻿using EggLink.DanhengServer.Internationalization;
+using EggLink.DanhengServer.Plugin.Constructor;
 using EggLink.DanhengServer.Util;
 using McMaster.NETCore.Plugins;
 using Newtonsoft.Json;
@@ -137,7 +138,7 @@ namespace EggLink.DanhengServer.Plugin
                 UnloadPlugin(plugin);
             }
 
-            logger.Info("Unloaded all plugins");
+            logger.Info(I18nManager.Translate("Server.ServerInfo.UnloadedItems", I18nManager.Translate("Word.Plugin")));
         }
 
         #endregion

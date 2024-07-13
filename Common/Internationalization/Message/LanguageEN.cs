@@ -31,6 +31,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
     public class ServerTextEN
     {
         public WebTextEN Web { get; } = new();
+        public ServerInfoTextEN ServerInfo { get; } = new();
     }
 
     /// <summary>
@@ -49,6 +50,38 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string Buff { get; } = "Blessing";
         public string Miracle { get; } = "Curio";
         public string Unlock { get; } = "Luxury";
+
+        // server info
+        public string Config { get; } = "Config File";
+        public string Language { get; } = "Language";
+        public string Log { get; } = "Log";
+        public string GameData { get; } = "Game Data";
+        public string Database { get; } = "Database";
+        public string Command { get; } = "Command";
+        public string WebServer { get; } = "Web Server";
+        public string Plugin { get; } = "Plugin";
+        public string Handler { get; } = "Packet Handler";
+        public string Dispatch { get; } = "Global Dispatch";
+        public string Game { get; } = "Game";
+        public string Handbook { get; } = "Handbook";
+        public string NotFound { get; } = "Not Found";
+        public string Error { get; } = "Error";
+        public string FloorInfo { get; } = "Floor Info";
+        public string FloorGroupInfo { get; } = "Floor Group Info";
+        public string FloorMissingResult { get; } = "Teleportation and World Generation";
+        public string FloorGroupMissingResult { get; } = "Teleportation, Monster Battles, and World Generation";
+        public string Mission { get; } = "Mission";
+        public string MissionInfo { get; } = "Mission Info";
+        public string MazeSkill { get; } = "Maze Skill";
+        public string MazeSkillInfo { get; } = "Maze Skill Info";
+        public string Dialogue { get; } = "Simulated Universe Event";
+        public string DialogueInfo { get; } = "Simulated Universe Event Info";
+        public string Performance { get; } = "Performance";
+        public string PerformanceInfo { get; } = "Performance Info";
+        public string RogueChestMap { get; } = "Simulated Universe Map";
+        public string RogueChestMapInfo { get; } = "Simulated Universe Map Info";
+        public string ChessRogueRoom { get; } = "Simulated Universe DLC";
+        public string ChessRogueRoomInfo { get; } = "Simulated Universe DLC Info";
     }
 
     #endregion
@@ -78,6 +111,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public SceneTextEN Scene { get; } = new();
         public UnlockAllTextEN UnlockAll { get; } = new();
         public MailTextEN Mail { get; } = new();
+        public RaidTextEN Raid { get; } = new();
     }
 
     #endregion
@@ -90,6 +124,32 @@ namespace EggLink.DanhengServer.Internationalization.Message
     public class WebTextEN
     {
     }
+
+    /// <summary>
+    /// path: Server.ServerInfo
+    /// </summary>
+    public class ServerInfoTextEN
+    {
+        public string Shutdown { get; } = "Shutting down...";
+        public string CancelKeyPressed { get; } = "Cancel key pressed (Ctrl + C), server shutting down...";
+        public string StartingServer { get; } = "Starting DanhengServer...";
+        public string LoadingItem { get; } = "Loading {0}...";
+        public string RegisterItem { get; } = "Registered {0} {1}(s).";
+        public string FailedToLoadItem { get; } = "Failed to load {0}.";
+        public string FailedToInitializeItem { get; } = "Failed to initialize {0}.";
+        public string FailedToReadItem { get; } = "Failed to read {0}, file {1}";
+        public string GeneratedItem { get; } = "Generated {0}.";
+        public string LoadedItem { get; } = "Loaded {0}.";
+        public string LoadedItems { get; } = "Loaded {0} {1}(s).";
+        public string ServerRunning { get; } = "{0} server listening on {1}";
+        public string ServerStarted { get; } = "Startup complete! Took {0}s, better than 99% of users. Type 'help' for command help";  // This is a meme, consider localizing in English
+        public string MissionEnabled { get; } = "Mission system enabled. This feature is still in development and may not work as expected. Please report any bugs to the developers.";
+
+        public string ConfigMissing { get; } = "{0} is missing. Please check your resource folder: {1}, {2} may not be available.";
+        public string UnloadedItems { get; } = "Unloaded all {0}.";
+        public string SaveDatabase { get; } = "Database saved in {0}s";
+    }
+
 
     #endregion
 
@@ -279,6 +339,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string AllPropsUnlocked { get; } = "All props have been unlocked!";
         public string SceneChanged { get; } = "Entered scene {0}";
         public string SceneReloaded { get; } = "Scene has been reloaded!";
+        public string SceneReset { get; } = "The prop state in floor {0} has been reset!";
     }
 
     /// <summary>
@@ -287,9 +348,19 @@ namespace EggLink.DanhengServer.Internationalization.Message
     public class MailTextEN
     {
         public string Desc { get; } = "Manage player's mails";
-        public string Usage { get; } = "/mail <send [Sender Name] [Title] [Content] [Template ID] [Expire Days] - 發送郵件>/<send [Sender] [Title] [Content] [Template ID] [Expire Days] [Attachments] - 發送帶附件的郵件>";
+        public string Usage { get; } = "/mail <send [Sender Name] [Title] [Content] [Template ID] [Expire Days] - Send Mail>/<send [Sender] [Title] [Content] [Template ID] [Expire Days] [Attachments] - Send Mail with attachment>";
         public string MailSent { get; } = "Mail has been sent!";
         public string MailSentWithAttachment { get; } = "Mail with attachments has been sent!";
+    }
+
+    /// <summary>
+    /// path: Game.Command.Raid
+    /// </summary>
+    public class RaidTextEN
+    {
+        public string Desc { get; } = "Manage player's temporary scene";
+        public string Usage { get; } = "/raid <leave - leave temporary scene>";
+        public string Leaved { get; } = "Leaved temporary scene!";
     }
 
     #endregion

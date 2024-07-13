@@ -11,6 +11,7 @@ using EggLink.DanhengServer.Util;
 using EggLink.DanhengServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Game.Battle;
 using EggLink.DanhengServer.Game.Scene.Entity;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.Rogue;
 
 namespace EggLink.DanhengServer.Game.Rogue
 {
@@ -210,7 +211,7 @@ namespace EggLink.DanhengServer.Game.Rogue
         public void CostMoney(int amount, RogueActionDisplayType displayType = RogueActionDisplayType.RogueCommonActionResultDisplayTypeNone)
         {
             CurMoney -= amount;
-            Player.SendPacket(new PacketSyncRogueVirtualItemScNotify(this));
+            Player.SendPacket(new PacketSyncRogueCommonVirtualItemInfoScNotify(this));
 
             Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueVersionId, new RogueCommonActionResult()
             {
@@ -229,7 +230,7 @@ namespace EggLink.DanhengServer.Game.Rogue
         public void GainMoney(int amount, int displayType = 2, RogueActionDisplayType display = RogueActionDisplayType.RogueCommonActionResultDisplayTypeNone)
         {
             CurMoney += amount;
-            Player.SendPacket(new PacketSyncRogueVirtualItemScNotify(this));
+            Player.SendPacket(new PacketSyncRogueCommonVirtualItemInfoScNotify(this));
             Player.SendPacket(new PacketScenePlaneEventScNotify(new Database.Inventory.ItemData()
             {
                 ItemId = 31,

@@ -33,6 +33,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
     public class ServerTextCHS
     {
         public WebTextCHS Web { get; } = new();
+        public ServerInfoTextCHS ServerInfo { get; } = new();
     }
 
     /// <summary>
@@ -51,6 +52,38 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string Buff { get; } = "祝福";
         public string Miracle { get; } = "奇物";
         public string Unlock { get; } = "奢侈品";
+
+        // server info
+        public string Config { get; } = "配置文件";
+        public string Language { get; } = "语言";
+        public string Log { get; } = "日志";
+        public string GameData { get; } = "游戏数据";
+        public string Database { get; } = "数据库";
+        public string Command { get; } = "命令";
+        public string WebServer { get; } = "Web服务器";
+        public string Plugin { get; } = "插件";
+        public string Handler { get; } = "包处理器";
+        public string Dispatch { get; } = "全局分发";
+        public string Game { get; } = "游戏";
+        public string Handbook { get; } = "手册";
+        public string NotFound { get; } = "未找到";
+        public string Error { get; } = "错误";
+        public string FloorInfo { get; } = "区域文件";
+        public string FloorGroupInfo { get; } = "区域组文件";
+        public string FloorMissingResult { get; } = "传送与世界生成";
+        public string FloorGroupMissingResult { get; } = "传送、怪物战斗与世界生成";
+        public string Mission { get; } = "任务";
+        public string MissionInfo { get; } = "任务文件";
+        public string MazeSkill { get; } = "角色秘技";
+        public string MazeSkillInfo { get; } = "角色秘技文件";
+        public string Dialogue { get; } = "模拟宇宙事件";
+        public string DialogueInfo { get; } = "模拟宇宙事件文件";
+        public string Performance { get; } = "剧情操作";
+        public string PerformanceInfo { get; } = "剧情操作文件";
+        public string RogueChestMap { get; } = "模拟宇宙地图";
+        public string RogueChestMapInfo { get; } = "模拟宇宙地图文件";
+        public string ChessRogueRoom { get; } = "模拟宇宙DLC";
+        public string ChessRogueRoomInfo { get; } = "模拟宇宙DLC文件";
     }
 
     #endregion
@@ -80,6 +113,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public SceneTextCHS Scene { get; } = new();
         public UnlockAllTextCHS UnlockAll { get; } = new();
         public MailTextCHS Mail { get; } = new();
+        public RaidTextCHS Raid { get; } = new();
     }
 
     #endregion
@@ -91,6 +125,31 @@ namespace EggLink.DanhengServer.Internationalization.Message
     /// </summary>
     public class WebTextCHS
     {
+    }
+
+    /// <summary>
+    /// path: Server.ServerInfo
+    /// </summary>
+    public class ServerInfoTextCHS
+    {
+        public string Shutdown { get; } = "关闭中…";
+        public string CancelKeyPressed { get; } = "已按下取消键 (Ctrl + C)，服务器即将关闭…";
+        public string StartingServer { get; } = "正在启动 DanhengServer…";
+        public string LoadingItem { get; } = "正在加载 {0}…";
+        public string RegisterItem { get; } = "注册了 {0} 个 {1}。";
+        public string FailedToLoadItem { get; } = "加载 {0} 失败。";
+        public string FailedToInitializeItem { get; } = "初始化 {0} 失败。";
+        public string FailedToReadItem { get; } = "读取 {0} 失败，文件{1}";
+        public string GeneratedItem { get; } = "已生成 {0}。";
+        public string LoadedItem { get; } = "已加载 {0}。";
+        public string LoadedItems { get; } = "已加载 {0} 个 {1}。";
+        public string ServerRunning { get; } = "{0} 服务器正在监听 {1}";
+        public string ServerStarted { get; } = "启动完成！用时 {0}s，击败了99%的用户，输入 ‘help’ 来获取命令帮助";  // 玩梗，考虑英语版本将其本土化
+        public string MissionEnabled { get; } = "任务系统已启用，此功能仍在开发中，且可能不会按预期工作，如果遇见任何bug，请汇报给开发者。";
+
+        public string ConfigMissing { get; } = "{0} 缺失，请检查你的资源文件夹：{1}，{2} 可能不能使用。";
+        public string UnloadedItems { get; } = "卸载了所有 {0}。";
+        public string SaveDatabase { get; } = "已保存数据库，用时 {0}s";
     }
 
     #endregion
@@ -281,6 +340,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string AllPropsUnlocked { get; } = "所有道具已解锁!";
         public string SceneChanged { get; } = "已进入场景 {0}";
         public string SceneReloaded { get; } = "场景已重新加载!";
+        public string SceneReset { get; } = "已重置场景 {0} 中所有道具状态！";
     }
 
     /// <summary>
@@ -292,6 +352,16 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string Usage { get; } = "/mail <send [发送名称] [标题] [内容] [模板ID] [过期天数] - 发送邮件>/<send [发送者] [标题] [内容] [模板ID] [过期天数] [附件] - 发送带附件的邮件>";
         public string MailSent { get; } = "邮件已发送!";
         public string MailSentWithAttachment { get; } = "带附件的邮件已发送!";
+    }
+
+    /// <summary>
+    /// path: Game.Command.Raid
+    /// </summary>
+    public class RaidTextCHS
+    {
+        public string Desc { get; } = "管理玩家的任务临时场景";
+        public string Usage { get; } = "/raid <leave - 离开临时场景>";
+        public string Leaved { get; } = "已离开临时场景!";
     }
 
     #endregion

@@ -38,7 +38,8 @@ namespace EggLink.DanhengServer.Command
                     }
                 }
             }
-            Logger.Info($"Register {Commands.Count} commands.");
+
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.RegisterItem", Commands.Count.ToString(), I18nManager.Translate("Word.Command")));
         }
 
         public void Start()

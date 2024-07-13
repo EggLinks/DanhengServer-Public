@@ -1,9 +1,11 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using EggLink.DanhengServer.Common.Enums;
+using EggLink.DanhengServer.Internationalization;
 using EggLink.DanhengServer.KcpSharp;
 using EggLink.DanhengServer.Util;
 using KcpSharp;
+using Microsoft.Extensions.Logging;
 
 namespace EggLink.DanhengServer.Server
 {
@@ -38,7 +40,7 @@ namespace EggLink.DanhengServer.Server
             if (UDPListener == null) return;
             KCPTransport = KcpSocketTransport.CreateMultiplexConnection(UDPClient, 1400);
             KCPTransport.Start();
-            Logger.Info($"Game Server started. Listening on port: {PORT}");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.ServerRunning", I18nManager.Translate("Word.Game"), ConfigManager.Config.GameServer.GetDisplayAddress()));
         }
 
         private static void RegisterConnection(Connection con)

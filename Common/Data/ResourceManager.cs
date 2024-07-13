@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Rogue;
+using EggLink.DanhengServer.Internationalization;
 
 namespace EggLink.DanhengServer.Data
 {
@@ -54,7 +55,7 @@ namespace EggLink.DanhengServer.Data
                             var file = new FileInfo(path);
                             if (!file.Exists)
                             {
-                                Logger.Warn($"File {path} not found");
+                                Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", fileName, I18nManager.Translate("Word.NotFound")));
                                 continue;
                             }
                             var json = file.OpenText().ReadToEnd();
@@ -109,10 +110,10 @@ namespace EggLink.DanhengServer.Data
                         }
                         catch (Exception ex)
                         {
-                            Logger.Error($"Error in reading {fileName}", ex);
+                            Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", fileName, I18nManager.Translate("Word.Error")), ex);
                         }
                     }
-                    Logger.Info($"Loaded {count} {cls.Name}s.");
+                    Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), cls.Name));
                 }
             }
             foreach (var cls in resList)
@@ -123,13 +124,13 @@ namespace EggLink.DanhengServer.Data
 
         public static void LoadFloorInfo()
         {
-            Logger.Info("Loading floor files...");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.FloorInfo")));
             DirectoryInfo directory = new(ConfigManager.Config.Path.ResourcePath + "/Config/LevelOutput/RuntimeFloor/");
             bool missingGroupInfos = false;
 
             if (!directory.Exists)
             {
-                Logger.Warn($"Floor infos are missing, please check your resources folder: {ConfigManager.Config.Path.ResourcePath}/Config/LevelOutput/RuntimeFloor. Teleports and natural world spawns may not work!");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", I18nManager.Translate("Word.FloorInfo"), $"{ConfigManager.Config.Path.ResourcePath}/Config/LevelOutput/RuntimeFloor", I18nManager.Translate("Word.FloorMissingResult")));
                 return;
             }
             // Load floor infos
@@ -145,7 +146,7 @@ namespace EggLink.DanhengServer.Data
                     GameData.FloorInfoData.Add(name, info!);
                 } catch (Exception ex)
                 {
-                    Logger.Error("Error in reading" + file.Name, ex);
+                    Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name, I18nManager.Translate("Word.Error")), ex);
                 }
             }
 
@@ -165,13 +166,12 @@ namespace EggLink.DanhengServer.Data
                         if (group != null)
                         {
                             group.Id = groupInfo.ID;
-                            if (!info.Groups.ContainsKey(groupInfo.ID))
-                                info.Groups.Add(groupInfo.ID, group);
+                            info.Groups.TryAdd(groupInfo.ID, group);
                             group.Load();
                         }
                     } catch (Exception ex)
                     {
-                        Logger.Error("Error in reading " + file.Name, ex);
+                        Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name, I18nManager.Translate("Word.Error")), ex);
                     }
                     if (info.Groups.Count == 0)
                     {
@@ -181,18 +181,18 @@ namespace EggLink.DanhengServer.Data
                 info.OnLoad();
             }
             if (missingGroupInfos)
-                Logger.Warn($"Group infos are missing, please check your resources folder: {ConfigManager.Config.Path.ResourcePath}/Config/LevelOutput/SharedRuntimeGroup. Teleports, monster battles, and natural world spawns may not work!");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", I18nManager.Translate("Word.FloorGroupInfo"), $"{ConfigManager.Config.Path.ResourcePath}/Config/LevelOutput/SharedRuntimeGroup", I18nManager.Translate("Word.FloorGroupMissingResult")));
 
-            Logger.Info("Loaded " + GameData.FloorInfoData.Count + " floor infos.");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", GameData.FloorInfoData.Count.ToString(), I18nManager.Translate("Word.FloorInfo")));
         }
 
         public static void LoadMissionInfo()
         {
-            Logger.Info("Loading mission files...");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.MissionInfo")));
             DirectoryInfo directory = new(ConfigManager.Config.Path.ResourcePath + "/Config/Level/Mission");
             if (!directory.Exists)
             {
-                Logger.Warn($"Mission infos are missing, please check your resources folder: {ConfigManager.Config.Path.ResourcePath}/Config/Level/Mission. Missions may not work!");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", I18nManager.Translate("Word.MissionInfo"), $"{ConfigManager.Config.Path.ResourcePath}/Config/Level/Mission", I18nManager.Translate("Word.Mission")));
                 return;
             }
             bool missingMissionInfos = false;
@@ -250,7 +250,7 @@ namespace EggLink.DanhengServer.Data
                                 }
                             } catch (Exception ex)
                             {
-                                Logger.Error("Error in reading " + missionJsonPath, ex);
+                                Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", missionJsonPath, I18nManager.Translate("Word.Error")), ex);
                             }
                         }
                     }
@@ -261,18 +261,18 @@ namespace EggLink.DanhengServer.Data
                 }
             }
             if (missingMissionInfos)
-                Logger.Warn($"Mission infos are missing, please check your resources folder: {ConfigManager.Config.Path.ResourcePath}/Config/Level/Mission. Missions may not work!");
-            Logger.Info("Loaded " + count + " mission infos.");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", I18nManager.Translate("Word.MissionInfo"), $"{ConfigManager.Config.Path.ResourcePath}/Config/Level/Mission", I18nManager.Translate("Word.Mission")));
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.MissionInfo")));
         }
 
         public static T? LoadCustomFile<T>(string filetype, string filename)
         {
-            Logger.Info($"Loading {filetype} files...");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", filetype));
             FileInfo file = new(ConfigManager.Config.Path.ConfigPath + $"/{filename}.json");
             T? customFile = default;
             if (!file.Exists)
             {
-                Logger.Warn($"Banner infos are missing, please check your resources folder: {ConfigManager.Config.Path.ConfigPath}/{filename}.json. {filetype} may not work!");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", filetype, $"{ConfigManager.Config.Path.ConfigPath}/{filename}.json", filetype));
                 return customFile;
             }
             try
@@ -289,23 +289,23 @@ namespace EggLink.DanhengServer.Data
 
             if (customFile is Dictionary<int, int> d)
             {
-                Logger.Info("Loaded " + d.Count + $" {filetype}s.");
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", d.Count.ToString(), filetype));
             } else if (customFile is Dictionary<int, List<int>> di)
             {
-                Logger.Info("Loaded " + di.Count + $" {filetype}s.");
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", di.Count.ToString(), filetype));
             } else if (customFile is BannersConfig c)
             {
-                Logger.Info("Loaded " + c.Banners.Count + $" {filetype}s.");
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", c.Banners.Count.ToString(), filetype));
             } else if (customFile is RogueMiracleEffectConfig r)
             {
-                Logger.Info("Loaded " + r.Miracles.Count + $" {filetype}s.");
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", r.Miracles.Count.ToString(), filetype));
             } else if (customFile is ActivityConfig a)
             {
-                Logger.Info("Loaded " + a.ScheduleData.Count + $" {filetype}s.");
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", a.ScheduleData.Count.ToString(), filetype));
             }
             else
             {
-                Logger.Info("Loaded " + filetype + " file.");
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItem", filetype));
             }
 
             return customFile;
@@ -313,6 +313,7 @@ namespace EggLink.DanhengServer.Data
 
         public static void LoadMazeSkill()
         {
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.MazeSkillInfo")));
             var count = 0;
             foreach (var adventure in GameData.AdventurePlayerData.Values)
             {
@@ -332,18 +333,20 @@ namespace EggLink.DanhengServer.Data
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("Error in reading " + file.Name, ex);
+                    Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", adventurePath, I18nManager.Translate("Word.Error")), ex);
                 }
             }
             if (count < GameData.AdventurePlayerData.Count)
             {
-                Logger.Warn("Maze skill infos are missing, please check your resources folder: " + ConfigManager.Config.Path.ResourcePath + "/Config/ConfigAdventureAbility/LocalPlayer. Maze skills may not work!");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", I18nManager.Translate("Word.MazeSkillInfo"), $"{ConfigManager.Config.Path.ResourcePath}/Config/Level/AdventureAbility", I18nManager.Translate("Word.MazeSkill")));
             }
-            Logger.Info("Loaded " + count + " maze skill infos.");
+
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.MazeSkillInfo")));
         }
 
         public static void LoadDialogueInfo()
         {
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.DialogueInfo")));
             var count = 0;
             foreach (var dialogue in GameData.RogueNPCDialogueData)
             {
@@ -369,21 +372,22 @@ namespace EggLink.DanhengServer.Data
                     }
                 } catch (Exception ex)
                 {
-                    Logger.Error("Error in reading " + file.Name, ex);
+                    Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name, I18nManager.Translate("Word.Error")), ex);
                 }
 
             }
 
             if (count < GameData.RogueNPCDialogueData.Count)
             {
-                Logger.Warn("Dialogue infos are missing, please check your resources folder: " + ConfigManager.Config.Path.ResourcePath + "/Config/Level/RogueDialogue/RogueDialogueEvent. Dialogues may not work!");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", I18nManager.Translate("Word.DialogueInfo"), $"{ConfigManager.Config.Path.ResourcePath}/Config/Level/Rogue/Dialogue", I18nManager.Translate("Word.Dialogue")));
             }
 
-            Logger.Info("Loaded " + count + " dialogue infos.");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.DialogueInfo")));
         }
 
         public static void LoadPerformanceInfo()
         {
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.PerformanceInfo")));
             var count = 0;
             foreach (var performance in GameData.PerformanceEData.Values)
             {
@@ -410,7 +414,7 @@ namespace EggLink.DanhengServer.Data
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("Error in reading " + file.Name, ex);
+                    Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name, I18nManager.Translate("Word.Error")), ex);
                 }
 
             }
@@ -421,11 +425,12 @@ namespace EggLink.DanhengServer.Data
                 //Logger.Warn("Performance infos are missing, please check your resources folder: " + ConfigManager.Config.Path.ResourcePath + "/Config/Level/Mission/*/Act. Performances may not work!");
             }
 
-            Logger.Info("Loaded " + count + " performance infos.");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.PerformanceInfo")));
         }
 
         public static void LoadRogueChestMapInfo()
         {
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.RogueChestMapInfo")));
             var count = 0;
             var boardList = new List<RogueDLCChessBoardExcel>();
             foreach (var nousMap in GameData.RogueNousChessBoardData.Values)
@@ -464,27 +469,29 @@ namespace EggLink.DanhengServer.Data
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("Error in reading " + file.Name, ex);
+                    Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name, I18nManager.Translate("Word.Error")), ex);
                 }
             }
 
             if (count < boardList.Count)
             {
-                Logger.Warn("Chess board infos are missing, please check your resources folder: " + ConfigManager.Config.Path.ResourcePath + "/Config/Gameplays/RogueDLC. Chess rogue may not work!");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", I18nManager.Translate("Word.RogueChestMapInfo"), $"{ConfigManager.Config.Path.ResourcePath}/Config/Gameplays/RogueDLC", I18nManager.Translate("Word.RogueChestMap")));
             }
 
-            Logger.Info("Loaded " + count + " board infos.");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.RogueChestMapInfo")));
         }
 
         public static void LoadChessRogueRoomData()
         {
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.ChessRogueRoomInfo")));
             var count = 0;
 
             FileInfo file = new(ConfigManager.Config.Path.ConfigPath + $"/ChessRogueRoomGen.json");
-            List<ChessRogueRoomConfig>? customFile = default;
+            List<ChessRogueRoomConfig>? customFile;
             if (!file.Exists)
             {
-                Logger.Warn($"Banner infos are missing, please check your resources folder: {ConfigManager.Config.Path.ConfigPath}/ChessRogueRoomGen.json. Chess Rogue may not work!");
+                Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing", I18nManager.Translate("Word.ChessRogueRoomInfo"), $"{ConfigManager.Config.Path.ConfigPath}/ChessRogueRoomGen.json", I18nManager.Translate("Word.ChessRogueRoom")));
+
                 return;
             }
             try
@@ -538,7 +545,7 @@ namespace EggLink.DanhengServer.Data
                 Logger.Error("Error in reading " + file.Name, ex);
             }
 
-            Logger.Info("Loaded " + count + " room infos.");
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.ChessRogueRoomInfo")));
         }
 
         public static void AddRoomToGameData(RogueDLCBlockTypeEnum type, ChessRogueRoomConfig room)

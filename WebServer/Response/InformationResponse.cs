@@ -35,6 +35,8 @@ namespace EggLink.DanhengServer.WebServer.Response
         public string Name { get; set; } = "";
         public string Signature { get; set; } = "";
         public int HeadIconId { get; set; }
+        public int Credit { get; set; }
+        public int Jade { get; set; }
 
         // Scene info
         public int CurPlaneId { get; set; }
@@ -44,6 +46,10 @@ namespace EggLink.DanhengServer.WebServer.Response
         [JsonConverter(typeof(StringEnumConverter))]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
         public PlayerStatusEnum PlayerStatus { get; set; } = PlayerStatusEnum.Explore;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public PlayerSubStatusEnum PlayerSubStatus { get; set; } = PlayerSubStatusEnum.None;
         public int Stamina { get; set; } = 0;
         public int RecoveryStamina { get; set; } = 0;
         public List<int> AssistAvatarList { get; set; } = [];
@@ -54,6 +60,9 @@ namespace EggLink.DanhengServer.WebServer.Response
         public List<int> FinishedSubMissionIdList { get; set; } = [];
         public List<int> AcceptedMainMissionIdList { get; set; } = [];
         public List<int> AcceptedSubMissionIdList { get; set; } = [];
+
+        // Lineup info
+        public List<int> LineupBaseAvatarIdList { get; set; } = [];
 
     }
 }

@@ -39,6 +39,10 @@ namespace EggLink.DanhengServer.Configuration
         public string GameServerName { get; set; } = "DanhengServer";
         public string GameServerDescription { get; set; } = "A re-implementation of StarRail server";
         public int KcpInterval { get; set; } = 40;
+        public string GetDisplayAddress()
+        {
+            return PublicAddress + ":" + PublicPort;
+        }
     }
 
     public class PathConfig

@@ -29,17 +29,13 @@ using EggLink.DanhengServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Util;
 using EggLink.DanhengServer.Enums.Avatar;
 using EggLink.DanhengServer.Server.Packet.Send.Avatar;
-using System.Numerics;
 using EggLink.DanhengServer.Game.Challenge;
 using EggLink.DanhengServer.Game.Drop;
 using static EggLink.DanhengServer.Plugin.Event.PluginEvent;
-using EggLink.DanhengServer.Plugin.Event;
 using EggLink.DanhengServer.Game.Task;
 using EggLink.DanhengServer.GameServer.Game.Mail;
 using EggLink.DanhengServer.GameServer.Game.Raid;
 using EggLink.DanhengServer.GameServer.Game.Mission;
-using SqlSugar;
-using EggLink.DanhengServer.Database.Lineup;
 
 namespace EggLink.DanhengServer.Game.Player
 {
@@ -290,7 +286,6 @@ namespace EggLink.DanhengServer.Game.Player
             }
 
             OnLevelChange();
-            DatabaseHelper.Instance?.UpdateInstance(Data);
         }
 
         public void OnLevelChange()
@@ -454,7 +449,7 @@ namespace EggLink.DanhengServer.Game.Player
             return null;
         }
 
-        public bool EnterScene(int entryId, int teleportId, bool sendPacket, ChangeStoryLineAction storyLineAction = ChangeStoryLineAction.None, int storyLineId = 0)
+        public bool EnterScene(int entryId, int teleportId, bool sendPacket, ChangeStoryLineAction storyLineAction = ChangeStoryLineAction.None, int storyLineId = 0, bool mapTp = false)
         {
             if (storyLineId != StoryLineManager?.StoryLineData.CurStoryLineId)
             {
@@ -489,7 +484,7 @@ namespace EggLink.DanhengServer.Game.Player
 
             var beforeEntryId = Data.EntryId;
 
-            LoadScene(entrance.PlaneID, entrance.FloorID, entryId, anchor!.ToPositionProto(), anchor.ToRotationProto(), sendPacket, storyLineAction);
+            LoadScene(entrance.PlaneID, entrance.FloorID, entryId, anchor!.ToPositionProto(), anchor.ToRotationProto(), sendPacket, storyLineAction, mapTp);
 
             var afterEntryId = Data.EntryId;
 
@@ -536,7 +531,7 @@ namespace EggLink.DanhengServer.Game.Player
             SendPacket(new PacketSceneEntityMoveScNotify(this));
         }
 
-        public void LoadScene(int planeId, int floorId, int entryId, Position pos, Position rot, bool sendPacket, ChangeStoryLineAction storyLineAction = ChangeStoryLineAction.None)
+        public void LoadScene(int planeId, int floorId, int entryId, Position pos, Position rot, bool sendPacket, ChangeStoryLineAction storyLineAction = ChangeStoryLineAction.None, bool mapTp = false)
         {
             GameData.MazePlaneData.TryGetValue(planeId, out var plane);
             if (plane == null) return;
@@ -566,7 +561,7 @@ namespace EggLink.DanhengServer.Game.Player
                 Data.FloorId = floorId;
                 Data.EntryId = entryId;
             }
-            else if (StoryLineManager?.StoryLineData.CurStoryLineId == 0)
+            else if (StoryLineManager?.StoryLineData.CurStoryLineId == 0 && mapTp)  // only send move packet when not in story line and mapTp
             {
                 notSendMove = false;
             }
@@ -579,7 +574,7 @@ namespace EggLink.DanhengServer.Game.Player
             {
                 SendPacket(new PacketEnterSceneByServerScNotify(instance, storyLineAction));
             }
-            else if (!notSendMove)
+            else if (sendPacket && !notSendMove)  // send move packet
             {
                 SendPacket(new PacketSceneEntityMoveScNotify(this));
             }

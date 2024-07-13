@@ -35,6 +35,7 @@ namespace EggLink.DanhengServer.Game.Scene
         public Dictionary<int, AvatarSceneInfo> AvatarInfo = [];
         public int LeaderEntityId;
         public Dictionary<int, IGameEntity> Entities = [];
+        public List<int> Groups = [];
         public List<EntityProp> HealingSprings = [];
 
         public SceneEntityLoader? EntityLoader;
@@ -268,6 +269,17 @@ namespace EggLink.DanhengServer.Game.Scene
                     });
                 }
                 groups[groups.FindIndex(x => x.GroupId == entity.Value.GroupID)].EntityList.Add(entity.Value.ToProto());
+            }
+
+            foreach (var groupId in Groups)  // Add for empty group
+            {
+                if (groups.FindIndex(x => x.GroupId == groupId) == -1)
+                {
+                    groups.Add(new SceneEntityGroupInfo()
+                    {
+                        GroupId = (uint)groupId
+                    });
+                }
             }
 
             foreach (var group in groups)

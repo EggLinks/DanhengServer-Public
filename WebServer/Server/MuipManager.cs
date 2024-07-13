@@ -15,6 +15,8 @@ using EggLink.DanhengServer.Database.Avatar;
 using EggLink.DanhengServer.Database.Mission;
 using EggLink.DanhengServer.Enums;
 using Spectre.Console;
+using EggLink.DanhengServer.Database.Lineup;
+using EggLink.DanhengServer.Data;
 
 namespace EggLink.DanhengServer.WebServer.Server
 {
@@ -24,7 +26,7 @@ namespace EggLink.DanhengServer.WebServer.Server
         public static event ExecuteCommandDelegate? OnExecuteCommand;
         public delegate void ServerInformationDelegate(Dictionary<int, PlayerData> resultData);
         public static event ServerInformationDelegate? OnGetServerInformation;
-        public delegate void GetPlayerStatusDelegate(int uid, out PlayerStatusEnum status);
+        public delegate void GetPlayerStatusDelegate(int uid, out PlayerStatusEnum status, out PlayerSubStatusEnum subStatus);
         public static event GetPlayerStatusDelegate? OnGetPlayerStatus;
 
         public static string RsaPublicKey { get; private set; } = "";
@@ -187,21 +189,37 @@ namespace EggLink.DanhengServer.WebServer.Server
                 }
 
                 var result = new Dictionary<int, PlayerData>();
-                var sync = Task.Run(() => OnGetServerInformation?.Invoke(result));
-
-                sync.Wait();
-
-                result.TryGetValue(uid, out var player);
-                if (player == null) return new(2, "Player not exist or is offline!", null);
+                var player = DatabaseHelper.Instance?.GetInstance<PlayerData>(uid);
+                if (player == null) return new(2, "Player not exist!", null);
 
                 var status = PlayerStatusEnum.Offline;
+                var subStatus = PlayerSubStatusEnum.None;
 
-                var statusSync = Task.Run(() => OnGetPlayerStatus?.Invoke(player.Uid, out status));
+                var statusSync = Task.Run(() => OnGetPlayerStatus?.Invoke(player.Uid, out status, out subStatus));
 
                 statusSync.Wait();
 
                 var avatarData = DatabaseHelper.Instance!.GetInstance<AvatarData>(player.Uid)!;
+                var lineupData = DatabaseHelper.Instance!.GetInstance<LineupData>(player.Uid)!;
                 var missionData = DatabaseHelper.Instance!.GetInstance<MissionData>(player.Uid)!;
+
+                var curLineupAvatars = new List<int>();
+                var index = lineupData.CurExtraLineup > 0 ? lineupData.CurExtraLineup : lineupData.CurLineup;
+
+                lineupData.Lineups.TryGetValue(index, out var lineup);
+
+                if (lineup != null)
+                {
+                    foreach (var avatar in lineup.BaseAvatars ?? [])
+                    {
+                        GameData.AvatarConfigData.TryGetValue(avatar.BaseAvatarId, out var excel);
+                        if (excel != null)
+                        {
+                            curLineupAvatars.Add(avatar.BaseAvatarId);
+                        }
+                    }
+                }
+
 
                 return new(0, "Success", new()
                 {
@@ -219,7 +237,11 @@ namespace EggLink.DanhengServer.WebServer.Server
                     AcceptedMainMissionIdList = missionData.RunningMainMissionIds,
                     FinishedMainMissionIdList = missionData.FinishedMainMissionIds,
                     FinishedSubMissionIdList = missionData.FinishedSubMissionIds,
-                    PlayerStatus = status
+                    PlayerStatus = status,
+                    PlayerSubStatus = subStatus,
+                    Credit = player.Scoin,
+                    Jade = player.Hcoin,
+                    LineupBaseAvatarIdList = curLineupAvatars
                 });
             }
             return new(3, "Session not found!", null);

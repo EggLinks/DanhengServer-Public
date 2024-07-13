@@ -74,7 +74,41 @@ namespace EggLink.DanhengServer.GameServer.Game.Raid
                 else if (excel.TeamType == Enums.Scene.RaidTeamTypeEnum.TrialOnly)
                 {
                     // set lineup
-                    Player.LineupManager!.SetExtraLineup(ExtraLineupType.LineupHeliobus, excel.TrialAvatarList);
+                    List<int> list = [..excel.TrialAvatarList];
+                    if (list.Count > 0)
+                    {
+                        if (Player.Data.CurrentGender == Gender.Man)
+                        {
+                            foreach (var avatar in excel.TrialAvatarList)
+                            {
+                                if (avatar > 10000)  // else is Base Avatar
+                                {
+                                    if (avatar.ToString().EndsWith("8002") ||
+                                        avatar.ToString().EndsWith("8004") ||
+                                        avatar.ToString().EndsWith("8006"))
+                                    {
+                                        list.Remove(avatar);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (var avatar in excel.TrialAvatarList)
+                            {
+                                if (avatar > 10000)  // else is Base Avatar
+                                {
+                                    if (avatar.ToString().EndsWith("8001") ||
+                                        avatar.ToString().EndsWith("8003") ||
+                                        avatar.ToString().EndsWith("8005"))
+                                    {
+                                        list.Remove(avatar);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Player.LineupManager!.SetExtraLineup(ExtraLineupType.LineupHeliobus, list);
                     Player.SendPacket(new PacketSyncLineupNotify(Player.LineupManager!.GetCurLineup()!));
                 }
                 else

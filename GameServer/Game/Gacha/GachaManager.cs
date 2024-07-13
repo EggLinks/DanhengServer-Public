@@ -230,7 +230,19 @@ namespace EggLink.DanhengServer.Game.Gacha
                 {
                     dirt += 20;
                 }
-                var i = Player.InventoryManager?.AddItem(item, 1, false, sync: false, returnRaw: true);
+
+                ItemData? i;
+                if (GameData.ItemConfigData[item].ItemMainType == ItemMainTypeEnum.AvatarCard && Player.AvatarManager!.GetAvatar(item) == null)
+                {
+                    i = null;
+                    Player.AvatarManager!.AddAvatar(item, isGacha:true);
+                }
+
+                else
+                {
+                    i = Player.InventoryManager?.AddItem(item, 1, false, sync: false, returnRaw: true);
+                }
+
                 if (i != null)
                 {
                     syncItems.Add(i);
@@ -289,6 +301,8 @@ namespace EggLink.DanhengServer.Game.Gacha
                     });
                 }
                 gachaItem.TokenItem = tokenItem;
+
+                gachaItem.TransferItemList ??= new();
 
                 gachaItems.Add(gachaItem);
             }

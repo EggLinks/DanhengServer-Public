@@ -28,7 +28,7 @@ namespace EggLink.DanhengServer.Internationalization
             var language = Activator.CreateInstance(languageType) ?? throw new Exception("Language not found");
             Language = language;
 
-            Logger.Info("Language loaded");
+            Logger.Info(Translate("Server.ServerInfo.LoadedItem", Translate("Word.Language")));
         }
 
         public static string Translate(string key, params string[] args)

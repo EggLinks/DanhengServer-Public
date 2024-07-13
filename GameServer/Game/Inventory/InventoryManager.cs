@@ -97,23 +97,29 @@ namespace EggLink.DanhengServer.Game.Inventory
                     itemData = item;
                     break;
                 case ItemMainTypeEnum.Virtual:
+                    var actualCount = 0;
                     switch (itemConfig.ID)
                     {
                         case 1:
                             Player.Data.Hcoin += count;
+                            actualCount = Player.Data.Hcoin;
                             break;
                         case 2:
                             Player.Data.Scoin += count;
+                            actualCount = Player.Data.Scoin;
                             break;
                         case 3:
                             Player.Data.Mcoin += count;
+                            actualCount = Player.Data.Mcoin;
                             break;
                         case 11:
                             Player.Data.Stamina += count;
+                            actualCount = Player.Data.Stamina;
                             break;
                         case 22:
                             Player.Data.Exp += count;
                             Player.OnAddExp();
+                            actualCount = Player.Data.Exp;
                             break;
                         case 32:
                             Player.Data.TalentPoints += count;
@@ -126,7 +132,7 @@ namespace EggLink.DanhengServer.Game.Inventory
                         itemData = new()
                         {
                             ItemId = itemId,
-                            Count = count,
+                            Count = actualCount,
                         };
                     }
                     break;
@@ -284,7 +290,7 @@ namespace EggLink.DanhengServer.Game.Inventory
                     }
                     if (sync && itemData != null)
                     {
-                        Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
+                        Player.SendPacket(new PacketPlayerSyncScNotify(Player.ToProto()));
                     }
                     break;
                 case ItemMainTypeEnum.Equipment:
@@ -677,18 +683,31 @@ namespace EggLink.DanhengServer.Game.Inventory
             avatarData.Exp = curExp;
             DatabaseHelper.Instance!.UpdateInstance(Player.AvatarManager.AvatarData!);
             // leftover
-            List<ItemData> list = [];
+            Dictionary<int, ItemData> list = [];
             var leftover = exp;
             while (leftover > 0)
             {
                 var gain = false;
-                foreach (var expItem in GameData.AvatarExpItemConfigData.Values.Reverse())
+                foreach (var expItem in GameData.EquipmentExpItemConfigData.Values.Reverse())
                 {
-                    if (leftover >= expItem.Exp)
+                    if (leftover >= expItem.ExpProvide)
                     {
                         // add
-                        list.Add(PutItem(expItem.ItemID, 1));
-                        leftover -= expItem.Exp;
+                        PutItem(expItem.ItemID, 1);
+                        if (list.TryGetValue(expItem.ItemID, out var i))
+                        {
+                            i.Count++;
+                        }
+                        else
+                        {
+                            i = new ItemData()
+                            {
+                                ItemId = expItem.ItemID,
+                                Count = 1
+                            };
+                            list[expItem.ItemID] = i;
+                        }
+                        leftover -= expItem.ExpProvide;
                         gain = true;
                         break;
                     }
@@ -698,13 +717,13 @@ namespace EggLink.DanhengServer.Game.Inventory
                     break;  // no more item
                 }
             }
+
             if (list.Count > 0)
             {
-                Player.SendPacket(new PacketPlayerSyncScNotify(list));
+                Player.SendPacket(new PacketPlayerSyncScNotify(list.Values.ToList()));
             }
             Player.SendPacket(new PacketPlayerSyncScNotify(avatarData));
-
-            return list;
+            return [.. list.Values];
         }
 
         #endregion
@@ -781,7 +800,7 @@ namespace EggLink.DanhengServer.Game.Inventory
             itemData.Exp = curExp;
             DatabaseHelper.Instance!.UpdateInstance(Data);
             // leftover
-            List<ItemData> list = [];
+            Dictionary<int, ItemData> list = [];
             var leftover = exp;
             while (leftover > 0)
             {
@@ -791,7 +810,20 @@ namespace EggLink.DanhengServer.Game.Inventory
                     if (leftover >= expItem.ExpProvide)
                     {
                         // add
-                        list.Add(PutItem(expItem.ItemID, 1));
+                        PutItem(expItem.ItemID, 1);
+                        if (list.TryGetValue(expItem.ItemID, out var i))
+                        {
+                            i.Count++;
+                        }
+                        else
+                        {
+                            i = new ItemData()
+                            {
+                                ItemId = expItem.ItemID,
+                                Count = 1
+                            };
+                            list[expItem.ItemID] = i;
+                        }
                         leftover -= expItem.ExpProvide;
                         gain = true;
                         break;
@@ -802,12 +834,13 @@ namespace EggLink.DanhengServer.Game.Inventory
                     break;  // no more item
                 }
             }
+
             if (list.Count > 0)
             {
-                Player.SendPacket(new PacketPlayerSyncScNotify(list));
+                Player.SendPacket(new PacketPlayerSyncScNotify(list.Values.ToList()));
             }
             Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
-            return list;
+            return [.. list.Values];
         }
 
         public Boolean promoteAvatar(int avatarId) {
@@ -835,6 +868,7 @@ namespace EggLink.DanhengServer.Game.Inventory
             Player.SendPacket(new PacketPlayerSyncScNotify(avatarData));
             return true;
         }
+
         public bool PromoteEquipment(int equipmentUniqueId)
         {
             var equipmentData = Player.InventoryManager!.Data.EquipmentItems.FirstOrDefault(x => x.UniqueId == equipmentUniqueId);
@@ -859,6 +893,7 @@ namespace EggLink.DanhengServer.Game.Inventory
 
             return true;
         }
+
         public List<ItemData> LevelUpRelic(int uniqueId, ItemCostData costData)
         {
             var relicItem = Data.RelicItems.Find(x => x.UniqueId == uniqueId);
@@ -984,11 +1019,11 @@ namespace EggLink.DanhengServer.Game.Inventory
                     break;  // no more item
                 }
             }
+
             if (list.Count > 0)
             {
                 Player.SendPacket(new PacketPlayerSyncScNotify(list.Values.ToList()));
             }
-            DatabaseHelper.Instance!.UpdateInstance(Data);
 
             // sync
             Player.SendPacket(new PacketPlayerSyncScNotify(relicItem));

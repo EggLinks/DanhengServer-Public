@@ -21,14 +21,14 @@ namespace EggLink.DanhengServer.Handbook
             var textMapPath = config.Path.ResourcePath + "/TextMap/TextMap" + config.ServerOption.Language + ".json";
             if (!File.Exists(textMapPath))
             {
-                Logger.GetByClassName().Error("TextMap file not found: " + textMapPath);
+                Logger.GetByClassName().Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath, I18nManager.Translate("Word.NotFound")));
                 return;
             }
             var textMap = JsonConvert.DeserializeObject<Dictionary<long, string>>(File.ReadAllText(textMapPath));
 
             if (textMap == null)
             {
-                Logger.GetByClassName().Error("Failed to load TextMap file: " + textMapPath);
+                Logger.GetByClassName().Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem",textMapPath, I18nManager.Translate("Word.Error")));
                 return;
             }
 
@@ -76,7 +76,7 @@ namespace EggLink.DanhengServer.Handbook
             builder.AppendLine();
             WriteToFile(builder.ToString());
 
-            Logger.GetByClassName().Info("Handbook generated successfully.");
+            Logger.GetByClassName().Info(I18nManager.Translate("Server.ServerInfo.GeneratedItem", I18nManager.Translate("Word.Handbook")));
         }
 
         public static void GenerateCmd(StringBuilder builder)

@@ -33,6 +33,8 @@ namespace EggLink.DanhengServer.Game.Scene
 
         public void SyncEntity()
         {
+            if (Scene.Excel.PlaneType == PlaneTypeEnum.Raid) return;
+
             bool refreshed = false;
             var oldGroupId = new List<int>();
             foreach (var entity in Scene.Entities.Values)
@@ -69,6 +71,7 @@ namespace EggLink.DanhengServer.Game.Scene
                                 refreshed = true;
                             }
                         }
+                        Scene.Groups.Remove(group.Id);
                     }
                     else if (group.OwnerMainMissionID != 0 && Scene.Player.MissionManager!.GetMainMissionStatus(group.OwnerMainMissionID) != Enums.MissionPhaseEnum.Accept)
                     {
@@ -81,6 +84,7 @@ namespace EggLink.DanhengServer.Game.Scene
                                 refreshed = true;
                             }
                         }
+                        Scene.Groups.Remove(group.Id);
                     }
                 } else  // check if it should be loaded
                 {
@@ -89,31 +93,45 @@ namespace EggLink.DanhengServer.Game.Scene
                     addList.AddRange(groupList ?? []);
                 }
             }
-            if (refreshed)
+            if (refreshed && (addList.Count > 0 || removeList.Count > 0))
             {
-                Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(null, removeList));
-                Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(addList, null));
+                Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(addList, removeList));
             }
         }
 
         public virtual List<IGameEntity>? LoadGroup(GroupInfo info, bool forceLoad = false)
         {
             var missionData = Scene.Player.MissionManager!.Data;
-
-            if (!(info.OwnerMainMissionID == 0 || Scene.Player.MissionManager!.GetMainMissionStatus(info.OwnerMainMissionID) == Enums.MissionPhaseEnum.Accept))
+            if (info.LoadSide == GroupLoadSideEnum.Client)
             {
                 return null;
             }
 
-            if ((!info.LoadCondition.IsTrue(missionData) || info.UnloadCondition.IsTrue(missionData, false) || info.ForceUnloadCondition.IsTrue(missionData, false)) && !forceLoad)
+            if (info.GroupName.Contains("TrainVisitor"))
             {
                 return null;
+            }
+
+            if (Scene.Excel.PlaneType != PlaneTypeEnum.Raid)
+            {
+                if (!(info.OwnerMainMissionID == 0 || Scene.Player.MissionManager!.GetMainMissionStatus(info.OwnerMainMissionID) == Enums.MissionPhaseEnum.Accept))
+                {
+                    return null;
+                }
+
+                if ((!info.LoadCondition.IsTrue(missionData) || info.UnloadCondition.IsTrue(missionData, false) || info.ForceUnloadCondition.IsTrue(missionData, false)) && !forceLoad)
+                {
+                    return null;
+                }
             }
 
             if (Scene.Entities.Values.ToList().FindIndex(x => x.GroupID == info.Id) != -1)  // check if group is already loaded
             {
                 return null;
             }
+
+            // load
+            Scene.Groups.Add(info.Id);
 
             var entityList = new List<IGameEntity>();
             foreach (var npc in info.NPCList)
@@ -184,6 +202,7 @@ namespace EggLink.DanhengServer.Game.Scene
                     refreshed = true;
                 }
             }
+            Scene.Groups.Remove(group.Id);
 
             if (refreshed)
             {
@@ -197,10 +216,17 @@ namespace EggLink.DanhengServer.Game.Scene
             {
                 return null;
             }
+
+            if (group.Id == 117)
+            {
+                GameData.GetAvatarExpRequired(0, 0);
+            }
+
             if (!GameData.NpcDataData.ContainsKey(info.NPCID))
             {
                 return null;
             }
+
             bool hasDuplicateNpcId = false;
             foreach (IGameEntity entity in Scene.Entities.Values)
             {
@@ -210,10 +236,12 @@ namespace EggLink.DanhengServer.Game.Scene
                     break;
                 }
             }
+
             if (hasDuplicateNpcId)
             {
-                return null;
+                //return null;
             }
+
             EntityNpc npc = new(Scene, group, info);
             Scene.AddEntity(npc, sendPacket);
 
