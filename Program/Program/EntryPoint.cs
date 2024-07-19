@@ -211,7 +211,7 @@ namespace EggLink.DanhengServer.Program
 
             HandlerManager.Init();
 
-            WebProgram.Main([], GetConfig().HttpServer.PublicPort, GetConfig().HttpServer.GetDisplayAddress());
+            WebProgram.Main([], GetConfig().HttpServer.BindPort, GetConfig().HttpServer.GetBindAddress());
             logger.Info(I18nManager.Translate("Server.ServerInfo.ServerRunning", I18nManager.Translate("Word.Dispatch"), GetConfig().HttpServer.GetDisplayAddress()));
 
             Listener.StartListener();

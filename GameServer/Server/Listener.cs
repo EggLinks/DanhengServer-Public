@@ -32,10 +32,10 @@ namespace EggLink.DanhengServer.Server
             UpdateInterval = 100,
             KeepAliveOptions = new KcpKeepAliveOptions(1000, 30000)
         };
-        private static uint PORT => ConfigManager.Config.GameServer.PublicPort;
+        private static uint PORT => ConfigManager.Config.GameServer.BindPort;
         public static void StartListener()
         {
-            ListenAddress = new IPEndPoint(IPAddress.Parse(ConfigManager.Config.GameServer.PublicAddress), (int)PORT);
+            ListenAddress = new IPEndPoint(IPAddress.Parse(ConfigManager.Config.GameServer.BindAddress), (int)PORT);
             UDPClient = new UdpClient(ListenAddress);
             if (UDPListener == null) return;
             KCPTransport = KcpSocketTransport.CreateMultiplexConnection(UDPClient, 1400);

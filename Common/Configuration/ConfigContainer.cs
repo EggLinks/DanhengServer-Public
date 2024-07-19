@@ -16,25 +16,35 @@ namespace EggLink.DanhengServer.Configuration
 
     public class HttpServerConfig
     {
-        public string PublicAddress { get; set; } = "127.0.0.1";
+        public string PublicAddress { get; set; } = "server.example.com";
+        public string BindAddress { get; set; } = "0.0.0.0";
         public int PublicPort { get; set; } = 443;
-        public bool UseSSL { get; set; } = true;
+        public int BindPort { get; set; } = 60000;
+        public bool BindUseSSL { get; set; } = false;
+        public bool AccessUseSSL { get; set; } = false;
+
         public string GetDisplayAddress()
         {
-            return (UseSSL ? "https" : "http") + "://" + PublicAddress + ":" + PublicPort;
+            return (AccessUseSSL ? "https" : "http") + "://" + PublicAddress + ":" + PublicPort;
+        }
+        public string GetBindAddress()
+        {
+            return (BindUseSSL ? "https" : "http") + "://" + BindAddress + ":" + BindPort;
         }
     }
 
     public class KeyStoreConfig
     {
-        public string KeyStorePath { get; set; } = "certificate.p12";
+        public string KeyStorePath { get; set; } = "keystore.p12";
         public string KeyStorePassword { get; set; } = "123456";
     }
 
     public class GameServerConfig
     {
-        public string PublicAddress { get; set; } = "127.0.0.1";
+        public string PublicAddress { get; set; } = "server.example.com";
+        public string BindAddress { get; set; } = "0.0.0.0";
         public uint PublicPort { get; set; } = 23301;
+        public uint BindPort { get; set; } = 23301;
         public string GameServerId { get; set; } = "dan_heng";
         public string GameServerName { get; set; } = "DanhengServer";
         public string GameServerDescription { get; set; } = "A re-implementation of StarRail server";
