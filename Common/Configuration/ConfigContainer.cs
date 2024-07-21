@@ -35,7 +35,7 @@ namespace EggLink.DanhengServer.Configuration
 
     public class KeyStoreConfig
     {
-        public string KeyStorePath { get; set; } = "keystore.p12";
+        public string KeyStorePath { get; set; } = "certificate.p12";
         public string KeyStorePassword { get; set; } = "123456";
     }
 
