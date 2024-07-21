@@ -30,7 +30,7 @@ namespace EggLink.DanhengServer.WebServer
                 })
                 .UseUrls(address);
 
-            if (ConfigManager.Config.HttpServer.UseSSL)
+            if (ConfigManager.Config.HttpServer.BindUseSSL)
             {
                 b.UseKestrel(options =>
                  {
