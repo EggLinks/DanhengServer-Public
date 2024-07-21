@@ -14,6 +14,7 @@ namespace EggLink.DanhengServer.Data.Config
         public List<FloorGroupInfo> GroupInstanceList { get; set; } = [];
         public List<FloorSavedValueInfo> SavedValues { get; set; } = [];
         public List<FloorCustomValueInfo> CustomValues { get; set; } = [];
+        public List<FloorDimensionInfo> DimensionList { get; set; } = [];
 
         [JsonIgnore]
         public bool Loaded = false;
@@ -41,6 +42,11 @@ namespace EggLink.DanhengServer.Data.Config
             if (Loaded) return;
 
             StartGroupID = GroupInstanceList[StartGroupIndex].ID;
+
+            foreach (var dimension in DimensionList)
+            {
+                dimension.OnLoad(this);
+            }
 
             // Cache anchors
             foreach (var group in Groups.Values)
@@ -103,5 +109,22 @@ namespace EggLink.DanhengServer.Data.Config
         public int ID { get; set; }
         public string Name { get; set; } = string.Empty;
         public string DefaultValue { get; set; } = string.Empty;
+    }
+
+    public class FloorDimensionInfo
+    {
+        public int ID { get; set; }
+        public List<int> GroupIndexList { get; set; } = [];
+
+        [JsonIgnore]
+        public List<int> GroupIDList { get; set; } = [];
+
+        public void OnLoad(FloorInfo floor)
+        {
+            foreach (var index in GroupIndexList)
+            {
+                GroupIDList.Add(floor.GroupInstanceList[index].ID);
+            }
+        }
     }
 }

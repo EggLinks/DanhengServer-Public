@@ -14,7 +14,8 @@ namespace EggLink.DanhengServer.Game.Mission.FinishType.Handler
     {
         public override void Init(PlayerInstance player, SubMissionInfo info, object? arg)
         {
-            player.EnterMissionScene(info.MapEntranceID, info.AnchorGroupID, info.AnchorID, true);
+            // MOVE TO TASK HANDLER
+            //player.EnterMissionScene(info.MapEntranceID, info.AnchorGroupID, info.AnchorID, true);
         }
 
         public override void HandleFinishType(PlayerInstance player, SubMissionInfo info, object? arg)

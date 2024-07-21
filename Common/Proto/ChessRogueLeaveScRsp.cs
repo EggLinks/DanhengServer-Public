@@ -25,8 +25,8 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChpDaGVzc1JvZ3VlTGVhdmVTY1JzcC5wcm90bxoXQ2hlc3NSb2d1ZUdldElu",
-            "Zm8ucHJvdG8aGkNoZXNzUm9ndWVQbGF5ZXJJbmZvLnByb3RvGhlDaGVzc1Jv",
-            "Z3VlUXVlcnlJbmZvLnByb3RvGhhDaGVzc1JvZ3VlQWVvbkluZm8ucHJvdG8i",
+            "Zm8ucHJvdG8aGUNoZXNzUm9ndWVRdWVyeUluZm8ucHJvdG8aGkNoZXNzUm9n",
+            "dWVQbGF5ZXJJbmZvLnByb3RvGhhDaGVzc1JvZ3VlQWVvbkluZm8ucHJvdG8i",
             "1wEKFENoZXNzUm9ndWVMZWF2ZVNjUnNwEigKCnF1ZXJ5X2luZm8YAyABKAsy",
             "FC5DaGVzc1JvZ3VlUXVlcnlJbmZvEg8KB3JldGNvZGUYDCABKA0SKgoOcm9n",
             "dWVfZ2V0X2luZm8YASABKAsyEi5DaGVzc1JvZ3VlR2V0SW5mbxIqCgtwbGF5",
@@ -34,7 +34,7 @@ namespace EggLink.DanhengServer.Proto {
             "X2Flb25faW5mbxgGIAEoCzITLkNoZXNzUm9ndWVBZW9uSW5mb0IeqgIbRWdn",
             "TGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChessRogueGetInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRoguePlayerInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRogueQueryInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRogueAeonInfoReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChessRogueGetInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRogueQueryInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRoguePlayerInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChessRogueAeonInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.ChessRogueLeaveScRsp), global::EggLink.DanhengServer.Proto.ChessRogueLeaveScRsp.Parser, new[]{ "QueryInfo", "Retcode", "RogueGetInfo", "PlayerInfo", "RogueAeonInfo" }, null, null, null, null)
           }));

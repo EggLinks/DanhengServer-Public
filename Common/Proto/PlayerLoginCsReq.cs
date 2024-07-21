@@ -24,8 +24,8 @@ namespace EggLink.DanhengServer.Proto {
     static PlayerLoginCsReqReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChZQbGF5ZXJMb2dpbkNzUmVxLnByb3RvGhJMYW5ndWFnZVR5cGUucHJvdG8a",
-            "ElBsYXRmb3JtVHlwZS5wcm90bxoRTUtER0hPTURETk0ucHJvdG8iuwQKEFBs",
+            "ChZQbGF5ZXJMb2dpbkNzUmVxLnByb3RvGhFNS0RHSE9NREROTS5wcm90bxoS",
+            "UGxhdGZvcm1UeXBlLnByb3RvGhJMYW5ndWFnZVR5cGUucHJvdG8iuwQKEFBs",
             "YXllckxvZ2luQ3NSZXESHwoIbGFuZ3VhZ2UYDiABKA4yDS5MYW5ndWFnZVR5",
             "cGUSFAoLQUlPTkFJUEFLSkMYiAggASgJEhQKC0VKS05ISkdBSUJNGO0IIAEo",
             "CRIUCgtCRENFRU1IR0JISRi4CSABKA0SEQoJc2lnbmF0dXJlGAUgASgJEhMK",
@@ -41,7 +41,7 @@ namespace EggLink.DanhengServer.Proto {
             "DyABKA0SFAoMbG9naW5fcmFuZG9tGAQgASgEQh6qAhtFZ2dMaW5rLkRhbmhl",
             "bmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.LanguageTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.PlatformTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.MKDGHOMDDNMReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.MKDGHOMDDNMReflection.Descriptor, global::EggLink.DanhengServer.Proto.PlatformTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.LanguageTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PlayerLoginCsReq), global::EggLink.DanhengServer.Proto.PlayerLoginCsReq.Parser, new[]{ "Language", "AIONAIPAKJC", "EJKNHJGAIBM", "BDCEEMHGBHI", "Signature", "NGMENNDFODP", "HAIKFFCCIFL", "OKAFNHKOKFJ", "DHNMDCNBNLD", "HHLOJBCCNPL", "JAKEDMONFKM", "JAPDDCEJDKN", "HLDGIGHGHCF", "Platform", "MOLBBPGIOOJ", "JBJFBOCCBBA", "PIMJDJPHEIF", "ResVersion", "CLGEKPFAPNG", "HHHIHGDICGF", "ClientVersion", "DKMGKNMJEPM", "PHLGMEIBOIM", "LoginRandom" }, null, null, null, null)
           }));

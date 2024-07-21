@@ -112,6 +112,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public UnlockAllTextEN UnlockAll { get; } = new();
         public MailTextEN Mail { get; } = new();
         public RaidTextEN Raid { get; } = new();
+        public AccountTextEN Account { get; } = new();
     }
 
     #endregion
@@ -361,6 +362,20 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string Desc { get; } = "Manage player's temporary scene";
         public string Usage { get; } = "/raid <leave - leave temporary scene>";
         public string Leaved { get; } = "Leaved temporary scene!";
+    }
+    /// <summary>
+    /// path: Game.Command.Account
+    /// </summary>
+    public class AccountTextEN
+    {
+        public string Desc { get; } = "Create Account";
+        public string Usage { get; } = "/account create <username>";
+        public string InvalidUid { get; } = "Invalid UID argument!";
+        public string CreateError { get; } = "An internal error occurred {0}";
+        public string CreateSuccess { get; } = "New account {0} created successfully!";
+        public string DuplicateAccount { get; } = "Account {0} already exists!";
+        public string DuplicateUID { get; } = "UID {0} already exists!";
+        public string DataError { get; } = "Failed to retrieve new account! {0}!";
     }
 
     #endregion

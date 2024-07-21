@@ -33,7 +33,8 @@ namespace EggLink.DanhengServer.Server.Packet.Send.Mission
                     proto.MissionList.Add(new Proto.Mission()
                     {
                         Id = (uint)mission,
-                        Status = MissionStatus.MissionDoing
+                        Status = MissionStatus.MissionDoing,
+                        Progress = (uint)player.MissionManager!.GetMissionProgress(mission)
                     });
                 }
             }

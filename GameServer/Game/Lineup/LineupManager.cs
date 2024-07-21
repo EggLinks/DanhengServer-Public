@@ -297,7 +297,7 @@ namespace EggLink.DanhengServer.Game.Lineup
             }
         }
 
-        public void RemoveAvatar(int lineupIndex, int avatarId)
+        public void RemoveAvatar(int lineupIndex, int avatarId, bool sendPacket = true)
         {
             if (lineupIndex < 0)
             {
@@ -308,19 +308,31 @@ namespace EggLink.DanhengServer.Game.Lineup
             {
                 return;
             }
-            lineup.BaseAvatars?.RemoveAll(avatar => avatar.BaseAvatarId == avatarId);
+            GameData.SpecialAvatarData.TryGetValue(avatarId * 10 + Player.Data.WorldLevel, out var specialAvatar);
+            if (specialAvatar != null)
+            {
+                lineup.BaseAvatars?.RemoveAll(avatar => avatar.BaseAvatarId == specialAvatar.AvatarID);
+            } 
+            else
+            {
+                lineup.BaseAvatars?.RemoveAll(avatar => avatar.BaseAvatarId == avatarId);
+            }
             LineupData.Lineups[lineupIndex] = lineup;
             DatabaseHelper.Instance?.UpdateInstance(LineupData);
-            if (lineupIndex == LineupData.GetCurLineupIndex())
+
+            if (sendPacket)
             {
-                Player.SceneInstance?.SyncLineup();
+                if (lineupIndex == LineupData.GetCurLineupIndex())
+                {
+                    Player.SceneInstance?.SyncLineup();
+                }
+                Player.SendPacket(new PacketSyncLineupNotify(lineup));
             }
-            Player.SendPacket(new PacketSyncLineupNotify(lineup));
         }
 
-        public void RemoveAvatarFromCurTeam(int avatarId)
+        public void RemoveAvatarFromCurTeam(int avatarId, bool sendPacket = true)
         {
-            RemoveAvatar(LineupData.GetCurLineupIndex(), avatarId);
+            RemoveAvatar(LineupData.GetCurLineupIndex(), avatarId, sendPacket);
         }
 
         public void RemoveSpecialAvatarFromCurTeam(int specialAvatarId)

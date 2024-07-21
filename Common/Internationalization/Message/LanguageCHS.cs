@@ -74,6 +74,8 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string FloorGroupMissingResult { get; } = "传送、怪物战斗与世界生成";
         public string Mission { get; } = "任务";
         public string MissionInfo { get; } = "任务文件";
+        public string SubMission { get; } = "子任务";
+        public string SubMissionInfo { get; } = "子任务文件";
         public string MazeSkill { get; } = "角色秘技";
         public string MazeSkillInfo { get; } = "角色秘技文件";
         public string Dialogue { get; } = "模拟宇宙事件";
@@ -114,6 +116,7 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public UnlockAllTextCHS UnlockAll { get; } = new();
         public MailTextCHS Mail { get; } = new();
         public RaidTextCHS Raid { get; } = new();
+        public AccountTextCHS Account { get; } = new();
     }
 
     #endregion
@@ -363,7 +366,20 @@ namespace EggLink.DanhengServer.Internationalization.Message
         public string Usage { get; } = "/raid <leave - 离开临时场景>";
         public string Leaved { get; } = "已离开临时场景!";
     }
-
+    /// <summary>
+    /// path: Game.Command.Account
+    /// </summary>
+    public class AccountTextCHS
+    {
+        public string Desc { get; } = "创建账号";
+        public string Usage { get; } = "/account create  <用户名>";
+        public string InvalidUid { get; } = "无效UID参数！ ";
+        public string CreateError { get; } = "出现内部错误 {0} ";
+        public string CreateSuccess { get; } = "新账号 {0} 创建成功!";
+        public string DuplicateAccount { get; } = "账号 {0} 已存在!";
+        public string DuplicateUID { get; } = "UID {0} 已存在!";
+        public string DataError { get; } = "新账号获取失败! {0}!";
+    }
     #endregion
 
     #endregion

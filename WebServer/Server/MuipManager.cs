@@ -2,6 +2,7 @@
 using EggLink.DanhengServer.WebServer.Response;
 using Org.BouncyCastle.Crypto.Parameters;
 using System.Numerics;
+using System.Management;
 using System.Security.Cryptography;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Math;
@@ -17,11 +18,11 @@ using EggLink.DanhengServer.Enums;
 using Spectre.Console;
 using EggLink.DanhengServer.Database.Lineup;
 using EggLink.DanhengServer.Data;
-
 namespace EggLink.DanhengServer.WebServer.Server
 {
     public static class MuipManager
     {
+        private static readonly Logger logger = Logger.GetByClassName();
         public delegate void ExecuteCommandDelegate(string message, MuipCommandSender sender);
         public static event ExecuteCommandDelegate? OnExecuteCommand;
         public delegate void ServerInformationDelegate(Dictionary<int, PlayerData> resultData);
@@ -106,6 +107,7 @@ namespace EggLink.DanhengServer.WebServer.Server
                 }
 
                 var commandStr = Encoding.UTF8.GetString(decrypted);
+                logger.Info($"SessionId: {sessionId}, UID: {targetUid}, ExecuteCommand: {commandStr}");
                 var returnStr = "";
 
                 var sync = Task.Run(() => OnExecuteCommand?.Invoke(commandStr, new MuipCommandSender(session, (msg) =>
@@ -353,6 +355,149 @@ namespace EggLink.DanhengServer.WebServer.Server
             }
             return 0;
         }
+        public static float GetCpuUsage()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return GetCpuUsageLinux();
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return GetCpuUsageWindows();
+            }
+            throw new NotSupportedException("Unsupported OS platform");
+        }
+
+        private static float GetCpuUsageLinux()
+        {
+            string[] lines = File.ReadAllLines("/proc/stat");
+            string[] cpuInfo = lines[0].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            float idleTime = float.Parse(cpuInfo[4]);
+            float totalTime = 0;
+
+            for (int i = 1; i < cpuInfo.Length; i++)
+            {
+                totalTime += float.Parse(cpuInfo[i]);
+            }
+
+            return 100 * (1 - idleTime / totalTime);
+        }
+
+        private static float GetCpuUsageWindows()
+        {
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                throw new PlatformNotSupportedException("PerformanceCounter is only supported on Windows");
+            }
+
+            var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+            cpuCounter.NextValue();
+            System.Threading.Thread.Sleep(1000);
+            return cpuCounter.NextValue();
+        }
+
+        public static (string ModelName, int Cores, float Frequency) GetCpuDetails()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return GetCpuDetailsLinux();
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return GetCpuDetailsWindows();
+            }
+            throw new NotSupportedException("Unsupported OS platform");
+        }
+
+        private static (string ModelName, int Cores, float Frequency) GetCpuDetailsLinux()
+        {
+            string[] lines = File.ReadAllLines("/proc/cpuinfo");
+            string modelName = "";
+            int cores = 0;
+            float frequency = 0;
+
+            foreach (string line in lines)
+            {
+                if (line.StartsWith("model name"))
+                {
+                    modelName = line.Split(':')[1].Trim();
+                }
+                if (line.StartsWith("cpu cores"))
+                {
+                    cores = int.Parse(line.Split(':')[1].Trim());
+                }
+                if (line.StartsWith("cpu MHz"))
+                {
+                    frequency = float.Parse(line.Split(':')[1].Trim());
+                }
+            }
+
+            return (modelName, cores, frequency);
+        }
+
+        private static (string ModelName, int Cores, float Frequency) GetCpuDetailsWindows()
+        {
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                throw new PlatformNotSupportedException("ManagementObjectSearcher is only supported on Windows");
+            }
+
+            string modelName = "";
+            int cores = 0;
+            float frequency = 0;
+
+            var searcher = new ManagementObjectSearcher("select * from Win32_Processor");
+            foreach (var item in searcher.Get())
+            {
+                modelName = item["Name"]?.ToString() ?? "Unknown";
+                cores = int.Parse(item["NumberOfCores"]?.ToString() ?? "0");
+                frequency = float.Parse(item["MaxClockSpeed"]?.ToString() ?? "0") / 1000; // MHz to GHz
+            }
+
+            return (modelName, cores, frequency);
+        }
+        public static string GetSystemVersion()
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            return GetWindowsVersion();
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            return GetLinuxVersion();
+        }
+        else
+        {
+            throw new PlatformNotSupportedException("This method only supports Windows and Linux.");
+        }
+    }
+
+    private static string GetWindowsVersion()
+    {
+        return Environment.OSVersion.VersionString;
+    }
+
+    private static string GetLinuxVersion()
+    {
+        string version = string.Empty;
+        if (File.Exists("/etc/os-release"))
+        {
+            var lines = File.ReadAllLines("/etc/os-release");
+            foreach (var line in lines)
+            {
+                if (line.StartsWith("PRETTY_NAME"))
+                {
+                    version = line.Split('=')[1].Trim('"');
+                    break;
+                }
+            }
+        }
+        else if (File.Exists("/proc/version"))
+        {
+            version = File.ReadAllText("/proc/version");
+        }
+        return version;
+    }
 
         #endregion
     }

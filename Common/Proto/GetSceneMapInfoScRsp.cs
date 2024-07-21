@@ -24,9 +24,9 @@ namespace EggLink.DanhengServer.Proto {
     static GetSceneMapInfoScRspReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpHZXRTY2VuZU1hcEluZm9TY1JzcC5wcm90bxoPQ2hlc3RJbmZvLnByb3Rv",
-            "GhNNYXplUHJvcFN0YXRlLnByb3RvGhJTY2VuZU1hcEluZm8ucHJvdG8aD01h",
-            "emVHcm91cC5wcm90byLhAgoUR2V0U2NlbmVNYXBJbmZvU2NSc3ASEwoLQ0dJ",
+            "ChpHZXRTY2VuZU1hcEluZm9TY1JzcC5wcm90bxoTTWF6ZVByb3BTdGF0ZS5w",
+            "cm90bxoPTWF6ZUdyb3VwLnByb3RvGhJTY2VuZU1hcEluZm8ucHJvdG8aD0No",
+            "ZXN0SW5mby5wcm90byLhAgoUR2V0U2NlbmVNYXBJbmZvU2NSc3ASEwoLQ0dJ",
             "SUlFS0lESkUYDSABKA0SJgoObWF6ZV9wcm9wX2xpc3QYByADKAsyDi5NYXpl",
             "UHJvcFN0YXRlEhAKCGVudHJ5X2lkGAsgASgNEg8KB3JldGNvZGUYCiABKA0S",
             "HgoKY2hlc3RfbGlzdBgFIAMoCzIKLkNoZXN0SW5mbxIjCg9tYXplX2dyb3Vw",
@@ -37,7 +37,7 @@ namespace EggLink.DanhengServer.Proto {
             "aXN0GAEgAygNQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnBy",
             "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChestInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.MazePropStateReflection.Descriptor, global::EggLink.DanhengServer.Proto.SceneMapInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.MazeGroupReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.MazePropStateReflection.Descriptor, global::EggLink.DanhengServer.Proto.MazeGroupReflection.Descriptor, global::EggLink.DanhengServer.Proto.SceneMapInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChestInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetSceneMapInfoScRsp), global::EggLink.DanhengServer.Proto.GetSceneMapInfoScRsp.Parser, new[]{ "CGIIIEKIDJE", "MazePropList", "EntryId", "Retcode", "ChestList", "MazeGroupList", "UnlockTeleportList", "CurMapEntryId", "SceneMapInfo", "BDKGPGBNFNN", "ContentId", "LightenSectionList" }, null, null, null, null)
           }));

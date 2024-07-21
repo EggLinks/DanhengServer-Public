@@ -1,6 +1,9 @@
 ﻿using EggLink.DanhengServer.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Collections.Generic;
+using EggLink.DanhengServer.WebServer.Server;
+
 
 namespace EggLink.DanhengServer.WebServer.Response
 {
@@ -15,6 +18,11 @@ namespace EggLink.DanhengServer.WebServer.Response
         public float MaxMemory { get; set; } = 0;
         public float UsedMemory { get; set; } = 0;
         public float ProgramUsedMemory { get; set; } = 0;
+        public float CpuUsage { get; set; } = MuipManager.GetCpuUsage();
+        public string CpuModel { get; set; } = MuipManager.GetCpuDetails().ModelName;
+        public int CpuCores { get; set; } = MuipManager.GetCpuDetails().Cores;
+        public float CpuFrequency { get; set; } = MuipManager.GetCpuDetails().Frequency;
+        public string SystemVersion { get; set; } = MuipManager.GetSystemVersion();
     }
 
     public class SimplePlayerInformationData

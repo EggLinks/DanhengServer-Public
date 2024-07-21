@@ -15,7 +15,7 @@ namespace EggLink.DanhengServer.Data.Excel
         public string PerformancePath { get; set; } = "";
 
         [JsonIgnore]
-        public MissionActInfo? ActInfo { get; set; }
+        public LevelGraphConfigInfo? ActInfo { get; set; }
 
         public override int GetId()
         {

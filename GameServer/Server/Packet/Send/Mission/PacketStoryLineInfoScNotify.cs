@@ -24,6 +24,11 @@ namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Mission
                 RunningStoryLineIdList = { storyLineIdList },
             };
 
+            if (!proto.RunningStoryLineIdList.Contains(proto.CurStoryLineId))
+            {
+                proto.RunningStoryLineIdList.Add(proto.CurStoryLineId);
+            }
+
             GameData.StroyLineTrialAvatarDataData.TryGetValue(player.StoryLineManager!.StoryLineData.CurStoryLineId, out var storyExcel);
             if (storyExcel != null)
             {

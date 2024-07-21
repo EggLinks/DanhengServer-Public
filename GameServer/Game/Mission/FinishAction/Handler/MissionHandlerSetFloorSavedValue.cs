@@ -1,5 +1,6 @@
 ﻿using EggLink.DanhengServer.Enums;
 using EggLink.DanhengServer.Game.Player;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace EggLink.DanhengServer.Game.Mission.FinishAction.Handler
     {
         public override void OnHandle(List<int> Params, List<string> ParamString, PlayerInstance Player)
         {
+            _ = int.TryParse(ParamString[0], out var plane);
             _ = int.TryParse(ParamString[1], out var floor);
             Player.SceneData!.FloorSavedData.TryGetValue(floor, out var value);
             if (value == null)
@@ -22,6 +24,9 @@ namespace EggLink.DanhengServer.Game.Mission.FinishAction.Handler
             }
 
             value[ParamString[2]] = int.Parse(ParamString[3]);  // ParamString[2] is the key
+            Player.SendPacket(new PacketUpdateFloorSavedValueNotify(ParamString[2], int.Parse(ParamString[3])));
+
+            Player.TaskManager?.SceneTaskTrigger.TriggerFloor(plane, floor);
         }
     }
 }

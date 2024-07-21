@@ -151,6 +151,9 @@ namespace EggLink.DanhengServer.Game.Inventory
                         AddItem(itemId + 200000, 1, false);
                     }
                     break;
+                case ItemMainTypeEnum.Mission:
+                    itemData = PutItem(itemId, count);
+                    break;
                 default:
                     itemData = PutItem(itemId, Math.Min(count, itemConfig.PileLimit));
                     break;
@@ -167,6 +170,8 @@ namespace EggLink.DanhengServer.Game.Inventory
                 {
                     Player.SendPacket(new PacketScenePlaneEventScNotify(clone));
                 }
+
+                Player.MissionManager?.HandleFinishType(Enums.MissionFinishTypeEnum.GetItem, itemData);
             }
 
             return returnRaw ? itemData : clone ?? itemData;
@@ -314,11 +319,18 @@ namespace EggLink.DanhengServer.Game.Inventory
                     itemData = relic;
                     break;
             }
+
             if (itemData != null && sync)
             {
                 Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
             }
-            DatabaseHelper.Instance?.UpdateInstance(Data);
+
+            Player.MissionManager?.HandleFinishType(Enums.MissionFinishTypeEnum.UseItem, new ItemData()
+            {
+                ItemId = itemId,
+                Count = count,
+            });
+
             return itemData;
         }
 

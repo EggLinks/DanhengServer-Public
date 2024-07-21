@@ -24,9 +24,9 @@ namespace EggLink.DanhengServer.Proto {
     static EvolveBuildLevelInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpFdm9sdmVCdWlsZExldmVsSW5mby5wcm90bxoXRXZvbHZlQnVpbGRBdmF0",
-            "YXIucHJvdG8aEkJhdHRsZVRhcmdldC5wcm90bxobRXZvbHZlQnVpbGRCYXR0",
-            "bGVJbmZvLnByb3RvIocCChRFdm9sdmVCdWlsZExldmVsSW5mbxIyChtCYXR0",
+            "ChpFdm9sdmVCdWlsZExldmVsSW5mby5wcm90bxoSQmF0dGxlVGFyZ2V0LnBy",
+            "b3RvGhtFdm9sdmVCdWlsZEJhdHRsZUluZm8ucHJvdG8aF0V2b2x2ZUJ1aWxk",
+            "QXZhdGFyLnByb3RvIocCChRFdm9sdmVCdWlsZExldmVsSW5mbxIyChtCYXR0",
             "bGVUYXJnZXRMaXN0RmllbGROdW1iZXIYBSADKAsyDS5CYXR0bGVUYXJnZXQS",
             "GwoTUm91bmRDbnRGaWVsZE51bWJlchgCIAEoDRIxChVBdmF0YXJMaXN0Rmll",
             "bGROdW1iZXIYBCADKAsyEi5Fdm9sdmVCdWlsZEF2YXRhchIrCgtiYXR0bGVf",
@@ -35,7 +35,7 @@ namespace EggLink.DanhengServer.Proto {
             "ZXIYAyABKA1CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IGcHJv",
             "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.EvolveBuildAvatarReflection.Descriptor, global::EggLink.DanhengServer.Proto.BattleTargetReflection.Descriptor, global::EggLink.DanhengServer.Proto.EvolveBuildBattleInfoReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.BattleTargetReflection.Descriptor, global::EggLink.DanhengServer.Proto.EvolveBuildBattleInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.EvolveBuildAvatarReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.EvolveBuildLevelInfo), global::EggLink.DanhengServer.Proto.EvolveBuildLevelInfo.Parser, new[]{ "BattleTargetListFieldNumber", "RoundCntFieldNumber", "AvatarListFieldNumber", "BattleInfo", "PeriodIdListFieldNumber", "CurGameExpFieldNumber" }, null, null, null, null)
           }));

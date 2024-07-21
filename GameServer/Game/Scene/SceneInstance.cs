@@ -9,11 +9,13 @@ using EggLink.DanhengServer.Game.ChessRogue.Cell;
 using EggLink.DanhengServer.Game.Player;
 using EggLink.DanhengServer.Game.Rogue.Scene;
 using EggLink.DanhengServer.Game.Scene.Entity;
+using EggLink.DanhengServer.GameServer.Game.Mission;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Server.Packet;
 using EggLink.DanhengServer.Server.Packet.Send.Lineup;
 using EggLink.DanhengServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Util;
+using System.Numerics;
 
 namespace EggLink.DanhengServer.Game.Scene
 {
@@ -72,11 +74,20 @@ namespace EggLink.DanhengServer.Game.Scene
                     EntityLoader = new ChallengeEntityLoader(this, Player);
                     break;
                 default:
-                    EntityLoader = new(this);
+                    if (Player.StoryLineManager?.StoryLineData.CurStoryLineId != 0)
+                    {
+                       EntityLoader = new StoryLineEntityLoader(this);
+                    }
+                    else
+                    {
+                        EntityLoader = new SceneEntityLoader(this);
+                    }
                     break;
             }
 
             EntityLoader.LoadEntity();
+
+            Player.TaskManager?.SceneTaskTrigger.TriggerFloor(PlaneId, FloorId);
         }
 
         #endregion

@@ -24,8 +24,8 @@ namespace EggLink.DanhengServer.Proto {
     static PVEBattleResultCsReqReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpQVkVCYXR0bGVSZXN1bHRDc1JlcS5wcm90bxoWQmF0dGxlU3RhdGlzdGlj",
-            "cy5wcm90bxoVQmF0dGxlRW5kU3RhdHVzLnByb3RvGg5CYXR0bGVPcC5wcm90",
+            "ChpQVkVCYXR0bGVSZXN1bHRDc1JlcS5wcm90bxoVQmF0dGxlRW5kU3RhdHVz",
+            "LnByb3RvGhZCYXR0bGVTdGF0aXN0aWNzLnByb3RvGg5CYXR0bGVPcC5wcm90",
             "byLiAwoUUFZFQmF0dGxlUmVzdWx0Q3NSZXESEwoLUE1PTEZHTkJHQUEYAiAB",
             "KA0SOwoLTUdKRE9QQkFQSEIYBCADKAsyJi5QVkVCYXR0bGVSZXN1bHRDc1Jl",
             "cS5NR0pET1BCQVBIQkVudHJ5EhEKCWJhdHRsZV9pZBgLIAEoDRITCgtyZXNf",
@@ -39,7 +39,7 @@ namespace EggLink.DanhengServer.Proto {
             "bnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKA06AjgBQh6qAhtFZ2dM",
             "aW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.BattleStatisticsReflection.Descriptor, global::EggLink.DanhengServer.Proto.BattleEndStatusReflection.Descriptor, global::EggLink.DanhengServer.Proto.BattleOpReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.BattleEndStatusReflection.Descriptor, global::EggLink.DanhengServer.Proto.BattleStatisticsReflection.Descriptor, global::EggLink.DanhengServer.Proto.BattleOpReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.PVEBattleResultCsReq), global::EggLink.DanhengServer.Proto.PVEBattleResultCsReq.Parser, new[]{ "PMOLFGNBGAA", "MGJDOPBAPHB", "BattleId", "ResVersion", "StageId", "FPHBMPAADKB", "EndStatus", "CostTime", "ClientVersion", "NDBCFEKIBCF", "BPNJOCFEGCD", "TurnSnapshotHash", "OpList", "Stt", "IsAiConsiderUltraSkill" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
           }));

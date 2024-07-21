@@ -1,4 +1,5 @@
-﻿using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Enums.Task;
+using EggLink.DanhengServer.Proto;
 
 namespace EggLink.DanhengServer.Enums
 {
@@ -21,6 +22,18 @@ namespace EggLink.DanhengServer.Enums
                 MissionPhaseEnum.Finish => MissionStatus.MissionFinish,
                 MissionPhaseEnum.Cancel => MissionStatus.MissionNone,
                 _ => MissionStatus.MissionNone,
+            };
+        }
+
+        public static SubMissionStateEnum ToStateEnum(this MissionPhaseEnum status)
+        {
+            return status switch
+            {
+                MissionPhaseEnum.None => SubMissionStateEnum.Unknow,
+                MissionPhaseEnum.Accept => SubMissionStateEnum.Started,
+                MissionPhaseEnum.Finish => SubMissionStateEnum.Finish,
+                MissionPhaseEnum.Cancel => SubMissionStateEnum.TakenAndNotStarted,
+                _ => SubMissionStateEnum.Unknow,
             };
         }
     }

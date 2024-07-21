@@ -26,6 +26,12 @@ namespace EggLink.DanhengServer.Data.Config
         [JsonIgnore()]
         public Dictionary<int, List<int>> UnlockDoorID { get; set; } = [];
 
+        [JsonIgnore()]
+        public Dictionary<int, List<int>> UnlockControllerID { get; set; } = [];
+
+        [JsonIgnore()]
+        public int MazePieceCount { get; set; }
+
         public void Load(GroupInfo info)
         {
             if (ValueSource != null)
@@ -38,7 +44,17 @@ namespace EggLink.DanhengServer.Data.Config
                         var value = v["Value"];
                         if (value != null && key != null)
                         {
-                            if (key.ToString().Contains("Door") || 
+                            if (key.ToString() == "ListenTriggerCustomString")
+                            {
+                                info.PropTriggerCustomString.TryGetValue(value.ToString(), out var list);
+                                if (list == null)
+                                {
+                                    list = [];
+                                    info.PropTriggerCustomString.Add(value.ToString(), list);
+                                }
+                                list.Add(ID);
+                            }
+                            else if (key.ToString().Contains("Door") || 
                                 key.ToString().Contains("Bridge") || 
                                 key.ToString().Contains("UnlockTarget") ||
                                 key.ToString().Contains("Rootcontamination") ||
@@ -51,6 +67,20 @@ namespace EggLink.DanhengServer.Data.Config
                                         UnlockDoorID.Add(int.Parse(value.ToString().Split(",")[0]), []);
                                     }
                                     UnlockDoorID[int.Parse(value.ToString().Split(",")[0])].Add(int.Parse(value.ToString().Split(",")[1]));
+                                }
+                                catch
+                                {
+                                }
+                            } 
+                            else if (key.ToString().Contains("Controller"))
+                            {
+                                try
+                                {
+                                    if (UnlockControllerID.ContainsKey(int.Parse(value.ToString().Split(",")[0])) == false)
+                                    {
+                                        UnlockControllerID.Add(int.Parse(value.ToString().Split(",")[0]), []);
+                                    }
+                                    UnlockControllerID[int.Parse(value.ToString().Split(",")[0])].Add(int.Parse(value.ToString().Split(",")[1]));
                                 }
                                 catch
                                 {
