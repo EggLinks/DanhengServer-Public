@@ -153,6 +153,11 @@ namespace EggLink.DanhengServer.Command.Cmd
                 player.SceneData.ScenePropData[floorId] = [];
             }
 
+            if (player.SceneData?.FloorSavedData.TryGetValue(floorId, out var _) == true)
+            {
+                player.SceneData.FloorSavedData[floorId] = [];
+            }
+
             arg.SendMsg(I18nManager.Translate("Game.Command.Scene.SceneReset", floorId.ToString()));
         }
     }

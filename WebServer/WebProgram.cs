@@ -4,6 +4,12 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using System.Net;
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace EggLink.DanhengServer.WebServer
 {
@@ -46,6 +52,17 @@ namespace EggLink.DanhengServer.WebServer
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
+
             services.AddControllers();
         }
 
@@ -75,6 +92,8 @@ namespace EggLink.DanhengServer.WebServer
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 

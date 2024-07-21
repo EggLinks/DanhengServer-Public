@@ -15,6 +15,7 @@ namespace EggLink.DanhengServer.Data.Config
         public GroupLoadSideEnum LoadSide { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public GroupCategoryEnum Category { get; set; }
+        public string LevelGraph { get; set; } = "";
         public bool LoadOnInitial { get; set; }
         public string GroupName { get; set; } = "";
         public LoadCondition LoadCondition { get; set; } = new();
@@ -27,6 +28,12 @@ namespace EggLink.DanhengServer.Data.Config
         public List<MonsterInfo> MonsterList { get; set; } = [];
         public List<PropInfo> PropList { get; set; } = [];
         public List<NpcInfo> NPCList { get; set; } = [];
+
+        [JsonIgnore]
+        public LevelGraphConfigInfo? LevelGraphConfig { get; set; }
+
+        [JsonIgnore]
+        public Dictionary<string, List<int>> PropTriggerCustomString { get; set; } = [];
 
         public void Load()
         {

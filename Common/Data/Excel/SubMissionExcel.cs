@@ -17,6 +17,9 @@ namespace EggLink.DanhengServer.Data.Excel
         [JsonIgnore()]
         public SubMissionInfo? SubMissionInfo { get; set; }
 
+        [JsonIgnore()]
+        public LevelGraphConfigInfo? SubMissionTaskInfo { get; set; }
+
         public override int GetId()
         {
             return SubMissionID;

@@ -14,7 +14,8 @@ namespace EggLink.DanhengServer.Game.Mission.FinishType.Handler
     {
         public override void Init(PlayerInstance player, SubMissionInfo info, object? arg)
         {
-            player.MessageManager!.AddMessageSection(info.ParamInt1);
+            // MOVE TO TASK HANDLER
+            //player.MessageManager!.AddMessageSection(info.ParamInt1);
         }
 
         public override void HandleFinishType(PlayerInstance player, SubMissionInfo info, object? arg)

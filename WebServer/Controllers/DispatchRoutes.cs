@@ -6,10 +6,11 @@ using EggLink.DanhengServer.WebServer.Objects;
 using Google.Protobuf;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-
+using Microsoft.AspNetCore.Cors;
 namespace EggLink.DanhengServer.WebServer.Controllers
 {
     [ApiController]
+    [EnableCors("AllowAll")]
     [Route("/")]
     public class DispatchRoutes
     {

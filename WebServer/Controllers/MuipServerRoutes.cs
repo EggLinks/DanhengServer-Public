@@ -4,9 +4,11 @@ using EggLink.DanhengServer.WebServer.Response;
 using EggLink.DanhengServer.WebServer.Server;
 using Microsoft.AspNetCore.Mvc;
 
+using Microsoft.AspNetCore.Cors; 
 namespace EggLink.DanhengServer.WebServer.Controllers
 {
     [ApiController]
+    [EnableCors("AllowAll")]
     [Route("/")]
     public class MuipServerRoutes
     {
@@ -31,14 +33,14 @@ namespace EggLink.DanhengServer.WebServer.Controllers
         }
 
         [HttpGet("/muip/server_information")]
-        public IActionResult GetServerInformation([FromBody] ServerInformationRequest req)
+        public IActionResult GetServerInformation([FromQuery] ServerInformationRequest req)
         {
             var resp = MuipManager.GetInformation(req.SessionId);
             return new JsonResult(resp);
         }
 
         [HttpGet("/muip/player_information")]
-        public IActionResult GetPlayerInformation([FromBody] PlayerInformationRequest req)
+        public IActionResult GetPlayerInformation([FromQuery] PlayerInformationRequest req)
         {
             var resp = MuipManager.GetPlayerInformation(req.SessionId, req.Uid);
             return new JsonResult(resp);

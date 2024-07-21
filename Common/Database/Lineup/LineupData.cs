@@ -108,7 +108,7 @@ namespace EggLink.DanhengServer.Database.Lineup
                 Name = Name,
                 MaxMp = 5,
                 Mp = (uint)Mp,
-                ExtraLineupType = (ExtraLineupType)LineupType,
+                ExtraLineupType = (ExtraLineupType)(LineupType == (int)ExtraLineupType.LineupHeliobus ? (int)ExtraLineupType.LineupNone : LineupType),
                 Index = (uint)(LineupData?.Lineups?.Values.ToList().IndexOf(this) ?? 0),
             };
 

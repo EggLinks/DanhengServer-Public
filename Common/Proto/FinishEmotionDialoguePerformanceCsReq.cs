@@ -25,14 +25,14 @@ namespace EggLink.DanhengServer.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CitGaW5pc2hFbW90aW9uRGlhbG9ndWVQZXJmb3JtYW5jZUNzUmVxLnByb3Rv",
-            "ImYKJUZpbmlzaEVtb3Rpb25EaWFsb2d1ZVBlcmZvcm1hbmNlQ3NSZXESEwoL",
-            "T05LS0hHQk5KT0kYDyABKA0SEwoLSk5FREVFTEVFS08YASABKA0SEwoLSkpQ",
-            "TkRBQUNNRUoYBCABKA1CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90",
-            "b2IGcHJvdG8z"));
+            "ImQKJUZpbmlzaEVtb3Rpb25EaWFsb2d1ZVBlcmZvcm1hbmNlQ3NSZXESEQoJ",
+            "c2NyaXB0X2lkGA8gASgNEhMKC2RpYWxvZ3VlX2lkGAEgASgNEhMKC0pKUE5E",
+            "QUFDTUVKGAQgASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9i",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.FinishEmotionDialoguePerformanceCsReq), global::EggLink.DanhengServer.Proto.FinishEmotionDialoguePerformanceCsReq.Parser, new[]{ "ONKKHGBNJOI", "JNEDEELEEKO", "JJPNDAACMEJ" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.FinishEmotionDialoguePerformanceCsReq), global::EggLink.DanhengServer.Proto.FinishEmotionDialoguePerformanceCsReq.Parser, new[]{ "ScriptId", "DialogueId", "JJPNDAACMEJ" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,8 +74,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FinishEmotionDialoguePerformanceCsReq(FinishEmotionDialoguePerformanceCsReq other) : this() {
-      oNKKHGBNJOI_ = other.oNKKHGBNJOI_;
-      jNEDEELEEKO_ = other.jNEDEELEEKO_;
+      scriptId_ = other.scriptId_;
+      dialogueId_ = other.dialogueId_;
       jJPNDAACMEJ_ = other.jJPNDAACMEJ_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -86,27 +86,27 @@ namespace EggLink.DanhengServer.Proto {
       return new FinishEmotionDialoguePerformanceCsReq(this);
     }
 
-    /// <summary>Field number for the "ONKKHGBNJOI" field.</summary>
-    public const int ONKKHGBNJOIFieldNumber = 15;
-    private uint oNKKHGBNJOI_;
+    /// <summary>Field number for the "script_id" field.</summary>
+    public const int ScriptIdFieldNumber = 15;
+    private uint scriptId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint ONKKHGBNJOI {
-      get { return oNKKHGBNJOI_; }
+    public uint ScriptId {
+      get { return scriptId_; }
       set {
-        oNKKHGBNJOI_ = value;
+        scriptId_ = value;
       }
     }
 
-    /// <summary>Field number for the "JNEDEELEEKO" field.</summary>
-    public const int JNEDEELEEKOFieldNumber = 1;
-    private uint jNEDEELEEKO_;
+    /// <summary>Field number for the "dialogue_id" field.</summary>
+    public const int DialogueIdFieldNumber = 1;
+    private uint dialogueId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint JNEDEELEEKO {
-      get { return jNEDEELEEKO_; }
+    public uint DialogueId {
+      get { return dialogueId_; }
       set {
-        jNEDEELEEKO_ = value;
+        dialogueId_ = value;
       }
     }
 
@@ -137,8 +137,8 @@ namespace EggLink.DanhengServer.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ONKKHGBNJOI != other.ONKKHGBNJOI) return false;
-      if (JNEDEELEEKO != other.JNEDEELEEKO) return false;
+      if (ScriptId != other.ScriptId) return false;
+      if (DialogueId != other.DialogueId) return false;
       if (JJPNDAACMEJ != other.JJPNDAACMEJ) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -147,8 +147,8 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (ONKKHGBNJOI != 0) hash ^= ONKKHGBNJOI.GetHashCode();
-      if (JNEDEELEEKO != 0) hash ^= JNEDEELEEKO.GetHashCode();
+      if (ScriptId != 0) hash ^= ScriptId.GetHashCode();
+      if (DialogueId != 0) hash ^= DialogueId.GetHashCode();
       if (JJPNDAACMEJ != 0) hash ^= JJPNDAACMEJ.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -168,17 +168,17 @@ namespace EggLink.DanhengServer.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (JNEDEELEEKO != 0) {
+      if (DialogueId != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt32(JNEDEELEEKO);
+        output.WriteUInt32(DialogueId);
       }
       if (JJPNDAACMEJ != 0) {
         output.WriteRawTag(32);
         output.WriteUInt32(JJPNDAACMEJ);
       }
-      if (ONKKHGBNJOI != 0) {
+      if (ScriptId != 0) {
         output.WriteRawTag(120);
-        output.WriteUInt32(ONKKHGBNJOI);
+        output.WriteUInt32(ScriptId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -190,17 +190,17 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (JNEDEELEEKO != 0) {
+      if (DialogueId != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt32(JNEDEELEEKO);
+        output.WriteUInt32(DialogueId);
       }
       if (JJPNDAACMEJ != 0) {
         output.WriteRawTag(32);
         output.WriteUInt32(JJPNDAACMEJ);
       }
-      if (ONKKHGBNJOI != 0) {
+      if (ScriptId != 0) {
         output.WriteRawTag(120);
-        output.WriteUInt32(ONKKHGBNJOI);
+        output.WriteUInt32(ScriptId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -212,11 +212,11 @@ namespace EggLink.DanhengServer.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (ONKKHGBNJOI != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ONKKHGBNJOI);
+      if (ScriptId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ScriptId);
       }
-      if (JNEDEELEEKO != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(JNEDEELEEKO);
+      if (DialogueId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DialogueId);
       }
       if (JJPNDAACMEJ != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(JJPNDAACMEJ);
@@ -233,11 +233,11 @@ namespace EggLink.DanhengServer.Proto {
       if (other == null) {
         return;
       }
-      if (other.ONKKHGBNJOI != 0) {
-        ONKKHGBNJOI = other.ONKKHGBNJOI;
+      if (other.ScriptId != 0) {
+        ScriptId = other.ScriptId;
       }
-      if (other.JNEDEELEEKO != 0) {
-        JNEDEELEEKO = other.JNEDEELEEKO;
+      if (other.DialogueId != 0) {
+        DialogueId = other.DialogueId;
       }
       if (other.JJPNDAACMEJ != 0) {
         JJPNDAACMEJ = other.JJPNDAACMEJ;
@@ -258,7 +258,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            JNEDEELEEKO = input.ReadUInt32();
+            DialogueId = input.ReadUInt32();
             break;
           }
           case 32: {
@@ -266,7 +266,7 @@ namespace EggLink.DanhengServer.Proto {
             break;
           }
           case 120: {
-            ONKKHGBNJOI = input.ReadUInt32();
+            ScriptId = input.ReadUInt32();
             break;
           }
         }
@@ -285,7 +285,7 @@ namespace EggLink.DanhengServer.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            JNEDEELEEKO = input.ReadUInt32();
+            DialogueId = input.ReadUInt32();
             break;
           }
           case 32: {
@@ -293,7 +293,7 @@ namespace EggLink.DanhengServer.Proto {
             break;
           }
           case 120: {
-            ONKKHGBNJOI = input.ReadUInt32();
+            ScriptId = input.ReadUInt32();
             break;
           }
         }

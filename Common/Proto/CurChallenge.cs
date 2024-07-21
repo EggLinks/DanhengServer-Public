@@ -24,9 +24,9 @@ namespace EggLink.DanhengServer.Proto {
     static CurChallengeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJDdXJDaGFsbGVuZ2UucHJvdG8aEUpHSEpKRkVKUExHLnByb3RvGhhDaGFs",
-            "bGVuZ2VTdG9yeUluZm8ucHJvdG8aFUV4dHJhTGluZXVwVHlwZS5wcm90bxoV",
-            "Q2hhbGxlbmdlU3RhdHVzLnByb3RvIpsCCgxDdXJDaGFsbGVuZ2USFAoMY2hh",
+            "ChJDdXJDaGFsbGVuZ2UucHJvdG8aFUNoYWxsZW5nZVN0YXR1cy5wcm90bxoV",
+            "RXh0cmFMaW5ldXBUeXBlLnByb3RvGhhDaGFsbGVuZ2VTdG9yeUluZm8ucHJv",
+            "dG8aEUpHSEpKRkVKUExHLnByb3RvIpsCCgxDdXJDaGFsbGVuZ2USFAoMY2hh",
             "bGxlbmdlX2lkGA8gASgNEigKC3BsYXllcl9pbmZvGAQgASgLMhMuQ2hhbGxl",
             "bmdlU3RvcnlJbmZvEhAKCHNjb3JlX2lkGAMgASgNEhMKC09HQUhNRURPS05F",
             "GAogASgNEhMKC3JvdW5kX2NvdW50GAUgASgNEhEKCXNjb3JlX3R3bxgJIAEo",
@@ -35,7 +35,7 @@ namespace EggLink.DanhengServer.Proto {
             "UExHEiAKBnN0YXR1cxgNIAEoDjIQLkNoYWxsZW5nZVN0YXR1c0IeqgIbRWdn",
             "TGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.JGHJJFEJPLGReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChallengeStoryInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.ExtraLineupTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChallengeStatusReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChallengeStatusReflection.Descriptor, global::EggLink.DanhengServer.Proto.ExtraLineupTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChallengeStoryInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.JGHJJFEJPLGReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.CurChallenge), global::EggLink.DanhengServer.Proto.CurChallenge.Parser, new[]{ "ChallengeId", "PlayerInfo", "ScoreId", "OGAHMEDOKNE", "RoundCount", "ScoreTwo", "ExtraLineupType", "ArchiveMonsterIdList", "Status" }, null, null, null, null)
           }));

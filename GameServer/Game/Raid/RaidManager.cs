@@ -195,28 +195,9 @@ namespace EggLink.DanhengServer.GameServer.Game.Raid
             GameData.RaidConfigData.TryGetValue(RaidData.CurRaidId * 100 + record.WorldLevel, out var config);
             if (config == null) return;
 
-            if (Player.LineupManager!.GetCurLineup()!.IsExtraLineup())
-            {
-                Player.LineupManager!.SetExtraLineup(ExtraLineupType.LineupNone, []);
-                Player.SendPacket(new PacketSyncLineupNotify(Player.LineupManager!.GetCurLineup()!));
-            }
-
-            if (config.FinishEntranceID > 0)
-            {
-                Player.EnterScene(config.FinishEntranceID, 0, true);
-            }
-            else
-            {
-                Player.EnterScene(record.OldEntryId, 0, true);
-                Player.MoveTo(record.OldPos, record.OldRot);
-            }
             record.Status = RaidStatus.Finish;
 
             Player.SendPacket(new PacketRaidInfoNotify(record));
-
-            // reset raid info
-            RaidData.CurRaidId = 0;
-            RaidData.CurRaidWorldLevel = 0;
         }
 
         public void LeaveRaid(bool save)
@@ -239,21 +220,36 @@ namespace EggLink.DanhengServer.GameServer.Game.Raid
                 Player.SendPacket(new PacketSyncLineupNotify(Player.LineupManager!.GetCurLineup()!));
             }
 
-            Player.EnterScene(record.OldEntryId, 0, true);
-            Player.MoveTo(record.OldPos, record.OldRot);
+            if (record.Status == RaidStatus.Finish)
+            {
+                if (config.FinishEntranceID > 0)
+                {
+                    Player.EnterScene(config.FinishEntranceID, 0, true);
+                }
+                else
+                {
+                    Player.EnterScene(record.OldEntryId, 0, true);
+                    Player.MoveTo(record.OldPos, record.OldRot);
+                }
+            }
+            else
+            {
+                Player.EnterScene(record.OldEntryId, 0, true);
+                Player.MoveTo(record.OldPos, record.OldRot);
 
-            // reset raid info
-            record.Status = RaidStatus.Doing;
+                // reset raid info
+                record.Status = RaidStatus.Doing;
 
-            Player.SendPacket(new PacketRaidInfoNotify(record));
+                Player.SendPacket(new PacketRaidInfoNotify(record));
+
+                if (!save)
+                {
+                    ClearRaid(record.RaidId, record.WorldLevel);
+                }
+            }
 
             RaidData.CurRaidId = 0;
             RaidData.CurRaidWorldLevel = 0;
-
-            if (!save)
-            {
-                ClearRaid(record.RaidId, record.WorldLevel);
-            }
         }
 
         public void ClearRaid(int raidId, int worldLevel)

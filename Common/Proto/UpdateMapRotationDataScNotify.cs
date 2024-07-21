@@ -24,9 +24,9 @@ namespace EggLink.DanhengServer.Proto {
     static UpdateMapRotationDataScNotifyReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiNVcGRhdGVNYXBSb3RhdGlvbkRhdGFTY05vdGlmeS5wcm90bxoXUm90YXRv",
-            "ckVuZXJneUluZm8ucHJvdG8aEUlKSkhLRE5GS01ELnByb3RvGhFSb3RhdGVy",
-            "RGF0YS5wcm90bxoRQ2hhcmdlckluZm8ucHJvdG8i7wEKHVVwZGF0ZU1hcFJv",
+            "CiNVcGRhdGVNYXBSb3RhdGlvbkRhdGFTY05vdGlmeS5wcm90bxoRUm90YXRl",
+            "ckRhdGEucHJvdG8aEUNoYXJnZXJJbmZvLnByb3RvGhdSb3RhdG9yRW5lcmd5",
+            "SW5mby5wcm90bxoRSUpKSEtETkZLTUQucHJvdG8i7wEKHVVwZGF0ZU1hcFJv",
             "dGF0aW9uRGF0YVNjTm90aWZ5EiIKDHJvdGF0ZXJfZGF0YRgBIAMoCzIMLlJv",
             "dGF0ZXJEYXRhEhMKC0lJQ0ZPT05PTEFJGAogASgFEiIKDGNoYXJnZXJfaW5m",
             "bxgHIAMoCzIMLkNoYXJnZXJJbmZvEhMKC0NMSE1BRkNISkFGGAQgASgIEicK",
@@ -34,7 +34,7 @@ namespace EggLink.DanhengServer.Proto {
             "X2luZm8YAyABKAsyDC5JSkpIS0RORktNRBITCgtITUNBRkVKQVBKSxgPIAEo",
             "DUIeqgIbRWdnTGluay5EYW5oZW5nU2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RotatorEnergyInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.IJJHKDNFKMDReflection.Descriptor, global::EggLink.DanhengServer.Proto.RotaterDataReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChargerInfoReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RotaterDataReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChargerInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RotatorEnergyInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.IJJHKDNFKMDReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.UpdateMapRotationDataScNotify), global::EggLink.DanhengServer.Proto.UpdateMapRotationDataScNotify.Parser, new[]{ "RotaterData", "IICFOONOLAI", "ChargerInfo", "CLHMAFCHJAF", "EnergyInfo", "MapInfo", "HMCAFEJAPJK" }, null, null, null, null)
           }));

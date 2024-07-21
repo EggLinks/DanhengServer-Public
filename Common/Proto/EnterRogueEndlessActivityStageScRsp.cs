@@ -24,15 +24,15 @@ namespace EggLink.DanhengServer.Proto {
     static EnterRogueEndlessActivityStageScRspReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CilFbnRlclJvZ3VlRW5kbGVzc0FjdGl2aXR5U3RhZ2VTY1JzcC5wcm90bxob",
-            "Um9ndWVFbmRsZXNzTGF5ZXJJbmZvLnByb3RvGhVTY2VuZUJhdHRsZUluZm8u",
+            "CilFbnRlclJvZ3VlRW5kbGVzc0FjdGl2aXR5U3RhZ2VTY1JzcC5wcm90bxoV",
+            "U2NlbmVCYXR0bGVJbmZvLnByb3RvGhtSb2d1ZUVuZGxlc3NMYXllckluZm8u",
             "cHJvdG8iigEKI0VudGVyUm9ndWVFbmRsZXNzQWN0aXZpdHlTdGFnZVNjUnNw",
             "EisKC0ZMRkpFT0lKQ01JGAsgASgLMhYuUm9ndWVFbmRsZXNzTGF5ZXJJbmZv",
             "EiUKC2JhdHRsZV9pbmZvGAYgASgLMhAuU2NlbmVCYXR0bGVJbmZvEg8KB3Jl",
             "dGNvZGUYDCABKA1CHqoCG0VnZ0xpbmsuRGFuaGVuZ1NlcnZlci5Qcm90b2IG",
             "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.RogueEndlessLayerInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.SceneBattleInfoReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.SceneBattleInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.RogueEndlessLayerInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.EnterRogueEndlessActivityStageScRsp), global::EggLink.DanhengServer.Proto.EnterRogueEndlessActivityStageScRsp.Parser, new[]{ "FLFJEOIJCMI", "BattleInfo", "Retcode" }, null, null, null, null)
           }));

@@ -29,22 +29,9 @@ namespace EggLink.DanhengServer.Game.Mission.FinishType.Handler
                 player.MissionManager!.FinishSubMission(info.ID);
             } else  // update progress
             {
-                if (finishCount > 0)
+                if (player.MissionManager!.GetMissionProgress(info.ID) != finishCount)
                 {
-                    var sync = new Proto.MissionSync()
-                    {
-                        MissionList =
-                    {
-                        new Proto.Mission()
-                        {
-                            Id = (uint)info.ID,
-                            Status = Proto.MissionStatus.MissionDoing,
-                            Progress = (uint)finishCount
-                        }
-                    }
-                    };
-
-                    player.SendPacket(new PacketPlayerSyncScNotify(sync));
+                    player.MissionManager!.SetMissionProgress(info.ID, finishCount);
                 }
             }
         }

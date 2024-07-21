@@ -25,6 +25,7 @@ namespace EggLink.DanhengServer.Data
             LoadMazeSkill();
             LoadDialogueInfo();
             LoadPerformanceInfo();
+            LoadSubMissionInfo();
             LoadRogueChestMapInfo();
             GameData.ActivityConfig = LoadCustomFile<ActivityConfig>("Activity", "ActivityConfig") ?? new();
             GameData.BannersConfig = LoadCustomFile<BannersConfig>("Banner", "Banners") ?? new();
@@ -168,6 +169,22 @@ namespace EggLink.DanhengServer.Data
                             group.Id = groupInfo.ID;
                             info.Groups.TryAdd(groupInfo.ID, group);
                             group.Load();
+
+                            // load graph
+                            var graphPath = ConfigManager.Config.Path.ResourcePath + "/" + group.LevelGraph;
+                            var graphFile = new FileInfo(graphPath);
+                            if (graphFile.Exists)
+                            {
+                                using var graphReader = graphFile.OpenRead();
+                                using StreamReader graphReader2 = new(graphReader);
+                                var graphText = graphReader2.ReadToEnd().Replace("$type", "Type");
+                                var graphObj = JObject.Parse(graphText);
+                                if (graphObj != null)
+                                {
+                                    LevelGraphConfigInfo graphInfo = LevelGraphConfigInfo.LoadFromJsonObject(graphObj);
+                                    group.LevelGraphConfig = graphInfo;
+                                }
+                            }
                         }
                     } catch (Exception ex)
                     {
@@ -216,42 +233,6 @@ namespace EggLink.DanhengServer.Data
                         if (File.Exists(missionJsonPath))
                         {
                             var missionJson = File.ReadAllText(missionJsonPath).Replace("$type", "Type");
-                            try
-                            {
-                                if (subMission.FinishType == Enums.MissionFinishTypeEnum.EnterFloor)
-                                {
-                                    var mission = JsonConvert.DeserializeObject<SubMissionTask<EnterFloorTaskInfo>>(missionJson);
-
-                                    if (mission != null)
-                                    {
-                                        subMission.Task = mission;
-                                        subMission.Loaded(1);
-                                    }
-                                } else if (subMission.FinishType == Enums.MissionFinishTypeEnum.PropState)
-                                {
-                                    var mission = JsonConvert.DeserializeObject<SubMissionTask<PropStateTaskInfo>>(missionJson);
-                                    if (mission != null)
-                                    {
-                                        subMission.PropTask = mission;
-                                        subMission.Loaded(2);
-                                    }
-                                } else if (subMission.FinishType == Enums.MissionFinishTypeEnum.StageWin)
-                                {
-                                    var mission = JsonConvert.DeserializeObject<SubMissionTask<StageWinTaskInfo>>(missionJson);
-                                    if (mission != null)
-                                    {
-                                        subMission.StageWinTask = mission;
-                                        subMission.Loaded(3);
-                                    }
-                                }
-                                else
-                                {
-                                    subMission.Loaded(0);
-                                }
-                            } catch (Exception ex)
-                            {
-                                Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", missionJsonPath, I18nManager.Translate("Word.Error")), ex);
-                            }
                         }
                     }
                     count++;
@@ -405,10 +386,83 @@ namespace EggLink.DanhengServer.Data
                     using var reader = file.OpenRead();
                     using StreamReader reader2 = new(reader);
                     var text = reader2.ReadToEnd().Replace("$type", "Type");
-                    var act = JsonConvert.DeserializeObject<MissionActInfo>(text);
-                    if (act != null)
+                    var obj = JObject.Parse(text);
+                    if (obj != null)
                     {
-                        performance.ActInfo = act;
+                        LevelGraphConfigInfo info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
+                        performance.ActInfo = info;
+                        count++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name, I18nManager.Translate("Word.Error")), ex);
+                }
+            }
+
+            foreach (var performance in GameData.PerformanceDData.Values)
+            {
+                if (performance.PerformancePath == "")
+                {
+                    count++;
+                    continue;
+                }
+
+                var path = ConfigManager.Config.Path.ResourcePath + "/" + performance.PerformancePath;
+                var file = new FileInfo(path);
+                if (!file.Exists) continue;
+                try
+                {
+                    using var reader = file.OpenRead();
+                    using StreamReader reader2 = new(reader);
+                    var text = reader2.ReadToEnd().Replace("$type", "Type");
+                    var obj = JObject.Parse(text);
+                    if (obj != null)
+                    {
+                        LevelGraphConfigInfo info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
+                        performance.ActInfo = info;
+                        count++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name, I18nManager.Translate("Word.Error")), ex);
+                }
+            }
+
+            if (count < GameData.PerformanceEData.Count + GameData.PerformanceDData.Count)
+            {
+                // looks like many dont exist
+                //Logger.Warn("Performance infos are missing, please check your resources folder: " + ConfigManager.Config.Path.ResourcePath + "/Config/Level/Mission/*/Act. Performances may not work!");
+            }
+
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.PerformanceInfo")));
+        }
+
+        public static void LoadSubMissionInfo()
+        {
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.SubMissionInfo")));
+            var count = 0;
+            foreach (var subMission in GameData.SubMissionData.Values)
+            {
+                if (subMission.SubMissionInfo == null || subMission.SubMissionInfo.MissionJsonPath == "")
+                {
+                    continue;
+                }
+
+                var path = ConfigManager.Config.Path.ResourcePath + "/" + subMission.SubMissionInfo.MissionJsonPath;
+                var file = new FileInfo(path);
+                if (!file.Exists) continue;
+                try
+                {
+                    using var reader = file.OpenRead();
+                    using StreamReader reader2 = new(reader);
+                    var text = reader2.ReadToEnd().Replace("$type", "Type");
+                    var obj = JObject.Parse(text);
+                    if (obj != null)
+                    {
+                        LevelGraphConfigInfo info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
+                        subMission.SubMissionTaskInfo = info;
                         count++;
                     }
                 }
@@ -419,13 +473,12 @@ namespace EggLink.DanhengServer.Data
 
             }
 
-            if (count < GameData.PerformanceEData.Count)
+            if (count < GameData.SubMissionData.Count)
             {
-                // looks like many dont exist
                 //Logger.Warn("Performance infos are missing, please check your resources folder: " + ConfigManager.Config.Path.ResourcePath + "/Config/Level/Mission/*/Act. Performances may not work!");
             }
 
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.PerformanceInfo")));
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), I18nManager.Translate("Word.SubMissionInfo")));
         }
 
         public static void LoadRogueChestMapInfo()

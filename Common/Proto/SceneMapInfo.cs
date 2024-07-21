@@ -24,8 +24,8 @@ namespace EggLink.DanhengServer.Proto {
     static SceneMapInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJTY2VuZU1hcEluZm8ucHJvdG8aD0NoZXN0SW5mby5wcm90bxoTTWF6ZVBy",
-            "b3BTdGF0ZS5wcm90bxoRQkdGTU1PRUhKQ0UucHJvdG8aD01hemVHcm91cC5w",
+            "ChJTY2VuZU1hcEluZm8ucHJvdG8aE01hemVQcm9wU3RhdGUucHJvdG8aD01h",
+            "emVHcm91cC5wcm90bxoPQ2hlc3RJbmZvLnByb3RvGhFCR0ZNTU9FSEpDRS5w",
             "cm90byLAAgoMU2NlbmVNYXBJbmZvEhIKCmNvbnRlbnRfaWQYCyABKA0SEAoI",
             "ZW50cnlfaWQYBSABKA0SHAoUdW5sb2NrX3RlbGVwb3J0X2xpc3QYCiADKA0S",
             "EwoLQk9OQUNCT0lJQkUYDSABKA0SIQoLQUhPSk5NTkZPRkgYBCADKAsyDC5C",
@@ -36,7 +36,7 @@ namespace EggLink.DanhengServer.Proto {
             "YXplUHJvcFN0YXRlQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJvdG9i",
             "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.ChestInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.MazePropStateReflection.Descriptor, global::EggLink.DanhengServer.Proto.BGFMMOEHJCEReflection.Descriptor, global::EggLink.DanhengServer.Proto.MazeGroupReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.MazePropStateReflection.Descriptor, global::EggLink.DanhengServer.Proto.MazeGroupReflection.Descriptor, global::EggLink.DanhengServer.Proto.ChestInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.BGFMMOEHJCEReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.SceneMapInfo), global::EggLink.DanhengServer.Proto.SceneMapInfo.Parser, new[]{ "ContentId", "EntryId", "UnlockTeleportList", "BONACBOIIBE", "AHOJNMNFOFH", "LightenSectionList", "ChestList", "Retcode", "CurMapEntryId", "MazeGroupList", "MazePropList" }, null, null, null, null)
           }));

@@ -24,9 +24,9 @@ namespace EggLink.DanhengServer.Proto {
     static BattleAvatarReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJCYXR0bGVBdmF0YXIucHJvdG8aFUJhdHRsZUVxdWlwbWVudC5wcm90bxoR",
-            "QmF0dGxlUmVsaWMucHJvdG8aD1NwQmFySW5mby5wcm90bxoVQXZhdGFyU2tp",
-            "bGxUcmVlLnByb3RvGhBBdmF0YXJUeXBlLnByb3RvGhFHRk5JSERNTUxNRS5w",
+            "ChJCYXR0bGVBdmF0YXIucHJvdG8aEEF2YXRhclR5cGUucHJvdG8aFUF2YXRh",
+            "clNraWxsVHJlZS5wcm90bxoRR0ZOSUhETU1MTUUucHJvdG8aEUJhdHRsZVJl",
+            "bGljLnByb3RvGg9TcEJhckluZm8ucHJvdG8aFUJhdHRsZUVxdWlwbWVudC5w",
             "cm90byL6AgoMQmF0dGxlQXZhdGFyEiAKC2F2YXRhcl90eXBlGAEgASgOMgsu",
             "QXZhdGFyVHlwZRIKCgJpZBgCIAEoDRINCgVsZXZlbBgDIAEoDRIMCgRyYW5r",
             "GAQgASgNEg0KBWluZGV4GAUgASgNEigKDnNraWxsdHJlZV9saXN0GAYgAygL",
@@ -38,7 +38,7 @@ namespace EggLink.DanhengServer.Proto {
             "SW5mbxITCgtFSEdDT0VGTktPRxgRIAEoDUIeqgIbRWdnTGluay5EYW5oZW5n",
             "U2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.BattleEquipmentReflection.Descriptor, global::EggLink.DanhengServer.Proto.BattleRelicReflection.Descriptor, global::EggLink.DanhengServer.Proto.SpBarInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.AvatarSkillTreeReflection.Descriptor, global::EggLink.DanhengServer.Proto.AvatarTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.GFNIHDMMLMEReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.AvatarTypeReflection.Descriptor, global::EggLink.DanhengServer.Proto.AvatarSkillTreeReflection.Descriptor, global::EggLink.DanhengServer.Proto.GFNIHDMMLMEReflection.Descriptor, global::EggLink.DanhengServer.Proto.BattleRelicReflection.Descriptor, global::EggLink.DanhengServer.Proto.SpBarInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.BattleEquipmentReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.BattleAvatar), global::EggLink.DanhengServer.Proto.BattleAvatar.Parser, new[]{ "AvatarType", "Id", "Level", "Rank", "Index", "SkilltreeList", "EquipmentList", "Hp", "Promotion", "RelicList", "WorldLevel", "AssistUid", "OJHDGAOKJKJ", "SpBar", "EHGCOEFNKOG" }, null, null, null, null)
           }));

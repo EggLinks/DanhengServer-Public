@@ -22,6 +22,9 @@ namespace EggLink.DanhengServer.Database.Mission
         [SugarColumn(IsJson = true)]
         public List<int> RunningMainMissionIds { get; set; } = [];
 
+        [SugarColumn(IsJson = true)]
+        public Dictionary<int, int> SubMissionProgressDict { get; set; } = [];
+
         public int TrackingMainMissionId { get; set; }
 
         public MissionPhaseEnum GetMainMissionStatus(int missionId)

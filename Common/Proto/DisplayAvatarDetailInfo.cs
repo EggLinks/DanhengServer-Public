@@ -24,9 +24,9 @@ namespace EggLink.DanhengServer.Proto {
     static DisplayAvatarDetailInfoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch1EaXNwbGF5QXZhdGFyRGV0YWlsSW5mby5wcm90bxoVQXZhdGFyU2tpbGxU",
-            "cmVlLnByb3RvGhpEaXNwbGF5RXF1aXBtZW50SW5mby5wcm90bxoWRGlzcGxh",
-            "eVJlbGljSW5mby5wcm90byKKAgoXRGlzcGxheUF2YXRhckRldGFpbEluZm8S",
+            "Ch1EaXNwbGF5QXZhdGFyRGV0YWlsSW5mby5wcm90bxoaRGlzcGxheUVxdWlw",
+            "bWVudEluZm8ucHJvdG8aFkRpc3BsYXlSZWxpY0luZm8ucHJvdG8aFUF2YXRh",
+            "clNraWxsVHJlZS5wcm90byKKAgoXRGlzcGxheUF2YXRhckRldGFpbEluZm8S",
             "CwoDcG9zGAwgASgNEiUKCnJlbGljX2xpc3QYCiADKAsyES5EaXNwbGF5UmVs",
             "aWNJbmZvEgwKBHJhbmsYBCABKA0SDQoFbGV2ZWwYCCABKA0SCwoDZXhwGAEg",
             "ASgNEhEKCXByb21vdGlvbhgPIAEoDRIoCg5za2lsbHRyZWVfTGlzdBgOIAMo",
@@ -35,7 +35,7 @@ namespace EggLink.DanhengServer.Proto {
             "ZF9za2luX2lkGAYgASgNQh6qAhtFZ2dMaW5rLkRhbmhlbmdTZXJ2ZXIuUHJv",
             "dG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.AvatarSkillTreeReflection.Descriptor, global::EggLink.DanhengServer.Proto.DisplayEquipmentInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.DisplayRelicInfoReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.DisplayEquipmentInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.DisplayRelicInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.AvatarSkillTreeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo), global::EggLink.DanhengServer.Proto.DisplayAvatarDetailInfo.Parser, new[]{ "Pos", "RelicList", "Rank", "Level", "Exp", "Promotion", "SkilltreeList", "Equipment", "AvatarId", "DressedSkinId" }, null, null, null, null)
           }));

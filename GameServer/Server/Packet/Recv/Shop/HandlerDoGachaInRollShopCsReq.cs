@@ -4,6 +4,7 @@ using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Server.Packet.Send.Challenge;
 using EggLink.DanhengServer.Server.Packet.Send.Gacha;
 using EggLink.DanhengServer.Server.Packet.Send.Shop;
+using EggLink.DanhengServer.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Shop
                         }
                     });
                 });
-                var RewardId = RewardIds.Keys.ToList()[new Random().Next(0, RewardIds.Count)];
+                var RewardId = RewardIds.Keys.ToList().RandomElement();
                 var type = RewardIds[RewardId];
                 if (type < maxtype) maxtype = type;
                 var rewardExcel = GameData.RewardDataData[(int)RewardId];
@@ -56,8 +57,11 @@ namespace EggLink.DanhengServer.Server.Packet.Recv.Shop
                     ItemId = rewardItems[0].Item1,
                     Count = rewardItems[0].Item2
                 };
-
-                itemList.ItemList_.Add(itemData.ToProto());
+                var rsp = connection.Player!.InventoryManager!.AddItem(itemData.ItemId, itemData.Count);
+                if (rsp != null)
+                {
+                    itemList.ItemList_.Add(rsp.ToProto());
+                }
                 connection.Player!.InventoryManager!.RemoveItem(122000, 1);
             }
             connection.SendPacket(new PacketDoGachaInRollShopScRsp(req.RollShopId, itemList, maxtype));

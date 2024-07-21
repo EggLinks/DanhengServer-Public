@@ -36,6 +36,8 @@ using EggLink.DanhengServer.Game.Task;
 using EggLink.DanhengServer.GameServer.Game.Mail;
 using EggLink.DanhengServer.GameServer.Game.Raid;
 using EggLink.DanhengServer.GameServer.Game.Mission;
+using EggLink.DanhengServer.GameServer.Game.Task;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 
 namespace EggLink.DanhengServer.Game.Player
 {
@@ -63,7 +65,7 @@ namespace EggLink.DanhengServer.Game.Player
         public ShopService? ShopService { get; private set; }
         public ChallengeManager? ChallengeManager { get; private set; }
 
-        public PerformanceTrigger? PerformanceTrigger { get; private set; }
+        public TaskManager? TaskManager { get; private set; }
 
         #endregion
 
@@ -72,6 +74,7 @@ namespace EggLink.DanhengServer.Game.Player
         public PlayerData Data { get; set; } = data;
         public PlayerUnlockData? PlayerUnlockData { get; private set; }
         public SceneData? SceneData { get; private set; }
+        public HeartDialData? HeartDialData { get; private set; }
         public TutorialData? TutorialData { get; private set; }
         public TutorialGuideData? TutorialGuideData { get; private set; }
         public SceneInstance? SceneInstance { get; private set; }
@@ -131,12 +134,13 @@ namespace EggLink.DanhengServer.Game.Player
             ShopService = new(this);
             ChessRogueManager = new(this);
             ChallengeManager = new(this);
-            PerformanceTrigger = new(this);
+            TaskManager = new(this);
             RaidManager = new(this);
             StoryLineManager = new(this);
 
             PlayerUnlockData = InitializeDatabase<PlayerUnlockData>();
             SceneData = InitializeDatabase<SceneData>();
+            HeartDialData = InitializeDatabase<HeartDialData>();
             TutorialData = InitializeDatabase<TutorialData>();
             TutorialGuideData = InitializeDatabase<TutorialGuideData>();
 
@@ -443,6 +447,27 @@ namespace EggLink.DanhengServer.Game.Player
                     // handle plugin event
                     InvokeOnPlayerInteract(this, prop);
 
+                    var floorSavedKey = prop.PropInfo.Name.Replace("Controller_", "");
+                    var key = $"FSV_ML{floorSavedKey}{(config.TargetState == PropStateEnum.Open ? "Started":"Complete")}";
+                    if (SceneInstance?.FloorInfo?.SavedValues.Find(x => x.Name == key) != null)
+                    {
+                        // should save
+                        var plane = SceneInstance.PlaneId;
+                        var floor = SceneInstance.FloorId;
+                        SceneData!.FloorSavedData.TryGetValue(floor, out var value);
+                        if (value == null)
+                        {
+                            value = [];
+                            SceneData.FloorSavedData[floor] = value;
+                        }
+
+                        value[key] = 1;  // ParamString[2] is the key
+                        SendPacket(new PacketUpdateFloorSavedValueNotify(key, 1));
+
+                        TaskManager?.SceneTaskTrigger.TriggerFloor(plane, floor);
+                        MissionManager?.HandleFinishType(MissionFinishTypeEnum.FloorSavedValue);
+                    }
+
                     return prop;
                 }
             }
@@ -454,6 +479,7 @@ namespace EggLink.DanhengServer.Game.Player
             if (storyLineId != StoryLineManager?.StoryLineData.CurStoryLineId)
             {
                 StoryLineManager?.EnterStoryLine(storyLineId, entryId == 0);  // entryId == 0 -> teleport
+                mapTp = false;  // do not use mapTp when enter story line
             }
 
             GameData.MapEntranceData.TryGetValue(entryId, out var entrance);

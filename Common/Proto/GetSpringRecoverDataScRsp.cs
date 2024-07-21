@@ -24,14 +24,14 @@ namespace EggLink.DanhengServer.Proto {
     static GetSpringRecoverDataScRspReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch9HZXRTcHJpbmdSZWNvdmVyRGF0YVNjUnNwLnByb3RvGhJIZWFsUG9vbElu",
-            "Zm8ucHJvdG8aGVNwcmluZ1JlY292ZXJDb25maWcucHJvdG8iewoZR2V0U3By",
+            "Ch9HZXRTcHJpbmdSZWNvdmVyRGF0YVNjUnNwLnByb3RvGhlTcHJpbmdSZWNv",
+            "dmVyQ29uZmlnLnByb3RvGhJIZWFsUG9vbEluZm8ucHJvdG8iewoZR2V0U3By",
             "aW5nUmVjb3ZlckRhdGFTY1JzcBIpCgtKTE1MRktCTUpOTBgNIAEoCzIULlNw",
             "cmluZ1JlY292ZXJDb25maWcSIgoLS01OQ0FQSlBHRFAYDCABKAsyDS5IZWFs",
             "UG9vbEluZm8SDwoHcmV0Y29kZRgCIAEoDUIeqgIbRWdnTGluay5EYW5oZW5n",
             "U2VydmVyLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.HealPoolInfoReflection.Descriptor, global::EggLink.DanhengServer.Proto.SpringRecoverConfigReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::EggLink.DanhengServer.Proto.SpringRecoverConfigReflection.Descriptor, global::EggLink.DanhengServer.Proto.HealPoolInfoReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::EggLink.DanhengServer.Proto.GetSpringRecoverDataScRsp), global::EggLink.DanhengServer.Proto.GetSpringRecoverDataScRsp.Parser, new[]{ "JLMLFKBMJNL", "KMNCAPJPGDP", "Retcode" }, null, null, null, null)
           }));

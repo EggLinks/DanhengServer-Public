@@ -31,6 +31,7 @@ namespace EggLink.DanhengServer.Game.Scene.Entity
 
         public void SetState(PropStateEnum state)
         {
+            if (state == State) return;
             SetState(state, Scene.IsLoaded);
         }
 
