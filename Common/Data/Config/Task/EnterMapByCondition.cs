@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Config.Task;
 
-namespace EggLink.DanhengServer.Data.Config.Task
+public class EnterMapByCondition : TaskConfigInfo
 {
-    public class EnterMapByCondition : TaskConfigInfo
-    {
-        public DynamicFloat EntranceID { get; set; } = new();
-    }
+    public DynamicFloat EntranceID { get; set; } = new();
 }

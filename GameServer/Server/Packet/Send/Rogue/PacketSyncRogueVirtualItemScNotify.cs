@@ -1,26 +1,22 @@
-﻿using EggLink.DanhengServer.Game.Rogue;
+﻿using EggLink.DanhengServer.GameServer.Game.Rogue;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Rogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Rogue;
+
+public class PacketSyncRogueVirtualItemScNotify : BasePacket
 {
-    public class PacketSyncRogueVirtualItemScNotify : BasePacket
+    public PacketSyncRogueVirtualItemScNotify(BaseRogueInstance instance) : base(
+        CmdIds.SyncRogueVirtualItemInfoScNotify)
     {
-        public PacketSyncRogueVirtualItemScNotify(BaseRogueInstance instance): base(CmdIds.SyncRogueVirtualItemInfoScNotify)
+        var proto = new SyncRogueVirtualItemInfoScNotify
         {
-            var proto = new SyncRogueVirtualItemInfoScNotify
+            RogueVirtualItemInfo = new RogueVirtualItemInfo
             {
-                RogueVirtualItemInfo = new()
-                {
-                    //RogueMoney = (uint)instance.CurMoney,
-                }
-            };
+                //RogueMoney = (uint)instance.CurMoney,
+            }
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

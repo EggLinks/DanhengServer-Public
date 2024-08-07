@@ -11,7 +11,7 @@
   <a href="https://discord.gg/xRtZsmHBVj"><img src="https://img.shields.io/badge/Discord%20Server-000000.svg?style=for-the-badge&logo=Discord&logoColor=white" /></a>
 </p>
 
-[EN](../README.md) | [简中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
+[EN](../README.md) | [簡中](README_zh-CN.md) | [繁中](README_zh-CN.md) | [JP](README_ja-JP.md)
 
 ## 💡機能
 
@@ -34,16 +34,13 @@
 
 ### クイックスタート
 
-1. [Action](https://github.com/EggLink/DanhengServer-Public/actions) で実行可能ファイルをダウンロードする
+1. [Action](https://github.com/StopWuyu/DanhengServer/actions) で実行可能ファイルをダウンロードする
 2. ダウンロードが完了した` DanhengServer.zip `を開いて任意のフォルダに解凍します __*英文パスが望ましい*__
 
 > (オプション) ソースコードのWebServerフォルダに` certificate.p 12 `をダウンロードすることで、HTTPSモードで起動して転送をより安全にすることができます: )
 
-3. Resources[https://github.com/Dimbreath/StarRailData](https://github.com/Dimbreath/StarRailData)をダウンロードして同ディレクトリに解凍し`Resources`、译文
-
-そしてに[https://github.com/egglinks/danhengserver-resources] (https://github.com/egglinks/danhengserver-resources)ダウンロードして「Resources/Config」にConfigを上書きします。プロジェクトでConfigをダウンロードして同ディレクトリに解凍する`Config`
-4. GameServer.exeの実行
-5. エージェント起動ゲームの実行
+3. GameServer.exeの実行
+4. エージェント起動ゲームの実行
 
 ### 構築＃コウチク＃
 
@@ -57,7 +54,7 @@ Danhengserver Dotnetを使用した構築
 ##### Windows
 
 ```shell
-git clone --recurse-submodules https://github.com/EggLink/DanhengServer-Public.git
+git clone --recurse-submodules https://github.com/StopWuyu/DanhengServer.git
 cd DanhengServer
 .\dotnet build # コンパイル
 ```
@@ -77,7 +74,7 @@ sudo apt-get update && \
 
 - 環境をコンパイルして実行する
 ```shell
-git clone --recurse-submodules https://github.com/EggLink/DanhengServer-Public.git
+git clone --recurse-submodules https://github.com/StopWuyu/DanhengServer.git
 cd DanhengServer
 .\dotnet build # コンパイル
 ./Gameserver
@@ -89,9 +86,6 @@ cd DanhengServer
 
 - アンドロイドシステムのサポート
 - 100040119（自動完了できません）（/mission finish 100040119 を使用した修正）
-
-## 🔗インタフェースの説明
-[EN](MuipAPI.md) | [简中](MuipAPI_zh-CN.md) | [繁中](MuipAPI_zh-CN.md) | [JP](MuipAPI_ja-JP.md)
 
 ## ❕️トラブルシューティング
 

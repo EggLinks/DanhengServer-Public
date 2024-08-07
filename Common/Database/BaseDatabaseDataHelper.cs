@@ -1,11 +1,8 @@
-﻿using Microsoft.Data.Sqlite;
-using SqlSugar;
+﻿using SqlSugar;
 
-namespace EggLink.DanhengServer.Database
+namespace EggLink.DanhengServer.Database;
+
+public abstract class BaseDatabaseDataHelper
 {
-    public abstract class BaseDatabaseDataHelper
-    {
-        [SugarColumn(IsPrimaryKey = true)]
-        public int Uid { get; set; }
-    }
+    [SugarColumn(IsPrimaryKey = true)] public int Uid { get; set; }
 }

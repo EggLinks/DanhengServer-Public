@@ -1,40 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
-namespace EggLink.DanhengServer.Data.Excel
+namespace EggLink.DanhengServer.Data.Excel;
+
+[ResourceEntity("BattleEventData.json")]
+public partial class BattleEventDataExcel : ExcelResource
 {
-    [ResourceEntity("BattleEventData.json")]
-    public partial class BattleEventDataExcel : ExcelResource
+    public int BattleEventID { get; set; }
+    public string Config { get; set; } = "";
+
+    [GeneratedRegex(@"(?<=Avatar_RogueBattleevent)(.*?)(?=_Config.json)")]
+    private static partial Regex RegexConfig();
+
+    public override int GetId()
     {
-        public int BattleEventID { get; set; }
-        public string Config { get; set; } = "";
+        return BattleEventID;
+    }
 
-        [GeneratedRegex(@"(?<=Avatar_RogueBattleevent)(.*?)(?=_Config.json)")]
-        private static partial Regex RegexConfig();
-
-        public override int GetId()
+    public override void Loaded()
+    {
+        try
         {
-            return BattleEventID;
-        }
-
-        public override void Loaded()
-        {
-            try
+            var match = RegexConfig().Match(Config);
+            if (match.Success)
             {
-                Match match = RegexConfig().Match(Config);
-                if (match.Success)
-                {
-                    int rogueBuffType = int.Parse(match.Value);
-                    GameData.RogueBattleEventData.Add(rogueBuffType, this);
-                }
-            } catch
-            {
-
+                var rogueBuffType = int.Parse(match.Value);
+                GameData.RogueBattleEventData.Add(rogueBuffType, this);
             }
+        }
+        catch
+        {
         }
     }
 }

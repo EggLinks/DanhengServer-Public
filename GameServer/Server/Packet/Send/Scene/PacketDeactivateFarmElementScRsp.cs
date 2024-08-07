@@ -1,22 +1,17 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Scene
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
+
+public class PacketDeactivateFarmElementScRsp : BasePacket
 {
-    public class PacketDeactivateFarmElementScRsp : BasePacket
+    public PacketDeactivateFarmElementScRsp(uint id) : base(CmdIds.DeactivateFarmElementScRsp)
     {
-        public PacketDeactivateFarmElementScRsp(uint id) : base(CmdIds.DeactivateFarmElementScRsp)
+        var proto = new DeactivateFarmElementScRsp
         {
-            var proto = new DeactivateFarmElementScRsp()
-            {
-                EntityId = id
-            };
+            EntityId = id
+        };
 
-            SetData(proto);
-        } 
+        SetData(proto);
     }
 }

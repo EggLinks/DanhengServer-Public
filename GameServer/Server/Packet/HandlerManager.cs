@@ -1,34 +1,31 @@
 ﻿using System.Reflection;
 
-namespace EggLink.DanhengServer.Server.Packet
+namespace EggLink.DanhengServer.GameServer.Server.Packet;
+
+public static class HandlerManager
 {
-    public static class HandlerManager
+    public static Dictionary<int, Handler> handlers = [];
+
+    public static void Init()
     {
-        public static Dictionary<int, Handler> handlers = [];
-
-        public static void Init()
+        var classes = Assembly.GetExecutingAssembly().GetTypes(); // Get all classes in the assembly
+        foreach (var cls in classes)
         {
-            var classes = Assembly.GetExecutingAssembly().GetTypes();  // Get all classes in the assembly
-            foreach (var cls in classes)
-            {
-                var attribute = (Opcode)Attribute.GetCustomAttribute(cls, typeof(Opcode))!;
+            var attribute = (Opcode?)Attribute.GetCustomAttribute(cls, typeof(Opcode));
 
-                if (attribute != null)
-                {
-                    handlers.Add(attribute.CmdId, (Handler)Activator.CreateInstance(cls)!);
-                }
-            }
+            if (attribute != null) handlers.Add(attribute.CmdId, (Handler)Activator.CreateInstance(cls)!);
         }
+    }
 
-        public static Handler? GetHandler(int cmdId)
+    public static Handler? GetHandler(int cmdId)
+    {
+        try
         {
-            try
-            {
-                return handlers[cmdId];
-            } catch
-            {
-                return null;
-            }
+            return handlers[cmdId];
+        }
+        catch
+        {
+            return null;
         }
     }
 }

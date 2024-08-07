@@ -1,14 +1,8 @@
-﻿using EggLink.DanhengServer.Game.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.GameServer.Game.Player;
 
-namespace EggLink.DanhengServer.Game
+namespace EggLink.DanhengServer.GameServer.Game;
+
+public class BasePlayerManager(PlayerInstance player)
 {
-    public class BasePlayerManager(PlayerInstance player)
-    {
-        public PlayerInstance Player { get; private set; } = player;
-    }
+    public PlayerInstance Player { get; private set; } = player;
 }

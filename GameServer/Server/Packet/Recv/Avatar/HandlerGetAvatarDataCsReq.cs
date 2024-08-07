@@ -1,13 +1,13 @@
-﻿using EggLink.DanhengServer.Server.Packet.Send.Avatar;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Avatar;
+using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Avatar
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Avatar;
+
+[Opcode(CmdIds.GetAvatarDataCsReq)]
+public class HandlerGetAvatarDataCsReq : Handler
 {
-    [Opcode(CmdIds.GetAvatarDataCsReq)]
-    public class HandlerGetAvatarDataCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.SendPacket(new PacketGetAvatarDataScRsp(connection.Player!));
-        }
+        await connection.SendPacket(new PacketGetAvatarDataScRsp(connection.Player!));
     }
 }

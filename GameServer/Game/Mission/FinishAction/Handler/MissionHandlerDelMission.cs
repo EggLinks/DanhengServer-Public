@@ -1,21 +1,15 @@
-﻿using EggLink.DanhengServer.Enums;
-using EggLink.DanhengServer.Game.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Enums.Mission;
+using EggLink.DanhengServer.GameServer.Game.Player;
 
-namespace EggLink.DanhengServer.Game.Mission.FinishAction.Handler
+namespace EggLink.DanhengServer.GameServer.Game.Mission.FinishAction.Handler;
+
+[MissionFinishAction(FinishActionTypeEnum.delMission)]
+public class MissionHandlerDelMission : MissionFinishActionHandler
 {
-    [MissionFinishAction(FinishActionTypeEnum.delMission)]
-    public class MissionHandlerDelMission : MissionFinishActionHandler
+    public override async ValueTask OnHandle(List<int> Params, List<string> ParamString, PlayerInstance Player)
     {
-        public override void OnHandle(List<int> Params, List<string> ParamString, PlayerInstance Player)
-        {
-            if (Params.Count < 1) return;
-            var missionId = Params[0];
-            Player.MissionManager?.FinishSubMission(missionId);
-        }
+        if (Params.Count < 1) return;
+        var missionId = Params[0];
+        await Player.MissionManager!.FinishSubMission(missionId);
     }
 }

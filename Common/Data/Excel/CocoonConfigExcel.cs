@@ -1,27 +1,24 @@
-﻿using EggLink.DanhengServer.Util;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("CocoonConfig.json")]
+public class CocoonConfigExcel : ExcelResource
 {
-    [ResourceEntity("CocoonConfig.json")]
-    public class CocoonConfigExcel : ExcelResource
+    public int ID { get; set; }
+    public int MappingInfoID { get; set; }
+    public int WorldLevel { get; set; }
+    public int PropID { get; set; }
+    public int StaminaCost { get; set; }
+    public int MaxWave { get; set; }
+    public List<int> StageIDList { get; set; } = [];
+    public List<int> DropList { get; set; } = [];
+
+    public override int GetId()
     {
-        public int ID { get; set; }
-        public int MappingInfoID { get; set; }
-        public int WorldLevel { get; set; }
-        public int PropID { get; set; }
-        public int StaminaCost { get; set; }
-        public int MaxWave { get; set; }
-        public List<int> StageIDList { get; set; } = [];
-        public List<int> DropList { get; set; } = [];
+        return ID * 100 + WorldLevel;
+    }
 
-        public override int GetId()
-        {
-            return (ID * 100) + WorldLevel;
-        }
-
-        public override void Loaded()
-        {
-            GameData.CocoonConfigData.Add(GetId(), this);
-        }
+    public override void Loaded()
+    {
+        GameData.CocoonConfigData.Add(GetId(), this);
     }
 }

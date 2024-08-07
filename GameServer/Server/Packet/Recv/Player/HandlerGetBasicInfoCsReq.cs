@@ -1,18 +1,13 @@
-﻿using EggLink.DanhengServer.Server.Packet.Send.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Player;
+using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Player
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Player;
+
+[Opcode(CmdIds.GetBasicInfoCsReq)]
+public class HandlerGetBasicInfoCsReq : Handler
 {
-    [Opcode(CmdIds.GetBasicInfoCsReq)]
-    public class HandlerGetBasicInfoCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.SendPacket(new PacketGetBasicInfoScRsp(connection.Player!));
-        }
+        await connection.SendPacket(new PacketGetBasicInfoScRsp(connection.Player!));
     }
 }

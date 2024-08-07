@@ -1,33 +1,30 @@
 ﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Scene
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
+
+public class PacketGetEnteredSceneScRsp : BasePacket
 {
-    public class PacketGetEnteredSceneScRsp : BasePacket
+    public PacketGetEnteredSceneScRsp() : base(CmdIds.GetEnteredSceneScRsp)
     {
-        public PacketGetEnteredSceneScRsp() : base(CmdIds.GetEnteredSceneScRsp)
+        var proto = new GetEnteredSceneScRsp();
+
+        foreach (var excel in GameData.MapEntranceData.Values)
         {
-            var proto = new GetEnteredSceneScRsp();
+            // Skip these
+            if (excel.FinishMainMissionList.Count == 0 && excel.FinishMainMissionList.Count == 0) continue;
 
-            foreach (var excel in GameData.MapEntranceData.Values)
+            // Add info
+            var info = new EnteredSceneInfo
             {
-                // Skip these
-                if (excel.FinishMainMissionList.Count == 0 && excel.FinishMainMissionList.Count == 0)
-                {
-                    continue;
-                }
+                FloorId = (uint)excel.FloorID,
+                PlaneId = (uint)excel.PlaneID
+            };
 
-                // Add info
-                var info = new EnteredScene()
-                {
-                    FloorId = (uint)excel.FloorID,
-                    PlaneId = (uint)excel.PlaneID,
-                };
-
-                proto.EnteredSceneList.Add(info);
-            }
-
-            SetData(proto);
+            proto.EnteredSceneInfoList.Add(info);
         }
+
+        SetData(proto);
     }
 }

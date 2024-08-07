@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Enums.Mission;
 
-namespace EggLink.DanhengServer.Enums.Mission
+public enum StoryLineConditionTypeEnum
 {
-    public enum StoryLineConditionTypeEnum
-    {
-        FinishSubMission = 1,
-    }
+    FinishSubMission = 1,
+    SubMissionTaken = 2
 }

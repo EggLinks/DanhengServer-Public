@@ -1,272 +1,260 @@
-﻿using EggLink.DanhengServer.Database;
-using EggLink.DanhengServer.Game.Player;
+﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Database;
 using EggLink.DanhengServer.Database.Challenge;
-using EggLink.DanhengServer.Data.Excel;
-using EggLink.DanhengServer.Data;
-using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet.Send.Challenge;
-using EggLink.DanhengServer.Database.Lineup;
 using EggLink.DanhengServer.Database.Inventory;
+using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.Challenge;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Game.Challenge
+namespace EggLink.DanhengServer.GameServer.Game.Challenge;
+
+public class ChallengeManager(PlayerInstance player) : BasePlayerManager(player)
 {
-    public class ChallengeManager(PlayerInstance player) : BasePlayerManager(player)
+    #region Properties
+
+    public ChallengeInstance? ChallengeInstance { get; set; }
+
+    public ChallengeData ChallengeData { get; } =
+        DatabaseHelper.Instance!.GetInstanceOrCreateNew<ChallengeData>(player.Uid);
+
+    #endregion
+
+    #region Management
+
+    public async ValueTask StartChallenge(int challengeId, ChallengeStoryBuffInfo? storyBuffs,
+        ChallengeBossBuffInfo? bossBuffs)
     {
-        #region Properties
-
-        public ChallengeInstance? ChallengeInstance { get; set; }
-        public ChallengeData ChallengeData { get; private set; } = DatabaseHelper.Instance!.GetInstanceOrCreateNew<ChallengeData>(player.Uid);
-
-        #endregion
-
-        #region Management
-
-        public void StartChallenge(int challengeId, StartChallengeStoryBuffInfo? storyBuffs, StartChallengeBossBuffInfo? bossBuffs)
+        // Get challenge excel
+        if (!GameData.ChallengeConfigData.TryGetValue(challengeId, out var value))
         {
-            // Get challenge excel
-            if (!GameData.ChallengeConfigData.TryGetValue(challengeId, out ChallengeConfigExcel? value))
+            await Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeNotExist));
+            return;
+        }
+
+        var Excel = value;
+
+        // Sanity check lineups
+        if (Excel.StageNum > 0)
+        {
+            // Get lineup
+            var Lineup = Player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge)!;
+
+            // Make sure this lineup has avatars set
+            if (Lineup.AvatarData!.Avatars.Count == 0)
             {
-                Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeNotExist));
-                return;
-            }
-            ChallengeConfigExcel Excel = value;
-
-            // Sanity check lineups
-            if (Excel.StageNum > 0)
-            {
-                // Get lineup
-                var Lineup = Player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge)!;
-
-                // Make sure this lineup has avatars set
-                if (Lineup.AvatarData!.Avatars.Count == 0)
-                {
-                    Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeLineupEmpty));
-                    return;
-                }
-
-                // Reset hp/sp
-                foreach (var avatar in Lineup.AvatarData!.Avatars)
-                {
-                    avatar.SetCurHp(10000, true);
-                    avatar.SetCurSp(avatar.GetCurSp(true) / 2, true);
-                }
-
-                // Set technique points to full
-                Lineup.Mp = 5; // Max Mp
-            }
-
-            if (Excel.StageNum >= 2)
-            {
-                // Get lineup
-                var Lineup = Player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge2)!;
-
-                // Make sure this lineup has avatars set
-                if (Lineup.AvatarData!.Avatars.Count == 0)
-                {
-                    Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeLineupEmpty));
-                    return;
-                }
-
-                // Reset hp/sp
-                foreach (var avatar in Lineup.AvatarData!.Avatars)
-                {
-                    avatar.SetCurHp(10000, true);
-                    avatar.SetCurSp(avatar.GetCurSp(true) / 2, true);
-                }
-
-                // Set technique points to full
-                Lineup.Mp = 5; // Max Mp
-            }
-
-            // Set challenge data for player
-            ChallengeInstance instance = new(Player, Excel);
-            ChallengeInstance = instance;
-
-            // Set first lineup before we enter scenes
-            Player.LineupManager!.SetCurLineup(instance.CurrentExtraLineup + 10);
-
-            // Enter scene
-            try
-            {
-                Player.EnterScene(Excel.MapEntranceID, 0, false);
-            }
-            catch
-            {
-                // Reset lineup/instance if entering scene failed
-                ChallengeInstance = null;
-
-                // Send error packet
-                Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeNotExist));
+                await Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeLineupEmpty));
                 return;
             }
 
-            // Save start positions
-            instance.StartPos = Player.Data.Pos!;
-            instance.StartRot = Player.Data.Rot!;
-            instance.SavedMp = Player.LineupManager.GetCurLineup()!.Mp;
-
-            if (Excel.IsStory() && storyBuffs != null)
+            // Reset hp/sp
+            foreach (var avatar in Lineup.AvatarData!.Avatars)
             {
-                instance.StoryBuffs.Add((int)storyBuffs.StoryBuffOne);
-                instance.StoryBuffs.Add((int)storyBuffs.StoryBuffTwo);
+                avatar.SetCurHp(10000, true);
+                avatar.SetCurSp(avatar.GetCurSp(true) / 2, true);
             }
 
-            if (bossBuffs != null)
-            {
-                instance.BossBuffs.Add((int)bossBuffs.StoryBuffOne);
-                instance.BossBuffs.Add((int)bossBuffs.StoryBuffTwo);
-            }
-
-            // Send packet
-            Player.SendPacket(new PacketStartChallengeScRsp(Player));
-
-            // Save instance
-            SaveInstance(instance);
+            // Set technique points to full
+            Lineup.Mp = 5; // Max Mp
         }
 
-        public void AddHistory(int challengeId, int stars, int score)
+        if (Excel.StageNum >= 2)
         {
-            if (stars <= 0) return;
+            // Get lineup
+            var Lineup = Player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge2)!;
 
-            if (!ChallengeData.History.ContainsKey(challengeId))
+            // Make sure this lineup has avatars set
+            if (Lineup.AvatarData!.Avatars.Count == 0)
             {
-                ChallengeData.History[challengeId] = new ChallengeHistoryData(Player.Uid, challengeId);
-            }
-            var info = ChallengeData.History[challengeId];
-
-            // Set
-            info.SetStars(stars);
-            info.Score = score;
-        }
-
-        public List<TakenChallengeRewardInfo>? TakeRewards(int groupId)
-        {
-            // Get excels
-            if (!GameData.ChallengeGroupData.ContainsKey(groupId)) return null;
-            var challengeGroup = GameData.ChallengeGroupData[groupId];
-
-            if (!GameData.ChallengeRewardData.ContainsKey(challengeGroup.RewardLineGroupID)) return null;
-            var challengeRewardLine = GameData.ChallengeRewardData[challengeGroup.RewardLineGroupID];
-
-            // Get total stars
-            int totalStars = 0;
-            foreach (ChallengeHistoryData ch in ChallengeData.History.Values)
-            {
-                // Legacy compatibility
-                if (ch.GroupId == 0)
-                {
-                    if (!GameData.ChallengeConfigData.ContainsKey(ch.ChallengeId)) continue;
-                    var challengeExcel = GameData.ChallengeConfigData[ch.ChallengeId];
-
-                    ch.GroupId = challengeExcel.GroupID;
-                }
-
-                // Add total stars
-                if (ch.GroupId == groupId)
-                {
-                    totalStars += ch.GetTotalStars();
-                }
+                await Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeLineupEmpty));
+                return;
             }
 
-            // Rewards
-            List<TakenChallengeRewardInfo> rewardInfos = new List<TakenChallengeRewardInfo>();
-            List<ItemData> data = new List<ItemData>();
-
-            // Get challenge rewards
-            foreach (var challengeReward in challengeRewardLine)
+            // Reset hp/sp
+            foreach (var avatar in Lineup.AvatarData!.Avatars)
             {
-                // Check if we have enough stars to take this reward
-                if (totalStars < challengeReward.StarCount)
-                {
-                    continue;
-                }
-
-                // Get reward info
-                if (!ChallengeData.TakenRewards.ContainsKey(groupId))
-                {
-                    ChallengeData.TakenRewards[groupId] = new ChallengeGroupReward(Player.Uid, groupId);
-                }
-                var reward = ChallengeData.TakenRewards[groupId];
-
-                // Check if reward has been taken
-                if (reward.HasTakenReward(challengeReward.StarCount))
-                {
-                    continue;
-                }
-
-                // Set reward as taken
-                reward.SetTakenReward(challengeReward.StarCount);
-
-                // Get reward excel
-                if (!GameData.RewardDataData.ContainsKey(challengeReward.RewardID)) continue;
-                var rewardExcel = GameData.RewardDataData[challengeReward.RewardID];
-
-                // Add rewards
-                var proto = new TakenChallengeRewardInfo()
-                {
-                    StarCount = (uint)challengeReward.StarCount,
-                    Reward = new ItemList()
-                };
-
-                foreach (var item in rewardExcel.GetItems())
-                {
-                    var itemData = new ItemData()
-                    {
-                        ItemId = item.Item1,
-                        Count = item.Item2
-                    };
-
-                    proto.Reward.ItemList_.Add(itemData.ToProto());
-                    data.Add(itemData);
-                }
-
-                rewardInfos.Add(proto);
+                avatar.SetCurHp(10000, true);
+                avatar.SetCurSp(avatar.GetCurSp(true) / 2, true);
             }
 
-            // Add items to inventory
-            Player.InventoryManager!.AddItems(data);
-            return rewardInfos;
+            // Set technique points to full
+            Lineup.Mp = 5; // Max Mp
         }
 
-        public void SaveInstance(ChallengeInstance instance)
+        // Set challenge data for player
+        ChallengeInstance instance = new(Player, Excel);
+        ChallengeInstance = instance;
+
+        // Set first lineup before we enter scenes
+        await Player.LineupManager!.SetCurLineup(instance.CurrentExtraLineup + 10);
+
+        // Enter scene
+        try
         {
-            ChallengeData.Instance.StartPos = instance.StartPos;
-            ChallengeData.Instance.StartRot = instance.StartRot;
-            ChallengeData.Instance.ChallengeId = instance.ChallengeId;
-            ChallengeData.Instance.CurrentStage = instance.CurrentStage;
-            ChallengeData.Instance.CurrentExtraLineup = instance.CurrentExtraLineup;
-            ChallengeData.Instance.Status = instance.Status;
-            ChallengeData.Instance.HasAvatarDied = instance.HasAvatarDied;
-            ChallengeData.Instance.SavedMp = instance.SavedMp;
-            ChallengeData.Instance.RoundsLeft = instance.RoundsLeft;
-            ChallengeData.Instance.Stars = instance.Stars;
-            ChallengeData.Instance.ScoreStage1 = instance.ScoreStage1;
-            ChallengeData.Instance.ScoreStage2 = instance.ScoreStage2;
-            ChallengeData.Instance.StoryBuffs = instance.StoryBuffs;
-            ChallengeData.Instance.BossBuffs = instance.BossBuffs;
+            await Player.EnterScene(Excel.MapEntranceID, 0, false);
         }
-
-        public void ClearInstance()
+        catch
         {
-            ChallengeData.Instance.ChallengeId = 0;
+            // Reset lineup/instance if entering scene failed
+            ChallengeInstance = null;
+
+            // Send error packet
+            await Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeNotExist));
+            return;
         }
 
-        public void ResurrectInstance()
+        // Save start positions
+        instance.StartPos = Player.Data.Pos!;
+        instance.StartRot = Player.Data.Rot!;
+        instance.SavedMp = Player.LineupManager.GetCurLineup()!.Mp;
+
+        if (Excel.IsStory() && storyBuffs != null)
         {
-            if (ChallengeData.Instance != null && ChallengeData.Instance.ChallengeId != 0)
-            {
-                int ChallengeId = ChallengeData.Instance.ChallengeId;
-                if (GameData.ChallengeConfigData.TryGetValue(ChallengeId, out ChallengeConfigExcel? value))
-                {
-                    ChallengeConfigExcel Excel = value;
-                    ChallengeInstance instance = new ChallengeInstance(Player, Excel, ChallengeData.Instance);
-                    ChallengeInstance = instance;
-                }
-            }
+            instance.StoryBuffs.Add((int)storyBuffs.BuffOne);
+            instance.StoryBuffs.Add((int)storyBuffs.BuffTwo);
         }
 
-        #endregion
+        if (bossBuffs != null)
+        {
+            instance.BossBuffs.Add((int)bossBuffs.BuffOne);
+            instance.BossBuffs.Add((int)bossBuffs.BuffTwo);
+        }
+
+        // Send packet
+        await Player.SendPacket(new PacketStartChallengeScRsp(Player));
+
+        // Save instance
+        SaveInstance(instance);
     }
 
-    // WatchAndyTW was here
+    public void AddHistory(int challengeId, int stars, int score)
+    {
+        if (stars <= 0) return;
+
+        if (!ChallengeData.History.ContainsKey(challengeId))
+            ChallengeData.History[challengeId] = new ChallengeHistoryData(Player.Uid, challengeId);
+        var info = ChallengeData.History[challengeId];
+
+        // Set
+        info.SetStars(stars);
+        info.Score = score;
+    }
+
+    public async ValueTask<List<TakenChallengeRewardInfo>?> TakeRewards(int groupId)
+    {
+        // Get excels
+        if (!GameData.ChallengeGroupData.ContainsKey(groupId)) return null;
+        var challengeGroup = GameData.ChallengeGroupData[groupId];
+
+        if (!GameData.ChallengeRewardData.ContainsKey(challengeGroup.RewardLineGroupID)) return null;
+        var challengeRewardLine = GameData.ChallengeRewardData[challengeGroup.RewardLineGroupID];
+
+        // Get total stars
+        var totalStars = 0;
+        foreach (var ch in ChallengeData.History.Values)
+        {
+            // Legacy compatibility
+            if (ch.GroupId == 0)
+            {
+                if (!GameData.ChallengeConfigData.ContainsKey(ch.ChallengeId)) continue;
+                var challengeExcel = GameData.ChallengeConfigData[ch.ChallengeId];
+
+                ch.GroupId = challengeExcel.GroupID;
+            }
+
+            // Add total stars
+            if (ch.GroupId == groupId) totalStars += ch.GetTotalStars();
+        }
+
+        // Rewards
+        var rewardInfos = new List<TakenChallengeRewardInfo>();
+        var data = new List<ItemData>();
+
+        // Get challenge rewards
+        foreach (var challengeReward in challengeRewardLine)
+        {
+            // Check if we have enough stars to take this reward
+            if (totalStars < challengeReward.StarCount) continue;
+
+            // Get reward info
+            if (!ChallengeData.TakenRewards.ContainsKey(groupId))
+                ChallengeData.TakenRewards[groupId] = new ChallengeGroupReward(Player.Uid, groupId);
+            var reward = ChallengeData.TakenRewards[groupId];
+
+            // Check if reward has been taken
+            if (reward.HasTakenReward(challengeReward.StarCount)) continue;
+
+            // Set reward as taken
+            reward.SetTakenReward(challengeReward.StarCount);
+
+            // Get reward excel
+            if (!GameData.RewardDataData.ContainsKey(challengeReward.RewardID)) continue;
+            var rewardExcel = GameData.RewardDataData[challengeReward.RewardID];
+
+            // Add rewards
+            var proto = new TakenChallengeRewardInfo
+            {
+                StarCount = (uint)challengeReward.StarCount,
+                Reward = new ItemList()
+            };
+
+            foreach (var item in rewardExcel.GetItems())
+            {
+                var itemData = new ItemData
+                {
+                    ItemId = item.Item1,
+                    Count = item.Item2
+                };
+
+                proto.Reward.ItemList_.Add(itemData.ToProto());
+                data.Add(itemData);
+            }
+
+            rewardInfos.Add(proto);
+        }
+
+        // Add items to inventory
+        await Player.InventoryManager!.AddItems(data);
+        return rewardInfos;
+    }
+
+    public void SaveInstance(ChallengeInstance instance)
+    {
+        ChallengeData.Instance.StartPos = instance.StartPos;
+        ChallengeData.Instance.StartRot = instance.StartRot;
+        ChallengeData.Instance.ChallengeId = instance.ChallengeId;
+        ChallengeData.Instance.CurrentStage = instance.CurrentStage;
+        ChallengeData.Instance.CurrentExtraLineup = instance.CurrentExtraLineup;
+        ChallengeData.Instance.Status = instance.Status;
+        ChallengeData.Instance.HasAvatarDied = instance.HasAvatarDied;
+        ChallengeData.Instance.SavedMp = instance.SavedMp;
+        ChallengeData.Instance.RoundsLeft = instance.RoundsLeft;
+        ChallengeData.Instance.Stars = instance.Stars;
+        ChallengeData.Instance.ScoreStage1 = instance.ScoreStage1;
+        ChallengeData.Instance.ScoreStage2 = instance.ScoreStage2;
+        ChallengeData.Instance.StoryBuffs = instance.StoryBuffs;
+        ChallengeData.Instance.BossBuffs = instance.BossBuffs;
+    }
+
+    public void ClearInstance()
+    {
+        ChallengeData.Instance.ChallengeId = 0;
+    }
+
+    public void ResurrectInstance()
+    {
+        if (ChallengeData.Instance != null && ChallengeData.Instance.ChallengeId != 0)
+        {
+            var ChallengeId = ChallengeData.Instance.ChallengeId;
+            if (GameData.ChallengeConfigData.TryGetValue(ChallengeId, out var value))
+            {
+                var Excel = value;
+                var instance = new ChallengeInstance(Player, Excel, ChallengeData.Instance);
+                ChallengeInstance = instance;
+            }
+        }
+    }
+
+    #endregion
 }
+
+// WatchAndyTW was here

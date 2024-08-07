@@ -1,26 +1,25 @@
-﻿namespace EggLink.DanhengServer.Data.Excel
+﻿namespace EggLink.DanhengServer.Data.Excel;
+
+[ResourceEntity("ChallengeStoryMazeExtra.json")]
+public class ChallengeStoryExtraExcel : ExcelResource
 {
-    [ResourceEntity("ChallengeStoryMazeExtra.json")]
-    public class ChallengeStoryExtraExcel : ExcelResource
+    public int ID { get; set; }
+    public int TurnLimit { get; set; }
+    public int ClearScore { get; set; }
+    public List<int>? BattleTargetID { get; set; }
+
+
+    public override int GetId()
     {
-        public int ID { get; set; }
-        public int TurnLimit { get; set; }
-        public int ClearScore { get; set; }
-        public List<int>? BattleTargetID { get; set; }
+        return ID;
+    }
 
-
-        public override int GetId()
+    public override void Loaded()
+    {
+        if (GameData.ChallengeConfigData.ContainsKey(ID))
         {
-            return ID;
-        }
-
-        public override void Loaded()
-        {
-            if (GameData.ChallengeConfigData.ContainsKey(ID))
-            {
-                var challengeExcel = GameData.ChallengeConfigData[ID];
-                challengeExcel.SetStoryExcel(this);
-            }
+            var challengeExcel = GameData.ChallengeConfigData[ID];
+            challengeExcel.SetStoryExcel(this);
         }
     }
 }

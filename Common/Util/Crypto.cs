@@ -1,50 +1,42 @@
-﻿using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Util
+namespace EggLink.DanhengServer.Util;
+
+public class Crypto
 {
-    public class Crypto
+    private static readonly Random secureRandom = new();
+    public static Logger logger = new("Crypto");
+
+    public static void Xor(byte[] packet, byte[] key)
     {
-        private static Random secureRandom = new();
-        public static Logger logger = new("Crypto");
-        public static void Xor(byte[] packet, byte[] key)
+        try
         {
-            try
-            {
-                for (int i = 0; i < packet.Length; i++)
-                {
-                    packet[i] ^= key[i % key.Length];
-                }
-            }
-            catch (Exception e)
-            {
-                logger.Error("Crypto error.", e);
-            }
+            for (var i = 0; i < packet.Length; i++) packet[i] ^= key[i % key.Length];
         }
-
-        // Simple way to create a unique session key
-        public static string CreateSessionKey(string accountUid)
+        catch (Exception e)
         {
-            byte[] random = new byte[64];
-            secureRandom.NextBytes(random);
+            logger.Error("Crypto error.", e);
+        }
+    }
 
-            string temp = accountUid + "." + DateTime.Now.Ticks + "." + secureRandom.ToString();
+    // Simple way to create a unique session key
+    public static string CreateSessionKey(string accountUid)
+    {
+        var random = new byte[64];
+        secureRandom.NextBytes(random);
 
-            try
-            {
-                byte[] bytes = SHA512.HashData(Encoding.UTF8.GetBytes(temp));
-                return Convert.ToBase64String(bytes);
-            }
-            catch
-            {
-                byte[] bytes = SHA512.HashData(Encoding.UTF8.GetBytes(temp));
-                return Convert.ToBase64String(bytes);
-            }
+        var temp = accountUid + "." + DateTime.Now.Ticks + "." + secureRandom;
+
+        try
+        {
+            var bytes = SHA512.HashData(Encoding.UTF8.GetBytes(temp));
+            return Convert.ToBase64String(bytes);
+        }
+        catch
+        {
+            var bytes = SHA512.HashData(Encoding.UTF8.GetBytes(temp));
+            return Convert.ToBase64String(bytes);
         }
     }
 }

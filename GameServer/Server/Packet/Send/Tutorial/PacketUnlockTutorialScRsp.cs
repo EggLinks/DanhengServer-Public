@@ -1,25 +1,20 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Tutorial
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Tutorial;
+
+public class PacketUnlockTutorialScRsp : BasePacket
 {
-    public class PacketUnlockTutorialScRsp : BasePacket
+    public PacketUnlockTutorialScRsp(uint tutorialId) : base(CmdIds.UnlockTutorialScRsp)
     {
-        public PacketUnlockTutorialScRsp(uint tutorialId) : base(CmdIds.UnlockTutorialScRsp)
+        var proto = new UnlockTutorialScRsp
         {
-            var proto = new UnlockTutorialScRsp
+            Tutorial = new Proto.Tutorial
             {
-                Tutorial = new()
-                {
-                    Id = tutorialId,
-                    Status = TutorialStatus.TutorialUnlock,
-                }
-            };
-            SetData(proto);
-        }
+                Id = tutorialId,
+                Status = TutorialStatus.TutorialUnlock
+            }
+        };
+        SetData(proto);
     }
 }

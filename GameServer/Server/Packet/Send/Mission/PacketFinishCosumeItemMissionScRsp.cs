@@ -1,31 +1,26 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Mission
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Mission;
+
+public class PacketFinishCosumeItemMissionScRsp : BasePacket
 {
-    public class PacketFinishCosumeItemMissionScRsp : BasePacket
+    public PacketFinishCosumeItemMissionScRsp(uint subMissionId) : base(CmdIds.FinishCosumeItemMissionScRsp)
     {
-        public PacketFinishCosumeItemMissionScRsp(uint subMissionId) : base(CmdIds.FinishCosumeItemMissionScRsp)
+        var proto = new FinishCosumeItemMissionScRsp
         {
-            var proto = new FinishCosumeItemMissionScRsp()
-            {
-                SubMissionId = subMissionId
-            };
+            SubMissionId = subMissionId
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
+    }
 
-        public PacketFinishCosumeItemMissionScRsp() : base(CmdIds.FinishCosumeItemMissionScRsp)
+    public PacketFinishCosumeItemMissionScRsp() : base(CmdIds.FinishCosumeItemMissionScRsp)
+    {
+        var proto = new FinishCosumeItemMissionScRsp
         {
-            var proto = new FinishCosumeItemMissionScRsp()
-            {
-                Retcode = 1
-            };
-            SetData(proto);
-        }
+            Retcode = 1
+        };
+        SetData(proto);
     }
 }

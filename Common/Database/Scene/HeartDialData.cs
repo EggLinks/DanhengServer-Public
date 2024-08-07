@@ -1,69 +1,62 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Enums.Mission;
 using SqlSugar;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Database.Scene
+namespace EggLink.DanhengServer.Database.Scene;
+
+[SugarTable("HeartDial")]
+public class HeartDialData : BaseDatabaseDataHelper
 {
-    [SugarTable("HeartDial")]
-    public class HeartDialData : BaseDatabaseDataHelper
+    [SugarColumn(IsJson = true)] public Dictionary<int, HeartDialInfo> DialList { get; set; } = [];
+
+    public HeartDialInfo ChangeScriptEmotion(int scriptId, HeartDialEmoTypeEnum emoType, HeartDialStepTypeEnum stepType)
     {
-        [SugarColumn(IsJson = true)]
-        public Dictionary<int, HeartDialInfo> DialList { get; set; } = [];
-
-        public HeartDialInfo ChangeScriptEmotion(int scriptId, HeartDialEmoTypeEnum emoType, HeartDialStepTypeEnum stepType)
+        if (DialList.TryGetValue(scriptId, out var dialInfo))
         {
-            if (DialList.TryGetValue(scriptId, out var dialInfo))
+            dialInfo.EmoType = emoType;
+            dialInfo.StepType = stepType;
+        }
+        else
+        {
+            DialList.Add(scriptId, new HeartDialInfo
             {
-                dialInfo.EmoType = emoType;
-                dialInfo.StepType = stepType;
-            }
-            else
-            {
-                DialList.Add(scriptId, new HeartDialInfo
-                {
-                    ScriptId = scriptId,
-                    EmoType = emoType,
-                    StepType = stepType
-                });
+                ScriptId = scriptId,
+                EmoType = emoType,
+                StepType = stepType
+            });
 
-                dialInfo = DialList[scriptId];
-            }
-
-            return dialInfo;
+            dialInfo = DialList[scriptId];
         }
 
-        public HeartDialInfo ChangeScriptEmotion(int scriptId, HeartDialEmoTypeEnum emoType)
-        {
-            if (DialList.TryGetValue(scriptId, out var dialInfo))
-            {
-                dialInfo.EmoType = emoType;
-            }
-            else
-            {
-                GameData.HeartDialScriptData.TryGetValue(scriptId, out var scriptData);
-                DialList.Add(scriptId, new HeartDialInfo
-                {
-                    ScriptId = scriptId,
-                    EmoType = emoType,
-                    StepType = scriptData?.StepList[0] ?? HeartDialStepTypeEnum.Normal
-                });
-
-                dialInfo = DialList[scriptId];
-            }
-
-            return dialInfo;
-        }
+        return dialInfo;
     }
 
-    public class HeartDialInfo
+    public HeartDialInfo ChangeScriptEmotion(int scriptId, HeartDialEmoTypeEnum emoType)
     {
-        public int ScriptId { get; set; }
-        public HeartDialEmoTypeEnum EmoType { get; set; } = HeartDialEmoTypeEnum.Peace;
-        public HeartDialStepTypeEnum StepType { get; set; } = HeartDialStepTypeEnum.Normal;
+        if (DialList.TryGetValue(scriptId, out var dialInfo))
+        {
+            dialInfo.EmoType = emoType;
+        }
+        else
+        {
+            GameData.HeartDialScriptData.TryGetValue(scriptId, out var scriptData);
+            DialList.Add(scriptId, new HeartDialInfo
+            {
+                ScriptId = scriptId,
+                EmoType = emoType,
+                StepType = scriptData?.StepList[0] ?? HeartDialStepTypeEnum.Normal
+            });
+
+            dialInfo = DialList[scriptId];
+        }
+
+        return dialInfo;
     }
+}
+
+public class HeartDialInfo
+{
+    public int ScriptId { get; set; }
+    public HeartDialEmoTypeEnum EmoType { get; set; } = HeartDialEmoTypeEnum.Peace;
+    public HeartDialStepTypeEnum StepType { get; set; } = HeartDialStepTypeEnum.Normal;
 }

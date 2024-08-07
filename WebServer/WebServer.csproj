@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.25.3" />
-    <PackageReference Include="Google.Protobuf.Tools" Version="3.25.3" />
+    <PackageReference Include="Google.Protobuf" Version="3.27.3" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.27.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
     <PackageReference Include="Spectre.Console" Version="0.48.0" />
@@ -21,6 +21,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="System.Management" Version="8.0.0" />
     <ProjectReference Include="..\Common\Common.csproj" />
+    <Reference Include="DanhengProto">
+      <HintPath>..\Proto\DanhengProto.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.25.3" />
-    <PackageReference Include="Google.Protobuf.Tools" Version="3.25.3" />
+    <PackageReference Include="Google.Protobuf" Version="3.27.3" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.27.3" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -19,6 +19,12 @@
     <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.8" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.143" />
     <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DanhengProto">
+      <HintPath>..\Proto\DanhengProto.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

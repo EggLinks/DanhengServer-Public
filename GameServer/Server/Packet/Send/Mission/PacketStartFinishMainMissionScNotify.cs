@@ -1,17 +1,17 @@
-﻿using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Mission
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Mission;
+
+public class PacketStartFinishMainMissionScNotify : BasePacket
 {
-    public class PacketStartFinishMainMissionScNotify : BasePacket
+    public PacketStartFinishMainMissionScNotify(int missionId) : base(CmdIds.StartFinishMainMissionScNotify)
     {
-        public PacketStartFinishMainMissionScNotify(int missionId) : base(CmdIds.StartFinishMainMissionScNotify)
+        var proto = new StartFinishMainMissionScNotify
         {
-            var proto = new StartFinishMainMissionScNotify()
-            {
-                MainMissionId = (uint)missionId,
-            };
+            MainMissionId = (uint)missionId
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

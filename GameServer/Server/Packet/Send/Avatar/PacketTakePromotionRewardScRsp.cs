@@ -1,31 +1,26 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Avatar
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Avatar;
+
+public class PacketTakePromotionRewardScRsp : BasePacket
 {
-    public class PacketTakePromotionRewardScRsp : BasePacket
+    public PacketTakePromotionRewardScRsp() : base(CmdIds.TakePromotionRewardScRsp)
     {
-        public PacketTakePromotionRewardScRsp() : base(CmdIds.TakePromotionRewardScRsp)
+        var itemList = new Proto.Item
         {
-            var itemList = new Item()
-            {
-                ItemId = 101,
-                Num = 1
-            };
+            ItemId = 101,
+            Num = 1
+        };
 
-            var rsp = new TakePromotionRewardScRsp
+        var rsp = new TakePromotionRewardScRsp
+        {
+            RewardList = new ItemList
             {
-                RewardList = new()
-                {
-                    ItemList_ = { itemList }
-                }
-            };
+                ItemList_ = { itemList }
+            }
+        };
 
-            SetData(rsp);
-        }
+        SetData(rsp);
     }
 }

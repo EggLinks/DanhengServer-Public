@@ -1,20 +1,13 @@
 ﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Raid;
-using EggLink.DanhengServer.Server;
-using EggLink.DanhengServer.Server.Packet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Raid
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Raid;
+
+[Opcode(CmdIds.GetRaidInfoCsReq)]
+public class HandlerGetRaidInfoCsReq : Handler
 {
-    [Opcode(CmdIds.GetRaidInfoCsReq)]
-    public class HandlerGetRaidInfoCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.SendPacket(new PacketGetRaidInfoScRsp(connection.Player!));
-        }
+        await connection.SendPacket(new PacketGetRaidInfoScRsp(connection.Player!));
     }
 }

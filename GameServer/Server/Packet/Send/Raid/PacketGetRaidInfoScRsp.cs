@@ -1,41 +1,24 @@
-﻿using EggLink.DanhengServer.Game.Player;
+﻿using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Raid
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Raid;
+
+public class PacketGetRaidInfoScRsp : BasePacket
 {
-    public class PacketGetRaidInfoScRsp : BasePacket
+    public PacketGetRaidInfoScRsp(PlayerInstance player) : base(CmdIds.GetRaidInfoScRsp)
     {
-        public PacketGetRaidInfoScRsp(PlayerInstance player) : base(CmdIds.GetRaidInfoScRsp)
-        {
-            var proto = new GetRaidInfoScRsp()
-            {
-                ChallengeRaidList = { },
-                ChallengeTakenRewardIdListFieldNumber = { },
-                FinishedRaidInfoList = { },
-            };
+        var proto = new GetRaidInfoScRsp();
 
-            foreach (var recordDict in player.RaidManager!.RaidData.RaidRecordDatas)
-            {
-                foreach (var record in recordDict.Value)
+        foreach (var recordDict in player.RaidManager!.RaidData.RaidRecordDatas)
+        foreach (var record in recordDict.Value)
+            if (record.Value.Status == RaidStatus.Finish)
+                proto.FinishedRaidInfoList.Add(new FinishedRaidInfo
                 {
-                    if (record.Value.Status == RaidStatus.Finish)
-                    {
-                        proto.FinishedRaidInfoList.Add(new RaidInfo()
-                        {
-                            RaidId = (uint)record.Value.RaidId,
-                            WorldLevel = (uint)record.Value.WorldLevel,
-                        });
-                    }
-                }
-            }
+                    RaidId = (uint)record.Value.RaidId,
+                    WorldLevel = (uint)record.Value.WorldLevel
+                });
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

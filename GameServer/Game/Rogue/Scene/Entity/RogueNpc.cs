@@ -1,55 +1,47 @@
 ﻿using EggLink.DanhengServer.Data.Config;
-using EggLink.DanhengServer.Game.Rogue.Event;
-using EggLink.DanhengServer.Game.Scene;
-using EggLink.DanhengServer.Game.Scene.Entity;
+using EggLink.DanhengServer.GameServer.Game.Rogue.Event;
+using EggLink.DanhengServer.GameServer.Game.Scene;
+using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet.Send.Scene;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Game.Rogue.Scene.Entity
+namespace EggLink.DanhengServer.GameServer.Game.Rogue.Scene.Entity;
+
+public class RogueNpc(SceneInstance scene, GroupInfo group, NpcInfo npcInfo) : EntityNpc(scene, group, npcInfo)
 {
-    public class RogueNpc(SceneInstance scene, GroupInfo group, NpcInfo npcInfo) : EntityNpc(scene, group, npcInfo)
+    public int RogueNpcId { get; set; }
+    public int UniqueId { get; set; }
+    private bool IsFinish { get; set; }
+
+    public RogueEventInstance? RogueEvent { get; set; }
+
+    public async ValueTask FinishDialogue()
     {
-        public int RogueNpcId { get; set; }
-        public int UniqueId { get; set; }
-        private bool IsFinish { get; set; } = false;
+        IsFinish = true;
+        await Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(this));
+    }
 
-        public RogueEventInstance? RogueEvent { get; set; }
+    public override SceneEntityInfo ToProto()
+    {
+        var proto = base.ToProto();
 
-        public void FinishDialogue()
+        if (RogueNpcId > 0 && RogueEvent != null)
         {
-            IsFinish = true;
-            Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(this));
-        }
-
-        public override SceneEntityInfo ToProto()
-        {
-            var proto = base.ToProto();
-
-            if (RogueNpcId > 0 && RogueEvent != null)
+            proto.Npc.ExtraInfo = new NpcExtraInfo
             {
-                proto.Npc.ExtraInfo = new()
+                RogueInfo = new NpcRogueInfo
                 {
-                    RogueInfo = new()
-                    {
-                        EventId = (uint)RogueNpcId,
-                        EventUniqueId = (uint)UniqueId,
-                        FinishDialogue = IsFinish,
-                        //DialogueGroupId = (uint)GroupID
-                    }
-                };
-
-                foreach (var param in RogueEvent.Options)
-                {
-                    proto.Npc.ExtraInfo.RogueInfo.DialogueEventParamList.Add(param.ToNpcProto());
+                    EventId = (uint)RogueNpcId,
+                    EventUniqueId = (uint)UniqueId,
+                    FinishDialogue = IsFinish
+                    //DialogueGroupId = (uint)GroupID
                 }
-            }
+            };
 
-            return proto;
+            foreach (var param in RogueEvent.Options)
+                proto.Npc.ExtraInfo.RogueInfo.DialogueEventParamList.Add(param.ToNpcProto());
         }
+
+        return proto;
     }
 }

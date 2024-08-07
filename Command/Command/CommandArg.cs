@@ -1,85 +1,70 @@
-﻿using EggLink.DanhengServer.Server;
+﻿using EggLink.DanhengServer.GameServer.Server;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Command
+namespace EggLink.DanhengServer.Command.Command;
+
+public class CommandArg
 {
-    public class CommandArg
+    public CommandArg(string raw, ICommandSender sender, Connection? con = null)
     {
-        public string Raw { get; }
-        public List<string> Args { get; } = [];
-        public List<string> BasicArgs { get; } = [];
-        public Dictionary<string, string> CharacterArgs { get; } = [];
-        public Connection? Target { get; set; }
-        public ICommandSender Sender { get; }
-
-        public CommandArg(string raw, ICommandSender sender, Connection? con = null)
+        Raw = raw;
+        Sender = sender;
+        var args = raw.Split(' ');
+        foreach (var arg in args)
         {
-            Raw = raw;
-            Sender = sender;
-            var args = raw.Split(' ');
-            foreach (var arg in args)
+            if (string.IsNullOrEmpty(arg)) continue;
+            var character = arg[0];
+            if (!int.TryParse(character.ToString(), out var _) && character != '-')
             {
-                if (string.IsNullOrEmpty(arg))
+                try
                 {
-                    continue;
+                    CharacterArgs.Add(arg[..1], arg[1..]);
+                    Args.Add(arg);
                 }
-                var character = arg[0];
-                if (!int.TryParse(character.ToString(), out var _) && character != '-')
-                {
-                    try
-                    {
-                        CharacterArgs.Add(arg[..1], arg[1..]);
-                        Args.Add(arg);
-                    } catch
-                    {
-                        BasicArgs.Add(arg);
-                        Args.Add(arg);
-                    }
-                }
-                else
+                catch
                 {
                     BasicArgs.Add(arg);
                     Args.Add(arg);
                 }
             }
-            if (con != null)
+            else
             {
-                Target = con;
-            }
-
-            CharacterArgs.TryGetValue("@", out var target);
-            if (target != null)
-            {
-                var connection = Listener.Connections.Values.ToList().Find(item => item.Player?.Uid.ToString() == target);
-                if (connection != null)
-                {
-                    Target = connection;
-                }
+                BasicArgs.Add(arg);
+                Args.Add(arg);
             }
         }
-        public int GetInt(int index)
-        {
-            if (BasicArgs.Count <= index)
-            {
-                return 0;
-            }
-            _ = int.TryParse(BasicArgs[index], out int res);
-            return res;
-        }
 
-        public void SendMsg(string msg)
-        {
-            Sender.SendMsg(msg);
-        }
+        if (con != null) Target = con;
 
-        public override string ToString()
-        {
-            return $"BasicArg: {BasicArgs.ToArrayString()}. CharacterArg: {CharacterArgs.ToJsonString()}.";
-        }
+        CharacterArgs.TryGetValue("@", out var target);
+        if (target != null)
+            if (DanhengListener.Connections.Values.ToList()
+                    .Find(item => (item as Connection)?.Player?.Uid.ToString() == target) is Connection connection)
+                Target = connection;
+    }
+
+    public string Raw { get; }
+    public List<string> Args { get; } = [];
+    public List<string> BasicArgs { get; } = [];
+    public Dictionary<string, string> CharacterArgs { get; } = [];
+    public Connection? Target { get; set; }
+    public ICommandSender Sender { get; }
+
+    public int GetInt(int index)
+    {
+        if (BasicArgs.Count <= index) return 0;
+        _ = int.TryParse(BasicArgs[index], out var res);
+        return res;
+    }
+
+    public async ValueTask SendMsg(string msg)
+    {
+        await Sender.SendMsg(msg);
+    }
+
+    public override string ToString()
+    {
+        return $"BasicArg: {BasicArgs.ToArrayString()}. CharacterArg: {CharacterArgs.ToJsonString()}.";
     }
 }

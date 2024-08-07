@@ -1,25 +1,35 @@
-﻿using EggLink.DanhengServer.Game.Player;
+﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Avatar
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Avatar;
+
+public class PacketGetAvatarDataScRsp : BasePacket
 {
-    public class PacketGetAvatarDataScRsp : BasePacket
+    public PacketGetAvatarDataScRsp(PlayerInstance player) : base(CmdIds.GetAvatarDataScRsp)
     {
-        public PacketGetAvatarDataScRsp(PlayerInstance player) : base(CmdIds.GetAvatarDataScRsp)
+        var proto = new GetAvatarDataScRsp
         {
-            var proto = new GetAvatarDataScRsp()
-            {
-                IsGetAll = true,
-            };
+            IsGetAll = true
+        };
 
-            player.AvatarManager?.AvatarData?.Avatars?.ForEach(avatar =>
-            {
-                if (avatar.GetBaseAvatarId() != 8001)
-                    proto.AvatarList.Add(avatar.ToProto());
-            });
-            proto.AvatarList.Add(player.AvatarManager!.GetHero()!.ToProto());
+        player.AvatarManager?.AvatarData?.Avatars?.ForEach(avatar =>
+        {
+            GameData.MultiplePathAvatarConfigData.TryGetValue(avatar.AvatarId, out var multiPathAvatar);
 
-            SetData(proto);
-        }
+            if (multiPathAvatar == null)
+            {
+                // Normal avatar
+                proto.AvatarList.Add(avatar.ToProto());
+            }
+            else
+            {
+                // Multiple path avatar
+                if (avatar.AvatarId == multiPathAvatar.BaseAvatarID) proto.AvatarList.Add(avatar.ToProto());
+            }
+        });
+
+        SetData(proto);
     }
 }

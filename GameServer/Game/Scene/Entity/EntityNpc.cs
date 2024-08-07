@@ -1,53 +1,48 @@
 ﻿using EggLink.DanhengServer.Data.Config;
-using EggLink.DanhengServer.Game.Battle;
+using EggLink.DanhengServer.GameServer.Game.Battle;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Game.Scene.Entity
+namespace EggLink.DanhengServer.GameServer.Game.Scene.Entity;
+
+public class EntityNpc(SceneInstance scene, GroupInfo group, NpcInfo npcInfo) : IGameEntity
 {
-    public class EntityNpc(SceneInstance scene, GroupInfo group, NpcInfo npcInfo) : IGameEntity
+    public SceneInstance Scene { get; set; } = scene;
+    public Position Position { get; set; } = npcInfo.ToPositionProto();
+    public Position Rotation { get; set; } = npcInfo.ToRotationProto();
+    public int NpcId { get; set; } = npcInfo.NPCID;
+    public int InstId { get; set; } = npcInfo.ID;
+    public int EntityID { get; set; }
+    public int GroupID { get; set; } = group.Id;
+
+    public async ValueTask AddBuff(SceneBuff buff)
     {
-        public SceneInstance Scene { get; set; } = scene;
-        public int EntityID { get; set; }
-        public int GroupID { get; set; } = group.Id;
-        public Position Position { get; set; } = npcInfo.ToPositionProto();
-        public Position Rotation { get; set; } = npcInfo.ToRotationProto();
-        public int NpcId { get; set; } = npcInfo.NPCID;
-        public int InstId { get; set; } = npcInfo.ID;
+        await System.Threading.Tasks.Task.CompletedTask;
+    }
 
-        public void AddBuff(SceneBuff buff)
-        {
-        }
+    public async ValueTask ApplyBuff(BattleInstance instance)
+    {
+        await System.Threading.Tasks.Task.CompletedTask;
+    }
 
-        public void ApplyBuff(BattleInstance instance)
+    public virtual SceneEntityInfo ToProto()
+    {
+        SceneNpcInfo npc = new()
         {
-        }
+            NpcId = (uint)NpcId
+        };
 
-        public virtual SceneEntityInfo ToProto()
+        return new SceneEntityInfo
         {
-            SceneNpcInfo npc = new()
+            EntityId = (uint)EntityID,
+            GroupId = (uint)GroupID,
+            Motion = new MotionInfo
             {
-                NpcId = (uint)NpcId,
-            };
-
-            return new SceneEntityInfo()
-            {
-                EntityId = (uint)EntityID,
-                GroupId = (uint)GroupID,
-                Motion = new MotionInfo()
-                {
-                    Pos = Position.ToProto(),
-                    Rot = Rotation.ToProto(),
-                },
-                InstId = (uint)InstId,
-                Npc = npc,
-            };
-        }
+                Pos = Position.ToProto(),
+                Rot = Rotation.ToProto()
+            },
+            InstId = (uint)InstId,
+            Npc = npc
+        };
     }
 }

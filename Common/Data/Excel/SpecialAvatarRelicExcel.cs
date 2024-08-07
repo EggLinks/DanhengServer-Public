@@ -1,29 +1,27 @@
 ﻿using Newtonsoft.Json;
 
-namespace EggLink.DanhengServer.Data.Excel
+namespace EggLink.DanhengServer.Data.Excel;
+
+[ResourceEntity("SpecialAvatarRelic.json")]
+public class SpecialAvatarRelicExcel : ExcelResource
 {
-    [ResourceEntity("SpecialAvatarRelic.json")]
-    public class SpecialAvatarRelicExcel : ExcelResource
+    public int RelicPropertyType { get; set; }
+    public List<SpecialAvatarRelicInfo> RelicIDList { get; set; } = [];
+
+    public override int GetId()
     {
-        public int RelicPropertyType { get; set; }
-        public List<SpecialAvatarRelicInfo> RelicIDList { get; set; } = [];
-
-        public override int GetId()
-        {
-            return RelicPropertyType;
-        }
-
-        public override void Loaded()
-        {
-            GameData.SpecialAvatarRelicData[GetId()] = this;
-        }
+        return RelicPropertyType;
     }
 
-    public class SpecialAvatarRelicInfo
+    public override void Loaded()
     {
-        [JsonProperty("BDHIKPAMCJF")]
-        public int RelicID { get; set; }
-        [JsonProperty("PKAFFFBFJII")]
-        public int RelicLevel { get; set; }
+        GameData.SpecialAvatarRelicData[GetId()] = this;
     }
+}
+
+public class SpecialAvatarRelicInfo
+{
+    [JsonProperty("BDHIKPAMCJF")] public int RelicID { get; set; }
+
+    [JsonProperty("PKAFFFBFJII")] public int RelicLevel { get; set; }
 }

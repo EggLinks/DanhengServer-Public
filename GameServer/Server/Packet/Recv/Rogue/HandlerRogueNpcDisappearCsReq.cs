@@ -1,22 +1,23 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Rogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Rogue;
+
+[Opcode(CmdIds.RogueNpcDisappearCsReq)]
+public class HandlerRogueNpcDisappearCsReq : Handler
 {
-    [Opcode(CmdIds.RogueNpcDisappearCsReq)]
-    public class HandlerRogueNpcDisappearCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
+        var req = RogueNpcDisappearCsReq.Parser.ParseFrom(data);
+
+        if (connection.Player!.RogueManager?.GetRogueInstance() == null)
         {
-            var req = RogueNpcDisappearCsReq.Parser.ParseFrom(data);
-
-            connection.Player!.RogueManager!.GetRogueInstance()?.HandleNpcDisappear((int)req.DisappearNpcEntityId);
-
-            connection.SendPacket(CmdIds.RogueNpcDisappearScRsp);
+            await connection.SendPacket(CmdIds.RogueNpcDisappearScRsp);
+            return;
         }
+
+        await connection.Player!.RogueManager!.GetRogueInstance()!.HandleNpcDisappear((int)req.DisappearNpcEntityId);
+
+        await connection.SendPacket(CmdIds.RogueNpcDisappearScRsp);
     }
 }

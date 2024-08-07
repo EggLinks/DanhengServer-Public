@@ -3,56 +3,54 @@ using EggLink.DanhengServer.Proto;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace EggLink.DanhengServer.Data.Excel
+namespace EggLink.DanhengServer.Data.Excel;
+
+[ResourceEntity("RogueBuff.json")]
+public class RogueBuffExcel : ExcelResource
 {
-    [ResourceEntity("RogueBuff.json")]
-    public class RogueBuffExcel : ExcelResource
+    public int MazeBuffID { get; set; }
+    public int MazeBuffLevel { get; set; }
+    public int RogueBuffType { get; set; }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public RogueBuffCategoryEnum RogueBuffCategory { get; set; }
+
+    public int RogueBuffTag { get; set; }
+    public int AeonID { get; set; }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public RogueBuffAeonTypeEnum BattleEventBuffType { get; set; } = RogueBuffAeonTypeEnum.Normal;
+
+    public bool IsAeonBuff => BattleEventBuffType != RogueBuffAeonTypeEnum.Normal;
+
+    public override int GetId()
     {
-        public int MazeBuffID { get; set; }
-        public int MazeBuffLevel { get; set; }
-        public int RogueBuffType { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public RogueBuffCategoryEnum RogueBuffCategory { get; set; }
-        public int RogueBuffTag { get; set; }
-        public int AeonID { get; set; }
+        return MazeBuffID * 100 + MazeBuffLevel;
+    }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public RogueBuffAeonTypeEnum BattleEventBuffType { get; set; } = RogueBuffAeonTypeEnum.Normal;
+    public override void Loaded()
+    {
+        GameData.RogueBuffData.Add(GetId(), this);
 
-        public override int GetId()
+        if (BattleEventBuffType == RogueBuffAeonTypeEnum.BattleEventBuff)
         {
-            return MazeBuffID * 100 + MazeBuffLevel;
+            GameData.RogueAeonBuffData.Add(AeonID, this);
         }
-
-        public override void Loaded()
+        else if (BattleEventBuffType == RogueBuffAeonTypeEnum.BattleEventBuffEnhance)
         {
-            GameData.RogueBuffData.Add(GetId(), this);
-
-            if (BattleEventBuffType == RogueBuffAeonTypeEnum.BattleEventBuff)
-            {
-                GameData.RogueAeonBuffData.Add(AeonID, this);
-            } else if (BattleEventBuffType == RogueBuffAeonTypeEnum.BattleEventBuffEnhance)
-            {
-                if (GameData.RogueAeonEnhanceData.TryGetValue(AeonID, out var aeonBuff))
-                {
-                    aeonBuff.Add(this);
-                }
-                else
-                {
-                    GameData.RogueAeonEnhanceData.Add(AeonID, [this]);
-                }
-            }
+            if (GameData.RogueAeonEnhanceData.TryGetValue(AeonID, out var aeonBuff))
+                aeonBuff.Add(this);
+            else
+                GameData.RogueAeonEnhanceData.Add(AeonID, [this]);
         }
+    }
 
-        public RogueCommonBuff ToProto()
+    public RogueCommonBuff ToProto()
+    {
+        return new RogueCommonBuff
         {
-            return new()
-            {
-                BuffId = (uint)MazeBuffID,
-                BuffLevel = (uint)MazeBuffLevel,
-            };
-        }
-
-        public bool IsAeonBuff => BattleEventBuffType != RogueBuffAeonTypeEnum.Normal;
+            BuffId = (uint)MazeBuffID,
+            BuffLevel = (uint)MazeBuffLevel
+        };
     }
 }

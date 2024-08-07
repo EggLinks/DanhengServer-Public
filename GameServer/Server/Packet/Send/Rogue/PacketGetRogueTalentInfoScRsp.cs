@@ -1,24 +1,18 @@
-﻿using EggLink.DanhengServer.Game.Player;
-using EggLink.DanhengServer.Game.Rogue;
+﻿using EggLink.DanhengServer.GameServer.Game.Rogue;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Rogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Rogue;
+
+public class PacketGetRogueTalentInfoScRsp : BasePacket
 {
-    public class PacketGetRogueTalentInfoScRsp : BasePacket
+    public PacketGetRogueTalentInfoScRsp() : base(CmdIds.GetRogueTalentInfoScRsp)
     {
-        public PacketGetRogueTalentInfoScRsp() : base(CmdIds.GetRogueTalentInfoScRsp)
+        var proto = new GetRogueTalentInfoScRsp
         {
-            var proto = new GetRogueTalentInfoScRsp()
-            {
-                RogueTalentInfo = RogueManager.ToTalentProto()
-            };
+            TalentInfoList = RogueManager.ToTalentProto()
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

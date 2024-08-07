@@ -1,21 +1,16 @@
-﻿using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet.Send.Mission;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Mission;
+using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Mission
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Mission;
+
+[Opcode(CmdIds.GetMainMissionCustomValueCsReq)]
+public class HandlerGetMainMissionCustomValueCsReq : Handler
 {
-    [Opcode(CmdIds.GetMainMissionCustomValueCsReq)]
-    public class HandlerGetMainMissionCustomValueCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = GetMainMissionCustomValueCsReq.Parser.ParseFrom(data);
-            var player = connection.Player!;
-            connection.SendPacket(new PacketGetMainMissionCustomValueScRsp(req, player));
-        }
+        var req = GetMainMissionCustomValueCsReq.Parser.ParseFrom(data);
+        var player = connection.Player!;
+        await connection.SendPacket(new PacketGetMainMissionCustomValueScRsp(req, player));
     }
 }

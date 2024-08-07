@@ -1,43 +1,39 @@
 ﻿using EggLink.DanhengServer.Database.Player;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Friend
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Friend;
+
+public class PacketHandleFriendScRsp : BasePacket
 {
-    public class PacketHandleFriendScRsp : BasePacket
+    public PacketHandleFriendScRsp(uint uid, bool isAccept) : base(CmdIds.HandleFriendScRsp)
     {
-        public PacketHandleFriendScRsp(uint uid, bool isAccept) : base(CmdIds.HandleFriendScRsp)
+        var proto = new HandleFriendScRsp
         {
-            var proto = new HandleFriendScRsp
-            {
-                Uid = uid,
-                IsAccept = isAccept
-            };
+            Uid = uid,
+            IsAccept = isAccept
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
+    }
 
-        public PacketHandleFriendScRsp(uint uid, bool isAccept, PlayerData playerData) : base(CmdIds.HandleFriendScRsp)
+    public PacketHandleFriendScRsp(uint uid, bool isAccept, PlayerData playerData) : base(CmdIds.HandleFriendScRsp)
+    {
+        var status = Listener.GetActiveConnection((int)uid) == null
+            ? FriendOnlineStatus.Offline
+            : FriendOnlineStatus.Online;
+        var proto = new HandleFriendScRsp
         {
-            var status = Listener.GetActiveConnection((int)uid) == null ? FriendOnlineStatus.Offline : FriendOnlineStatus.Online;
-            var proto = new HandleFriendScRsp
+            Uid = uid,
+            IsAccept = isAccept,
+            FriendInfo = new FriendSimpleInfo
             {
-                Uid = uid,
-                IsAccept = isAccept,
-                FriendInfo = new()
-                {
-                    IsMarked = false,
-                    RemarkName = "",
-                    PlayerInfo = playerData.ToSimpleProto(status)
-                }
-            };
+                IsMarked = false,
+                RemarkName = "",
+                PlayerInfo = playerData.ToSimpleProto(status)
+            }
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

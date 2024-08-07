@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("ChatBubbleConfig.json")]
+public class ChatBubbleConfigExcel : ExcelResource
 {
-    [ResourceEntity("ChatBubbleConfig.json")]
-    public class ChatBubbleConfigExcel : ExcelResource
+    public int ID { get; set; }
+
+    public override int GetId()
     {
-        public int ID { get; set; }
+        return ID;
+    }
 
-        public override int GetId()
-        {
-            return ID;
-        }
-
-        public override void Loaded()
-        {
-            GameData.ChatBubbleConfigData[ID] = this;
-        }
+    public override void Loaded()
+    {
+        GameData.ChatBubbleConfigData[ID] = this;
     }
 }

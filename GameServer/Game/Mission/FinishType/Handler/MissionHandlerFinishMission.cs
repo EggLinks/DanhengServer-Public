@@ -1,36 +1,34 @@
 ﻿using EggLink.DanhengServer.Data.Config;
-using EggLink.DanhengServer.Enums;
-using EggLink.DanhengServer.Game.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EggLink.DanhengServer.Data.Excel;
+using EggLink.DanhengServer.Enums.Mission;
+using EggLink.DanhengServer.GameServer.Game.Player;
 
-namespace EggLink.DanhengServer.Game.Mission.FinishType.Handler
+namespace EggLink.DanhengServer.GameServer.Game.Mission.FinishType.Handler;
+
+[MissionFinishType(MissionFinishTypeEnum.FinishMission)]
+public class MissionHandlerFinishMission : MissionFinishTypeHandler
 {
-    [MissionFinishType(MissionFinishTypeEnum.FinishMission)]
-    public class MissionHandlerFinishMission : MissionFinishTypeHandler
+    public override async ValueTask HandleMissionFinishType(PlayerInstance player, SubMissionInfo info, object? arg)
     {
-        public override void Init(PlayerInstance player, SubMissionInfo info, object? arg)
-        {
-        }
+        var send = true;
+        foreach (var mainMissionId in info.ParamIntList ?? [])
+            if (player.MissionManager!.GetMainMissionStatus(mainMissionId) != MissionPhaseEnum.Finish)
+            {
+                send = false;
+                break;
+            }
 
-        public override void HandleFinishType(PlayerInstance player, SubMissionInfo info, object? arg)
-        {
-            var send = true;
-            foreach (var mainMissionId in info.ParamIntList ?? [])
-            {
-                if (player.MissionManager!.GetMainMissionStatus(mainMissionId) != MissionPhaseEnum.Finish)
-                {
-                    send = false;
-                    break;
-                }
-            }
-            if (send)
-            {
-                player.MissionManager!.FinishSubMission(info.ID);
-            }
-        }
+        if (send) await player.MissionManager!.FinishSubMission(info.ID);
+    }
+
+    public override async ValueTask HandleQuestFinishType(PlayerInstance player, QuestDataExcel quest,
+        FinishWayExcel excel, object? arg)
+    {
+        var progress = 0;
+        foreach (var mainMissionId in excel.ParamIntList)
+            if (player.MissionManager!.GetMainMissionStatus(mainMissionId) == MissionPhaseEnum.Finish)
+                progress++;
+
+        await player.QuestManager!.UpdateQuestProgress(quest.QuestID, progress);
     }
 }

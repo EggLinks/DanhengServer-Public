@@ -1,4 +1,4 @@
 @echo off
-del /s /f ..\Common\Proto\*.cs
+del /s /f ..\Proto\*.cs
 cd OriginalProto
-protoc ".\*" --csharp_out=..\..\Common\Proto\
+protoc ".\*" --csharp_out=..\..\Proto\

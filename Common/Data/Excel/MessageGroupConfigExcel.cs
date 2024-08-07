@@ -1,39 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("MessageGroupConfig.json")]
+public class MessageGroupConfigExcel : ExcelResource
 {
-    [ResourceEntity("MessageGroupConfig.json")]
-    public class MessageGroupConfigExcel : ExcelResource
+    public int ID { get; set; }
+    public int MessageContactsID { get; set; }
+    public List<int> MessageSectionIDList { get; set; } = [];
+
+    public override int GetId()
     {
-        public int ID { get; set; }
-        public int MessageContactsID { get; set; }
-        public List<int> MessageSectionIDList { get; set; } = [];
+        return ID;
+    }
 
-        public override int GetId()
-        {
-            return ID;
-        }
+    public override void Loaded()
+    {
+        GameData.MessageGroupConfigData.Add(ID, this);
+    }
 
-        public override void Loaded()
+    public override void AfterAllDone()
+    {
+        GameData.MessageContactsConfigData[MessageContactsID].Groups.Add(this);
+        MessageSectionIDList.ForEach(m =>
         {
-            GameData.MessageGroupConfigData.Add(ID, this);
-        }
-
-        public override void AfterAllDone()
-        {
-            GameData.MessageContactsConfigData[MessageContactsID].Groups.Add(this);
-            MessageSectionIDList.ForEach(m =>
-            {
-                GameData.MessageSectionConfigData.TryGetValue(m, out var section);
-                if (section != null)
-                {
-                    section.GroupID = ID;
-                }
-            });
-        }
+            GameData.MessageSectionConfigData.TryGetValue(m, out var section);
+            if (section != null) section.GroupID = ID;
+        });
     }
 }

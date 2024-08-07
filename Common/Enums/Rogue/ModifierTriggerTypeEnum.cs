@@ -1,12 +1,11 @@
-﻿namespace EggLink.DanhengServer.Enums.Rogue
+﻿namespace EggLink.DanhengServer.Enums.Rogue;
+
+/// <summary>
+///     Original Name: ModifierTriggerType
+/// </summary>
+public enum ModifierTriggerTypeEnum
 {
-    /// <summary>
-    /// Original Name: ModifierTriggerType
-    /// </summary>
-    public enum ModifierTriggerTypeEnum
-    {
-        None = 0,
-        EnterChessRogueCell = 1,
-        EnterChessRogueRow = 2,
-    }
+    None = 0,
+    EnterChessRogueCell = 1,
+    EnterChessRogueRow = 2
 }

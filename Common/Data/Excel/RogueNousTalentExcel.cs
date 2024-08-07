@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("RogueNousTalent.json")]
+public class RogueNousTalentExcel : ExcelResource
 {
-    [ResourceEntity("RogueNousTalent.json")]
-    public class RogueNousTalentExcel : ExcelResource
+    public int TalentID { get; set; }
+
+    public override int GetId()
     {
-        public int TalentID { get; set; }
+        return TalentID;
+    }
 
-        public override int GetId()
-        {
-            return TalentID;
-        }
-
-        public override void Loaded()
-        {
-            GameData.RogueNousTalentData[TalentID] = this;
-        }
+    public override void Loaded()
+    {
+        GameData.RogueNousTalentData[TalentID] = this;
     }
 }

@@ -1,37 +1,30 @@
-﻿using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Battle
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Challenge;
+
+[Opcode(CmdIds.StartChallengeCsReq)]
+public class HandlerStartChallengeCsReq : Handler
 {
-    [Opcode(CmdIds.StartChallengeCsReq)]
-    public class HandlerStartChallengeCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = StartChallengeCsReq.Parser.ParseFrom(data);
+        var req = StartChallengeCsReq.Parser.ParseFrom(data);
 
-            StartChallengeStoryBuffInfo? storyBuffInfo = null;
-            if (req.PlayerInfo != null && req.PlayerInfo.StoryBuffInfo != null)
-            {
-                storyBuffInfo = req.PlayerInfo.StoryBuffInfo;
-            };
+        ChallengeStoryBuffInfo? storyBuffInfo = null;
+        if (req.PlayerInfo != null && req.PlayerInfo.StoryBuffInfo != null)
+            storyBuffInfo = req.PlayerInfo.StoryBuffInfo;
 
-            StartChallengeBossBuffInfo? bossBuffInfo = null;
-            if (req.PlayerInfo != null && req.PlayerInfo.BossBuffInfo != null)
-            {
-                bossBuffInfo = req.PlayerInfo.BossBuffInfo;
-            };
-            
-            if (req.TeamOne.Count > 0)
-            {
-                connection.Player!.LineupManager!.ReplaceLineup(0, req.TeamOne.Select(x => (int)x).ToList(), ExtraLineupType.LineupChallenge);
-            }
+        ChallengeBossBuffInfo? bossBuffInfo = null;
+        if (req.PlayerInfo != null && req.PlayerInfo.BossBuffInfo != null) bossBuffInfo = req.PlayerInfo.BossBuffInfo;
 
-            if (req.TeamTwo.Count > 0)
-            {
-                connection.Player!.LineupManager!.ReplaceLineup(0, req.TeamTwo.Select(x => (int)x).ToList(), ExtraLineupType.LineupChallenge2);
-            }
+        if (req.FirstLineup.Count > 0)
+            await connection.Player!.LineupManager!.ReplaceLineup(0, req.FirstLineup.Select(x => (int)x).ToList(),
+                ExtraLineupType.LineupChallenge);
 
-            connection.Player!.ChallengeManager!.StartChallenge((int)req.ChallengeId, storyBuffInfo, bossBuffInfo);
-        }
+        if (req.SecondLineup.Count > 0)
+            await connection.Player!.LineupManager!.ReplaceLineup(0, req.SecondLineup.Select(x => (int)x).ToList(),
+                ExtraLineupType.LineupChallenge2);
+
+        await connection.Player!.ChallengeManager!.StartChallenge((int)req.ChallengeId, storyBuffInfo, bossBuffInfo);
     }
 }

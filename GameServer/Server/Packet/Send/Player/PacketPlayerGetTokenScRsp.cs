@@ -1,27 +1,28 @@
-﻿using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Player
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Player;
+
+public class PacketPlayerGetTokenScRsp : BasePacket
 {
-    public class PacketPlayerGetTokenScRsp : BasePacket
+    public PacketPlayerGetTokenScRsp(Connection connection) : base(CmdIds.PlayerGetTokenScRsp)
     {
-        public PacketPlayerGetTokenScRsp(Connection connection) : base(CmdIds.PlayerGetTokenScRsp)
+        var rsp = new PlayerGetTokenScRsp
         {
-            var rsp = new PlayerGetTokenScRsp()
-            {
-                BlackInfo = new(),
-                Uid = (uint)(connection.Player?.Uid ?? 0),
-            };
+            BlackInfo = new BlackInfo(),
+            Uid = (uint)(connection.Player?.Uid ?? 0)
+        };
 
-            SetData(rsp);
-        }
-        public PacketPlayerGetTokenScRsp() : base(CmdIds.PlayerGetTokenScRsp)
+        SetData(rsp);
+    }
+
+    public PacketPlayerGetTokenScRsp() : base(CmdIds.PlayerGetTokenScRsp)
+    {
+        var rsp = new PlayerGetTokenScRsp
         {
-            var rsp = new PlayerGetTokenScRsp()
-            {
-                Retcode = 0,
-            };
+            Retcode = 0
+        };
 
-            SetData(rsp);
-        }
+        SetData(rsp);
     }
 }

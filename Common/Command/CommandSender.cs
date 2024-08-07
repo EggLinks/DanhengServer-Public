@@ -1,37 +1,31 @@
-﻿using EggLink.DanhengServer.Database;
-using EggLink.DanhengServer.Database.Account;
-using EggLink.DanhengServer.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Util;
 
-namespace EggLink.DanhengServer.Command
+namespace EggLink.DanhengServer.Command;
+
+public interface ICommandSender
 {
-    public interface ICommandSender
+    public ValueTask SendMsg(string msg);
+
+    public bool HasPermission(string permission);
+
+    public int GetSender();
+}
+
+public class ConsoleCommandSender(Logger logger) : ICommandSender
+{
+    public async ValueTask SendMsg(string msg)
     {
-        public void SendMsg(string msg);
-
-        public bool HasPermission(string permission);
-
-        public int GetSender();
+        logger.Info(msg);
+        await Task.CompletedTask;
     }
 
-    public class ConsoleCommandSender(Logger logger) : ICommandSender
+    public bool HasPermission(string permission)
     {
-        public void SendMsg(string msg)
-        {
-            logger.Info(msg);
-        }
+        return true;
+    }
 
-        public bool HasPermission(string permission)
-        {
-            return true;
-        }
-        public int GetSender()
-        {
-            return 0;
-        }
+    public int GetSender()
+    {
+        return 0;
     }
 }

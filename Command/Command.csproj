@@ -9,12 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Management" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\GameServer\GameServer.csproj" />
+    <Reference Include="DanhengKcpSharp">
+      <HintPath>..\DanhengKcpSharp\DanhengKcpSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="DanhengProto">
+      <HintPath>..\Proto\DanhengProto.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

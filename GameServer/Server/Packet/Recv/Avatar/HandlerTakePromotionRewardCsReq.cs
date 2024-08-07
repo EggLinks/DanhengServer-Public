@@ -1,31 +1,23 @@
-﻿using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet.Send.Avatar;
-using EggLink.DanhengServer.Server.Packet.Send.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Avatar;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.PlayerSync;
+using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Avatar
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Avatar;
+
+[Opcode(CmdIds.TakePromotionRewardCsReq)]
+public class HandlerTakePromotionRewardCsReq : Handler
 {
-    [Opcode(CmdIds.TakePromotionRewardCsReq)]
-    public class HandlerTakePromotionRewardCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = TakePromotionRewardCsReq.Parser.ParseFrom(data);
+        var req = TakePromotionRewardCsReq.Parser.ParseFrom(data);
 
-            var avatar = connection.Player!.AvatarManager!.GetAvatar((int)req.BaseAvatarId);
-            if (avatar == null)
-            {
-                return;
-            }
-            avatar.TakeReward((int)req.Promotion);
-            connection.Player!.InventoryManager!.AddItem(101, 1, false);
-            connection.SendPacket(new PacketPlayerSyncScNotify(avatar));
+        var avatar = connection.Player!.AvatarManager!.GetAvatar((int)req.BaseAvatarId);
+        if (avatar == null) return;
+        avatar.TakeReward((int)req.Promotion);
+        await connection.Player!.InventoryManager!.AddItem(101, 1, false);
+        await connection.SendPacket(new PacketPlayerSyncScNotify(avatar));
 
-            connection.SendPacket(new PacketTakePromotionRewardScRsp());
-        }
+        await connection.SendPacket(new PacketTakePromotionRewardScRsp());
     }
 }

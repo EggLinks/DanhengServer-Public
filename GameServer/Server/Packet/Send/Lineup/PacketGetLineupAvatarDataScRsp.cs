@@ -1,26 +1,26 @@
-﻿using EggLink.DanhengServer.Game.Player;
+﻿using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Lineup
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Lineup;
+
+public class PacketGetLineupAvatarDataScRsp : BasePacket
 {
-    public class PacketGetLineupAvatarDataScRsp : BasePacket
+    public PacketGetLineupAvatarDataScRsp(PlayerInstance player) : base(CmdIds.GetLineupAvatarDataScRsp)
     {
-        public PacketGetLineupAvatarDataScRsp(PlayerInstance player) : base(CmdIds.GetLineupAvatarDataScRsp)
+        var rsp = new GetLineupAvatarDataScRsp();
+
+        player.AvatarManager?.AvatarData?.Avatars?.ForEach(avatar =>
         {
-            var rsp = new GetLineupAvatarDataScRsp();
-
-            player.AvatarManager?.AvatarData?.Avatars?.ForEach(avatar =>
+            var data = new LineupAvatarData
             {
-                var data = new LineupAvatarData()
-                {
-                    Id = (uint)avatar.AvatarId,
-                    Hp = (uint)avatar.CurrentHp,
-                    AvatarType = AvatarType.AvatarFormalType
-                };
-                rsp.AvatarDataList.Add(data);
-            });
+                Id = (uint)avatar.AvatarId,
+                Hp = (uint)avatar.CurrentHp,
+                AvatarType = AvatarType.AvatarFormalType
+            };
+            rsp.AvatarDataList.Add(data);
+        });
 
-            SetData(rsp);
-        }
+        SetData(rsp);
     }
 }

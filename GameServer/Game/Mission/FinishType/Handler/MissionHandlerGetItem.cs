@@ -1,31 +1,26 @@
 ﻿using EggLink.DanhengServer.Data.Config;
-using EggLink.DanhengServer.Database.Inventory;
-using EggLink.DanhengServer.Game.Mission.FinishType;
-using EggLink.DanhengServer.Game.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EggLink.DanhengServer.Data.Excel;
+using EggLink.DanhengServer.Enums.Mission;
+using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.GameServer.Game.Mission.FinishType.Handler
+namespace EggLink.DanhengServer.GameServer.Game.Mission.FinishType.Handler;
+
+[MissionFinishType(MissionFinishTypeEnum.GetItem)]
+public class MissionHandlerGetItem : MissionFinishTypeHandler
 {
-    [MissionFinishType(Enums.MissionFinishTypeEnum.GetItem)]
-    internal class MissionHandlerGetItem : MissionFinishTypeHandler
+    public override async ValueTask HandleMissionFinishType(PlayerInstance player, SubMissionInfo info, object? arg)
     {
-        public override void Init(PlayerInstance player, SubMissionInfo info, object? arg)
-        {
-        }
+        if (arg is Item item)
+            if (item.ItemId == info.ParamInt1)
+                await player.MissionManager!.FinishSubMission(info.ID);
+    }
 
-        public override void HandleFinishType(PlayerInstance player, SubMissionInfo info, object? arg)
-        {
-            if (arg != null && arg is ItemData item)
-            {
-                if (item.ItemId == info.ParamInt1)
-                {
-                    player.MissionManager!.FinishSubMission(info.ID);
-                }
-            }
-        }
+    public override async ValueTask HandleQuestFinishType(PlayerInstance player, QuestDataExcel quest,
+        FinishWayExcel excel, object? arg)
+    {
+        var item = player.InventoryManager!.GetItem(excel.ParamInt1);
+        if (item != null)
+            await player.QuestManager!.UpdateQuestProgress(quest.QuestID, item.Count);
     }
 }

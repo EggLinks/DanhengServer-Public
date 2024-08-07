@@ -1,40 +1,28 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.ChessRogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.ChessRogue;
+
+[Opcode(CmdIds.ChessRogueStartCsReq)]
+public class HandlerChessRogueStartCsReq : Handler
 {
-    [Opcode(CmdIds.ChessRogueStartCsReq)]
-    public class HandlerChessRogueStartCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var player = connection.Player!;
-            var req = ChessRogueStartCsReq.Parser.ParseFrom(data);
+        var player = connection.Player!;
+        var req = ChessRogueStartCsReq.Parser.ParseFrom(data);
 
-            var difficultyIdList = new List<int>();
-            var disableAeonIdList = new List<int>();
+        var difficultyIdList = new List<int>();
+        var disableAeonIdList = new List<int>();
 
-            if (req.DifficultyIdList != null)
-            {
-                foreach (var difficultyId in req.DifficultyIdList)
-                {
-                    difficultyIdList.Add((int)difficultyId);
-                }
-            }
+        if (req.DifficultyIdList != null)
+            foreach (var difficultyId in req.DifficultyIdList)
+                difficultyIdList.Add((int)difficultyId);
 
-            if (req.DisableAeonIdList != null)
-            {
-                foreach (var disableAeonId in req.DisableAeonIdList)
-                {
-                    disableAeonIdList.Add((int)disableAeonId);
-                }
-            }
+        if (req.DisableAeonIdList != null)
+            foreach (var disableAeonId in req.DisableAeonIdList)
+                disableAeonIdList.Add((int)disableAeonId);
 
-            player.ChessRogueManager!.StartRogue((int)req.AeonId, [.. req.BaseAvatarIdList], (int)req.Id, (int)req.BranchId, difficultyIdList, disableAeonIdList);
-        }
+        await player.ChessRogueManager!.StartRogue((int)req.AeonId, [.. req.BaseAvatarIdList], (int)req.Id,
+            (int)req.DiceBranchId, difficultyIdList, disableAeonIdList);
     }
 }

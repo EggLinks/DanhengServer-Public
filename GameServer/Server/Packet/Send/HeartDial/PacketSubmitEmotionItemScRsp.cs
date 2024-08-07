@@ -1,23 +1,17 @@
-﻿using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.HeartDial
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.HeartDial;
+
+public class PacketSubmitEmotionItemScRsp : BasePacket
 {
-    public class PacketSubmitEmotionItemScRsp : BasePacket
+    public PacketSubmitEmotionItemScRsp(uint scriptId) : base(CmdIds.SubmitEmotionItemScRsp)
     {
-        public PacketSubmitEmotionItemScRsp(uint scriptId) : base(CmdIds.SubmitEmotionItemScRsp)
+        var proto = new SubmitEmotionItemScRsp
         {
-            var proto = new SubmitEmotionItemScRsp
-            {
-                ScriptId = scriptId
-            };
+            ScriptId = scriptId
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

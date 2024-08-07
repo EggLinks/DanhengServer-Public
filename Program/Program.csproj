@@ -15,14 +15,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Management" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Command\Command.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\GameServer\GameServer.csproj" />
     <ProjectReference Include="..\WebServer\WebServer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DanhengKcpSharp">
+      <HintPath>..\DanhengKcpSharp\DanhengKcpSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

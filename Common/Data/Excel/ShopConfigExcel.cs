@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("ShopConfig.json")]
+public class ShopConfigExcel : ExcelResource
 {
-    [ResourceEntity("ShopConfig.json")]
-    public class ShopConfigExcel : ExcelResource
+    public int ShopID { get; set; }
+    public int ShopType { get; set; }
+
+    public List<ShopGoodsConfigExcel> Goods { get; set; } = [];
+
+    public override int GetId()
     {
-        public int ShopID { get; set; }
-        public int ShopType { get; set; }
+        return ShopID;
+    }
 
-        public List<ShopGoodsConfigExcel> Goods { get; set; } = [];
-
-        public override int GetId()
-        {
-            return ShopID;
-        }
-
-        public override void Loaded()
-        {
-            GameData.ShopConfigData.Add(GetId(), this);
-        }
+    public override void Loaded()
+    {
+        GameData.ShopConfigData.Add(GetId(), this);
     }
 }

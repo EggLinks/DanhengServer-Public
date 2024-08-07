@@ -18,11 +18,27 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\WebServer\WebServer.csproj" />
+    <Reference Include="DanhengKcpSharp">
+      <HintPath>..\DanhengKcpSharp\DanhengKcpSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="DanhengProto">
+      <HintPath>..\Proto\DanhengProto.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Server\Packet\Send\ChessRogue\" />
+    <Folder Include="Server\Packet\Send\Chat\" />
+    <Folder Include="Server\Packet\Send\ContentPackage\" />
+    <Folder Include="Server\Packet\Send\JukeBox\" />
+    <Folder Include="Server\Packet\Send\MapRotation\" />
+    <Folder Include="Server\Packet\Send\Message\" />
+    <Folder Include="Server\Packet\Send\Phone\" />
+    <Folder Include="Server\Packet\Send\PlayerBoard\" />
+    <Folder Include="Server\Packet\Send\RogueCommon\" />
+    <Folder Include="Server\Packet\Send\RollShop\" />
+    <Folder Include="Server\Packet\Send\StoryLine\" />
+    <Folder Include="Server\Packet\Send\PlayerSync\" />
+    <Folder Include="Server\Packet\Send\TalkEvent\" />
   </ItemGroup>
 
   <ItemGroup>

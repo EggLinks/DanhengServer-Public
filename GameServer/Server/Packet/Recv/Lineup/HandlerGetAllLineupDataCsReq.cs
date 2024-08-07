@@ -1,13 +1,13 @@
-﻿using EggLink.DanhengServer.Server.Packet.Send.Lineup;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Lineup;
+using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Lineup
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Lineup;
+
+[Opcode(CmdIds.GetAllLineupDataCsReq)]
+public class HandlerGetAllLineupDataCsReq : Handler
 {
-    [Opcode(CmdIds.GetAllLineupDataCsReq)]
-    public class HandlerGetAllLineupDataCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.SendPacket(new PacketGetAllLineupDataScRsp(connection.Player!));
-        }
+        await connection.SendPacket(new PacketGetAllLineupDataScRsp(connection.Player!));
     }
 }

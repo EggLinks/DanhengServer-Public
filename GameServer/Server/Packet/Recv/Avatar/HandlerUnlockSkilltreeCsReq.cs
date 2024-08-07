@@ -1,46 +1,45 @@
 ﻿using EggLink.DanhengServer.Data;
-using EggLink.DanhengServer.Database;
+using EggLink.DanhengServer.Enums.Mission;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.Avatar;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.PlayerSync;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet.Send.Avatar;
-using EggLink.DanhengServer.Server.Packet.Send.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Avatar
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Avatar;
+
+[Opcode(CmdIds.UnlockSkilltreeCsReq)]
+public class HandlerUnlockSkilltreeCsReq : Handler
 {
-    [Opcode(CmdIds.UnlockSkilltreeCsReq)]
-    public class HandlerUnlockSkilltreeCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
+        var req = UnlockSkilltreeCsReq.Parser.ParseFrom(data);
+        var player = connection.Player!;
+        GameData.AvatarSkillTreeConfigData.TryGetValue((int)(req.PointId * 10 + req.Level), out var config);
+        if (config == null)
         {
-            var req = UnlockSkilltreeCsReq.Parser.ParseFrom(data);
-            var player = connection.Player!;
-            GameData.AvatarSkillTreeConfigData.TryGetValue((int)(req.PointId * 10 + req.Level), out var config);
-            if (config == null)
-            {
-                connection.SendPacket(new PacketUnlockSkilltreeScRsp());
-                return;
-            }
-            var avatar = player.AvatarManager!.GetAvatar(config.AvatarID);
-            if (avatar == null)
-            {
-                connection.SendPacket(new PacketUnlockSkilltreeScRsp());
-                return;
-            }
-            foreach (var cost in req.ItemList)
-            {
-                connection.Player!.InventoryManager!.RemoveItem((int)cost.PileItem.ItemId, (int)cost.PileItem.ItemNum);
-            }
-
-            avatar.GetSkillTree().TryGetValue((int)req.PointId, out var level);
-            avatar.GetSkillTree()[(int)req.PointId] = level + 1;
-            DatabaseHelper.Instance!.UpdateInstance(player.AvatarManager.AvatarData!);
-
-            connection.SendPacket(new PacketPlayerSyncScNotify(avatar));
-            connection.SendPacket(new PacketUnlockSkilltreeScRsp(req.PointId, req.Level));
+            await connection.SendPacket(new PacketUnlockSkilltreeScRsp(Retcode.RetSkilltreeConfigNotExist));
+            return;
         }
+
+        var avatar = player.AvatarManager!.GetAvatar(config.AvatarID);
+        if (avatar == null)
+        {
+            await connection.SendPacket(new PacketUnlockSkilltreeScRsp(Retcode.RetAvatarNotExist));
+            return;
+        }
+
+        foreach (var cost in req.ItemList)
+            await connection.Player!.InventoryManager!.RemoveItem((int)cost.PileItem.ItemId,
+                (int)cost.PileItem.ItemNum);
+
+        avatar.GetSkillTree()[(int)req.PointId] = (int)req.Level;
+
+        await connection.SendPacket(new PacketPlayerSyncScNotify(avatar));
+
+        player.MissionManager?.HandleFinishType(MissionFinishTypeEnum.UnlockSkilltreeCnt, "UnlockSkillTree");
+        player.MissionManager?.HandleFinishType(MissionFinishTypeEnum.UnlockSkilltree, "UnlockSkillTree");
+        player.MissionManager?.HandleFinishType(MissionFinishTypeEnum.AllAvatarUnlockSkilltreeCnt, "UnlockSkillTree");
+
+        await connection.SendPacket(new PacketUnlockSkilltreeScRsp(req.PointId, req.Level));
     }
 }

@@ -1,39 +1,65 @@
 ﻿using EggLink.DanhengServer.Internationalization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Command.Command.Cmd
+namespace EggLink.DanhengServer.Command.Command.Cmd;
+
+[CommandInfo("mail", "Game.Command.Mail.Desc", "Game.Command.Mail.Usage", permission: "")]
+public class CommandMail : ICommand
 {
-    [CommandInfo("mail", "Game.Command.Mail.Desc", "Game.Command.Mail.Usage", permission: "")]
-    public class CommandMail : ICommand
+    [CommandDefault]
+    public async ValueTask Mail(CommandArg arg)
     {
-        [CommandDefault]
-        public void Mail(CommandArg arg)
+        if (arg.Target == null)
         {
-            if (arg.Target == null)
-            {
-                arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
-                return;
-            }
-
-            if (arg.Args.Count < 5)
-            {
-                arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
-                return;
-            }
-
-            var sender = arg.Args[0];
-            var title = arg.Args[1];
-            var content = arg.Args[2];
-            var templateId = int.Parse(arg.Args[3]);
-            var expiredDay = int.Parse(arg.Args[4]);
-
-            arg.Target.Player!.MailManager!.SendMail(sender, title, content, templateId, expiredDay);
-
-            arg.SendMsg(I18nManager.Translate("Game.Command.Mail.MailSent"));
+            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            return;
         }
+
+        if (arg.Args.Count < 7)
+        {
+            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            return;
+        }
+
+        if (!(arg.Args.Contains("_TITLE") && arg.Args.Contains("_CONTENT")))
+        {
+            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            return;
+        }
+
+        var sender = arg.Args[0];
+        var templateId = int.Parse(arg.Args[1]);
+        var expiredDay = int.Parse(arg.Args[2]);
+
+        var title = "";
+        var content = "";
+
+        var flagTitle = false;
+        var flagContent = false;
+        foreach (var text in arg.Args)
+        {
+            if (text == "_TITLE")
+            {
+                flagTitle = true;
+                continue;
+            }
+
+            if (text == "_CONTENT")
+            {
+                flagContent = true;
+                continue;
+            }
+
+            if (flagTitle && !flagContent) title += text + " ";
+
+
+            if (flagTitle && flagContent) content += text + " ";
+        }
+
+        content = content[..^1];
+        title = title[..^1];
+
+        await arg.Target.Player!.MailManager!.SendMail(sender, title, content, templateId, expiredDay);
+
+        await arg.SendMsg(I18nManager.Translate("Game.Command.Mail.MailSent"));
     }
 }

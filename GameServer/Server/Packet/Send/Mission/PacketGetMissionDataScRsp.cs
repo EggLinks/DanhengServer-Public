@@ -1,45 +1,37 @@
 ﻿using EggLink.DanhengServer.Data;
-using EggLink.DanhengServer.Enums;
-using EggLink.DanhengServer.Game.Player;
+using EggLink.DanhengServer.Enums.Mission;
+using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Mission
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Mission;
+
+public class PacketGetMissionDataScRsp : BasePacket
 {
-    public class PacketGetMissionDataScRsp : BasePacket
+    public PacketGetMissionDataScRsp(PlayerInstance player) : base(CmdIds.GetMissionDataScRsp)
     {
-        public PacketGetMissionDataScRsp(PlayerInstance player) : base(CmdIds.GetMissionDataScRsp)
+        var proto = new GetMissionDataScRsp
         {
-            var proto = new GetMissionDataScRsp()
-            {
-                TrackMissionId = (uint)player.MissionManager!.Data.TrackingMainMissionId,
-            };
-            
-            foreach (var mission in GameData.MainMissionData.Keys)
-            {
-                if (player.MissionManager!.GetMainMissionStatus(mission) == MissionPhaseEnum.Accept)
-                {
-                    proto.MissionDataList.Add(new MissionData()
-                    {
-                        Id = (uint)mission,
-                        Status = MissionStatus.MissionDoing
-                    });
-                }
-            }
+            TrackMissionId = (uint)player.MissionManager!.Data.TrackingMainMissionId
+        };
 
-            foreach (var mission in GameData.SubMissionData.Keys)
-            {
-                if (player.MissionManager!.GetSubMissionStatus(mission) == MissionPhaseEnum.Accept)
+        foreach (var mission in GameData.MainMissionData.Keys)
+            if (player.MissionManager!.GetMainMissionStatus(mission) == MissionPhaseEnum.Accept)
+                proto.MainMissionList.Add(new MainMission
                 {
-                    proto.MissionList.Add(new Proto.Mission()
-                    {
-                        Id = (uint)mission,
-                        Status = MissionStatus.MissionDoing,
-                        Progress = (uint)player.MissionManager!.GetMissionProgress(mission)
-                    });
-                }
-            }
+                    Id = (uint)mission,
+                    Status = MissionStatus.MissionDoing
+                });
 
-            SetData(proto);
-        }
+        foreach (var mission in GameData.SubMissionData.Keys)
+            if (player.MissionManager!.GetSubMissionStatus(mission) == MissionPhaseEnum.Accept)
+                proto.MissionList.Add(new Proto.Mission
+                {
+                    Id = (uint)mission,
+                    Status = MissionStatus.MissionDoing,
+                    Progress = (uint)player.MissionManager!.GetMissionProgress(mission)
+                });
+
+        SetData(proto);
     }
 }

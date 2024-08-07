@@ -1,23 +1,18 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Rogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Rogue;
+
+[Opcode(CmdIds.StartRogueCsReq)]
+public class HandlerStartRogueCsReq : Handler
 {
-    [Opcode(CmdIds.StartRogueCsReq)]
-    public class HandlerStartRogueCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = StartRogueCsReq.Parser.ParseFrom(data);
-            var player = connection.Player!;
-            var disableAeonIdList = req.DisableAeonIdList.Select(x => (int)x).ToList();
-            var avatarIds = req.BaseAvatarIdList.Select(x => (int)x).ToList();
+        var req = StartRogueCsReq.Parser.ParseFrom(data);
+        var player = connection.Player!;
+        var disableAeonIdList = req.DisableAeonIdList.Select(x => (int)x).ToList();
+        var avatarIds = req.BaseAvatarIdList.Select(x => (int)x).ToList();
 
-            player.RogueManager!.StartRogue((int) req.AreaId, (int)req.AeonId, disableAeonIdList, avatarIds);
-        }
+        await player.RogueManager!.StartRogue((int)req.AreaId, (int)req.AeonId, disableAeonIdList, avatarIds);
     }
 }

@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("ContentPackageConfig.json")]
+public class ContentPackageConfigExcel : ExcelResource
 {
-    [ResourceEntity("ContentPackageConfig.json")]
-    public class ContentPackageConfigExcel : ExcelResource
+    public int ContentID { get; set; }
+
+    public override int GetId()
     {
-        public int ContentID { get; set; }
+        return ContentID;
+    }
 
-        public override int GetId()
-        {
-            return ContentID;
-        }
-
-        public override void Loaded()
-        {
-            GameData.ContentPackageConfigData.Add(ContentID, this);
-        }
+    public override void Loaded()
+    {
+        GameData.ContentPackageConfigData.Add(ContentID, this);
     }
 }

@@ -1,24 +1,19 @@
-﻿using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Player
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Player;
+
+public class PacketPlayerHeartBeatScRsp : BasePacket
 {
-    public class PacketPlayerHeartBeatScRsp : BasePacket
+    public PacketPlayerHeartBeatScRsp(long clientTime) : base(CmdIds.PlayerHeartBeatScRsp)
     {
-        public PacketPlayerHeartBeatScRsp(long clientTime) : base(CmdIds.PlayerHeartBeatScRsp)
+        var data = new PlayerHeartBeatScRsp
         {
-            var data = new PlayerHeartBeatScRsp()
-            {
-                ClientTimeMs = (ulong)clientTime,
-                ServerTimeMs = (ulong)Extensions.GetUnixMs(),
-            };
+            ClientTimeMs = (ulong)clientTime,
+            ServerTimeMs = (ulong)Extensions.GetUnixMs()
+        };
 
-            SetData(data);
-        }
+        SetData(data);
     }
 }

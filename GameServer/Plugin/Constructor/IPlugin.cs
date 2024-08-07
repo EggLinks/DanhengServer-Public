@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.GameServer.Plugin.Constructor;
 
-namespace EggLink.DanhengServer.Plugin.Constructor
+public interface IPlugin
 {
-    public interface IPlugin
-    {
-        public void OnLoad();
-        public void OnUnload();
-    }
+    public void OnLoad();
+    public void OnUnload();
 }

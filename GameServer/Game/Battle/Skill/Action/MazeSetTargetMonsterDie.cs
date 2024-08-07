@@ -1,38 +1,31 @@
 ﻿using EggLink.DanhengServer.Enums.Scene;
-using EggLink.DanhengServer.Game.Scene;
-using EggLink.DanhengServer.Game.Scene.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EggLink.DanhengServer.GameServer.Game.Scene;
+using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
 
-namespace EggLink.DanhengServer.Game.Battle.Skill.Action
+namespace EggLink.DanhengServer.GameServer.Game.Battle.Skill.Action;
+
+public class MazeSetTargetMonsterDie : IMazeSkillAction
 {
-    public class MazeSetTargetMonsterDie : IMazeSkillAction
+    public async ValueTask OnAttack(AvatarSceneInfo avatar, List<EntityMonster> entities)
     {
-        public void OnAttack(AvatarSceneInfo avatar, List<EntityMonster> entities)
-        {
-            foreach (var entity in entities)
+        foreach (var entity in entities)
+            if (entity.MonsterData.Rank < MonsterRankEnum.Elite)
             {
-                if (entity.MonsterData.Rank < MonsterRankEnum.Elite)
-                {
-                    entity.Kill();
+                await entity.Kill();
 
-                    entity.Scene.Player.LineupManager!.CostMp(1);
-                    entity.Scene.Player.RogueManager!.GetRogueInstance()?.RollBuff(1);
-                    entity.Scene.Player.RogueManager!.GetRogueInstance()?.GainMoney(Random.Shared.Next(20, 60));
-                }
+                await entity.Scene.Player.LineupManager!.CostMp(1);
+                entity.Scene.Player.RogueManager!.GetRogueInstance()?.RollBuff(1);
+                entity.Scene.Player.RogueManager!.GetRogueInstance()?.GainMoney(Random.Shared.Next(20, 60));
             }
-        }
+    }
 
-        public void OnCast(AvatarSceneInfo avatar)
-        {
-            
-        }
+    public async ValueTask OnCast(AvatarSceneInfo avatar)
+    {
+        await System.Threading.Tasks.Task.CompletedTask;
+    }
 
-        public void OnHitTarget(AvatarSceneInfo avatar, List<EntityMonster> entities)
-        {
-        }
+    public async ValueTask OnHitTarget(AvatarSceneInfo avatar, List<EntityMonster> entities)
+    {
+        await System.Threading.Tasks.Task.CompletedTask;
     }
 }

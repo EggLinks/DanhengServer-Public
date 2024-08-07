@@ -1,27 +1,23 @@
-﻿using EggLink.DanhengServer.Database;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Tutorial;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet.Send.Tutorial;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Tutorial
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Tutorial;
+
+[Opcode(CmdIds.FinishTutorialGuideCsReq)]
+public class HandlerFinishTutorialGuideCsReq : Handler
 {
-    [Opcode(CmdIds.FinishTutorialGuideCsReq)]
-    public class HandlerFinishTutorialGuideCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = FinishTutorialGuideCsReq.Parser.ParseFrom(data);
-            var player = connection.Player!;
-            if (player.TutorialGuideData!.Tutorials.TryGetValue((int)req.GroupId, out var res))
+        var req = FinishTutorialGuideCsReq.Parser.ParseFrom(data);
+        var player = connection.Player!;
+        if (player.TutorialGuideData!.Tutorials.TryGetValue((int)req.GroupId, out var res))
+            if (res != TutorialStatus.TutorialFinish)
             {
-                if (res != TutorialStatus.TutorialFinish)
-                {
-                    player.InventoryManager!.AddItem(1, 1, false);
-                    player.TutorialGuideData!.Tutorials[(int)req.GroupId] = TutorialStatus.TutorialFinish;
-                    DatabaseHelper.Instance?.UpdateInstance(player.TutorialGuideData!);
-                }
+                await player.InventoryManager!.AddItem(1, 1, false);
+                player.TutorialGuideData!.Tutorials[(int)req.GroupId] = TutorialStatus.TutorialFinish;
             }
 
-            connection.SendPacket(new PacketFinishTutorialGuideScRsp(req.GroupId));
-        }
+        await connection.SendPacket(new PacketFinishTutorialGuideScRsp(req.GroupId));
     }
 }

@@ -1,22 +1,17 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Scene
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
+
+public class PacketSceneEntityTeleportScRsp : BasePacket
 {
-    public class PacketSceneEntityTeleportScRsp : BasePacket
+    public PacketSceneEntityTeleportScRsp(EntityMotion motion) : base(CmdIds.SceneEntityTeleportScRsp)
     {
-        public PacketSceneEntityTeleportScRsp(EntityMotion motion) : base(CmdIds.SceneEntityTeleportScRsp)
+        var proto = new SceneEntityTeleportScRsp
         {
-            var proto = new SceneEntityTeleportScRsp()
-            {
-                EntityMotion = motion,
-            };
+            EntityMotion = motion
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

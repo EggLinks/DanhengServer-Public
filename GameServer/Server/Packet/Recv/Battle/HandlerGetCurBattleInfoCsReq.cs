@@ -1,18 +1,13 @@
 ﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Battle;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Battle
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Battle;
+
+[Opcode(CmdIds.GetCurBattleInfoCsReq)]
+public class HandlerGetCurBattleInfoCsReq : Handler
 {
-    [Opcode(CmdIds.GetCurBattleInfoCsReq)]
-    public class HandlerGetCurBattleInfoCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.SendPacket(new PacketGetCurBattleInfoScRsp());
-        }
+        await connection.SendPacket(new PacketGetCurBattleInfoScRsp());
     }
 }

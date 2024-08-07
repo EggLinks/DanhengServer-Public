@@ -1,26 +1,21 @@
-﻿using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet.Send.Rogue;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Rogue;
+using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Rogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Rogue;
+
+[Opcode(CmdIds.EnhanceRogueBuffCsReq)]
+public class HandlerEnhanceRogueBuffCsReq : Handler
 {
-    [Opcode(CmdIds.EnhanceRogueBuffCsReq)]
-    public class HandlerEnhanceRogueBuffCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = EnhanceRogueBuffCsReq.Parser.ParseFrom(data);
+        var req = EnhanceRogueBuffCsReq.Parser.ParseFrom(data);
 
-            var rogue = connection.Player!.RogueManager?.GetRogueInstance();
-            if (rogue == null) return;
+        var rogue = connection.Player!.RogueManager?.GetRogueInstance();
+        if (rogue == null) return;
 
-            rogue.EnhanceBuff((int)req.MazeBuffId, RogueActionSource.RogueCommonActionResultSourceTypeEnhance);
+        await rogue.EnhanceBuff((int)req.MazeBuffId, RogueCommonActionResultSourceType.Enhance);
 
-            connection.SendPacket(new PacketEnhanceRogueBuffScRsp(req.MazeBuffId));
-        }
+        await connection.SendPacket(new PacketEnhanceRogueBuffScRsp(req.MazeBuffId));
     }
 }

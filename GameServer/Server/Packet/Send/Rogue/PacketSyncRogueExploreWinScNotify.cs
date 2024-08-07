@@ -1,22 +1,17 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Rogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Rogue;
+
+public class PacketSyncRogueExploreWinScNotify : BasePacket
 {
-    public class PacketSyncRogueExploreWinScNotify : BasePacket
+    public PacketSyncRogueExploreWinScNotify() : base(CmdIds.SyncRogueExploreWinScNotify)
     {
-        public PacketSyncRogueExploreWinScNotify() : base(CmdIds.SyncRogueExploreWinScNotify)
+        var proto = new SyncRogueExploreWinScNotify
         {
-            var proto = new SyncRogueExploreWinScNotify()
-            {
-                IsWin = true,
-            };
+            IsExploreWin = true
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

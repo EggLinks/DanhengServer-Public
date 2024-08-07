@@ -1,20 +1,15 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Lineup
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Lineup;
+
+[Opcode(CmdIds.ReplaceLineupCsReq)]
+public class HandlerReplaceLineupCsReq : Handler
 {
-    [Opcode(CmdIds.ReplaceLineupCsReq)]
-    public class HandlerReplaceLineupCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = ReplaceLineupCsReq.Parser.ParseFrom(data);
-            connection.Player!.LineupManager?.ReplaceLineup(req);
-            connection.SendPacket(CmdIds.ReplaceLineupScRsp);
-        }
+        var req = ReplaceLineupCsReq.Parser.ParseFrom(data);
+        await connection.Player!.LineupManager!.ReplaceLineup(req);
+        await connection.SendPacket(CmdIds.ReplaceLineupScRsp);
     }
 }

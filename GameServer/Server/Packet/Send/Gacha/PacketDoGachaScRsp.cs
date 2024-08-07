@@ -1,26 +1,21 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Gacha
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Gacha;
+
+public class PacketDoGachaScRsp : BasePacket
 {
-    public class PacketDoGachaScRsp : BasePacket
+    public PacketDoGachaScRsp(DoGachaScRsp rsp) : base(CmdIds.DoGachaScRsp)
     {
-        public PacketDoGachaScRsp(DoGachaScRsp rsp) : base(CmdIds.DoGachaScRsp)
-        {
-            SetData(rsp);
-        }
+        SetData(rsp);
+    }
 
-        public PacketDoGachaScRsp() : base(CmdIds.DoGachaScRsp)
+    public PacketDoGachaScRsp() : base(CmdIds.DoGachaScRsp)
+    {
+        var rsp = new DoGachaScRsp
         {
-            var rsp = new DoGachaScRsp
-            {
-                Retcode = 1,
-            };
-            SetData(rsp);
-        }
+            Retcode = 1
+        };
+        SetData(rsp);
     }
 }

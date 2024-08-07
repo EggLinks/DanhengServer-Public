@@ -1,16 +1,15 @@
-﻿using EggLink.DanhengServer.Server.Packet.Send.Tutorial;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Tutorial;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Util;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Tutorial
-{
-    [Opcode(CmdIds.GetTutorialGuideCsReq)]
-    public class HandlerGetTutorialGuideCsReq : Handler
-    {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Tutorial;
 
-            if (ConfigManager.Config.ServerOption.EnableMission)  // If missions are enabled
-                connection.SendPacket(new PacketGetTutorialGuideScRsp(connection.Player!));  // some bug
-        }
+[Opcode(CmdIds.GetTutorialGuideCsReq)]
+public class HandlerGetTutorialGuideCsReq : Handler
+{
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
+    {
+        if (ConfigManager.Config.ServerOption.EnableMission) // If missions are enabled
+            await connection.SendPacket(new PacketGetTutorialGuideScRsp(connection.Player!)); // some bug
     }
 }

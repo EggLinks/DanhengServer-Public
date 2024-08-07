@@ -1,13 +1,13 @@
-﻿using EggLink.DanhengServer.Server.Packet.Send.Mission;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Mission;
+using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Mission
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Mission;
+
+[Opcode(CmdIds.GetMissionDataCsReq)]
+public class HandlerGetMissionDataCsReq : Handler
 {
-    [Opcode(CmdIds.GetMissionDataCsReq)]
-    public class HandlerGetMissionDataCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.SendPacket(new PacketGetMissionDataScRsp(connection.Player!));
-        }
+        await connection.SendPacket(new PacketGetMissionDataScRsp(connection.Player!));
     }
 }

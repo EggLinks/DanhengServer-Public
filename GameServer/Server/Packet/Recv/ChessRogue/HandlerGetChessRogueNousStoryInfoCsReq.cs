@@ -1,18 +1,13 @@
-﻿using EggLink.DanhengServer.Server.Packet.Send.ChessRogue;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.ChessRogue;
+using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.ChessRogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.ChessRogue;
+
+[Opcode(CmdIds.GetChessRogueNousStoryInfoCsReq)]
+public class HandlerGetChessRogueNousStoryInfoCsReq : Handler
 {
-    [Opcode(CmdIds.GetChessRogueNousStoryInfoCsReq)]
-    public class HandlerGetChessRogueNousStoryInfoCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.SendPacket(new PacketGetChessRogueNousStoryInfoScRsp());
-        }
+        await connection.SendPacket(new PacketGetChessRogueNousStoryInfoScRsp());
     }
 }

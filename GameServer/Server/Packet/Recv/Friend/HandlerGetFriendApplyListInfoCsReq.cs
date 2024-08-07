@@ -1,18 +1,13 @@
-﻿using EggLink.DanhengServer.Server.Packet.Send.Gacha;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Friend;
+using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Friend
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Friend;
+
+[Opcode(CmdIds.GetFriendApplyListInfoCsReq)]
+public class HandlerGetFriendApplyListInfoCsReq : Handler
 {
-    [Opcode(CmdIds.GetFriendApplyListInfoCsReq)]
-    public class HandlerGetFriendApplyListInfoCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.SendPacket(new PacketGetFriendApplyListInfoCsReq(connection));
-        }
+        await connection.SendPacket(new PacketGetFriendApplyListInfoCsReq(connection));
     }
 }

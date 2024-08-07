@@ -1,7 +1,6 @@
-﻿namespace EggLink.DanhengServer.Server.Packet
+﻿namespace EggLink.DanhengServer.GameServer.Server.Packet;
+
+public abstract class Handler
 {
-    public abstract class Handler
-    {
-        public abstract void OnHandle(Connection connection, byte[] header, byte[] data);
-    }
+    public abstract Task OnHandle(Connection connection, byte[] header, byte[] data);
 }

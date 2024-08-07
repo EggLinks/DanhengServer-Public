@@ -1,18 +1,11 @@
-﻿using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Gacha
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Friend;
+
+public class PacketGetFriendApplyListInfoCsReq : BasePacket
 {
-    public class PacketGetFriendApplyListInfoCsReq : BasePacket
+    public PacketGetFriendApplyListInfoCsReq(Connection connection) : base(CmdIds.GetFriendApplyListInfoScRsp)
     {
-        public PacketGetFriendApplyListInfoCsReq(Connection connection) : base(CmdIds.GetFriendApplyListInfoScRsp)
-        {
-
-            SetData(connection.Player!.FriendManager!.ToApplyListProto());
-        }
+        SetData(connection.Player!.FriendManager!.ToApplyListProto());
     }
 }

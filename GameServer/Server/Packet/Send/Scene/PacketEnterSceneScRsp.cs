@@ -1,25 +1,20 @@
-﻿using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
+
+public class PacketEnterSceneScRsp : BasePacket
 {
-    public class PacketEnterSceneScRsp : BasePacket
+    public PacketEnterSceneScRsp(bool overMapTp = false, bool tpByMap = false, int storyLineId = 0) : base(
+        CmdIds.EnterSceneScRsp)
     {
-        public PacketEnterSceneScRsp(bool overMapTp = false, bool tpByMap = false, int storyLineId = 0) : base(CmdIds.EnterSceneScRsp)
+        var proto = new EnterSceneScRsp
         {
-            var proto = new EnterSceneScRsp
-            {
-                GameStoryLineId = (uint)storyLineId,
-                MapTp = tpByMap,
-                JDALDJPFNMN = overMapTp
-            };
+            GameStoryLineId = (uint)storyLineId,
+            IsCloseMap = tpByMap,
+            IsOverMap = overMapTp
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("MonsterConfig.json")]
+public class MonsterConfigExcel : ExcelResource
 {
-    [ResourceEntity("MonsterConfig.json")]
-    public class MonsterConfigExcel : ExcelResource
+    public int MonsterID { get; set; }
+
+    public override int GetId()
     {
-        public int MonsterID { get; set; }
+        return MonsterID;
+    }
 
-        public override int GetId()
-        {
-            return MonsterID;
-        }
-
-        public override void Loaded()
-        {
-            GameData.MonsterConfigData.Add(MonsterID, this);
-        }
+    public override void Loaded()
+    {
+        GameData.MonsterConfigData.Add(MonsterID, this);
     }
 }

@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("ItemComposeConfig.json")]
+public class ItemComposeConfigExcel : ExcelResource
 {
-    [ResourceEntity("ItemComposeConfig.json")]
-    public class ItemComposeConfigExcel : ExcelResource
+    public int ID { get; set; }
+    public int ItemID { get; set; }
+    public int CoinCost { get; set; }
+    public List<MaterialItem> MaterialCost { get; set; } = [];
+
+    public override int GetId()
     {
-        public int ID { get; set; }
-        public int ItemID { get; set; }
-        public int CoinCost { get; set; }
-        public List<MaterialItem> MaterialCost { get; set; } = [];
-
-        public override int GetId()
-        {
-            return ID;
-        }
-
-        public override void Loaded()
-        {
-            GameData.ItemComposeConfigData[ID] = this;
-        }
+        return ID;
     }
 
-    public class MaterialItem
+    public override void Loaded()
     {
-        public int ItemID { get; set; }
-        public int ItemNum { get; set; }
+        GameData.ItemComposeConfigData[ID] = this;
     }
+}
+
+public class MaterialItem
+{
+    public int ItemID { get; set; }
+    public int ItemNum { get; set; }
 }

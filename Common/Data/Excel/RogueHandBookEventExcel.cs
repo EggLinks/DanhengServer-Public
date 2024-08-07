@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("RogueHandBookEvent.json")]
+public class RogueHandBookEventExcel : ExcelResource
 {
-    [ResourceEntity("RogueHandBookEvent.json")]
-    public class RogueHandBookEventExcel : ExcelResource
+    public int EventHandbookID { get; set; }
+    public HashName EventTitle { get; set; } = new();
+
+    public int EventReward { get; set; }
+    public List<int> EventTypeList { get; set; } = [];
+
+    public override int GetId()
     {
-        public int EventHandbookID { get; set; }
-        public HashName EventTitle { get; set; } = new();
+        return EventHandbookID;
+    }
 
-        public int EventReward { get; set; }
-        public List<int> EventTypeList { get; set; } = [];
-
-        public override int GetId()
-        {
-            return EventHandbookID;
-        }
-
-        public override void Loaded()
-        {
-            GameData.RogueHandBookEventData.Add(GetId(), this);
-        }
+    public override void Loaded()
+    {
+        GameData.RogueHandBookEventData.Add(GetId(), this);
     }
 }

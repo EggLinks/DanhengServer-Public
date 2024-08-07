@@ -1,23 +1,20 @@
-﻿using EggLink.DanhengServer.Enums.Mission;
-using EggLink.DanhengServer.Game.Scene;
+﻿using EggLink.DanhengServer.GameServer.Game.Scene;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Scene
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
+
+public class PacketEnterSceneByServerScNotify : BasePacket
 {
-    public class PacketEnterSceneByServerScNotify : BasePacket
+    public PacketEnterSceneByServerScNotify(SceneInstance scene) : base(CmdIds.EnterSceneByServerScNotify)
     {
-        public PacketEnterSceneByServerScNotify(SceneInstance scene, ChangeStoryLineAction storyLineAction = ChangeStoryLineAction.None) : base(CmdIds.EnterSceneByServerScNotify)
+        var sceneInfo = scene.ToProto();
+        var notify = new EnterSceneByServerScNotify
         {
-            var sceneInfo = scene.ToProto();
-            var notify = new EnterSceneByServerScNotify()
-            {
-                Scene = sceneInfo,
-                Lineup = scene.Player.LineupManager!.GetCurLineup()!.ToProto(),
-            };
+            Scene = sceneInfo,
+            Lineup = scene.Player.LineupManager!.GetCurLineup()!.ToProto()
+        };
 
-            notify.Scene.BONACBOIIBE = (uint) storyLineAction;
-
-            SetData(notify);
-        }
+        SetData(notify);
     }
 }

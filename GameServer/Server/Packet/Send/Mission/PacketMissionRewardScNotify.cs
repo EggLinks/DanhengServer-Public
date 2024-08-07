@@ -1,19 +1,23 @@
-﻿using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Database.Inventory;
+using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Mission
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Mission;
+
+public class PacketMissionRewardScNotify : BasePacket
 {
-    public class PacketMissionRewardScNotify : BasePacket
+    public PacketMissionRewardScNotify(int mainMissionId, int subMissionId, List<ItemData> item) : base(
+        CmdIds.MissionRewardScNotify)
     {
-        public PacketMissionRewardScNotify(int mainMissionId, int subMissionId, ItemList item) : base(CmdIds.MissionRewardScNotify)
+        var proto = new MissionRewardScNotify
         {
-            var proto = new MissionRewardScNotify
-            {
-                MainMissionId = (uint)mainMissionId,
-                SubMissionId = (uint)subMissionId,
-                Reward = item
-            };
+            MainMissionId = (uint)mainMissionId,
+            SubMissionId = (uint)subMissionId,
+            Reward = new ItemList()
+        };
 
-            SetData(proto);
-        }
+        foreach (var i in item) proto.Reward.ItemList_.Add(i.ToProto());
+
+        SetData(proto);
     }
 }

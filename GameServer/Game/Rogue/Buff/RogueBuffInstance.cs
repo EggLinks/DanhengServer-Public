@@ -1,57 +1,62 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Data.Excel;
-using EggLink.DanhengServer.Game.Battle;
+using EggLink.DanhengServer.Enums.Rogue;
+using EggLink.DanhengServer.GameServer.Game.Battle;
 using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Game.Rogue.Buff
+namespace EggLink.DanhengServer.GameServer.Game.Rogue.Buff;
+
+public class RogueBuffInstance(int buffId, int buffLevel)
 {
-    public class RogueBuffInstance(int buffId, int buffLevel)
+    public int BuffId { get; set; } = buffId;
+    public int BuffLevel { get; set; } = buffLevel;
+    public RogueBuffExcel BuffExcel { get; set; } = GameData.RogueBuffData[buffId * 100 + buffLevel];
+
+    public int CurSp { get; set; } = 10000;
+    public int MaxSp { get; set; } = 10000;
+
+    public int EnhanceCost => 100 + ((int)BuffExcel.RogueBuffCategory - 1) * 30;
+
+    public void OnStartBattle(BattleInstance battle)
     {
-        public int BuffId { get; set; } = buffId;
-        public int BuffLevel { get; set; } = buffLevel;
-        public RogueBuffExcel BuffExcel { get; set; } = GameData.RogueBuffData[buffId * 100 + buffLevel];
-
-        public int CurSp { get; set; } = 10000;
-        public int MaxSp { get; set; } = 10000;
-
-        public void OnStartBattle(BattleInstance battle)
+        if (BuffExcel.BattleEventBuffType == RogueBuffAeonTypeEnum.BattleEventBuff)
         {
-            if (BuffExcel.BattleEventBuffType == Enums.Rogue.RogueBuffAeonTypeEnum.BattleEventBuff)
-            {
-                GameData.RogueBattleEventData.TryGetValue(BuffExcel.RogueBuffType, out var battleEvent);
-                if (battleEvent == null) return;
-                battle.BattleEvents.Add(BuffId, new(battleEvent.BattleEventID, CurSp, MaxSp));
-            }
-            battle.Buffs.Add(new(BuffId, BuffLevel, -1)
-            {
-                WaveFlag = -1
-            });
+            GameData.RogueBattleEventData.TryGetValue(BuffExcel.RogueBuffType, out var battleEvent);
+            if (battleEvent == null) return;
+            battle.BattleEvents.Add(BuffId, new BattleEventInstance(battleEvent.BattleEventID, CurSp, MaxSp));
         }
 
-        public int EnhanceCost => 100 + (((int)BuffExcel.RogueBuffCategory - 1) * 30);
+        battle.Buffs.Add(new MazeBuff(BuffId, BuffLevel, -1)
+        {
+            WaveFlag = -1
+        });
+    }
 
-        public RogueBuff ToProto() => new()
+    public RogueBuff ToProto()
+    {
+        return new RogueBuff
         {
             BuffId = (uint)BuffId,
             Level = (uint)BuffLevel
         };
+    }
 
-        public RogueCommonBuff ToCommonProto() => new()
+    public RogueCommonBuff ToCommonProto()
+    {
+        return new RogueCommonBuff
         {
             BuffId = (uint)BuffId,
             BuffLevel = (uint)BuffLevel
         };
+    }
 
-        public RogueCommonActionResult ToResultProto(RogueActionSource source) => new()
+    public RogueCommonActionResult ToResultProto(RogueCommonActionResultSourceType source)
+    {
+        return new RogueCommonActionResult
         {
-            RogueAction = new()
+            RogueAction = new RogueCommonActionResultData
             {
-                GetBuffList = new()
+                GetBuffList = new RogueCommonBuff
                 {
                     BuffId = (uint)BuffId,
                     BuffLevel = (uint)BuffLevel
@@ -59,36 +64,48 @@ namespace EggLink.DanhengServer.Game.Rogue.Buff
             },
             Source = source
         };
+    }
 
-        public RogueBuffEnhance ToEnhanceProto() => new()
+    public RogueBuffEnhanceInfo ToEnhanceProto()
+    {
+        return new RogueBuffEnhanceInfo
         {
             BuffId = (uint)BuffId,
-            CostData = new()
+            CostData = new ItemCostData
             {
-                ItemList = { new ItemCost() 
+                ItemList =
                 {
-                    PileItem = new()
+                    new ItemCost
                     {
-                        ItemId = 31,
-                        ItemNum = (uint)EnhanceCost
+                        PileItem = new PileItem
+                        {
+                            ItemId = 31,
+                            ItemNum = (uint)EnhanceCost
+                        }
                     }
-                } }
+                }
             }
         };
+    }
 
-        public ChessRogueBuffEnhance ToChessEnhanceProto() => new()
+    public ChessRogueBuffEnhanceInfo ToChessEnhanceProto()
+    {
+        return new ChessRogueBuffEnhanceInfo
         {
             BuffId = (uint)BuffId,
-            CostData = new()
+            CostData = new ItemCostData
             {
-                ItemList = { new ItemCost() 
+                ItemList =
                 {
-                    PileItem = new()
+                    new ItemCost
                     {
-                        ItemId = 31,
-                        ItemNum = (uint)EnhanceCost
+                        PileItem = new PileItem
+                        {
+                            ItemId = 31,
+                            ItemNum = (uint)EnhanceCost
+                        }
                     }
-                } }
+                }
             }
         };
     }

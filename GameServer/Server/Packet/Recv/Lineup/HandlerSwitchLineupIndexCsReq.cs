@@ -1,23 +1,17 @@
-﻿using EggLink.DanhengServer.Proto;
-using EggLink.DanhengServer.Server.Packet.Send.Lineup;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Lineup;
+using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Lineup
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Lineup;
+
+[Opcode(CmdIds.SwitchLineupIndexCsReq)]
+public class HandlerSwitchLineupIndexCsReq : Handler
 {
-    [Opcode(CmdIds.SwitchLineupIndexCsReq)]
-    public class HandlerSwitchLineupIndexCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = SwitchLineupIndexCsReq.Parser.ParseFrom(data);
-            if (connection.Player!.LineupManager!.SetCurLineup((int)req.Index))  // SetCurLineup returns true if the index is valid
-            {
-                connection.SendPacket(new PacketSwitchLineupIndexScRsp(req.Index));
-            }
-        }
+        var req = SwitchLineupIndexCsReq.Parser.ParseFrom(data);
+        if (await connection.Player!.LineupManager!
+                .SetCurLineup((int)req.Index)) // SetCurLineup returns true if the index is valid
+            await connection.SendPacket(new PacketSwitchLineupIndexScRsp(req.Index));
     }
 }

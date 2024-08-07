@@ -1,32 +1,26 @@
-﻿using EggLink.DanhengServer.Enums;
-using EggLink.DanhengServer.Game.Player;
+﻿using EggLink.DanhengServer.Enums.Mission;
+using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Game.Mission.FinishAction.Handler
+namespace EggLink.DanhengServer.GameServer.Game.Mission.FinishAction.Handler;
+
+[MissionFinishAction(FinishActionTypeEnum.SetFloorSavedValue)]
+public class MissionHandlerSetFloorSavedValue : MissionFinishActionHandler
 {
-    [MissionFinishAction(FinishActionTypeEnum.SetFloorSavedValue)]
-    public class MissionHandlerSetFloorSavedValue : MissionFinishActionHandler
+    public override async ValueTask OnHandle(List<int> Params, List<string> ParamString, PlayerInstance Player)
     {
-        public override void OnHandle(List<int> Params, List<string> ParamString, PlayerInstance Player)
+        _ = int.TryParse(ParamString[0], out var plane);
+        _ = int.TryParse(ParamString[1], out var floor);
+        Player.SceneData!.FloorSavedData.TryGetValue(floor, out var value);
+        if (value == null)
         {
-            _ = int.TryParse(ParamString[0], out var plane);
-            _ = int.TryParse(ParamString[1], out var floor);
-            Player.SceneData!.FloorSavedData.TryGetValue(floor, out var value);
-            if (value == null)
-            {
-                value = [];
-                Player.SceneData.FloorSavedData[floor] = value;
-            }
-
-            value[ParamString[2]] = int.Parse(ParamString[3]);  // ParamString[2] is the key
-            Player.SendPacket(new PacketUpdateFloorSavedValueNotify(ParamString[2], int.Parse(ParamString[3])));
-
-            Player.TaskManager?.SceneTaskTrigger.TriggerFloor(plane, floor);
+            value = [];
+            Player.SceneData.FloorSavedData[floor] = value;
         }
+
+        value[ParamString[2]] = int.Parse(ParamString[3]); // ParamString[2] is the key
+        await Player.SendPacket(new PacketUpdateFloorSavedValueNotify(ParamString[2], int.Parse(ParamString[3])));
+
+        Player.TaskManager?.SceneTaskTrigger.TriggerFloor(plane, floor);
     }
 }

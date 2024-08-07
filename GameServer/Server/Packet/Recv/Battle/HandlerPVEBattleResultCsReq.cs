@@ -1,14 +1,15 @@
-﻿using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.Battle
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Battle;
+
+[Opcode(CmdIds.PVEBattleResultCsReq)]
+public class HandlerPVEBattleResultCsReq : Handler
 {
-    [Opcode(CmdIds.PVEBattleResultCsReq)]
-    public class HandlerPVEBattleResultCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            var req = PVEBattleResultCsReq.Parser.ParseFrom(data);
-            connection.Player?.BattleManager?.EndBattle(req);
-        }
+        var req = PVEBattleResultCsReq.Parser.ParseFrom(data);
+        var player = connection.Player!;
+        await player.BattleManager!.EndBattle(req);
     }
 }

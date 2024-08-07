@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EggLink.DanhengServer.Kcp;
 
-namespace EggLink.DanhengServer.Server.Packet.Recv.ChessRogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.ChessRogue;
+
+[Opcode(CmdIds.ChessRogueQuitCsReq)]
+public class HandlerChessRogueQuitCsReq : Handler
 {
-    [Opcode(CmdIds.ChessRogueQuitCsReq)]
-    public class HandlerChessRogueQuitCsReq : Handler
+    public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        public override void OnHandle(Connection connection, byte[] header, byte[] data)
-        {
-            connection.Player!.ChessRogueManager!.RogueInstance?.QuitRogue();
-        }
+        await connection.Player!.ChessRogueManager!.RogueInstance!.QuitRogue();
     }
 }

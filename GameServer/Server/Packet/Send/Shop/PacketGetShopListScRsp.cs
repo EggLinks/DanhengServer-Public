@@ -1,34 +1,28 @@
 ﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Shop
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Shop;
+
+public class PacketGetShopListScRsp : BasePacket
 {
-    public class PacketGetShopListScRsp : BasePacket
+    public PacketGetShopListScRsp(uint shopType) : base(CmdIds.GetShopListScRsp)
     {
-        public PacketGetShopListScRsp(uint shopType) : base(CmdIds.GetShopListScRsp)
+        var proto = new GetShopListScRsp
         {
-            var proto = new GetShopListScRsp();
+            ShopType = shopType
+        };
 
-            foreach (var item in GameData.ShopConfigData.Values)
-            {
-                if (item.ShopType == shopType)
+        foreach (var item in GameData.ShopConfigData.Values)
+            if (item.ShopType == shopType)
+                proto.ShopList.Add(new Proto.Shop
                 {
-                    proto.ShopList.Add(new Proto.Shop()
-                    {
-                        ShopId = (uint)item.ShopID,
-                        CityLevel = 1,
-                        EndTime = long.MaxValue,
-                        GoodsList = { item.Goods.Select(g => g.ToProto()) }
-                    });
-                }
-            }
+                    ShopId = (uint)item.ShopID,
+                    CityLevel = 1,
+                    EndTime = uint.MaxValue,
+                    GoodsList = { item.Goods.Select(g => g.ToProto()) }
+                });
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

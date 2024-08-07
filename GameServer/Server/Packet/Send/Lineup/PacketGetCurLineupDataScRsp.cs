@@ -1,18 +1,18 @@
-﻿using EggLink.DanhengServer.Game.Player;
+﻿using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.Lineup
-{
-    public class PacketGetCurLineupDataScRsp : BasePacket
-    {
-        public PacketGetCurLineupDataScRsp(PlayerInstance player) : base(CmdIds.GetCurLineupDataScRsp)
-        {
-            var data = new GetCurLineupDataScRsp()
-            {
-                Lineup = player.LineupManager?.GetCurLineup()?.ToProto() ?? new(),
-            };
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Lineup;
 
-            SetData(data);
-        }
+public class PacketGetCurLineupDataScRsp : BasePacket
+{
+    public PacketGetCurLineupDataScRsp(PlayerInstance player) : base(CmdIds.GetCurLineupDataScRsp)
+    {
+        var data = new GetCurLineupDataScRsp
+        {
+            Lineup = player.LineupManager?.GetCurLineup()?.ToProto() ?? new LineupInfo()
+        };
+
+        SetData(data);
     }
 }

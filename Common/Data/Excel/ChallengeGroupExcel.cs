@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EggLink.DanhengServer.Data.Excel;
 
-namespace EggLink.DanhengServer.Data.Excel
+[ResourceEntity("ChallengeGroupConfig.json,ChallengeStoryGroupConfig.json,ChallengeBossGroupConfig.json",
+    true)]
+public class ChallengeGroupExcel : ExcelResource
 {
-    [ResourceEntity("ChallengeGroupConfig.json,ChallengeStoryGroupConfig.json,ChallengeBossGroupConfig.json",
-        isMultifile: true)]
-    public class ChallengeGroupExcel : ExcelResource
+    public int GroupID { get; set; }
+    public int RewardLineGroupID { get; set; }
+    public int SchduleID { get; set; }
+
+    public override int GetId()
     {
-        public int GroupID { get; set; }
-        public int RewardLineGroupID { get; set; }
-        public int SchduleID { get; set; }
+        return GroupID;
+    }
 
-        public override int GetId()
-        {
-            return GroupID;
-        }
-
-        public override void Loaded()
-        {
-            GameData.ChallengeGroupData[GroupID] = this;
-        }
+    public override void Loaded()
+    {
+        GameData.ChallengeGroupData[GroupID] = this;
     }
 }

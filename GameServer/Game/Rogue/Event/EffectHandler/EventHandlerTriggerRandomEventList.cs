@@ -1,24 +1,24 @@
 ﻿using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.Util;
 
-namespace EggLink.DanhengServer.Game.Rogue.Event.EffectHandler
+namespace EggLink.DanhengServer.GameServer.Game.Rogue.Event.EffectHandler;
+
+[RogueEvent(DialogueEventTypeEnum.TriggerRandomEventList)]
+public class EventHandlerTriggerRandomEventList : RogueEventEffectHandler
 {
-    [RogueEvent(DialogueEventTypeEnum.TriggerRandomEventList)]
-    public class EventHandlerTriggerRandomEventList : RogueEventEffectHandler
+    public override async ValueTask Handle(BaseRogueInstance rogue, RogueEventInstance? eventInstance,
+        List<int> paramList)
     {
-        public override void Handle(BaseRogueInstance rogue, RogueEventInstance? eventInstance, List<int> ParamList)
+        var list = new RandomList<int>();
+        for (var i = 0; i < paramList.Count; i += 2) list.Add(paramList[i], paramList[i + 1]);
+
+        var randomEvent = list.GetRandom();
+        eventInstance!.Options.Add(new RogueEventParam
         {
-            var list = new RandomList<int>();
-            for (int i = 0; i < ParamList.Count; i += 2)
-            {
-                list.Add(ParamList[i], ParamList[i + 1]);
-            }
-            var randomEvent = list.GetRandom();
-            eventInstance!.Options.Add(new()
-            {
-                OptionId = randomEvent,
-            });
-            rogue.TriggerEvent(eventInstance, randomEvent);
-        }
+            OptionId = randomEvent
+        });
+        rogue.TriggerEvent(eventInstance, randomEvent);
+
+        await System.Threading.Tasks.Task.CompletedTask;
     }
 }

@@ -1,23 +1,19 @@
-﻿using EggLink.DanhengServer.Game.ChessRogue.Dice;
+﻿using EggLink.DanhengServer.GameServer.Game.ChessRogue.Dice;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EggLink.DanhengServer.Server.Packet.Send.ChessRogue
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.ChessRogue;
+
+public class PacketChessRogueUpdateDiceInfoScNotify : BasePacket
 {
-    public class PacketChessRogueUpdateDiceInfoScNotify : BasePacket
+    public PacketChessRogueUpdateDiceInfoScNotify(ChessRogueDiceInstance dice) : base(
+        CmdIds.ChessRogueUpdateDiceInfoScNotify)
     {
-        public PacketChessRogueUpdateDiceInfoScNotify(ChessRogueDiceInstance dice) : base(CmdIds.ChessRogueUpdateDiceInfoScNotify)
+        var proto = new ChessRogueUpdateDiceInfoScNotify
         {
-            var proto = new ChessRogueUpdateDiceInfoScNotify()
-            {
-                RogueDiceInfo = dice.ToProto(),
-            };
+            RogueDiceInfo = dice.ToProto()
+        };
 
-            SetData(proto);
-        }
+        SetData(proto);
     }
 }

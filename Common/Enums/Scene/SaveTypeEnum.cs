@@ -1,10 +1,9 @@
-﻿namespace EggLink.DanhengServer.Enums.Scene
+﻿namespace EggLink.DanhengServer.Enums.Scene;
+
+public enum SaveTypeEnum
 {
-    public enum SaveTypeEnum
-    {
-        Save = 0,
-        Reset = 1,
-        Temporary = 2,
-        Permanent = 3,
-    }
+    Save = 0,
+    Reset = 1,
+    Temporary = 2,
+    Permanent = 3
 }

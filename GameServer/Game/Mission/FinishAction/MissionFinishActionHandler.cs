@@ -1,10 +1,8 @@
-﻿using EggLink.DanhengServer.Enums;
-using EggLink.DanhengServer.Game.Player;
+﻿using EggLink.DanhengServer.GameServer.Game.Player;
 
-namespace EggLink.DanhengServer.Game.Mission.FinishAction
+namespace EggLink.DanhengServer.GameServer.Game.Mission.FinishAction;
+
+public abstract class MissionFinishActionHandler
 {
-    public abstract class MissionFinishActionHandler
-    {
-        public abstract void OnHandle(List<int> Params, List<string> ParamString, PlayerInstance Player);
-    }
+    public abstract ValueTask OnHandle(List<int> Params, List<string> ParamString, PlayerInstance Player);
 }
