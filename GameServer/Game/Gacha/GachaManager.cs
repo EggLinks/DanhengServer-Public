@@ -19,7 +19,7 @@ public class GachaManager(PlayerInstance player) : BasePlayerManager(player)
     {
         var purpleAvatars = new List<int>();
         foreach (var avatar in GameData.AvatarConfigData.Values)
-            if (avatar.Rarity == RarityEnum.CombatPowerAvatarRarityType4)
+            if (avatar.Rarity == RarityEnum.CombatPowerAvatarRarityType4 && avatar.AvatarID != 1224)
                 purpleAvatars.Add(avatar.AvatarID);
         return purpleAvatars;
     }
