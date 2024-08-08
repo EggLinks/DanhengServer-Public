@@ -356,10 +356,10 @@ public class LineupManager : BasePlayerManager
         curLineup.Mp = Math.Min(Math.Max(0, curLineup.Mp), 5);
         DatabaseHelper.Instance?.UpdateInstance(LineupData);
 
-        //await Player.SendPacket(new PacketSceneCastSkillMpUpdateScNotify(castEntityId, curLineup.Mp));
+        await Player.SendPacket(new PacketSceneCastSkillMpUpdateScNotify(castEntityId, curLineup.Mp));
     }
 
-    public async ValueTask GainMp(int count, bool sendPacket = true)
+    public async ValueTask GainMp(int count, bool sendPacket = true, SyncLineupReason reason = SyncLineupReason.SyncReasonNone)
     {
         var curLineup = GetCurLineup()!;
         curLineup.Mp += count;
@@ -367,7 +367,7 @@ public class LineupManager : BasePlayerManager
         DatabaseHelper.Instance?.UpdateInstance(LineupData);
         if (sendPacket)
             await Player.SendPacket(
-                new PacketSyncLineupNotify(GetCurLineup()!, SyncLineupReason.SyncReasonMpAddPropHit));
+                new PacketSyncLineupNotify(GetCurLineup()!, reason));
     }
 
     #endregion

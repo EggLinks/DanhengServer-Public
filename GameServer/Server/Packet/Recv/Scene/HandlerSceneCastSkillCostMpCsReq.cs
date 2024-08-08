@@ -11,7 +11,7 @@ public class HandlerSceneCastSkillCostMpCsReq : Handler
     {
         var req = SceneCastSkillCostMpCsReq.Parser.ParseFrom(data);
         var player = connection.Player!;
-        await player.LineupManager!.CostMp(1);
+        await player.LineupManager!.CostMp(1, req.CastEntityId);
         await connection.SendPacket(new PacketSceneCastSkillCostMpScRsp((int)req.CastEntityId));
     }
 }

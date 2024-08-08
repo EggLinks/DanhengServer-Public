@@ -48,6 +48,8 @@ public class EntityMonster(
             TempBuff = null;
         }
 
+        if (BuffList.Count == 0) return;
+
         foreach (var buff in BuffList)
         {
             if (buff.IsExpired()) continue;

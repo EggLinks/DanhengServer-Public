@@ -139,7 +139,8 @@ public class QuestManager(PlayerInstance player) : BasePlayerManager(player)
         if (questExcel == null) return Retcode.RetFail;
         GameData.FinishWayData.TryGetValue(questExcel.FinishWayID, out var finishWayExcel);
         if (finishWayExcel == null) return Retcode.RetQuestStatusError;
-        if (finishWayExcel.FinishType != MissionFinishTypeEnum.AutoFinish) return Retcode.RetQuestStatusError;
+        if (finishWayExcel.FinishType != MissionFinishTypeEnum.AutoFinish &&
+            finishWayExcel.FinishType != MissionFinishTypeEnum.FinishQuestByClient) return Retcode.RetQuestStatusError;
 
         if (!QuestData.Quests.TryGetValue(questId, out var questInfo)) return Retcode.RetQuestNotAccept;
         if (questInfo.QuestStatus != QuestStatus.QuestDoing) return Retcode.RetQuestStatusError;

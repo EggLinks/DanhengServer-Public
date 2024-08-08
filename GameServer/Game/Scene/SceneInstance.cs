@@ -366,6 +366,7 @@ public class AvatarSceneInfo(AvatarInfo avatarInfo, AvatarType avatarType, Playe
 
     public async ValueTask ApplyBuff(BattleInstance instance)
     {
+        if (BuffList.Count == 0) return;
         foreach (var buff in BuffList)
         {
             if (buff.IsExpired()) continue;

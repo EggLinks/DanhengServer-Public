@@ -106,7 +106,7 @@ public class BannerConfig
     public bool IsRate4()
     {
         var random = new Random();
-        return random.Next(0, 100) < 31;
+        return random.Next(0, 100) < 10;
     }
 
     public int GetRateUpItem5(List<int> gold, bool forceUp)

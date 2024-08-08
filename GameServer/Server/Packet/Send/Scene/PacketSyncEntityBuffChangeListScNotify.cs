@@ -32,7 +32,7 @@ public class PacketSyncEntityBuffChangeListScNotify : BasePacket
             var change = new SceneEntityBuffChange
             {
                 EntityId = (uint)entity.EntityID,
-                BuffChangeInfo = buff.ToProto()
+                RemoveBuffId = (uint)buff.BuffID
             };
             proto.EntityBuffChangeList.Add(change);
         }

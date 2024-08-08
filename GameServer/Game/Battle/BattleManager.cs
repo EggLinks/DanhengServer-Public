@@ -76,7 +76,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             await Player.SceneInstance!.RemoveEntity(prop);
             if (prop.Excel.IsMpRecover)
             {
-                await Player.LineupManager!.GainMp(2);
+                await Player.LineupManager!.GainMp(2, true, SyncLineupReason.SyncReasonMpAddPropHit);
             }
             else if (prop.Excel.IsHpRecover)
             {

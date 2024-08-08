@@ -13,7 +13,7 @@ public class MazeSetTargetMonsterDie : IMazeSkillAction
             {
                 await entity.Kill();
 
-                await entity.Scene.Player.LineupManager!.CostMp(1);
+                await entity.Scene.Player.LineupManager!.CostMp(1, (uint)avatar.EntityID);
                 entity.Scene.Player.RogueManager!.GetRogueInstance()?.RollBuff(1);
                 entity.Scene.Player.RogueManager!.GetRogueInstance()?.GainMoney(Random.Shared.Next(20, 60));
             }

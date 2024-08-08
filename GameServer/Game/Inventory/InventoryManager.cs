@@ -266,6 +266,7 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         {
             case ItemMainTypeEnum.Material:
             case ItemMainTypeEnum.Mission:
+            case ItemMainTypeEnum.Usable:
                 var item = Data.MaterialItems.Find(x => x.ItemId == itemId);
                 if (item == null) return null;
                 item.Count -= count;
@@ -641,6 +642,9 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
                     await info.AddBuff(new SceneBuff(useConfig.MazeBuffID2, 1, info.AvatarInfo.AvatarId));
             }
         }
+
+        // remove item
+        await RemoveItem(itemId, count);
 
         return (Retcode.RetSucc, null);
     }

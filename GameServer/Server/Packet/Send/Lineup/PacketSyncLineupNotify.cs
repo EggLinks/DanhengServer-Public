@@ -12,8 +12,12 @@ public class PacketSyncLineupNotify : BasePacket
         var proto = new SyncLineupNotify
         {
             Lineup = info.ToProto(),
-            ReasonList = { reason }
         };
+
+        if (reason != SyncLineupReason.SyncReasonNone)
+        {
+            proto.ReasonList.Add(reason);
+        }
 
         SetData(proto);
     }
