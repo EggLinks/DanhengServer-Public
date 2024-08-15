@@ -80,7 +80,6 @@ cd DanhengServer
 ## ❓ Help
 
 - Support Android system
-- Mission 100040119 (cannot complet automatically) (use /mission finish 100040119 to fix it)、
 - 
 ## 🔗API Help
 [EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-TW.md) | [JP](docs/MuipAPI_ja-JP.md)
