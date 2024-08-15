@@ -21,10 +21,11 @@
 - [√] **Battle** - Some errors are exist among scene skills
 - [√] **Scene** - Walking simulator, interaction, correct loading of entities
 - [√] **Basic character development** - Some minor bugs that don't significantly affect the playing experience
-- [√] **Quests** - Some issues are exist among some quests. Storyline for Belobog has been completed, others remain WIP or untested, working for both Caelus and Stelle.
+- [√] **Quests** - There may be some bugs in some missions, the main story before Penacony is basically playable, and most of the story after Penacony has bugs
 - [√] **Friends**
-- [√] **Forgotten Hall & Pure Fiction**
-- [√] **Simulated Universe**
+- [√] **Forgotten Hall & Pure Fiction & Apocalyptic Shadow**
+- [√] **Simulated Universe & Gold and Gears**
+- [√] **Achievements** - Most achievements can be completed.
 
 - [ ] **More**  - Coming soon
 
@@ -79,7 +80,6 @@ cd DanhengServer
 ## ❓ Help
 
 - Support Android system
-- Mission 100040119 (cannot complet automatically) (use /mission finish 100040119 to fix it)、
 - 
 ## 🔗API Help
 [EN](docs/MuipAPI.md) | [简中](docs/MuipAPI_zh-CN.md) | [繁中](docs/MuipAPI_zh-TW.md) | [JP](docs/MuipAPI_ja-JP.md)
