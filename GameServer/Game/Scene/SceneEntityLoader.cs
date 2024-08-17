@@ -1,5 +1,5 @@
 ﻿using EggLink.DanhengServer.Data;
-using EggLink.DanhengServer.Data.Config;
+using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Enums;
 using EggLink.DanhengServer.Enums.Mission;
 using EggLink.DanhengServer.Enums.Scene;

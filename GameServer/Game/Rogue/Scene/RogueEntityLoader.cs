@@ -1,5 +1,5 @@
 ﻿using EggLink.DanhengServer.Data;
-using EggLink.DanhengServer.Data.Config;
+using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Enums.Scene;
 using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Game.Rogue.Scene.Entity;
@@ -84,8 +84,6 @@ public class RogueEntityLoader(SceneInstance scene, PlayerInstance player) : Sce
                 npc.RogueNpcId = instance.EventId;
                 npc.UniqueId = instance.EventUniqueId;
             }
-
-            ;
         }
 
         await Scene.AddEntity(npc, sendPacket);

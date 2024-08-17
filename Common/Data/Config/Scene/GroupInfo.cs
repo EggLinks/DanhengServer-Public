@@ -6,7 +6,7 @@ using EggLink.DanhengServer.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace EggLink.DanhengServer.Data.Config;
+namespace EggLink.DanhengServer.Data.Config.Scene;
 
 public class GroupInfo
 {

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EggLink.DanhengServer.Enums.Rogue;
+using Newtonsoft.Json;
 
 namespace EggLink.DanhengServer.Data.Excel;
 
@@ -13,7 +14,7 @@ public class RogueDLCAreaExcel : ExcelResource
 
     public List<RogueDLCAreaScoreMap> AreaScoreMap { get; set; } = [];
 
-    [JsonIgnore] public int RogueVersionId { get; set; }
+    [JsonIgnore] public RogueSubModeEnum RogueVersionId { get; set; }
 
     public override int GetId()
     {
@@ -24,10 +25,7 @@ public class RogueDLCAreaExcel : ExcelResource
     {
         GameData.RogueDLCAreaData[AreaID] = this;
 
-        if (SubType.Contains("Nous"))
-            RogueVersionId = 202;
-        else
-            RogueVersionId = 201;
+        RogueVersionId = SubType.Contains("Nous") ? RogueSubModeEnum.ChessRogueNous : RogueSubModeEnum.ChessRogue;
     }
 }
 

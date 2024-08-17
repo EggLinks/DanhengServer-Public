@@ -4,6 +4,7 @@ using EggLink.DanhengServer.Configuration;
 using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Database;
 using EggLink.DanhengServer.Enums;
+using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.GameServer.Command;
 using EggLink.DanhengServer.GameServer.Plugin;
 using EggLink.DanhengServer.GameServer.Server;
@@ -26,12 +27,12 @@ public class EntryPoint
 
     public static void Main(string[] args)
     {
-        AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) =>
+        AppDomain.CurrentDomain.ProcessExit += (_, _) =>
         {
             Logger.Info(I18nManager.Translate("Server.ServerInfo.Shutdown"));
             PerformCleanup();
         };
-        Console.CancelKeyPress += (sender, eventArgs) =>
+        Console.CancelKeyPress += (_, eventArgs) =>
         {
             Logger.Info(I18nManager.Translate("Server.ServerInfo.CancelKeyPressed"));
             eventArgs.Cancel = true;
@@ -161,10 +162,10 @@ public class EntryPoint
                     {
                         status = PlayerStatusEnum.Rogue;
                         if ((con as Connection)!.Player!.ChessRogueManager?.RogueInstance?.AreaExcel.RogueVersionId ==
-                            202)
+                            RogueSubModeEnum.ChessRogue)
                             status = PlayerStatusEnum.ChessRogueNous;
                         else if ((con as Connection)!.Player!.ChessRogueManager?.RogueInstance?.AreaExcel
-                                 .RogueVersionId == 201)
+                                 .RogueVersionId == RogueSubModeEnum.ChessRogueNous)
                             status = PlayerStatusEnum.ChessRogue;
                     }
                     else if ((con as Connection)!.Player!.ChallengeManager?.ChallengeInstance != null)
@@ -202,7 +203,7 @@ public class EntryPoint
 
         HandlerManager.Init();
 
-        WebProgram.Main([], GetConfig().HttpServer.PublicPort, GetConfig().HttpServer.GetDisplayAddress());
+        WebProgram.Main([], GetConfig().HttpServer.Port, GetConfig().HttpServer.GetBindDisplayAddress());
         Logger.Info(I18nManager.Translate("Server.ServerInfo.ServerRunning", I18nManager.Translate("Word.Dispatch"),
             GetConfig().HttpServer.GetDisplayAddress()));
 

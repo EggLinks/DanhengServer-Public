@@ -1,5 +1,5 @@
 ﻿using EggLink.DanhengServer.Data;
-using EggLink.DanhengServer.Data.Config;
+using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.Enums.Mission;

@@ -8,12 +8,12 @@ namespace EggLink.DanhengServer.GameServer.Game.Rogue.Event;
 
 public class RogueEventInstance(int eventId, RogueNpc npc, List<RogueEventParam> optionIds, int uniqueId)
 {
-    public RogueEventInstance(RogueNPCDialogueExcel excel, RogueNpc npc, int uniqueId) : this(excel.RogueNPCID, npc, [],
+    public RogueEventInstance(RogueNPCExcel excel, RogueNpc npc, int uniqueId) : this(excel.RogueNPCID, npc, [],
         uniqueId) // check in RogueInstance.cs
     {
-        foreach (var option in excel.DialogueInfo!.DialogueIds)
+        foreach (var option in excel.RogueNpcConfig!.DialogueList[0].OptionInfo?.OptionList ?? [])
         {
-            GameData.DialogueEventData.TryGetValue(option, out var dialogueEvent);
+            GameData.DialogueEventData.TryGetValue(option.OptionID, out var dialogueEvent);
             if (dialogueEvent == null) continue;
 
             var argId = 0;
@@ -25,7 +25,7 @@ public class RogueEventInstance(int eventId, RogueNpc npc, List<RogueEventParam>
 
             Options.Add(new RogueEventParam
             {
-                OptionId = option,
+                OptionId = option.OptionID,
                 ArgId = argId
             });
         }
@@ -37,6 +37,7 @@ public class RogueEventInstance(int eventId, RogueNpc npc, List<RogueEventParam>
     public List<RogueEventParam> Options { get; set; } = optionIds;
     public int EventUniqueId { get; set; } = uniqueId;
     public int SelectedOptionId { get; set; } = 0;
+    public List<int> EffectEventId { get; set; } = [];
 
     public async ValueTask Finish()
     {
@@ -77,6 +78,8 @@ public class RogueEventParam
     public int ArgId { get; set; }
     public float Ratio { get; set; }
     public bool IsSelected { get; set; } = false;
+    public bool? OverrideSelected { get; set; } = null;
+    public List<RogueEventResultInfo> Results { get; set; } = [];
 
     public RogueCommonDialogueOptionInfo ToProto()
     {
@@ -89,7 +92,8 @@ public class RogueEventParam
             {
                 DisplayFloatValue = Ratio
             },
-            Confirm = IsSelected
+            OptionResultInfo = { Results.Select(x => x.ToProto()) },
+            Confirm = OverrideSelected ?? IsSelected
         };
     }
 
@@ -99,6 +103,22 @@ public class RogueEventParam
         {
             RogueDialogueEventId = (uint)OptionId,
             ArgId = (uint)ArgId
+        };
+    }
+}
+
+public class RogueEventResultInfo
+{
+    public int BattleEventId { get; set; }
+
+    public RogueCommonDialogueOptionResultInfo ToProto()
+    {
+        return new RogueCommonDialogueOptionResultInfo
+        {
+            BattleResultInfo = new RogueCommonDialogueOptionBattleResultInfo
+            {
+                BattleEventId = (uint)BattleEventId
+            }
         };
     }
 }

@@ -11,7 +11,6 @@ public class PacketSyncRogueCommonDialogueOptionFinishScNotify : BasePacket
     {
         var proto = new SyncRogueCommonDialogueOptionFinishScNotify
         {
-            DialogueData = instance.ToProto(),
             EventUniqueId = (uint)instance.EventUniqueId,
             OptionId = (uint)instance.SelectedOptionId,
             ResultOptionInfo = instance.Options.Find(o => o.OptionId == instance.SelectedOptionId)!.ToProto()

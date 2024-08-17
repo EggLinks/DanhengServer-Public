@@ -1,4 +1,4 @@
-﻿using EggLink.DanhengServer.Data.Config;
+﻿using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.GameServer.Game.Rogue.Event;
 using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;

@@ -1,5 +1,6 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Data.Excel;
+using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.GameServer.Game.Battle;
 using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Game.Rogue.Buff;
@@ -16,7 +17,7 @@ public class RogueInstance : BaseRogueInstance
     #region Initialization
 
     public RogueInstance(RogueAreaConfigExcel areaExcel, RogueAeonExcel aeonExcel, PlayerInstance player) : base(player,
-        101, aeonExcel.RogueBuffType)
+        RogueSubModeEnum.CosmosRogue, aeonExcel.RogueBuffType)
     {
         AreaExcel = areaExcel;
         AeonExcel = aeonExcel;

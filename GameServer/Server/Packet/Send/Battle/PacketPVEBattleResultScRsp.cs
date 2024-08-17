@@ -29,7 +29,7 @@ public class PacketPVEBattleResultScRsp : BasePacket
             BattleId = req.BattleId,
             EndStatus = req.EndStatus,
             CheckIdentical = true,
-            Unk1 = new ItemList(),
+            MultipleDropData = new ItemList(),
             Unk2 = new ItemList(),
             Unk3 = new ItemList(),
             EventId = (uint)battle.EventId

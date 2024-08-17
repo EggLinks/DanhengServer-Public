@@ -1,4 +1,4 @@
-﻿using EggLink.DanhengServer.Data.Config;
+﻿using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.GameServer.Game.Battle;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;

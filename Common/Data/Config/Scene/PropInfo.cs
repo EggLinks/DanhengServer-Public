@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
-namespace EggLink.DanhengServer.Data.Config;
+namespace EggLink.DanhengServer.Data.Config.Scene;
 
 public class PropInfo : PositionInfo
 {

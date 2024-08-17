@@ -359,7 +359,8 @@ public class LineupManager : BasePlayerManager
         await Player.SendPacket(new PacketSceneCastSkillMpUpdateScNotify(castEntityId, curLineup.Mp));
     }
 
-    public async ValueTask GainMp(int count, bool sendPacket = true, SyncLineupReason reason = SyncLineupReason.SyncReasonNone)
+    public async ValueTask GainMp(int count, bool sendPacket = true,
+        SyncLineupReason reason = SyncLineupReason.SyncReasonNone)
     {
         var curLineup = GetCurLineup()!;
         curLineup.Mp += count;

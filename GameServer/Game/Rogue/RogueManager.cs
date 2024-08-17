@@ -19,7 +19,7 @@ public class RogueManager(PlayerInstance player) : BasePlayerManager(player)
     #region Information
 
     /// <summary>
-    ///     Get the begin time and end time
+    ///     Get the beginning time and end time
     /// </summary>
     /// <returns></returns>
     public static (long, long) GetCurrentRogueTime()

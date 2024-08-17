@@ -49,9 +49,10 @@ public class LineupInfo
                 if (avatarInfo != null)
                 {
                     if (avatarInfo.GetCurHp(IsExtraLineup()) <= 0 && !allowRevive) continue;
-                    if (avatarInfo.GetCurHp(IsExtraLineup()) >= 10000 && count > 0) continue;  // full hp
-                    if (avatarInfo.GetCurHp(IsExtraLineup()) <= 0 && count < 0) continue;  // dead
-                    avatarInfo.SetCurHp(Math.Max(Math.Min(avatarInfo.GetCurHp(IsExtraLineup()) + count, 10000), 0), IsExtraLineup());
+                    if (avatarInfo.GetCurHp(IsExtraLineup()) >= 10000 && count > 0) continue; // full hp
+                    if (avatarInfo.GetCurHp(IsExtraLineup()) <= 0 && count < 0) continue; // dead
+                    avatarInfo.SetCurHp(Math.Max(Math.Min(avatarInfo.GetCurHp(IsExtraLineup()) + count, 10000), 0),
+                        IsExtraLineup());
                     result = true;
                 }
             }
@@ -96,7 +97,7 @@ public class LineupInfo
                 if (avatarInfo != null)
                 {
                     if (avatarInfo.CurrentHp <= 0) continue;
-                    avatarInfo.SetCurSp((int)Math.Min(avatarInfo.GetCurSp(IsExtraLineup()) + count, 10000), IsExtraLineup());
+                    avatarInfo.SetCurSp(Math.Min(avatarInfo.GetCurSp(IsExtraLineup()) + count, 10000), IsExtraLineup());
                     result = true;
                 }
             }

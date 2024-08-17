@@ -19,7 +19,7 @@ internal class QueryGatewayHandler
         {
             RegionName = config.GameServer.GameServerId,
             Ip = config.GameServer.PublicAddress,
-            Port = config.GameServer.PublicPort,
+            Port = config.GameServer.Port,
             Msg = "Access verification failed. Please check if you have logged in to the correct account and server.",
             Unk1 = true,
             Unk2 = true,

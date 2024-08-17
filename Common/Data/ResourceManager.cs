@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using EggLink.DanhengServer.Data.Config;
+using EggLink.DanhengServer.Data.Config.Rogue;
+using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Rogue;
@@ -41,29 +43,30 @@ public class ResourceManager
         var resList = new List<ExcelResource>();
         foreach (var cls in classes)
         {
-            var attribute = (ResourceEntity)Attribute.GetCustomAttribute(cls, typeof(ResourceEntity))!;
+            var attribute = (ResourceEntity?)Attribute.GetCustomAttribute(cls, typeof(ResourceEntity));
 
-            if (attribute != null)
-            {
-                var resource = (ExcelResource)Activator.CreateInstance(cls)!;
-                var count = 0;
-                foreach (var fileName in attribute.FileName)
-                    try
+            if (attribute == null) continue;
+            var resource = (ExcelResource)Activator.CreateInstance(cls)!;
+            var count = 0;
+            foreach (var fileName in attribute.FileName)
+                try
+                {
+                    var path = ConfigManager.Config.Path.ResourcePath + "/ExcelOutput/" + fileName;
+                    var file = new FileInfo(path);
+                    if (!file.Exists)
                     {
-                        var path = ConfigManager.Config.Path.ResourcePath + "/ExcelOutput/" + fileName;
-                        var file = new FileInfo(path);
-                        if (!file.Exists)
-                        {
-                            Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", fileName,
-                                I18nManager.Translate("Word.NotFound")));
-                            continue;
-                        }
+                        Logger.Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", fileName,
+                            I18nManager.Translate("Word.NotFound")));
+                        continue;
+                    }
 
-                        var json = file.OpenText().ReadToEnd();
-                        using (var reader = new JsonTextReader(new StringReader(json)))
+                    var json = file.OpenText().ReadToEnd();
+                    using (var reader = new JsonTextReader(new StringReader(json)))
+                    {
+                        reader.Read();
+                        switch (reader.TokenType)
                         {
-                            reader.Read();
-                            if (reader.TokenType == JsonToken.StartArray)
+                            case JsonToken.StartArray:
                             {
                                 // array
                                 var jArray = JArray.Parse(json);
@@ -74,15 +77,15 @@ public class ResourceManager
                                     ((ExcelResource?)res)?.Loaded();
                                     count++;
                                 }
+
+                                break;
                             }
-                            else if (reader.TokenType == JsonToken.StartObject)
+                            case JsonToken.StartObject:
                             {
                                 // dictionary
                                 var jObject = JObject.Parse(json);
-                                foreach (var item in jObject)
+                                foreach (var (_, obj) in jObject)
                                 {
-                                    var id = int.Parse(item.Key);
-                                    var obj = item.Value;
                                     var instance = JsonConvert.DeserializeObject(obj!.ToString(), cls);
 
                                     if (((ExcelResource?)instance)?.GetId() == 0 || (ExcelResource?)instance == null)
@@ -101,26 +104,28 @@ public class ResourceManager
                                     }
                                     else
                                     {
-                                        resList.Add((ExcelResource)instance!);
+                                        resList.Add((ExcelResource)instance);
                                         ((ExcelResource)instance).Loaded();
                                     }
 
                                     count++;
                                 }
+
+                                break;
                             }
                         }
-
-                        resource.Finalized();
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error(
-                            I18nManager.Translate("Server.ServerInfo.FailedToReadItem", fileName,
-                                I18nManager.Translate("Word.Error")), ex);
                     }
 
-                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), cls.Name));
-            }
+                    resource.Finalized();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(
+                        I18nManager.Translate("Server.ServerInfo.FailedToReadItem", fileName,
+                            I18nManager.Translate("Word.Error")), ex);
+                }
+
+            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(), cls.Name));
         }
 
         foreach (var cls in resList) cls.AfterAllDone();
@@ -187,11 +192,8 @@ public class ResourceManager
                             using StreamReader graphReader2 = new(graphReader);
                             var graphText = graphReader2.ReadToEnd().Replace("$type", "Type");
                             var graphObj = JObject.Parse(graphText);
-                            if (graphObj != null)
-                            {
-                                var graphInfo = LevelGraphConfigInfo.LoadFromJsonObject(graphObj);
-                                group.LevelGraphConfig = graphInfo;
-                            }
+                            var graphInfo = LevelGraphConfigInfo.LoadFromJsonObject(graphObj);
+                            group.LevelGraphConfig = graphInfo;
                         }
                     }
                 }
@@ -248,16 +250,6 @@ public class ResourceManager
             if (missionInfo != null)
             {
                 GameData.MainMissionData[missionExcel.Key].MissionInfo = missionInfo;
-                foreach (var subMission in missionInfo.SubMissionList)
-                {
-                    // load mission json
-                    var missionJsonPath = ConfigManager.Config.Path.ResourcePath + "/" + subMission.MissionJsonPath;
-                    if (File.Exists(missionJsonPath))
-                    {
-                        var missionJson = File.ReadAllText(missionJsonPath).Replace("$type", "Type");
-                    }
-                }
-
                 count++;
             }
             else
@@ -300,19 +292,28 @@ public class ResourceManager
             Logger.Error("Error in reading " + file.Name, ex);
         }
 
-        if (customFile is Dictionary<int, int> d)
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", d.Count.ToString(), filetype));
-        else if (customFile is Dictionary<int, List<int>> di)
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", di.Count.ToString(), filetype));
-        else if (customFile is BannersConfig c)
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", c.Banners.Count.ToString(), filetype));
-        else if (customFile is RogueMiracleEffectConfig r)
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", r.Miracles.Count.ToString(), filetype));
-        else if (customFile is ActivityConfig a)
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", a.ScheduleData.Count.ToString(),
-                filetype));
-        else
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItem", filetype));
+        switch (customFile)
+        {
+            case Dictionary<int, int> d:
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", d.Count.ToString(), filetype));
+                break;
+            case Dictionary<int, List<int>> di:
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", di.Count.ToString(), filetype));
+                break;
+            case BannersConfig c:
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", c.Banners.Count.ToString(), filetype));
+                break;
+            case RogueMiracleEffectConfig r:
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", r.Miracles.Count.ToString(), filetype));
+                break;
+            case ActivityConfig a:
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItems", a.ScheduleData.Count.ToString(),
+                    filetype));
+                break;
+            default:
+                Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadedItem", filetype));
+                break;
+        }
 
         return customFile;
     }
@@ -361,9 +362,9 @@ public class ResourceManager
     {
         Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.DialogueInfo")));
         var count = 0;
-        foreach (var dialogue in GameData.RogueNPCDialogueData)
+        foreach (var dialogue in GameData.RogueNPCData)
         {
-            var path = ConfigManager.Config.Path.ResourcePath + "/" + dialogue.Value.DialoguePath;
+            var path = ConfigManager.Config.Path.ResourcePath + "/" + dialogue.Value.NPCJsonPath;
             var file = new FileInfo(path);
             if (!file.Exists) continue;
             try
@@ -371,14 +372,11 @@ public class ResourceManager
                 using var reader = file.OpenRead();
                 using StreamReader reader2 = new(reader);
                 var text = reader2.ReadToEnd().Replace("$type", "Type");
-                var dialogueInfo = JsonConvert.DeserializeObject<DialogueInfo>(text);
+                var dialogueInfo = JsonConvert.DeserializeObject<RogueNPCConfigInfo>(text);
                 if (dialogueInfo != null)
                 {
-                    dialogue.Value.DialogueInfo = dialogueInfo;
+                    dialogue.Value.RogueNpcConfig = dialogueInfo;
                     dialogueInfo.Loaded();
-                    if (dialogueInfo.DialogueIds.Count == 0)
-                        // set to invalid
-                        dialogue.Value.DialogueInfo = null;
                     count++;
                 }
             }
@@ -390,7 +388,7 @@ public class ResourceManager
             }
         }
 
-        if (count < GameData.RogueNPCDialogueData.Count)
+        if (count < GameData.RogueNPCData.Count)
             Logger.Warn(I18nManager.Translate("Server.ServerInfo.ConfigMissing",
                 I18nManager.Translate("Word.DialogueInfo"),
                 $"{ConfigManager.Config.Path.ResourcePath}/Config/Level/Rogue/Dialogue",
@@ -422,12 +420,9 @@ public class ResourceManager
                 using StreamReader reader2 = new(reader);
                 var text = reader2.ReadToEnd().Replace("$type", "Type");
                 var obj = JObject.Parse(text);
-                if (obj != null)
-                {
-                    var info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
-                    performance.ActInfo = info;
-                    count++;
-                }
+                var info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
+                performance.ActInfo = info;
+                count++;
             }
             catch (Exception ex)
             {
@@ -454,12 +449,9 @@ public class ResourceManager
                 using StreamReader reader2 = new(reader);
                 var text = reader2.ReadToEnd().Replace("$type", "Type");
                 var obj = JObject.Parse(text);
-                if (obj != null)
-                {
-                    var info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
-                    performance.ActInfo = info;
-                    count++;
-                }
+                var info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
+                performance.ActInfo = info;
+                count++;
             }
             catch (Exception ex)
             {
@@ -497,12 +489,9 @@ public class ResourceManager
                 using StreamReader reader2 = new(reader);
                 var text = reader2.ReadToEnd().Replace("$type", "Type");
                 var obj = JObject.Parse(text);
-                if (obj != null)
-                {
-                    var info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
-                    subMission.SubMissionTaskInfo = info;
-                    count++;
-                }
+                var info = LevelGraphConfigInfo.LoadFromJsonObject(obj);
+                subMission.SubMissionTaskInfo = info;
+                count++;
             }
             catch (Exception ex)
             {
@@ -600,39 +589,37 @@ public class ResourceManager
             customFile = json;
 
             foreach (var room in customFile!)
-                if (room.BlockType == RogueDLCBlockTypeEnum.MonsterNormal)
+                switch (room.BlockType)
                 {
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterNormal, room);
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterSwarm, room);
-                    count += 2;
-                }
-                else if (room.BlockType == RogueDLCBlockTypeEnum.MonsterBoss)
-                {
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterBoss, room);
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterNousBoss, room);
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterSwarmBoss, room);
-                    count += 3;
-                }
-                else if (room.BlockType == RogueDLCBlockTypeEnum.Event)
-                {
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.Event, room);
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.Reward, room);
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.Adventure, room); // adventure is not this type
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.NousSpecialEvent, room);
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.SwarmEvent, room);
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.NousEvent, room);
-                    count += 6;
-                }
-                else if (room.BlockType == RogueDLCBlockTypeEnum.Trade)
-                {
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.Trade, room);
-                    AddRoomToGameData(RogueDLCBlockTypeEnum.BlackMarket, room);
-                    count += 2;
-                }
-                else
-                {
-                    AddRoomToGameData(room.BlockType, room);
-                    count++;
+                    case RogueDLCBlockTypeEnum.MonsterNormal:
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterNormal, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterSwarm, room);
+                        count += 2;
+                        break;
+                    case RogueDLCBlockTypeEnum.MonsterBoss:
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterBoss, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterNousBoss, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.MonsterSwarmBoss, room);
+                        count += 3;
+                        break;
+                    case RogueDLCBlockTypeEnum.Event:
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.Event, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.Reward, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.Adventure, room); // adventure is not this type
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.NousSpecialEvent, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.SwarmEvent, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.NousEvent, room);
+                        count += 6;
+                        break;
+                    case RogueDLCBlockTypeEnum.Trade:
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.Trade, room);
+                        AddRoomToGameData(RogueDLCBlockTypeEnum.BlackMarket, room);
+                        count += 2;
+                        break;
+                    default:
+                        AddRoomToGameData(room.BlockType, room);
+                        count++;
+                        break;
                 }
         }
         catch (Exception ex)

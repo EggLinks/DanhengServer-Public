@@ -119,7 +119,7 @@ public class RogueMiracleInstance
             }
 
             // send packet
-            await Instance.Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(Instance.RogueVersionId,
+            await Instance.Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(Instance.RogueSubMode,
                 ToGetResult(), RogueCommonActionResultDisplayType.Single));
         }
     }

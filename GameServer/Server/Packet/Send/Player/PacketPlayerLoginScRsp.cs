@@ -12,8 +12,8 @@ public class PacketPlayerLoginScRsp : BasePacket
         {
             CurTimezone = (int)TimeZoneInfo.Local.BaseUtcOffset.TotalHours,
             ServerTimestampMs = (ulong)Extensions.GetUnixMs(),
-            BasicInfo = connection?.Player?.ToProto(), // should not be null
-            Stamina = (uint)(connection?.Player?.Data.Stamina ?? 0)
+            BasicInfo = connection.Player?.ToProto(), // should not be null
+            Stamina = (uint)(connection.Player?.Data.Stamina ?? 0)
         };
 
         SetData(rsp);
