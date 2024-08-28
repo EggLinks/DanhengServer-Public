@@ -251,7 +251,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         }
 
         if (sync && removedItems.Count > 0) await Player.SendPacket(new PacketPlayerSyncScNotify(removedItems));
-        DatabaseHelper.Instance?.UpdateInstance(Data);
         return removedItems;
     }
 
@@ -486,8 +485,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
                 var i = (await Player.InventoryManager!.AddItem(item.ItemId, item.Count, false))!;
                 i.Count = item.Count; // return the all thing
             }
-
-            DatabaseHelper.Instance!.UpdateInstance(Player.InventoryManager!.Data);
         }
 
         return items;
@@ -796,7 +793,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
 
         avatarData.Level = curLevel;
         avatarData.Exp = curExp;
-        DatabaseHelper.Instance!.UpdateInstance(Player.AvatarManager.AvatarData!);
         // leftover
         Dictionary<int, ItemData> list = [];
         var leftover = exp;
@@ -904,7 +900,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
 
         itemData.Level = curLevel;
         itemData.Exp = curExp;
-        DatabaseHelper.Instance!.UpdateInstance(Data);
         // leftover
         Dictionary<int, ItemData> list = [];
         var leftover = exp;
@@ -989,7 +984,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
             await Player.InventoryManager!.RemoveItem(cost.ItemID, cost.ItemNum);
 
         equipmentData.Promotion++;
-        DatabaseHelper.Instance!.UpdateInstance(Player.InventoryManager.Data);
         await Player.SendPacket(new PacketPlayerSyncScNotify(equipmentData));
 
         return true;
@@ -1125,7 +1119,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         var avatarData = Player.AvatarManager!.GetAvatar(baseAvatarId);
         if (avatarData == null) return;
         avatarData.GetCurPathInfo().Rank++;
-        DatabaseHelper.Instance!.UpdateInstance(Player.AvatarManager.AvatarData!);
         await Player.SendPacket(new PacketPlayerSyncScNotify(avatarData));
     }
 
@@ -1143,7 +1136,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         var itemData = Data.EquipmentItems.Find(x => x.UniqueId == equipmentUniqueId);
         if (itemData == null) return;
         itemData.Rank += rank;
-        DatabaseHelper.Instance!.UpdateInstance(Data);
         await Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
     }
 

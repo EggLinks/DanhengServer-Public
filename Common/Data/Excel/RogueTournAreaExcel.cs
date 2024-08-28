@@ -15,6 +15,7 @@ public class RogueTournAreaExcel : ExcelResource
 
     [JsonConverter(typeof(StringEnumConverter))]
     public RogueTournDifficultyTypeEnum Difficulty { get; set; }
+
     public int ExpScoreID { get; set; }
     public int UnlockID { get; set; }
     public int AreaID { get; set; }

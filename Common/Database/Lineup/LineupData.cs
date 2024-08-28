@@ -56,8 +56,6 @@ public class LineupInfo
                     result = true;
                 }
             }
-
-            DatabaseHelper.Instance?.UpdateInstance(AvatarData!);
         }
 
         return result;
@@ -79,8 +77,6 @@ public class LineupInfo
                     result = true;
                 }
             }
-
-            DatabaseHelper.Instance?.UpdateInstance(AvatarData!);
         }
 
         return result;
@@ -101,8 +97,6 @@ public class LineupInfo
                     result = true;
                 }
             }
-
-            DatabaseHelper.Instance?.UpdateInstance(AvatarData!);
         }
 
         return result;

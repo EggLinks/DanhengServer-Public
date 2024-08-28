@@ -88,8 +88,6 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
             diceData.Surfaces = surfaceId;
         }
 
-        DatabaseHelper.Instance!.UpdateInstance(ChessRogueNousData);
-
         return diceData;
     }
 
@@ -109,7 +107,6 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
         }
 
         diceData.Surfaces[index] = surfaceId;
-        DatabaseHelper.Instance!.UpdateInstance(ChessRogueNousData);
 
         return diceData;
     }
@@ -132,8 +129,6 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
         }
 
         foreach (var d in dice.SurfaceList) diceData.Surfaces[(int)d.Index] = (int)d.SurfaceId;
-
-        DatabaseHelper.Instance!.UpdateInstance(ChessRogueNousData);
 
         return diceData;
     }

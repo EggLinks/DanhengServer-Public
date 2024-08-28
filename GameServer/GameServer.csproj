@@ -24,6 +24,8 @@
     <Reference Include="DanhengProto">
       <HintPath>..\Proto\DanhengProto.dll</HintPath>
     </Reference>
+    <PackageReference Include="McMaster.NETCore.Plugins" Version="1.4.0" />
+    <PackageReference Include="McMaster.NETCore.Plugins.Mvc" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,16 +41,6 @@
     <Folder Include="Server\Packet\Send\StoryLine\" />
     <Folder Include="Server\Packet\Send\PlayerSync\" />
     <Folder Include="Server\Packet\Send\TalkEvent\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="McMaster.NETCore.Plugins" Version="1.4.0" />
-    <PackageReference Include="McMaster.NETCore.Plugins.Mvc" Version="1.4.0" />
-    <PackageReference Include="Spectre.Console" Version="0.48.0" />
-    <PackageReference Include="SQLitePCLRaw.core" Version="2.1.8" />
-    <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.8" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.143" />
-    <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

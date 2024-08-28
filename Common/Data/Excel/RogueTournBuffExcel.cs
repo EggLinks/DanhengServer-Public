@@ -10,8 +10,10 @@ public class RogueTournBuffExcel : ExcelResource
     public int MazeBuffID { get; set; }
     public int MazeBuffLevel { get; set; }
     public int RogueBuffType { get; set; }
+
     [JsonConverter(typeof(StringEnumConverter))]
     public RogueBuffCategoryEnum RogueBuffCategory { get; set; }
+
     public int RogueBuffTag { get; set; }
 
     public bool IsInHandbook { get; set; }

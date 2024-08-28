@@ -15,29 +15,35 @@ public class CommandManager
     private int _historyIndex = -1;
     public static CommandManager? Instance { get; private set; }
     public Dictionary<string, ICommand> Commands { get; } = [];
-    public Dictionary<string, CommandInfo> CommandInfo { get; } = [];
+    public Dictionary<string, CommandInfoAttribute> CommandInfo { get; } = [];
+    public Dictionary<string, string> CommandAlias { get; } = []; // alias -> command
     public Logger Logger { get; } = new("CommandManager");
     public Connection? Target { get; set; }
 
-    public void RegisterCommand()
+    public void RegisterCommands()
     {
         Instance = this;
         foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
         {
-            var attr = type.GetCustomAttribute<CommandInfo>();
-            if (attr != null)
-            {
-                var instance = Activator.CreateInstance(type);
-                if (instance is ICommand command)
-                {
-                    Commands.Add(attr.Name, command);
-                    CommandInfo.Add(attr.Name, attr);
-                }
-            }
+            if (typeof(ICommand).IsAssignableFrom(type) && !type.IsAbstract) RegisterCommand(type);
         }
 
-        Logger.Info(I18nManager.Translate("Server.ServerInfo.RegisterItem", Commands.Count.ToString(),
-            I18nManager.Translate("Word.Command")));
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.RegisterItem", Commands.Count.ToString(),
+            I18NManager.Translate("Word.Command")));
+    }
+
+    public void RegisterCommand(Type type)
+    {
+        var attr = type.GetCustomAttribute<CommandInfoAttribute>();
+        if (attr == null) return;
+        var instance = Activator.CreateInstance(type);
+        if (instance is not ICommand command) return;
+        Commands.Add(attr.Name, command);
+        CommandInfo.Add(attr.Name, attr);
+
+        // register alias
+        foreach (var alias in attr.Alias) // add alias
+            CommandAlias.Add(alias, attr.Name);
     }
 
     public void Start()
@@ -49,7 +55,7 @@ public class CommandManager
 
                 if (string.IsNullOrEmpty(input)) continue;
 
-                if (input.StartsWith("/")) input = input.Substring(1);
+                if (input.StartsWith("/")) input = input[1..];
 
                 if (_commandHistory.Count >= MaxCommandHistory) _commandHistory.RemoveAt(0);
 
@@ -59,19 +65,19 @@ public class CommandManager
             }
             catch
             {
-                Logger.Error(I18nManager.Translate("Game.Command.Notice.InternalError"));
+                Logger.Error(I18NManager.Translate("Game.Command.Notice.InternalError"));
             }
+        // ReSharper disable once FunctionNeverReturns
     }
 
     private string ReadCommand()
     {
         var input = new List<char>();
-        ConsoleKeyInfo keyInfo;
 
         AnsiConsole.Markup("[yellow]> [/]");
         while (true)
         {
-            keyInfo = Console.ReadKey(true);
+            var keyInfo = Console.ReadKey(true);
 
             if (keyInfo.Key == ConsoleKey.Enter)
             {
@@ -79,46 +85,54 @@ public class CommandManager
                 break;
             }
 
-            if (keyInfo.Key == ConsoleKey.Backspace)
+            switch (keyInfo.Key)
             {
-                if (input.Count > 0)
+                case ConsoleKey.Backspace:
                 {
-                    input.RemoveAt(input.Count - 1);
-                    Console.Write("\b \b");
+                    if (input.Count > 0)
+                    {
+                        input.RemoveAt(input.Count - 1);
+                        Console.Write("\b \b");
+                    }
+
+                    break;
                 }
-            }
-            else if (keyInfo.Key == ConsoleKey.UpArrow)
-            {
-                if (_historyIndex > 0)
+                case ConsoleKey.UpArrow:
                 {
-                    _historyIndex--;
-                    ReplaceInput(input, _commandHistory[_historyIndex]);
+                    if (_historyIndex > 0)
+                    {
+                        _historyIndex--;
+                        ReplaceInput(input, _commandHistory[_historyIndex]);
+                    }
+
+                    break;
                 }
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow)
-            {
-                if (_historyIndex < _commandHistory.Count - 1)
-                {
+                case ConsoleKey.DownArrow when _historyIndex < _commandHistory.Count - 1:
                     _historyIndex++;
                     ReplaceInput(input, _commandHistory[_historyIndex]);
-                }
-                else if (_historyIndex == _commandHistory.Count - 1)
+                    break;
+                case ConsoleKey.DownArrow:
                 {
-                    _historyIndex++;
-                    ReplaceInput(input, string.Empty);
+                    if (_historyIndex == _commandHistory.Count - 1)
+                    {
+                        _historyIndex++;
+                        ReplaceInput(input, string.Empty);
+                    }
+
+                    break;
                 }
-            }
-            else // known issue: Ctrl + (Any Key but C) or other control key will cause display error
-            {
-                input.Add(keyInfo.KeyChar);
-                Console.Write(keyInfo.KeyChar);
+                // known issue: Ctrl + (Any Key but C) or other control key will cause display error
+                default:
+                    input.Add(keyInfo.KeyChar);
+                    Console.Write(keyInfo.KeyChar);
+                    break;
             }
         }
 
         return new string(input.ToArray());
     }
 
-    private void ReplaceInput(List<char> input, string newText)
+    private static void ReplaceInput(List<char> input, string newText)
     {
         while (input.Count > 0)
         {
@@ -146,13 +160,13 @@ public class CommandManager
                             .Find(item => (item as Connection)?.Player?.Uid.ToString() == target) is Connection con)
                     {
                         Target = con;
-                        sender.SendMsg(I18nManager.Translate("Game.Command.Notice.TargetFound", target,
+                        sender.SendMsg(I18NManager.Translate("Game.Command.Notice.TargetFound", target,
                             con.Player!.Data.Name!));
                     }
                     else
                     {
                         // offline or not exist
-                        sender.SendMsg(I18nManager.Translate("Game.Command.Notice.TargetNotFound", target));
+                        sender.SendMsg(I18NManager.Translate("Game.Command.Notice.TargetNotFound", target));
                     }
 
                     return;
@@ -164,18 +178,21 @@ public class CommandManager
                 tempTarget = Listener.GetActiveConnection(sender.GetSender());
                 if (tempTarget == null)
                 {
-                    sender.SendMsg(I18nManager.Translate("Game.Command.Notice.TargetNotFound",
+                    sender.SendMsg(I18NManager.Translate("Game.Command.Notice.TargetNotFound",
                         sender.GetSender().ToString()));
                     return;
                 }
             }
 
-            if (tempTarget != null && !tempTarget.IsOnline)
+            if (tempTarget is { IsOnline: false })
             {
-                sender.SendMsg(I18nManager.Translate("Game.Command.Notice.TargetOffline",
+                sender.SendMsg(I18NManager.Translate("Game.Command.Notice.TargetOffline",
                     tempTarget.Player!.Uid.ToString(), tempTarget.Player!.Data.Name!));
                 tempTarget = null;
             }
+
+            // find the command
+            if (CommandAlias.TryGetValue(cmd, out var realCmd)) cmd = realCmd;
 
             if (Commands.TryGetValue(cmd, out var command))
             {
@@ -187,81 +204,66 @@ public class CommandManager
                 // judge permission
                 if (arg.Target?.Player?.Uid != sender.GetSender() && !sender.HasPermission("command.others"))
                 {
-                    sender.SendMsg(I18nManager.Translate("Game.Command.Notice.NoPermission"));
+                    sender.SendMsg(I18NManager.Translate("Game.Command.Notice.NoPermission"));
                     return;
                 }
 
-                // find the proper method with attribute CommandMethod
+                // find the proper method with attribute CommandMethodAttribute
                 var isFound = false;
                 var info = CommandInfo[cmd];
 
                 if (!sender.HasPermission(info.Permission))
                 {
-                    sender.SendMsg(I18nManager.Translate("Game.Command.Notice.NoPermission"));
+                    sender.SendMsg(I18NManager.Translate("Game.Command.Notice.NoPermission"));
                     return;
                 }
 
                 foreach (var method in command.GetType().GetMethods())
                 {
-                    var attr = method.GetCustomAttribute<CommandMethod>();
-                    if (attr != null)
+                    var attr = method.GetCustomAttribute<CommandMethodAttribute>();
+                    if (attr == null) continue;
+                    var canRun = true;
+                    foreach (var condition in attr.Conditions)
                     {
-                        var canRun = true;
-                        foreach (var condition in attr.Conditions)
+                        if (split.Count <= condition.Index)
                         {
-                            if (split.Count <= condition.Index)
-                            {
-                                canRun = false;
-                                break;
-                            }
-
-                            if (!split[condition.Index].Equals(condition.ShouldBe))
-                            {
-                                canRun = false;
-                                break;
-                            }
-                        }
-
-                        if (canRun)
-                        {
-                            isFound = true;
-                            method.Invoke(command, [arg]);
+                            canRun = false;
                             break;
                         }
+
+                        if (split[condition.Index].Equals(condition.ShouldBe)) continue;
+                        canRun = false;
+                        break;
                     }
+
+                    if (!canRun) continue;
+                    isFound = true;
+                    method.Invoke(command, [arg]);
+                    break;
                 }
 
-                if (!isFound)
+                if (isFound) return;
+                // find the default method with attribute CommandDefaultAttribute
+                foreach (var method in command.GetType().GetMethods())
                 {
-                    // find the default method with attribute CommandDefault
-                    foreach (var method in command.GetType().GetMethods())
-                    {
-                        var attr = method.GetCustomAttribute<CommandDefault>();
-                        if (attr != null)
-                        {
-                            isFound = true;
-                            method.Invoke(command, [arg]);
-                            break;
-                        }
-                    }
-
-                    if (!isFound)
-                    {
-                        if (info != null)
-                            sender.SendMsg(I18nManager.Translate(info.Usage));
-                        else
-                            sender.SendMsg(I18nManager.Translate("Game.Command.Notice.CommandNotFound"));
-                    }
+                    var attr = method.GetCustomAttribute<CommandDefaultAttribute>();
+                    if (attr == null) continue;
+                    isFound = true;
+                    method.Invoke(command, [arg]);
+                    break;
                 }
+
+                if (isFound) return;
+                sender.SendMsg(I18NManager.Translate(info.Usage));
             }
             else
             {
-                sender.SendMsg(I18nManager.Translate("Game.Command.Notice.CommandNotFound"));
+                sender.SendMsg(I18NManager.Translate("Game.Command.Notice.CommandNotFound"));
             }
         }
         catch
         {
-            sender.SendMsg(I18nManager.Translate("Game.Command.Notice.InternalError"));
+            sender.SendMsg(I18NManager.Translate("Game.Command.Notice.InternalError"));
         }
     }
 }

@@ -264,6 +264,7 @@ public class HelpTextCHS
     public string Usage => "用法：/help\n\n用法：/help [命令]";
     public string Commands => "命令:";
     public string CommandPermission => "所需权限: ";
+    public string CommandAlias => "命令别名：";
 }
 
 /// <summary>
@@ -361,7 +362,7 @@ public class SceneTextCHS
         "使用 unlockall 来解锁场景内所有道具（即将所有能设置为open状态的道具设置为open状态），此命令有较大可能会导致游戏加载卡条约90%，使用 /scene reset <floorId> 来解决问题\n" +
         "使用 change 来进入指定场景，要获取EntryId，请访问 Resources/MapEntrance.json\n" +
         "使用 reload 来重新加载当前场景，并回到初始位置\n" +
-        "使用 reset 来重置指定场景所有道具状态，要获取当前FloorId，请访问数据库 Player 表";
+        "使用 reset 来重置指定场景所有道具状态，要获取当前FloorId，请使用 /scene cur";
 
     public string Usage =>
         "用法：/scene prop [组ID] [道具ID] [状态]\n\n用法：/scene remove [实体ID]\n\n用法：/scene unlockall\n\n用法：/scene change [entryId]\n\n用法：/scene reload\n\n用法：/scene reset <floorId>";
@@ -375,6 +376,7 @@ public class SceneTextCHS
     public string SceneChanged => "已进入场景 {0}";
     public string SceneReloaded => "场景已重新加载!";
     public string SceneReset => "已重置场景 {0} 中所有道具状态！";
+    public string CurrentScene => "当前场景Entry Id: {0}, Plane Id: {1}, Floor Id: {2}";
 }
 
 /// <summary>

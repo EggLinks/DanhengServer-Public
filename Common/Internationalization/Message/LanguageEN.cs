@@ -272,6 +272,7 @@ public class HelpTextEN
     public string Commands => "Commands:";
     public string CommandUsage => "Usage: ";
     public string CommandPermission => "Need Permission: ";
+    public string CommandAlias => "Command Alias：";
 }
 
 /// <summary>
@@ -371,7 +372,7 @@ public class SceneTextEN
         "Use 'unlockall' to unlock all props in the scene (i.e., set all props that can be opened to the 'open' state). This command may cause the game to load to about 90%. Use '/scene reset <floorId>' to resolve this issue.\n" +
         "Use 'change' to enter a specified scene. For EntryId, refer to Resources/MapEntrance.json\n" +
         "Use 'reload' to reload the current scene and return to the initial position.\n" +
-        "Use 'reset' to reset the state of all props in the specified scene. For the current FloorId, refer to the Player table in the database.";
+        "Use 'reset' to reset the state of all props in the specified scene. For the current FloorId, use '/scene cur'.";
 
     public string Usage =>
         "Usage: /scene prop [groupId] [propId] [state]\n\nUsage: /scene remove [entityId]\n\nUsage: /scene unlockall\n\nUsage: /scene change [entryId]\n\nUsage: /scene reload\n\nUsage: /scene reset <floorId>";
@@ -385,6 +386,7 @@ public class SceneTextEN
     public string SceneChanged => "Entered scene {0}";
     public string SceneReloaded => "Scene has been reloaded!";
     public string SceneReset => "The prop state in floor {0} has been reset!";
+    public string CurrentScene => "Current Scene Entry Id: {0}, Plane Id: {1}, Floor Id: {2}";
 }
 
 /// <summary>

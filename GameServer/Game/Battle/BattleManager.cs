@@ -1,6 +1,5 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Data.Excel;
-using EggLink.DanhengServer.Database;
 using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.GameServer.Game.Battle.Skill;
 using EggLink.DanhengServer.GameServer.Game.Player;
@@ -11,6 +10,7 @@ using EggLink.DanhengServer.GameServer.Server.Packet.Send.Lineup;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
+using Microsoft.Extensions.Logging;
 
 namespace EggLink.DanhengServer.GameServer.Game.Battle;
 
@@ -29,31 +29,29 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             foreach (var entity in hitTargetEntityIdList)
             {
                 Player.SceneInstance!.Entities.TryGetValue((int)entity, out var entityInstance);
-                if (entityInstance is EntityMonster monster)
-                    targetList.Add(monster);
-                else if (entityInstance is EntityProp prop) propList.Add(prop);
+                switch (entityInstance)
+                {
+                    case EntityMonster monster:
+                        targetList.Add(monster);
+                        break;
+                    case EntityProp prop:
+                        propList.Add(prop);
+                        break;
+                }
             }
 
             foreach (var info in req.AssistMonsterEntityInfo)
             foreach (var entity in info.EntityIdList)
             {
                 Player.SceneInstance!.Entities.TryGetValue((int)entity, out var entityInstance);
-                if (entityInstance is EntityMonster monster)
-                {
-                    if (targetList.Contains(monster)) continue; // avoid adding the same monster twice
-                    targetList.Add(monster);
-                }
+                if (entityInstance is not EntityMonster monster) continue;
+                if (targetList.Contains(monster)) continue; // avoid adding the same monster twice
+                targetList.Add(monster);
             }
         }
         else
         {
-            var isAmbushed = false;
-            foreach (var entity in hitTargetEntityIdList)
-                if (Player.SceneInstance!.AvatarInfo.ContainsKey((int)entity))
-                {
-                    isAmbushed = true;
-                    break;
-                }
+            var isAmbushed = hitTargetEntityIdList.Any(entity => Player.SceneInstance!.AvatarInfo.ContainsKey((int)entity));
 
             if (!isAmbushed)
             {
@@ -107,13 +105,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
                 skill.OnCast(castAvatar);
             }
 
-            var triggerBattle = false;
-            foreach (var target in targetList)
-                if (target.IsAlive)
-                {
-                    triggerBattle = true;
-                    break;
-                }
+            var triggerBattle = targetList.Any(target => target.IsAlive);
 
             if (!triggerBattle)
             {
@@ -126,15 +118,9 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
                 WorldLevel = Player.Data.WorldLevel
             };
 
-            foreach (var item in
-                     Player.LineupManager!.GetCurLineup()!
-                         .BaseAvatars!) // get all avatars in the lineup and add them to the battle instance
-            {
-                var avatar =
-                    Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x =>
-                        x.AvatarInfo.AvatarId == item.BaseAvatarId);
-                if (avatar != null) avatarList.Add(avatar);
-            }
+            avatarList.AddRange(Player.LineupManager!.GetCurLineup()!.BaseAvatars!
+                .Select(item => Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId))
+                .OfType<AvatarSceneInfo>());
 
             MazeBuff? mazeBuff = null;
             if (castAvatar != null)
@@ -200,16 +186,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             EventId = eventId
         };
 
-        var avatarList = new List<AvatarSceneInfo>();
-
-        foreach (var item in
-                 Player.LineupManager!.GetCurLineup()!
-                     .BaseAvatars!) // get all avatars in the lineup and add them to the battle instance
-        {
-            var avatar =
-                Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId);
-            if (avatar != null) avatarList.Add(avatar);
-        }
+        var avatarList = Player.LineupManager!.GetCurLineup()!.BaseAvatars!.Select(item => Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId)).OfType<AvatarSceneInfo>().ToList();
 
         battleInstance.AvatarInfo = avatarList;
 
@@ -267,16 +244,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             MappingInfoId = config.MappingInfoID
         };
 
-        var avatarList = new List<AvatarSceneInfo>();
-
-        foreach (var item in
-                 Player.LineupManager!.GetCurLineup()!
-                     .BaseAvatars!) // get all avatars in the lineup and add them to the battle instance
-        {
-            var avatar =
-                Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId);
-            if (avatar != null) avatarList.Add(avatar);
-        }
+        var avatarList = Player.LineupManager!.GetCurLineup()!.BaseAvatars!.Select(item => Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId)).OfType<AvatarSceneInfo>().ToList();
 
         battleInstance.AvatarInfo = avatarList;
 
@@ -284,6 +252,38 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
         Player.QuestManager!.OnBattleStart(battleInstance);
 
         await Player.SendPacket(new PacketStartCocoonStageScRsp(battleInstance, cocoonId, wave));
+    }
+
+    public (Retcode, BattleInstance?) StartBattleCollege(int collegeId)
+    {
+        if (Player.BattleInstance != null)
+        {
+            return (Retcode.RetInBattleNow, null);
+        }
+
+        GameData.BattleCollegeConfigData.TryGetValue(collegeId, out var config);
+        if (config == null) return (Retcode.RetFail, null);
+
+        var stageId = config.StageID;
+
+        GameData.StageConfigData.TryGetValue(stageId, out var stageConfig);
+        if (stageConfig == null) return (Retcode.RetStageConfigNotExist, null);
+
+        BattleInstance battleInstance = new(Player, Player.LineupManager!.GetCurLineup()!, [stageConfig])
+        {
+            WorldLevel = Player.Data.WorldLevel,
+            CollegeConfigExcel = config,
+            AvatarInfo = []
+        };
+
+        // call battle start
+        Player.RogueManager!.GetRogueInstance()?.OnBattleStart(battleInstance);
+        Player.ChallengeManager!.ChallengeInstance?.OnBattleStart(battleInstance);
+        Player.QuestManager!.OnBattleStart(battleInstance);
+
+        Player.BattleInstance = battleInstance;
+
+        return (Retcode.RetSucc, battleInstance);
     }
 
     public async ValueTask EndBattle(PVEBattleResultCsReq req)
@@ -347,7 +347,6 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
                 }
             }
 
-            DatabaseHelper.Instance?.UpdateInstance(Player.AvatarManager!.AvatarData);
             await Player.SendPacket(new PacketSyncLineupNotify(lineup));
         }
 

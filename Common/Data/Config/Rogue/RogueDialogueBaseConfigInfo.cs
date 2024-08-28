@@ -32,8 +32,8 @@ public class RogueDialogueBaseConfigInfo
             catch (Exception ex)
             {
                 logger.Error(
-                    I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
-                        I18nManager.Translate("Word.Error")), ex);
+                    I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
+                        I18NManager.Translate("Word.Error")), ex);
             }
         }
 
@@ -54,8 +54,8 @@ public class RogueDialogueBaseConfigInfo
             catch (Exception ex)
             {
                 logger.Error(
-                    I18nManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
-                        I18nManager.Translate("Word.Error")), ex);
+                    I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
+                        I18NManager.Translate("Word.Error")), ex);
             }
         }
     }

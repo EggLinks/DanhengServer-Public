@@ -13,20 +13,20 @@ public class CommandHero : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         if (arg.BasicArgs.Count < 1)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
         var gender = (Gender)arg.GetInt(0);
         if (gender == Gender.None)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Hero.GenderNotSpecified"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Hero.GenderNotSpecified"));
             return;
         }
 
@@ -35,7 +35,7 @@ public class CommandHero : ICommand
         await player.ChangeAvatarPathType(8001, MultiPathAvatarTypeEnum.Warrior);
         await player.SendPacket(new PacketGetMultiPathAvatarInfoScRsp(player));
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Hero.GenderChanged"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Hero.GenderChanged"));
     }
 
     [CommandMethod("0 type")]
@@ -43,26 +43,26 @@ public class CommandHero : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         if (arg.BasicArgs.Count < 1)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
         var gender = (MultiPathAvatarTypeEnum)arg.GetInt(0);
         if (gender == 0)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Hero.HeroTypeNotSpecified"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Hero.HeroTypeNotSpecified"));
             return;
         }
 
         var player = arg.Target!.Player!;
         await player.ChangeAvatarPathType(8001, gender);
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Hero.HeroTypeChanged"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Hero.HeroTypeChanged"));
     }
 }

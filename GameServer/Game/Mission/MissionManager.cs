@@ -174,7 +174,6 @@ public class MissionManager : BasePlayerManager
             Status = MissionStatus.MissionDoing
         });
 
-        DatabaseHelper.Instance?.UpdateInstance(Data);
         if (sendPacket) await Player.SendPacket(new PacketPlayerSyncScNotify(sync));
         Player.SceneInstance!.SyncGroupInfo();
         if (mission.SubMissionInfo != null)

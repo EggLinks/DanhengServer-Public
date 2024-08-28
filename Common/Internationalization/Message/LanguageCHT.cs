@@ -264,6 +264,7 @@ public class HelpTextCHT
     public string Usage => "用法：/help\n\n用法：/help [命令]";
     public string Commands => "命令:";
     public string CommandPermission => "所需權限: ";
+    public string CommandAlias => "命令彆名：";
 }
 
 /// <summary>
@@ -361,7 +362,7 @@ public class SceneTextCHT
         "使用 unlockall 來解鎖場景內所有道具（即將所有能設置為open狀態的道具設置為open狀態），此命令有較大可能會導致遊戲加載卡條約90%，使用 /scene reset <floorId> 來解決問題\n" +
         "使用 change 來進入指定場景，要獲取EntryId，請訪問 Resources/MapEntrance.json\n" +
         "使用 reload 來重新加載當前場景，並回到初始位置\n" +
-        "使用 reset 來重置指定場景所有道具狀態，要獲取當前FloorId，請訪問數據庫 Player 表";
+        "使用 reset 來重置指定塲景所有道具狀態，要穫取噹前FloorId，請使用 /scene cur";
 
     public string Usage =>
         "用法：/scene prop [組ID] [道具ID] [狀態]\n\n用法：/scene remove [實體ID]\n\n用法：/scene unlockall\n\n用法：/scene change [entryId]\n\n用法：/scene reload\n\n用法：/scene reset <floorId>";
@@ -375,6 +376,7 @@ public class SceneTextCHT
     public string SceneChanged => "已進入場景 {0}";
     public string SceneReloaded => "場景已重新加載!";
     public string SceneReset => "已重置場景 {0} 中所有道具狀態！";
+    public string CurrentScene => "噹前塲景Entry Id: {0}, Plane Id: {1}, Floor Id: {2}";
 }
 
 /// <summary>

@@ -1,4 +1,5 @@
-﻿using EggLink.DanhengServer.Database.Inventory;
+﻿using System.Globalization;
+using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.Database.Quests;
 using EggLink.DanhengServer.Internationalization;
 using EggLink.DanhengServer.Util;
@@ -23,7 +24,7 @@ public class DatabaseHelper
 
     public void Initialize()
     {
-        logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.Database")));
+        logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.Database")));
         var config = ConfigManager.Config;
         DbType type;
         string connectionString;
@@ -90,9 +91,8 @@ public class DatabaseHelper
             .Select(x => x)
             .ToList();
 
-        foreach (var instance in list!)
+        foreach (var inst in list!.Select(instance => (instance as BaseDatabaseDataHelper)!))
         {
-            var inst = (instance as BaseDatabaseDataHelper)!;
             if (!UidInstanceMap.TryGetValue(inst.Uid, out var value))
             {
                 value = [];
@@ -108,8 +108,6 @@ public class DatabaseHelper
         logger.Info("Upgrading database...");
 
         foreach (var instance in GetAllInstance<MissionData>()!) instance.MoveFromOld();
-
-        foreach (var instance in GetAllInstance<InventoryData>()!) UpdateInstance(instance);
     }
 
     public void MoveFromSqlite()
@@ -167,6 +165,7 @@ public class DatabaseHelper
         InitializeSqlite();
     }
 
+    // ReSharper disable once UnusedMember.Global
     public static void InitializeSqliteTable<T>() where T : class, new()
     {
         try
@@ -175,6 +174,7 @@ public class DatabaseHelper
         }
         catch
         {
+            // ignored
         }
     }
 
@@ -182,17 +182,12 @@ public class DatabaseHelper
     {
         try
         {
-            if (!UidInstanceMap.TryGetValue(uid, out var value))
-            {
-                value = [];
-                UidInstanceMap[uid] = value;
-            }
+            if (UidInstanceMap.TryGetValue(uid, out var value))
+                return value.OfType<T>().Select(instance => instance).FirstOrDefault();
+            value = [];
+            UidInstanceMap[uid] = value;
 
-            foreach (var instance in value)
-                if (instance is T)
-                    return instance as T; // found
-
-            return null; // not found
+            return value.OfType<T>().Select(instance => instance).FirstOrDefault();
         }
         catch (Exception e)
         {
@@ -204,12 +199,10 @@ public class DatabaseHelper
     public T GetInstanceOrCreateNew<T>(int uid) where T : class, new()
     {
         var instance = GetInstance<T>(uid);
-        if (instance == null)
-        {
-            instance = new T();
-            (instance as BaseDatabaseDataHelper)!.Uid = uid;
-            SaveInstance(instance);
-        }
+        if (instance != null) return instance;
+        instance = new T();
+        (instance as BaseDatabaseDataHelper)!.Uid = uid;
+        SaveInstance(instance);
 
         return instance;
     }
@@ -234,14 +227,6 @@ public class DatabaseHelper
         sqlSugarScope?.Insertable(instance).ExecuteCommand();
         UidInstanceMap[(instance as BaseDatabaseDataHelper)!.Uid]
             .Add((instance as BaseDatabaseDataHelper)!); // add to the map
-    }
-
-    public void UpdateInstance<T>(T instance) where T : class, new()
-    {
-        //lock (GetLock((instance as BaseDatabaseDataHelper)!.Uid))
-        //{
-        //    sqlSugarScope?.Updateable(instance).ExecuteCommand();
-        //}
     }
 
     public void CalcSaveDatabase() // per 5 min
@@ -271,8 +256,9 @@ public class DatabaseHelper
                 }
             }
 
-            logger.Info(I18nManager.Translate("Server.ServerInfo.SaveDatabase",
-                (DateTime.Now - prev).TotalSeconds.ToString()[..4]));
+            var t = (DateTime.Now - prev).TotalSeconds;
+            logger.Info(I18NManager.Translate("Server.ServerInfo.SaveDatabase",
+                Math.Round(t, 2).ToString(CultureInfo.InvariantCulture)));
 
             ToSaveUidList.Clear();
         }

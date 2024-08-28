@@ -5,8 +5,8 @@ namespace EggLink.DanhengServer.Util;
 
 public class Crypto
 {
-    private static readonly Random secureRandom = new();
-    public static Logger logger = new("Crypto");
+    private static readonly Random SecureRandom = new();
+    public static Logger Logger = new("Crypto");
 
     public static void Xor(byte[] packet, byte[] key)
     {
@@ -16,7 +16,7 @@ public class Crypto
         }
         catch (Exception e)
         {
-            logger.Error("Crypto error.", e);
+            Logger.Error("Crypto error.", e);
         }
     }
 
@@ -24,9 +24,9 @@ public class Crypto
     public static string CreateSessionKey(string accountUid)
     {
         var random = new byte[64];
-        secureRandom.NextBytes(random);
+        SecureRandom.NextBytes(random);
 
-        var temp = accountUid + "." + DateTime.Now.Ticks + "." + secureRandom;
+        var temp = accountUid + "." + DateTime.Now.Ticks + "." + SecureRandom;
 
         try
         {

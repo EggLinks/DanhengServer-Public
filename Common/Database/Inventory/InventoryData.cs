@@ -42,7 +42,7 @@ public class ItemData
     {
         GameData.RelicConfigData.TryGetValue(ItemId, out var config);
         if (config == null) return;
-        var affixId = GameTools.GetRandomRelicMainAffix(config.MainAffixGroup);
+        var affixId = UtilTools.GetRandomRelicMainAffix(config.MainAffixGroup);
         MainAffix = affixId;
     }
 

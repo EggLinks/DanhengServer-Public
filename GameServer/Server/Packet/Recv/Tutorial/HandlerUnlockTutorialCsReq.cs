@@ -1,5 +1,4 @@
-﻿using EggLink.DanhengServer.Database;
-using EggLink.DanhengServer.GameServer.Server.Packet.Send.Tutorial;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Tutorial;
 using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
@@ -15,7 +14,6 @@ public class HandlerUnlockTutorialCsReq : Handler
         if (!player.TutorialData!.Tutorials.TryGetValue((int)req.TutorialId, out var _))
         {
             player.TutorialData!.Tutorials.Add((int)req.TutorialId, TutorialStatus.TutorialUnlock);
-            DatabaseHelper.Instance?.UpdateInstance(player.TutorialData!);
         }
 
         await connection.SendPacket(new PacketUnlockTutorialScRsp(req.TutorialId));

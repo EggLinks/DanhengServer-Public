@@ -38,10 +38,10 @@ public class CommandArg
         if (con != null) Target = con;
 
         CharacterArgs.TryGetValue("@", out var target);
-        if (target != null)
-            if (DanhengListener.Connections.Values.ToList()
-                    .Find(item => (item as Connection)?.Player?.Uid.ToString() == target) is Connection connection)
-                Target = connection;
+        if (target == null) return;
+        if (DanhengListener.Connections.Values.ToList()
+                .Find(item => (item as Connection)?.Player?.Uid.ToString() == target) is Connection connection)
+            Target = connection;
     }
 
     public string Raw { get; }

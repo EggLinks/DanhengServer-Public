@@ -34,14 +34,12 @@ public class AccountData : BaseDatabaseDataHelper
     public string GenerateDispatchToken()
     {
         DispatchToken = Crypto.CreateSessionKey(Uid.ToString());
-        DatabaseHelper.Instance?.UpdateInstance(this);
         return DispatchToken;
     }
 
     public string GenerateComboToken()
     {
         ComboToken = Crypto.CreateSessionKey(Uid.ToString());
-        DatabaseHelper.Instance?.UpdateInstance(this);
         return ComboToken;
     }
 }

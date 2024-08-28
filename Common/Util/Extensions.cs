@@ -52,12 +52,12 @@ public static class Extensions
         return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
     }
 
-    public static string ToArrayString(this List<string> list)
+    public static string ToArrayString<T>(this List<T> list)
     {
         return list.JoinFormat(", ", "");
     }
 
-    public static string ToJsonString(this Dictionary<string, string> dic)
+    public static string ToJsonString<TK, TV>(this Dictionary<TK, TV> dic) where TK : notnull
     {
         return JsonConvert.SerializeObject(dic);
     }

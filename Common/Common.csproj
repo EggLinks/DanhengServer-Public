@@ -17,7 +17,7 @@
     <PackageReference Include="Spectre.Console" Version="0.48.0" />
     <PackageReference Include="SQLitePCLRaw.core" Version="2.1.8" />
     <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.8" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.143" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.167" />
     <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
 

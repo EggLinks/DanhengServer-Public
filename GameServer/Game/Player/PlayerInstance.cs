@@ -78,6 +78,7 @@ public class PlayerInstance(PlayerData data)
     public HeartDialData? HeartDialData { get; private set; }
     public TutorialData? TutorialData { get; private set; }
     public TutorialGuideData? TutorialGuideData { get; private set; }
+    public BattleCollegeData? BattleCollegeData { get; private set; }
     public ServerPrefsData? ServerPrefsData { get; private set; }
     public SceneInstance? SceneInstance { get; private set; }
     public int Uid { get; set; }
@@ -153,6 +154,7 @@ public class PlayerInstance(PlayerData data)
         TutorialData = InitializeDatabase<TutorialData>();
         TutorialGuideData = InitializeDatabase<TutorialGuideData>();
         ServerPrefsData = InitializeDatabase<ServerPrefsData>();
+        BattleCollegeData = InitializeDatabase<BattleCollegeData>();
 
 
         Data.LastActiveTime = Extensions.GetUnixSec();

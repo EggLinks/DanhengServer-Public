@@ -45,11 +45,14 @@ public class RogueTournManager(PlayerInstance player) : BasePlayerManager(player
         {
             TalentInfoList = new RogueTalentInfoList
             {
-                TalentInfo = { GameData.RogueTournPermanentTalentData.Values.Select(x => new RogueTalentInfo
+                TalentInfo =
                 {
-                    TalentId = (uint)x.TalentID,
-                    Status = RogueTalentStatus.Enable
-                }) }
+                    GameData.RogueTournPermanentTalentData.Values.Select(x => new RogueTalentInfo
+                    {
+                        TalentId = (uint)x.TalentID,
+                        Status = RogueTalentStatus.Enable
+                    })
+                }
             }
         };
     }
@@ -99,30 +102,18 @@ public class RogueTournManager(PlayerInstance player) : BasePlayerManager(player
         };
 
         foreach (var hexAvatar in GameData.RogueTournHexAvatarBaseTypeData.Keys)
-        {
             proto.HandbookAvatarBaseList.Add((uint)hexAvatar);
-        }
 
         foreach (var buff in GameData.RogueTournBuffData.Values)
-        {
             if (buff.IsInHandbook)
                 proto.HandbookBuffList.Add((uint)buff.MazeBuffID);
-        }
 
-        foreach (var formulaId in GameData.RogueTournFormulaData.Keys)
-        {
-            proto.HandbookFormulaList.Add((uint)formulaId);
-        }
+        foreach (var formulaId in GameData.RogueTournFormulaData.Keys) proto.HandbookFormulaList.Add((uint)formulaId);
 
         foreach (var miracleId in GameData.RogueTournHandbookMiracleData.Keys)
-        {
             proto.HandbookMiracleList.Add((uint)miracleId);
-        }
 
-        foreach (var eventId in GameData.RogueTournHandBookEventData.Keys)
-        {
-            proto.HandbookEventList.Add((uint)eventId);
-        }
+        foreach (var eventId in GameData.RogueTournHandBookEventData.Keys) proto.HandbookEventList.Add((uint)eventId);
 
         return proto;
     }
