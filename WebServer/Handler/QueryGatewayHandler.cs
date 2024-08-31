@@ -1,4 +1,6 @@
-﻿using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Internationalization;
+using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
 using Google.Protobuf;
 
@@ -20,7 +22,7 @@ internal class QueryGatewayHandler
             RegionName = config.GameServer.GameServerId,
             Ip = config.GameServer.PublicAddress,
             Port = config.GameServer.Port,
-            Msg = "Access verification failed. Please check if you have logged in to the correct account and server.",
+            Msg = I18NManager.Translate("Server.Web.Maintain"),
             Unk1 = true,
             Unk2 = true,
             Unk3 = true,
@@ -29,6 +31,11 @@ internal class QueryGatewayHandler
             Unk6 = true,
             Unk7 = true
         };
+
+        if (!ResourceManager.IsLoaded)
+        {
+            gateServer.Retcode = 2;
+        }
 
         if (urlData.AssetBundleUrl != null && urlData.AssetBundleUrl.Length > 0)
             gateServer.AssetBundleUrl = urlData.AssetBundleUrl;

@@ -124,6 +124,7 @@ public class CommandTextEN
 /// </summary>
 public class WebTextEN
 {
+    public string Maintain => "The server is undergoing maintenance, please try again later.";
 }
 
 /// <summary>

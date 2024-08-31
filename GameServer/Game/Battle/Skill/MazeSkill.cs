@@ -1,20 +1,28 @@
-﻿using EggLink.DanhengServer.Data.Config;
+﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Data.Config;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Avatar;
 using EggLink.DanhengServer.GameServer.Game.Battle.Skill.Action;
+using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
+using EggLink.DanhengServer.Proto;
 
 namespace EggLink.DanhengServer.GameServer.Game.Battle.Skill;
 
 public class MazeSkill
 {
-    public MazeSkill(List<TaskInfo> taskInfos, bool isSkill = false, AvatarConfigExcel? excel = null)
+    public MazeSkill(List<TaskInfo> taskInfos, SceneCastSkillCsReq req, bool isSkill = false, AvatarConfigExcel? excel = null)
     {
-        foreach (var task in taskInfos) AddAction(task);
+        Req = req;
         IsMazeSkill = isSkill;
         Excel = excel;
+        foreach (var task in taskInfos) AddAction(task);
+
+        if (GameData.SummonUnitDataData.TryGetValue((excel?.AvatarID ?? 0) * 10 + 1, out var summonUnit) && isSkill && !summonUnit.IsClient) Actions.Add(new MazeSummonUnit(summonUnit, req.TargetMotion));
     }
+
+    public SceneCastSkillCsReq Req;
 
     public List<IMazeSkillAction> Actions { get; } = [];
     public bool TriggerBattle { get; private set; } = true;
@@ -38,6 +46,7 @@ public class MazeSkill
             case TaskTypeEnum.AdventureModifyTeamPlayerSP:
                 break;
             case TaskTypeEnum.CreateSummonUnit:
+                //Actions.Add(new MazeSummonUnit(GameData.SummonUnitDataData[task.SummonUnitID], Req.TargetMotion));
                 break;
             case TaskTypeEnum.AdventureSetAttackTargetMonsterDie:
                 Actions.Add(new MazeSetTargetMonsterDie());
@@ -58,9 +67,9 @@ public class MazeSkill
         }
     }
 
-    public void OnCast(AvatarSceneInfo info)
+    public void OnCast(AvatarSceneInfo info, PlayerInstance player)
     {
-        foreach (var action in Actions) action.OnCast(info);
+        foreach (var action in Actions) action.OnCast(info, player);
     }
 
     public void OnAttack(AvatarSceneInfo info, List<EntityMonster> entities)

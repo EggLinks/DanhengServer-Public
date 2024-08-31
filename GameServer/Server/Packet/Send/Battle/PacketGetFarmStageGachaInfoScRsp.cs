@@ -1,5 +1,6 @@
 ﻿using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
+using EggLink.DanhengServer.Util;
 
 namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Battle;
 
@@ -14,7 +15,7 @@ public class PacketGetFarmStageGachaInfoScRsp : BasePacket
             {
                 GachaId = item,
                 BeginTime = 0,
-                EndTime = long.MaxValue
+                EndTime = Extensions.GetUnixSec() + 3600
             });
 
         SetData(proto);

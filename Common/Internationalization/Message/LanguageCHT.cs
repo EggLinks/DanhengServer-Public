@@ -124,6 +124,7 @@ public class CommandTextCHT
 /// </summary>
 public class WebTextCHT
 {
+    public string Maintain => "服务器正在维修，请稍后尝试。";
 }
 
 /// <summary>

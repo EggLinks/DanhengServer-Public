@@ -32,7 +32,7 @@ public static class GameData
         [];
 
     public static Dictionary<int, AdventurePlayerExcel> AdventurePlayerData { get; private set; } = [];
-    public static Dictionary<int, SummonUnitExcel> SummonUnitData { get; private set; } = [];
+    public static Dictionary<int, SummonUnitDataExcel> SummonUnitDataData { get; private set; } = [];
 
     #endregion
 

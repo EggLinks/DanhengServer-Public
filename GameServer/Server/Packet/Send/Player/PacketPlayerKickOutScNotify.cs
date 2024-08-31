@@ -13,4 +13,19 @@ public class PacketPlayerKickOutScNotify : BasePacket
         };
         SetData(proto);
     }
+
+    public PacketPlayerKickOutScNotify(KickType type, BlackInfo? info = null) : base(CmdIds.PlayerKickOutScNotify)
+    {
+        var proto = new PlayerKickOutScNotify
+        {
+            KickType = type
+        };
+
+        if (info != null)
+        {
+            proto.BlackInfo = info;
+        }
+
+        SetData(proto);
+    }
 }

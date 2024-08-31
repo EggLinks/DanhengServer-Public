@@ -5,7 +5,7 @@ namespace EggLink.DanhengServer.GameServer.Game.Battle;
 
 public class MazeBuff(int buffID, int buffLevel, int owner)
 {
-    public MazeBuff(SceneBuff buff) : this(buff.BuffID, buff.BuffLevel, 0)
+    public MazeBuff(SceneBuff buff) : this(buff.BuffId, buff.BuffLevel, 0)
     {
         Duration = buff.Duration;
         OwnerAvatarId = buff.OwnerAvatarId;

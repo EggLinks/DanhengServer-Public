@@ -81,6 +81,12 @@ public class MissionManager : BasePlayerManager
             await Player.LineupManager!.AddAvatarToCurTeam(1003);
         }
 
+        // message
+        foreach (var sectionConfigExcel in GameData.MessageSectionConfigData.Values.Where(x => x.MainMissionLink == missionId))
+        {
+            await Player.MessageManager!.AddMessageSection(sectionConfigExcel.ID);
+        }
+
         return list;
     }
 

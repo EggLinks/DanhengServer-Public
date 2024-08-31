@@ -45,6 +45,18 @@ public class MuipServerRoutes
         return new JsonResult(resp);
     }
 
+
+    [HttpGet("/server/type")]
+    public IActionResult DanhengVerify()
+    {
+        return new ContentResult
+        {
+            Content =
+                "{\"serverType\": \"DanhengServer\"}",
+            ContentType = "application/json"
+        };
+    }
+
     [HttpPost("/muip/server_information")]
     public IActionResult GetServerInformationPost([FromBody] ServerInformationRequest req)
     {

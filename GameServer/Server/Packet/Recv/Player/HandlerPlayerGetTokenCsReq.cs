@@ -1,4 +1,5 @@
-﻿using EggLink.DanhengServer.Database;
+﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Database;
 using EggLink.DanhengServer.Database.Account;
 using EggLink.DanhengServer.Database.Player;
 using EggLink.DanhengServer.GameServer.Game.Player;
@@ -19,8 +20,13 @@ public class HandlerPlayerGetTokenCsReq : Handler
         var account = DatabaseHelper.Instance?.GetInstance<AccountData>(int.Parse(req.AccountUid));
         if (account == null)
         {
-            await connection.SendPacket(new PacketPlayerGetTokenScRsp());
-            await connection.SendPacket(new PacketPlayerKickOutScNotify());
+            await connection.SendPacket(new PacketPlayerGetTokenScRsp(0, Retcode.RetNotInWhiteList));
+            return;
+        }
+
+        if (!ResourceManager.IsLoaded)
+        {
+            // resource manager not loaded, return
             return;
         }
 
@@ -32,13 +38,13 @@ public class HandlerPlayerGetTokenCsReq : Handler
         }
 
         connection.State = SessionStateEnum.WAITING_FOR_LOGIN;
+
         var pd = DatabaseHelper.Instance?.GetInstance<PlayerData>(int.Parse(req.AccountUid));
-        if (pd == null)
-            connection.Player = new PlayerInstance(int.Parse(req.AccountUid));
-        else
-            connection.Player = new PlayerInstance(pd);
+        connection.Player = pd == null ? new PlayerInstance(int.Parse(req.AccountUid)) : new PlayerInstance(pd);
+
         connection.DebugFile = Path.Combine(ConfigManager.Config.Path.LogPath, "Debug/", $"{req.AccountUid}/",
             $"Debug-{DateTime.Now:yyyy-MM-dd HH-mm-ss}.log");
+
         await connection.Player.OnGetToken();
         connection.Player.Connection = connection;
         await connection.SendPacket(new PacketPlayerGetTokenScRsp(connection));

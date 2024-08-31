@@ -1,4 +1,5 @@
 ﻿using EggLink.DanhengServer.Enums.Scene;
+using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
 
@@ -19,7 +20,7 @@ public class MazeSetTargetMonsterDie : IMazeSkillAction
             }
     }
 
-    public async ValueTask OnCast(AvatarSceneInfo avatar)
+    public async ValueTask OnCast(AvatarSceneInfo avatar, PlayerInstance player)
     {
         await System.Threading.Tasks.Task.CompletedTask;
     }

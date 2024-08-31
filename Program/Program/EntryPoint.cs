@@ -82,20 +82,6 @@ public class EntryPoint
             return;
         }
 
-        // Load the game data
-        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.GameData")));
-        try
-        {
-            ResourceManager.LoadGameData();
-        }
-        catch (Exception e)
-        {
-            Logger.Error(
-                I18NManager.Translate("Server.ServerInfo.FailedToLoadItem", I18NManager.Translate("Word.GameData")), e);
-            Console.ReadLine();
-            return;
-        }
-
         // Initialize the database
         try
         {
@@ -109,6 +95,31 @@ public class EntryPoint
         {
             Logger.Error(
                 I18NManager.Translate("Server.ServerInfo.FailedToLoadItem", I18NManager.Translate("Word.Database")), e);
+            Console.ReadLine();
+            return;
+        }
+
+        HandlerManager.Init();
+
+        WebProgram.Main([], GetConfig().HttpServer.Port, GetConfig().HttpServer.GetBindDisplayAddress());
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.ServerRunning", I18NManager.Translate("Word.Dispatch"),
+            GetConfig().HttpServer.GetDisplayAddress()));
+
+        DanhengListener.BaseConnection = typeof(Connection);
+        DanhengListener.StartListener();
+
+        GenerateLogMap();
+
+        // Load the game data
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.GameData")));
+        try
+        {
+            ResourceManager.LoadGameData();
+        }
+        catch (Exception e)
+        {
+            Logger.Error(
+                I18NManager.Translate("Server.ServerInfo.FailedToLoadItem", I18NManager.Translate("Word.GameData")), e);
             Console.ReadLine();
             return;
         }
@@ -200,23 +211,15 @@ public class EntryPoint
         // generate the handbook
         HandbookGenerator.Generate();
 
-        HandlerManager.Init();
-
-        WebProgram.Main([], GetConfig().HttpServer.Port, GetConfig().HttpServer.GetBindDisplayAddress());
-        Logger.Info(I18NManager.Translate("Server.ServerInfo.ServerRunning", I18NManager.Translate("Word.Dispatch"),
-            GetConfig().HttpServer.GetDisplayAddress()));
-
-        DanhengListener.BaseConnection = typeof(Connection);
-        DanhengListener.StartListener();
-
         var elapsed = DateTime.Now - time;
         Logger.Info(I18NManager.Translate("Server.ServerInfo.ServerStarted",
             Math.Round(elapsed.TotalSeconds, 2).ToString(CultureInfo.InvariantCulture)));
 
-        GenerateLogMap();
-
         if (GetConfig().ServerOption.EnableMission)
             Logger.Warn(I18NManager.Translate("Server.ServerInfo.MissionEnabled"));
+
+        ResourceManager.IsLoaded = true;
+
         CommandManager.Start();
     }
 

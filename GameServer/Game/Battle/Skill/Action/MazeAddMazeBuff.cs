@@ -1,4 +1,5 @@
-﻿using EggLink.DanhengServer.GameServer.Game.Scene;
+﻿using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
 
 namespace EggLink.DanhengServer.GameServer.Game.Battle.Skill.Action;
@@ -15,7 +16,7 @@ public class MazeAddMazeBuff(int buffId, int duration) : IMazeSkillAction
         await System.Threading.Tasks.Task.CompletedTask;
     }
 
-    public async ValueTask OnCast(AvatarSceneInfo avatar)
+    public async ValueTask OnCast(AvatarSceneInfo avatar, PlayerInstance player)
     {
         await avatar.AddBuff(new SceneBuff(BuffId, 1, avatar.AvatarInfo.AvatarId, duration));
     }

@@ -102,7 +102,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             if (castAvatar != null)
             {
                 skill.OnAttack(Player.SceneInstance!.AvatarInfo[(int)req.AttackedByEntityId], targetList);
-                skill.OnCast(castAvatar);
+                skill.OnCast(castAvatar, Player);
             }
 
             var triggerBattle = targetList.Any(target => target.IsAlive);
@@ -154,6 +154,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
 
             Player.BattleInstance = battleInstance;
             await Player.SendPacket(new PacketSceneCastSkillScRsp(req.CastEntityId, battleInstance));
+            Player.SceneInstance?.ClearSummonUnit();
         }
         else
         {
@@ -198,6 +199,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
         Player.BattleInstance = battleInstance;
 
         await Player.SendPacket(new PacketSceneEnterStageScRsp(battleInstance));
+        Player.SceneInstance?.ClearSummonUnit();
     }
 
     public async ValueTask StartCocoonStage(int cocoonId, int wave, int worldLevel)
@@ -252,6 +254,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
         Player.QuestManager!.OnBattleStart(battleInstance);
 
         await Player.SendPacket(new PacketStartCocoonStageScRsp(battleInstance, cocoonId, wave));
+        Player.SceneInstance?.ClearSummonUnit();
     }
 
     public (Retcode, BattleInstance?) StartBattleCollege(int collegeId)

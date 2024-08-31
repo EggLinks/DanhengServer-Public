@@ -11,22 +11,6 @@ public class PacketSceneGroupRefreshScNotify : BasePacket
     {
         var proto = new SceneGroupRefreshScNotify();
         Dictionary<int, GroupRefreshInfo> refreshInfo = [];
-        foreach (var e in addEntity ?? [])
-        {
-            var group = new GroupRefreshInfo
-            {
-                GroupId = (uint)e.GroupID
-            };
-            group.RefreshEntity.Add(new SceneEntityRefreshInfo
-            {
-                AddEntity = e.ToProto()
-            });
-
-            if (refreshInfo.TryGetValue(e.GroupID, out var value))
-                value.RefreshEntity.AddRange(group.RefreshEntity);
-            else
-                refreshInfo[e.GroupID] = group;
-        }
 
         foreach (var e in removeEntity ?? [])
         {
@@ -37,6 +21,23 @@ public class PacketSceneGroupRefreshScNotify : BasePacket
             group.RefreshEntity.Add(new SceneEntityRefreshInfo
             {
                 DeleteEntity = (uint)e.EntityID
+            });
+
+            if (refreshInfo.TryGetValue(e.GroupID, out var value))
+                value.RefreshEntity.AddRange(group.RefreshEntity);
+            else
+                refreshInfo[e.GroupID] = group;
+        }
+
+        foreach (var e in addEntity ?? [])
+        {
+            var group = new GroupRefreshInfo
+            {
+                GroupId = (uint)e.GroupID
+            };
+            group.RefreshEntity.Add(new SceneEntityRefreshInfo
+            {
+                AddEntity = e.ToProto()
             });
 
             if (refreshInfo.TryGetValue(e.GroupID, out var value))

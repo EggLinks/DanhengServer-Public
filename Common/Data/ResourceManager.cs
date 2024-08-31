@@ -2,6 +2,7 @@
 using EggLink.DanhengServer.Data.Config;
 using EggLink.DanhengServer.Data.Config.Rogue;
 using EggLink.DanhengServer.Data.Config.Scene;
+using EggLink.DanhengServer.Data.Config.SummonUnit;
 using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Rogue;
@@ -15,6 +16,7 @@ namespace EggLink.DanhengServer.Data;
 public class ResourceManager
 {
     public static Logger Logger { get; } = new("ResourceManager");
+    public static bool IsLoaded { get; set; }
 
     public static void LoadGameData()
     {
@@ -22,6 +24,7 @@ public class ResourceManager
         LoadFloorInfo();
         LoadMissionInfo();
         LoadMazeSkill();
+        LoadSummonUnit();
         LoadDialogueInfo();
         LoadPerformanceInfo();
         LoadSubMissionInfo();
@@ -370,6 +373,46 @@ public class ResourceManager
 
         Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(),
             I18NManager.Translate("Word.MazeSkillInfo")));
+    }
+
+    public static void LoadSummonUnit()
+    {
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
+            I18NManager.Translate("Word.SummonUnitInfo")));
+        var count = 0;
+        foreach (var summonUnit in GameData.SummonUnitDataData.Values)
+        {
+            var path = ConfigManager.Config.Path.ResourcePath + "/" + summonUnit.JsonPath;
+            var file = new FileInfo(path);
+            if (!file.Exists) continue;
+            try
+            {
+                using var reader = file.OpenRead();
+                using StreamReader reader2 = new(reader);
+                var text = reader2.ReadToEnd().Replace("$type", "Type");
+
+                var obj = JObject.Parse(text);
+                var info = SummonUnitConfigInfo.LoadFromJsonObject(obj);
+
+                summonUnit.ConfigInfo = info;
+                count++;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(
+                    I18NManager.Translate("Server.ServerInfo.FailedToReadItem", summonUnit.JsonPath,
+                        I18NManager.Translate("Word.Error")), ex);
+            }
+        }
+
+        if (count < GameData.SummonUnitDataData.Count)
+            Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
+                I18NManager.Translate("Word.SummonUnitInfo"),
+                $"{ConfigManager.Config.Path.ResourcePath}/ConfigSummonUnit",
+                I18NManager.Translate("Word.SummonUnit")));
+
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(),
+            I18NManager.Translate("Word.SummonUnitInfo")));
     }
 
     public static void LoadDialogueInfo()
