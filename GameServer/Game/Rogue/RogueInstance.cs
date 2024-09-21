@@ -272,7 +272,7 @@ public class RogueInstance : BaseRogueInstance
     {
         return new GameAeonInfo
         {
-            AeonId = (uint)AeonId,
+            GameAeonId = (uint)AeonId,
             IsUnlocked = AeonId != 0,
             UnlockedAeonEnhanceNum = (uint)(AeonId != 0 ? 3 : 0)
         };

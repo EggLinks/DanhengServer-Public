@@ -1,5 +1,4 @@
-﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.ServerPrefs;
-using EggLink.DanhengServer.Kcp;
+﻿using EggLink.DanhengServer.Kcp;
 
 namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.ServerPrefs;
 
@@ -9,6 +8,6 @@ public class HandlerGetAllServerPrefsDataCsReq : Handler
     public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
         var infos = connection.Player?.ServerPrefsData?.ServerPrefsDict.Values.ToList() ?? [];
-        await connection.SendPacket(new PacketGetAllServerPrefsDataScRsp(infos));
+        //await connection.SendPacket(new PacketGetAllServerPrefsDataScRsp(infos));
     }
 }

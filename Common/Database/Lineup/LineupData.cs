@@ -42,7 +42,6 @@ public class LineupInfo
     {
         var result = false;
         if (BaseAvatars != null && AvatarData != null)
-        {
             foreach (var avatar in BaseAvatars)
             {
                 var avatarInfo = AvatarData?.Avatars?.Find(item => item.GetBaseAvatarId() == avatar.BaseAvatarId);
@@ -56,7 +55,6 @@ public class LineupInfo
                     result = true;
                 }
             }
-        }
 
         return result;
     }
@@ -65,7 +63,6 @@ public class LineupInfo
     {
         var result = false;
         if (BaseAvatars != null && AvatarData != null)
-        {
             foreach (var avatar in BaseAvatars)
             {
                 var avatarInfo = AvatarData?.Avatars?.Find(item => item.GetAvatarId() == avatar.BaseAvatarId);
@@ -77,7 +74,6 @@ public class LineupInfo
                     result = true;
                 }
             }
-        }
 
         return result;
     }
@@ -86,7 +82,6 @@ public class LineupInfo
     {
         var result = false;
         if (BaseAvatars != null && AvatarData != null)
-        {
             foreach (var avatar in BaseAvatars)
             {
                 var avatarInfo = AvatarData?.Avatars?.Find(item => item.GetAvatarId() == avatar.BaseAvatarId);
@@ -97,7 +92,6 @@ public class LineupInfo
                     result = true;
                 }
             }
-        }
 
         return result;
     }

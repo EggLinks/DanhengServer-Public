@@ -113,7 +113,7 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
 
     public ChessRogueNousDiceData SetDice(ChessRogueDice dice)
     {
-        var branchId = (int)dice.DiceBranchId;
+        var branchId = (int)dice.BranchId;
         ChessRogueNousData.RogueDiceData.TryGetValue(branchId, out var diceData);
         if (diceData == null)
         {
@@ -121,14 +121,14 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
             var branch = GameData.RogueNousDiceBranchData[branchId];
             var surface = branch.GetDefaultSurfaceList();
 
-            foreach (var d in dice.SurfaceList) surface[(int)d.Index - 1] = (int)d.SurfaceId;
+            foreach (var d in dice.SurfaceList) surface[(int)d.DiceSlotId - 1] = (int)d.DiceSurfaceId;
 
             return SetDice(branchId,
                 surface.Select((id, i) => new { id, i })
                     .ToDictionary(x => x.i + 1, x => x.id)); // convert to dictionary
         }
 
-        foreach (var d in dice.SurfaceList) diceData.Surfaces[(int)d.Index] = (int)d.SurfaceId;
+        foreach (var d in dice.SurfaceList) diceData.Surfaces[(int)d.DiceSlotId] = (int)d.DiceSurfaceId;
 
         return diceData;
     }
@@ -159,10 +159,10 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
         return info;
     }
 
-    public ChessRogueCurrentInfo ToCurrentInfo()
+    public ChessRogueGameInfo ToGameInfo()
     {
-        if (RogueInstance != null) return RogueInstance.ToProto();
-        var info = new ChessRogueCurrentInfo
+        if (RogueInstance != null) return RogueInstance.ToRogueGameInfo();
+        var info = new ChessRogueGameInfo
         {
             RogueSubMode = 201,
             LevelInfo = ToLevelInfo(),
@@ -211,7 +211,7 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
             AreaInfo = new ChessRogueAreaInfo
             {
                 Cell = new CellInfo(),
-                OJNCMJDAABJ = new JDIPIHPMEKN()
+                EFCBJHLHGFG = new KKCPDACDMKM()
             }
         };
 
@@ -265,8 +265,8 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
 
         foreach (var dice in GameData.RogueNousDiceBranchData) proto.DiceList.Add(GetDice(dice.Key).ToProto());
 
-        for (var i = 1; i < 7; i++) proto.MLKDHOECNFL.Add((uint)i, i % 3 == 0);
-        proto.MLKDHOECNFL[5] = true;
+        for (var i = 1; i < 7; i++) proto.BJDFPFAKCFH.Add((uint)i, i % 3 == 0);
+        proto.BJDFPFAKCFH[5] = true;
 
         return proto;
     }

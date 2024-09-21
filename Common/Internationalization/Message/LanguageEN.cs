@@ -80,6 +80,8 @@ public class WordTextEN
     public string RogueChestMapInfo => "Simulated Universe Map Info";
     public string ChessRogueRoom => "Simulated Universe DLC";
     public string ChessRogueRoomInfo => "Simulated Universe DLC Info";
+
+    public string DatabaseAccount => "Database Account";
 }
 
 #endregion
@@ -154,6 +156,11 @@ public class ServerInfoTextEN
     public string ConfigMissing => "{0} is missing. Please check your resource folder: {1}, {2} may not be available.";
     public string UnloadedItems => "Unloaded all {0}.";
     public string SaveDatabase => "Database saved in {0}s";
+
+    public string WaitForAllDone =>
+        "You cannot enter the game yet. Please wait for all items to load before trying again";
+
+    public string UnhandledException => "An unhandled exception occurred: {0}";
 }
 
 #endregion

@@ -2,6 +2,7 @@
 using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Database.Challenge;
+using EggLink.DanhengServer.Enums.Item;
 using EggLink.DanhengServer.Enums.Mission;
 using EggLink.DanhengServer.GameServer.Game.Battle;
 using EggLink.DanhengServer.GameServer.Game.Player;
@@ -132,18 +133,93 @@ public class ChallengeInstance
             ScoreTwo = (uint)ScoreStage2,
             RoundCount = (uint)GetRoundsElapsed(),
             ExtraLineupType = (ExtraLineupType)CurrentExtraLineup,
-            PlayerInfo = new ChallengeStoryInfo
-            {
-                CurStoryBuffs = new ChallengeStoryBuffList(),
-                CurBossBuffs = new ChallengeBossBuffList()
-            }
+            StageInfo = new ChallengeStoryInfo()
         };
 
-        if (StoryBuffs != null && StoryBuffs.Count >= CurrentStage)
-            proto.PlayerInfo.CurStoryBuffs.BuffList.Add(StoryBuffs.Select(x => (uint)x));
+        if (Excel.IsBoss())
+            proto.StageInfo.CurBossBuffs = new ChallengeBossBuffList
+            {
+                ChallengeBossConst = 1
+            };
 
-        if (BossBuffs != null && BossBuffs.Count >= CurrentStage)
-            proto.PlayerInfo.CurBossBuffs.BuffList.Add(BossBuffs.Select(x => (uint)x));
+        if (Excel.IsStory()) proto.StageInfo.CurStoryBuffs = new ChallengeStoryBuffList();
+
+        if (StoryBuffs.Count >= CurrentStage)
+            proto.StageInfo.CurStoryBuffs.BuffList.Add(StoryBuffs.Select(x => (uint)x));
+
+        if (BossBuffs.Count >= CurrentStage)
+            proto.StageInfo.CurBossBuffs.BuffList.Add(BossBuffs.Select(x => (uint)x));
+
+        return proto;
+    }
+
+    public ChallengeStageInfo ToStageInfo()
+    {
+        var proto = new ChallengeStageInfo();
+
+        if (Excel.IsBoss())
+        {
+            proto.BossInfo = new ChallengeBossInfo
+            {
+                FirstNode = new ChallengeBossSingleNodeInfo
+                {
+                    BuffId = (uint)BossBuffs[0]
+                },
+                SecondNode = new ChallengeBossSingleNodeInfo
+                {
+                    BuffId = (uint)BossBuffs[1]
+                },
+                LBOJBINABDG = true
+            };
+
+            foreach (var lineupAvatar in Player.LineupManager?.GetExtraLineup(ExtraLineupType.LineupChallenge)
+                         ?.BaseAvatars ?? [])
+            {
+                var avatar = Player.AvatarManager?.GetAvatar(lineupAvatar.BaseAvatarId);
+                if (avatar == null) continue;
+                proto.BossInfo.FirstLineup.Add((uint)avatar.GetAvatarId());
+                var equip = Player.InventoryManager?.GetItem(0, avatar.GetCurPathInfo().EquipId,
+                    ItemMainTypeEnum.Equipment);
+                if (equip != null)
+                    proto.BossInfo.ChallengeAvatarEquipmentMap.Add((uint)avatar.GetAvatarId(),
+                        equip.ToChallengeEquipmentProto());
+
+                var relicProto = new ChallengeBossAvatarRelicInfo();
+
+                foreach (var relicUniqueId in avatar.GetCurPathInfo().Relic)
+                {
+                    var relic = Player.InventoryManager?.GetItem(0, relicUniqueId.Value, ItemMainTypeEnum.Relic);
+                    if (relic == null) continue;
+                    relicProto.AvatarRelicSlotMap.Add((uint)relicUniqueId.Key, relic.ToChallengeRelicProto());
+                }
+
+                proto.BossInfo.ChallengeAvatarRelicMap.Add((uint)avatar.GetAvatarId(), relicProto);
+            }
+
+            foreach (var lineupAvatar in Player.LineupManager?.GetExtraLineup(ExtraLineupType.LineupChallenge2)
+                         ?.BaseAvatars ?? [])
+            {
+                var avatar = Player.AvatarManager?.GetAvatar(lineupAvatar.BaseAvatarId);
+                if (avatar == null) continue;
+                proto.BossInfo.FirstLineup.Add((uint)avatar.GetAvatarId());
+                var equip = Player.InventoryManager?.GetItem(0, avatar.GetCurPathInfo().EquipId,
+                    ItemMainTypeEnum.Equipment);
+                if (equip != null)
+                    proto.BossInfo.ChallengeAvatarEquipmentMap.Add((uint)avatar.GetAvatarId(),
+                        equip.ToChallengeEquipmentProto());
+
+                var relicProto = new ChallengeBossAvatarRelicInfo();
+
+                foreach (var relicUniqueId in avatar.GetCurPathInfo().Relic)
+                {
+                    var relic = Player.InventoryManager?.GetItem(0, relicUniqueId.Value, ItemMainTypeEnum.Relic);
+                    if (relic == null) continue;
+                    relicProto.AvatarRelicSlotMap.Add((uint)relicUniqueId.Key, relic.ToChallengeRelicProto());
+                }
+
+                proto.BossInfo.ChallengeAvatarRelicMap.Add((uint)avatar.GetAvatarId(), relicProto);
+            }
+        }
 
         return proto;
     }
@@ -156,15 +232,12 @@ public class ChallengeInstance
     {
         battle.RoundLimit = RoundsLeft;
 
-        if (StoryBuffs != null)
-        {
-            battle.Buffs.Add(new MazeBuff(Excel.MazeBuffID, 1, -1));
+        battle.Buffs.Add(new MazeBuff(Excel.MazeBuffID, 1, -1));
 
-            if (StoryBuffs.Count >= CurrentStage)
-            {
-                var buffId = StoryBuffs[CurrentStage - 1];
-                battle.Buffs.Add(new MazeBuff(buffId, 1, -1));
-            }
+        if (StoryBuffs.Count >= CurrentStage)
+        {
+            var buffId = StoryBuffs[CurrentStage - 1];
+            battle.Buffs.Add(new MazeBuff(buffId, 1, -1));
         }
 
         if (Excel.StoryExcel != null)
@@ -172,6 +245,12 @@ public class ChallengeInstance
             battle.AddBattleTarget(1, 10001, GetTotalScore());
 
             foreach (var id in Excel.StoryExcel.BattleTargetID!) battle.AddBattleTarget(5, id, GetTotalScore());
+        }
+
+        if (Excel.BossExcel != null)
+        {
+            battle.AddBattleTarget(1, 90004, 0);
+            battle.AddBattleTarget(1, 90005, 0);
         }
     }
 
@@ -181,6 +260,20 @@ public class ChallengeInstance
         {
             // Calculate score for current stage
             var stageScore = (int)req.Stt.ChallengeScore - GetTotalScore();
+
+            // Set score
+            if (CurrentStage == 1)
+                ScoreStage1 = stageScore;
+            else
+                ScoreStage2 = stageScore;
+        }
+
+        if (IsBoss())
+        {
+            // Calculate score for current stage
+            var stageScore = 0;
+            foreach (var battleTarget in req.Stt.BattleTargetInfo[1].BattleTargetList_)
+                stageScore += (int)battleTarget.Progress;
 
             // Set score
             if (CurrentStage == 1)
@@ -200,7 +293,7 @@ public class ChallengeInstance
                 // Get monster count in stage
                 long monsters = Player.SceneInstance!.Entities.Values.OfType<EntityMonster>().Count();
 
-                if (monsters == 0) await AdvanceStage();
+                if (monsters == 0) await AdvanceStage(req);
 
                 // Calculate rounds left
                 if (IsStory()) RoundsLeft = (int)Math.Min(Math.Max(RoundsLeft - req.Stt.RoundCnt, 1), RoundsLeft);
@@ -219,7 +312,7 @@ public class ChallengeInstance
                 // Determine challenge result
                 if ((IsStory() || IsBoss()) && req.Stt.EndReason == BattleEndReason.TurnLimit)
                 {
-                    await AdvanceStage();
+                    await AdvanceStage(req);
                 }
                 else
                 {
@@ -234,7 +327,7 @@ public class ChallengeInstance
         }
     }
 
-    private async ValueTask AdvanceStage()
+    private async ValueTask AdvanceStage(PVEBattleResultCsReq req)
     {
         if (CurrentStage >= Excel.StageNum)
         {
@@ -247,7 +340,7 @@ public class ChallengeInstance
 
             // Send challenge result data
             if (IsBoss())
-                await Player.SendPacket(new PacketChallengeBossPhaseSettleNotify(this));
+                await Player.SendPacket(new PacketChallengeBossPhaseSettleNotify(this, req.Stt.BattleTargetInfo[1]));
             else
                 await Player.SendPacket(new PacketChallengeSettleNotify(this));
 
@@ -256,19 +349,62 @@ public class ChallengeInstance
         }
         else
         {
-            // Increment and reset stage
-            CurrentStage++;
+            if (IsBoss())
+            {
+                await Player.SendPacket(new PacketChallengeBossPhaseSettleNotify(this, req.Stt.BattleTargetInfo[1]));
+            }
+            else
+            {
+                // Increment and reset stage
+                CurrentStage++;
+                // Load scene group for stage 2
+                await Player.SceneInstance!.EntityLoader!.LoadGroup(Excel.MazeGroupID2);
 
-            // Load scene group for stage 2
+                // Change player line up
+                SetCurrentExtraLineup(ExtraLineupType.LineupChallenge2);
+                await Player.LineupManager!.SetCurLineup(CurrentExtraLineup + 10);
+                await Player.SendPacket(new PacketChallengeLineupNotify((ExtraLineupType)CurrentExtraLineup));
+                SavedMp = Player.LineupManager.GetCurLineup()!.Mp;
+
+                // Move player
+                if (Excel.MapEntranceID2 != 0)
+                {
+                    await Player.EnterScene(Excel.MapEntranceID2, 0, true);
+                    StartPos = Player.Data.Pos!;
+                    StartRot = Player.Data.Rot!;
+                    await Player.SceneInstance!.EntityLoader!.LoadGroup(Excel.MazeGroupID2);
+                }
+                else
+                {
+                    await Player.MoveTo(StartPos, StartRot);
+                }
+            }
+        }
+    }
+
+    public async ValueTask NextPhase()
+    {
+        // Increment and reset stage
+        CurrentStage++;
+        // Load scene group for stage 2
+        await Player.SceneInstance!.EntityLoader!.LoadGroup(Excel.MazeGroupID2);
+
+        // Change player line up
+        SetCurrentExtraLineup(ExtraLineupType.LineupChallenge2);
+        await Player.LineupManager!.SetCurLineup(CurrentExtraLineup + 10);
+        await Player.SendPacket(new PacketChallengeLineupNotify((ExtraLineupType)CurrentExtraLineup));
+        SavedMp = Player.LineupManager.GetCurLineup()!.Mp;
+
+        // Move player
+        if (Excel.MapEntranceID2 != 0)
+        {
+            await Player.EnterScene(Excel.MapEntranceID2, 0, false);
+            StartPos = Player.Data.Pos!;
+            StartRot = Player.Data.Rot!;
             await Player.SceneInstance!.EntityLoader!.LoadGroup(Excel.MazeGroupID2);
-
-            // Change player line up
-            SetCurrentExtraLineup(ExtraLineupType.LineupChallenge2);
-            await Player.LineupManager!.SetCurLineup(CurrentExtraLineup + 10);
-            await Player.SendPacket(new PacketChallengeLineupNotify((ExtraLineupType)CurrentExtraLineup));
-            SavedMp = Player.LineupManager.GetCurLineup()!.Mp;
-
-            // Move player
+        }
+        else
+        {
             await Player.MoveTo(StartPos, StartRot);
         }
     }

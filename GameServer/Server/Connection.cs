@@ -148,7 +148,7 @@ public class Connection(KcpConversation conversation, IPEndPoint remote) : Danhe
         if (packetName == null) return;
 
         var respName = packetName.Replace("Cs", "Sc").Replace("Req", "Rsp"); // Get the response packet name
-        if (respName == packetName) return;  // do not send rsp when resp name = recv name
+        if (respName == packetName) return; // do not send rsp when resp name = recv name
         var respOpcode = LogMap.FirstOrDefault(x => x.Value == respName).Key; // Get the response opcode
 
         // Send Rsp

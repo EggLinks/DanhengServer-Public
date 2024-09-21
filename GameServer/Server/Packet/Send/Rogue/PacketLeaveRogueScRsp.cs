@@ -12,7 +12,7 @@ public class PacketLeaveRogueScRsp : BasePacket
         {
             Lineup = player.LineupManager!.GetCurLineup()!.ToProto(),
             Scene = player.SceneInstance!.ToProto(),
-            RogueInfo = player.RogueManager!.ToProto()
+            RogueGameInfo = player.RogueManager!.ToProto()
         };
 
         SetData(proto);

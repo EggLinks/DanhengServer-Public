@@ -32,10 +32,7 @@ internal class QueryGatewayHandler
             Unk7 = true
         };
 
-        if (!ResourceManager.IsLoaded)
-        {
-            gateServer.Retcode = 2;
-        }
+        if (!ResourceManager.IsLoaded) gateServer.Retcode = 2;
 
         if (urlData.AssetBundleUrl != null && urlData.AssetBundleUrl.Length > 0)
             gateServer.AssetBundleUrl = urlData.AssetBundleUrl;

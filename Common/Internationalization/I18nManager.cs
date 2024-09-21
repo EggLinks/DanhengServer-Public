@@ -54,7 +54,10 @@ public static class I18NManager
     public static string Translate(string key, params string[] args)
     {
         var pluginLangs = PluginLanguages.Values;
-        var langs = (from pluginLang in pluginLangs from o in pluginLang where o.Key == Enum.Parse<ProgramLanguageTypeEnum>(ConfigManager.Config.ServerOption.Language) select o.Value).ToList();  // get all plugin languages
+        var langs = (from pluginLang in pluginLangs
+            from o in pluginLang
+            where o.Key == Enum.Parse<ProgramLanguageTypeEnum>(ConfigManager.Config.ServerOption.Language)
+            select o.Value).ToList(); // get all plugin languages
         langs.Add(Language); // add server language
 
         var result = langs.Select(lang => GetNestedPropertyValue(lang, key)).OfType<string>().FirstOrDefault() ?? key;

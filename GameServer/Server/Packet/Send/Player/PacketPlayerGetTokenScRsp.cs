@@ -16,7 +16,8 @@ public class PacketPlayerGetTokenScRsp : BasePacket
         SetData(rsp);
     }
 
-    public PacketPlayerGetTokenScRsp(uint uid, Retcode ret, BlackInfo? black = null, string msg = "") : base(CmdIds.PlayerGetTokenScRsp)
+    public PacketPlayerGetTokenScRsp(uint uid, Retcode ret, BlackInfo? black = null, string msg = "") : base(
+        CmdIds.PlayerGetTokenScRsp)
     {
         var rsp = new PlayerGetTokenScRsp
         {

@@ -21,14 +21,18 @@ public class ResourceManager
     public static void LoadGameData()
     {
         LoadExcel();
-        LoadFloorInfo();
-        LoadMissionInfo();
-        LoadMazeSkill();
-        LoadSummonUnit();
-        LoadDialogueInfo();
-        LoadPerformanceInfo();
-        LoadSubMissionInfo();
-        LoadRogueChestMapInfo();
+
+        var t1 = Task.Run(LoadFloorInfo);
+        var t2 = Task.Run(LoadMazeSkill);
+        var t3 = Task.Run(LoadSummonUnit);
+        var t4 = Task.Run(() =>
+        {
+            LoadMissionInfo();
+            LoadSubMissionInfo();
+        });
+        var t5 = Task.Run(LoadPerformanceInfo);
+        var t6 = Task.Run(LoadDialogueInfo);
+        var t7 = Task.Run(LoadRogueChestMapInfo);
         GameData.ActivityConfig = LoadCustomFile<ActivityConfig>("Activity", "ActivityConfig") ?? new ActivityConfig();
         GameData.BannersConfig = LoadCustomFile<BannersConfig>("Banner", "Banners") ?? new BannersConfig();
         GameData.RogueMapGenData = LoadCustomFile<Dictionary<int, List<int>>>("Rogue Map", "RogueMapGen") ?? [];
@@ -38,6 +42,8 @@ public class ResourceManager
             LoadCustomFile<RogueMiracleEffectConfig>("Rogue Miracle Effect", "RogueMiracleEffectGen") ??
             new RogueMiracleEffectConfig();
         LoadChessRogueRoomData();
+
+        Task.WaitAll(t1, t2, t3, t4, t5, t6, t7);
     }
 
     public static void LoadExcel()
@@ -54,7 +60,10 @@ public class ResourceManager
         foreach (var cls in resList) cls.AfterAllDone();
     }
 
-    public static List<T>? LoadSingleExcel<T>(Type cls) where T : ExcelResource, new() => LoadSingleExcelResource(cls) as List<T>;
+    public static List<T>? LoadSingleExcel<T>(Type cls) where T : ExcelResource, new()
+    {
+        return LoadSingleExcelResource(cls) as List<T>;
+    }
 
     public static List<ExcelResource>? LoadSingleExcelResource(Type cls)
     {
@@ -83,52 +92,52 @@ public class ResourceManager
                     switch (reader.TokenType)
                     {
                         case JsonToken.StartArray:
+                        {
+                            // array
+                            var jArray = JArray.Parse(json);
+                            foreach (var item in jArray)
                             {
-                                // array
-                                var jArray = JArray.Parse(json);
-                                foreach (var item in jArray)
-                                {
-                                    var res = JsonConvert.DeserializeObject(item.ToString(), cls);
-                                    resList.Add((ExcelResource)res!);
-                                    ((ExcelResource?)res)?.Loaded();
-                                    count++;
-                                }
-
-                                break;
+                                var res = JsonConvert.DeserializeObject(item.ToString(), cls);
+                                resList.Add((ExcelResource)res!);
+                                ((ExcelResource?)res)?.Loaded();
+                                count++;
                             }
+
+                            break;
+                        }
                         case JsonToken.StartObject:
+                        {
+                            // dictionary
+                            var jObject = JObject.Parse(json);
+                            foreach (var (_, obj) in jObject)
                             {
-                                // dictionary
-                                var jObject = JObject.Parse(json);
-                                foreach (var (_, obj) in jObject)
+                                var instance = JsonConvert.DeserializeObject(obj!.ToString(), cls);
+
+                                if (((ExcelResource?)instance)?.GetId() == 0 || (ExcelResource?)instance == null)
                                 {
-                                    var instance = JsonConvert.DeserializeObject(obj!.ToString(), cls);
+                                    // Deserialize as JObject to handle nested dictionaries
+                                    var nestedObject = JsonConvert.DeserializeObject<JObject>(obj.ToString());
 
-                                    if (((ExcelResource?)instance)?.GetId() == 0 || (ExcelResource?)instance == null)
+                                    foreach (var nestedItem in nestedObject ?? [])
                                     {
-                                        // Deserialize as JObject to handle nested dictionaries
-                                        var nestedObject = JsonConvert.DeserializeObject<JObject>(obj.ToString());
-
-                                        foreach (var nestedItem in nestedObject ?? [])
-                                        {
-                                            var nestedInstance =
-                                                JsonConvert.DeserializeObject(nestedItem.Value!.ToString(), cls);
-                                            resList.Add((ExcelResource)nestedInstance!);
-                                            ((ExcelResource?)nestedInstance)?.Loaded();
-                                            count++;
-                                        }
+                                        var nestedInstance =
+                                            JsonConvert.DeserializeObject(nestedItem.Value!.ToString(), cls);
+                                        resList.Add((ExcelResource)nestedInstance!);
+                                        ((ExcelResource?)nestedInstance)?.Loaded();
+                                        count++;
                                     }
-                                    else
-                                    {
-                                        resList.Add((ExcelResource)instance);
-                                        ((ExcelResource)instance).Loaded();
-                                    }
-
-                                    count++;
+                                }
+                                else
+                                {
+                                    resList.Add((ExcelResource)instance);
+                                    ((ExcelResource)instance).Loaded();
                                 }
 
-                                break;
+                                count++;
                             }
+
+                            break;
+                        }
                     }
                 }
 
@@ -161,8 +170,11 @@ public class ResourceManager
             return;
         }
 
-        // Load floor infos
-        foreach (var file in directory.GetFiles())
+        var files = directory.GetFiles();
+
+        // Load floor infos in parallel
+        var res = Parallel.ForEach(files, file =>
+        {
             try
             {
                 using var reader = file.OpenRead();
@@ -170,7 +182,54 @@ public class ResourceManager
                 var text = reader2.ReadToEnd();
                 var info = JsonConvert.DeserializeObject<FloorInfo>(text);
                 var name = file.Name[..file.Name.IndexOf('.')];
-                GameData.FloorInfoData.Add(name, info!);
+                if (info == null) return;
+                GameData.FloorInfoData[name] = info;
+
+                // Load group infos sequentially to maintain order
+                foreach (var groupInfo in info.GroupInstanceList)
+                {
+                    if (groupInfo.IsDelete) continue;
+                    FileInfo groupFile = new(ConfigManager.Config.Path.ResourcePath + "/" + groupInfo.GroupPath);
+                    if (!groupFile.Exists) continue;
+
+                    try
+                    {
+                        using var groupReader = groupFile.OpenRead();
+                        using StreamReader groupReader2 = new(groupReader);
+                        var groupText = groupReader2.ReadToEnd();
+                        var group = JsonConvert.DeserializeObject<GroupInfo>(groupText);
+                        if (group != null)
+                        {
+                            group.Id = groupInfo.ID;
+                            // Use a sorted collection or maintain order manually
+                            info.Groups[groupInfo.ID] = group;
+                            group.Load();
+
+                            // Load graph
+                            var graphPath = ConfigManager.Config.Path.ResourcePath + "/" + group.LevelGraph;
+                            var graphFile = new FileInfo(graphPath);
+                            if (graphFile.Exists)
+                            {
+                                using var graphReader = graphFile.OpenRead();
+                                using StreamReader graphReader2 = new(graphReader);
+                                var graphText = graphReader2.ReadToEnd().Replace("$type", "Type");
+                                var graphObj = JObject.Parse(graphText);
+                                var graphInfo = LevelGraphConfigInfo.LoadFromJsonObject(graphObj);
+                                group.LevelGraphConfig = graphInfo;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(
+                            I18NManager.Translate("Server.ServerInfo.FailedToReadItem", groupFile.Name,
+                                I18NManager.Translate("Word.Error")), ex);
+                    }
+                }
+
+                if (info.Groups.Count == 0) missingGroupInfos = true;
+
+                info.OnLoad();
             }
             catch (Exception ex)
             {
@@ -178,52 +237,10 @@ public class ResourceManager
                     I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
                         I18NManager.Translate("Word.Error")), ex);
             }
+        });
 
-        foreach (var info in GameData.FloorInfoData.Values)
-        {
-            foreach (var groupInfo in info.GroupInstanceList)
-            {
-                if (groupInfo.IsDelete) continue;
-                FileInfo file = new(ConfigManager.Config.Path.ResourcePath + "/" + groupInfo.GroupPath);
-                if (!file.Exists) continue;
-                try
-                {
-                    using var reader = file.OpenRead();
-                    using StreamReader reader2 = new(reader);
-                    var text = reader2.ReadToEnd();
-                    var group = JsonConvert.DeserializeObject<GroupInfo>(text);
-                    if (group != null)
-                    {
-                        group.Id = groupInfo.ID;
-                        info.Groups.TryAdd(groupInfo.ID, group);
-                        group.Load();
-
-                        // load graph
-                        var graphPath = ConfigManager.Config.Path.ResourcePath + "/" + group.LevelGraph;
-                        var graphFile = new FileInfo(graphPath);
-                        if (graphFile.Exists)
-                        {
-                            using var graphReader = graphFile.OpenRead();
-                            using StreamReader graphReader2 = new(graphReader);
-                            var graphText = graphReader2.ReadToEnd().Replace("$type", "Type");
-                            var graphObj = JObject.Parse(graphText);
-                            var graphInfo = LevelGraphConfigInfo.LoadFromJsonObject(graphObj);
-                            group.LevelGraphConfig = graphInfo;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(
-                        I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
-                            I18NManager.Translate("Word.Error")), ex);
-                }
-
-                if (info.Groups.Count == 0) missingGroupInfos = true;
-            }
-
-            info.OnLoad();
-        }
+        // wait it done
+        while (!res.IsCompleted) Thread.Sleep(10);
 
         if (missingGroupInfos)
             Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
@@ -234,6 +251,7 @@ public class ResourceManager
         Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", GameData.FloorInfoData.Count.ToString(),
             I18NManager.Translate("Word.FloorInfo")));
     }
+
 
     public static void LoadMissionInfo()
     {
@@ -250,14 +268,14 @@ public class ResourceManager
 
         var missingMissionInfos = false;
         var count = 0;
-        foreach (var missionExcel in GameData.MainMissionData)
+        var res = Parallel.ForEach(GameData.MainMissionData, missionExcel =>
         {
             var path =
                 $"{ConfigManager.Config.Path.ResourcePath}/Config/Level/Mission/{missionExcel.Key}/MissionInfo_{missionExcel.Key}.json";
             if (!File.Exists(path))
             {
                 missingMissionInfos = true;
-                continue;
+                return;
             }
 
             var json = File.ReadAllText(path);
@@ -271,7 +289,10 @@ public class ResourceManager
             {
                 missingMissionInfos = true;
             }
-        }
+        });
+
+        // wait it done
+        while (!res.IsCompleted) Thread.Sleep(10);
 
         if (missingMissionInfos)
             Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
@@ -340,14 +361,14 @@ public class ResourceManager
         Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
             I18NManager.Translate("Word.MazeSkillInfo")));
         var count = 0;
-        foreach (var adventure in GameData.AdventurePlayerData.Values)
+        var res = Parallel.ForEach(GameData.AdventurePlayerData.Values, adventure =>
         {
             var avatar = GameData.AvatarConfigData[adventure.AvatarID];
             var adventurePath = adventure.PlayerJsonPath.Replace("_Config.json", "_Ability.json")
                 .Replace("ConfigCharacter", "ConfigAdventureAbility");
             var path = ConfigManager.Config.Path.ResourcePath + "/" + adventurePath;
             var file = new FileInfo(path);
-            if (!file.Exists) continue;
+            if (!file.Exists) return;
             try
             {
                 using var reader = file.OpenRead();
@@ -363,7 +384,10 @@ public class ResourceManager
                     I18NManager.Translate("Server.ServerInfo.FailedToReadItem", adventurePath,
                         I18NManager.Translate("Word.Error")), ex);
             }
-        }
+        });
+
+        // wait it done
+        while (!res.IsCompleted) Thread.Sleep(10);
 
         if (count < GameData.AdventurePlayerData.Count)
             Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
@@ -380,11 +404,11 @@ public class ResourceManager
         Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
             I18NManager.Translate("Word.SummonUnitInfo")));
         var count = 0;
-        foreach (var summonUnit in GameData.SummonUnitDataData.Values)
+        var res = Parallel.ForEach(GameData.SummonUnitDataData.Values, summonUnit =>
         {
             var path = ConfigManager.Config.Path.ResourcePath + "/" + summonUnit.JsonPath;
             var file = new FileInfo(path);
-            if (!file.Exists) continue;
+            if (!file.Exists) return;
             try
             {
                 using var reader = file.OpenRead();
@@ -403,7 +427,10 @@ public class ResourceManager
                     I18NManager.Translate("Server.ServerInfo.FailedToReadItem", summonUnit.JsonPath,
                         I18NManager.Translate("Word.Error")), ex);
             }
-        }
+        });
+
+        // wait it done
+        while (!res.IsCompleted) Thread.Sleep(10);
 
         if (count < GameData.SummonUnitDataData.Count)
             Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
@@ -419,23 +446,21 @@ public class ResourceManager
     {
         Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.DialogueInfo")));
         var count = 0;
-        foreach (var dialogue in GameData.RogueNPCData)
+        var res = Parallel.ForEach(GameData.RogueNPCData.Values, dialogue =>
         {
-            var path = ConfigManager.Config.Path.ResourcePath + "/" + dialogue.Value.NPCJsonPath;
+            var path = ConfigManager.Config.Path.ResourcePath + "/" + dialogue.NPCJsonPath;
             var file = new FileInfo(path);
-            if (!file.Exists) continue;
+            if (!file.Exists) return;
             try
             {
                 using var reader = file.OpenRead();
                 using StreamReader reader2 = new(reader);
                 var text = reader2.ReadToEnd().Replace("$type", "Type");
                 var dialogueInfo = JsonConvert.DeserializeObject<RogueNPCConfigInfo>(text);
-                if (dialogueInfo != null)
-                {
-                    dialogue.Value.RogueNpcConfig = dialogueInfo;
-                    dialogueInfo.Loaded();
-                    count++;
-                }
+                if (dialogueInfo == null) return;
+                dialogue.RogueNpcConfig = dialogueInfo;
+                count++;
+                dialogueInfo.Loaded();
             }
             catch (Exception ex)
             {
@@ -443,7 +468,10 @@ public class ResourceManager
                     I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
                         I18NManager.Translate("Word.Error")), ex);
             }
-        }
+        });
+
+        // wait it done
+        while (!res.IsCompleted) Thread.Sleep(10);
 
         if (count < GameData.RogueNPCData.Count)
             Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
@@ -460,17 +488,18 @@ public class ResourceManager
         Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
             I18NManager.Translate("Word.PerformanceInfo")));
         var count = 0;
-        foreach (var performance in GameData.PerformanceEData.Values)
+
+        var res = Parallel.ForEach(GameData.PerformanceEData.Values, performance =>
         {
             if (performance.PerformancePath == "")
             {
                 count++;
-                continue;
+                return;
             }
 
             var path = ConfigManager.Config.Path.ResourcePath + "/" + performance.PerformancePath;
             var file = new FileInfo(path);
-            if (!file.Exists) continue;
+            if (!file.Exists) return;
             try
             {
                 using var reader = file.OpenRead();
@@ -487,19 +516,19 @@ public class ResourceManager
                     I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
                         I18NManager.Translate("Word.Error")), ex);
             }
-        }
+        });
 
-        foreach (var performance in GameData.PerformanceDData.Values)
+        var res2 = Parallel.ForEach(GameData.PerformanceDData.Values, performance =>
         {
             if (performance.PerformancePath == "")
             {
                 count++;
-                continue;
+                return;
             }
 
             var path = ConfigManager.Config.Path.ResourcePath + "/" + performance.PerformancePath;
             var file = new FileInfo(path);
-            if (!file.Exists) continue;
+            if (!file.Exists) return;
             try
             {
                 using var reader = file.OpenRead();
@@ -516,7 +545,10 @@ public class ResourceManager
                     I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
                         I18NManager.Translate("Word.Error")), ex);
             }
-        }
+        });
+
+        // wait it done
+        while (!(res.IsCompleted && res2.IsCompleted)) Thread.Sleep(10);
 
         if (count < GameData.PerformanceEData.Count + GameData.PerformanceDData.Count)
         {
@@ -533,13 +565,13 @@ public class ResourceManager
         Logger.Info(
             I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.SubMissionInfo")));
         var count = 0;
-        foreach (var subMission in GameData.SubMissionData.Values)
+        var res = Parallel.ForEach(GameData.SubMissionData.Values, subMission =>
         {
-            if (subMission.SubMissionInfo == null || subMission.SubMissionInfo.MissionJsonPath == "") continue;
+            if (subMission.SubMissionInfo == null || subMission.SubMissionInfo.MissionJsonPath == "") return;
 
             var path = ConfigManager.Config.Path.ResourcePath + "/" + subMission.SubMissionInfo.MissionJsonPath;
             var file = new FileInfo(path);
-            if (!file.Exists) continue;
+            if (!file.Exists) return;
             try
             {
                 using var reader = file.OpenRead();
@@ -556,7 +588,10 @@ public class ResourceManager
                     I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
                         I18NManager.Translate("Word.Error")), ex);
             }
-        }
+        });
+
+        // wait it done
+        while (!res.IsCompleted) Thread.Sleep(10);
 
         if (count < GameData.SubMissionData.Count)
         {

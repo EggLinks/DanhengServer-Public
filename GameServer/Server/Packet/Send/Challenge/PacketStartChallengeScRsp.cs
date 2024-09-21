@@ -23,6 +23,7 @@ public class PacketStartChallengeScRsp : BasePacket
         if (player.ChallengeManager!.ChallengeInstance != null)
         {
             proto.CurChallenge = player.ChallengeManager.ChallengeInstance.ToProto();
+            proto.StageInfo = player.ChallengeManager.ChallengeInstance.ToStageInfo();
             proto.LineupList.Add(player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge)!.ToProto());
             proto.LineupList.Add(player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge2)!.ToProto());
             if (sendScene) proto.Scene = player.SceneInstance!.ToProto();

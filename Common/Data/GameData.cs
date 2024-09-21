@@ -1,4 +1,5 @@
-﻿using EggLink.DanhengServer.Data.Config.Scene;
+﻿using System.Collections.Concurrent;
+using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Rogue;
@@ -98,7 +99,7 @@ public static class GameData
     #region Maze
 
     public static Dictionary<int, NPCDataExcel> NpcDataData { get; private set; } = [];
-    public static Dictionary<string, FloorInfo> FloorInfoData { get; } = [];
+    public static ConcurrentDictionary<string, FloorInfo> FloorInfoData { get; } = [];
     public static Dictionary<int, MapEntranceExcel> MapEntranceData { get; private set; } = [];
     public static Dictionary<int, MazePlaneExcel> MazePlaneData { get; private set; } = [];
     public static Dictionary<int, MazePropExcel> MazePropData { get; private set; } = [];

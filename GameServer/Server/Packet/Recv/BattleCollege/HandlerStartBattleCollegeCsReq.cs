@@ -13,12 +13,8 @@ public class HandlerStartBattleCollegeCsReq : Handler
         var player = connection.Player!;
         var resp = player.BattleManager?.StartBattleCollege((int)req.Id);
         if (resp != null)
-        {
             await connection.SendPacket(new PacketStartBattleCollegeScRsp(req.Id, resp.Value.Item1, resp.Value.Item2));
-        }
         else
-        {
             await connection.SendPacket(new PacketStartBattleCollegeScRsp(req.Id, Retcode.RetWaitLogin, null));
-        }
     }
 }

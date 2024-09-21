@@ -19,7 +19,7 @@ public class SceneBuff(int buffId, int buffLevel, int owner, int duration = -1)
     {
         if (Duration < 0)
             return false; // Permanent buff
-        return Extensions.GetUnixMs() - CreatedTime >= Duration;
+        return Extensions.GetUnixMs() - CreatedTime >= Duration * 1000;
     }
 
     public BuffInfo ToProto()

@@ -21,10 +21,7 @@ public class PacketPlayerKickOutScNotify : BasePacket
             KickType = type
         };
 
-        if (info != null)
-        {
-            proto.BlackInfo = info;
-        }
+        if (info != null) proto.BlackInfo = info;
 
         SetData(proto);
     }

@@ -14,7 +14,7 @@ public class MazeBuff(int buffID, int buffLevel, int owner)
     public int BuffID { get; } = buffID;
     public int BuffLevel { get; } = buffLevel;
     public int OwnerIndex { get; private set; } = owner;
-    public int OwnerAvatarId { get; } = -1;
+    public int OwnerAvatarId { get; set; } = -1;
     public int? WaveFlag { get; set; } = null;
     public int Duration { get; private set; } = -1;
     public Dictionary<string, float> DynamicValues { get; } = [];

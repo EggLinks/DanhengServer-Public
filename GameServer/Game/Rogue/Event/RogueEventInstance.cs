@@ -64,7 +64,7 @@ public class RogueEventInstance(int eventId, RogueNpc npc, List<RogueEventParam>
         {
             DialogueBasicInfo = new RogueCommonDialogueBasicInfo
             {
-                DialogueId = (uint)EventId
+                TalkDialogueId = (uint)EventId
             }
         };
 

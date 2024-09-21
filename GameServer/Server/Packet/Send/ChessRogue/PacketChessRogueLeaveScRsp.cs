@@ -10,7 +10,7 @@ public class PacketChessRogueLeaveScRsp : BasePacket
     {
         var proto = new ChessRogueLeaveScRsp
         {
-            PlayerInfo = instance.ToPlayerProto(),
+            StageInfo = instance.ToStageProto(),
             QueryInfo = instance.Player.ChessRogueManager!.ToQueryInfo(),
             RogueAeonInfo = instance.Player.ChessRogueManager!.ToRogueAeonInfo(),
             RogueGetInfo = instance.Player.ChessRogueManager!.ToGetInfo()

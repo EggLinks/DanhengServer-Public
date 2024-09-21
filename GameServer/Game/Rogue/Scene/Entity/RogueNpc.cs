@@ -25,22 +25,20 @@ public class RogueNpc(SceneInstance scene, GroupInfo group, NpcInfo npcInfo) : E
     {
         var proto = base.ToProto();
 
-        if (RogueNpcId > 0 && RogueEvent != null)
+        if (RogueNpcId <= 0 || RogueEvent == null) return proto;
+        proto.Npc.ExtraInfo = new NpcExtraInfo
         {
-            proto.Npc.ExtraInfo = new NpcExtraInfo
+            RogueGameInfo = new NpcRogueGameInfo
             {
-                RogueInfo = new NpcRogueInfo
-                {
-                    EventId = (uint)RogueNpcId,
-                    EventUniqueId = (uint)UniqueId,
-                    FinishDialogue = IsFinish
-                    //DialogueGroupId = (uint)GroupID
-                }
-            };
+                TalkDialogueId = (uint)RogueNpcId,
+                EventUniqueId = (uint)UniqueId,
+                FinishDialogue = IsFinish
+                //DialogueGroupId = (uint)GroupID
+            }
+        };
 
-            foreach (var param in RogueEvent.Options)
-                proto.Npc.ExtraInfo.RogueInfo.DialogueEventParamList.Add(param.ToNpcProto());
-        }
+        foreach (var param in RogueEvent.Options)
+            proto.Npc.ExtraInfo.RogueGameInfo.DialogueEventParamList.Add(param.ToNpcProto());
 
         return proto;
     }

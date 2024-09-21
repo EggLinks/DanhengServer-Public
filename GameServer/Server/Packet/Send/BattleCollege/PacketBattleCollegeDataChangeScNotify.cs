@@ -11,9 +11,7 @@ public class PacketBattleCollegeDataChangeScNotify : BasePacket
         var proto = new BattleCollegeDataChangeScNotify();
 
         foreach (var id in player.BattleCollegeData?.FinishedCollegeIdList ?? [])
-        {
             proto.FinishedCollegeIdList.Add((uint)id);
-        }
 
         SetData(proto);
     }

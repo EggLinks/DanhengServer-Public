@@ -11,9 +11,7 @@ public class PacketGetBattleCollegeDataScRsp : BasePacket
         var proto = new GetBattleCollegeDataScRsp();
 
         foreach (var id in player.BattleCollegeData?.FinishedCollegeIdList ?? [])
-        {
             proto.FinishedCollegeIdList.Add((uint)id);
-        }
 
         SetData(proto);
     }

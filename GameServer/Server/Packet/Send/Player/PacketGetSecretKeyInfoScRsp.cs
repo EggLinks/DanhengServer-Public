@@ -11,7 +11,7 @@ public class PacketGetSecretKeyInfoScRsp : BasePacket
         proto.SecretInfo.Add(new SecretKeyInfo
         {
             Type = SecretKeyType.SecretKeyVideo,
-            Key = "10120425825329403"
+            SecretKey = "10120425825329403"
         });
 
         SetData(proto);

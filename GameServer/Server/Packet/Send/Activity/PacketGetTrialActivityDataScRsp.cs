@@ -9,7 +9,7 @@ public class PacketGetTrialActivityDataScRsp : BasePacket
     public PacketGetTrialActivityDataScRsp(PlayerInstance player) : base(CmdIds.GetTrialActivityDataScRsp)
     {
         var proto = new GetTrialActivityDataScRsp();
-        proto.TrialActivityList.Add(player.ActivityManager!.Data.TrialActivityData.ToProto());
+        proto.TrialActivityInfoList.Add(player.ActivityManager!.Data.TrialActivityData.ToProto());
         SetData(proto);
     }
 }

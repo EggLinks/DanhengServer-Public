@@ -10,9 +10,9 @@ public class PacketChessRogueStartScRsp : BasePacket
     {
         var proto = new ChessRogueStartScRsp
         {
-            PlayerInfo = player.ChessRogueManager!.RogueInstance!.ToPlayerProto(),
-            Info = player.ChessRogueManager!.RogueInstance!.ToProto(),
-            RogueCurrentInfo = player.ChessRogueManager!.RogueInstance!.ToRogueGameInfo()
+            StageInfo = player.ChessRogueManager!.RogueInstance!.ToStageProto(),
+            RogueCurrentInfo = player.ChessRogueManager!.RogueInstance!.ToCurrentProto(),
+            Info = player.ChessRogueManager!.RogueInstance!.ToRogueGameInfo()
         };
 
         SetData(proto);

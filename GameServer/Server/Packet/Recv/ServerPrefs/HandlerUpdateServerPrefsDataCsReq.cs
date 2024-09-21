@@ -1,5 +1,4 @@
-﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.ServerPrefs;
-using EggLink.DanhengServer.Kcp;
+﻿using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
 namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.ServerPrefs;
@@ -11,8 +10,8 @@ public class HandlerUpdateServerPrefsDataCsReq : Handler
     {
         var req = UpdateServerPrefsDataCsReq.Parser.ParseFrom(data);
 
-        connection.Player?.ServerPrefsData?.SetData((int)req.ServerPrefs.ServerPrefsId,
-            req.ServerPrefs.Data.ToBase64());
-        await connection.SendPacket(new PacketUpdateServerPrefsDataScRsp(req.ServerPrefs.ServerPrefsId));
+        //connection.Player?.ServerPrefsData?.SetData((int)req.ServerPrefs.ServerPrefsId,
+        //    req.ServerPrefs.Data.ToBase64());
+        //await connection.SendPacket(new PacketUpdateServerPrefsDataScRsp(req.ServerPrefs.ServerPrefsId));
     }
 }

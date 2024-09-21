@@ -25,10 +25,8 @@ public class HandlerPlayerGetTokenCsReq : Handler
         }
 
         if (!ResourceManager.IsLoaded)
-        {
             // resource manager not loaded, return
             return;
-        }
 
         var prev = Listener.GetActiveConnection(account.Uid);
         if (prev != null)

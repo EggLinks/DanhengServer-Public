@@ -90,8 +90,8 @@ public class ChessRogueInstance : BaseRogueInstance
 
         CalculateDifficulty(battle);
 
-        if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterNousBoss ||
-            CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
+        if (CurCell!.BlockType == RogueDLCBlockTypeEnum.MonsterNousBoss ||
+            CurCell!.BlockType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
         {
             var buffList = new List<int>();
             foreach (var buff in BossBuff)
@@ -164,7 +164,7 @@ public class ChessRogueInstance : BaseRogueInstance
 
         await RollBuff(battle.Stages.Count);
 
-        switch (CurCell!.CellType)
+        switch (CurCell!.BlockType)
         {
             case RogueDLCBlockTypeEnum.MonsterBoss:
                 await Player.SendPacket(new PacketChessRogueLayerAccountInfoNotify(this));
@@ -182,7 +182,7 @@ public class ChessRogueInstance : BaseRogueInstance
 
     public override async ValueTask RollBuff(int amount)
     {
-        if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterBoss)
+        if (CurCell!.BlockType == RogueDLCBlockTypeEnum.MonsterBoss)
         {
             await RollBuff(amount, 100003, 2); // boss room
             await RollMiracle(1);
@@ -444,9 +444,32 @@ public class ChessRogueInstance : BaseRogueInstance
 
     #region Serialization
 
-    public ChessRogueCurrentInfo ToProto()
+    public ChessRogueCurrentInfo ToCurrentProto()
     {
         var proto = new ChessRogueCurrentInfo
+        {
+            RogueSubMode = (uint)RogueSubMode
+        };
+
+        proto.RogueCurrentGameInfo.AddRange(ToGameInfo());
+
+        return proto;
+    }
+
+    public ChessRogueInfo ToStageProto()
+    {
+        var playerInfo = new ChessRogueInfo
+        {
+            Lineup = Player.LineupManager!.GetCurLineup()!.ToProto(),
+            Scene = Player.SceneInstance!.ToProto()
+        };
+
+        return playerInfo;
+    }
+
+    public ChessRogueGameInfo ToRogueGameInfo()
+    {
+        var proto = new ChessRogueGameInfo
         {
             GameMiracleInfo = ToMiracleInfo(),
             RogueBuffInfo = ToBuffInfo(),
@@ -460,29 +483,6 @@ public class ChessRogueInstance : BaseRogueInstance
             PendingAction = RogueActions.Count > 0
                 ? RogueActions.First().Value.ToProto()
                 : new RogueCommonPendingAction()
-        };
-
-        proto.RogueCurrentGameInfo.AddRange(ToGameInfo());
-
-        return proto;
-    }
-
-    public ChessRoguePlayerInfo ToPlayerProto()
-    {
-        var playerInfo = new ChessRoguePlayerInfo
-        {
-            Lineup = Player.LineupManager!.GetCurLineup()!.ToProto(),
-            Scene = Player.SceneInstance!.ToProto()
-        };
-
-        return playerInfo;
-    }
-
-    public ChessRogueQueryGameInfo ToRogueGameInfo()
-    {
-        var proto = new ChessRogueQueryGameInfo
-        {
-            RogueSubMode = (uint)RogueSubMode
         };
 
         proto.RogueCurrentGameInfo.AddRange(ToGameInfo());
@@ -519,7 +519,7 @@ public class ChessRogueInstance : BaseRogueInstance
     {
         var proto = new ChessRogueAeonInfo
         {
-            AeonId = (uint)AeonId
+            GameAeonId = (uint)AeonId
         };
 
         return proto;
@@ -529,7 +529,7 @@ public class ChessRogueInstance : BaseRogueInstance
     {
         var proto = new ChessRogueGameAeonInfo
         {
-            AeonId = (uint)AeonId
+            GameAeonId = (uint)AeonId
         };
 
         return proto;
@@ -647,7 +647,7 @@ public class ChessRogueInstance : BaseRogueInstance
                 {
                     CellList = { RogueCells.Select(x => x.Value.ToProto()).ToList() }
                 },
-                AllowedSelectCellIdList = { canSelected },
+                AllowSelectCellIdList = { canSelected },
                 HistoryCell = { HistoryCell.Select(x => x.ToHistoryProto()).ToList() }
             }
         };

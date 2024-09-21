@@ -7,16 +7,20 @@ public class SummonUnitConfigInfo
 {
     public string GroupConfigName { get; set; } = "";
     public string ConfigEntityPath { get; set; } = "";
+
     public string TickLodTemplateName { get; set; } = "";
+
     //public TriggerEffect[] ResidentEffects { get; set; }
     public string ShoesType { get; set; } = "";
     public bool ShowShadow { get; set; }
     public bool ColliderIsTrigger { get; set; }
 
     public string AttachPoint { get; set; } = "";
+
     //public MVector3 LocalPosition { get; set; }
     //public MVector3 LocalRotation { get; set; }
     public DynamicFloat Duration { get; set; } = new();
+
     //public TaskConfigInfo[] OnCreate { get; set; }
     //public TaskConfigInfo[] OnDestroy { get; set; }
     //public TaskConfigInfo[] OnBeReplaced { get; set; }

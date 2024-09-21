@@ -13,7 +13,7 @@ public class PacketChessRogueUpdateAllowedSelectCellScNotify : BasePacket
             BoardId = (uint)boardId
         };
 
-        foreach (var cell in allowed) proto.AllowedSelectCellIdList.Add((uint)cell);
+        foreach (var cell in allowed) proto.AllowSelectCellIdList.Add((uint)cell);
 
         SetData(proto);
     }

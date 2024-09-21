@@ -10,6 +10,6 @@ public class HandlerChessRogueCheatRollCsReq : Handler
     {
         var req = ChessRogueCheatRollCsReq.Parser.ParseFrom(data);
         if (connection.Player!.ChessRogueManager?.RogueInstance == null) return;
-        await connection.Player!.ChessRogueManager!.RogueInstance.CheatDice((int)req.SurfaceId);
+        await connection.Player!.ChessRogueManager!.RogueInstance.CheatDice((int)req.DiceSurfaceId);
     }
 }

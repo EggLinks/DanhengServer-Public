@@ -16,7 +16,7 @@ public class PacketSyncRogueCommonActionResultScNotify : BasePacket
             DisplayType = displayType
         };
 
-        proto.ActionResult.Add(result);
+        proto.ActionResultList.Add(result);
 
         SetData(proto);
     }
@@ -32,7 +32,7 @@ public class PacketSyncRogueCommonActionResultScNotify : BasePacket
             DisplayType = displayType
         };
 
-        proto.ActionResult.AddRange(results);
+        proto.ActionResultList.AddRange(results);
 
         SetData(proto);
     }

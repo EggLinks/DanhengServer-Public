@@ -31,6 +31,9 @@ public class ChallengeEntityLoader(SceneInstance scene, PlayerInstance player) :
         Scene.LeaveEntryId =
             instance.IsStory() ? GameConstants.CHALLENGE_STORY_ENTRANCE : GameConstants.CHALLENGE_ENTRANCE;
 
+        if (instance.IsBoss())
+            Scene.LeaveEntryId = GameConstants.CHALLENGE_BOSS_ENTRANCE;
+
         foreach (var group in Scene.FloorInfo.Groups.Values)
         {
             // Skip non-server groups
@@ -54,10 +57,10 @@ public class ChallengeEntityLoader(SceneInstance scene, PlayerInstance player) :
 
         // Get current stage monster infos
         Dictionary<int, ChallengeConfigExcel.ChallengeMonsterInfo> challengeMonsters;
-        if (instance.Excel.MazeGroupID1 == group.Id)
-            challengeMonsters = instance.Excel.ChallengeMonsters1;
-        else if (instance.Excel.MazeGroupID2 == group.Id)
-            challengeMonsters = instance.Excel.ChallengeMonsters2;
+        if (instance.Excel.MazeGroupID1 == group.Id || instance.Excel.MazeGroupID2 == group.Id)
+            challengeMonsters = instance.CurrentStage == 1
+                ? instance.Excel.ChallengeMonsters1
+                : instance.Excel.ChallengeMonsters2;
         else
             return null;
 

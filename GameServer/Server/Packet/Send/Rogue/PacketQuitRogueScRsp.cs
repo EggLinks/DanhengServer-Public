@@ -10,7 +10,7 @@ public class PacketQuitRogueScRsp : BasePacket
     {
         var proto = new QuitRogueScRsp
         {
-            RogueInfo = player.RogueManager!.ToProto()
+            RogueGameInfo = player.RogueManager!.ToProto()
         };
 
         SetData(proto);

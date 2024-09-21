@@ -13,7 +13,7 @@ public class ChallengeBossExtraExcel : ExcelResource
         return ID;
     }
 
-    public override void Loaded()
+    public override void AfterAllDone()
     {
         if (GameData.ChallengeConfigData.ContainsKey(ID))
         {

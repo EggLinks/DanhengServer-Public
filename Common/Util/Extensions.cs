@@ -22,6 +22,13 @@ public static class Extensions
         return values[index];
     }
 
+    public static ICollection<T> Clone<T>(this ICollection<T> values)
+    {
+        List<T> list = [.. values];
+
+        return list;
+    }
+
     public static int RandomInt(int from, int to)
     {
         return new Random().Next(from, to);

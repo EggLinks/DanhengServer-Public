@@ -5,7 +5,8 @@ namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 
 public class PacketRefreshTriggerByClientScRsp : BasePacket
 {
-    public PacketRefreshTriggerByClientScRsp(Retcode ret, string triggerName, uint entityId) : base(CmdIds.RefreshTriggerByClientScRsp)
+    public PacketRefreshTriggerByClientScRsp(Retcode ret, string triggerName, uint entityId) : base(
+        CmdIds.RefreshTriggerByClientScRsp)
     {
         var rsp = new RefreshTriggerByClientScRsp
         {

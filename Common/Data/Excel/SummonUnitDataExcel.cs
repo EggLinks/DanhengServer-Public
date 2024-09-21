@@ -9,7 +9,7 @@ public class SummonUnitDataExcel : ExcelResource
     public string JsonPath { get; set; } = "";
     public bool DestroyOnEnterBattle { get; set; }
     public bool RemoveMazeBuffOnDestroy { get; set; }
-    
+
     public bool IsClient { get; set; }
 
     public SummonUnitConfigInfo? ConfigInfo { get; set; }

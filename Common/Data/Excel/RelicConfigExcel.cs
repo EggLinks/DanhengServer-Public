@@ -13,6 +13,7 @@ public class RelicConfigExcel : ExcelResource
 
     [JsonConverter(typeof(StringEnumConverter))]
     public RelicTypeEnum Type { get; set; }
+
     public int MainAffixGroup { get; set; }
     public int SubAffixGroup { get; set; }
     public int MaxLevel { get; set; }

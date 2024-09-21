@@ -82,10 +82,9 @@ public class MissionManager : BasePlayerManager
         }
 
         // message
-        foreach (var sectionConfigExcel in GameData.MessageSectionConfigData.Values.Where(x => x.MainMissionLink == missionId))
-        {
+        foreach (var sectionConfigExcel in GameData.MessageSectionConfigData.Values.Where(x =>
+                     x.MainMissionLink == missionId))
             await Player.MessageManager!.AddMessageSection(sectionConfigExcel.ID);
-        }
 
         return list;
     }

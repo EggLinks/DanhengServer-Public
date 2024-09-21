@@ -2,7 +2,6 @@
 using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Database.Avatar;
-using EggLink.DanhengServer.Database.Player;
 using EggLink.DanhengServer.Enums.Scene;
 using EggLink.DanhengServer.GameServer.Game.Activity.Loaders;
 using EggLink.DanhengServer.GameServer.Game.Battle;
@@ -263,7 +262,9 @@ public class SceneInstance
             }
         }
 
-        foreach (var avatar in oldAvatarInfo.Where(avatar => AvatarInfo.Values.ToList().FindIndex(x => x.AvatarInfo.AvatarId == avatar.AvatarInfo.AvatarId) == -1))
+        foreach (var avatar in oldAvatarInfo.Where(avatar =>
+                     AvatarInfo.Values.ToList().FindIndex(x => x.AvatarInfo.AvatarId == avatar.AvatarInfo.AvatarId) ==
+                     -1))
         {
             removeAvatar.Add(new AvatarSceneInfo(new AvatarInfo
             {
@@ -319,13 +320,9 @@ public class SceneInstance
             monster!.IsInSummonUnit = false;
             List<SceneBuff> buffList = [.. monster.BuffList];
             foreach (var sceneBuff in buffList)
-            {
                 if (sceneBuff.SummonUnitEntityId > 0)
-                {
                     // clear old buff
                     await monster.RemoveBuff(sceneBuff.BuffId);
-                }
-            }
         }
 
         await Player.SendPacket(new PacketSceneGroupRefreshScNotify(entity, SummonUnit));
@@ -365,7 +362,8 @@ public class SceneInstance
         var trigger = SummonUnit.TriggerList.Find(x => x.TriggerName == triggerName);
         if (trigger == null) return Retcode.RetSceneUseSkillFail;
 
-        await Player.SendPacket(new PacketRefreshTriggerByClientScNotify(triggerName, (uint)SummonUnit.EntityID, targetIds));
+        await Player.SendPacket(
+            new PacketRefreshTriggerByClientScNotify(triggerName, (uint)SummonUnit.EntityID, targetIds));
         // check target
 
         List<IGameEntity> targetEnter = [];
@@ -394,10 +392,7 @@ public class SceneInstance
                 targetEnter.Add(monster);
             }
 
-            if (prop != null)
-            {
-                targetEnter.Add(prop);
-            }
+            if (prop != null) targetEnter.Add(prop);
         }
 
         foreach (var gameEntity in Entities.Values)
@@ -444,25 +439,25 @@ public class SceneInstance
             monster!.IsInSummonUnit = false;
             List<SceneBuff> buffList = [.. monster.BuffList];
             foreach (var sceneBuff in buffList)
-            {
                 if (sceneBuff.SummonUnitEntityId > 0)
-                {
                     // clear old buff
                     await monster.RemoveBuff(sceneBuff.BuffId);
-                }
-            }
         }
     }
 
     public async ValueTask OnHeartBeat()
     {
+        foreach (var gameEntity in Entities.Values.Clone().Where(x => x is EntityMonster).OfType<EntityMonster>())
+        foreach (var sceneBuff in gameEntity.BuffList.Clone().Where(sceneBuff => sceneBuff.IsExpired()))
+            await gameEntity.RemoveBuff(sceneBuff.BuffId);
+
+        foreach (var gameEntity in AvatarInfo.Values.Clone())
+        foreach (var sceneBuff in gameEntity.BuffList.Clone().Where(sceneBuff => sceneBuff.IsExpired()))
+            await gameEntity.RemoveBuff(sceneBuff.BuffId);
         if (SummonUnit == null) return;
         var endTime = SummonUnit.CreateTimeMs + SummonUnit.LifeTimeMs;
 
-        if (endTime < Extensions.GetUnixMs())
-        {
-            await ClearSummonUnit();
-        }
+        if (endTime < Extensions.GetUnixMs()) await ClearSummonUnit();
     }
 
     #endregion
@@ -510,10 +505,7 @@ public class AvatarSceneInfo(AvatarInfo avatarInfo, AvatarType avatarType, Playe
     public async ValueTask ApplyBuff(BattleInstance instance)
     {
         if (BuffList.Count == 0) return;
-        foreach (var buff in BuffList.Where(buff => !buff.IsExpired()))
-        {
-            instance.Buffs.Add(new MazeBuff(buff));
-        }
+        foreach (var buff in BuffList.Where(buff => !buff.IsExpired())) instance.Buffs.Add(new MazeBuff(buff));
 
         await player.SendPacket(new PacketSyncEntityBuffChangeListScNotify(this, BuffList));
 
@@ -523,5 +515,14 @@ public class AvatarSceneInfo(AvatarInfo avatarInfo, AvatarType avatarType, Playe
     public SceneEntityInfo ToProto()
     {
         return AvatarInfo.ToSceneEntityInfo(AvatarType);
+    }
+
+    public async ValueTask RemoveBuff(int buffId)
+    {
+        var buff = BuffList.Find(x => x.BuffId == buffId);
+        if (buff == null) return;
+
+        BuffList.Remove(buff);
+        await player.SendPacket(new PacketSyncEntityBuffChangeListScNotify(this, [buff]));
     }
 }

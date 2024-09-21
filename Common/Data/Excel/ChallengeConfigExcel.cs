@@ -14,6 +14,7 @@ public class ChallengeConfigExcel : ExcelResource
     public int ID { get; set; }
     public int GroupID { get; set; }
     public int MapEntranceID { get; set; }
+    public int MapEntranceID2 { get; set; }
     public int StageNum { get; set; }
     public int ChallengeCountDown { get; set; }
     public int MazeBuffID { get; set; }

@@ -12,7 +12,7 @@ public class PacketChessRogueCheatRollScRsp : BasePacket
         var proto = new ChessRogueCheatRollScRsp
         {
             RogueDiceInfo = dice.ToProto(),
-            SurfaceId = (uint)surfaceId
+            DiceSurfaceId = (uint)surfaceId
         };
 
         SetData(proto);

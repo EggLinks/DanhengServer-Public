@@ -80,6 +80,8 @@ public class WordTextCHT
     public string RogueChestMapInfo => "模擬宇宙地圖文件";
     public string ChessRogueRoom => "模擬宇宙DLC";
     public string ChessRogueRoomInfo => "模擬宇宙DLC文件";
+
+    public string DatabaseAccount => "數據庫賬號";
 }
 
 #endregion
@@ -150,6 +152,9 @@ public class ServerInfoTextCHT
     public string ConfigMissing => "{0} 缺失，請檢查你的資源文件夾：{1}，{2} 可能不能使用。";
     public string UnloadedItems => "卸載了所有 {0}。";
     public string SaveDatabase => "已保存數據庫，用時 {0}s";
+    public string WaitForAllDone => "現在還不可以進入遊戲，請等待所有項目加載完成後再試";
+
+    public string UnhandledException => "未處理的異常：{0}";
 }
 
 #endregion

@@ -23,6 +23,7 @@ public class SceneEntityLoader(SceneInstance scene)
 
         foreach (var group in from @group in Scene.FloorInfo?.Groups.Values!
                  where @group.LoadSide != GroupLoadSideEnum.Client
+                 where !@group.GroupName.Contains("DeployPuzzle_Repeat_Area")
                  where !@group.GroupName.Contains("TrainVisitor")
                  select @group) await LoadGroup(group);
 
@@ -39,8 +40,11 @@ public class SceneEntityLoader(SceneInstance scene)
         var removeList = new List<IGameEntity>();
         var addList = new List<IGameEntity>();
 
-        foreach (var group in Scene.FloorInfo!.Groups.Values.Where(group => group.LoadSide != GroupLoadSideEnum.Client)
-                     .Where(group => !group.GroupName.Contains("TrainVisitor")))
+        foreach (var group in Scene.FloorInfo!.Groups.Values
+                         .Where(group => group.LoadSide != GroupLoadSideEnum.Client)
+                         .Where(group => !group.GroupName.Contains("TrainVisitor"))
+                         .Where(group => !group.GroupName.Contains("DeployPuzzle_Repeat_Area")))
+
             if (oldGroupId.Contains(group.Id)) // check if it should be unloaded
             {
                 if (group.ForceUnloadCondition.IsTrue(Scene.Player.MissionManager!.Data, false) ||
@@ -85,8 +89,8 @@ public class SceneEntityLoader(SceneInstance scene)
         if (!LoadGroups.Contains(info.Id)) return null;
         var missionData = Scene.Player.MissionManager!.Data;
         if (info.LoadSide == GroupLoadSideEnum.Client) return null;
-
         if (info.GroupName.Contains("TrainVisitor")) return null;
+        if (info.GroupName.Contains("DeployPuzzle_Repeat_Area")) return null;
 
         if (info.SystemUnlockCondition != null)
         {
@@ -230,7 +234,7 @@ public class SceneEntityLoader(SceneInstance scene)
 
     public virtual async ValueTask<EntityProp?> LoadProp(PropInfo info, GroupInfo group, bool sendPacket = false)
     {
-        if (info.IsClientOnly || info.IsDelete) return null;
+        if (info.IsClientOnly || info.IsDelete || !info.LoadOnInitial) return null;
 
         GameData.MazePropData.TryGetValue(info.PropID, out var excel);
         if (excel == null) return null;

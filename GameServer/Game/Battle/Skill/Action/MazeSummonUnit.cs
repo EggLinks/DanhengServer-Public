@@ -17,7 +17,7 @@ public class MazeSummonUnit(SummonUnitDataExcel excel, MotionInfo motion) : IMaz
             AttachEntityId = excel.ConfigInfo?.AttachPoint == "Origin" ? avatar.EntityID : 0,
             SummonUnitId = excel.ID,
             CreateAvatarId = avatar.AvatarInfo.GetAvatarId(),
-            LifeTimeMs = 15000,
+            LifeTimeMs = 20000,
             TriggerList = excel.ConfigInfo?.TriggerConfig.CustomTriggers ?? [],
             Motion = motion
         };

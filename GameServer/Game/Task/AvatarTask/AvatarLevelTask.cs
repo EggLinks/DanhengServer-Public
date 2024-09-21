@@ -8,14 +8,21 @@ namespace EggLink.DanhengServer.GameServer.Game.Task.AvatarTask;
 
 public class AvatarLevelTask
 {
+    #region Task Condition
+
+    public bool ByIsContainAdventureModifier(TaskConfigInfo act, List<IGameEntity> targetEntities,
+        EntitySummonUnit? summonUnit)
+    {
+        return true;
+    }
+
+    #endregion
+
     #region Manage
 
     public void TriggerTasks(List<TaskConfigInfo> tasks, List<IGameEntity> targetEntities, EntitySummonUnit? summonUnit)
     {
-        foreach (var task in tasks)
-        {
-            TriggerTask(task, targetEntities, summonUnit);
-        }
+        foreach (var task in tasks) TriggerTask(task, targetEntities, summonUnit);
     }
 
     public void TriggerTask(TaskConfigInfo act, List<IGameEntity> targetEntities, EntitySummonUnit? summonUnit)
@@ -36,7 +43,32 @@ public class AvatarLevelTask
 
     #region Task
 
-    public async ValueTask AddMazeBuff(TaskConfigInfo act, List<IGameEntity> targetEntities, EntitySummonUnit? summonUnit)
+    public async ValueTask PredicateTaskList(TaskConfigInfo act, List<IGameEntity> targetEntities,
+        EntitySummonUnit? summonUnit)
+    {
+        if (act is PredicateTaskList predicateTaskList)
+        {
+            // handle predicateCondition
+            var methodName = predicateTaskList.Predicate.Type.Replace("RPG.GameCore.", "");
+
+            var method = GetType().GetMethod(methodName);
+            if (method != null)
+            {
+                var resp = method.Invoke(this, [predicateTaskList.Predicate, targetEntities, summonUnit]);
+                if (resp is bool res && res)
+                    foreach (var task in predicateTaskList.SuccessTaskList)
+                        TriggerTask(task, targetEntities, summonUnit);
+                else
+                    foreach (var task in predicateTaskList.FailedTaskList)
+                        TriggerTask(task, targetEntities, summonUnit);
+            }
+        }
+
+        await ValueTask.CompletedTask;
+    }
+
+    public async ValueTask AddMazeBuff(TaskConfigInfo act, List<IGameEntity> targetEntities,
+        EntitySummonUnit? summonUnit)
     {
         if (act is not AddMazeBuff addMazeBuff) return;
 
@@ -56,7 +88,8 @@ public class AvatarLevelTask
         }
     }
 
-    public async ValueTask RemoveMazeBuff(TaskConfigInfo act, List<IGameEntity> targetEntities, EntitySummonUnit? summonUnit)
+    public async ValueTask RemoveMazeBuff(TaskConfigInfo act, List<IGameEntity> targetEntities,
+        EntitySummonUnit? summonUnit)
     {
         if (act is not RemoveMazeBuff removeMazeBuff) return;
 
@@ -68,14 +101,15 @@ public class AvatarLevelTask
         }
     }
 
-    public async ValueTask RefreshMazeBuffTime(TaskConfigInfo act, List<IGameEntity> targetEntities, EntitySummonUnit? summonUnit)
+    public async ValueTask RefreshMazeBuffTime(TaskConfigInfo act, List<IGameEntity> targetEntities,
+        EntitySummonUnit? summonUnit)
     {
         if (act is not RefreshMazeBuffTime refreshMazeBuffTime) return;
 
         var buff = new SceneBuff(refreshMazeBuffTime.ID, 1, summonUnit?.CreateAvatarId ?? 0)
         {
             SummonUnitEntityId = summonUnit?.EntityID ?? 0,
-            Duration = refreshMazeBuffTime.LifeTime.GetValue()
+            Duration = refreshMazeBuffTime.LifeTime.GetValue() == 0 ? -1 : refreshMazeBuffTime.LifeTime.GetValue()
         };
 
         foreach (var targetEntity in targetEntities)
@@ -86,7 +120,8 @@ public class AvatarLevelTask
         }
     }
 
-    public async ValueTask TriggerHitProp(TaskConfigInfo act, List<IGameEntity> targetEntities, EntitySummonUnit? summonUnit)
+    public async ValueTask TriggerHitProp(TaskConfigInfo act, List<IGameEntity> targetEntities,
+        EntitySummonUnit? summonUnit)
     {
         foreach (var targetEntity in targetEntities)
         {
@@ -100,7 +135,8 @@ public class AvatarLevelTask
             else if (prop.Excel.IsHpRecover)
             {
                 prop.Scene.Player.LineupManager!.GetCurLineup()!.Heal(2000, false);
-                await prop.Scene.Player.SendPacket(new PacketSyncLineupNotify(prop.Scene.Player.LineupManager!.GetCurLineup()!));
+                await prop.Scene.Player.SendPacket(
+                    new PacketSyncLineupNotify(prop.Scene.Player.LineupManager!.GetCurLineup()!));
             }
             else
             {

@@ -71,7 +71,8 @@ public class LifeTimeInfo
     public int GetLifeTime()
     {
         if (IsDynamic) return 20; // find a better way to get the value
-        if (FixedValue.Value <= 0) return -1; // infinite
+        if (FixedValue.Value <= 0 && FixedValue.Value >= -30000) return -1; // infinite
+        if (FixedValue.Value < -30000) return 20;
         return (int)(FixedValue.Value * 10);
     }
 }

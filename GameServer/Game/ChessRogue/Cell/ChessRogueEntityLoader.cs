@@ -17,8 +17,8 @@ public class ChessRogueEntityLoader(SceneInstance scene) : SceneEntityLoader(sce
     public override async ValueTask LoadEntity()
     {
         if (Scene.IsLoaded) return;
-
-        foreach (var group in Scene?.FloorInfo?.Groups.Values!) // Sanity check in SceneInstance
+        LoadGroups.AddRange(Scene.FloorInfo?.Groups.Keys ?? []);
+        foreach (var group in Scene.FloorInfo?.Groups.Values!) // Sanity check in SceneInstance
         {
             if (group.LoadSide == GroupLoadSideEnum.Client) continue;
             if (instance.CurCell!.GetLoadGroupList().Contains(group.Id))
@@ -72,7 +72,7 @@ public class ChessRogueEntityLoader(SceneInstance scene) : SceneEntityLoader(sce
         else
         {
             List<MonsterRankEnum> allowedRank = [];
-            if (room.CellType == RogueDLCBlockTypeEnum.MonsterElite)
+            if (room.BlockType == RogueDLCBlockTypeEnum.MonsterElite)
             {
                 allowedRank.Add(MonsterRankEnum.Elite);
             }
@@ -116,12 +116,12 @@ public class ChessRogueEntityLoader(SceneInstance scene) : SceneEntityLoader(sce
         {
             await prop.SetState(PropStateEnum.CustomState02);
             prop.IsChessRogue = true;
-            if (instance.CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterBoss ||
-                instance.CurCell.CellType == RogueDLCBlockTypeEnum.MonsterNousBoss ||
-                instance.CurCell.CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
+            if (instance.CurCell!.BlockType == RogueDLCBlockTypeEnum.MonsterBoss ||
+                instance.CurCell.BlockType == RogueDLCBlockTypeEnum.MonsterNousBoss ||
+                instance.CurCell.BlockType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
             {
                 await prop.SetState(PropStateEnum.CustomState04);
-                if (instance.CurCell!.CellType != RogueDLCBlockTypeEnum.MonsterBoss) prop.IsLastRoom = true;
+                if (instance.CurCell!.BlockType != RogueDLCBlockTypeEnum.MonsterBoss) prop.IsLastRoom = true;
             }
         }
         else

@@ -10,7 +10,7 @@ public class PacketCurTrialActivityScNotify : BasePacket
     {
         var proto = new CurTrialActivityScNotify
         {
-            StageId = stageId,
+            ActivityStageId = stageId,
             Status = status
         };
 

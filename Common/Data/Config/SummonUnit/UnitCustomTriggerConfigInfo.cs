@@ -15,10 +15,14 @@ public class UnitCustomTriggerConfigInfo
     public float RayStartOffsetY { get; set; }
     public bool ForceSyncTargetToSever { get; set; }
     public bool DependOnServerTarget { get; set; }
+
     public bool IsSingle { get; set; }
+
     // EntityType TargetEntityType { get; set; }
-    public DynamicFloat TargetGroupID { get; set; }
-    public DynamicFloat TargetID { get; set; }
+    public DynamicFloat TargetGroupID { get; set; } = new();
+
+    public DynamicFloat TargetID { get; set; } = new();
+
     // EntityType[] TargetTypes { get; set; }
     // PredicateConfigInfo TargetFilter { get; set; }
     public string ColliderRelativePath { get; set; } = "";
@@ -98,7 +102,8 @@ public class UnitCustomTriggerConfigInfo
             info.OnTriggerExit = value.Select(x => TaskConfigInfo.LoadFromJsonObject((x as JObject)!)).ToList();
 
         if (obj.TryGetValue(nameof(OnTriggerEnterRollback), out value))
-            info.OnTriggerEnterRollback = value.Select(x => TaskConfigInfo.LoadFromJsonObject((x as JObject)!)).ToList();
+            info.OnTriggerEnterRollback =
+                value.Select(x => TaskConfigInfo.LoadFromJsonObject((x as JObject)!)).ToList();
 
         if (obj.TryGetValue(nameof(BlockDialogueInRange), out value))
             info.BlockDialogueInRange = value.Value<bool>();

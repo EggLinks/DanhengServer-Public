@@ -27,20 +27,20 @@ public class ChessRogueDiceInstance(ChessRogueInstance instance, ChessRogueNousD
         var index = DiceData.Surfaces.ToList().FindIndex(x => x.Value == CurSurfaceId) + 1;
         return new ChessRogueDiceInfo
         {
-            BranchId = (uint)DiceData.BranchId,
+            GameBranchId = (uint)DiceData.BranchId,
             Dice = DiceData.ToProto(),
             DiceStatus = DiceStatus,
             CurSurfaceId = (uint)CurSurfaceId,
             CheatTimes = (uint)CheatTimes,
             RerollTimes = (uint)RerollTimes,
-            CurBranchId = (uint)DiceData.BranchId,
+            GameDiceBranchId = (uint)DiceData.BranchId,
             DiceType = ChessRogueDiceType.ChessRogueDiceEditable,
-            DPNCGPOLFKH = true,
-            CurSurfaceIndex = (uint)(index > 0 ? index : 0),
+            KMHBLNCILEL = true,
+            CurSurfaceSlotId = (uint)(index > 0 ? index : 0),
             //DisplayId = (uint)(CurSurfaceId > 0 ? GameData.RogueNousDiceSurfaceData[CurSurfaceId].Sort : 0),
             CanRerollDice = RerollTimes > 0,
             DiceModifier = new RogueModifier(),
-            AMDLOMOGEOE = new ICNMLEMMHKL()
+            DMHLBBFPELI = new BAKPIDLEIFI()
         };
     }
 }

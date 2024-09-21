@@ -146,7 +146,7 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
             case ItemMainTypeEnum.AvatarCard:
                 // add avatar
                 var avatar = Player.AvatarManager?.GetAvatar(itemId);
-                if (avatar != null && avatar.Excel != null)
+                if (avatar is { Excel: not null })
                 {
                     var rankUpItem = Player.InventoryManager!.GetItem(avatar.Excel.RankUpItemId);
                     if ((avatar.PathInfoes[itemId].Rank + rankUpItem?.Count ?? 0) <= 5)
@@ -168,18 +168,17 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         }
 
         ItemData? clone = null;
-        if (itemData != null)
-        {
-            clone = itemData.Clone();
-            if (sync)
-                await Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
-            clone.Count = count;
-            if (notify) await Player.SendPacket(new PacketScenePlaneEventScNotify(clone));
+        if (itemData == null) return returnRaw ? itemData : clone ?? itemData;
 
-            Player.MissionManager?.HandleFinishType(MissionFinishTypeEnum.GetItem, itemData.ToProto());
-        }
+        clone = itemData.Clone();
+        if (sync)
+            await Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
+        clone.Count = count;
+        if (notify) await Player.SendPacket(new PacketScenePlaneEventScNotify(clone));
 
-        return returnRaw ? itemData : clone ?? itemData;
+        Player.MissionManager?.HandleFinishType(MissionFinishTypeEnum.GetItem, itemData.ToProto());
+
+        return returnRaw ? itemData : clone;
     }
 
     public async ValueTask<ItemData> PutItem(int itemId, int count, int rank = 0, int promotion = 0, int level = 0,
@@ -327,20 +326,32 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         return itemData;
     }
 
-    public ItemData? GetItem(int itemId)
+    /// <summary>
+    ///     Get item by itemId and uniqueId, if uniqueId provided, itemId will be ignored
+    /// </summary>
+    /// <param name="itemId"></param>
+    /// <param name="uniqueId"></param>
+    /// <returns></returns>
+    public ItemData? GetItem(int itemId, int uniqueId = 0, ItemMainTypeEnum mainType = ItemMainTypeEnum.Unknown)
     {
         GameData.ItemConfigData.TryGetValue(itemId, out var itemConfig);
-        if (itemConfig == null) return null;
-        switch (itemConfig.ItemMainType)
+        if (itemConfig == null && mainType == ItemMainTypeEnum.Unknown) return null;
+        if (itemConfig != null)
+            mainType = itemConfig.ItemMainType;
+        switch (mainType)
         {
             case ItemMainTypeEnum.Material:
                 return Data.MaterialItems.Find(x => x.ItemId == itemId);
             case ItemMainTypeEnum.Equipment:
-                return Data.EquipmentItems.Find(x => x.ItemId == itemId);
+                return uniqueId > 0
+                    ? Data.EquipmentItems.Find(x => x.UniqueId == uniqueId)
+                    : Data.EquipmentItems.Find(x => x.ItemId == itemId);
             case ItemMainTypeEnum.Relic:
-                return Data.RelicItems.Find(x => x.ItemId == itemId);
+                return uniqueId > 0
+                    ? Data.RelicItems.Find(x => x.UniqueId == uniqueId)
+                    : Data.RelicItems.Find(x => x.ItemId == itemId);
             case ItemMainTypeEnum.Virtual:
-                switch (itemConfig.ID)
+                switch (itemConfig?.ID ?? 0)
                 {
                     case 1:
                         return new ItemData

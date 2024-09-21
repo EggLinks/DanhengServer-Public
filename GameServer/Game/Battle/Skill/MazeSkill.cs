@@ -12,17 +12,19 @@ namespace EggLink.DanhengServer.GameServer.Game.Battle.Skill;
 
 public class MazeSkill
 {
-    public MazeSkill(List<TaskInfo> taskInfos, SceneCastSkillCsReq req, bool isSkill = false, AvatarConfigExcel? excel = null)
+    public SceneCastSkillCsReq Req;
+
+    public MazeSkill(List<TaskInfo> taskInfos, SceneCastSkillCsReq req, bool isSkill = false,
+        AvatarConfigExcel? excel = null)
     {
         Req = req;
         IsMazeSkill = isSkill;
         Excel = excel;
         foreach (var task in taskInfos) AddAction(task);
 
-        if (GameData.SummonUnitDataData.TryGetValue((excel?.AvatarID ?? 0) * 10 + 1, out var summonUnit) && isSkill && !summonUnit.IsClient) Actions.Add(new MazeSummonUnit(summonUnit, req.TargetMotion));
+        if (GameData.SummonUnitDataData.TryGetValue((excel?.AvatarID ?? 0) * 10 + 1, out var summonUnit) && isSkill &&
+            !summonUnit.IsClient) Actions.Add(new MazeSummonUnit(summonUnit, req.TargetMotion));
     }
-
-    public SceneCastSkillCsReq Req;
 
     public List<IMazeSkillAction> Actions { get; } = [];
     public bool TriggerBattle { get; private set; } = true;

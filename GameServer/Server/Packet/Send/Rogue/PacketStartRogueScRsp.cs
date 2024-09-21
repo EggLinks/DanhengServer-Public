@@ -10,7 +10,7 @@ public class PacketStartRogueScRsp : BasePacket
     {
         var proto = new StartRogueScRsp
         {
-            RogueInfo = player.RogueManager!.ToProto(),
+            RogueGameInfo = player.RogueManager!.ToProto(),
             Lineup = player.LineupManager!.GetCurLineup()!.ToProto(),
             Scene = player.SceneInstance!.ToProto()
         };

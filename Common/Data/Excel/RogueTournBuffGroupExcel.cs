@@ -34,7 +34,9 @@ public class RogueTournBuffGroupExcel : ExcelResource
         if (IsLoaded) return;
         var count = 0;
         foreach (var buffId in RogueBuffDrop)
-            if (GameData.RogueTournBuffData.FirstOrDefault(x => x.Value.RogueBuffTag == buffId).Value is { } buff)
+        {
+            List<RogueTournBuffExcel> buffs = [.. GameData.RogueTournBuffData.Values];
+            if (buffs.FirstOrDefault(x => x.RogueBuffTag == buffId) is { } buff)
             {
                 BuffList.SafeAdd(buff);
                 count++;
@@ -47,6 +49,7 @@ public class RogueTournBuffGroupExcel : ExcelResource
                 BuffList.SafeAddRange(group.BuffList);
                 count++;
             }
+        }
 
         if (count == RogueBuffDrop.Count) IsLoaded = true;
     }

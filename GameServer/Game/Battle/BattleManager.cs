@@ -10,7 +10,6 @@ using EggLink.DanhengServer.GameServer.Server.Packet.Send.Lineup;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
-using Microsoft.Extensions.Logging;
 
 namespace EggLink.DanhengServer.GameServer.Game.Battle;
 
@@ -51,7 +50,8 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
         }
         else
         {
-            var isAmbushed = hitTargetEntityIdList.Any(entity => Player.SceneInstance!.AvatarInfo.ContainsKey((int)entity));
+            var isAmbushed =
+                hitTargetEntityIdList.Any(entity => Player.SceneInstance!.AvatarInfo.ContainsKey((int)entity));
 
             if (!isAmbushed)
             {
@@ -119,7 +119,9 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             };
 
             avatarList.AddRange(Player.LineupManager!.GetCurLineup()!.BaseAvatars!
-                .Select(item => Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId))
+                .Select(item =>
+                    Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x =>
+                        x.AvatarInfo.AvatarId == item.BaseAvatarId))
                 .OfType<AvatarSceneInfo>());
 
             MazeBuff? mazeBuff = null;
@@ -187,7 +189,9 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             EventId = eventId
         };
 
-        var avatarList = Player.LineupManager!.GetCurLineup()!.BaseAvatars!.Select(item => Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId)).OfType<AvatarSceneInfo>().ToList();
+        var avatarList = Player.LineupManager!.GetCurLineup()!.BaseAvatars!.Select(item =>
+                Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId))
+            .OfType<AvatarSceneInfo>().ToList();
 
         battleInstance.AvatarInfo = avatarList;
 
@@ -246,7 +250,9 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             MappingInfoId = config.MappingInfoID
         };
 
-        var avatarList = Player.LineupManager!.GetCurLineup()!.BaseAvatars!.Select(item => Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId)).OfType<AvatarSceneInfo>().ToList();
+        var avatarList = Player.LineupManager!.GetCurLineup()!.BaseAvatars!.Select(item =>
+                Player.SceneInstance!.AvatarInfo.Values.FirstOrDefault(x => x.AvatarInfo.AvatarId == item.BaseAvatarId))
+            .OfType<AvatarSceneInfo>().ToList();
 
         battleInstance.AvatarInfo = avatarList;
 
@@ -259,10 +265,7 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
 
     public (Retcode, BattleInstance?) StartBattleCollege(int collegeId)
     {
-        if (Player.BattleInstance != null)
-        {
-            return (Retcode.RetInBattleNow, null);
-        }
+        if (Player.BattleInstance != null) return (Retcode.RetInBattleNow, null);
 
         GameData.BattleCollegeConfigData.TryGetValue(collegeId, out var config);
         if (config == null) return (Retcode.RetFail, null);

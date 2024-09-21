@@ -7,8 +7,6 @@ namespace EggLink.DanhengServer.GameServer.Game.Scene.Entity;
 
 public class EntitySummonUnit : IGameEntity
 {
-    public int EntityID { get; set; }
-    public int GroupID { get; set; } = 0;
     public int CreateAvatarEntityId { get; set; } = 0;
     public int AttachEntityId { get; set; } = 0;
     public int CreateAvatarId { get; set; } = 0;
@@ -18,6 +16,8 @@ public class EntitySummonUnit : IGameEntity
     public MotionInfo Motion { get; set; } = new();
 
     public List<UnitCustomTriggerConfigInfo> TriggerList { get; set; } = [];
+    public int EntityID { get; set; }
+    public int GroupID { get; set; } = 0;
 
     public async ValueTask AddBuff(SceneBuff buff)
     {
