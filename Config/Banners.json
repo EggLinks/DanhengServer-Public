@@ -127,6 +127,62 @@
         21020
       ]
     },
+  {
+    "gachaId": 2041,
+    "gachaType": "AvatarUp",
+    "beginTime": 0,
+    "endTime": 1924992000,
+    "rateUpItems5": [
+      1220
+    ],
+    "rateUpItems4": [
+      1223,
+      1009,
+      1111
+   ]
+  },
+  {
+    "gachaId": 3041,
+    "gachaType": "WeaponUp",
+    "beginTime": 0,
+    "endTime": 1924992000,
+    "rateUpItems5": [
+      23031
+    ],
+    "rateUpItems4": [
+      21015,
+      21006,
+      21010
+    ]
+  },
+ {
+    "gachaId": 2045,
+    "gachaType": "AvatarUp",
+    "beginTime": 0,
+    "endTime": 1924992000,
+    "rateUpItems5": [
+      1222
+    ],
+    "rateUpItems4": [
+      1223,
+      1009,
+      1111
+    ]
+  },
+  {
+    "gachaId": 3045,
+    "gachaType": "WeaponUp",
+    "beginTime": 0,
+    "endTime": 1924992000,
+    "rateUpItems5": [
+      23032
+    ],
+    "rateUpItems4": [
+      21015,
+      21006,
+      21010      
+    ]
+  },
     {
       "gachaId": 2001,
       "gachaType": "AvatarUp",
