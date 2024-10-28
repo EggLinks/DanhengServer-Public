@@ -1,0 +1,368 @@
+{
+    "2001": {
+        "SurfaceId": 2001,
+        "ContentEffects": [
+            {
+                "EffectType": "SetCellTypeAndTakeReward",
+                "Params": {
+                    "SourceType": "3;5",
+                    "TargetType": "1",
+                    "Reward": "Area,0"
+                }
+                
+            }
+        ]
+    },
+    "2002": {
+        "SurfaceId": 2002,
+        "ContentEffects": [
+            {
+                "EffectType": "SetCellTypeAndTakeReward",
+                "Params": {
+                    "SourceType": "7;8;9",
+                    "TargetType": "1",
+                    "Reward": "Event,Buff"
+                }
+            }
+        ]
+    },
+    "2003": {
+        "SurfaceId": 2003,
+        "ContentEffects": [
+            {
+                "EffectType": "TrunAroundToEmptyGetBuff",
+                "Params": {
+                    "SourceType": "2;3;4;5;6;7;8;9;10;13;14;16;17",
+                    "TargetType": "1",
+                    "Reward": "Cell,Buff"
+                }
+            }
+        ]
+    },
+    "2004": {
+        "SurfaceId": 2004,
+        "ContentEffects": [
+            {
+                "EffectType": "ChangeSelectCellType",
+                "Params": {
+                    "SourceType": "1;2;4;5;6;7;8;9;10;13;14;16;17",
+                    "TargetType": "3"
+                }
+            }
+        ]
+    },
+    "2005": {
+        "SurfaceId": 2005,
+        "ContentEffects": [
+            {
+                "EffectType": "TurnRandomCellBlockType",
+                "Params": {
+                    "SourceType": "1;2;3;4;5;6;7;10;13;14;16;17",
+                    "TargetType": "8;9",
+                    "Count": "1"
+                }
+            }
+        ]
+    },
+    "2006": {
+        "SurfaceId": 2006,
+        "ContentEffects": [
+            {
+                "EffectType": "ReplicateCurCellToSelectCell",
+                "Params": {
+                    "SourceType": "1;2;3;4;5;6;7;8;9;10;13;14;16;17",
+                    "TargetType": "0"
+                }
+            }
+        ]
+    },
+    "2007": {
+        "SurfaceId": 2007,
+        "ContentEffects": [
+            {
+                "EffectType": "ReplicateSelectCellToAround",
+                "Params": {
+                    "SourceType": "1;2;3;4;5;6;7;8;9;10;13;14;16;17",
+                    "TargetType": "0",
+                    "Count": "1"
+                }
+            }
+        ]
+    },
+    "2008": {
+        "SurfaceId": 2008,
+        "ContentEffects": [
+            {
+                "EffectType": "ReRandomCellTypeGetMoney",
+                "Params": {
+                    "SourceType": "1;2;3;4;5;6;7;8;9;10;13;14;16;17",
+                    "TargetType": "2;3;4;5;6;7;8;9;10;13;14;16;17",
+                    "Reward": "Cell,Money",
+                    "Count": "50"
+                }
+            }
+        ]
+    },
+    "2009": {
+        "SurfaceId": 2009,
+        "ContentEffects": [
+            {
+                "EffectType": "SetBlockTypeToAround",
+                "Params": {
+                    "SourceType": "1;2;3;4;5;6;7;8;9;10;13;14;16;17",
+                    "TargetType": "0",
+                    "Count": "1"
+                }
+            }
+        ]
+    },
+    "2010": {
+        "SurfaceId": 2010,
+        "ContentEffects": [
+            {
+                "EffectType": "ReplicateSelectCellToRandom",
+                "Params": {
+                    "SourceType": "1;2;3;4;5;6;7;8;9;10;13;14;16;17",
+                    "TargetType": "0",
+                    "Count": 2
+                }
+            }
+        ]
+    },
+    "2011": {
+        "SurfaceId": 2011,
+        "ContentEffects": [
+            {
+                "EffectType": "SetBlockTypeToAround",
+                "Params": {
+                    "SourceType": "3",
+                    "TargetType": "0",
+                    "Count": "1"
+                }
+            }
+        ]
+    },
+    "2012": {
+        "SurfaceId": 2012,
+        "ContentEffects": [
+            {
+                "EffectType": "TurnRandomCellBlockType",
+                "Params": {
+                    "SourceType": "5;6",
+                    "TargetType": "7",
+                    "Count": "1"
+                }
+            }
+        ]
+    },
+    "2013": {
+        "SurfaceId": 2013,
+        "ContentEffects": [
+            {
+                "EffectType": "SwapCellToCurAround",
+                "Params": {
+                    "SourceType": "3;5"
+                }
+            }
+        ]
+    },
+    "2017": {
+        "SurfaceId": 2017,
+        "ContentEffects": [
+            {
+                "EffectType": "ReplicateCurCellToRandom",
+                "Params": {
+                    "SourceType": "1;2;3;4;5;6;7;8;9;10;13;14;16;17",
+                    "Count": 2
+                }
+            }
+        ]
+    },
+    "2046": {
+        "SurfaceId": 2046,
+        "ContentEffects": [
+            {
+                "EffectType": "SetColCanMove",
+                "Params": {
+                    "Column": "~1;~2;~3"
+                }
+            }
+        ]
+    },
+    "2058": {
+        "SurfaceId": 2058,
+        "ContentEffects": [
+            {
+                "EffectType": "GetMoneyOnAbandonMiracle",
+                "Params": {
+                    "Count": "100"
+                }
+            }
+        ]
+    },
+    "2061": {
+        "SurfaceId": 2061,
+        "ContentEffects": [
+            {
+                "EffectType": "AddMiracleList",
+                "Params": {
+                    "SelectMiracle": "10002,1",
+                    "AddMiracle": "10003,1"
+                }
+            }
+        ]
+    },
+    "2062": {
+        "SurfaceId": 2062,
+        "ContentEffects": [
+            {
+                "EffectType": "AbandonReGetMiracle"
+            }
+        ]
+    },
+    "2063": {
+        "SurfaceId": 2063,
+        "ContentEffects": [
+            {
+                "EffectType": "TurnRandomCellBlockType",
+                "Params": {
+                    "SourceType": "1;2;3;4;5;6;7;8;9;10;14;16;17",
+                    "TargetType": "13",
+                    "Count": "2"
+                }
+            }
+        ]
+    },
+    "2064": {
+        "SurfaceId": 2064,
+        "ContentEffects": [
+            {
+                "EffectType": "GetMoneyOnEnterCell",
+                "Params": {
+                    "SourceType": "13",
+                    "Count": "150"
+                }
+            }
+        ]
+    },
+    "2065": {
+        "SurfaceId": 2065,
+        "ContentEffects": [
+            {
+                "EffectType": "GetMoneyOnSelectCellToTargetType",
+                "Params": {
+                    "SourceType": "5;6;7",
+                    "TargetType": "13",
+                    "Count": "150"
+                }
+            }
+        ]
+    },
+    "2066": {
+        "SurfaceId": 2066,
+        "ContentEffects": [
+            {
+                "EffectType": "GetMoneyByMiracleCount",
+                "Params": {
+                    "Count": "50"
+                }
+            }
+        ]
+    },
+    "2067": {
+        "SurfaceId": 2067,
+        "ContentEffects": [
+            {
+                "EffectType": "ShopDiscountOnTradeCell",
+                "Params": {
+                    "Discount": "1.5"
+                }
+            }
+        ]
+    },
+    "2068": {
+        "SurfaceId": 2068,
+        "ContentEffects": [
+            {
+                "EffectType": "GetMoneyChangeActionPoint",
+                "Params": {
+                    "Count": "200",
+                    "ActionPoint": "-1"
+                }
+            }
+        ]
+    },
+    "2070": {
+        "SurfaceId": 2070,
+        "ContentEffects": [
+            {
+                "EffectType": "AddActionPointOnGetMiracle",
+                "Params": {
+                    "AddMiracle": "10003,1",
+                    "ActionPoint": "-1"
+                }
+            }
+        ]
+    },
+    "2071": {
+        "SurfaceId": 2071,
+        "ContentEffects": [
+            {
+                "EffectType": "GetMoneyActionPointOnAbandonMiracle",
+                "Params": {
+                    "LoseCount": "1",
+                    "Money": "0",
+                    "ActionPoint": "1"
+                }
+            }
+        ]
+    },
+    "2072": {
+        "SurfaceId": 2072,
+        "ContentEffects": [
+            {
+                "EffectType": "AddActionPointOnSetCellType",
+                "Params": {
+                    "SourceType": "6;7",
+                    "TargetType": "1",
+                    "ActionPoint": "1"
+                }
+            }
+        ]
+    },
+    "2089": {
+        "SurfaceId": 2089,
+        "ContentEffects": [
+            {
+                "EffectType": "AddMazeBuff",
+                "Params": {
+                    "BuffId": "650310"
+                }
+            }
+        ]
+    },
+    "2101": {
+        "SurfaceId": 2101,
+        "ContentEffects": [
+            {
+                "EffectType": "RandomSetReplaceMarkType",
+                "Params": {
+                    "SourceType": "7;8;9",
+                    "TargetType": "6;7",
+                    "Count": "2"
+                }
+            }
+        ]
+    },
+    "2103": {
+        "SurfaceId": 2103,
+        "ContentEffects": [
+            {
+                "EffectType": "SetNearestBlockCanMove",
+                "Params": {
+                    "SourceType": "5;7"
+                }
+            }
+        ]
+    }
+}

@@ -25,10 +25,10 @@
       "panelId": 10019
     },
     {
-      "activityId": 1002101,
-      "beginTime": "1728590400",
-      "endTime": "1729195199",
-      "panelId": 10073
+      "activityId": 1002001,
+      "beginTime": "1732219200",
+      "endTime": "1732823999",
+      "panelId": 10077
     },
     {
       "activityId": 1002501,
@@ -38,9 +38,9 @@
     },
     {
       "activityId": 1002601,
-      "beginTime": "1727035200",
-      "endTime": "1727639999",
-      "panelId": 10074
+      "beginTime": "1730836800",
+      "endTime": "1731441599",
+      "panelId": 10078
     },
     {
       "activityId": 1004101,
@@ -49,10 +49,10 @@
       "panelId": 10041
     },
     {
-      "activityId": 1005901,
-      "beginTime": "1725825600",
-      "endTime": "1729540799",
-      "panelId": 10059
+      "activityId": 1006001,
+      "beginTime": "1729454400",
+      "endTime": "1733169599",
+      "panelId": 10060
     },
     {
       "activityId": 1006201,
@@ -67,40 +67,28 @@
       "panelId": 10068
     },
     {
-      "activityId": 1007201,
-      "beginTime": "1725825600",
-      "endTime": "1729634400",
-      "panelId": 10072
+      "activityId": 1007901,
+      "beginTime": "1729638000",
+      "endTime": "1733266799",
+      "panelId": 10079
     },
     {
-      "activityId": 1007501,
-      "beginTime": "1725922800",
-      "endTime": "1729637999",
-      "panelId": 10075
+      "activityId": 2000602,
+      "beginTime": "1731470400",
+      "endTime": "1733209199",
+      "panelId": 20045
     },
     {
-      "activityId": 2000503,
-      "beginTime": "1725825600",
-      "endTime": "1727841599",
-      "panelId": 20040
+      "activityId": 2000604,
+      "beginTime": "1729454400",
+      "endTime": "1731470399",
+      "panelId": 20044
     },
     {
-      "activityId": 2000803,
-      "beginTime": "1727841600",
-      "endTime": "1729580399",
-      "panelId": 20041
-    },
-    {
-      "activityId": 2000901,
-      "beginTime": "1725825600",
-      "endTime": "1727841599",
-      "panelId": 20040
-    },
-    {
-      "activityId": 2000902,
-      "beginTime": "1725825600",
-      "endTime": "1727841599",
-      "panelId": 20040
+      "activityId": 2000903,
+      "beginTime": "1731470400",
+      "endTime": "1733209199",
+      "panelId": 20045
     },
     {
       "activityId": 2001101,
@@ -151,70 +139,118 @@
       "panelId": 20011
     },
     {
-      "activityId": 2001701,
-      "beginTime": "1727841600",
-      "endTime": "1729580399",
-      "panelId": 20041
+      "activityId": 2001201,
+      "beginTime": "1729454400",
+      "endTime": "1731470399",
+      "panelId": 20044
     },
     {
-      "activityId": 2001703,
-      "beginTime": "1727841600",
-      "endTime": "1729580399",
-      "panelId": 20041
+      "activityId": 2001202,
+      "beginTime": "1731470400",
+      "endTime": "1733209199",
+      "panelId": 20045
     },
     {
-      "activityId": 2002501,
-      "beginTime": "1725825600",
-      "endTime": "1727841599",
-      "panelId": 20040
+      "activityId": 2001302,
+      "beginTime": "1729454400",
+      "endTime": "1731470399",
+      "panelId": 20044
     },
     {
-      "activityId": 2002502,
-      "beginTime": "1727841600",
-      "endTime": "1729580399",
-      "panelId": 20041
+      "activityId": 2002303,
+      "beginTime": "1729454400",
+      "endTime": "1731470399",
+      "panelId": 20044
     },
     {
-      "activityId": 2003101,
-      "beginTime": "1725825600",
-      "endTime": "1727841599",
-      "panelId": 20040
+      "activityId": 2002801,
+      "beginTime": "1731470400",
+      "endTime": "1733209199",
+      "panelId": 20045
     },
     {
-      "activityId": 2004000,
-      "beginTime": "1725825600",
-      "endTime": "1727841599",
-      "panelId": 20040
+      "activityId": 2002901,
+      "beginTime": "1731470400",
+      "endTime": "1733209199",
+      "panelId": 20045
     },
     {
-      "activityId": 2004001,
-      "beginTime": "1725825600",
-      "endTime": "1727841599",
-      "panelId": 20040
+      "activityId": 2004400,
+      "beginTime": "1729454400",
+      "endTime": "1731470399",
+      "panelId": 20044
     },
     {
-      "activityId": 2004002,
-      "beginTime": "1725825600",
-      "endTime": "1727841599",
-      "panelId": 20040
+      "activityId": 2004401,
+      "beginTime": "1729454400",
+      "endTime": "1731470399",
+      "panelId": 20044
     },
     {
-      "activityId": 2004100,
-      "beginTime": "1727841600",
-      "endTime": "1729580399",
-      "panelId": 20041
-    },
-    {
-      "activityId": 2004101,
-      "beginTime": "1727841600",
-      "endTime": "1729580399",
-      "panelId": 20041
+      "activityId": 2004500,
+      "beginTime": "1731470400",
+      "endTime": "1733209199",
+      "panelId": 20045
     },
     {
       "activityId": 3000801,
       "beginTime": "1703448000",
       "endTime": "4294967295",
       "panelId": 30008
+    },
+    {
+      "activityId": 3001101,
+      "beginTime": "1730347200",
+      "endTime": "1731268799",
+      "panelId": 30011
+    },
+    {
+      "activityId": 3001102,
+      "beginTime": "1730404800",
+      "endTime": "1731268799",
+      "panelId": 30011
+    },
+    {
+      "activityId": 3001103,
+      "beginTime": "1730491200",
+      "endTime": "1731268799",
+      "panelId": 30011
+    },
+    {
+      "activityId": 3001104,
+      "beginTime": "1730577600",
+      "endTime": "1731268799",
+      "panelId": 30011
+    },
+    {
+      "activityId": 3001105,
+      "beginTime": "1730664000",
+      "endTime": "1731268799",
+      "panelId": 30011
+    },
+    {
+      "activityId": 3001106,
+      "beginTime": "1730750400",
+      "endTime": "1731268799",
+      "panelId": 30011
+    },
+    {
+      "activityId": 3001107,
+      "beginTime": "1730836800",
+      "endTime": "1731268799",
+      "panelId": 30011
+    },
+    {
+      "activityId": 3001201,
+      "beginTime": "1731441600",
+      "endTime": "1733083199",
+      "panelId": 30012
+    },
+    {
+      "activityId": 3001202,
+      "beginTime": "1732737600",
+      "endTime": "1733083199",
+      "panelId": 30012
     },
     {
       "activityId": 4000208,
@@ -493,22 +529,10 @@
       "panelId": 50015
     },
     {
-      "activityId": 5001801,
-      "beginTime": "1725825600",
-      "endTime": "1729454399",
-      "panelId": 50018
-    },
-    {
       "activityId": 5001802,
       "beginTime": "1725825600",
       "endTime": "4294967295",
       "panelId": 50018
-    },
-    {
-      "activityId": 5002101,
-      "beginTime": "1727668800",
-      "endTime": "1729454399",
-      "panelId": 50021
     },
     {
       "activityId": 5002102,
@@ -517,10 +541,16 @@
       "panelId": 50021
     },
     {
-      "activityId": 5002301,
-      "beginTime": "1725922800",
-      "endTime": "1729637999",
-      "panelId": 50023
+      "activityId": 5002201,
+      "beginTime": "1729828800",
+      "endTime": "1733083199",
+      "panelId": 50022
+    },
+    {
+      "activityId": 5002202,
+      "beginTime": "1729828800",
+      "endTime": "4294967295",
+      "panelId": 50022
     },
     {
       "activityId": 6000101,
@@ -533,12 +563,6 @@
       "beginTime": "1693972800",
       "endTime": "4294967295",
       "panelId": 60003
-    },
-    {
-      "activityId": 6000801,
-      "beginTime": "1703448000",
-      "endTime": "1729637999",
-      "panelId": 60008
     },
     {
       "activityId": 6000901,
@@ -559,10 +583,22 @@
       "panelId": 60014
     },
     {
-      "activityId": 8001101,
-      "beginTime": "1725825600",
-      "endTime": "1729637999",
-      "panelId": 80011
+      "activityId": 6001501,
+      "beginTime": "1729454400",
+      "endTime": "2117600895",
+      "panelId": 60015
+    },
+    {
+      "activityId": 6001601,
+      "beginTime": "1729454400",
+      "endTime": "4294967295",
+      "panelId": 60016
+    },
+    {
+      "activityId": 8001201,
+      "beginTime": "1729638000",
+      "endTime": "1733266799",
+      "panelId": 80012
     }
   ]
 }
