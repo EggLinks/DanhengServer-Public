@@ -1,5 +1,5 @@
 ﻿using EggLink.DanhengServer.Data;
-using EggLink.DanhengServer.Data.Config;
+using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Enums;
 using EggLink.DanhengServer.Enums.Mission;
 using EggLink.DanhengServer.Enums.Scene;
@@ -21,12 +21,11 @@ public class SceneEntityLoader(SceneInstance scene)
         if (dimInfo == null) return;
         LoadGroups.AddRange(dimInfo.GroupIDList);
 
-        foreach (var group in Scene?.FloorInfo?.Groups.Values!) // Sanity check in SceneInstance
-        {
-            if (group.LoadSide == GroupLoadSideEnum.Client) continue;
-            if (group.GroupName.Contains("TrainVisitor")) continue;
-            await LoadGroup(group);
-        }
+        foreach (var group in from @group in Scene.FloorInfo?.Groups.Values!
+                 where @group.LoadSide != GroupLoadSideEnum.Client
+                 where !@group.GroupName.Contains("DeployPuzzle_Repeat_Area")
+                 where !@group.GroupName.Contains("TrainVisitor")
+                 select @group) await LoadGroup(group);
 
         Scene.IsLoaded = true;
     }
@@ -35,31 +34,28 @@ public class SceneEntityLoader(SceneInstance scene)
     {
         var refreshed = false;
         var oldGroupId = new List<int>();
-        foreach (var entity in Scene.Entities.Values)
-            if (!oldGroupId.Contains(entity.GroupID))
-                oldGroupId.Add(entity.GroupID);
+        foreach (var entity in Scene.Entities.Values.Where(entity => !oldGroupId.Contains(entity.GroupID)))
+            oldGroupId.Add(entity.GroupID);
 
         var removeList = new List<IGameEntity>();
         var addList = new List<IGameEntity>();
 
-        foreach (var group in Scene.FloorInfo!.Groups.Values)
-        {
-            if (group.LoadSide == GroupLoadSideEnum.Client) continue;
-
-            if (group.GroupName.Contains("TrainVisitor")) continue;
+        foreach (var group in Scene.FloorInfo!.Groups.Values
+                         .Where(group => group.LoadSide != GroupLoadSideEnum.Client)
+                         .Where(group => !group.GroupName.Contains("TrainVisitor"))
+                         .Where(group => !group.GroupName.Contains("DeployPuzzle_Repeat_Area")))
 
             if (oldGroupId.Contains(group.Id)) // check if it should be unloaded
             {
                 if (group.ForceUnloadCondition.IsTrue(Scene.Player.MissionManager!.Data, false) ||
                     group.UnloadCondition.IsTrue(Scene.Player.MissionManager!.Data, false))
                 {
-                    foreach (var entity in Scene.Entities.Values)
-                        if (entity.GroupID == group.Id)
-                        {
-                            await Scene.RemoveEntity(entity, false);
-                            removeList.Add(entity);
-                            refreshed = true;
-                        }
+                    foreach (var entity in Scene.Entities.Values.Where(entity => entity.GroupID == group.Id))
+                    {
+                        await Scene.RemoveEntity(entity, false);
+                        removeList.Add(entity);
+                        refreshed = true;
+                    }
 
                     Scene.Groups.Remove(group.Id);
                 }
@@ -67,13 +63,12 @@ public class SceneEntityLoader(SceneInstance scene)
                          Scene.Player.MissionManager!.GetMainMissionStatus(group.OwnerMainMissionID) !=
                          MissionPhaseEnum.Accept)
                 {
-                    foreach (var entity in Scene.Entities.Values)
-                        if (entity.GroupID == group.Id)
-                        {
-                            await Scene.RemoveEntity(entity, false);
-                            removeList.Add(entity);
-                            refreshed = true;
-                        }
+                    foreach (var entity in Scene.Entities.Values.Where(entity => entity.GroupID == group.Id))
+                    {
+                        await Scene.RemoveEntity(entity, false);
+                        removeList.Add(entity);
+                        refreshed = true;
+                    }
 
                     Scene.Groups.Remove(group.Id);
                 }
@@ -84,7 +79,6 @@ public class SceneEntityLoader(SceneInstance scene)
                 refreshed = groupList != null || refreshed;
                 addList.AddRange(groupList ?? []);
             }
-        }
 
         if (refreshed && (addList.Count > 0 || removeList.Count > 0))
             await Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(addList, removeList));
@@ -95,8 +89,8 @@ public class SceneEntityLoader(SceneInstance scene)
         if (!LoadGroups.Contains(info.Id)) return null;
         var missionData = Scene.Player.MissionManager!.Data;
         if (info.LoadSide == GroupLoadSideEnum.Client) return null;
-
         if (info.GroupName.Contains("TrainVisitor")) return null;
+        if (info.GroupName.Contains("DeployPuzzle_Repeat_Area")) return null;
 
         if (info.SystemUnlockCondition != null)
         {
@@ -118,11 +112,9 @@ public class SceneEntityLoader(SceneInstance scene)
                     break;
                 }
 
-                if (info.SystemUnlockCondition.Operation == OperationEnum.Not && part)
-                {
-                    result = false;
-                    break;
-                }
+                if (info.SystemUnlockCondition.Operation != OperationEnum.Not || !part) continue;
+                result = false;
+                break;
             }
 
             if (!result) return null;
@@ -151,28 +143,31 @@ public class SceneEntityLoader(SceneInstance scene)
         foreach (var npc in info.NPCList)
             try
             {
-                if (await LoadNpc(npc, info) is EntityNpc entity) entityList.Add(entity);
+                if (await LoadNpc(npc, info) is { } entity) entityList.Add(entity);
             }
             catch
             {
+                // ignored
             }
 
         foreach (var monster in info.MonsterList)
             try
             {
-                if (await LoadMonster(monster, info) is EntityMonster entity) entityList.Add(entity);
+                if (await LoadMonster(monster, info) is { } entity) entityList.Add(entity);
             }
             catch
             {
+                // ignored
             }
 
         foreach (var prop in info.PropList)
             try
             {
-                if (await LoadProp(prop, info) is EntityProp entity) entityList.Add(entity);
+                if (await LoadProp(prop, info) is { } entity) entityList.Add(entity);
             }
             catch
             {
+                // ignored
             }
 
         return entityList;
@@ -184,7 +179,7 @@ public class SceneEntityLoader(SceneInstance scene)
         if (group == null) return null;
         var entities = await LoadGroup(group, true);
 
-        if (sendPacket && entities != null && entities.Count > 0)
+        if (sendPacket && entities is { Count: > 0 })
             await Scene.Player.SendPacket(new PacketSceneGroupRefreshScNotify(entities));
 
         return entities;
@@ -239,7 +234,7 @@ public class SceneEntityLoader(SceneInstance scene)
 
     public virtual async ValueTask<EntityProp?> LoadProp(PropInfo info, GroupInfo group, bool sendPacket = false)
     {
-        if (info.IsClientOnly || info.IsDelete) return null;
+        if (info.IsClientOnly || info.IsDelete || !info.LoadOnInitial) return null;
 
         GameData.MazePropData.TryGetValue(info.PropID, out var excel);
         if (excel == null) return null;
@@ -261,17 +256,10 @@ public class SceneEntityLoader(SceneInstance scene)
         else
         {
             if (Scene.Excel.PlaneType == PlaneTypeEnum.Raid)
-            {
                 prop.State = info.State;
-            }
             else
-            {
                 // elevator
-                if (prop.Excel.PropType == PropTypeEnum.PROP_ELEVATOR)
-                    prop.State = PropStateEnum.Elevator1;
-                else
-                    prop.State = info.State;
-            }
+                prop.State = prop.Excel.PropType == PropTypeEnum.PROP_ELEVATOR ? PropStateEnum.Elevator1 : info.State;
         }
 
         if (group.GroupName.Contains("Machine"))
@@ -286,11 +274,9 @@ public class SceneEntityLoader(SceneInstance scene)
 
         if (prop.PropInfo.PropID == 1003)
         {
-            if (prop.PropInfo.MappingInfoID == 2220)
-            {
-                await prop.SetState(PropStateEnum.Open);
-                await Scene.AddEntity(prop, sendPacket);
-            }
+            if (prop.PropInfo.MappingInfoID != 2220) return prop;
+            await prop.SetState(PropStateEnum.Open);
+            await Scene.AddEntity(prop, sendPacket);
         }
         else
         {

@@ -1,5 +1,4 @@
 ﻿using EggLink.DanhengServer.Enums.Rogue;
-using EggLink.DanhengServer.Proto;
 
 namespace EggLink.DanhengServer.GameServer.Game.Rogue.Event.CostHandler;
 
@@ -10,6 +9,6 @@ public class EventHandlerCostItemValue : RogueEventCostHandler
         List<int> paramList)
     {
         var decreaseMoney = paramList[1];
-        await rogue.CostMoney(decreaseMoney, RogueCommonActionResultDisplayType.Single);
+        await rogue.CostMoney(decreaseMoney);
     }
 }

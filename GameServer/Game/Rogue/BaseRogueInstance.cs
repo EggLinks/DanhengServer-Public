@@ -1,6 +1,7 @@
 ﻿using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Database.Inventory;
+using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.GameServer.Game.Battle;
 using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Game.Rogue.Buff;
@@ -16,11 +17,11 @@ using LineupInfo = EggLink.DanhengServer.Database.Lineup.LineupInfo;
 
 namespace EggLink.DanhengServer.GameServer.Game.Rogue;
 
-public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionId, int rogueBuffType)
+public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum rogueSubMode, int rogueBuffType)
 {
     public PlayerInstance Player { get; set; } = player;
     public LineupInfo? CurLineup { get; set; }
-    public int RogueVersionId { get; set; } = rogueVersionId;
+    public RogueSubModeEnum RogueSubMode { get; set; } = rogueSubMode;
     public int RogueType { get; set; } = 100;
     public int CurReviveCost { get; set; } = 80;
     public int CurRerollCost { get; set; } = 30;
@@ -94,7 +95,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
         var result = buff.ToResultProto(source);
 
         if (notify)
-            await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueVersionId, result, displayType));
+            await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode, result, displayType));
 
         if (updateMenu) await UpdateMenu();
 
@@ -112,7 +113,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
             if (res != null) resultList.Add(res);
         }
 
-        await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueVersionId, resultList,
+        await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode, resultList,
             RogueCommonActionResultDisplayType.Multi));
 
         await UpdateMenu();
@@ -129,7 +130,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
             if (excel != null)
             {
                 buff.BuffLevel++;
-                await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueVersionId,
+                await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode,
                     buff.ToResultProto(source), RogueCommonActionResultDisplayType.Single));
             }
         }
@@ -160,7 +161,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
                 {
                     var instance = new RogueBuffInstance(buff.MazeBuffID, buff.MazeBuffLevel);
                     RogueBuffs.Add(instance);
-                    await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueVersionId,
+                    await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode,
                         instance.ToResultProto(RogueCommonActionResultSourceType.Select)));
                 }
             }
@@ -182,7 +183,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
         {
             await action.RogueBuffSelectMenu.RerollBuff(); // reroll
             await Player.SendPacket(
-                new PacketHandleRogueCommonPendingActionScRsp(RogueVersionId, menu: action.RogueBuffSelectMenu));
+                new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, menu: action.RogueBuffSelectMenu));
         }
     }
 
@@ -190,13 +191,12 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
 
     #region Money
 
-    public async ValueTask CostMoney(int amount,
-        RogueCommonActionResultDisplayType displayType = RogueCommonActionResultDisplayType.None)
+    public async ValueTask CostMoney(int amount, int displayType = 0)
     {
         CurMoney -= amount;
         await Player.SendPacket(new PacketSyncRogueCommonVirtualItemInfoScNotify(this));
 
-        await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueVersionId,
+        await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode,
             new RogueCommonActionResult
             {
                 Source = RogueCommonActionResultSourceType.Dialogue,
@@ -205,14 +205,13 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
                     RemoveItemList = new RogueCommonMoney
                     {
                         Num = (uint)amount,
-                        DisplayType = (uint)displayType + 1
+                        DisplayType = (uint)displayType
                     }
                 }
-            }, displayType));
+            }, RogueCommonActionResultDisplayType.Single));
     }
 
-    public async ValueTask GainMoney(int amount, int displayType = 2,
-        RogueCommonActionResultDisplayType display = RogueCommonActionResultDisplayType.None)
+    public async ValueTask GainMoney(int amount, int displayType = 0)
     {
         CurMoney += amount;
         await Player.SendPacket(new PacketSyncRogueCommonVirtualItemInfoScNotify(this));
@@ -222,7 +221,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
             Count = amount
         }));
 
-        await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueVersionId,
+        await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode,
             new RogueCommonActionResult
             {
                 Source = RogueCommonActionResultSourceType.Dialogue,
@@ -234,7 +233,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
                         DisplayType = (uint)displayType
                     }
                 }
-            }, display));
+            }, RogueCommonActionResultDisplayType.Single));
     }
 
     #endregion
@@ -295,7 +294,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
 
         var miracle = new RogueMiracleInstance(this, miracleId);
         RogueMiracles.Add(miracleId, miracle);
-        await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueVersionId, miracle.ToGetResult(),
+        await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode, miracle.ToGetResult(),
             RogueCommonActionResultDisplayType.Single));
     }
 
@@ -311,7 +310,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
 
         // TODO: handle bonus
         GameData.RogueBonusData.TryGetValue(bonusId, out var bonus);
-        if (bonus != null) TriggerEvent(null, bonus.BonusEvent);
+        if (bonus != null) await TriggerEvent(null, bonus.BonusEvent);
 
         RogueActions.Remove(action.QueuePosition);
         await UpdateMenu();
@@ -323,7 +322,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
     {
         if (RogueActions.Count > 0)
             await Player.SendPacket(
-                new PacketSyncRogueCommonPendingActionScNotify(RogueActions.First().Value, RogueVersionId));
+                new PacketSyncRogueCommonPendingActionScNotify(RogueActions.First().Value, RogueSubMode));
     }
 
     #endregion
@@ -352,17 +351,18 @@ public abstract class BaseRogueInstance(PlayerInstance player, int rogueVersionI
 
     #region Events
 
-    public void TriggerEvent(RogueEventInstance? rogueEvent, int eventId)
+    public async ValueTask TriggerEvent(RogueEventInstance? rogueEvent, int eventId)
     {
-        EventManager?.TriggerEvent(rogueEvent, eventId);
+        if (EventManager == null) return;
+        await EventManager.TriggerEvent(rogueEvent, eventId);
     }
 
     public async ValueTask<RogueEventInstance> GenerateEvent(RogueNpc npc)
     {
-        RogueNPCDialogueExcel? dialogue;
+        RogueNPCExcel? dialogue;
         do
         {
-            dialogue = GameData.RogueNPCDialogueData.Values.ToList().RandomElement();
+            dialogue = GameData.RogueNPCData.Values.ToList().RandomElement();
         } while (!dialogue.CanUseInVer(RogueType));
 
         var instance = new RogueEventInstance(dialogue, npc, CurEventUniqueID++);

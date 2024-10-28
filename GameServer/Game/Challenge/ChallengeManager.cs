@@ -31,57 +31,57 @@ public class ChallengeManager(PlayerInstance player) : BasePlayerManager(player)
             return;
         }
 
-        var Excel = value;
+        var excel = value;
 
         // Sanity check lineups
-        if (Excel.StageNum > 0)
+        if (excel.StageNum > 0)
         {
             // Get lineup
-            var Lineup = Player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge)!;
+            var lineup = Player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge)!;
 
             // Make sure this lineup has avatars set
-            if (Lineup.AvatarData!.Avatars.Count == 0)
+            if (lineup.AvatarData!.Avatars.Count == 0)
             {
                 await Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeLineupEmpty));
                 return;
             }
 
             // Reset hp/sp
-            foreach (var avatar in Lineup.AvatarData!.Avatars)
+            foreach (var avatar in lineup.AvatarData!.Avatars)
             {
                 avatar.SetCurHp(10000, true);
-                avatar.SetCurSp(avatar.GetCurSp(true) / 2, true);
+                avatar.SetCurSp(5000, true);
             }
 
             // Set technique points to full
-            Lineup.Mp = 5; // Max Mp
+            lineup.Mp = 5; // Max Mp
         }
 
-        if (Excel.StageNum >= 2)
+        if (excel.StageNum >= 2)
         {
             // Get lineup
-            var Lineup = Player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge2)!;
+            var lineup = Player.LineupManager!.GetExtraLineup(ExtraLineupType.LineupChallenge2)!;
 
             // Make sure this lineup has avatars set
-            if (Lineup.AvatarData!.Avatars.Count == 0)
+            if (lineup.AvatarData!.Avatars.Count == 0)
             {
                 await Player.SendPacket(new PacketStartChallengeScRsp((uint)Retcode.RetChallengeLineupEmpty));
                 return;
             }
 
             // Reset hp/sp
-            foreach (var avatar in Lineup.AvatarData!.Avatars)
+            foreach (var avatar in lineup.AvatarData!.Avatars)
             {
                 avatar.SetCurHp(10000, true);
-                avatar.SetCurSp(avatar.GetCurSp(true) / 2, true);
+                avatar.SetCurSp(5000, true);
             }
 
             // Set technique points to full
-            Lineup.Mp = 5; // Max Mp
+            lineup.Mp = 5; // Max Mp
         }
 
         // Set challenge data for player
-        ChallengeInstance instance = new(Player, Excel);
+        ChallengeInstance instance = new(Player, excel);
         ChallengeInstance = instance;
 
         // Set first lineup before we enter scenes
@@ -90,7 +90,7 @@ public class ChallengeManager(PlayerInstance player) : BasePlayerManager(player)
         // Enter scene
         try
         {
-            await Player.EnterScene(Excel.MapEntranceID, 0, false);
+            await Player.EnterScene(excel.MapEntranceID, 0, false);
         }
         catch
         {
@@ -107,7 +107,7 @@ public class ChallengeManager(PlayerInstance player) : BasePlayerManager(player)
         instance.StartRot = Player.Data.Rot!;
         instance.SavedMp = Player.LineupManager.GetCurLineup()!.Mp;
 
-        if (Excel.IsStory() && storyBuffs != null)
+        if (excel.IsStory() && storyBuffs != null)
         {
             instance.StoryBuffs.Add((int)storyBuffs.BuffOne);
             instance.StoryBuffs.Add((int)storyBuffs.BuffTwo);

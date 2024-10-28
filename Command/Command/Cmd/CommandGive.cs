@@ -3,7 +3,7 @@ using EggLink.DanhengServer.Internationalization;
 
 namespace EggLink.DanhengServer.Command.Command.Cmd;
 
-[CommandInfo("give", "Game.Command.Give.Desc", "Game.Command.Give.Usage")]
+[CommandInfo("give", "Game.Command.Give.Desc", "Game.Command.Give.Usage", ["g"])]
 public class CommandGive : ICommand
 {
     [CommandDefault]
@@ -12,20 +12,20 @@ public class CommandGive : ICommand
         var player = arg.Target?.Player;
         if (player == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         if (arg.BasicArgs.Count == 0)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
         GameData.ItemConfigData.TryGetValue(arg.GetInt(0), out var itemData);
         if (itemData == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Give.ItemNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Give.ItemNotFound"));
             return;
         }
 
@@ -38,14 +38,14 @@ public class CommandGive : ICommand
         if (!int.TryParse(str, out var amount) || !int.TryParse(levelStr, out var level) ||
             !int.TryParse(rankStr, out var rank))
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
         await player.InventoryManager!.AddItem(arg.GetInt(0), amount, rank: Math.Min(rank, 5),
             level: Math.Max(Math.Min(level, 80), 1));
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Give.GiveItem", player.Uid.ToString(), amount.ToString(),
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Give.GiveItem", player.Uid.ToString(), amount.ToString(),
             itemData.Name ?? itemData.ID.ToString()));
     }
 }

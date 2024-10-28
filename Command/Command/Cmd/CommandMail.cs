@@ -2,7 +2,7 @@
 
 namespace EggLink.DanhengServer.Command.Command.Cmd;
 
-[CommandInfo("mail", "Game.Command.Mail.Desc", "Game.Command.Mail.Usage", permission: "")]
+[CommandInfo("mail", "Game.Command.Mail.Desc", "Game.Command.Mail.Usage", permission: "egglink.manage")]
 public class CommandMail : ICommand
 {
     [CommandDefault]
@@ -10,19 +10,19 @@ public class CommandMail : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         if (arg.Args.Count < 7)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
         if (!(arg.Args.Contains("_TITLE") && arg.Args.Contains("_CONTENT")))
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -37,16 +37,14 @@ public class CommandMail : ICommand
         var flagContent = false;
         foreach (var text in arg.Args)
         {
-            if (text == "_TITLE")
+            switch (text)
             {
-                flagTitle = true;
-                continue;
-            }
-
-            if (text == "_CONTENT")
-            {
-                flagContent = true;
-                continue;
+                case "_TITLE":
+                    flagTitle = true;
+                    continue;
+                case "_CONTENT":
+                    flagContent = true;
+                    continue;
             }
 
             if (flagTitle && !flagContent) title += text + " ";
@@ -60,6 +58,6 @@ public class CommandMail : ICommand
 
         await arg.Target.Player!.MailManager!.SendMail(sender, title, content, templateId, expiredDay);
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Mail.MailSent"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Mail.MailSent"));
     }
 }

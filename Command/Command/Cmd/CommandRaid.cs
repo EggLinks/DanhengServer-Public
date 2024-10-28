@@ -10,12 +10,12 @@ public class CommandRaid : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         await arg.Target.Player!.RaidManager!.LeaveRaid(false);
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Raid.Leaved"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Raid.Leaved"));
     }
 }

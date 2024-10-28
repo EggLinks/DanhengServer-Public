@@ -12,7 +12,7 @@ public class CommandScene : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -21,7 +21,7 @@ public class CommandScene : ICommand
         foreach (var group in scene.Entities)
             if (!loadedGroup.Contains(group.Value.GroupID))
                 loadedGroup.Add(group.Value.GroupID);
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.LoadedGroups", string.Join(", ", loadedGroup)));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.LoadedGroups", string.Join(", ", loadedGroup)));
     }
 
     [CommandMethod("0 prop")]
@@ -29,7 +29,7 @@ public class CommandScene : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -44,12 +44,12 @@ public class CommandScene : ICommand
 
         if (prop == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.PropNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.PropNotFound"));
             return;
         }
 
         await prop.SetState((PropStateEnum)arg.GetInt(2));
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.PropStateChanged", prop.PropInfo.ID.ToString(),
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.PropStateChanged", prop.PropInfo.ID.ToString(),
             prop.State.ToString()));
     }
 
@@ -58,7 +58,7 @@ public class CommandScene : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -66,12 +66,12 @@ public class CommandScene : ICommand
         scene.Entities.TryGetValue(arg.GetInt(0), out var entity);
         if (entity == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.EntityNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.EntityNotFound"));
             return;
         }
 
         await scene.RemoveEntity(entity);
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.EntityRemoved", entity.EntityID.ToString()));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.EntityRemoved", entity.EntityID.ToString()));
     }
 
     [CommandMethod("0 unlockall")]
@@ -79,7 +79,7 @@ public class CommandScene : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -88,7 +88,7 @@ public class CommandScene : ICommand
             if (entity is EntityProp prop)
                 if (prop.Excel.PropStateList.Contains(PropStateEnum.Open))
                     await prop.SetState(PropStateEnum.Open);
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.AllPropsUnlocked"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.AllPropsUnlocked"));
     }
 
     [CommandMethod("0 change")]
@@ -96,19 +96,19 @@ public class CommandScene : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         if (arg.GetInt(0) == 0)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
         var player = arg.Target!.Player!;
         await player.EnterScene(arg.GetInt(0), 0, true);
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.SceneChanged", arg.GetInt(0).ToString()));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.SceneChanged", arg.GetInt(0).ToString()));
     }
 
     [CommandMethod("0 reload")]
@@ -116,13 +116,13 @@ public class CommandScene : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         var player = arg.Target!.Player!;
         await player.EnterScene(player.Data.EntryId, 0, true);
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.SceneReloaded"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.SceneReloaded"));
     }
 
     [CommandMethod("0 reset")]
@@ -130,24 +130,38 @@ public class CommandScene : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         var floorId = arg.GetInt(0);
         if (floorId == 0)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
         var player = arg.Target!.Player!;
-        if (player.SceneData?.ScenePropData.TryGetValue(floorId, out var _) == true)
+        if (player.SceneData?.ScenePropData.TryGetValue(floorId, out _) == true)
             player.SceneData.ScenePropData[floorId] = [];
 
-        if (player.SceneData?.FloorSavedData.TryGetValue(floorId, out var _) == true)
+        if (player.SceneData?.FloorSavedData.TryGetValue(floorId, out _) == true)
             player.SceneData.FloorSavedData[floorId] = [];
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Scene.SceneReset", floorId.ToString()));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.SceneReset", floorId.ToString()));
+    }
+
+    [CommandMethod("0 cur")]
+    public async ValueTask GetCurrentScene(CommandArg arg)
+    {
+        if (arg.Target == null)
+        {
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            return;
+        }
+
+        var player = arg.Target!.Player!;
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Scene.CurrentScene", player.Data.EntryId.ToString(),
+            player.Data.PlaneId.ToString(), player.Data.FloorId.ToString()));
     }
 }

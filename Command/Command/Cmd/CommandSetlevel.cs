@@ -1,5 +1,4 @@
 ﻿using EggLink.DanhengServer.Data;
-using EggLink.DanhengServer.Database;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.PlayerSync;
 using EggLink.DanhengServer.Internationalization;
 
@@ -13,13 +12,13 @@ public class CommandSetlevel : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         if (arg.Args.Count < 1)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -27,10 +26,9 @@ public class CommandSetlevel : ICommand
         var level = Math.Max(Math.Min(arg.GetInt(0), 70), 1);
         player.Data.Level = level;
         player.OnLevelChange();
-        DatabaseHelper.Instance?.UpdateInstance(player.Data);
         player.Data.Exp = GameData.GetPlayerExpRequired(level);
         await player.SendPacket(new PacketPlayerSyncScNotify(player.ToProto()));
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Setlevel.SetlevelSuccess"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Setlevel.SetlevelSuccess"));
     }
 }

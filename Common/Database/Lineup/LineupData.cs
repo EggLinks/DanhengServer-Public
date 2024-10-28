@@ -42,22 +42,19 @@ public class LineupInfo
     {
         var result = false;
         if (BaseAvatars != null && AvatarData != null)
-        {
             foreach (var avatar in BaseAvatars)
             {
                 var avatarInfo = AvatarData?.Avatars?.Find(item => item.GetBaseAvatarId() == avatar.BaseAvatarId);
                 if (avatarInfo != null)
                 {
                     if (avatarInfo.GetCurHp(IsExtraLineup()) <= 0 && !allowRevive) continue;
-                    if (avatarInfo.GetCurHp(IsExtraLineup()) >= 10000 && count > 0) continue;  // full hp
-                    if (avatarInfo.GetCurHp(IsExtraLineup()) <= 0 && count < 0) continue;  // dead
-                    avatarInfo.SetCurHp(Math.Max(Math.Min(avatarInfo.GetCurHp(IsExtraLineup()) + count, 10000), 0), IsExtraLineup());
+                    if (avatarInfo.GetCurHp(IsExtraLineup()) >= 10000 && count > 0) continue; // full hp
+                    if (avatarInfo.GetCurHp(IsExtraLineup()) <= 0 && count < 0) continue; // dead
+                    avatarInfo.SetCurHp(Math.Max(Math.Min(avatarInfo.GetCurHp(IsExtraLineup()) + count, 10000), 0),
+                        IsExtraLineup());
                     result = true;
                 }
             }
-
-            DatabaseHelper.Instance?.UpdateInstance(AvatarData!);
-        }
 
         return result;
     }
@@ -66,7 +63,6 @@ public class LineupInfo
     {
         var result = false;
         if (BaseAvatars != null && AvatarData != null)
-        {
             foreach (var avatar in BaseAvatars)
             {
                 var avatarInfo = AvatarData?.Avatars?.Find(item => item.GetAvatarId() == avatar.BaseAvatarId);
@@ -79,9 +75,6 @@ public class LineupInfo
                 }
             }
 
-            DatabaseHelper.Instance?.UpdateInstance(AvatarData!);
-        }
-
         return result;
     }
 
@@ -89,20 +82,16 @@ public class LineupInfo
     {
         var result = false;
         if (BaseAvatars != null && AvatarData != null)
-        {
             foreach (var avatar in BaseAvatars)
             {
                 var avatarInfo = AvatarData?.Avatars?.Find(item => item.GetAvatarId() == avatar.BaseAvatarId);
                 if (avatarInfo != null)
                 {
                     if (avatarInfo.CurrentHp <= 0) continue;
-                    avatarInfo.SetCurSp((int)Math.Min(avatarInfo.GetCurSp(IsExtraLineup()) + count, 10000), IsExtraLineup());
+                    avatarInfo.SetCurSp(Math.Min(avatarInfo.GetCurSp(IsExtraLineup()) + count, 10000), IsExtraLineup());
                     result = true;
                 }
             }
-
-            DatabaseHelper.Instance?.UpdateInstance(AvatarData!);
-        }
 
         return result;
     }

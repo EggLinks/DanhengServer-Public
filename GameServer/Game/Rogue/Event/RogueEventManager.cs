@@ -23,20 +23,18 @@ public class RogueEventManager
         foreach (var type in types)
         {
             var attr = type.GetCustomAttribute<RogueEventAttribute>();
-            if (attr != null)
+            if (attr == null) continue;
+            if (attr.EffectType != DialogueEventTypeEnum.None)
             {
-                if (attr.EffectType != DialogueEventTypeEnum.None)
-                {
-                    // Effect
-                    var effect = (RogueEventEffectHandler)Activator.CreateInstance(type, null)!;
-                    EffectHandler.Add(attr.EffectType, effect);
-                }
-                else
-                {
-                    // Cost
-                    var cost = (RogueEventCostHandler)Activator.CreateInstance(type, null)!;
-                    CostHandler.Add(attr.CostType, cost);
-                }
+                // Effect
+                var effect = (RogueEventEffectHandler)Activator.CreateInstance(type, null)!;
+                EffectHandler.Add(attr.EffectType, effect);
+            }
+            else
+            {
+                // Cost
+                var cost = (RogueEventCostHandler)Activator.CreateInstance(type, null)!;
+                CostHandler.Add(attr.CostType, cost);
             }
         }
     }
@@ -49,6 +47,18 @@ public class RogueEventManager
     public async ValueTask AddEvent(RogueEventInstance eventInstance)
     {
         RunningEvent.Add(eventInstance);
+        foreach (var option in eventInstance.Options)
+        {
+            GameData.DialogueEventData.TryGetValue(option.OptionId, out var dialogueEvent);
+            if (dialogueEvent == null) continue;
+
+            var param = dialogueEvent.RogueEffectParamList;
+
+            // Init option
+            if (EffectHandler.TryGetValue(dialogueEvent.RogueEffectType, out var effectHandler))
+                effectHandler.Init(Rogue, eventInstance, param, option);
+        }
+
         await Player.SendPacket(new PacketSyncRogueCommonDialogueDataScNotify(eventInstance));
     }
 
@@ -70,26 +80,23 @@ public class RogueEventManager
 
     public RogueEventInstance? FindEvent(int optionId)
     {
-        foreach (var eventInstance in RunningEvent)
-            if (eventInstance.Options.Exists(x => x.OptionId == optionId))
-                return eventInstance;
-        return null;
+        return RunningEvent.FirstOrDefault(eventInstance => eventInstance.Options.Exists(x => x.OptionId == optionId));
     }
 
-    public void TriggerEvent(RogueEventInstance? eventInstance, int eventId)
+    public async ValueTask TriggerEvent(RogueEventInstance? eventInstance, int eventId)
     {
         GameData.DialogueEventData.TryGetValue(eventId, out var dialogueEvent);
         if (dialogueEvent == null) return;
 
-        var Param = dialogueEvent.RogueEffectParamList;
-
-        // Handle option
-        if (EffectHandler.TryGetValue(dialogueEvent.RogueEffectType, out var effectHandler))
-            effectHandler.Handle(Rogue, eventInstance, Param);
+        var param = dialogueEvent.RogueEffectParamList;
 
         // Handle cost
         if (CostHandler.TryGetValue(dialogueEvent.CostType, out var costHandler))
-            costHandler.Handle(Rogue, eventInstance, dialogueEvent.CostParamList);
+            await costHandler.Handle(Rogue, eventInstance, dialogueEvent.CostParamList);
+
+        // Handle option
+        if (EffectHandler.TryGetValue(dialogueEvent.RogueEffectType, out var effectHandler))
+            await effectHandler.Handle(Rogue, eventInstance, param, null);
     }
 
     public async ValueTask SelectOption(RogueEventInstance eventInstance, int optionId)
@@ -109,7 +116,7 @@ public class RogueEventManager
             return;
         }
 
-        option.IsSelected = true;
+        await Player.SendPacket(new PacketSyncRogueCommonDialogueDataScNotify(eventInstance));
 
         var param = dialogueEvent.RogueEffectParamList;
         if (option.ArgId > 0)
@@ -128,16 +135,17 @@ public class RogueEventManager
             }
         }
 
-        // Handle option
-        if (EffectHandler.TryGetValue(dialogueEvent.RogueEffectType, out var effectHandler))
-            await effectHandler.Handle(Rogue, eventInstance, param);
-
         // Handle cost
         if (CostHandler.TryGetValue(dialogueEvent.CostType, out var costHandler))
             await costHandler.Handle(Rogue, eventInstance, dialogueEvent.CostParamList);
 
+        // Handle option
+        if (EffectHandler.TryGetValue(dialogueEvent.RogueEffectType, out var effectHandler))
+            await effectHandler.Handle(Rogue, eventInstance, param, option);
+
         // send rsp
         await Player.SendPacket(new PacketSyncRogueCommonDialogueOptionFinishScNotify(eventInstance));
+        option.IsSelected = true;
         await Player.SendPacket(new PacketSelectRogueCommonDialogueOptionScRsp(eventInstance));
     }
 }

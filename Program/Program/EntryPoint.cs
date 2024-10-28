@@ -4,6 +4,7 @@ using EggLink.DanhengServer.Configuration;
 using EggLink.DanhengServer.Data;
 using EggLink.DanhengServer.Database;
 using EggLink.DanhengServer.Enums;
+using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.GameServer.Command;
 using EggLink.DanhengServer.GameServer.Plugin;
 using EggLink.DanhengServer.GameServer.Server;
@@ -24,16 +25,25 @@ public class EntryPoint
     public static readonly Listener Listener = new();
     public static readonly CommandManager CommandManager = new();
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) =>
+        AppDomain.CurrentDomain.ProcessExit += (_, _) =>
         {
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.Shutdown"));
+            Logger.Info(I18NManager.Translate("Server.ServerInfo.Shutdown"));
             PerformCleanup();
         };
-        Console.CancelKeyPress += (sender, eventArgs) =>
+        AppDomain.CurrentDomain.UnhandledException += (obj, arg) =>
         {
-            Logger.Info(I18nManager.Translate("Server.ServerInfo.CancelKeyPressed"));
+            Logger.Error(I18NManager.Translate("Server.ServerInfo.UnhandledException", obj.GetType().Name),
+                (Exception)arg.ExceptionObject);
+            Logger.Info(I18NManager.Translate("Server.ServerInfo.Shutdown"));
+            PerformCleanup();
+            Environment.Exit(1);
+        };
+
+        Console.CancelKeyPress += (_, eventArgs) =>
+        {
+            Logger.Info(I18NManager.Translate("Server.ServerInfo.CancelKeyPressed"));
             eventArgs.Cancel = true;
             Environment.Exit(0);
         };
@@ -44,19 +54,17 @@ public class EntryPoint
         while (true)
         {
             file = new FileInfo(GetConfig().Path.LogPath + $"/{DateTime.Now:yyyy-MM-dd}-{++counter}.log");
-            if (!file.Exists && file.Directory != null)
-            {
-                file.Directory.Create();
-                break;
-            }
+            if (file is not { Exists: false, Directory: not null }) continue;
+            file.Directory.Create();
+            break;
         }
 
         Logger.SetLogFile(file);
         // Starting the server
-        Logger.Info(I18nManager.Translate("Server.ServerInfo.StartingServer"));
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.StartingServer"));
 
         // Load the config
-        Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.Config")));
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.Config")));
         try
         {
             ConfigManager.LoadConfig();
@@ -64,35 +72,21 @@ public class EntryPoint
         catch (Exception e)
         {
             Logger.Error(
-                I18nManager.Translate("Server.ServerInfo.FailedToLoadItem", I18nManager.Translate("Word.Config")), e);
+                I18NManager.Translate("Server.ServerInfo.FailedToLoadItem", I18NManager.Translate("Word.Config")), e);
             Console.ReadLine();
             return;
         }
 
         // Load the language
-        Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.Language")));
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.Language")));
         try
         {
-            I18nManager.LoadLanguage();
+            I18NManager.LoadLanguage();
         }
         catch (Exception e)
         {
             Logger.Error(
-                I18nManager.Translate("Server.ServerInfo.FailedToLoadItem", I18nManager.Translate("Word.Language")), e);
-            Console.ReadLine();
-            return;
-        }
-
-        // Load the game data
-        Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.GameData")));
-        try
-        {
-            ResourceManager.LoadGameData();
-        }
-        catch (Exception e)
-        {
-            Logger.Error(
-                I18nManager.Translate("Server.ServerInfo.FailedToLoadItem", I18nManager.Translate("Word.GameData")), e);
+                I18NManager.Translate("Server.ServerInfo.FailedToLoadItem", I18NManager.Translate("Word.Language")), e);
             Console.ReadLine();
             return;
         }
@@ -100,16 +94,43 @@ public class EntryPoint
         // Initialize the database
         try
         {
-            DatabaseHelper.Initialize();
+            _ = Task.Run(DatabaseHelper.Initialize); // do not wait
 
-            if (args.Contains("--upgrade-database")) DatabaseHelper.UpgradeDatabase();
+            while (!DatabaseHelper.LoadAccount) Thread.Sleep(100);
 
-            if (args.Contains("--move")) DatabaseHelper.MoveFromSqlite();
+            Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItem",
+                I18NManager.Translate("Word.DatabaseAccount")));
+            Logger.Warn(I18NManager.Translate("Server.ServerInfo.WaitForAllDone"));
         }
         catch (Exception e)
         {
             Logger.Error(
-                I18nManager.Translate("Server.ServerInfo.FailedToLoadItem", I18nManager.Translate("Word.Database")), e);
+                I18NManager.Translate("Server.ServerInfo.FailedToLoadItem", I18NManager.Translate("Word.Database")), e);
+            Console.ReadLine();
+            return;
+        }
+
+        HandlerManager.Init();
+
+        WebProgram.Main([], GetConfig().HttpServer.Port, GetConfig().HttpServer.GetBindDisplayAddress());
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.ServerRunning", I18NManager.Translate("Word.Dispatch"),
+            GetConfig().HttpServer.GetDisplayAddress()));
+
+        DanhengListener.BaseConnection = typeof(Connection);
+        DanhengListener.StartListener();
+
+        GenerateLogMap();
+
+        // Load the game data
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.GameData")));
+        try
+        {
+            ResourceManager.LoadGameData();
+        }
+        catch (Exception e)
+        {
+            Logger.Error(
+                I18NManager.Translate("Server.ServerInfo.FailedToLoadItem", I18NManager.Translate("Word.GameData")), e);
             Console.ReadLine();
             return;
         }
@@ -117,19 +138,19 @@ public class EntryPoint
         // Register the command handlers
         try
         {
-            CommandManager.RegisterCommand();
+            CommandManager.RegisterCommands();
         }
         catch (Exception e)
         {
             Logger.Error(
-                I18nManager.Translate("Server.ServerInfo.FailedToInitializeItem",
-                    I18nManager.Translate("Word.Command")), e);
+                I18NManager.Translate("Server.ServerInfo.FailedToInitializeItem",
+                    I18NManager.Translate("Word.Command")), e);
             Console.ReadLine();
             return;
         }
 
         // Load the plugins
-        Logger.Info(I18nManager.Translate("Server.ServerInfo.LoadingItem", I18nManager.Translate("Word.Plugin")));
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem", I18NManager.Translate("Word.Plugin")));
         try
         {
             PluginManager.LoadPlugins();
@@ -137,7 +158,7 @@ public class EntryPoint
         catch (Exception e)
         {
             Logger.Error(
-                I18nManager.Translate("Server.ServerInfo.FailedToLoadItem", I18nManager.Translate("Word.Plugin")), e);
+                I18NManager.Translate("Server.ServerInfo.FailedToLoadItem", I18NManager.Translate("Word.Plugin")), e);
             Console.ReadLine();
             return;
         }
@@ -159,13 +180,14 @@ public class EntryPoint
                 {
                     if ((con as Connection)!.Player!.RogueManager?.GetRogueInstance() != null)
                     {
-                        status = PlayerStatusEnum.Rogue;
-                        if ((con as Connection)!.Player!.ChessRogueManager?.RogueInstance?.AreaExcel.RogueVersionId ==
-                            202)
-                            status = PlayerStatusEnum.ChessRogueNous;
-                        else if ((con as Connection)!.Player!.ChessRogueManager?.RogueInstance?.AreaExcel
-                                 .RogueVersionId == 201)
-                            status = PlayerStatusEnum.ChessRogue;
+                        status =
+                            (con as Connection)!.Player!.ChessRogueManager?.RogueInstance?.AreaExcel
+                                .RogueVersionId switch
+                                {
+                                    RogueSubModeEnum.ChessRogue => PlayerStatusEnum.ChessRogueNous,
+                                    RogueSubModeEnum.ChessRogueNous => PlayerStatusEnum.ChessRogue,
+                                    _ => PlayerStatusEnum.Rogue
+                                };
                     }
                     else if ((con as Connection)!.Player!.ChallengeManager?.ChallengeInstance != null)
                     {
@@ -200,23 +222,33 @@ public class EntryPoint
         // generate the handbook
         HandbookGenerator.Generate();
 
-        HandlerManager.Init();
+        if (!DatabaseHelper.LoadAllData)
+        {
+            Logger.Warn(I18NManager.Translate("Server.ServerInfo.WaitForAllDone"));
+            var t = Task.Run(() =>
+            {
+                while (!DatabaseHelper.LoadAllData) // wait for all data to be loaded
+                    Thread.Sleep(100);
+            });
 
-        WebProgram.Main([], GetConfig().HttpServer.PublicPort, GetConfig().HttpServer.GetDisplayAddress());
-        Logger.Info(I18nManager.Translate("Server.ServerInfo.ServerRunning", I18nManager.Translate("Word.Dispatch"),
-            GetConfig().HttpServer.GetDisplayAddress()));
+            await t.WaitAsync(new CancellationToken());
 
-        DanhengListener.BaseConnection = typeof(Connection);
-        DanhengListener.StartListener();
+            Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItem", I18NManager.Translate("Word.Database")));
+        }
+
+        if (args.Contains("--upgrade-database")) DatabaseHelper.UpgradeDatabase();
+
+        if (args.Contains("--move")) DatabaseHelper.MoveFromSqlite();
 
         var elapsed = DateTime.Now - time;
-        Logger.Info(I18nManager.Translate("Server.ServerInfo.ServerStarted",
-            elapsed.TotalSeconds.ToString(CultureInfo.InvariantCulture)[..4]));
-
-        GenerateLogMap();
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.ServerStarted",
+            Math.Round(elapsed.TotalSeconds, 2).ToString(CultureInfo.InvariantCulture)));
 
         if (GetConfig().ServerOption.EnableMission)
-            Logger.Warn(I18nManager.Translate("Server.ServerInfo.MissionEnabled"));
+            Logger.Warn(I18NManager.Translate("Server.ServerInfo.MissionEnabled"));
+
+        ResourceManager.IsLoaded = true;
+
         CommandManager.Start();
     }
 
@@ -242,7 +274,7 @@ public class EntryPoint
         {
             var name = opcode.Name;
             var value = (int)opcode.GetValue(null)!;
-            DanhengConnection.LogMap.Add(value.ToString(), name);
+            DanhengConnection.LogMap.TryAdd(value, name);
         }
     }
 }

@@ -14,7 +14,7 @@ public class ChallengeStoryExtraExcel : ExcelResource
         return ID;
     }
 
-    public override void Loaded()
+    public override void AfterAllDone()
     {
         if (GameData.ChallengeConfigData.ContainsKey(ID))
         {

@@ -14,13 +14,19 @@ public class ConfigContainer
 
 public class HttpServerConfig
 {
+    public string BindAddress { get; set; } = "0.0.0.0";
     public string PublicAddress { get; set; } = "127.0.0.1";
-    public int PublicPort { get; set; } = 443;
+    public int Port { get; set; } = 443;
     public bool UseSSL { get; set; } = true;
 
     public string GetDisplayAddress()
     {
-        return (UseSSL ? "https" : "http") + "://" + PublicAddress + ":" + PublicPort;
+        return (UseSSL ? "https" : "http") + "://" + PublicAddress + ":" + Port;
+    }
+
+    public string GetBindDisplayAddress()
+    {
+        return (UseSSL ? "https" : "http") + "://" + BindAddress + ":" + Port;
     }
 }
 
@@ -32,16 +38,16 @@ public class KeyStoreConfig
 
 public class GameServerConfig
 {
+    public string BindAddress { get; set; } = "0.0.0.0";
     public string PublicAddress { get; set; } = "127.0.0.1";
-    public uint PublicPort { get; set; } = 23301;
+    public uint Port { get; set; } = 23301;
     public string GameServerId { get; set; } = "dan_heng";
     public string GameServerName { get; set; } = "DanhengServer";
     public string GameServerDescription { get; set; } = "A re-implementation of StarRail server";
-    public int KcpInterval { get; set; } = 40;
 
     public string GetDisplayAddress()
     {
-        return PublicAddress + ":" + PublicPort;
+        return PublicAddress + ":" + Port;
     }
 }
 
@@ -72,7 +78,7 @@ public class ServerOption
     public bool EnableMission { get; set; } = true; // experimental
     public bool AutoLightSection { get; set; } = true;
     public string Language { get; set; } = "EN";
-    public List<string> DefaultPermissions { get; set; } = ["*"];
+    public HashSet<string> DefaultPermissions { get; set; } = ["*"];
     public ServerAnnounce ServerAnnounce { get; set; } = new();
     public ServerProfile ServerProfile { get; set; } = new();
     public bool AutoCreateUser { get; set; } = true;

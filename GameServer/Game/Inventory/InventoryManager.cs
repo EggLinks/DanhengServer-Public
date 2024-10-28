@@ -146,7 +146,7 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
             case ItemMainTypeEnum.AvatarCard:
                 // add avatar
                 var avatar = Player.AvatarManager?.GetAvatar(itemId);
-                if (avatar != null && avatar.Excel != null)
+                if (avatar is { Excel: not null })
                 {
                     var rankUpItem = Player.InventoryManager!.GetItem(avatar.Excel.RankUpItemId);
                     if ((avatar.PathInfoes[itemId].Rank + rankUpItem?.Count ?? 0) <= 5)
@@ -168,18 +168,17 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         }
 
         ItemData? clone = null;
-        if (itemData != null)
-        {
-            clone = itemData.Clone();
-            if (sync)
-                await Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
-            clone.Count = count;
-            if (notify) await Player.SendPacket(new PacketScenePlaneEventScNotify(clone));
+        if (itemData == null) return returnRaw ? itemData : clone ?? itemData;
 
-            Player.MissionManager?.HandleFinishType(MissionFinishTypeEnum.GetItem, itemData.ToProto());
-        }
+        clone = itemData.Clone();
+        if (sync)
+            await Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
+        clone.Count = count;
+        if (notify) await Player.SendPacket(new PacketScenePlaneEventScNotify(clone));
 
-        return returnRaw ? itemData : clone ?? itemData;
+        Player.MissionManager?.HandleFinishType(MissionFinishTypeEnum.GetItem, itemData.ToProto());
+
+        return returnRaw ? itemData : clone;
     }
 
     public async ValueTask<ItemData> PutItem(int itemId, int count, int rank = 0, int promotion = 0, int level = 0,
@@ -251,7 +250,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         }
 
         if (sync && removedItems.Count > 0) await Player.SendPacket(new PacketPlayerSyncScNotify(removedItems));
-        DatabaseHelper.Instance?.UpdateInstance(Data);
         return removedItems;
     }
 
@@ -328,20 +326,32 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         return itemData;
     }
 
-    public ItemData? GetItem(int itemId)
+    /// <summary>
+    ///     Get item by itemId and uniqueId, if uniqueId provided, itemId will be ignored
+    /// </summary>
+    /// <param name="itemId"></param>
+    /// <param name="uniqueId"></param>
+    /// <returns></returns>
+    public ItemData? GetItem(int itemId, int uniqueId = 0, ItemMainTypeEnum mainType = ItemMainTypeEnum.Unknown)
     {
         GameData.ItemConfigData.TryGetValue(itemId, out var itemConfig);
-        if (itemConfig == null) return null;
-        switch (itemConfig.ItemMainType)
+        if (itemConfig == null && mainType == ItemMainTypeEnum.Unknown) return null;
+        if (itemConfig != null)
+            mainType = itemConfig.ItemMainType;
+        switch (mainType)
         {
             case ItemMainTypeEnum.Material:
                 return Data.MaterialItems.Find(x => x.ItemId == itemId);
             case ItemMainTypeEnum.Equipment:
-                return Data.EquipmentItems.Find(x => x.ItemId == itemId);
+                return uniqueId > 0
+                    ? Data.EquipmentItems.Find(x => x.UniqueId == uniqueId)
+                    : Data.EquipmentItems.Find(x => x.ItemId == itemId);
             case ItemMainTypeEnum.Relic:
-                return Data.RelicItems.Find(x => x.ItemId == itemId);
+                return uniqueId > 0
+                    ? Data.RelicItems.Find(x => x.UniqueId == uniqueId)
+                    : Data.RelicItems.Find(x => x.ItemId == itemId);
             case ItemMainTypeEnum.Virtual:
-                switch (itemConfig.ID)
+                switch (itemConfig?.ID ?? 0)
                 {
                     case 1:
                         return new ItemData
@@ -486,8 +496,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
                 var i = (await Player.InventoryManager!.AddItem(item.ItemId, item.Count, false))!;
                 i.Count = item.Count; // return the all thing
             }
-
-            DatabaseHelper.Instance!.UpdateInstance(Player.InventoryManager!.Data);
         }
 
         return items;
@@ -553,7 +561,8 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         return items;
     }
 
-    public async ValueTask<(Retcode, List<ItemData>? returnItems)> UseItem(int itemId, int count = 1, int baseAvatarId = 0)
+    public async ValueTask<(Retcode, List<ItemData>? returnItems)> UseItem(int itemId, int count = 1,
+        int baseAvatarId = 0)
     {
         GameData.ItemConfigData.TryGetValue(itemId, out var itemConfig);
         if (itemConfig == null) return (Retcode.RetItemNotExist, null);
@@ -561,12 +570,9 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         GameData.ItemUseBuffDataData.TryGetValue(dataId, out var useConfig);
         if (useConfig == null) return (Retcode.RetItemUseConfigNotExist, null);
 
-        for (int i = 0; i < count; i++)  // do count times
+        for (var i = 0; i < count; i++) // do count times
         {
-            if (useConfig.PreviewSkillPoint != 0)
-            {
-                await Player.LineupManager!.GainMp((int)useConfig.PreviewSkillPoint);
-            }
+            if (useConfig.PreviewSkillPoint != 0) await Player.LineupManager!.GainMp((int)useConfig.PreviewSkillPoint);
 
             if (baseAvatarId > 0)
             {
@@ -578,25 +584,30 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
 
                 if (useConfig.PreviewHPRecoveryPercent != 0)
                 {
-                    avatar.SetCurHp(Math.Min(Math.Max(avatar.CurrentHp + (int)(useConfig.PreviewHPRecoveryPercent * 10000), 0), 10000), extraLineup);
+                    avatar.SetCurHp(
+                        Math.Min(Math.Max(avatar.CurrentHp + (int)(useConfig.PreviewHPRecoveryPercent * 10000), 0),
+                            10000), extraLineup);
 
                     await Player.SendPacket(new PacketSyncLineupNotify(Player.LineupManager.GetCurLineup()!));
                 }
 
                 if (useConfig.PreviewHPRecoveryValue != 0)
                 {
-                    avatar.SetCurHp(Math.Min(Math.Max(avatar.CurrentHp + (int)useConfig.PreviewHPRecoveryValue, 0), 10000), extraLineup);
+                    avatar.SetCurHp(
+                        Math.Min(Math.Max(avatar.CurrentHp + (int)useConfig.PreviewHPRecoveryValue, 0), 10000),
+                        extraLineup);
 
                     await Player.SendPacket(new PacketSyncLineupNotify(Player.LineupManager.GetCurLineup()!));
                 }
 
                 if (useConfig.PreviewPowerPercent != 0)
                 {
-                    avatar.SetCurSp(Math.Min(Math.Max(avatar.CurrentHp + (int)(useConfig.PreviewPowerPercent * 10000), 0), 10000), extraLineup);
+                    avatar.SetCurSp(
+                        Math.Min(Math.Max(avatar.CurrentHp + (int)(useConfig.PreviewPowerPercent * 10000), 0), 10000),
+                        extraLineup);
 
                     await Player.SendPacket(new PacketSyncLineupNotify(Player.LineupManager.GetCurLineup()!));
                 }
-
             }
             else
             {
@@ -626,22 +637,14 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
 
         //maze buff
         if (useConfig.MazeBuffID > 0)
-        {
             foreach (var info in Player.SceneInstance?.AvatarInfo.Values.ToList() ?? [])
-            {
                 if (baseAvatarId == 0 || info.AvatarInfo.GetBaseAvatarId() == baseAvatarId)
                     await info.AddBuff(new SceneBuff(useConfig.MazeBuffID, 1, info.AvatarInfo.AvatarId));
-            }
-        }
 
         if (useConfig.MazeBuffID2 > 0)
-        {
             foreach (var info in Player.SceneInstance?.AvatarInfo.Values.ToList() ?? [])
-            {
                 if (baseAvatarId == 0 || info.AvatarInfo.GetBaseAvatarId() == baseAvatarId)
                     await info.AddBuff(new SceneBuff(useConfig.MazeBuffID2, 1, info.AvatarInfo.AvatarId));
-            }
-        }
 
         // remove item
         await RemoveItem(itemId, count);
@@ -801,7 +804,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
 
         avatarData.Level = curLevel;
         avatarData.Exp = curExp;
-        DatabaseHelper.Instance!.UpdateInstance(Player.AvatarManager.AvatarData!);
         // leftover
         Dictionary<int, ItemData> list = [];
         var leftover = exp;
@@ -909,7 +911,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
 
         itemData.Level = curLevel;
         itemData.Exp = curExp;
-        DatabaseHelper.Instance!.UpdateInstance(Data);
         // leftover
         Dictionary<int, ItemData> list = [];
         var leftover = exp;
@@ -994,7 +995,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
             await Player.InventoryManager!.RemoveItem(cost.ItemID, cost.ItemNum);
 
         equipmentData.Promotion++;
-        DatabaseHelper.Instance!.UpdateInstance(Player.InventoryManager.Data);
         await Player.SendPacket(new PacketPlayerSyncScNotify(equipmentData));
 
         return true;
@@ -1130,7 +1130,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         var avatarData = Player.AvatarManager!.GetAvatar(baseAvatarId);
         if (avatarData == null) return;
         avatarData.GetCurPathInfo().Rank++;
-        DatabaseHelper.Instance!.UpdateInstance(Player.AvatarManager.AvatarData!);
         await Player.SendPacket(new PacketPlayerSyncScNotify(avatarData));
     }
 
@@ -1148,7 +1147,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         var itemData = Data.EquipmentItems.Find(x => x.UniqueId == equipmentUniqueId);
         if (itemData == null) return;
         itemData.Rank += rank;
-        DatabaseHelper.Instance!.UpdateInstance(Data);
         await Player.SendPacket(new PacketPlayerSyncScNotify(itemData));
     }
 

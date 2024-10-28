@@ -62,9 +62,6 @@ public class FriendManager(PlayerInstance player) : BasePlayerManager(player)
         target.FriendList.Add(Player.Uid);
         target.SendApplyList.Remove(Player.Uid);
 
-        DatabaseHelper.Instance!.UpdateInstance(FriendData);
-        DatabaseHelper.Instance!.UpdateInstance(target);
-
         var targetData = PlayerData.GetPlayerByUid(targetUid)!;
         var targetPlayer = Listener.GetActiveConnection(targetUid);
         if (targetPlayer != null)

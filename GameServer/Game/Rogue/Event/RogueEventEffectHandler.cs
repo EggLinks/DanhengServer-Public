@@ -2,5 +2,9 @@
 
 public abstract class RogueEventEffectHandler
 {
-    public abstract ValueTask Handle(BaseRogueInstance rogue, RogueEventInstance? eventInstance, List<int> paramList);
+    public abstract void Init(BaseRogueInstance rogue, RogueEventInstance? eventInstance, List<int> paramList,
+        RogueEventParam? option);
+
+    public abstract ValueTask Handle(BaseRogueInstance rogue, RogueEventInstance? eventInstance, List<int> paramList,
+        RogueEventParam? option);
 }

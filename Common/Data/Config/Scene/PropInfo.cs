@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
-namespace EggLink.DanhengServer.Data.Config;
+namespace EggLink.DanhengServer.Data.Config.Scene;
 
 public class PropInfo : PositionInfo
 {
@@ -16,6 +16,7 @@ public class PropInfo : PositionInfo
     public int CocoonID { get; set; }
     public int FarmElementID { get; set; }
     public bool IsClientOnly { get; set; }
+    public bool LoadOnInitial { get; set; }
 
     public PropValueSource? ValueSource { get; set; }
     public string? InitLevelGraph { get; set; }

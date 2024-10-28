@@ -1,4 +1,4 @@
-﻿namespace EggLink.DanhengServer.Data.Config;
+﻿namespace EggLink.DanhengServer.Data.Config.Scene;
 
 public class MonsterInfo : PositionInfo
 {

@@ -7,8 +7,13 @@ namespace EggLink.DanhengServer.GameServer.Game.Rogue.Event.EffectHandler;
 [RogueEvent(DialogueEventTypeEnum.GetRogueMiracle)]
 public class EventHandlerGetRogueMiracle : RogueEventEffectHandler
 {
+    public override void Init(BaseRogueInstance rogue, RogueEventInstance? eventInstance, List<int> paramList,
+        RogueEventParam? option)
+    {
+    }
+
     public override async ValueTask Handle(BaseRogueInstance rogue, RogueEventInstance? eventInstance,
-        List<int> paramList)
+        List<int> paramList, RogueEventParam? option)
     {
         var miracleGroupId = paramList[0];
         GameData.RogueMiracleGroupData.TryGetValue(miracleGroupId, out var miracleGroup);

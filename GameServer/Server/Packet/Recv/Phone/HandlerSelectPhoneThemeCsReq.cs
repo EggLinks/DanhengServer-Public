@@ -1,5 +1,4 @@
-﻿using EggLink.DanhengServer.Database;
-using EggLink.DanhengServer.GameServer.Server.Packet.Send.Phone;
+﻿using EggLink.DanhengServer.GameServer.Server.Packet.Send.Phone;
 using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
@@ -13,7 +12,6 @@ public class HandlerSelectPhoneThemeCsReq : Handler
         var req = SelectPhoneThemeCsReq.Parser.ParseFrom(data);
 
         connection.Player!.Data.PhoneTheme = (int)req.ThemeId;
-        DatabaseHelper.Instance!.UpdateInstance(connection.Player!.Data);
 
         await connection.SendPacket(new PacketSelectPhoneThemeScRsp(req.ThemeId));
     }

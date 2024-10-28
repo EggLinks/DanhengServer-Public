@@ -6,9 +6,9 @@ namespace EggLink.DanhengServer.Data.Excel;
 [ResourceEntity("RogueBuffGroup.json")]
 public class RogueBuffGroupExcel : ExcelResource
 {
-    [JsonProperty("MNNPAFJEGJC")] public int GroupID { get; set; }
+    [JsonProperty("IOMDAGGIAME")] public int GroupID { get; set; }
 
-    [JsonProperty("KCFPNHGBGIA")] public List<int> BuffTagList { get; set; } = [];
+    [JsonProperty("HLKMFHBOAIA")] public List<int> BuffTagList { get; set; } = [];
 
     [JsonIgnore] public List<RogueBuffExcel> BuffList { get; set; } = [];
 
@@ -34,8 +34,10 @@ public class RogueBuffGroupExcel : ExcelResource
     {
         if (IsLoaded) return;
         var count = 0;
-        foreach (var buffID in BuffTagList)
-            if (GameData.RogueBuffData.FirstOrDefault(x => x.Value.RogueBuffTag == buffID).Value is RogueBuffExcel buff)
+        foreach (var buffId in BuffTagList)
+        {
+            List<RogueBuffExcel> buffs = [.. GameData.RogueBuffData.Values];
+            if (buffs.FirstOrDefault(x => x.RogueBuffTag == buffId) is { } buff)
             {
                 BuffList.SafeAdd(buff);
                 count++;
@@ -43,13 +45,12 @@ public class RogueBuffGroupExcel : ExcelResource
             else
             {
                 // might is group id
-                if (GameData.RogueBuffGroupData.TryGetValue(buffID, out var group))
-                {
-                    group.LoadBuff();
-                    BuffList.SafeAddRange(group.BuffList);
-                    count++;
-                }
+                if (!GameData.RogueBuffGroupData.TryGetValue(buffId, out var group)) continue;
+                group.LoadBuff();
+                BuffList.SafeAddRange(group.BuffList);
+                count++;
             }
+        }
 
         if (count == BuffTagList.Count) IsLoaded = true;
     }

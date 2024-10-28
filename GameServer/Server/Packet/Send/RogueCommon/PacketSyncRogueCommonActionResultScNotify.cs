@@ -1,11 +1,12 @@
-﻿using EggLink.DanhengServer.Kcp;
+﻿using EggLink.DanhengServer.Enums.Rogue;
+using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 
 namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.RogueCommon;
 
 public class PacketSyncRogueCommonActionResultScNotify : BasePacket
 {
-    public PacketSyncRogueCommonActionResultScNotify(int rogueSubmode, RogueCommonActionResult result,
+    public PacketSyncRogueCommonActionResultScNotify(RogueSubModeEnum rogueSubmode, RogueCommonActionResult result,
         RogueCommonActionResultDisplayType displayType = RogueCommonActionResultDisplayType.None) : base(
         CmdIds.SyncRogueCommonActionResultScNotify)
     {
@@ -15,12 +16,13 @@ public class PacketSyncRogueCommonActionResultScNotify : BasePacket
             DisplayType = displayType
         };
 
-        proto.ActionResult.Add(result);
+        proto.ActionResultList.Add(result);
 
         SetData(proto);
     }
 
-    public PacketSyncRogueCommonActionResultScNotify(int rogueSubmode, List<RogueCommonActionResult> results,
+    public PacketSyncRogueCommonActionResultScNotify(RogueSubModeEnum rogueSubmode,
+        List<RogueCommonActionResult> results,
         RogueCommonActionResultDisplayType displayType = RogueCommonActionResultDisplayType.None) : base(
         CmdIds.SyncRogueCommonActionResultScNotify)
     {
@@ -30,7 +32,7 @@ public class PacketSyncRogueCommonActionResultScNotify : BasePacket
             DisplayType = displayType
         };
 
-        proto.ActionResult.AddRange(results);
+        proto.ActionResultList.AddRange(results);
 
         SetData(proto);
     }

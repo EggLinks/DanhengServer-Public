@@ -6,8 +6,9 @@ namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Challenge;
 
 public class PacketChallengeBossPhaseSettleNotify : BasePacket
 {
-    public PacketChallengeBossPhaseSettleNotify(ChallengeInstance challenge) : base(CmdIds
-        .ChallengeBossPhaseSettleNotify)
+    public PacketChallengeBossPhaseSettleNotify(ChallengeInstance challenge, BattleTargetList? targetLists = null) :
+        base(CmdIds
+            .ChallengeBossPhaseSettleNotify)
     {
         var proto = new ChallengeBossPhaseSettleNotify
         {
@@ -18,8 +19,10 @@ public class PacketChallengeBossPhaseSettleNotify : BasePacket
             Star = (uint)challenge.Stars,
             Phase = (uint)challenge.CurrentStage,
             IsRemainingAction = true,
-            JFKBGANLNGF = true
+            IsReward = true
         };
+
+        proto.BattleTargetList.AddRange(targetLists?.BattleTargetList_ ?? []);
 
         SetData(proto);
     }

@@ -42,7 +42,7 @@ public class ItemData
     {
         GameData.RelicConfigData.TryGetValue(ItemId, out var config);
         if (config == null) return;
-        var affixId = GameTools.GetRandomRelicMainAffix(config.MainAffixGroup);
+        var affixId = UtilTools.GetRandomRelicMainAffix(config.MainAffixGroup);
         MainAffix = affixId;
     }
 
@@ -125,6 +125,35 @@ public class ItemData
             Rank = (uint)Rank,
             DressAvatarId = (uint)EquipAvatar
         };
+    }
+
+    public ChallengeBossEquipmentInfo ToChallengeEquipmentProto()
+    {
+        return new ChallengeBossEquipmentInfo
+        {
+            Tid = (uint)ItemId,
+            UniqueId = (uint)UniqueId,
+            Level = (uint)Level,
+            Promotion = (uint)Promotion,
+            Rank = (uint)Rank
+        };
+    }
+
+    public ChallengeBossRelicInfo ToChallengeRelicProto()
+    {
+        var proto = new ChallengeBossRelicInfo
+        {
+            Tid = (uint)ItemId,
+            UniqueId = (uint)UniqueId,
+            Level = (uint)Level,
+            MainAffixId = (uint)MainAffix
+        };
+
+        if (SubAffixes.Count < 1) return proto;
+        foreach (var subAffix in SubAffixes)
+            proto.SubAffixList.Add(subAffix.ToProto());
+
+        return proto;
     }
 
     public Item ToProto()

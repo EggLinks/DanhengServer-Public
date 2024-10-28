@@ -1,5 +1,4 @@
 ﻿using EggLink.DanhengServer.Enums.Rogue;
-using EggLink.DanhengServer.Proto;
 
 namespace EggLink.DanhengServer.GameServer.Game.Rogue.Event.CostHandler;
 
@@ -9,7 +8,6 @@ public class EventHandlerCostItemPercent : RogueEventCostHandler
     public override async ValueTask Handle(BaseRogueInstance rogue, RogueEventInstance? eventInstance,
         List<int> paramList)
     {
-        await rogue.CostMoney((int)(rogue.CurMoney * (paramList[1] / 100f)),
-            RogueCommonActionResultDisplayType.Single);
+        await rogue.CostMoney((int)(rogue.CurMoney * (paramList[1] / 100f)));
     }
 }

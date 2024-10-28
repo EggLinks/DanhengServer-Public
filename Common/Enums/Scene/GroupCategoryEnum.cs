@@ -7,5 +7,6 @@ public enum GroupCategoryEnum
     BattleProps = 2,
     Custom = 3,
     System = 4,
-    Atmosphere = 5
+    Atmosphere = 5,
+    BattleAudiences = 6
 }

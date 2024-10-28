@@ -8,7 +8,7 @@ namespace EggLink.DanhengServer.GameServer.Plugin;
 
 public class PluginManager
 {
-    private static readonly Logger logger = new("PluginManager");
+    private static readonly Logger Logger = new("PluginManager");
     public static readonly Dictionary<IPlugin, PluginInfo> Plugins = [];
 
     public static readonly Dictionary<IPlugin, List<Type>> PluginAssemblies = [];
@@ -32,21 +32,22 @@ public class PluginManager
             Directory.CreateDirectory(ConfigManager.Config.Path.PluginPath);
 
         var plugins = Directory.GetFiles(ConfigManager.Config.Path.PluginPath, "*.dll");
-        var loaders = new List<PluginLoader>();
-        AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
+        AppDomain.CurrentDomain.AssemblyResolve += (_, args) =>
         {
             var assemblyName = new AssemblyName(args.Name).Name + ".dll";
             var assemblyPath = Path.Combine(ConfigManager.Config.Path.PluginPath, assemblyName);
 
-            if (File.Exists(assemblyPath)) return Assembly.LoadFrom(assemblyPath);
-
-            return null;
+            return File.Exists(assemblyPath) ? Assembly.LoadFrom(assemblyPath) : null;
         };
         foreach (var plugin in plugins)
         {
             var fileInfo = new FileInfo(plugin);
             LoadPlugin(fileInfo.FullName);
         }
+
+        //var dict = PluginAssemblies.ToDictionary(pluginAssembly => Plugins[pluginAssembly.Key].Name, pluginAssembly => pluginAssembly.Value);
+
+        //I18NManager.LoadPluginLanguage(dict);
     }
 
     public static void LoadPlugin(string plugin)
@@ -72,18 +73,18 @@ public class PluginManager
                         var pluginInfo = type.GetCustomAttribute<PluginInfo>();
                         if (pluginInfo != null)
                         {
-                            logger.Info(
+                            Logger.Info(
                                 $"Loaded plugin {pluginInfo.Name} v{pluginInfo.Version}: {pluginInfo.Description}");
                         }
                         else
                         {
-                            logger.Info($"Loaded plugin {plugin}: No plugin info");
+                            Logger.Info($"Loaded plugin {plugin}: No plugin info");
                             continue;
                         }
 
                         if (Plugins.Values.Any(p => p.Name == pluginInfo.Name))
                         {
-                            logger.Error($"Failed to load plugin {plugin}: Plugin already loaded");
+                            Logger.Error($"Failed to load plugin {plugin}: Plugin already loaded");
                             continue;
                         }
 
@@ -97,29 +98,39 @@ public class PluginManager
 
                         pluginTypes.AddRange(types);
 
-                        pluginInstance.OnLoad();
+                        try
+                        {
+                            var dict = new Dictionary<string, List<Type>> { { pluginInfo.Name, pluginTypes } };
+
+                            I18NManager.LoadPluginLanguage(dict);
+                            pluginInstance.OnLoad();
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Error($"Failed to load plugin {plugin}: {e.Message}");
+                            // unload the plugin
+                            UnloadPlugin(pluginInstance);
+                        }
                     }
                     else
                     {
-                        logger.Error($"Failed to load plugin {plugin}: Plugin instance is null");
+                        Logger.Error($"Failed to load plugin {plugin}: Plugin instance is null");
                     }
                 }
         }
         catch (Exception ex)
         {
-            logger.Error($"Failed to load plugin {plugin}: {ex.Message}");
+            Logger.Error($"Failed to load plugin {plugin}: {ex.Message}");
         }
     }
 
     public static void UnloadPlugin(IPlugin plugin)
     {
-        if (Plugins.TryGetValue(plugin, out var value))
-        {
-            plugin.OnUnload();
-            Plugins.Remove(plugin);
-            PluginAssemblies.Remove(plugin);
-            logger.Info($"Unloaded plugin {value.Name}");
-        }
+        if (!Plugins.TryGetValue(plugin, out var value)) return;
+        plugin.OnUnload();
+        Plugins.Remove(plugin);
+        PluginAssemblies.Remove(plugin);
+        Logger.Info($"Unloaded plugin {value.Name}");
     }
 
 
@@ -127,7 +138,7 @@ public class PluginManager
     {
         foreach (var plugin in Plugins.Keys) UnloadPlugin(plugin);
 
-        logger.Info(I18nManager.Translate("Server.ServerInfo.UnloadedItems", I18nManager.Translate("Word.Plugin")));
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.UnloadedItems", I18NManager.Translate("Word.Plugin")));
     }
 
     #endregion

@@ -11,12 +11,12 @@ public class CommandKick : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         await arg.Target.SendPacket(new PacketPlayerKickOutScNotify());
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Kick.PlayerKicked", arg.Target.Player!.Data.Name!));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Kick.PlayerKicked", arg.Target.Player!.Data.Name!));
         arg.Target.Stop();
     }
 }

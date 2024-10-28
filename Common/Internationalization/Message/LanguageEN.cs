@@ -80,6 +80,8 @@ public class WordTextEN
     public string RogueChestMapInfo => "Simulated Universe Map Info";
     public string ChessRogueRoom => "Simulated Universe DLC";
     public string ChessRogueRoomInfo => "Simulated Universe DLC Info";
+
+    public string DatabaseAccount => "Database Account";
 }
 
 #endregion
@@ -124,6 +126,7 @@ public class CommandTextEN
 /// </summary>
 public class WebTextEN
 {
+    public string Maintain => "The server is undergoing maintenance, please try again later.";
 }
 
 /// <summary>
@@ -153,6 +156,11 @@ public class ServerInfoTextEN
     public string ConfigMissing => "{0} is missing. Please check your resource folder: {1}, {2} may not be available.";
     public string UnloadedItems => "Unloaded all {0}.";
     public string SaveDatabase => "Database saved in {0}s";
+
+    public string WaitForAllDone =>
+        "You cannot enter the game yet. Please wait for all items to load before trying again";
+
+    public string UnhandledException => "An unhandled exception occurred: {0}";
 }
 
 #endregion
@@ -272,6 +280,7 @@ public class HelpTextEN
     public string Commands => "Commands:";
     public string CommandUsage => "Usage: ";
     public string CommandPermission => "Need Permission: ";
+    public string CommandAlias => "Command Alias：";
 }
 
 /// <summary>
@@ -371,7 +380,7 @@ public class SceneTextEN
         "Use 'unlockall' to unlock all props in the scene (i.e., set all props that can be opened to the 'open' state). This command may cause the game to load to about 90%. Use '/scene reset <floorId>' to resolve this issue.\n" +
         "Use 'change' to enter a specified scene. For EntryId, refer to Resources/MapEntrance.json\n" +
         "Use 'reload' to reload the current scene and return to the initial position.\n" +
-        "Use 'reset' to reset the state of all props in the specified scene. For the current FloorId, refer to the Player table in the database.";
+        "Use 'reset' to reset the state of all props in the specified scene. For the current FloorId, use '/scene cur'.";
 
     public string Usage =>
         "Usage: /scene prop [groupId] [propId] [state]\n\nUsage: /scene remove [entityId]\n\nUsage: /scene unlockall\n\nUsage: /scene change [entryId]\n\nUsage: /scene reload\n\nUsage: /scene reset <floorId>";
@@ -385,6 +394,7 @@ public class SceneTextEN
     public string SceneChanged => "Entered scene {0}";
     public string SceneReloaded => "Scene has been reloaded!";
     public string SceneReset => "The prop state in floor {0} has been reset!";
+    public string CurrentScene => "Current Scene Entry Id: {0}, Plane Id: {1}, Floor Id: {2}";
 }
 
 /// <summary>

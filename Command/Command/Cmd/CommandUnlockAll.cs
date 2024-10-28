@@ -6,7 +6,7 @@ using EggLink.DanhengServer.Proto;
 
 namespace EggLink.DanhengServer.Command.Command.Cmd;
 
-[CommandInfo("unlockall", "Game.Command.UnlockAll.Desc", "Game.Command.UnlockAll.Usage")]
+[CommandInfo("unlockall", "Game.Command.UnlockAll.Desc", "Game.Command.UnlockAll.Usage", ["ua"])]
 public class CommandUnlockAll : ICommand
 {
     [CommandMethod("0 mission")]
@@ -14,7 +14,7 @@ public class CommandUnlockAll : ICommand
     {
         if (arg.Target == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -39,7 +39,7 @@ public class CommandUnlockAll : ICommand
             player.AvatarManager!.GetHero()!.PathId = 8002;
         }
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.UnlockAll.AllMissionsUnlocked"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.UnlockAll.AllMissionsUnlocked"));
         await arg.Target!.Player!.SendPacket(new PacketPlayerKickOutScNotify());
         arg.Target!.Stop();
     }

@@ -13,8 +13,8 @@ public class CommandReload : ICommand
         // Reload the banners
         GameData.BannersConfig =
             ResourceManager.LoadCustomFile<BannersConfig>("Banner", "Banners") ?? new BannersConfig();
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Reload.ConfigReloaded",
-            I18nManager.Translate("Word.Banner")));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Reload.ConfigReloaded",
+            I18NManager.Translate("Word.Banner")));
     }
 
     [CommandMethod("0 activity")]
@@ -23,7 +23,7 @@ public class CommandReload : ICommand
         // Reload the activities
         GameData.ActivityConfig = ResourceManager.LoadCustomFile<ActivityConfig>("Activity", "ActivityConfig") ??
                                   new ActivityConfig();
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Reload.ConfigReloaded",
-            I18nManager.Translate("Word.Activity")));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Reload.ConfigReloaded",
+            I18NManager.Translate("Word.Activity")));
     }
 }

@@ -16,6 +16,19 @@ public class PacketSelectRogueCommonDialogueOptionScRsp : BasePacket
             OptionId = (uint)rogueEvent.SelectedOptionId
         };
 
+        if (rogueEvent.EffectEventId.Count > 0)
+        {
+            proto.EffectEventIdList.AddRange(rogueEvent.EffectEventId.Select(x => (uint)x));
+            rogueEvent.EffectEventId.Clear();
+        }
+
+        foreach (var option in rogueEvent.Options)
+            if (option.OverrideSelected ?? option.IsSelected)
+            {
+                proto.EventHasEffect = true;
+                break;
+            }
+
         SetData(proto);
     }
 

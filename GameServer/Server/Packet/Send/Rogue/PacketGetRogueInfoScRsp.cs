@@ -10,7 +10,7 @@ public class PacketGetRogueInfoScRsp : BasePacket
     {
         var proto = new GetRogueInfoScRsp
         {
-            RogueInfo = player.RogueManager!.ToProto()
+            RogueGameInfo = player.RogueManager!.ToProto()
         };
 
         SetData(proto);

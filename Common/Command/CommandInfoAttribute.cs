@@ -1,10 +1,15 @@
 ﻿namespace EggLink.DanhengServer.Command;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class CommandInfo(string name, string description, string usage, string keyword = "", string permission = "")
+public class CommandInfoAttribute(
+    string name,
+    string description,
+    string usage,
+    string keyword = "",
+    string permission = "")
     : Attribute
 {
-    public CommandInfo(string name, string description, string usage, string[] alias, string keyword = "",
+    public CommandInfoAttribute(string name, string description, string usage, string[] alias, string keyword = "",
         string permission = "") : this(name, description, usage, keyword, permission)
     {
         Alias = alias;
@@ -19,23 +24,23 @@ public class CommandInfo(string name, string description, string usage, string k
 }
 
 [AttributeUsage(AttributeTargets.Method)]
-public class CommandMethod(CommandCondition conditions) : Attribute
+public class CommandMethodAttribute(CommandCondition conditions) : Attribute
 {
-    public CommandMethod(string condition) : this(new CommandCondition())
+    public CommandMethodAttribute(string condition) : this(new CommandCondition())
     {
         var index = 0;
         var conditions = condition.Split(' ');
         foreach (var c in conditions)
             if (int.TryParse(c, out var i))
                 Conditions[index].Index = i;
-            else if (c is string s) Conditions[index++].ShouldBe = s;
+            else Conditions[index++].ShouldBe = c;
     }
 
     public List<CommandCondition> Conditions { get; } = [conditions];
 }
 
 [AttributeUsage(AttributeTargets.Method)]
-public class CommandDefault : Attribute
+public class CommandDefaultAttribute : Attribute
 {
 }
 

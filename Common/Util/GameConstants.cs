@@ -22,6 +22,7 @@ public static class GameConstants
 
     public const int CHALLENGE_ENTRANCE = 100000103;
     public const int CHALLENGE_STORY_ENTRANCE = 102020107;
+    public const int CHALLENGE_BOSS_ENTRANCE = 1030402;
 
     public static readonly List<int> UpgradeWorldLevel = [20, 30, 40, 50, 60, 65];
     public static readonly List<int> AllowedChessRogueEntranceId = [8020701, 8020901, 8020401, 8020201];

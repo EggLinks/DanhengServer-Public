@@ -17,8 +17,8 @@ public static class HandbookGenerator
         var textMapPath = config.Path.ResourcePath + "/TextMap/TextMap" + config.ServerOption.Language + ".json";
         if (!File.Exists(textMapPath))
         {
-            Logger.GetByClassName().Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
-                I18nManager.Translate("Word.NotFound")));
+            Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
+                I18NManager.Translate("Word.NotFound")));
             return;
         }
 
@@ -26,8 +26,8 @@ public static class HandbookGenerator
 
         if (textMap == null)
         {
-            Logger.GetByClassName().Error(I18nManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
-                I18nManager.Translate("Word.Error")));
+            Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
+                I18NManager.Translate("Word.Error")));
             return;
         }
 
@@ -79,7 +79,7 @@ public static class HandbookGenerator
         WriteToFile(builder.ToString());
 
         Logger.GetByClassName()
-            .Info(I18nManager.Translate("Server.ServerInfo.GeneratedItem", I18nManager.Translate("Word.Handbook")));
+            .Info(I18NManager.Translate("Server.ServerInfo.GeneratedItem", I18NManager.Translate("Word.Handbook")));
     }
 
     public static void GenerateCmd(StringBuilder builder)
@@ -87,7 +87,7 @@ public static class HandbookGenerator
         foreach (var cmd in EntryPoint.CommandManager.CommandInfo)
         {
             builder.Append("\t" + cmd.Key);
-            var desc = I18nManager.Translate(cmd.Value.Description).Replace("\n", "\n\t\t");
+            var desc = I18NManager.Translate(cmd.Value.Description).Replace("\n", "\n\t\t");
             builder.AppendLine(": " + desc);
         }
     }

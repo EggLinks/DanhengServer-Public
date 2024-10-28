@@ -7,7 +7,7 @@ using EggLink.DanhengServer.Internationalization;
 
 namespace EggLink.DanhengServer.Command.Command.Cmd;
 
-[CommandInfo("giveall", "Game.Command.GiveAll.Desc", "Game.Command.GiveAll.Usage")]
+[CommandInfo("giveall", "Game.Command.GiveAll.Desc", "Game.Command.GiveAll.Usage", ["ga"])]
 public class CommandGiveall : ICommand
 {
     [CommandMethod("0 avatar")]
@@ -16,7 +16,7 @@ public class CommandGiveall : ICommand
         var player = arg.Target?.Player;
         if (player == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -26,7 +26,7 @@ public class CommandGiveall : ICommand
         levelStr ??= "1";
         if (!int.TryParse(rankStr, out var rank) || !int.TryParse(levelStr, out var level))
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -59,8 +59,8 @@ public class CommandGiveall : ICommand
 
         await player.SendPacket(new PacketPlayerSyncScNotify(player.AvatarManager!.AvatarData.Avatars));
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.GiveAll.GiveAllItems",
-            I18nManager.Translate("Word.Avatar"), "1"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
+            I18NManager.Translate("Word.Avatar"), "1"));
     }
 
     [CommandMethod("0 equipment")]
@@ -69,7 +69,7 @@ public class CommandGiveall : ICommand
         var player = arg.Target?.Player;
         if (player == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -82,7 +82,7 @@ public class CommandGiveall : ICommand
         if (!int.TryParse(rankStr, out var rank) || !int.TryParse(levelStr, out var level) ||
             !int.TryParse(amountStr, out var amount))
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -101,8 +101,8 @@ public class CommandGiveall : ICommand
 
         await player.SendPacket(new PacketPlayerSyncScNotify(items));
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.GiveAll.GiveAllItems",
-            I18nManager.Translate("Word.Equipment"), amount.ToString()));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
+            I18NManager.Translate("Word.Equipment"), amount.ToString()));
     }
 
     [CommandMethod("0 material")]
@@ -111,7 +111,7 @@ public class CommandGiveall : ICommand
         var player = arg.Target?.Player;
         if (player == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -119,7 +119,7 @@ public class CommandGiveall : ICommand
         amountStr ??= "1";
         if (!int.TryParse(amountStr, out var amount))
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -134,8 +134,8 @@ public class CommandGiveall : ICommand
                 });
 
         await player.InventoryManager!.AddItems(items, false);
-        await arg.SendMsg(I18nManager.Translate("Game.Command.GiveAll.GiveAllItems",
-            I18nManager.Translate("Word.Material"), amount.ToString()));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
+            I18NManager.Translate("Word.Material"), amount.ToString()));
     }
 
     [CommandMethod("0 relic")]
@@ -144,7 +144,7 @@ public class CommandGiveall : ICommand
         var player = arg.Target?.Player;
         if (player == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -152,7 +152,7 @@ public class CommandGiveall : ICommand
         levelStr ??= "1";
         if (!int.TryParse(levelStr, out var level))
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -160,7 +160,7 @@ public class CommandGiveall : ICommand
         amountStr ??= "1";
         if (!int.TryParse(amountStr, out var amount))
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -179,8 +179,8 @@ public class CommandGiveall : ICommand
 
         await player.SendPacket(new PacketPlayerSyncScNotify(items));
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.GiveAll.GiveAllItems",
-            I18nManager.Translate("Word.Relic"), amount.ToString()));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
+            I18NManager.Translate("Word.Relic"), amount.ToString()));
     }
 
     [CommandMethod("0 unlock")]
@@ -189,7 +189,7 @@ public class CommandGiveall : ICommand
         var player = arg.Target?.Player;
         if (player == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -201,8 +201,8 @@ public class CommandGiveall : ICommand
                     material.ItemSubType == ItemSubTypeEnum.ChatBubble)
                     await player.InventoryManager!.AddItem(material.ID, 1, false);
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.GiveAll.GiveAllItems",
-            I18nManager.Translate("Word.Unlock"), "1"));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
+            I18NManager.Translate("Word.Unlock"), "1"));
     }
 
     [CommandMethod("0 path")]
@@ -211,7 +211,7 @@ public class CommandGiveall : ICommand
         var player = arg.Target?.Player;
         if (player == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
@@ -236,8 +236,8 @@ public class CommandGiveall : ICommand
 
         await player.SendPacket(new PacketPlayerSyncScNotify(player.AvatarManager!.AvatarData.Avatars));
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.GiveAll.GiveAllItems",
-            I18nManager.Translate("Word.Avatar"),
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
+            I18NManager.Translate("Word.Avatar"),
             "1"));
     }
 }

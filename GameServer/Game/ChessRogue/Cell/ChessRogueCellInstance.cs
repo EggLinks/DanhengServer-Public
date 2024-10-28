@@ -5,6 +5,7 @@ using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
+using CellFinalMonsterInfo = EggLink.DanhengServer.Proto.CellFinalMonsterInfo;
 
 namespace EggLink.DanhengServer.GameServer.Game.ChessRogue.Cell;
 
@@ -21,19 +22,15 @@ public class ChessRogueCellInstance
         list.Add(RogueDLCBlockTypeEnum.NousSpecialEvent, 4);
         list.Add(RogueDLCBlockTypeEnum.NousEvent, 2);
 
-        if (item.BlockTypeList.Count > 0)
-            CellType = item.BlockTypeList.RandomElement();
-        else
-            CellType = list.GetRandom();
+        BlockType = item.BlockTypeList.Count > 0 ? item.BlockTypeList.RandomElement() : list.GetRandom();
     }
 
-    public RogueDLCBlockTypeEnum CellType { get; set; }
+    public RogueDLCBlockTypeEnum BlockType { get; set; }
     public int PosY { get; set; }
     public int PosX { get; set; }
     public int CellId { get; set; }
     public int RoomId { get; set; }
-    public int Layer { get; set; } = 1;
-    public int MapId { get; set; }
+    public int Layer { get; set; }
     public ChessRogueInstance Instance { get; set; }
     public ChessRogueBoardCellStatus CellStatus { get; set; } = ChessRogueBoardCellStatus.Idle;
     public ChessRogueRoomConfig? RoomConfig { get; set; }
@@ -45,17 +42,12 @@ public class ChessRogueCellInstance
 
     public void Init()
     {
-        if (CellType == RogueDLCBlockTypeEnum.MonsterBoss)
+        switch (BlockType)
         {
             // boss
-            if (Layer == 1)
+            case RogueDLCBlockTypeEnum.MonsterBoss when Layer == 1:
             {
-                var randomList = new List<int>();
-                foreach (var i in Enumerable.Range(101, 7))
-                {
-                    if (i == 103) continue;
-                    randomList.Add(i);
-                }
+                var randomList = Enumerable.Range(101, 7).Where(i => i != 103).ToList();
 
                 var random1 = randomList.RandomElement();
                 randomList.Remove(random1);
@@ -70,11 +62,11 @@ public class ChessRogueCellInstance
                     BossDecayId = randomList.RandomElement(),
                     MonsterId = Random.Shared.Next(221001, 221018)
                 });
+                break;
             }
-            else
+            case RogueDLCBlockTypeEnum.MonsterBoss:
             {
-                var randomList = new List<int>();
-                foreach (var i in Enumerable.Range(2, 3)) randomList.Add(i * 10 + 101);
+                var randomList = Enumerable.Range(2, 3).Select(i => i * 10 + 101).ToList();
 
                 var random1 = randomList.RandomElement();
                 randomList.Remove(random1);
@@ -90,44 +82,43 @@ public class ChessRogueCellInstance
                     BossDecayId = randomList.RandomElement(),
                     MonsterId = Random.Shared.Next(222001, 222017)
                 });
+                break;
             }
-        }
-        else if (CellType == RogueDLCBlockTypeEnum.MonsterNousBoss ||
-                 CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
-        {
-            // last boss
-            CellAdvanceInfo.Add(new ChessRogueCellAdvanceInfo
+            case RogueDLCBlockTypeEnum.MonsterNousBoss:
+            case RogueDLCBlockTypeEnum.MonsterSwarmBoss:
             {
-                BossDecayId = 114,
-                MonsterId = 223003
-            });
-            CellAdvanceInfo.Add(new ChessRogueCellAdvanceInfo
-            {
-                BossDecayId = 102 + Instance.BossAeonId * 10,
-                MonsterId = Random.Shared.Next(223001, 223003)
-            });
+                // last boss
+                CellAdvanceInfo.Add(new ChessRogueCellAdvanceInfo
+                {
+                    BossDecayId = 114,
+                    MonsterId = 223003
+                });
+                CellAdvanceInfo.Add(new ChessRogueCellAdvanceInfo
+                {
+                    BossDecayId = 102 + Instance.BossAeonId * 10,
+                    MonsterId = Random.Shared.Next(223001, 223003)
+                });
 
-            foreach (var decay in Instance.BossBuff) SelectedDecayId.Add(decay.BossDecayID);
+                foreach (var decay in Instance.BossBuff) SelectedDecayId.Add(decay.BossDecayID);
+                break;
+            }
         }
     }
 
     public int GetBossAeonId(int monsterId)
     {
         var info = CellAdvanceInfo.Find(x => x.MonsterId == monsterId);
-        if (info != null) return Math.Max((info.BossDecayId - 101) / 10, 0);
-        return 0;
+
+        return info != null ? Math.Max((info.BossDecayId - 101) / 10, 0) : 0;
     }
 
     public RogueDLCBossDecayExcel? GetBossDecayExcel(int monsterId)
     {
         var info = CellAdvanceInfo.Find(x => x.MonsterId == monsterId);
-        if (info != null)
-        {
-            GameData.RogueDLCBossDecayData.TryGetValue(info.BossDecayId, out var excel);
-            return excel;
-        }
+        if (info == null) return null;
+        GameData.RogueDLCBossDecayData.TryGetValue(info.BossDecayId, out var excel);
 
-        return null;
+        return excel;
     }
 
     public int GetCellId()
@@ -137,23 +128,21 @@ public class ChessRogueCellInstance
 
     public int GetEntryId()
     {
-        if (RoomConfig == null)
+        if (RoomConfig != null) return RoomConfig.EntranceId;
+        var pool = GameData.ChessRogueRoomData[BlockType].FindAll(x => x.EntranceId == Instance.LayerMap).ToList();
+        RoomConfig = pool.RandomElement();
+        if (Instance.FirstEnterBattle && BlockType == RogueDLCBlockTypeEnum.MonsterNormal)
         {
-            var pool = GameData.ChessRogueRoomData[CellType].FindAll(x => x.EntranceId == Instance.LayerMap).ToList();
-            RoomConfig = pool.RandomElement();
-            if (Instance.FirstEnterBattle && CellType == RogueDLCBlockTypeEnum.MonsterNormal)
+            do
             {
-                do
-                {
-                    RoomConfig = pool.RandomElement();
-                } while (RoomConfig.SubMonsterGroup.Count == 0); // make sure the room has sub monster
+                RoomConfig = pool.RandomElement();
+            } while (RoomConfig.SubMonsterGroup.Count == 0); // make sure the room has sub monster
 
-                Instance.FirstEnterBattle = false;
-            }
-
-            RoomId = RoomConfig.RoomPrefix * 10000 + (int)CellType * 100 +
-                     Random.Shared.Next(1, 10); // find a better way to generate room id
+            Instance.FirstEnterBattle = false;
         }
+
+        RoomId = RoomConfig.RoomPrefix * 10000 + (int)BlockType * 100 +
+                 Random.Shared.Next(1, 10); // find a better way to generate room id
 
         return RoomConfig.EntranceId;
     }
@@ -180,30 +169,39 @@ public class ChessRogueCellInstance
             CellStatus = CellStatus,
             PosY = (uint)PosY,
             Id = (uint)GetCellId(),
-            CellType = (uint)CellType,
+            BlockType = (uint)BlockType,
             IsUnlock = true,
             RoomId = (uint)RoomId,
-            JEHEAOINGMP = true,
+            PLOEJLHMONC = true,
             PosX = (uint)GetRow()
         };
 
-        if (CellAdvanceInfo.Count > 0)
-        {
-            info.PlayerInfo = new CellAdvanceInfo
+        if (CellAdvanceInfo.Count <= 0) return info;
+        if (SelectedDecayId.Count > 0)
+            info.StageInfo = new CellAdvanceInfo
+            {
+                FinalBossInfo = new CellFinalMonsterInfo
+                {
+                    BossInfo = new CellMonsterInfo
+                    {
+                        CellMonsterList = { CellAdvanceInfo.Select(x => x.ToProto()).ToList() },
+                        SelectBossId = (uint)SelectMonsterId
+                    },
+                    SelectBossInfo = new CellMonsterSelectInfo
+                    {
+                        SelectDecayId = { SelectedDecayId.Select(x => (uint)x) }
+                    }
+                }
+            };
+        else
+            info.StageInfo = new CellAdvanceInfo
             {
                 BossInfo = new CellMonsterInfo
                 {
-                    MonsterList = { CellAdvanceInfo.Select(x => x.ToProto()).ToList() },
+                    CellMonsterList = { CellAdvanceInfo.Select(x => x.ToProto()).ToList() },
                     SelectBossId = (uint)SelectMonsterId
                 }
             };
-
-            if (SelectedDecayId.Count > 0)
-                info.PlayerInfo.SelectBossInfo = new CellMonsterSelectInfo
-                {
-                    SelectDecayId = { SelectedDecayId.Select(x => (uint)x).ToList() }
-                };
-        }
 
         return info;
     }

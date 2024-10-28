@@ -47,7 +47,6 @@ public class SpecialAvatarExcel : ExcelResource
 
     public override void AfterAllDone()
     {
-        // TODO Relic handler
     }
 
     public AvatarInfo ToAvatarData(int uid)
@@ -84,8 +83,12 @@ public class SpecialAvatarExcel : ExcelResource
         });
 
         if (avatarConfig != null)
+        {
             foreach (var skill in avatarConfig.DefaultSkillTree)
                 instance.SkillTree.Add(skill.PointID, skill.Level);
+
+            instance.Excel = avatarConfig;
+        }
 
         return instance;
     }

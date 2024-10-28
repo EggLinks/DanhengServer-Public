@@ -80,6 +80,10 @@ public class WordTextCHS
     public string RogueChestMapInfo => "模拟宇宙地图文件";
     public string ChessRogueRoom => "模拟宇宙DLC";
     public string ChessRogueRoomInfo => "模拟宇宙DLC文件";
+    public string SummonUnit => "秘技生成";
+    public string SummonUnitInfo => "秘技生成文件";
+
+    public string DatabaseAccount => "数据库账号";
 }
 
 #endregion
@@ -124,6 +128,7 @@ public class CommandTextCHS
 /// </summary>
 public class WebTextCHS
 {
+    public string Maintain => "服务器正在维修，请稍后尝试。";
 }
 
 /// <summary>
@@ -149,6 +154,9 @@ public class ServerInfoTextCHS
     public string ConfigMissing => "{0} 缺失，请检查你的资源文件夹：{1}，{2} 可能不能使用。";
     public string UnloadedItems => "卸载了所有 {0}。";
     public string SaveDatabase => "已保存数据库，用时 {0}s";
+    public string WaitForAllDone => "现在还不可以进入游戏，请等待所有项目加载完成后再试";
+
+    public string UnhandledException => "发生未经处理的异常：{0}";
 }
 
 #endregion
@@ -264,6 +272,7 @@ public class HelpTextCHS
     public string Usage => "用法：/help\n\n用法：/help [命令]";
     public string Commands => "命令:";
     public string CommandPermission => "所需权限: ";
+    public string CommandAlias => "命令别名：";
 }
 
 /// <summary>
@@ -361,7 +370,7 @@ public class SceneTextCHS
         "使用 unlockall 来解锁场景内所有道具（即将所有能设置为open状态的道具设置为open状态），此命令有较大可能会导致游戏加载卡条约90%，使用 /scene reset <floorId> 来解决问题\n" +
         "使用 change 来进入指定场景，要获取EntryId，请访问 Resources/MapEntrance.json\n" +
         "使用 reload 来重新加载当前场景，并回到初始位置\n" +
-        "使用 reset 来重置指定场景所有道具状态，要获取当前FloorId，请访问数据库 Player 表";
+        "使用 reset 来重置指定场景所有道具状态，要获取当前FloorId，请使用 /scene cur";
 
     public string Usage =>
         "用法：/scene prop [组ID] [道具ID] [状态]\n\n用法：/scene remove [实体ID]\n\n用法：/scene unlockall\n\n用法：/scene change [entryId]\n\n用法：/scene reload\n\n用法：/scene reset <floorId>";
@@ -375,6 +384,7 @@ public class SceneTextCHS
     public string SceneChanged => "已进入场景 {0}";
     public string SceneReloaded => "场景已重新加载!";
     public string SceneReset => "已重置场景 {0} 中所有道具状态！";
+    public string CurrentScene => "当前场景Entry Id: {0}, Plane Id: {1}, Floor Id: {2}";
 }
 
 /// <summary>

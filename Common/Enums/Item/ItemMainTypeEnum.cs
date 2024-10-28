@@ -10,5 +10,6 @@ public enum ItemMainTypeEnum
     Usable = 5,
     Material = 6,
     Mission = 7,
-    Display = 8
+    Display = 8,
+    Pet = 9
 }

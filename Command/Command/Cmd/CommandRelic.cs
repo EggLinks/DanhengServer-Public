@@ -14,13 +14,13 @@ public class CommandRelic : ICommand
         var player = arg.Target?.Player;
         if (player == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
             return;
         }
 
         if (arg.BasicArgs.Count < 3)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -30,7 +30,7 @@ public class CommandRelic : ICommand
         levelStr ??= "1";
         if (!int.TryParse(str, out var amount) || !int.TryParse(levelStr, out var level))
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -38,7 +38,7 @@ public class CommandRelic : ICommand
         GameData.ItemConfigData.TryGetValue(int.Parse(arg.BasicArgs[0]), out var itemConfigExcel);
         if (itemConfig == null || itemConfigExcel == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Relic.RelicNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Relic.RelicNotFound"));
             return;
         }
 
@@ -46,7 +46,7 @@ public class CommandRelic : ICommand
         GameData.RelicMainAffixData.TryGetValue(itemConfig.MainAffixGroup, out var mainAffixConfig);
         if (subAffixConfig == null || mainAffixConfig == null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Relic.RelicNotFound"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Relic.RelicNotFound"));
             return;
         }
 
@@ -62,7 +62,7 @@ public class CommandRelic : ICommand
             mainAffixId = int.Parse(arg.BasicArgs[1]);
             if (!mainAffixConfig.ContainsKey(mainAffixId))
             {
-                await arg.SendMsg(I18nManager.Translate("Game.Command.Relic.InvalidMainAffixId"));
+                await arg.SendMsg(I18NManager.Translate("Game.Command.Relic.InvalidMainAffixId"));
                 return;
             }
 
@@ -77,13 +77,13 @@ public class CommandRelic : ICommand
             if (subAffix.Length != 2 || !int.TryParse(subAffix[0], out var subId) ||
                 !int.TryParse(subAffix[1], out var subLevel))
             {
-                await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+                await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
                 return;
             }
 
             if (!subAffixConfig.ContainsKey(subId))
             {
-                await arg.SendMsg(I18nManager.Translate("Game.Command.Relic.InvalidSubAffixId"));
+                await arg.SendMsg(I18NManager.Translate("Game.Command.Relic.InvalidSubAffixId"));
                 return;
             }
 
@@ -133,7 +133,7 @@ public class CommandRelic : ICommand
 
         for (var i = 0; i < amount; i++) await player.InventoryManager!.AddItem(itemData, false);
 
-        await arg.SendMsg(I18nManager.Translate("Game.Command.Relic.RelicGiven", player.Uid.ToString(),
+        await arg.SendMsg(I18NManager.Translate("Game.Command.Relic.RelicGiven", player.Uid.ToString(),
             amount.ToString(), itemConfigExcel.Name ?? itemData.ItemId.ToString(), itemData.MainAffix.ToString()));
     }
 }

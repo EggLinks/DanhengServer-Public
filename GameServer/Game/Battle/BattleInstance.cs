@@ -6,7 +6,9 @@ using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.BattleCollege;
 using EggLink.DanhengServer.Proto;
+using EggLink.DanhengServer.Util;
 using LineupInfo = EggLink.DanhengServer.Database.Lineup.LineupInfo;
 
 namespace EggLink.DanhengServer.GameServer.Game.Battle;
@@ -27,10 +29,11 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
         }
         else
         {
-            foreach (var monster in monsters)
+            foreach (var id in monsters.Select(monster => monster.GetStageId()))
             {
-                var id = monster.GetStageId();
-                GameData.StageConfigData.TryGetValue(id, out var stage);
+                GameData.PlaneEventData.TryGetValue(id * 10 + player.Data.WorldLevel, out var planeEvent);
+                if (planeEvent == null) continue;
+                GameData.StageConfigData.TryGetValue(planeEvent.StageID, out var stage);
                 if (stage != null) Stages.Add(stage);
             }
 
@@ -59,6 +62,7 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
     public List<MazeBuff> Buffs { get; set; } = [];
     public Dictionary<int, BattleEventInstance> BattleEvents { get; set; } = [];
     public Dictionary<int, BattleTargetList> BattleTargets { get; set; } = [];
+    public BattleCollegeConfigExcel? CollegeConfigExcel { get; set; }
     public PVEBattleResultCsReq? BattleResult { get; set; }
 
     public ItemList GetDropItemList()
@@ -73,7 +77,23 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
             foreach (var item in await Player.InventoryManager!.HandleMappingInfo(MappingInfoId, WorldLevel))
                 list.ItemList_.Add(item.ToProto());
         });
+
         t.Wait();
+
+        if (CollegeConfigExcel == null ||
+            Player.BattleCollegeData?.FinishedCollegeIdList.Contains(CollegeConfigExcel.ID) != false)
+            return list; // if college excel is not null and college is not finished
+
+        // finish it 
+        Player.BattleCollegeData.FinishedCollegeIdList.Add(CollegeConfigExcel.ID);
+        var t2 = System.Threading.Tasks.Task.Run(async () =>
+        {
+            await Player.SendPacket(new PacketBattleCollegeDataChangeScNotify(Player));
+            foreach (var item in await Player.InventoryManager!.HandleReward(CollegeConfigExcel.RewardID))
+                list.ItemList_.Add(item.ToProto());
+        });
+
+        t2.Wait();
 
         return list;
     }
@@ -100,29 +120,25 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
         var excel = GameData.StageConfigData[StageId];
         List<int> list = [.. excel.TrialAvatarList];
 
-        if (list.Count > 0)
-        {
-            if (Player.Data.CurrentGender == Gender.Man)
-            {
-                foreach (var avatar in excel.TrialAvatarList)
-                    if (avatar > 10000) // else is Base Avatar
-                        if (avatar.ToString().EndsWith("8002") ||
-                            avatar.ToString().EndsWith("8004") ||
-                            avatar.ToString().EndsWith("8006"))
-                            list.Remove(avatar);
-            }
-            else
-            {
-                foreach (var avatar in excel.TrialAvatarList)
-                    if (avatar > 10000) // else is Base Avatar
-                        if (avatar.ToString().EndsWith("8001") ||
-                            avatar.ToString().EndsWith("8003") ||
-                            avatar.ToString().EndsWith("8005"))
-                            list.Remove(avatar);
-            }
-        }
+        // if college excel is not null
+        if (CollegeConfigExcel is { TrialAvatarList.Count: > 0 }) list = [.. CollegeConfigExcel.TrialAvatarList];
 
         if (list.Count > 0)
+        {
+            List<int> tempList = [.. list];
+            if (Player.Data.CurrentGender == Gender.Man)
+                foreach (var avatar in tempList.Where(avatar =>
+                             GameData.SpecialAvatarData.TryGetValue(avatar * 10 + 0, out var specialAvatarExcel) &&
+                             specialAvatarExcel.AvatarID is 8002 or 8004 or 8006))
+                    list.Remove(avatar);
+            else
+                foreach (var avatar in tempList.Where(avatar =>
+                             GameData.SpecialAvatarData.TryGetValue(avatar * 10 + 0, out var specialAvatarExcel) &&
+                             specialAvatarExcel.AvatarID is 8001 or 8003 or 8005))
+                    list.Remove(avatar);
+        }
+
+        if (list.Count > 0) // if list is not empty
         {
             Dictionary<AvatarInfo, AvatarType> dict = [];
             foreach (var avatar in list)
@@ -134,8 +150,16 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
                 }
                 else
                 {
-                    var avatarInfo = Player.AvatarManager!.GetAvatar(avatar);
-                    if (avatarInfo != null) dict.Add(avatarInfo, AvatarType.AvatarFormalType);
+                    GameData.SpecialAvatarData.TryGetValue(avatar * 10 + 0, out var raw);
+                    if (raw != null)
+                    {
+                        dict.Add(raw.ToAvatarData(Player.Uid), AvatarType.AvatarTrialType);
+                    }
+                    else
+                    {
+                        var avatarInfo = Player.AvatarManager!.GetAvatar(avatar);
+                        if (avatarInfo != null) dict.Add(avatarInfo, AvatarType.AvatarFormalType);
+                    }
                 }
             }
 
@@ -144,7 +168,7 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
         else
         {
             Dictionary<AvatarInfo, AvatarType> dict = [];
-            foreach (var avatar in Lineup.BaseAvatars!)
+            foreach (var avatar in Lineup.BaseAvatars!) // if list is empty, use scene lineup
             {
                 AvatarInfo? avatarInstance = null;
                 var avatarType = AvatarType.AvatarFormalType;
@@ -154,7 +178,7 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
                     var player = DatabaseHelper.Instance!.GetInstance<AvatarData>(avatar.AssistUid);
                     if (player != null)
                     {
-                        avatarInstance = player.Avatars!.Find(item => item.GetAvatarId() == avatar.BaseAvatarId);
+                        avatarInstance = player.Avatars.Find(item => item.GetAvatarId() == avatar.BaseAvatarId);
                         avatarType = AvatarType.AvatarAssistType;
                     }
                 }
@@ -187,21 +211,21 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
         {
             BattleId = (uint)BattleId,
             WorldLevel = (uint)WorldLevel,
-            // RoundsLimit = (uint)RoundLimit,
+            RoundsLimit = (uint)RoundLimit,
             StageId = (uint)StageId,
             LogicRandomSeed = (uint)Random.Shared.Next()
         };
 
-        foreach (var wave in Stages)
+        foreach (var protoWave in Stages.Select(wave => wave.ToProto()))
         {
-            var protoWave = wave.ToProto();
             if (CustomLevel > 0)
                 foreach (var item in protoWave)
                     item.MonsterParam.Level = (uint)CustomLevel;
             proto.MonsterWaveList.AddRange(protoWave);
         }
 
-        foreach (var avatar in GetBattleAvatars())
+        var avatars = GetBattleAvatars();
+        foreach (var avatar in avatars)
             proto.BattleAvatarList.Add(avatar.Key.ToBattleProto(Player.LineupManager!.GetCurLineup()!,
                 Player.InventoryManager!.Data, avatar.Value));
 
@@ -209,24 +233,49 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
         {
             foreach (var monster in EntityMonsters) await monster.ApplyBuff(this);
 
-            foreach (var avatar in AvatarInfo) await avatar.ApplyBuff(this);
+            foreach (var avatar in AvatarInfo)
+                if (avatars.Keys.FirstOrDefault(x =>
+                        x.GetSpecialAvatarId() == avatar.AvatarInfo.GetSpecialAvatarId()) !=
+                    null) // if avatar is in lineup
+                    await avatar.ApplyBuff(this);
         }).Wait();
 
         foreach (var eventInstance in BattleEvents.Values) proto.BattleEvent.Add(eventInstance.ToProto());
 
-        if (BattleTargets != null)
-            for (var i = 1; i <= 5; i++)
+        for (var i = 1; i <= 5; i++)
+        {
+            var battleTargetEntry = new BattleTargetList();
+
+            if (BattleTargets.TryGetValue(i, out var battleTargetList))
+                battleTargetEntry.BattleTargetList_.AddRange(battleTargetList.BattleTargetList_);
+
+            proto.BattleTargetInfo.Add((uint)i, battleTargetEntry);
+        }
+
+        foreach (var buff in Buffs)
+        {
+            if (buff.WaveFlag != null) continue;
+            var buffs = Buffs.FindAll(x => x.BuffID == buff.BuffID);
+            if (buffs.Count < 2) continue;
+            var count = 0;
+            foreach (var mazeBuff in buffs)
             {
-                var battleTargetEntry = new BattleTargetList();
-
-                if (BattleTargets.ContainsKey(i))
-                {
-                    var battleTargetList = BattleTargets[i];
-                    battleTargetEntry.BattleTargetList_.AddRange(battleTargetList.BattleTargetList_);
-                }
-
-                proto.BattleTargetInfo.Add((uint)i, battleTargetEntry);
+                mazeBuff.WaveFlag = (int)Math.Pow(2, count);
+                count++;
             }
+        }
+
+        foreach (var buff in Buffs.Clone())
+        {
+            if (buff.BuffID == 122003)  // Fei Xiao Maze Buff
+            {
+                Buffs.Add(new MazeBuff(122002, buff.BuffLevel, 0)
+                {
+                    WaveFlag = buff.WaveFlag,
+                    OwnerAvatarId = buff.OwnerAvatarId
+                });
+            }
+        }
 
         proto.BuffList.AddRange(Buffs.Select(buff => buff.ToProto(this)));
         return proto;

@@ -11,7 +11,7 @@ public class PacketChessRogueQueryScRsp : BasePacket
         var proto = new ChessRogueQueryScRsp
         {
             RogueGetInfo = player.ChessRogueManager!.ToGetInfo(),
-            Info = player.ChessRogueManager!.ToCurrentInfo(),
+            Info = player.ChessRogueManager!.ToGameInfo(),
             QueryInfo = player.ChessRogueManager!.ToQueryInfo()
         };
 

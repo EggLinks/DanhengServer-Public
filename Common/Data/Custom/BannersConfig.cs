@@ -1,5 +1,4 @@
-﻿using EggLink.DanhengServer.Database;
-using EggLink.DanhengServer.Database.Gacha;
+﻿using EggLink.DanhengServer.Database.Gacha;
 using EggLink.DanhengServer.Enums;
 using EggLink.DanhengServer.Proto;
 using GachaInfo = EggLink.DanhengServer.Proto.GachaInfo;
@@ -79,8 +78,6 @@ public class BannerConfig
                 data.LastGachaPurpleFailedCount += 1;
             }
         }
-
-        DatabaseHelper.Instance?.UpdateInstance(data);
 
         return item;
     }

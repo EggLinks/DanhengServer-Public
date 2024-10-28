@@ -97,8 +97,6 @@ public class MissionData : BaseDatabaseDataHelper
             else if (main.Value == MissionPhaseEnum.Accept) RunningMainMissionIds.SafeAdd(main.Key);
 
         MainMissionInfo.Clear();
-
-        DatabaseHelper.Instance!.UpdateInstance(this);
     }
 }
 

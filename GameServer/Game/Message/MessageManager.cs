@@ -78,6 +78,12 @@ public class MessageManager(PlayerInstance player) : BasePlayerManager(player)
     {
         GameData.MessageSectionConfigData.TryGetValue(sectionId, out var sectionConfig);
         if (sectionConfig == null) return;
+
+        if (Data.Groups.TryGetValue(sectionConfig.GroupID, out var group) &&
+            group.Sections.Find(x => x.SectionId == sectionId) != null)
+            // already exist
+            return;
+
         foreach (var item in sectionConfig.StartMessageItemIDList) await AddMessageItem(item);
     }
 
@@ -109,7 +115,7 @@ public class MessageManager(PlayerInstance player) : BasePlayerManager(player)
             group.CurrentSectionId = sectionId;
             group.RefreshTime = Extensions.GetUnixSec();
             group.Status = MessageGroupStatus.MessageGroupDoing;
-            if (!group.Sections.Any(m => m.SectionId == sectionId)) // new section
+            if (group.Sections.All(m => m.SectionId != sectionId)) // new section
             {
                 group.Sections.Add(new MessageSectionData
                 {

@@ -13,7 +13,7 @@ public class HandlerSceneCastSkillCsReq : Handler
         var req = SceneCastSkillCsReq.Parser.ParseFrom(data);
 
         var player = connection.Player!;
-        MazeSkill mazeSkill = new([]);
+        MazeSkill mazeSkill = new([], req);
 
         // Get casting avatar
         connection.Player!.SceneInstance!.AvatarInfo.TryGetValue((int)req.AttackedByEntityId, out var caster);
@@ -26,13 +26,13 @@ public class HandlerSceneCastSkillCsReq : Handler
                 // Cast skill effects
                 if (caster.AvatarInfo.Excel != null && caster.AvatarInfo.Excel!.MazeSkill != null)
                 {
-                    mazeSkill = MazeSkillManager.GetSkill(caster.AvatarInfo.GetAvatarId(), (int)req.SkillIndex);
-                    mazeSkill.OnCast(caster);
+                    mazeSkill = MazeSkillManager.GetSkill(caster.AvatarInfo.GetAvatarId(), (int)req.SkillIndex, req);
+                    mazeSkill.OnCast(caster, player);
                 }
             }
             else
             {
-                mazeSkill = MazeSkillManager.GetSkill(caster.AvatarInfo.GetAvatarId(), 0);
+                mazeSkill = MazeSkillManager.GetSkill(caster.AvatarInfo.GetAvatarId(), 0, req);
             }
         }
 

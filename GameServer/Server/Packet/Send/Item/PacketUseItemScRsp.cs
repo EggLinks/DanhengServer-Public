@@ -6,7 +6,8 @@ namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Item;
 
 public class PacketUseItemScRsp : BasePacket
 {
-    public PacketUseItemScRsp(Retcode retCode, uint itemId, uint count, List<ItemData>? returnItems) : base(CmdIds.UseItemScRsp)
+    public PacketUseItemScRsp(Retcode retCode, uint itemId, uint count, List<ItemData>? returnItems) : base(
+        CmdIds.UseItemScRsp)
     {
         var proto = new UseItemScRsp
         {
@@ -18,10 +19,7 @@ public class PacketUseItemScRsp : BasePacket
         if (returnItems != null)
         {
             proto.ReturnData = new ItemList();
-            foreach (var item in returnItems)
-            {
-                proto.ReturnData.ItemList_.Add(item.ToProto());
-            }
+            foreach (var item in returnItems) proto.ReturnData.ItemList_.Add(item.ToProto());
         }
 
         SetData(proto);

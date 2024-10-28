@@ -11,9 +11,9 @@ public class PacketChessRogueQuitScRsp : BasePacket
         var proto = new ChessRogueQuitScRsp
         {
             FinishInfo = instance.ToFinishInfo(),
-            Info = instance.ToProto(),
+            Info = instance.ToRogueGameInfo(),
             LevelInfo = instance.ToLevelInfo(),
-            PlayerInfo = instance.ToPlayerProto(),
+            StageInfo = instance.ToStageProto(),
             QueryInfo = instance.Player.ChessRogueManager!.ToQueryInfo(),
             RogueGetInfo = instance.Player.ChessRogueManager!.ToGetInfo(),
             RogueAeonInfo = instance.Player.ChessRogueManager!.ToRogueAeonInfo()

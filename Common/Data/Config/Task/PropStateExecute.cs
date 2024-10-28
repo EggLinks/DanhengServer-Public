@@ -16,9 +16,10 @@ public class PropStateExecute : TaskConfigInfo
 
     public new static TaskConfigInfo LoadFromJsonObject(JObject obj)
     {
-        var info = new PropStateExecute();
-
-        info.Type = obj[nameof(Type)]!.ToObject<string>()!;
+        var info = new PropStateExecute
+        {
+            Type = obj[nameof(Type)]!.ToObject<string>()!
+        };
         if (obj.ContainsKey(nameof(TargetType)))
         {
             var targetType = obj[nameof(TargetType)] as JObject;

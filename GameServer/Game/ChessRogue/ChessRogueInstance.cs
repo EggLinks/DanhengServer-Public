@@ -17,7 +17,7 @@ namespace EggLink.DanhengServer.GameServer.Game.ChessRogue;
 public class ChessRogueInstance : BaseRogueInstance
 {
     public ChessRogueInstance(PlayerInstance player, RogueDLCAreaExcel areaExcel, RogueNousAeonExcel aeonExcel,
-        int rogueVersionId, int branchId) : base(player, rogueVersionId, aeonExcel.RogueBuffType)
+        RogueSubModeEnum rogueSubMode, int branchId) : base(player, rogueSubMode, aeonExcel.RogueBuffType)
     {
         CurLineup = player.LineupManager!.GetCurLineup()!;
         Player = player;
@@ -29,10 +29,7 @@ public class ChessRogueInstance : BaseRogueInstance
         CurLayer = Layers.First();
         EventManager = new RogueEventManager(player, this);
 
-        if (rogueVersionId == 202)
-            RogueType = 160;
-        else
-            RogueType = 130;
+        RogueType = rogueSubMode == RogueSubModeEnum.ChessRogueNous ? 160 : 130;
 
         foreach (var difficulty in areaExcel.DifficultyID)
             if (GameData.RogueDLCDifficultyData.TryGetValue(difficulty, out var diff))
@@ -63,7 +60,7 @@ public class ChessRogueInstance : BaseRogueInstance
     public List<ChessRogueCellInstance> HistoryCell { get; set; } = [];
     public int StartCell { get; set; }
 
-    public List<int> Layers { get; set; } = [];
+    public List<int> Layers { get; set; }
     public int CurLayer { get; set; }
     public RogueDLCChessBoardExcel? CurBoardExcel { get; set; }
     public ChessRogueLevelStatus CurLevelStatus { get; set; } = ChessRogueLevelStatus.ChessRogueLevelProcessing;
@@ -93,8 +90,8 @@ public class ChessRogueInstance : BaseRogueInstance
 
         CalculateDifficulty(battle);
 
-        if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterNousBoss ||
-            CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
+        if (CurCell!.BlockType == RogueDLCBlockTypeEnum.MonsterNousBoss ||
+            CurCell!.BlockType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
         {
             var buffList = new List<int>();
             foreach (var buff in BossBuff)
@@ -167,16 +164,17 @@ public class ChessRogueInstance : BaseRogueInstance
 
         await RollBuff(battle.Stages.Count);
 
-        if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterBoss)
+        switch (CurCell!.BlockType)
         {
-            await Player.SendPacket(new PacketChessRogueLayerAccountInfoNotify(this));
-        }
-        else if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterNousBoss ||
-                 CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterSwarmBoss)
-        {
-            CurLevelStatus = ChessRogueLevelStatus.ChessRogueLevelFinish;
-            await Player.SendPacket(new PacketChessRogueLayerAccountInfoNotify(this));
-            await Player.SendPacket(new PacketChessRogueUpdateLevelBaseInfoScNotify(CurLevelStatus));
+            case RogueDLCBlockTypeEnum.MonsterBoss:
+                await Player.SendPacket(new PacketChessRogueLayerAccountInfoNotify(this));
+                break;
+            case RogueDLCBlockTypeEnum.MonsterNousBoss:
+            case RogueDLCBlockTypeEnum.MonsterSwarmBoss:
+                CurLevelStatus = ChessRogueLevelStatus.ChessRogueLevelFinish;
+                await Player.SendPacket(new PacketChessRogueLayerAccountInfoNotify(this));
+                await Player.SendPacket(new PacketChessRogueUpdateLevelBaseInfoScNotify(CurLevelStatus));
+                break;
         }
     }
 
@@ -184,7 +182,7 @@ public class ChessRogueInstance : BaseRogueInstance
 
     public override async ValueTask RollBuff(int amount)
     {
-        if (CurCell!.CellType == RogueDLCBlockTypeEnum.MonsterBoss)
+        if (CurCell!.BlockType == RogueDLCBlockTypeEnum.MonsterBoss)
         {
             await RollBuff(amount, 100003, 2); // boss room
             await RollMiracle(1);
@@ -290,10 +288,9 @@ public class ChessRogueInstance : BaseRogueInstance
 
         LayerMap = GameConstants.AllowedChessRogueEntranceId.RandomElement();
 
-        if (RogueVersionId == 201)
-            CurBoardExcel = GameData.RogueSwarmChessBoardData[level].RandomElement();
-        else
-            CurBoardExcel = GameData.RogueNousChessBoardData[level].RandomElement();
+        CurBoardExcel = RogueSubMode == RogueSubModeEnum.ChessRogue
+            ? GameData.RogueSwarmChessBoardData[level].RandomElement()
+            : GameData.RogueNousChessBoardData[level].RandomElement();
 
         RogueCells.Clear();
         CurCell = null;
@@ -447,34 +444,21 @@ public class ChessRogueInstance : BaseRogueInstance
 
     #region Serialization
 
-    public ChessRogueCurrentInfo ToProto()
+    public ChessRogueCurrentInfo ToCurrentProto()
     {
         var proto = new ChessRogueCurrentInfo
         {
-            GameMiracleInfo = ToMiracleInfo(),
-            RogueBuffInfo = ToBuffInfo(),
-            RogueAeonInfo = ToAeonInfo(),
-            RogueSubMode = (uint)RogueVersionId,
-            RogueDiceInfo = DiceInstance.ToProto(),
-            RogueLineupInfo = ToLineupInfo(),
-            RogueDifficultyInfo = ToDifficultyInfo(),
-            VirtualItemInfo = ToVirtualItemInfo(),
-            LevelInfo = ToLevelInfo()
+            RogueSubMode = (uint)RogueSubMode
         };
-
-        if (RogueActions.Count > 0)
-            proto.PendingAction = RogueActions.First().Value.ToProto();
-        else
-            proto.PendingAction = new RogueCommonPendingAction();
 
         proto.RogueCurrentGameInfo.AddRange(ToGameInfo());
 
         return proto;
     }
 
-    public ChessRoguePlayerInfo ToPlayerProto()
+    public ChessRogueInfo ToStageProto()
     {
-        var playerInfo = new ChessRoguePlayerInfo
+        var playerInfo = new ChessRogueInfo
         {
             Lineup = Player.LineupManager!.GetCurLineup()!.ToProto(),
             Scene = Player.SceneInstance!.ToProto()
@@ -483,11 +467,22 @@ public class ChessRogueInstance : BaseRogueInstance
         return playerInfo;
     }
 
-    public ChessRogueQueryGameInfo ToRogueGameInfo()
+    public ChessRogueGameInfo ToRogueGameInfo()
     {
-        var proto = new ChessRogueQueryGameInfo
+        var proto = new ChessRogueGameInfo
         {
-            RogueSubMode = (uint)RogueVersionId
+            GameMiracleInfo = ToMiracleInfo(),
+            RogueBuffInfo = ToBuffInfo(),
+            RogueAeonInfo = ToAeonInfo(),
+            RogueSubMode = (uint)RogueSubMode,
+            RogueDiceInfo = DiceInstance.ToProto(),
+            RogueLineupInfo = ToLineupInfo(),
+            RogueDifficultyInfo = ToDifficultyInfo(),
+            VirtualItemInfo = ToVirtualItemInfo(),
+            LevelInfo = ToLevelInfo(),
+            PendingAction = RogueActions.Count > 0
+                ? RogueActions.First().Value.ToProto()
+                : new RogueCommonPendingAction()
         };
 
         proto.RogueCurrentGameInfo.AddRange(ToGameInfo());
@@ -524,7 +519,7 @@ public class ChessRogueInstance : BaseRogueInstance
     {
         var proto = new ChessRogueAeonInfo
         {
-            AeonId = (uint)AeonId
+            GameAeonId = (uint)AeonId
         };
 
         return proto;
@@ -534,7 +529,7 @@ public class ChessRogueInstance : BaseRogueInstance
     {
         var proto = new ChessRogueGameAeonInfo
         {
-            AeonId = (uint)AeonId
+            GameAeonId = (uint)AeonId
         };
 
         return proto;
@@ -627,16 +622,15 @@ public class ChessRogueInstance : BaseRogueInstance
     public ChessRogueLevelInfo ToLevelInfo()
     {
         List<uint> canSelected = [];
-        foreach (var cell in RogueCells)
-            if (cell.Value.CellStatus == ChessRogueBoardCellStatus.Idle)
-            {
-                if (cell.Value.PosY == CurCell!.PosY - 1 || cell.Value.PosY == CurCell!.PosY + 1)
-                    if (cell.Value.PosX == CurCell!.PosX || cell.Value.PosX == CurCell!.PosX + 1)
-                        canSelected.Add((uint)cell.Value.GetCellId());
-                if (cell.Value.PosY == CurCell!.PosY)
-                    if (cell.Value.PosX == CurCell!.PosX + 2)
-                        canSelected.Add((uint)cell.Value.GetCellId());
-            }
+        foreach (var cell in RogueCells.Where(cell => cell.Value.CellStatus == ChessRogueBoardCellStatus.Idle))
+        {
+            if (cell.Value.PosY == CurCell!.PosY - 1 || cell.Value.PosY == CurCell!.PosY + 1)
+                if (cell.Value.PosX == CurCell!.PosX || cell.Value.PosX == CurCell!.PosX + 1)
+                    canSelected.Add((uint)cell.Value.GetCellId());
+            if (cell.Value.PosY != CurCell!.PosY) continue;
+            if (cell.Value.PosX == CurCell!.PosX + 2)
+                canSelected.Add((uint)cell.Value.GetCellId());
+        }
 
         var proto = new ChessRogueLevelInfo
         {
@@ -653,7 +647,7 @@ public class ChessRogueInstance : BaseRogueInstance
                 {
                     CellList = { RogueCells.Select(x => x.Value.ToProto()).ToList() }
                 },
-                AllowedSelectCellIdList = { canSelected },
+                AllowSelectCellIdList = { canSelected },
                 HistoryCell = { HistoryCell.Select(x => x.ToHistoryProto()).ToList() }
             }
         };
@@ -670,7 +664,7 @@ public class ChessRogueInstance : BaseRogueInstance
             RogueLineup = CurLineup!.ToProto(),
             DifficultyLevel =
                 uint.Parse(AreaExcel.AreaID.ToString().Substring(AreaExcel.AreaID.ToString().Length - 1, 1)),
-            RogueSubMode = (uint)RogueVersionId,
+            RogueSubMode = (uint)RogueSubMode,
             RogueBuffInfo = new ChessRogueBuff
             {
                 BuffList = { RogueBuffs.Select(x => x.ToCommonProto()) }

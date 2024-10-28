@@ -73,9 +73,9 @@ public class PlayerData : BaseDatabaseDataHelper
         if (!GameData.ChatBubbleConfigData.ContainsKey(ChatBubble)) // to avoid npe
             ChatBubble = 220000;
 
-        var AvatarInfo = DatabaseHelper.Instance!.GetInstance<AvatarData>(Uid)!;
+        var instance = DatabaseHelper.Instance!.GetInstance<AvatarData>(Uid)!;
 
-        foreach (var avatar in AvatarInfo.Avatars)
+        foreach (var avatar in instance.Avatars)
         {
             avatar.PlayerData = this;
             avatar.Excel = GameData.AvatarConfigData[avatar.AvatarId];
@@ -95,16 +95,14 @@ public class PlayerData : BaseDatabaseDataHelper
         };
 
         var pos = 0;
-        foreach (var assist in AvatarInfo.AssistAvatars)
-        {
-            var avatar = AvatarInfo.Avatars.Find(x => x.AvatarId == assist)!;
-            info.AssistSimpleList.Add(new AssistSimpleInfo
+        foreach (var avatar in instance.AssistAvatars.Select(
+                     assist => instance.Avatars.Find(x => x.AvatarId == assist)!))
+            info.AssistSimpleInfoList.Add(new AssistSimpleInfo
             {
                 AvatarId = (uint)avatar.AvatarId,
                 Level = (uint)avatar.Level,
                 Pos = (uint)pos++
             });
-        }
 
         return info;
     }
@@ -124,30 +122,24 @@ public class PlayerData : BaseDatabaseDataHelper
             RecordInfo = new PlayerRecordInfo()
         };
 
-        var AvatarInfo = DatabaseHelper.Instance!.GetInstance<AvatarData>(Uid);
+        var avatarInfo = DatabaseHelper.Instance!.GetInstance<AvatarData>(Uid);
 
-        if (AvatarInfo != null)
+        if (avatarInfo == null) return info;
+        foreach (var avatar in avatarInfo.Avatars)
         {
-            foreach (var avatar in AvatarInfo.Avatars)
-            {
-                avatar.PlayerData = this;
-                avatar.Excel = GameData.AvatarConfigData[avatar.AvatarId];
-            }
-
-            var pos = 0;
-            foreach (var assist in AvatarInfo.AssistAvatars)
-            {
-                var avatar = AvatarInfo.Avatars.Find(x => x.AvatarId == assist)!;
-                info.AssistAvatarList.Add(avatar.ToDetailProto(pos++));
-            }
-
-            pos = 0;
-            foreach (var display in AvatarInfo.DisplayAvatars)
-            {
-                var avatar = AvatarInfo.Avatars.Find(x => x.AvatarId == display)!;
-                info.DisplayAvatarList.Add(avatar.ToDetailProto(pos++));
-            }
+            avatar.PlayerData = this;
+            avatar.Excel = GameData.AvatarConfigData[avatar.AvatarId];
         }
+
+        var pos = 0;
+        foreach (var avatar in avatarInfo.AssistAvatars.Select(assist =>
+                     avatarInfo.Avatars.Find(x => x.AvatarId == assist)!))
+            info.AssistAvatarList.Add(avatar.ToDetailProto(pos++));
+
+        pos = 0;
+        foreach (var avatar in avatarInfo.DisplayAvatars.Select(display =>
+                     avatarInfo.Avatars.Find(x => x.AvatarId == display)!))
+            info.DisplayAvatarList.Add(avatar.ToDetailProto(pos++));
 
         return info;
     }

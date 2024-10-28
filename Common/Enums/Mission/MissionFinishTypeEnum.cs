@@ -511,5 +511,20 @@ public enum MissionFinishTypeEnum
     SwordTrainingActionTurnStatusChange = 240013,
     SwordTrainingMoodValue = 240014,
     SwordTrainingTurnActionsIn = 240015,
-    BattleChallengeByClient = 240016
+    BattleChallengeByClient = 240016,
+    ActivityRaidAlleyOrderFinishById = 250000,
+    FightFestBattleWinWithScore = 250001,
+    FightFestSnsSubCommentCnt = 250002,
+    FightFestCurPhaseScore = 250003,
+    RogueTournFinishCntByAreaGroup = 250004,
+    RogueTournSttMeetCondition = 250005,
+    RogueTournSttGetMiracleCnt = 250006,
+    FightFestBattleEnd = 250007,
+    RaidFinishedAndTransfer = 250008,
+    StoryLineAddTrialAvatar = 250009,
+    StoryLineGetTrialAvatar = 250010,
+    StoryLineDelTrialAvatar = 250011,
+    FarmTypeCocoonFinish = 250012,
+    LineupLockLeaderByTask = 250013,
+    LineupUnlockLeaderByTask = 250014
 }

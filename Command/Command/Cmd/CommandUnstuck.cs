@@ -13,13 +13,13 @@ public class CommandUnstuck : ICommand
     {
         if (arg.Target != null)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Unstuck.PlayerIsOnline"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Unstuck.PlayerIsOnline"));
             return;
         }
 
         if (arg.BasicArgs.Count == 0)
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Notice.InvalidArguments"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
             return;
         }
 
@@ -32,11 +32,11 @@ public class CommandUnstuck : ICommand
             playerData.PlaneId = 20001;
             playerData.FloorId = 20001001;
             playerData.EntryId = 2000101;
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Unstuck.UnstuckSuccess"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Unstuck.UnstuckSuccess"));
         }
         else
         {
-            await arg.SendMsg(I18nManager.Translate("Game.Command.Unstuck.UidNotExist"));
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Unstuck.UidNotExist"));
         }
     }
 

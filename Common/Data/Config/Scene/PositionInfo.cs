@@ -1,6 +1,6 @@
 ﻿using EggLink.DanhengServer.Util;
 
-namespace EggLink.DanhengServer.Data.Config;
+namespace EggLink.DanhengServer.Data.Config.Scene;
 
 public class PositionInfo
 {

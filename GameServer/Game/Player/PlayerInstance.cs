@@ -23,6 +23,7 @@ using EggLink.DanhengServer.GameServer.Game.Mission;
 using EggLink.DanhengServer.GameServer.Game.Quest;
 using EggLink.DanhengServer.GameServer.Game.Raid;
 using EggLink.DanhengServer.GameServer.Game.Rogue;
+using EggLink.DanhengServer.GameServer.Game.RogueTourn;
 using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
 using EggLink.DanhengServer.GameServer.Game.Shop;
@@ -61,6 +62,7 @@ public class PlayerInstance(PlayerData data)
     public FriendManager? FriendManager { get; private set; }
     public RogueManager? RogueManager { get; private set; }
     public ChessRogueManager? ChessRogueManager { get; private set; }
+    public RogueTournManager? RogueTournManager { get; private set; }
     public ShopService? ShopService { get; private set; }
     public ChallengeManager? ChallengeManager { get; private set; }
 
@@ -76,6 +78,8 @@ public class PlayerInstance(PlayerData data)
     public HeartDialData? HeartDialData { get; private set; }
     public TutorialData? TutorialData { get; private set; }
     public TutorialGuideData? TutorialGuideData { get; private set; }
+    public BattleCollegeData? BattleCollegeData { get; private set; }
+    public ServerPrefsData? ServerPrefsData { get; private set; }
     public SceneInstance? SceneInstance { get; private set; }
     public int Uid { get; set; }
     public Connection? Connection { get; set; }
@@ -137,6 +141,7 @@ public class PlayerInstance(PlayerData data)
         RogueManager = new RogueManager(this);
         ShopService = new ShopService(this);
         ChessRogueManager = new ChessRogueManager(this);
+        RogueTournManager = new RogueTournManager(this);
         ChallengeManager = new ChallengeManager(this);
         TaskManager = new TaskManager(this);
         RaidManager = new RaidManager(this);
@@ -148,6 +153,9 @@ public class PlayerInstance(PlayerData data)
         HeartDialData = InitializeDatabase<HeartDialData>();
         TutorialData = InitializeDatabase<TutorialData>();
         TutorialGuideData = InitializeDatabase<TutorialGuideData>();
+        ServerPrefsData = InitializeDatabase<ServerPrefsData>();
+        BattleCollegeData = InitializeDatabase<BattleCollegeData>();
+
 
         Data.LastActiveTime = Extensions.GetUnixSec();
 
@@ -191,7 +199,7 @@ public class PlayerInstance(PlayerData data)
             foreach (var avatar in LineupManager.GetCurLineup()!.BaseAvatars!)
             {
                 var avatarData = AvatarManager.GetAvatar(avatar.BaseAvatarId);
-                if (avatarData != null && avatarData.CurrentHp <= 0)
+                if (avatarData is { CurrentHp: <= 0 })
                     // revive
                     avatarData.CurrentHp = 2000;
             }
@@ -368,6 +376,9 @@ public class PlayerInstance(PlayerData data)
         if (MissionManager != null)
             await MissionManager.HandleAllFinishType();
 
+        if (SceneInstance != null)
+            await SceneInstance.OnHeartBeat();
+
         DatabaseHelper.ToSaveUidList.SafeAdd(Uid);
     }
 
@@ -391,123 +402,116 @@ public class PlayerInstance(PlayerData data)
 
     public async ValueTask<EntityProp?> InteractProp(int propEntityId, int interactId)
     {
-        if (SceneInstance != null)
+        if (SceneInstance == null) return null;
+        SceneInstance.Entities.TryGetValue(propEntityId, out var entity);
+        if (entity is not EntityProp prop) return null;
+        GameData.InteractConfigData.TryGetValue(interactId, out var config);
+        if (config == null || config.SrcState != prop.State) return prop;
+        var oldState = prop.State;
+        await prop.SetState(config.TargetState);
+        var newState = prop.State;
+        await SendPacket(new PacketGroupStateChangeScNotify(Data.EntryId, prop.GroupID, prop.State));
+
+        switch (prop.Excel.PropType)
         {
-            SceneInstance.Entities.TryGetValue(propEntityId, out var entity);
-            if (entity == null) return null;
-            if (entity is EntityProp prop)
-            {
-                GameData.InteractConfigData.TryGetValue(interactId, out var config);
-                if (config == null || config.SrcState != prop.State) return prop;
-                var oldState = prop.State;
-                await prop.SetState(config.TargetState);
-                var newState = prop.State;
-                await SendPacket(new PacketGroupStateChangeScNotify(Data.EntryId, prop.GroupID, prop.State));
-
-                switch (prop.Excel.PropType)
+            case PropTypeEnum.PROP_TREASURE_CHEST:
+                if (oldState == PropStateEnum.ChestClosed && newState == PropStateEnum.ChestUsed)
                 {
-                    case PropTypeEnum.PROP_TREASURE_CHEST:
-                        if (oldState == PropStateEnum.ChestClosed && newState == PropStateEnum.ChestUsed)
-                        {
-                            // TODO: Filter treasure chest
-                            var items = DropService.CalculateDropsFromProp();
-                            await SceneInstance.Player.InventoryManager!.AddItems(items);
-                        }
-
-                        break;
-                    case PropTypeEnum.PROP_DESTRUCT:
-                        if (newState == PropStateEnum.Closed) await prop.SetState(PropStateEnum.Open);
-                        break;
-                    case PropTypeEnum.PROP_MAZE_JIGSAW:
-                    case PropTypeEnum.PROP_MAZE_PUZZLE:
-                        if (newState == PropStateEnum.Closed || newState == PropStateEnum.Open)
-                            foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID))
-                            {
-                                if (p.Excel.PropType == PropTypeEnum.PROP_TREASURE_CHEST)
-                                {
-                                    await p.SetState(PropStateEnum.ChestUsed);
-                                }
-                                else if (p.Excel.PropType == prop.Excel.PropType)
-                                {
-                                    // Skip
-                                }
-                                else
-                                {
-                                    await p.SetState(PropStateEnum.Open);
-                                }
-
-                                await MissionManager!.OnPlayerInteractWithProp();
-                            }
-
-                        break;
-                    case PropTypeEnum.PROP_ORDINARY:
-                        if (prop.PropInfo.CommonConsole)
-                            // set group
-                            foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID))
-                            {
-                                await p.SetState(newState);
-
-                                await MissionManager!.OnPlayerInteractWithProp();
-                            }
-
-                        break;
+                    // TODO: Filter treasure chest
+                    var items = DropService.CalculateDropsFromProp();
+                    await SceneInstance.Player.InventoryManager!.AddItems(items);
                 }
 
-                // for door unlock
-                if (prop.PropInfo.UnlockDoorID.Count > 0)
-                    foreach (var id in prop.PropInfo.UnlockDoorID)
-                    foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(id.Key))
-                        if (id.Value.Contains(p.PropInfo.ID))
+                break;
+            case PropTypeEnum.PROP_DESTRUCT:
+                if (newState == PropStateEnum.Closed) await prop.SetState(PropStateEnum.Open);
+                break;
+            case PropTypeEnum.PROP_MAZE_JIGSAW:
+            case PropTypeEnum.PROP_MAZE_PUZZLE:
+                if (newState == PropStateEnum.Closed || newState == PropStateEnum.Open)
+                    foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID))
+                    {
+                        if (p.Excel.PropType == PropTypeEnum.PROP_TREASURE_CHEST)
+                        {
+                            await p.SetState(PropStateEnum.ChestUsed);
+                        }
+                        else if (p.Excel.PropType == prop.Excel.PropType)
+                        {
+                            // Skip
+                        }
+                        else
                         {
                             await p.SetState(PropStateEnum.Open);
-                            await MissionManager!.OnPlayerInteractWithProp();
                         }
 
-                // for mission
-                await MissionManager!.OnPlayerInteractWithProp();
-
-                // plane event
-                InventoryManager!.HandlePlaneEvent(prop.PropInfo.EventID);
-
-                // handle plugin event
-                InvokeOnPlayerInteract(this, prop);
-
-                var floorSavedKey = prop.PropInfo.Name.Replace("Controller_", "");
-                var key = $"FSV_ML{floorSavedKey}{(config.TargetState == PropStateEnum.Open ? "Started" : "Complete")}";
-
-                if (prop.Group.GroupName.Contains("JigsawPuzzle") && prop.Group.GroupName.Contains("MainLine"))
-                {
-                    var splits = prop.Group.GroupName.Split('_');
-                    key =
-                        $"JG_ML_{splits[3]}_Puzzle{(config.TargetState == PropStateEnum.Open ? "Started" : "Complete")}";
-                }
-
-                if (SceneInstance?.FloorInfo?.SavedValues.Find(x => x.Name == key) != null)
-                {
-                    // should save
-                    var plane = SceneInstance.PlaneId;
-                    var floor = SceneInstance.FloorId;
-                    SceneData!.FloorSavedData.TryGetValue(floor, out var value);
-                    if (value == null)
-                    {
-                        value = [];
-                        SceneData.FloorSavedData[floor] = value;
+                        await MissionManager!.OnPlayerInteractWithProp();
                     }
 
-                    value[key] = 1; // ParamString[2] is the key
-                    await SendPacket(new PacketUpdateFloorSavedValueNotify(key, 1));
+                break;
+            case PropTypeEnum.PROP_ORDINARY:
+                if (prop.PropInfo.CommonConsole)
+                    // set group
+                    foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID))
+                    {
+                        await p.SetState(newState);
 
-                    TaskManager?.SceneTaskTrigger.TriggerFloor(plane, floor);
-                    MissionManager?.HandleFinishType(MissionFinishTypeEnum.FloorSavedValue);
-                }
+                        await MissionManager!.OnPlayerInteractWithProp();
+                    }
 
-                if (prop.PropInfo.IsLevelBtn) await prop.SetState(PropStateEnum.Closed);
-
-                return prop;
-            }
+                break;
         }
 
-        return null;
+        // for door unlock
+        if (prop.PropInfo.UnlockDoorID.Count > 0)
+            foreach (var p in prop.PropInfo.UnlockDoorID.SelectMany(id =>
+                         SceneInstance.GetEntitiesInGroup<EntityProp>(id.Key)
+                             .Where(p => id.Value.Contains(p.PropInfo.ID))))
+            {
+                await p.SetState(PropStateEnum.Open);
+                await MissionManager!.OnPlayerInteractWithProp();
+            }
+
+        // for mission
+        await MissionManager!.OnPlayerInteractWithProp();
+
+        // plane event
+        InventoryManager!.HandlePlaneEvent(prop.PropInfo.EventID);
+
+        // handle plugin event
+        InvokeOnPlayerInteract(this, prop);
+
+        var floorSavedKey = prop.PropInfo.Name.Replace("Controller_", "");
+        var key = $"FSV_ML{floorSavedKey}{(config.TargetState == PropStateEnum.Open ? "Started" : "Complete")}";
+
+        if (prop.Group.GroupName.Contains("JigsawPuzzle") && prop.Group.GroupName.Contains("MainLine"))
+        {
+            var splits = prop.Group.GroupName.Split('_');
+            key =
+                $"JG_ML_{splits[3]}_Puzzle{(config.TargetState == PropStateEnum.Open ? "Started" : "Complete")}";
+        }
+
+        if (SceneInstance?.FloorInfo?.SavedValues.Find(x => x.Name == key) != null)
+        {
+            // should save
+            var plane = SceneInstance.PlaneId;
+            var floor = SceneInstance.FloorId;
+            SceneData!.FloorSavedData.TryGetValue(floor, out var value);
+            if (value == null)
+            {
+                value = [];
+                SceneData.FloorSavedData[floor] = value;
+            }
+
+            value[key] = 1; // ParamString[2] is the key
+            await SendPacket(new PacketUpdateFloorSavedValueNotify(key, 1));
+
+            TaskManager?.SceneTaskTrigger.TriggerFloor(plane, floor);
+            MissionManager?.HandleFinishType(MissionFinishTypeEnum.FloorSavedValue);
+        }
+
+        if (prop.PropInfo.IsLevelBtn) await prop.SetState(PropStateEnum.Closed);
+
+        return prop;
     }
 
     public async ValueTask<bool> EnterScene(int entryId, int teleportId, bool sendPacket, int storyLineId = 0,
@@ -525,7 +529,6 @@ public class PlayerInstance(PlayerData data)
         if (entrance == null) return false;
 
         GameData.GetFloorInfo(entrance.PlaneID, entrance.FloorID, out var floorInfo);
-        if (floorInfo == null) return false;
 
         // Record last plane id for train view
         if (entrance.PlaneID != 10000) LastWorldId = GameData.MazePlaneData[entrance.PlaneID].WorldID;
@@ -569,7 +572,6 @@ public class PlayerInstance(PlayerData data)
         if (entrance == null) return;
 
         GameData.GetFloorInfo(entrance.PlaneID, entrance.FloorID, out var floorInfo);
-        if (floorInfo == null) return;
 
         var startGroup = anchorGroupId == 0 ? entrance.StartGroupID : anchorGroupId;
         var startAnchor = anchorId == 0 ? entrance.StartAnchorID : anchorId;
