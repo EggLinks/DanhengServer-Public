@@ -1,5 +1,7 @@
-﻿using EggLink.DanhengServer.Enums.Scene;
+﻿using EggLink.DanhengServer.Enums.RogueMagic;
+using EggLink.DanhengServer.Enums.Scene;
 using EggLink.DanhengServer.GameServer.Game.Player;
+using EggLink.DanhengServer.GameServer.Game.RogueMagic;
 using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
 
@@ -15,8 +17,20 @@ public class MazeSetTargetMonsterDie : IMazeSkillAction
                 await entity.Kill();
 
                 await entity.Scene.Player.LineupManager!.CostMp(1, (uint)avatar.EntityID);
-                entity.Scene.Player.RogueManager!.GetRogueInstance()?.RollBuff(1);
-                entity.Scene.Player.RogueManager!.GetRogueInstance()?.GainMoney(Random.Shared.Next(20, 60));
+                var instance = entity.Scene.Player.RogueManager!.GetRogueInstance();
+                switch (instance)
+                {
+                    case null:
+                        continue;
+                    case RogueMagicInstance magic:
+                        await magic.RollMagicUnit(1, 1, [RogueMagicUnitCategoryEnum.Common]);
+                        break;
+                    default:
+                        await instance.RollBuff(1);
+                        break;
+                }
+
+                await instance.GainMoney(Random.Shared.Next(20, 60));
             }
     }
 

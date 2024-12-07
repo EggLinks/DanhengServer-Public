@@ -20,5 +20,7 @@ public enum GameModeTypeEnum
     AetherDivide = 15,
     ChessRogue = 16,
     TournRogue = 17,
-    RelicRogue = 18
+    RelicRogue = 18,
+    ArcadeRogue = 19,
+    MagicRogue = 20
 }

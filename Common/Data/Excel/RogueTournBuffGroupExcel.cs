@@ -1,17 +1,13 @@
-﻿using EggLink.DanhengServer.Util;
-using Newtonsoft.Json;
+﻿using EggLink.DanhengServer.Data.Custom;
+using EggLink.DanhengServer.Util;
 
 namespace EggLink.DanhengServer.Data.Excel;
 
 [ResourceEntity("RogueTournBuffGroup.json")]
-public class RogueTournBuffGroupExcel : ExcelResource
+public class RogueTournBuffGroupExcel : BaseRogueBuffGroupExcel
 {
     public int RogueBuffGroupID { get; set; }
     public List<int> RogueBuffDrop { get; set; } = [];
-
-    [JsonIgnore] public List<RogueTournBuffExcel> BuffList { get; set; } = [];
-    [JsonIgnore] public bool IsLoaded { get; set; }
-
 
     public override int GetId()
     {
@@ -20,7 +16,7 @@ public class RogueTournBuffGroupExcel : ExcelResource
 
     public override void Loaded()
     {
-        GameData.RogueTournBuffGroupData.Add(GetId(), this);
+        GameData.RogueBuffGroupData.Add(GetId(), this);
         LoadBuff();
     }
 
@@ -35,7 +31,11 @@ public class RogueTournBuffGroupExcel : ExcelResource
         var count = 0;
         foreach (var buffId in RogueBuffDrop)
         {
-            List<RogueTournBuffExcel> buffs = [.. GameData.RogueTournBuffData.Values];
+            List<RogueTournBuffExcel> buffs =
+            [
+                .. GameData.RogueBuffData.Where(x => x.Value is RogueTournBuffExcel).Select(x =>
+                    (x.Value as RogueTournBuffExcel)!).ToList()
+            ];
             if (buffs.FirstOrDefault(x => x.RogueBuffTag == buffId) is { } buff)
             {
                 BuffList.SafeAdd(buff);
@@ -44,9 +44,10 @@ public class RogueTournBuffGroupExcel : ExcelResource
             else
             {
                 // might is group id
-                if (!GameData.RogueTournBuffGroupData.TryGetValue(buffId, out var group)) continue;
-                group.LoadBuff();
-                BuffList.SafeAddRange(group.BuffList);
+                if (!GameData.RogueBuffGroupData.TryGetValue(buffId, out var group)) continue;
+                if (group is not RogueTournBuffGroupExcel e) continue;
+                e.LoadBuff();
+                BuffList.SafeAddRange(e.BuffList);
                 count++;
             }
         }

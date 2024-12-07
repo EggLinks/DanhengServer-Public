@@ -20,7 +20,7 @@ public class EventHandlerEnhanceRogueBuff : RogueEventEffectHandler
         if (buffGroup == null) return;
         var count = paramList[1];
 
-        var buffs = rogue.GetRogueBuffInGroup(buffGroup.GroupID);
+        var buffs = rogue.GetRogueBuffInGroup(buffGroup.GetId());
         if (buffs.Count == 0) return;
 
         for (var i = 0; i < count;)

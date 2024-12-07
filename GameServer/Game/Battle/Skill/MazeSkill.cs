@@ -23,7 +23,8 @@ public class MazeSkill
         foreach (var task in taskInfos) AddAction(task);
 
         if (GameData.SummonUnitDataData.TryGetValue((excel?.AvatarID ?? 0) * 10 + 1, out var summonUnit) && isSkill &&
-            !summonUnit.IsClient) Actions.Add(new MazeSummonUnit(summonUnit, req.TargetMotion));
+            !summonUnit.IsClient &&
+            req.MazeAbilityStr == "") Actions.Add(new MazeSummonUnit(summonUnit, req.TargetMotion));
     }
 
     public List<IMazeSkillAction> Actions { get; } = [];
@@ -41,7 +42,7 @@ public class MazeSkill
                 Actions.Add(new MazeAddMazeBuff(task.ID, task.LifeTime.GetLifeTime()));
                 break;
             case TaskTypeEnum.RemoveMazeBuff:
-                Actions.RemoveAll(a => a is MazeAddMazeBuff buff && buff.BuffId == task.ID);
+                Actions.Add(new MazeRemoveMazeBuff(task.ID));
                 break;
             case TaskTypeEnum.AdventureModifyTeamPlayerHP:
                 break;
@@ -49,6 +50,9 @@ public class MazeSkill
                 break;
             case TaskTypeEnum.CreateSummonUnit:
                 //Actions.Add(new MazeSummonUnit(GameData.SummonUnitDataData[task.SummonUnitID], Req.TargetMotion));
+                break;
+            case TaskTypeEnum.DestroySummonUnit:
+                Actions.Add(new MazeRemoveSummonUnit(task.SummonUnit.SummonUnitID));
                 break;
             case TaskTypeEnum.AdventureSetAttackTargetMonsterDie:
                 Actions.Add(new MazeSetTargetMonsterDie());

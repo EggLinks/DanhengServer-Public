@@ -18,7 +18,7 @@ public class StageConfigExcel : ExcelResource
 
     public override void Loaded()
     {
-        GameData.StageConfigData.Add(StageID, this);
+        GameData.StageConfigData.TryAdd(StageID, this);
     }
 
     public List<SceneMonsterWave> ToProto()

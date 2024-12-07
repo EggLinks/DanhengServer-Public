@@ -7,7 +7,7 @@ namespace EggLink.DanhengServer.Database.Quests;
 [SugarTable("Mission")]
 public class MissionData : BaseDatabaseDataHelper
 {
-    [SugarColumn(IsJson = true)]
+    [SugarColumn(IsJson = true, ColumnDataType = "TEXT")]
     public Dictionary<int, Dictionary<int, MissionInfo>> MissionInfo { get; set; } =
         []; // Dictionary<MissionId, Dictionary<SubMissionId, MissionInfo>> // seems like main missionId is not used
 

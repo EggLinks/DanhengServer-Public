@@ -1,13 +1,37 @@
-﻿using EggLink.DanhengServer.Kcp;
+﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Data.Custom;
+using EggLink.DanhengServer.Kcp;
+using EggLink.DanhengServer.Proto;
+using System.Numerics;
+using System.Linq;
 
-namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Player;
-
-public class PacketGetVideoVersionKeyScRsp : BasePacket
+namespace EggLink.DanhengServer.GameServer.Server.Packet.Send.Player
 {
-    public PacketGetVideoVersionKeyScRsp() : base(CmdIds.GetVideoVersionKeyScRsp)
+    public class PacketGetVideoVersionKeyScRsp : BasePacket
     {
-        // FIND A BETTER WAY
-        SetData(Convert.FromBase64String(
-            "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"));
+        public PacketGetVideoVersionKeyScRsp() : base(CmdIds.GetVideoVersionKeyScRsp)
+        {
+            var proto = new GetVideoVersionKeyScRsp
+            {
+                ActivityVideoKeyInfoList =
+                {
+                    GameData.VideoKeysConfig.ActivityVideoKeyData.Select(activity => new VideoKeyInfo
+                    {
+                        Id = (uint)activity.Id,
+                        VideoKey = (ulong)activity.VideoKey
+                    })
+                },
+                VideoKeyInfoList =
+                {
+                    GameData.VideoKeysConfig.VideoKeyInfoData.Select(video => new VideoKeyInfo
+                    {
+                        Id = (uint)video.Id,
+                        VideoKey = (ulong)video.VideoKey
+                    })
+                }
+            };
+
+            SetData(proto);
+        }
     }
 }

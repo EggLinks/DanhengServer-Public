@@ -31,7 +31,7 @@ public class PacketPVEBattleResultScRsp : BasePacket
             CheckIdentical = true,
             Unk1 = new ItemList(),
             Unk2 = new ItemList(),
-            Unk3 = new ItemList(),
+            MultipleDropData = new ItemList(),
             EventId = (uint)battle.EventId
         };
 

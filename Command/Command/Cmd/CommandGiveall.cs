@@ -138,6 +138,38 @@ public class CommandGiveall : ICommand
             I18NManager.Translate("Word.Material"), amount.ToString()));
     }
 
+    [CommandMethod("0 pet")]
+    public async ValueTask GiveAllPet(CommandArg arg)
+    {
+        var player = arg.Target?.Player;
+        if (player == null)
+        {
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            return;
+        }
+
+        arg.CharacterArgs.TryGetValue("x", out var amountStr);
+        amountStr ??= "1";
+        if (!int.TryParse(amountStr, out var amount))
+        {
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.InvalidArguments"));
+            return;
+        }
+
+        var petList = GameData.ItemConfigData.Values;
+        var items = new List<ItemData>();
+        foreach (var pet in petList)
+            if (pet.ItemMainType == ItemMainTypeEnum.Pet)
+                items.Add(new ItemData
+                {
+                    ItemId = pet.ID,
+                    Count = amount
+                });
+        await player.InventoryManager!.AddItems(items);
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
+            I18NManager.Translate("Word.Pet"), "1"));
+    }
+
     [CommandMethod("0 relic")]
     public async ValueTask GiveAllRelic(CommandArg arg)
     {

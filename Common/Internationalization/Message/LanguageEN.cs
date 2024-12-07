@@ -38,10 +38,12 @@ public class WordTextEN
     public string Rank => "Rank";
     public string Avatar => "Avatar";
     public string Material => "Material";
+    public string Pet => "Pet";
     public string Relic => "Relic";
     public string Equipment => "Light Cone";
     public string Talent => "Talent";
     public string Banner => "Gacha";
+    public string VideoKeys => "CG Keys";
     public string Activity => "Activity";
     public string Buff => "Blessing";
     public string Miracle => "Curio";
@@ -62,26 +64,38 @@ public class WordTextEN
     public string Handbook => "Handbook";
     public string NotFound => "Not Found";
     public string Error => "Error";
-    public string FloorInfo => "Floor Info";
-    public string FloorGroupInfo => "Floor Group Info";
+    public string FloorInfo => "Floor File";
+    public string FloorGroupInfo => "Floor Group File";
     public string FloorMissingResult => "Teleportation and World Generation";
     public string FloorGroupMissingResult => "Teleportation, Monster Battles, and World Generation";
     public string Mission => "Mission";
-    public string MissionInfo => "Mission Info";
+    public string MissionInfo => "Mission File";
     public string SubMission => "Sub Mission";
-    public string SubMissionInfo => "Sub Mission Info";
+    public string SubMissionInfo => "Sub Mission File";
     public string MazeSkill => "Maze Skill";
-    public string MazeSkillInfo => "Maze Skill Info";
+    public string MazeSkillInfo => "Maze Skill File";
     public string Dialogue => "Simulated Universe Event";
-    public string DialogueInfo => "Simulated Universe Event Info";
+    public string DialogueInfo => "Simulated Universe Event File";
     public string Performance => "Performance";
-    public string PerformanceInfo => "Performance Info";
+    public string PerformanceInfo => "Performance File";
     public string RogueChestMap => "Simulated Universe Map";
-    public string RogueChestMapInfo => "Simulated Universe Map Info";
+    public string RogueChestMapInfo => "Simulated Universe Map File";
     public string ChessRogueRoom => "Simulated Universe DLC";
-    public string ChessRogueRoomInfo => "Simulated Universe DLC Info";
+    public string ChessRogueRoomInfo => "Simulated Universe DLC File";
+    public string SummonUnit => "Summon Unit";
+    public string SummonUnitInfo => "Summon Unit File";
+    public string RogueTournRoom => "Divergent Rogue Room";
+    public string RogueTournRoomInfo => "Divergent Rogue Room File";
+    public string TypesOfRogue => "types of rogue";
+    public string RogueMagicRoom => "Unknowable Domain Room";
+    public string RogueMagicRoomInfo => "Unknowable Domain Room File";
+    public string RogueDiceSurface => "Dice Surface Effect";
+    public string RogueDiceSurfaceInfo => "Dice Surface Effect File";
+    public string AdventureModifier => "AdventureModifier";
+    public string AdventureModifierInfo => "AdventureModifier File";
 
     public string DatabaseAccount => "Database Account";
+    public string Tutorial => "Tutorial";
 }
 
 #endregion
@@ -140,6 +154,10 @@ public class ServerInfoTextEN
     public string LoadingItem => "Loading {0}...";
     public string RegisterItem => "Registered {0} {1}(s).";
     public string FailedToLoadItem => "Failed to load {0}.";
+
+    public string NewClientSecretKey =>
+        "Client Secret Key does not exist and a new Client Secret Key is being generated.";
+
     public string FailedToInitializeItem => "Failed to initialize {0}.";
     public string FailedToReadItem => "Failed to read {0}, file {1}";
     public string GeneratedItem => "Generated {0}.";
@@ -209,10 +227,12 @@ public class UnlockAllTextEN
 {
     public string Desc =>
         "Unlock the objects in given category\n" +
-        "Use '/unlockall mission' to finish all missions, and the target player will be kicked, after re-login, the player may be stuck in tutorial, please use with caution";
+        "Use '/unlockall mission' to finish all missions, and the target player will be kicked, after re-login, the player may be stuck in tutorial, please use with caution" +
+        "Use '/unlockall tutorial' to unlock all tutorials, and the target player will be kicked, used for being stuck in some pages\n" +
+        "Use '/unlockall rogue' to unlock all types of rogue, and the target player will be kicked, used with '/unlockall tutorial' to get better performance";
 
-    public string Usage => "Usage: /unlockall mission";
-    public string AllMissionsUnlocked => "All missions have been unlocked!";
+    public string Usage => "Usage：/unlockall [mission/tutorial/rogue]";
+    public string UnlockedAll => "Unlocked/Finished All {0}!";
 }
 
 /// <summary>

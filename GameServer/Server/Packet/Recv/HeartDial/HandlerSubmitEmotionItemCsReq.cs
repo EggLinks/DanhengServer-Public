@@ -17,7 +17,7 @@ public class HandlerSubmitEmotionItemCsReq : Handler
         if (scriptData != null)
         {
             var info = connection.Player!.HeartDialData!.ChangeScriptEmotion((int)req.ScriptId,
-                scriptData.MissingEmoList[0], HeartDialStepTypeEnum.Normal);
+                scriptData.DefaultEmoType, HeartDialStepTypeEnum.UnLock);
             await connection.Player!.SendPacket(
                 new PacketHeartDialScriptChangeScNotify(HeartDialUnlockStatus.UnlockAll, info));
             await connection.Player!.MissionManager!.HandleFinishType(MissionFinishTypeEnum.HeartDialScriptListStep);

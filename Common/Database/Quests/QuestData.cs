@@ -6,7 +6,8 @@ namespace EggLink.DanhengServer.Database.Quests;
 [SugarTable("quest_data")]
 public class QuestData : BaseDatabaseDataHelper
 {
-    [SugarColumn(IsJson = true)] public Dictionary<int, QuestInfo> Quests { get; set; } = [];
+    [SugarColumn(IsJson = true, ColumnDataType = "MEDIUMTEXT")]
+    public Dictionary<int, QuestInfo> Quests { get; set; } = [];
 }
 
 public class QuestInfo

@@ -11,10 +11,12 @@ public class MissionHandlerRaidFinishedAndTransfer : MissionFinishTypeHandler
 {
     public override async ValueTask HandleMissionFinishType(PlayerInstance player, SubMissionInfo info, object? arg)
     {
-        if (player.RaidManager!.GetRaidStatus(info.ParamInt1) == RaidStatus.Finish) await player.MissionManager!.FinishSubMission(info.ID);
+        if (player.RaidManager!.GetRaidStatus(info.ParamInt1) == RaidStatus.Finish)
+            await player.MissionManager!.FinishSubMission(info.ID);
     }
 
-    public override async ValueTask HandleQuestFinishType(PlayerInstance player, QuestDataExcel quest, FinishWayExcel excel, object? arg)
+    public override async ValueTask HandleQuestFinishType(PlayerInstance player, QuestDataExcel quest,
+        FinishWayExcel excel, object? arg)
     {
         await ValueTask.CompletedTask;
     }

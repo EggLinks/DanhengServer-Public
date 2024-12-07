@@ -169,7 +169,7 @@ public class ChallengeInstance
                 {
                     BuffId = (uint)BossBuffs[1]
                 },
-                LBOJBINABDG = true
+                CPNMHNAFDJM = true
             };
 
             foreach (var lineupAvatar in Player.LineupManager?.GetExtraLineup(ExtraLineupType.LineupChallenge)
@@ -242,7 +242,7 @@ public class ChallengeInstance
 
         if (Excel.StoryExcel != null)
         {
-            battle.AddBattleTarget(1, 10001, GetTotalScore());
+            battle.AddBattleTarget(1, 10002, GetTotalScore());
 
             foreach (var id in Excel.StoryExcel.BattleTargetID!) battle.AddBattleTarget(5, id, GetTotalScore());
         }
@@ -357,6 +357,9 @@ public class ChallengeInstance
             {
                 // Increment and reset stage
                 CurrentStage++;
+                // Unload scene group for stage 1
+                await Player.SceneInstance!.EntityLoader!.UnloadGroup(Excel.MazeGroupID1);
+
                 // Load scene group for stage 2
                 await Player.SceneInstance!.EntityLoader!.LoadGroup(Excel.MazeGroupID2);
 
@@ -367,11 +370,12 @@ public class ChallengeInstance
                 SavedMp = Player.LineupManager.GetCurLineup()!.Mp;
 
                 // Move player
-                if (Excel.MapEntranceID2 != 0)
+                if (Excel.MapEntranceID2 != 0 && Excel.MapEntranceID2 != Excel.MapEntranceID)
                 {
                     await Player.EnterScene(Excel.MapEntranceID2, 0, true);
                     StartPos = Player.Data.Pos!;
                     StartRot = Player.Data.Rot!;
+                    await Player.SceneInstance!.EntityLoader!.UnloadGroup(Excel.MazeGroupID1);
                     await Player.SceneInstance!.EntityLoader!.LoadGroup(Excel.MazeGroupID2);
                 }
                 else

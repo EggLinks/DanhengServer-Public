@@ -26,7 +26,7 @@ public class PacketGetRogueHandbookDataScRsp : BasePacket
         {
             if (item.Value.Lv != 1)
                 continue;
-            proto.HandbookInfo.BuffList.Add(new FLBOPEMOKDM
+            proto.HandbookInfo.BuffList.Add(new RogueHandbookMazeBuff
             {
                 MazeBuffId = (uint)item.Value.ID
             });

@@ -41,9 +41,9 @@ public class SceneEntityLoader(SceneInstance scene)
         var addList = new List<IGameEntity>();
 
         foreach (var group in Scene.FloorInfo!.Groups.Values
-                         .Where(group => group.LoadSide != GroupLoadSideEnum.Client)
-                         .Where(group => !group.GroupName.Contains("TrainVisitor"))
-                         .Where(group => !group.GroupName.Contains("DeployPuzzle_Repeat_Area")))
+                     .Where(group => group.LoadSide != GroupLoadSideEnum.Client)
+                     .Where(group => !group.GroupName.Contains("TrainVisitor"))
+                     .Where(group => !group.GroupName.Contains("DeployPuzzle_Repeat_Area")))
 
             if (oldGroupId.Contains(group.Id)) // check if it should be unloaded
             {

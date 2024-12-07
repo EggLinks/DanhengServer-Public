@@ -34,6 +34,7 @@ public class ChessRogueCellInstance
     public ChessRogueInstance Instance { get; set; }
     public ChessRogueBoardCellStatus CellStatus { get; set; } = ChessRogueBoardCellStatus.Idle;
     public ChessRogueRoomConfig? RoomConfig { get; set; }
+    public RogueCellMarkTypeEnum MarkType { get; set; } = RogueCellMarkTypeEnum.None;
     public int SelectMonsterId { get; set; }
 
     public List<int> SelectedDecayId { get; set; } = [];
@@ -126,6 +127,14 @@ public class ChessRogueCellInstance
         return CellId;
     }
 
+    public bool IsCollapsed()
+    {
+        var curCell = Instance.CurCell;
+        if (curCell == null) return true;
+
+        return curCell.PosX >= PosX; // only check the left side of the board
+    }
+
     public int GetEntryId()
     {
         if (RoomConfig != null) return RoomConfig.EntranceId;
@@ -156,7 +165,20 @@ public class ChessRogueCellInstance
     {
         var groupList = new List<int>();
         groupList.AddRange(RoomConfig!.DefaultLoadBasicGroup);
-        groupList.AddRange(RoomConfig.DefaultLoadGroup);
+
+        switch (MarkType)
+        {
+            case RogueCellMarkTypeEnum.Choice:
+                groupList.AddRange(RoomConfig.SelectEventLoadGroup);
+                break;
+            case RogueCellMarkTypeEnum.Double:
+                groupList.AddRange(RoomConfig.DoubleEventLoadGroup);
+                break;
+            default:
+                groupList.AddRange(RoomConfig.DefaultLoadGroup);
+                break;
+        }
+
         groupList.AddRange(RoomConfig.SubMonsterGroup);
 
         return groupList;
@@ -172,8 +194,9 @@ public class ChessRogueCellInstance
             BlockType = (uint)BlockType,
             IsUnlock = true,
             RoomId = (uint)RoomId,
-            PLOEJLHMONC = true,
-            PosX = (uint)GetRow()
+            IsUnlocked = true,
+            PosX = (uint)GetRow(),
+            MarkType = (uint)MarkType
         };
 
         if (CellAdvanceInfo.Count <= 0) return info;
@@ -182,7 +205,7 @@ public class ChessRogueCellInstance
             {
                 FinalBossInfo = new CellFinalMonsterInfo
                 {
-                    BossInfo = new CellMonsterInfo
+                    CellBossInfo = new CellMonsterInfo
                     {
                         CellMonsterList = { CellAdvanceInfo.Select(x => x.ToProto()).ToList() },
                         SelectBossId = (uint)SelectMonsterId
@@ -196,7 +219,7 @@ public class ChessRogueCellInstance
         else
             info.StageInfo = new CellAdvanceInfo
             {
-                BossInfo = new CellMonsterInfo
+                CellBossInfo = new CellMonsterInfo
                 {
                     CellMonsterList = { CellAdvanceInfo.Select(x => x.ToProto()).ToList() },
                     SelectBossId = (uint)SelectMonsterId

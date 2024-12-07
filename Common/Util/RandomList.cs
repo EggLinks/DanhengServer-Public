@@ -24,7 +24,7 @@ public class RandomList<T>
 
     public void Remove(T item)
     {
-        var temp = _List.ToList();
+        var temp = _List.Clone().ToList();
         _List.Clear();
         foreach (var i in temp)
             if (i?.Equals(item) == false)

@@ -211,7 +211,7 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
             AreaInfo = new ChessRogueAreaInfo
             {
                 Cell = new CellInfo(),
-                EFCBJHLHGFG = new KKCPDACDMKM()
+                DOHIBBPIKDD = new IEKCBAHADKE()
             }
         };
 
@@ -265,8 +265,8 @@ public class ChessRogueManager(PlayerInstance player) : BasePlayerManager(player
 
         foreach (var dice in GameData.RogueNousDiceBranchData) proto.DiceList.Add(GetDice(dice.Key).ToProto());
 
-        for (var i = 1; i < 7; i++) proto.BJDFPFAKCFH.Add((uint)i, i % 3 == 0);
-        proto.BJDFPFAKCFH[5] = true;
+        for (var i = 1; i < 7; i++) proto.Sus.Add((uint)i, i % 3 == 0);
+        proto.Sus[5] = true;
 
         return proto;
     }

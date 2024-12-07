@@ -203,6 +203,7 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         switch (GameData.ItemConfigData[itemId].ItemMainType)
         {
             case ItemMainTypeEnum.Material:
+            case ItemMainTypeEnum.Pet:
             case ItemMainTypeEnum.Virtual:
             case ItemMainTypeEnum.Usable:
             case ItemMainTypeEnum.Mission:
@@ -263,6 +264,7 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         switch (itemConfig.ItemMainType)
         {
             case ItemMainTypeEnum.Material:
+            case ItemMainTypeEnum.Pet:
             case ItemMainTypeEnum.Mission:
             case ItemMainTypeEnum.Usable:
                 var item = Data.MaterialItems.Find(x => x.ItemId == itemId);
@@ -341,6 +343,7 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         switch (mainType)
         {
             case ItemMainTypeEnum.Material:
+            case ItemMainTypeEnum.Pet:
                 return Data.MaterialItems.Find(x => x.ItemId == itemId);
             case ItemMainTypeEnum.Equipment:
                 return uniqueId > 0

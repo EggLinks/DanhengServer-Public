@@ -23,6 +23,7 @@ using EggLink.DanhengServer.GameServer.Game.Mission;
 using EggLink.DanhengServer.GameServer.Game.Quest;
 using EggLink.DanhengServer.GameServer.Game.Raid;
 using EggLink.DanhengServer.GameServer.Game.Rogue;
+using EggLink.DanhengServer.GameServer.Game.RogueMagic;
 using EggLink.DanhengServer.GameServer.Game.RogueTourn;
 using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
@@ -63,6 +64,7 @@ public class PlayerInstance(PlayerData data)
     public RogueManager? RogueManager { get; private set; }
     public ChessRogueManager? ChessRogueManager { get; private set; }
     public RogueTournManager? RogueTournManager { get; private set; }
+    public RogueMagicManager? RogueMagicManager { get; internal set; }
     public ShopService? ShopService { get; private set; }
     public ChallengeManager? ChallengeManager { get; private set; }
 
@@ -142,6 +144,7 @@ public class PlayerInstance(PlayerData data)
         ShopService = new ShopService(this);
         ChessRogueManager = new ChessRogueManager(this);
         RogueTournManager = new RogueTournManager(this);
+        RogueMagicManager = new RogueMagicManager(this);
         ChallengeManager = new ChallengeManager(this);
         TaskManager = new TaskManager(this);
         RaidManager = new RaidManager(this);
@@ -221,7 +224,7 @@ public class PlayerInstance(PlayerData data)
         await QuestManager!.AcceptQuestByCondition();
     }
 
-    public T InitializeDatabase<T>() where T : class, new()
+    public T InitializeDatabase<T>() where T : BaseDatabaseDataHelper, new()
     {
         var instance = DatabaseHelper.Instance?.GetInstanceOrCreateNew<T>(Uid);
         return instance!;
@@ -418,7 +421,7 @@ public class PlayerInstance(PlayerData data)
                 if (oldState == PropStateEnum.ChestClosed && newState == PropStateEnum.ChestUsed)
                 {
                     // TODO: Filter treasure chest
-                    var items = DropService.CalculateDropsFromProp();
+                    var items = DropService.CalculateDropsFromProp(prop.PropInfo.ChestID);
                     await SceneInstance.Player.InventoryManager!.AddItems(items);
                 }
 

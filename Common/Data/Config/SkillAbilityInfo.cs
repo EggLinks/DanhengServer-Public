@@ -11,6 +11,9 @@ public class SkillAbilityInfo
         foreach (var ability in AbilityList)
         {
             ability.Loaded();
+
+            excel.MazeAbility.Add(ability.Name, ability);
+
             if (ability.Name.EndsWith("MazeSkill"))
                 excel.MazeSkill = ability;
             else if (ability.Name.Contains("NormalAtk")) excel.MazeAtk = ability;

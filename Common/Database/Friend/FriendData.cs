@@ -13,7 +13,7 @@ public class FriendData : BaseDatabaseDataHelper
 
     [SugarColumn(IsJson = true)] public List<int> ReceiveApplyList { get; set; } = [];
 
-    [SugarColumn(IsJson = true)]
+    [SugarColumn(IsJson = true, ColumnDataType = "TEXT")]
     public Dictionary<int, FriendChatHistory> ChatHistory { get; set; } = []; // key: friend uid
 }
 

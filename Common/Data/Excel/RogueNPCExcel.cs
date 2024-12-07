@@ -2,7 +2,7 @@
 
 namespace EggLink.DanhengServer.Data.Excel;
 
-[ResourceEntity("RogueNPC.json")]
+[ResourceEntity("RogueNPC.json,RogueTournNPC.json", true)]
 public class RogueNPCExcel : ExcelResource
 {
     public int RogueNPCID { get; set; }

@@ -16,7 +16,8 @@ public class PacketSceneGroupRefreshScNotify : BasePacket
         {
             var group = new GroupRefreshInfo
             {
-                GroupId = (uint)e.GroupID
+                GroupId = (uint)e.GroupID,
+                RefreshType = SceneGroupRefreshType.Loaded
             };
             group.RefreshEntity.Add(new SceneEntityRefreshInfo
             {

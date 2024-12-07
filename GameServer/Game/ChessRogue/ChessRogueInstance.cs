@@ -1,14 +1,19 @@
-﻿using EggLink.DanhengServer.Data;
+﻿using System.Reflection;
+using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Data.Config.AdventureAbility;
+using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.GameServer.Game.Battle;
 using EggLink.DanhengServer.GameServer.Game.ChessRogue.Cell;
 using EggLink.DanhengServer.GameServer.Game.ChessRogue.Dice;
+using EggLink.DanhengServer.GameServer.Game.ChessRogue.Modifier.ModifierEffect;
 using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Game.Rogue;
 using EggLink.DanhengServer.GameServer.Game.Rogue.Buff;
 using EggLink.DanhengServer.GameServer.Game.Rogue.Event;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.ChessRogue;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.RogueModifier;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
 
@@ -28,8 +33,18 @@ public class ChessRogueInstance : BaseRogueInstance
         Layers = areaExcel.LayerIDList;
         CurLayer = Layers.First();
         EventManager = new RogueEventManager(player, this);
-
         RogueType = rogueSubMode == RogueSubModeEnum.ChessRogueNous ? 160 : 130;
+
+
+        var types = Assembly.GetExecutingAssembly().GetTypes();
+        foreach (var type in types)
+        {
+            var attr = type.GetCustomAttribute<ModifierEffectAttribute>();
+            if (attr == null) continue;
+
+            var handler = (ModifierEffectHandler)Activator.CreateInstance(type, null)!;
+            ModifierEffectHandlers.Add(attr.EffectType, handler);
+        }
 
         foreach (var difficulty in areaExcel.DifficultyID)
             if (GameData.RogueDLCDifficultyData.TryGetValue(difficulty, out var diff))
@@ -54,9 +69,11 @@ public class ChessRogueInstance : BaseRogueInstance
     public int BossAeonId { get; set; }
     public List<RogueDLCDifficultyExcel> DifficultyExcel { get; set; } = [];
     public ChessRogueDiceInstance DiceInstance { get; set; }
+    public Dictionary<ModifierEffectTypeEnum, ModifierEffectHandler> ModifierEffectHandlers { get; set; } = [];
 
     public Dictionary<int, ChessRogueCellInstance> RogueCells { get; set; } = [];
     public ChessRogueCellInstance? CurCell { get; set; }
+    public List<int> CanMoveCellIdList { get; set; } = [];
     public List<ChessRogueCellInstance> HistoryCell { get; set; } = [];
     public int StartCell { get; set; }
 
@@ -69,6 +86,7 @@ public class ChessRogueInstance : BaseRogueInstance
     public int LayerMap { get; set; }
 
     public int ActionPoint { get; set; } = 15;
+    public int CurModifierId { get; set; } = 1;
 
     public List<int> DisableAeonIds { get; set; } = [];
 
@@ -107,6 +125,11 @@ public class ChessRogueInstance : BaseRogueInstance
                     WaveFlag = -1
                 });
         }
+
+
+        if (DiceInstance.Modifier == null) return;
+        var modifier = DiceInstance.Modifier;
+        modifier.BeforeBattle(this, battle);
     }
 
     public void CalculateDifficulty(BattleInstance battle)
@@ -164,6 +187,12 @@ public class ChessRogueInstance : BaseRogueInstance
 
         await RollBuff(battle.Stages.Count);
 
+        if (DiceInstance.Modifier != null)
+        {
+            var modifier = DiceInstance.Modifier;
+            await modifier.AfterBattle(this, battle);
+        }
+
         switch (CurCell!.BlockType)
         {
             case RogueDLCBlockTypeEnum.MonsterBoss:
@@ -178,7 +207,64 @@ public class ChessRogueInstance : BaseRogueInstance
         }
     }
 
+    #region Modifier
+
+    public async ValueTask ApplyModifier(int selectCellId)
+    {
+        if (DiceInstance.Modifier == null) return;
+
+        var modifier = DiceInstance.Modifier;
+        if (selectCellId == 0)
+        {
+            modifier.IsConfirmed = true;
+            await Player.SendPacket(new PacketRogueModifierStageStartNotify(modifier.SourceType));
+            // gain money
+            await GainMoney(10, 2);
+
+            await Player.SendPacket(new PacketChessRogueUpdateDiceInfoScNotify(DiceInstance));
+            return;
+        }
+
+        await modifier.SelectModifierCell(this, selectCellId);
+
+        await Player.SendPacket(new PacketChessRogueUpdateDiceInfoScNotify(DiceInstance));
+    }
+
+    #endregion
+
     #region Buff Management
+
+    public override void HandleMazeBuffModifier(AdventureModifierConfig config, MazeBuff buff)
+    {
+        var task = config.OnBeforeBattle;
+
+        foreach (var info in task)
+        {
+            if (!info.Type.Replace("RPG.GameCore.", "").StartsWith("SetDynamicValueBy")) continue;
+            var key = info.Type.Replace("RPG.GameCore.SetDynamicValueBy", "");
+            var value = key switch
+            {
+                "ItemNum" => CurMoney,
+                "RogueMiracleNum" => RogueMiracles.Count,
+                "RogueBuffNumWithType" => RogueBuffs.Count,
+                "RogueModifierCount" => DiceInstance.Modifier == null ? 0 : 1,
+                "RogueLayer" => Layers.IndexOf(CurLayer) + 1,
+                _ => 0
+            };
+
+            key = key switch
+            {
+                "ItemNum" => "ItemNumber",
+                "RogueMiracleNum" => "RogueMiracleNumber",
+                "RogueBuffNumWithType" => "RogueBuffNumberWithType",
+                "RogueModifierCount" => "RogueModifierCount",
+                "RogueLayer" => "_RogueLayer",
+                _ => key
+            };
+
+            buff.DynamicValues.Add(key, value);
+        }
+    }
 
     public override async ValueTask RollBuff(int amount)
     {
@@ -201,12 +287,12 @@ public class ChessRogueInstance : BaseRogueInstance
             return;
         var curAeonBuffCount = 0; // current path buff count
         var hintId = AeonId * 100 + 1;
-        var enhanceData = GameData.RogueAeonEnhanceData[AeonId];
+        var enhanceData = GameData.RogueAeonEnhanceData[AeonId].Select(x => x as BaseRogueBuffExcel).ToList();
         var buffData = GameData.RogueAeonBuffData[AeonId];
         foreach (var buff in RogueBuffs)
             if (buff.BuffExcel.RogueBuffType == AeonExcel.RogueBuffType)
             {
-                if (!buff.BuffExcel.IsAeonBuff)
+                if (buff.BuffExcel is RogueBuffExcel { IsAeonBuff: false })
                 {
                     curAeonBuffCount++;
                 }
@@ -257,9 +343,9 @@ public class ChessRogueInstance : BaseRogueInstance
         }
     }
 
-    public override async ValueTask UpdateMenu()
+    public override async ValueTask UpdateMenu(int position = 0)
     {
-        await base.UpdateMenu();
+        await base.UpdateMenu(position);
 
 
         await AddAeonBuff(); // check if aeon buff can be added
@@ -351,6 +437,12 @@ public class ChessRogueInstance : BaseRogueInstance
         await Player.SendPacket(new PacketChessRogueCellUpdateNotify(cell, CurBoardExcel?.ChessBoardID ?? 0));
         await CostActionPoint(1);
 
+        if (DiceInstance.Modifier != null)
+        {
+            var modifier = DiceInstance.Modifier;
+            await modifier.SelectCell(this, cellId);
+        }
+
         await Player.SendPacket(new PacketChessRogueSelectCellScRsp(cellId));
     }
 
@@ -386,7 +478,7 @@ public class ChessRogueInstance : BaseRogueInstance
 
     public async ValueTask ConfirmRoll()
     {
-        DiceInstance.DiceStatus = ChessRogueDiceStatus.ChessRogueDiceConfirmed;
+        await DiceInstance.ConfirmDice();
 
         await Player.SendPacket(new PacketChessRogueUpdateDiceInfoScNotify(DiceInstance));
         await Player.SendPacket(new PacketChessRogueConfirmRollScRsp(DiceInstance));
@@ -632,6 +724,10 @@ public class ChessRogueInstance : BaseRogueInstance
                 canSelected.Add((uint)cell.Value.GetCellId());
         }
 
+        canSelected.AddRange(CanMoveCellIdList.Select(i => (uint)i));
+
+        CanMoveCellIdList.Clear(); // clear
+
         var proto = new ChessRogueLevelInfo
         {
             LevelStatus = (uint)CurLevelStatus,
@@ -659,8 +755,8 @@ public class ChessRogueInstance : BaseRogueInstance
     {
         var info = new ChessRogueFinishInfo
         {
-            EndAreaId = (uint)AreaExcel.AreaID,
-            LastLayerId = (uint)CurLayer,
+            //EndAreaId = (uint)AreaExcel.AreaID,
+            //LastLayerId = (uint)CurLayer,
             RogueLineup = CurLineup!.ToProto(),
             DifficultyLevel =
                 uint.Parse(AreaExcel.AreaID.ToString().Substring(AreaExcel.AreaID.ToString().Length - 1, 1)),

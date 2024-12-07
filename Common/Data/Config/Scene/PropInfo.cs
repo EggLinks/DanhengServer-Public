@@ -14,6 +14,7 @@ public class PropInfo : PositionInfo
     public int PropID { get; set; }
     public int EventID { get; set; }
     public int CocoonID { get; set; }
+    public int ChestID { get; set; }
     public int FarmElementID { get; set; }
     public bool IsClientOnly { get; set; }
     public bool LoadOnInitial { get; set; }

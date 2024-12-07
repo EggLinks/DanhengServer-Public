@@ -1,4 +1,4 @@
-﻿using EggLink.DanhengServer.Data.Excel;
+﻿using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
 
@@ -7,7 +7,7 @@ namespace EggLink.DanhengServer.GameServer.Game.Rogue.Buff;
 public class RogueBuffSelectMenu(BaseRogueInstance rogue)
 {
     public int HintId { get; set; } = 1;
-    public List<RogueBuffExcel> Buffs { get; set; } = [];
+    public List<BaseRogueBuffExcel> Buffs { get; set; } = [];
     public int RollMaxCount { get; set; } = rogue.BaseRerollCount;
     public int RollCount { get; set; }
     public int RollFreeCount { get; set; } = rogue.BaseRerollFreeCount;
@@ -16,21 +16,21 @@ public class RogueBuffSelectMenu(BaseRogueInstance rogue)
     public bool IsAeonBuff { get; set; } = false;
     public int CurCount { get; set; } = 1;
     public int TotalCount { get; set; } = 1;
-    public List<RogueBuffExcel> BuffPool { get; set; } = [];
+    public List<BaseRogueBuffExcel> BuffPool { get; set; } = [];
 
-    public void RollBuff(List<RogueBuffExcel> buffs, int count = 3)
+    public void RollBuff(List<BaseRogueBuffExcel> buffs, int count = 3)
     {
         BuffPool.Clear();
         BuffPool.AddRange(buffs);
 
-        var list = new RandomList<RogueBuffExcel>();
+        var list = new RandomList<BaseRogueBuffExcel>();
 
         foreach (var buff in buffs)
             if (buff.RogueBuffType == rogue.RogueBuffType)
-                list.Add(buff, (int)(20f / (int)buff.RogueBuffCategory * 2.5));
+                list.Add(buff, 20);
             else
-                list.Add(buff, (int)(20f / (int)buff.RogueBuffCategory * 0.7));
-        var result = new List<RogueBuffExcel>();
+                list.Add(buff, 15);
+        var result = new List<BaseRogueBuffExcel>();
 
         for (var i = 0; i < count; i++)
         {
@@ -98,8 +98,16 @@ public class RogueBuffSelectMenu(BaseRogueInstance rogue)
                 }
             },
             SourceHintId = (uint)HintId,
-            HandbookUnlockBuffIdList = { Buffs.Select(x => (uint)x.MazeBuffID) },
+            //HandbookUnlockBuffIdList = { Buffs.Select(x => (uint)x.MazeBuffID) },
             SelectBuffList = { Buffs.Select(x => x.ToProto()) }
+        };
+    }
+
+    public RogueCommonBuffReforgeSelectInfo ToReforgeProto()
+    {
+        return new RogueCommonBuffReforgeSelectInfo
+        {
+            SelectBuffs = { Buffs.Select(x => x.ToProto()) }
         };
     }
 }

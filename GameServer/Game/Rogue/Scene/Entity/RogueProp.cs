@@ -1,5 +1,7 @@
 ﻿using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Data.Excel;
+using EggLink.DanhengServer.Enums.RogueMagic;
+using EggLink.DanhengServer.Enums.TournRogue;
 using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
 using EggLink.DanhengServer.Proto;
@@ -21,6 +23,13 @@ public class RogueProp(SceneInstance scene, MazePropExcel excel, GroupInfo group
     public bool IsChessRogue { get; set; } = false;
     public bool IsLastRoom { get; set; } = false;
 
+    public bool IsTournRogue { get; set; } = false;
+    public bool EnterNextLayer { get; set; } = false;
+    public RogueTournRoomTypeEnum RoomType { get; set; } = RogueTournRoomTypeEnum.Unknown;
+
+    public bool IsMagicRogue { get; set; } = false;
+    public RogueMagicRoomTypeEnum MagicRoomType { get; set; } = RogueMagicRoomTypeEnum.Unknown;
+
     public override SceneEntityInfo ToProto()
     {
         var proto = base.ToProto();
@@ -41,6 +50,26 @@ public class RogueProp(SceneInstance scene, MazePropExcel excel, GroupInfo group
                 ChessRogueInfo = new PropChessRogueInfo
                 {
                     EnterNextCell = !IsLastRoom
+                }
+            };
+
+        if (IsTournRogue)
+            proto.Prop.ExtraInfo = new PropExtraInfo
+            {
+                RogueTournDoorInfo = new RogueTournDoorInfo
+                {
+                    EnterNextLayer = EnterNextLayer,
+                    RogueDoorNextRoomType = (uint)RoomType
+                }
+            };
+
+        if (IsMagicRogue)
+            proto.Prop.ExtraInfo = new PropExtraInfo
+            {
+                RogueMagicDoorInfo = new RogueMagicDoorInfo
+                {
+                    EnterNextLayer = EnterNextLayer,
+                    RogueDoorNextRoomType = (uint)MagicRoomType
                 }
             };
 

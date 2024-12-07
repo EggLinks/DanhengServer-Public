@@ -12,6 +12,7 @@ public class TaskInfo
 
     // Here's a conflict between Dimbreath's res and Andy's res ( we recommend to use the one from Andy's res )
     public bool TriggerBattle { get; set; } = false;
+    public SummonUnitInfo SummonUnit { get; set; } = new();
 
     public List<TaskInfo> OnAttack { get; set; } = [];
     public List<TaskInfo> OnBattle { get; set; } = [];
@@ -40,6 +41,8 @@ public class TaskInfo
             TaskType = TaskTypeEnum.AdventureModifyTeamPlayerSP;
         else if (Type.Contains("CreateSummonUnit"))
             TaskType = TaskTypeEnum.CreateSummonUnit;
+        else if (Type.Contains("DestroySummonUnit"))
+            TaskType = TaskTypeEnum.DestroySummonUnit;
         else if (Type.Contains("AdventureSetAttackTargetMonsterDie"))
             TaskType = TaskTypeEnum.AdventureSetAttackTargetMonsterDie;
         else if (SuccessTaskList.Count > 0)
@@ -61,6 +64,11 @@ public class TaskInfo
         attackInfo.AddRange(OnBattle);
         return attackInfo;
     }
+}
+
+public class SummonUnitInfo
+{
+    public int SummonUnitID { get; set; }
 }
 
 public class LifeTimeInfo

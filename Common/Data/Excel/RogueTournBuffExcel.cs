@@ -1,21 +1,10 @@
-﻿using EggLink.DanhengServer.Enums.Rogue;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using EggLink.DanhengServer.Data.Custom;
 
 namespace EggLink.DanhengServer.Data.Excel;
 
 [ResourceEntity("RogueTournBuff.json")]
-public class RogueTournBuffExcel : ExcelResource
+public class RogueTournBuffExcel : BaseRogueBuffExcel
 {
-    public int MazeBuffID { get; set; }
-    public int MazeBuffLevel { get; set; }
-    public int RogueBuffType { get; set; }
-
-    [JsonConverter(typeof(StringEnumConverter))]
-    public RogueBuffCategoryEnum RogueBuffCategory { get; set; }
-
-    public int RogueBuffTag { get; set; }
-
     public bool IsInHandbook { get; set; }
 
     public override int GetId()
@@ -25,6 +14,6 @@ public class RogueTournBuffExcel : ExcelResource
 
     public override void Loaded()
     {
-        GameData.RogueTournBuffData.TryAdd(GetId(), this);
+        GameData.RogueBuffData.TryAdd(GetId(), this);
     }
 }

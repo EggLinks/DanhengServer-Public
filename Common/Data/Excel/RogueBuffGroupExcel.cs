@@ -1,18 +1,15 @@
-﻿using EggLink.DanhengServer.Util;
+﻿using EggLink.DanhengServer.Data.Custom;
+using EggLink.DanhengServer.Util;
 using Newtonsoft.Json;
 
 namespace EggLink.DanhengServer.Data.Excel;
 
 [ResourceEntity("RogueBuffGroup.json")]
-public class RogueBuffGroupExcel : ExcelResource
+public class RogueBuffGroupExcel : BaseRogueBuffGroupExcel
 {
-    [JsonProperty("IOMDAGGIAME")] public int GroupID { get; set; }
+    [JsonProperty("HFLJEIPCCNF")] public int GroupID { get; set; }
 
-    [JsonProperty("HLKMFHBOAIA")] public List<int> BuffTagList { get; set; } = [];
-
-    [JsonIgnore] public List<RogueBuffExcel> BuffList { get; set; } = [];
-
-    [JsonIgnore] public bool IsLoaded { get; set; }
+    [JsonProperty("ILLJGPJPFAC")] public List<int> BuffTagList { get; set; } = [];
 
     public override int GetId()
     {
@@ -36,7 +33,11 @@ public class RogueBuffGroupExcel : ExcelResource
         var count = 0;
         foreach (var buffId in BuffTagList)
         {
-            List<RogueBuffExcel> buffs = [.. GameData.RogueBuffData.Values];
+            List<RogueBuffExcel> buffs =
+            [
+                .. GameData.RogueBuffData.Where(x => x.Value is RogueBuffExcel).Select(x =>
+                    (x.Value as RogueBuffExcel)!).ToList()
+            ];
             if (buffs.FirstOrDefault(x => x.RogueBuffTag == buffId) is { } buff)
             {
                 BuffList.SafeAdd(buff);
@@ -46,8 +47,9 @@ public class RogueBuffGroupExcel : ExcelResource
             {
                 // might is group id
                 if (!GameData.RogueBuffGroupData.TryGetValue(buffId, out var group)) continue;
-                group.LoadBuff();
-                BuffList.SafeAddRange(group.BuffList);
+                if (group is not RogueBuffGroupExcel e) continue;
+                e.LoadBuff();
+                BuffList.SafeAddRange(e.BuffList);
                 count++;
             }
         }

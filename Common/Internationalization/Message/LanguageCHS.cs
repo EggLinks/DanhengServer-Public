@@ -38,10 +38,12 @@ public class WordTextCHS
     public string Rank => "星魂";
     public string Avatar => "角色";
     public string Material => "材料";
+    public string Pet => "宠物";
     public string Relic => "遗器";
     public string Equipment => "光锥";
     public string Talent => "行迹";
     public string Banner => "卡池";
+    public string VideoKeys => "游戏CG密钥";
     public string Activity => "活动";
     public string Buff => "祝福";
     public string Miracle => "奇物";
@@ -82,8 +84,18 @@ public class WordTextCHS
     public string ChessRogueRoomInfo => "模拟宇宙DLC文件";
     public string SummonUnit => "秘技生成";
     public string SummonUnitInfo => "秘技生成文件";
+    public string RogueTournRoom => "差分宇宙";
+    public string RogueTournRoomInfo => "差分宇宙房间文件";
+    public string TypesOfRogue => "类型的模拟宇宙";
+    public string RogueMagicRoom => "不可知域";
+    public string RogueMagicRoomInfo => "不可知域房间文件";
+    public string RogueDiceSurface => "骰面效果";
+    public string RogueDiceSurfaceInfo => "骰面效果文件";
+    public string AdventureModifier => "AdventureModifier";
+    public string AdventureModifierInfo => "AdventureModifier文件";
 
     public string DatabaseAccount => "数据库账号";
+    public string Tutorial => "教程";
 }
 
 #endregion
@@ -142,6 +154,7 @@ public class ServerInfoTextCHS
     public string LoadingItem => "正在加载 {0}…";
     public string RegisterItem => "注册了 {0} 个 {1}。";
     public string FailedToLoadItem => "加载 {0} 失败。";
+    public string NewClientSecretKey => "客户端密钥不存在，正在生成新的客户端密钥。";
     public string FailedToInitializeItem => "初始化 {0} 失败。";
     public string FailedToReadItem => "读取 {0} 失败，文件{1}";
     public string GeneratedItem => "已生成 {0}。";
@@ -204,10 +217,12 @@ public class UnlockAllTextCHS
 {
     public string Desc =>
         "解锁所有在类别内的对象\n" +
-        "使用 /unlockall mission 以完成所有任务，使用后会被踢出，重新登录后可能会被教程卡住，请谨慎使用";
+        "使用 /unlockall mission 以完成所有任务，使用后会被踢出，重新登录后可能会被教程卡住，请谨慎使用\n" +
+        "使用 /unlockall tutorial 以解锁所有教程，使用后会被踢出，用于部分界面卡住无法行动的情况\n" +
+        "使用 /unlockall rogue 以解锁所有类型模拟宇宙，使用后会被踢出，建议与 /unlockall tutorial 搭配使用以获取更好效果";
 
-    public string Usage => "用法：/unlockall mission";
-    public string AllMissionsUnlocked => "所有任务已解锁!";
+    public string Usage => "用法：/unlockall [mission/tutorial/rogue]";
+    public string UnlockedAll => "已解锁/完成所有{0}!";
 }
 
 /// <summary>

@@ -160,6 +160,7 @@ public class PacketPlayerSyncScNotify : BasePacket
                 break;
             case ItemMainTypeEnum.Mission:
             case ItemMainTypeEnum.Material:
+            case ItemMainTypeEnum.Pet:
             case ItemMainTypeEnum.Usable:
                 notify.MaterialList.Add(item.ToMaterialProto());
                 break;

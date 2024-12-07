@@ -100,7 +100,6 @@ public class EntryPoint
 
             Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItem",
                 I18NManager.Translate("Word.DatabaseAccount")));
-            Logger.Warn(I18NManager.Translate("Server.ServerInfo.WaitForAllDone"));
         }
         catch (Exception e)
         {
@@ -111,7 +110,13 @@ public class EntryPoint
         }
 
         HandlerManager.Init();
+        if (ConfigManager.Config.GameServer.UsePacketEncryption)
+        {
+            Crypto.ClientSecretKey = Crypto.InitEc2b();
+            if (Crypto.ClientSecretKey == null) ConfigManager.Config.GameServer.UsePacketEncryption = false;
+        }
 
+        Logger.Warn(I18NManager.Translate("Server.ServerInfo.WaitForAllDone"));
         WebProgram.Main([], GetConfig().HttpServer.Port, GetConfig().HttpServer.GetBindDisplayAddress());
         Logger.Info(I18NManager.Translate("Server.ServerInfo.ServerRunning", I18NManager.Translate("Word.Dispatch"),
             GetConfig().HttpServer.GetDisplayAddress()));
@@ -220,7 +225,7 @@ public class EntryPoint
         };
 
         // generate the handbook
-        HandbookGenerator.Generate();
+        new Task(HandbookGenerator.GenerateAll).Start();
 
         if (!DatabaseHelper.LoadAllData)
         {

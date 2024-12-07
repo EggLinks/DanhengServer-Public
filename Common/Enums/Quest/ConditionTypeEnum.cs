@@ -17,5 +17,8 @@ public enum ConditionTypeEnum
     BetweenSubMission = 12,
     InStoryLine = 13,
     NotFinishSubMission = 14,
-    ReleaseContentPackage = 15
+    ReleaseContentPackage = 15,
+    SubMissionTaken = 16,
+    HasItemMainType = 17,
+    FinishSimulatedRogueAreaProgress = 20
 }

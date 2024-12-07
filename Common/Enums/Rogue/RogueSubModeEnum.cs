@@ -7,5 +7,7 @@ public enum RogueSubModeEnum
     CosmosRogueEndless = 102,
     ChessRogue = 201,
     ChessRogueNous = 202,
-    TournRogue = 301
+    TournRogue = 301,
+    ArcadeRogue = 401,
+    MagicRogue = 501
 }

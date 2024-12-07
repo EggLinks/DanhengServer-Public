@@ -11,7 +11,8 @@ public class MissionHandlerRaidFinishCnt : MissionFinishTypeHandler
 {
     public override async ValueTask HandleMissionFinishType(PlayerInstance player, SubMissionInfo info, object? arg)
     {
-        var finishCount = (info.ParamIntList ?? []).Count(raidId => player.RaidManager!.GetRaidStatus(raidId) == RaidStatus.Finish);
+        var finishCount =
+            (info.ParamIntList ?? []).Count(raidId => player.RaidManager!.GetRaidStatus(raidId) == RaidStatus.Finish);
 
         if (finishCount >= info.Progress) await player.MissionManager!.FinishSubMission(info.ID);
     }
@@ -20,7 +21,8 @@ public class MissionHandlerRaidFinishCnt : MissionFinishTypeHandler
         FinishWayExcel excel, object? arg)
     {
         // this type wont be used in quest
-        var finishCount = excel.ParamIntList.Count(raidLevel => player.RaidManager!.GetRaidStatus(excel.ParamInt1, raidLevel) == RaidStatus.Finish);
+        var finishCount = excel.ParamIntList.Count(raidLevel =>
+            player.RaidManager!.GetRaidStatus(excel.ParamInt1, raidLevel) == RaidStatus.Finish);
 
         await player.QuestManager!.UpdateQuestProgress(quest.QuestID, finishCount);
     }

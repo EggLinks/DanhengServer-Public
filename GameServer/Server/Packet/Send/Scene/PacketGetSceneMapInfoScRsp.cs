@@ -14,7 +14,7 @@ public class PacketGetSceneMapInfoScRsp : BasePacket
     {
         var rsp = new GetSceneMapInfoScRsp
         {
-            MFDIBEECLPP = req.MFDIBEECLPP
+            PNFPBICGDPC = req.PNFPBICGDPC
         };
 
         foreach (var entry in req.EntryIdList)

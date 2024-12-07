@@ -32,6 +32,9 @@ public class EntityMonster(
 
     public int EventID { get; set; } = info.EventID;
     public int CustomStageID { get; set; } = 0;
+
+    public int RogueMonsterId { get; set; } = 0;
+    public int CustomLevel { get; set; } = 0;
     public int EntityID { get; set; } = 0;
     public int GroupID { get; set; } = GroupID;
 
@@ -66,7 +69,7 @@ public class EntityMonster(
 
     public SceneEntityInfo ToProto()
     {
-        return new SceneEntityInfo
+        var proto = new SceneEntityInfo
         {
             EntityId = (uint)EntityID,
             GroupId = (uint)GroupID,
@@ -83,6 +86,18 @@ public class EntityMonster(
                 WorldLevel = (uint)Scene.Player.Data.WorldLevel
             }
         };
+
+        if (RogueMonsterId > 0)
+            proto.NpcMonster.ExtraInfo = new NpcMonsterExtraInfo
+            {
+                RogueGameInfo = new NpcMonsterRogueInfo
+                {
+                    RogueMonsterId = (uint)RogueMonsterId,
+                    Level = (uint)CustomLevel
+                }
+            };
+
+        return proto;
     }
 
     public async ValueTask RemoveBuff(int buffId)
@@ -102,7 +117,6 @@ public class EntityMonster(
 
     public async ValueTask<List<ItemData>> Kill(bool sendPacket = true)
     {
-        await Scene.RemoveEntity(this);
         IsAlive = false;
 
         GameData.MonsterDropData.TryGetValue(MonsterData.ID * 10 + Scene.Player.Data.WorldLevel, out var dropData);
@@ -113,6 +127,7 @@ public class EntityMonster(
         // TODO: Rogue support
         // call mission handler
         await Scene.Player.MissionManager!.HandleFinishType(MissionFinishTypeEnum.KillMonster, this);
+        await Scene.RemoveEntity(this);
         return dropItems;
     }
 }

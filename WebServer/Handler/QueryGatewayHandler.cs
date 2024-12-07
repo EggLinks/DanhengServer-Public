@@ -23,14 +23,16 @@ internal class QueryGatewayHandler
             Ip = config.GameServer.PublicAddress,
             Port = config.GameServer.Port,
             Msg = I18NManager.Translate("Server.Web.Maintain"),
-            Unk1 = true,
-            Unk2 = true,
-            Unk3 = true,
-            Unk4 = true,
-            Unk5 = true,
-            Unk6 = true,
-            Unk7 = true
+            EnableVersionUpdate = true,
+            EnableUploadBattleLog = true,
+            EnableWatermark = true,
+            IALOEKGOJOC = true,
+            EnableAndroidMiddlePackage = true,
+            FIOHEKDJNCG = true,
+            CloseRedeemCode = true
         };
+        if (ConfigManager.Config.GameServer.UsePacketEncryption)
+            gateServer.ClientSecretKey = Convert.ToBase64String(Crypto.ClientSecretKey!.GetBytes());
 
         if (!ResourceManager.IsLoaded) gateServer.Retcode = 2;
 

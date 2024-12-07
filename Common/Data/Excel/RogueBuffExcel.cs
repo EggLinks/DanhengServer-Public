@@ -1,21 +1,13 @@
-﻿using EggLink.DanhengServer.Enums.Rogue;
-using EggLink.DanhengServer.Proto;
+﻿using EggLink.DanhengServer.Data.Custom;
+using EggLink.DanhengServer.Enums.Rogue;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace EggLink.DanhengServer.Data.Excel;
 
 [ResourceEntity("RogueBuff.json")]
-public class RogueBuffExcel : ExcelResource
+public class RogueBuffExcel : BaseRogueBuffExcel
 {
-    public int MazeBuffID { get; set; }
-    public int MazeBuffLevel { get; set; }
-    public int RogueBuffType { get; set; }
-
-    [JsonConverter(typeof(StringEnumConverter))]
-    public RogueBuffCategoryEnum RogueBuffCategory { get; set; }
-
-    public int RogueBuffTag { get; set; }
     public int AeonID { get; set; }
 
     [JsonConverter(typeof(StringEnumConverter))]
@@ -43,14 +35,5 @@ public class RogueBuffExcel : ExcelResource
             else
                 GameData.RogueAeonEnhanceData.Add(AeonID, [this]);
         }
-    }
-
-    public RogueCommonBuff ToProto()
-    {
-        return new RogueCommonBuff
-        {
-            BuffId = (uint)MazeBuffID,
-            BuffLevel = (uint)MazeBuffLevel
-        };
     }
 }

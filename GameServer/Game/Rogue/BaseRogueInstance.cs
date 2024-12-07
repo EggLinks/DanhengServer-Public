@@ -1,4 +1,6 @@
 ﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Data.Config.AdventureAbility;
+using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.Enums.Rogue;
@@ -37,7 +39,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
 
     public SortedDictionary<int, RogueActionInstance> RogueActions { get; set; } = []; // queue_position -> action
     public int CurActionQueuePosition { get; set; } = 0;
-    public int CurEventUniqueID { get; set; } = 100;
+    public int CurEventUniqueId { get; set; } = 100;
 
     public int CurAeonBuffCount { get; set; } = 0;
     public int CurAeonEnhanceCount { get; set; } = 0;
@@ -52,14 +54,14 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         await RollBuff(amount, 100005);
     }
 
-    public virtual async ValueTask RollBuff(int amount, int buffGroupId, int buffHintType = 1)
+    public virtual async ValueTask RollBuff(int amount, int buffGroupId, int buffHintType = 1, bool isReforge = false)
     {
         var buffGroup = GameData.RogueBuffGroupData[buffGroupId];
-        var buffList = buffGroup.BuffList;
-        var actualBuffList = new List<RogueBuffExcel>();
-        foreach (var buff in buffList)
-            if (!RogueBuffs.Exists(x => x.BuffExcel.MazeBuffID == buff.MazeBuffID))
-                actualBuffList.Add(buff);
+        var buffList = RogueSubMode == RogueSubModeEnum.TournRogue
+            ? (buffGroup as RogueTournBuffGroupExcel)!.BuffList.Select(x => x)
+            : (buffGroup as RogueBuffGroupExcel)!.BuffList;
+        var actualBuffList = buffList.Where(buff => !RogueBuffs.Exists(x => x.BuffExcel.MazeBuffID == buff.MazeBuffID))
+            .ToList();
 
         if (actualBuffList.Count == 0) return; // no buffs to roll
 
@@ -67,16 +69,17 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         {
             var menu = new RogueBuffSelectMenu(this)
             {
-                CurCount = i + 1,
-                TotalCount = amount
+                CurCount = 1,
+                TotalCount = 1
             };
             menu.RollBuff(actualBuffList);
             menu.HintId = buffHintType;
             var action = menu.GetActionInstance();
+            action.IsReforge = isReforge;
             RogueActions.Add(action.QueuePosition, action);
-        }
 
-        await UpdateMenu();
+            await UpdateMenu();
+        }
     }
 
     public virtual async ValueTask<RogueCommonActionResult?> AddBuff(int buffId, int level = 1,
@@ -88,7 +91,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         GameData.RogueBuffData.TryGetValue(buffId * 100 + level, out var excel);
         if (excel == null) return null;
         if (CurAeonBuffCount > 0) // check if aeon buff exists
-            if (excel.IsAeonBuff)
+            if (excel is RogueBuffExcel { IsAeonBuff: true })
                 return null;
         var buff = new RogueBuffInstance(buffId, level);
         RogueBuffs.Add(buff);
@@ -102,7 +105,25 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         return result;
     }
 
-    public virtual async ValueTask AddBuffList(List<RogueBuffExcel> excel)
+    public virtual async ValueTask<RogueCommonActionResult?> RemoveBuff(int buffId,
+        RogueCommonActionResultSourceType source = RogueCommonActionResultSourceType.Dialogue,
+        RogueCommonActionResultDisplayType displayType = RogueCommonActionResultDisplayType.Single,
+        bool updateMenu = true, bool notify = true)
+    {
+        var buff = RogueBuffs.Find(x => x.BuffExcel.MazeBuffID == buffId);
+        if (buff == null) return null; // buff not found
+        RogueBuffs.Remove(buff);
+        var result = buff.ToRemoveResultProto(source);
+
+        if (notify)
+            await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode, result, displayType));
+
+        if (updateMenu) await UpdateMenu();
+
+        return result;
+    }
+
+    public virtual async ValueTask AddBuffList(List<BaseRogueBuffExcel> excel)
     {
         List<RogueCommonActionResult> resultList = [];
         foreach (var buff in excel)
@@ -142,7 +163,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         return RogueBuffs.FindAll(x => group.BuffList.Contains(x.BuffExcel));
     }
 
-    public virtual async ValueTask HandleBuffSelect(int buffId)
+    public virtual async ValueTask HandleBuffSelect(int buffId, int location)
     {
         if (RogueActions.Count == 0) return;
 
@@ -172,10 +193,44 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
 
         await UpdateMenu();
 
-        await Player.SendPacket(new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, true));
+        await Player.SendPacket(new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, location, true));
     }
 
-    public virtual async ValueTask HandleRerollBuff()
+    public virtual async ValueTask HandleBuffReforgeSelect(int buffId, int location)
+    {
+        if (RogueActions.Count == 0) return;
+
+        var action = RogueActions.First().Value;
+        if (action.RogueBuffSelectMenu != null)
+        {
+            var buff = action.RogueBuffSelectMenu.Buffs.Find(x => x.MazeBuffID == buffId);
+            if (buff != null) // check if buff is in the list
+            {
+                if (RogueBuffs.Exists(x => x.BuffExcel.MazeBuffID == buffId)) // check if buff already exists
+                {
+                    // enhance
+                    await EnhanceBuff(buffId, RogueCommonActionResultSourceType.Select);
+                }
+                else
+                {
+                    var instance = new RogueBuffInstance(buff.MazeBuffID, buff.MazeBuffLevel);
+                    RogueBuffs.Add(instance);
+                    await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode,
+                        instance.ToResultProto(RogueCommonActionResultSourceType.Select)));
+                }
+            }
+
+            RogueActions.Remove(action.QueuePosition);
+            if (action.RogueBuffSelectMenu.IsAeonBuff) AeonBuffPending = false; // aeon buff added
+        }
+
+        await UpdateMenu();
+
+        await Player.SendPacket(
+            new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, location, reforgeBuff: true));
+    }
+
+    public virtual async ValueTask HandleRerollBuff(int location)
     {
         if (RogueActions.Count == 0) return;
         var action = RogueActions.First().Value;
@@ -183,7 +238,36 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         {
             await action.RogueBuffSelectMenu.RerollBuff(); // reroll
             await Player.SendPacket(
-                new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, menu: action.RogueBuffSelectMenu));
+                new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, location,
+                    menu: action.RogueBuffSelectMenu));
+        }
+    }
+
+    public virtual void HandleMazeBuffModifier(AdventureModifierConfig config, MazeBuff buff)
+    {
+        var task = config.OnBeforeBattle;
+
+        foreach (var info in task)
+        {
+            if (!info.Type.Replace("RPG.GameCore.", "").StartsWith("SetDynamicValueBy")) continue;
+            var key = info.Type.Replace("RPG.GameCore.SetDynamicValueBy", "");
+            var value = key switch
+            {
+                "ItemNum" => CurMoney,
+                "RogueMiracleNum" => RogueMiracles.Count,
+                "RogueBuffNumWithType" => RogueBuffs.Count,
+                _ => 0
+            };
+
+            key = key switch
+            {
+                "ItemNum" => "ItemNumber",
+                "RogueMiracleNum" => "RogueMiracleNumber",
+                "RogueBuffNumWithType" => "RogueBuffNumberWithType",
+                _ => key
+            };
+
+            buff.DynamicValues.Add(key, value);
         }
     }
 
@@ -211,7 +295,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
             }, RogueCommonActionResultDisplayType.Single));
     }
 
-    public async ValueTask GainMoney(int amount, int displayType = 0)
+    public async ValueTask GainMoney(int amount, int displayType = 1)
     {
         CurMoney += amount;
         await Player.SendPacket(new PacketSyncRogueCommonVirtualItemInfoScNotify(this));
@@ -224,7 +308,6 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         await Player.SendPacket(new PacketSyncRogueCommonActionResultScNotify(RogueSubMode,
             new RogueCommonActionResult
             {
-                Source = RogueCommonActionResultSourceType.Dialogue,
                 RogueAction = new RogueCommonActionResultData
                 {
                     GetItemList = new RogueCommonMoney
@@ -267,7 +350,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         await UpdateMenu();
     }
 
-    public virtual async ValueTask HandleMiracleSelect(uint miracleId)
+    public virtual async ValueTask HandleMiracleSelect(uint miracleId, int location)
     {
         if (RogueActions.Count == 0) return;
 
@@ -282,7 +365,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         await UpdateMenu();
 
         await Player.SendPacket(
-            new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, selectMiracle: true));
+            new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, location, selectMiracle: true));
     }
 
     public virtual async ValueTask AddMiracle(int miracleId)
@@ -302,7 +385,7 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
 
     #region Actions
 
-    public virtual async ValueTask HandleBonusSelect(int bonusId)
+    public virtual async ValueTask HandleBonusSelect(int bonusId, int location)
     {
         if (RogueActions.Count == 0) return;
 
@@ -315,14 +398,29 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         RogueActions.Remove(action.QueuePosition);
         await UpdateMenu();
 
-        await Player.SendPacket(new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, selectBonus: true));
+        await Player.SendPacket(
+            new PacketHandleRogueCommonPendingActionScRsp(action.QueuePosition, location, selectBonus: true));
     }
 
-    public virtual async ValueTask UpdateMenu()
+    public virtual async ValueTask UpdateMenu(int position = 0)
     {
         if (RogueActions.Count > 0)
-            await Player.SendPacket(
-                new PacketSyncRogueCommonPendingActionScNotify(RogueActions.First().Value, RogueSubMode));
+        {
+            if (position == 0)
+            {
+                var action = RogueActions.Values.First();
+                action.GetSelectMenu()?.Roll();
+                await Player.SendPacket(
+                    new PacketSyncRogueCommonPendingActionScNotify(action, RogueSubMode));
+            }
+            else
+            {
+                var action = RogueActions[position];
+                action.GetSelectMenu()?.Roll();
+                await Player.SendPacket(
+                    new PacketSyncRogueCommonPendingActionScNotify(action, RogueSubMode));
+            }
+        }
     }
 
     #endregion
@@ -363,9 +461,16 @@ public abstract class BaseRogueInstance(PlayerInstance player, RogueSubModeEnum 
         do
         {
             dialogue = GameData.RogueNPCData.Values.ToList().RandomElement();
-        } while (!dialogue.CanUseInVer(RogueType));
+            if (dialogue.NPCJsonPath.Contains("RogueNPC_230") && RogueSubMode != RogueSubModeEnum.TournRogue)
+                // skip because it's a tourn rogue event
+                dialogue = null;
+            else if (!dialogue.NPCJsonPath.Contains("RogueNPC_230") && RogueSubMode == RogueSubModeEnum.TournRogue)
+                // skip because it's not a tourn rogue event
+                dialogue = null;
+        } while (dialogue == null || (!dialogue.CanUseInVer(RogueType) &&
+                                      dialogue.RogueNpcConfig?.DialogueType == RogueDialogueTypeEnum.Event));
 
-        var instance = new RogueEventInstance(dialogue, npc, CurEventUniqueID++);
+        var instance = new RogueEventInstance(dialogue, npc, CurEventUniqueId++);
         if (EventManager == null) return instance;
         await EventManager.AddEvent(instance);
 

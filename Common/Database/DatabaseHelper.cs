@@ -234,12 +234,34 @@ public class DatabaseHelper
         }
     }
 
-    public T GetInstanceOrCreateNew<T>(int uid) where T : class, new()
+    public T GetInstanceOrCreateNew<T>(int uid) where T : BaseDatabaseDataHelper, new()
     {
         var instance = GetInstance<T>(uid);
         if (instance != null) return instance;
-        instance = new T();
-        (instance as BaseDatabaseDataHelper)!.Uid = uid;
+        // judge if exists (maybe the instance is not in the map)
+
+        var t = sqlSugarScope?.Queryable<T>()
+            .Where(x => x.Uid == uid)
+            .ToList();
+
+        if (t is { Count: > 0 }) // exists in the database
+        {
+            instance = t[0];
+            if (!UidInstanceMap.TryGetValue(uid, out var value))
+            {
+                value = [];
+                UidInstanceMap[uid] = value;
+            }
+
+            value.Add(instance); // add to the map
+            return instance;
+        }
+
+        // create a new instance
+        instance = new T
+        {
+            Uid = uid
+        };
         SaveInstance(instance);
 
         return instance;

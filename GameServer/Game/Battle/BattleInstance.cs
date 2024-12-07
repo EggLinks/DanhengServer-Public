@@ -60,6 +60,7 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
     public List<EntityMonster> EntityMonsters { get; set; } = [];
     public List<AvatarSceneInfo> AvatarInfo { get; set; } = [];
     public List<MazeBuff> Buffs { get; set; } = [];
+    public BattleRogueMagicInfo? MagicInfo { get; set; }
     public Dictionary<int, BattleEventInstance> BattleEvents { get; set; } = [];
     public Dictionary<int, BattleTargetList> BattleTargets { get; set; } = [];
     public BattleCollegeConfigExcel? CollegeConfigExcel { get; set; }
@@ -216,6 +217,8 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
             LogicRandomSeed = (uint)Random.Shared.Next()
         };
 
+        if (MagicInfo != null) proto.BattleRogueMagicInfo = MagicInfo;
+
         foreach (var protoWave in Stages.Select(wave => wave.ToProto()))
         {
             if (CustomLevel > 0)
@@ -266,16 +269,12 @@ public class BattleInstance(PlayerInstance player, LineupInfo lineup, List<Stage
         }
 
         foreach (var buff in Buffs.Clone())
-        {
-            if (buff.BuffID == 122003)  // Fei Xiao Maze Buff
-            {
+            if (buff.BuffID == 122003) // Fei Xiao Maze Buff
                 Buffs.Add(new MazeBuff(122002, buff.BuffLevel, 0)
                 {
                     WaveFlag = buff.WaveFlag,
                     OwnerAvatarId = buff.OwnerAvatarId
                 });
-            }
-        }
 
         proto.BuffList.AddRange(Buffs.Select(buff => buff.ToProto(this)));
         return proto;

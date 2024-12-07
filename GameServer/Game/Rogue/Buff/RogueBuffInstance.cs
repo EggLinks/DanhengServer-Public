@@ -1,4 +1,5 @@
 ﻿using EggLink.DanhengServer.Data;
+using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Rogue;
 using EggLink.DanhengServer.GameServer.Game.Battle;
@@ -10,7 +11,7 @@ public class RogueBuffInstance(int buffId, int buffLevel)
 {
     public int BuffId { get; set; } = buffId;
     public int BuffLevel { get; set; } = buffLevel;
-    public RogueBuffExcel BuffExcel { get; set; } = GameData.RogueBuffData[buffId * 100 + buffLevel];
+    public BaseRogueBuffExcel BuffExcel { get; set; } = GameData.RogueBuffData[buffId * 100 + buffLevel];
 
     public int CurSp { get; set; } = 10000;
     public int MaxSp { get; set; } = 10000;
@@ -19,7 +20,7 @@ public class RogueBuffInstance(int buffId, int buffLevel)
 
     public void OnStartBattle(BattleInstance battle)
     {
-        if (BuffExcel.BattleEventBuffType == RogueBuffAeonTypeEnum.BattleEventBuff)
+        if (BuffExcel is RogueBuffExcel { BattleEventBuffType: RogueBuffAeonTypeEnum.BattleEventBuff })
         {
             GameData.RogueBattleEventData.TryGetValue(BuffExcel.RogueBuffType, out var battleEvent);
             if (battleEvent == null) return;
@@ -57,6 +58,22 @@ public class RogueBuffInstance(int buffId, int buffLevel)
             RogueAction = new RogueCommonActionResultData
             {
                 GetBuffList = new RogueCommonBuff
+                {
+                    BuffId = (uint)BuffId,
+                    BuffLevel = (uint)BuffLevel
+                }
+            },
+            Source = source
+        };
+    }
+
+    public RogueCommonActionResult ToRemoveResultProto(RogueCommonActionResultSourceType source)
+    {
+        return new RogueCommonActionResult
+        {
+            RogueAction = new RogueCommonActionResultData
+            {
+                RemoveBuffList = new RogueCommonBuff
                 {
                     BuffId = (uint)BuffId,
                     BuffLevel = (uint)BuffLevel

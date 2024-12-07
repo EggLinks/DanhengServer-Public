@@ -17,7 +17,7 @@ public class HttpServerConfig
     public string BindAddress { get; set; } = "0.0.0.0";
     public string PublicAddress { get; set; } = "127.0.0.1";
     public int Port { get; set; } = 443;
-    public bool UseSSL { get; set; } = true;
+    public bool UseSSL { get; set; } = false;
 
     public string GetDisplayAddress()
     {
@@ -44,6 +44,7 @@ public class GameServerConfig
     public string GameServerId { get; set; } = "dan_heng";
     public string GameServerName { get; set; } = "DanhengServer";
     public string GameServerDescription { get; set; } = "A re-implementation of StarRail server";
+    public bool UsePacketEncryption { get; set; } = true;
 
     public string GetDisplayAddress()
     {
@@ -78,6 +79,7 @@ public class ServerOption
     public bool EnableMission { get; set; } = true; // experimental
     public bool AutoLightSection { get; set; } = true;
     public string Language { get; set; } = "EN";
+    public string FallbackLanguage { get; set; } = "EN";
     public HashSet<string> DefaultPermissions { get; set; } = ["*"];
     public ServerAnnounce ServerAnnounce { get; set; } = new();
     public ServerProfile ServerProfile { get; set; } = new();

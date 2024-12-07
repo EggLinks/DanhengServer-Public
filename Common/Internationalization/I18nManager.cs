@@ -67,6 +67,22 @@ public static class I18NManager
         return args.Aggregate(result, (current, arg) => current.Replace("{" + index++ + "}", arg));
     }
 
+    public static string TranslateAsCertainLang(string langStr, string key, params string[] args)
+    {
+        var languageStr = "EggLink.DanhengServer.Internationalization.Message.Language" +
+                          langStr;
+        var languageType = Type.GetType(languageStr) ?? Type.GetType("EggLink.DanhengServer.Internationalization.Message.LanguageEN")!;
+        var language = Activator.CreateInstance(languageType) ?? throw new Exception("Language not found");
+
+        List<object> langs = [language];
+
+        var result = langs.Select(lang => GetNestedPropertyValue(lang, key)).OfType<string>().FirstOrDefault() ?? key;
+
+        var index = 0;
+
+        return args.Aggregate(result, (current, arg) => current.Replace("{" + index++ + "}", arg));
+    }
+
 
     public static string? GetNestedPropertyValue(object? obj, string propertyName)
     {

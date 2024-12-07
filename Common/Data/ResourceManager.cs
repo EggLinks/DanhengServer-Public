@@ -1,11 +1,14 @@
 ﻿using System.Reflection;
 using EggLink.DanhengServer.Data.Config;
+using EggLink.DanhengServer.Data.Config.AdventureAbility;
 using EggLink.DanhengServer.Data.Config.Rogue;
 using EggLink.DanhengServer.Data.Config.Scene;
 using EggLink.DanhengServer.Data.Config.SummonUnit;
 using EggLink.DanhengServer.Data.Custom;
 using EggLink.DanhengServer.Data.Excel;
 using EggLink.DanhengServer.Enums.Rogue;
+using EggLink.DanhengServer.Enums.RogueMagic;
+using EggLink.DanhengServer.Enums.TournRogue;
 using EggLink.DanhengServer.Internationalization;
 using EggLink.DanhengServer.Util;
 using Newtonsoft.Json;
@@ -33,8 +36,10 @@ public class ResourceManager
         var t5 = Task.Run(LoadPerformanceInfo);
         var t6 = Task.Run(LoadDialogueInfo);
         var t7 = Task.Run(LoadRogueChestMapInfo);
+        var t8 = Task.Run(LoadAdventureModifier);
         GameData.ActivityConfig = LoadCustomFile<ActivityConfig>("Activity", "ActivityConfig") ?? new ActivityConfig();
         GameData.BannersConfig = LoadCustomFile<BannersConfig>("Banner", "Banners") ?? new BannersConfig();
+        GameData.VideoKeysConfig = LoadCustomFile<VideoKeysConfig>("VideoKeys", "VideoKeysConfig") ?? new VideoKeysConfig();
         GameData.RogueMapGenData = LoadCustomFile<Dictionary<int, List<int>>>("Rogue Map", "RogueMapGen") ?? [];
         GameData.RogueMiracleGroupData =
             LoadCustomFile<Dictionary<int, List<int>>>("Rogue Miracle Group", "RogueMiracleGroup") ?? [];
@@ -42,8 +47,11 @@ public class ResourceManager
             LoadCustomFile<RogueMiracleEffectConfig>("Rogue Miracle Effect", "RogueMiracleEffectGen") ??
             new RogueMiracleEffectConfig();
         LoadChessRogueRoomData();
+        LoadRogueTournRoomData();
+        LoadChessRogueDiceSurfaceEffectData();
+        LoadRogueMagicRoomData();
 
-        Task.WaitAll(t1, t2, t3, t4, t5, t6, t7);
+        Task.WaitAll(t1, t2, t3, t4, t5, t6, t7, t8);
     }
 
     public static void LoadExcel()
@@ -189,6 +197,7 @@ public class ResourceManager
                 foreach (var groupInfo in info.GroupInstanceList)
                 {
                     if (groupInfo.IsDelete) continue;
+                    if (groupInfo.GroupPath.Contains("_D100")) continue;
                     FileInfo groupFile = new(ConfigManager.Config.Path.ResourcePath + "/" + groupInfo.GroupPath);
                     if (!groupFile.Exists) continue;
 
@@ -346,6 +355,10 @@ public class ResourceManager
                 break;
             case ActivityConfig a:
                 Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", a.ScheduleData.Count.ToString(),
+                    filetype));
+                break;
+            case VideoKeysConfig a:
+                Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", a.TotalCount.ToString(),
                     filetype));
                 break;
             default:
@@ -654,6 +667,58 @@ public class ResourceManager
             I18NManager.Translate("Word.RogueChestMapInfo")));
     }
 
+    public static void LoadAdventureModifier()
+    {
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
+            I18NManager.Translate("Word.AdventureModifierInfo")));
+        var count = 0;
+
+        // list the files in folder
+        var directory = new DirectoryInfo($"{ConfigManager.Config.Path.ResourcePath}/Config/ConfigAdventureModifier");
+        if (!directory.Exists)
+        {
+            Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
+                I18NManager.Translate("Word.AdventureModifierInfo"),
+                $"{ConfigManager.Config.Path.ResourcePath}/Config/ConfigAdventureModifier",
+                I18NManager.Translate("Word.Buff")));
+
+            return;
+        }
+
+        var files = directory.GetFiles();
+
+        foreach (var file in files)
+            try
+            {
+                using var reader = file.OpenRead();
+                using StreamReader reader2 = new(reader);
+                var text = reader2.ReadToEnd().Replace("$type", "Type");
+                var obj = JObject.Parse(text);
+                var info = AdventureModifierLookupTableConfig.LoadFromJObject(obj);
+
+                foreach (var config in info.ModifierMap)
+                {
+                    GameData.AdventureModifierData.Add(config.Key, config.Value);
+                    count++;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(
+                    I18NManager.Translate("Server.ServerInfo.FailedToReadItem", file.Name,
+                        I18NManager.Translate("Word.Error")), ex);
+            }
+
+        //if (count < boardList.Count)
+        //    Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
+        //        I18NManager.Translate("Word.AdventureModifierInfo"),
+        //        $"{ConfigManager.Config.Path.ResourcePath}/Config/ConfigAdventureModifier",
+        //        I18NManager.Translate("Word.Buff")));
+
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(),
+            I18NManager.Translate("Word.AdventureModifierInfo")));
+    }
+
     public static void LoadChessRogueRoomData()
     {
         Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
@@ -721,6 +786,134 @@ public class ResourceManager
 
         Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(),
             I18NManager.Translate("Word.ChessRogueRoomInfo")));
+    }
+
+    public static void LoadRogueTournRoomData()
+    {
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
+            I18NManager.Translate("Word.RogueTournRoomInfo")));
+        var count = 0;
+
+        FileInfo file = new(ConfigManager.Config.Path.ConfigPath + "/TournRogueRoomGen.json");
+
+        if (!file.Exists)
+        {
+            Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
+                I18NManager.Translate("Word.RogueTournRoomInfo"),
+                $"{ConfigManager.Config.Path.ConfigPath}/TournRogueRoomGen.json",
+                I18NManager.Translate("Word.RogueTournRoom")));
+
+            return;
+        }
+
+        try
+        {
+            using var reader = file.OpenRead();
+            using StreamReader reader2 = new(reader);
+            var text = reader2.ReadToEnd();
+            var json = JsonConvert.DeserializeObject<List<RogueTournRoomConfig>>(text);
+            if (json == null) throw new Exception("Failed to deserialize TournRogueRoomGen.json");
+
+            foreach (var room in json.Clone())
+                if (room.RoomType == RogueTournRoomTypeEnum.Event)
+                {
+                    json.Add(room.Clone(RogueTournRoomTypeEnum.Reward));
+                    json.Add(room.Clone(RogueTournRoomTypeEnum.Encounter));
+                }
+
+            GameData.RogueTournRoomGenData = json;
+            count = json.Count;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Error in reading " + file.Name, ex);
+        }
+
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(),
+            I18NManager.Translate("Word.RogueTournRoomInfo")));
+    }
+
+    public static void LoadRogueMagicRoomData()
+    {
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
+            I18NManager.Translate("Word.RogueMagicRoomInfo")));
+        var count = 0;
+
+        FileInfo file = new(ConfigManager.Config.Path.ConfigPath + "/RogueMagicRoomGen.json");
+
+        if (!file.Exists)
+        {
+            Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
+                I18NManager.Translate("Word.RogueMagicRoomInfo"),
+                $"{ConfigManager.Config.Path.ConfigPath}/RogueMagicRoomGen.json",
+                I18NManager.Translate("Word.RogueMagicRoom")));
+
+            return;
+        }
+
+        try
+        {
+            using var reader = file.OpenRead();
+            using StreamReader reader2 = new(reader);
+            var text = reader2.ReadToEnd();
+            var json = JsonConvert.DeserializeObject<List<RogueMagicRoomConfig>>(text);
+            if (json == null) throw new Exception("Failed to deserialize RogueMagicRoomGen.json");
+
+            foreach (var room in json.Clone())
+                if (room.RoomType == RogueMagicRoomTypeEnum.Event)
+                {
+                    json.Add(room.Clone(RogueMagicRoomTypeEnum.Reward));
+                    json.Add(room.Clone(RogueMagicRoomTypeEnum.Encounter));
+                }
+
+            GameData.RogueMagicRoomGenData = json;
+            count = json.Count;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Error in reading " + file.Name, ex);
+        }
+
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(),
+            I18NManager.Translate("Word.RogueMagicRoomInfo")));
+    }
+
+    public static void LoadChessRogueDiceSurfaceEffectData()
+    {
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
+            I18NManager.Translate("Word.RogueDiceSurfaceInfo")));
+        var count = 0;
+
+        FileInfo file = new(ConfigManager.Config.Path.ConfigPath + "/ChessRogueDiceSurfaceEffect.json");
+
+        if (!file.Exists)
+        {
+            Logger.Warn(I18NManager.Translate("Server.ServerInfo.ConfigMissing",
+                I18NManager.Translate("Word.RogueDiceSurfaceInfo"),
+                $"{ConfigManager.Config.Path.ConfigPath}/ChessRogueDiceSurfaceEffect.json",
+                I18NManager.Translate("Word.RogueDiceSurface")));
+
+            return;
+        }
+
+        try
+        {
+            using var reader = file.OpenRead();
+            using StreamReader reader2 = new(reader);
+            var text = reader2.ReadToEnd();
+            var json = JsonConvert.DeserializeObject<Dictionary<int, ChessRogueDiceSurfaceEffectConfig>>(text);
+            if (json == null) throw new Exception("Failed to deserialize ChessRogueDiceSurfaceEffect.json");
+
+            GameData.ChessRogueDiceSurfaceEffectData = json;
+            count = json.Count;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Error in reading " + file.Name, ex);
+        }
+
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadedItems", count.ToString(),
+            I18NManager.Translate("Word.RogueDiceSurfaceInfo")));
     }
 
     public static void AddRoomToGameData(RogueDLCBlockTypeEnum type, ChessRogueRoomConfig room)

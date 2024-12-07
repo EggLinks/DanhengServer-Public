@@ -1,10 +1,14 @@
 ﻿using System.Buffers;
 using System.Net;
+using System.Reflection;
 using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Server.Packet;
 using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Kcp.KcpSharp;
+using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
+using Google.Protobuf;
+using Google.Protobuf.Reflection;
 
 namespace EggLink.DanhengServer.GameServer.Server;
 
@@ -78,6 +82,8 @@ public class Connection(KcpConversation conversation, IPEndPoint remote) : Danhe
     private async Task ProcessMessageAsync(Memory<byte> data)
     {
         var gamePacket = data.ToArray();
+        if (ConfigManager.Config.GameServer.UsePacketEncryption)
+            Crypto.Xor(gamePacket, XorKey!);
 
         await using MemoryStream ms = new(gamePacket);
         using BinaryReader br = new(ms);
@@ -138,7 +144,58 @@ public class Connection(KcpConversation conversation, IPEndPoint remote) : Danhe
                     break;
             }
 
-            await handler.OnHandle(this, header, payload);
+            try
+            {
+                await handler.OnHandle(this, header, payload);
+            }
+            catch
+            {
+                // get the packet rsp and set retCode to Retcode.RetFail
+                var curPacket = LogMap.GetValueOrDefault(opcode);
+                if (curPacket == null) return;
+
+                var rspName = curPacket.Replace("Cs", "Sc").Replace("Req", "Rsp"); // Get the response packet name
+                if (rspName == curPacket) return; // do not send rsp when resp name = recv name
+                var rspOpcode = LogMap.FirstOrDefault(x => x.Value == rspName).Key; // Get the response opcode
+
+                // get proto class
+                var typ = AppDomain.CurrentDomain.GetAssemblies()
+                    .SingleOrDefault(assembly => assembly.GetName().Name == "DanhengProto")!.GetTypes()
+                    .First(t => t.Name == rspName); //get the type using the packet name
+                var curTyp = AppDomain.CurrentDomain.GetAssemblies()
+                    .SingleOrDefault(assembly => assembly.GetName().Name == "DanhengProto")!.GetTypes()
+                    .First(t => t.Name == curPacket); //get the type using the packet name
+
+                // create the response packet
+                if (Activator.CreateInstance(typ) is not IMessage rsp) return;
+
+                // set the retCode to Retcode.RetFail
+                var retCode = typ.GetProperty("Retcode");
+                retCode?.SetValue(rsp, (uint)Retcode.RetFail);
+
+                // get the same field in req and rsp
+                var descriptor =
+                    curTyp.GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static)?.GetValue(
+                        null, null) as MessageDescriptor; // get the static property Descriptor
+                var reqPacket = descriptor?.Parser.ParseFrom(payload);
+
+                foreach (var propertyInfo in curTyp.GetProperties())
+                {
+                    var prop = typ.GetProperty(propertyInfo.Name);
+                    if (prop != null && prop.CanWrite)
+                    {
+                        var value = propertyInfo.GetValue(reqPacket);
+                        if (value != null)
+                            prop.SetValue(rsp, value);
+                    }
+                }
+
+                // send the response packet
+                var packet = new BasePacket((ushort)rspOpcode);
+                packet.SetData(rsp);
+                await SendPacket(packet);
+            }
+
             return;
         }
 

@@ -9,6 +9,10 @@ public class HandlerPlayerLoginFinishCsReq : Handler
     {
         await connection.SendPacket(CmdIds.PlayerLoginFinishScRsp);
         //var list = connection.Player!.MissionManager!.GetRunningSubMissionIdList();
-        //connection.SendPacket(new PacketMissionAcceptScNotify(list));
+        //await connection.SendPacket(new PacketMonthCardRewardNotify([new ItemData
+        //{
+        //    ItemId = 1,
+        //    Count = 90
+        //}]));
     }
 }

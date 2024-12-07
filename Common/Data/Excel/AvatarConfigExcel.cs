@@ -37,6 +37,7 @@ public class AvatarConfigExcel : ExcelResource
     [JsonIgnore] public AbilityInfo? MazeSkill { get; set; }
 
     [JsonIgnore] public AbilityInfo? MazeAtk { get; set; }
+    [JsonIgnore] public Dictionary<string, AbilityInfo> MazeAbility { get; set; } = [];
 
     public override int GetId()
     {

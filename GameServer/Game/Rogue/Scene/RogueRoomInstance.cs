@@ -20,7 +20,7 @@ public class RogueRoomInstance
     public int RoomId { get; set; }
     public int SiteId { get; set; }
     public RogueRoomStatus Status { get; set; } = RogueRoomStatus.Lock;
-    public List<int> NextSiteIds { get; set; } = [];
+    public List<int> NextSiteIds { get; set; }
     public RogueRoomExcel Excel { get; set; }
 
     public RogueRoom ToProto()

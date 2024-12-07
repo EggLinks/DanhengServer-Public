@@ -86,6 +86,9 @@ public class MissionManager : BasePlayerManager
                      x.MainMissionLink == missionId))
             await Player.MessageManager!.AddMessageSection(sectionConfigExcel.ID);
 
+        foreach (var info in mission.MissionInfo!.SubMissionList.Where(x => x.FinishType is MissionFinishTypeEnum.MessagePerformSectionFinish or MissionFinishTypeEnum.MessageSectionFinish))
+            await Player.MessageManager!.AddMessageSection(info.ParamInt1);
+
         return list;
     }
 
