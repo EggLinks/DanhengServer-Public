@@ -34,8 +34,6 @@ public static class HandbookGenerator
     {
         var config = ConfigManager.Config;
         var textMapPath = config.Path.ResourcePath + "/TextMap/TextMap" + lang + ".json";
-        var fallbackTextMapPath = config.Path.ResourcePath + "/TextMap/TextMap" + config.ServerOption.FallbackLanguage +
-                                  ".json";
         if (!File.Exists(textMapPath))
         {
             Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
@@ -43,16 +41,8 @@ public static class HandbookGenerator
             return;
         }
 
-        if (!File.Exists(fallbackTextMapPath))
-        {
-            Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
-                I18NManager.Translate("Word.NotFound")));
-            return;
-        }
-
         var textMap = JsonConvert.DeserializeObject<Dictionary<long, string>>(File.ReadAllText(textMapPath));
-        var fallbackTextMap =
-            JsonConvert.DeserializeObject<Dictionary<long, string>>(File.ReadAllText(fallbackTextMapPath));
+        var fallbackTextMap = GameData.FallbackTextMapData;
 
         if (textMap == null || fallbackTextMap == null)
         {
