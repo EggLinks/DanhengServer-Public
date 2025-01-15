@@ -61,11 +61,11 @@ public class ChessRogueDiceInstance(ChessRogueInstance instance, ChessRogueNousD
             RerollTimes = (uint)RerollTimes,
             GameDiceBranchId = (uint)DiceData.BranchId,
             DiceType = ChessRogueDiceType.ChessRogueDiceEditable,
-            AMFBDDACHKB = true,
+            IsAvailable = true,
             CurSurfaceSlotId = (uint)(index > 0 ? index : 0),
             CanRerollDice = RerollTimes > 0,
             DiceModifier = Modifier?.ToProto() ?? new RogueModifier(),
-            IPNFHJEFGAM = new JPEGOGNDPJJ()
+            EFGNGPJKOAA = new FOCKFLEPFCF()
         };
     }
 }

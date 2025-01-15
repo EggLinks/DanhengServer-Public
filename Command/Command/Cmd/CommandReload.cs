@@ -32,7 +32,7 @@ public class CommandReload : ICommand
     {
         // Reload the videokeys
         GameData.VideoKeysConfig = ResourceManager.LoadCustomFile<VideoKeysConfig>("VideoKeys", "VideoKeysConfig") ??
-                                  new VideoKeysConfig();
+                                   new VideoKeysConfig();
         await arg.SendMsg(I18NManager.Translate("Game.Command.Reload.ConfigReloaded",
             I18NManager.Translate("Word.VideoKeys")));
     }

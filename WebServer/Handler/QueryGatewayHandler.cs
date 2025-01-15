@@ -26,9 +26,9 @@ internal class QueryGatewayHandler
             EnableVersionUpdate = true,
             EnableUploadBattleLog = true,
             EnableWatermark = true,
-            IALOEKGOJOC = true,
+            PILJCFDPOPM = true,
             EnableAndroidMiddlePackage = true,
-            FIOHEKDJNCG = true,
+            NetworkDiagnostic = true,
             CloseRedeemCode = true
         };
         if (ConfigManager.Config.GameServer.UsePacketEncryption)

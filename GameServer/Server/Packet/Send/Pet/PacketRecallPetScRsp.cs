@@ -10,7 +10,7 @@ public class PacketRecallPetScRsp : BasePacket
         var proto = new RecallPetScRsp
         {
             CurPetId = newPetId,
-            NewPetId = 0
+            SelectPetId = 0
         };
 
         SetData(proto);

@@ -71,7 +71,8 @@ public static class I18NManager
     {
         var languageStr = "EggLink.DanhengServer.Internationalization.Message.Language" +
                           langStr;
-        var languageType = Type.GetType(languageStr) ?? Type.GetType("EggLink.DanhengServer.Internationalization.Message.LanguageEN")!;
+        var languageType = Type.GetType(languageStr) ??
+                           Type.GetType("EggLink.DanhengServer.Internationalization.Message.LanguageEN")!;
         var language = Activator.CreateInstance(languageType) ?? throw new Exception("Language not found");
 
         List<object> langs = [language];

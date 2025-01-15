@@ -4,6 +4,7 @@ using EggLink.DanhengServer.Internationalization;
 using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Util;
 using Spectre.Console;
+using static EggLink.DanhengServer.GameServer.Plugin.Event.PluginEvent;
 
 namespace EggLink.DanhengServer.Command.Command;
 
@@ -173,6 +174,7 @@ public class CommandManager
             }
             else
             {
+                InvokeOnPlayerUseCommand(sender, input);
                 // player 
                 tempTarget = Listener.GetActiveConnection(sender.GetSender());
                 if (tempTarget == null)

@@ -10,7 +10,7 @@ public class PacketRogueModifierDelNotify : BasePacket
     {
         var proto = new RogueModifierDelNotify
         {
-            MainModifierEffect = (ulong)modifier.ModifierId
+            ModifierId = (ulong)modifier.ModifierId
         };
 
         SetData(proto);

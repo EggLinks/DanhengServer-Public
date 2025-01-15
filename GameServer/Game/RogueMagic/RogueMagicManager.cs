@@ -91,7 +91,7 @@ public class RogueMagicManager(PlayerInstance player) : BasePlayerManager(player
     {
         return (from area in GameData.RogueMagicAreaData.Values
             select new RogueMagicAreaInfo
-                { AreaId = (uint)area.AreaID, IsTournFinish = true, IsUnlocked = true, IsTakenReward = true }).ToList();
+                { AreaId = (uint)area.AreaID, Completed = true, IsUnlocked = true, IsTakenReward = true }).ToList();
     }
 
     public List<RogueMagicDifficultyInfo> ToDifficultyInfoList()

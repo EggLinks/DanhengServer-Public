@@ -9,6 +9,7 @@ using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
 using LineupInfo = EggLink.DanhengServer.Database.Lineup.LineupInfo;
+using static EggLink.DanhengServer.GameServer.Plugin.Event.PluginEvent;
 
 namespace EggLink.DanhengServer.GameServer.Game.Lineup;
 
@@ -43,7 +44,8 @@ public class LineupManager : BasePlayerManager
 
     public LineupInfo? GetCurLineup()
     {
-        return GetLineup(LineupData.GetCurLineupIndex());
+        var lineup = GetLineup(LineupData.GetCurLineupIndex());
+        return lineup;
     }
 
     public List<AvatarSceneInfo> GetAvatarsFromTeam(int index)
@@ -226,6 +228,7 @@ public class LineupManager : BasePlayerManager
         if (sendPacket)
         {
             if (lineupIndex == LineupData.GetCurLineupIndex()) Player.SceneInstance?.SyncLineup();
+            InvokeOnPlayerSyncLineup(Player, lineup);
             await Player.SendPacket(new PacketSyncLineupNotify(lineup));
         }
     }
@@ -264,6 +267,7 @@ public class LineupManager : BasePlayerManager
         if (sendPacket)
         {
             Player.SceneInstance?.SyncLineup();
+            InvokeOnPlayerSyncLineup(Player, lineup);
             await Player.SendPacket(new PacketSyncLineupNotify(lineup));
         }
     }
@@ -283,6 +287,7 @@ public class LineupManager : BasePlayerManager
         if (sendPacket)
         {
             if (lineupIndex == LineupData.GetCurLineupIndex()) Player.SceneInstance?.SyncLineup();
+            InvokeOnPlayerSyncLineup(Player, lineup);
             await Player.SendPacket(new PacketSyncLineupNotify(lineup));
         }
     }
@@ -313,6 +318,7 @@ public class LineupManager : BasePlayerManager
         foreach (var avatar in lineupSlotList) await AddAvatar(index, avatar, false);
 
         if (index == LineupData.GetCurLineupIndex()) Player.SceneInstance?.SyncLineup();
+        InvokeOnPlayerSyncLineup(Player, lineup);
         await Player.SendPacket(new PacketSyncLineupNotify(lineup));
     }
 
@@ -336,6 +342,7 @@ public class LineupManager : BasePlayerManager
         foreach (var avatar in req.LineupSlotList) await AddAvatar(index, (int)avatar.Id, false);
 
         if (index == LineupData.GetCurLineupIndex()) Player.SceneInstance?.SyncLineup();
+        InvokeOnPlayerSyncLineup(Player, lineup);
         await Player.SendPacket(new PacketSyncLineupNotify(lineup));
     }
 

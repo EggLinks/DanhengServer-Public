@@ -1,6 +1,7 @@
 ﻿using EggLink.DanhengServer.Kcp;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
+using static EggLink.DanhengServer.GameServer.Plugin.Event.PluginEvent;
 
 namespace EggLink.DanhengServer.GameServer.Server.Packet.Recv.Challenge;
 
@@ -20,6 +21,8 @@ public class HandlerLeaveChallengeCsReq : Handler
             // Reset lineup
             player.LineupManager!.SetExtraLineup(ExtraLineupType.LineupChallenge, []);
             player.LineupManager.SetExtraLineup(ExtraLineupType.LineupChallenge2, []);
+
+            InvokeOnPlayerQuitChallenge(player, player.ChallengeManager!.ChallengeInstance);
 
             player.ChallengeManager!.ChallengeInstance = null;
             player.ChallengeManager!.ClearInstance();

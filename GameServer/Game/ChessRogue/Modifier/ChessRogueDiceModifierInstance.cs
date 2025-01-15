@@ -17,7 +17,7 @@ public class ChessRogueDiceModifierInstance(int modifierId, ChessRogueDiceSurfac
     {
         return new RogueModifier
         {
-            MainModifierEffect = (ulong)ModifierId,
+            ModifierId = (ulong)ModifierId,
             ModifierSourceType = SourceType,
             ModifierContent = new RogueModifierContent
             {
@@ -26,7 +26,7 @@ public class ChessRogueDiceModifierInstance(int modifierId, ChessRogueDiceSurfac
             },
             ModifierInfo = new ChessRogueModifierInfo
             {
-                GNDJCFDJHEJ = { SelectableCells.Select(x => (uint)x) },
+                ModifierEffectCellIdList = { SelectableCells.Select(x => (uint)x) },
                 SelectCellId = (uint)SelectedCell,
                 Confirm = IsConfirmed
             }

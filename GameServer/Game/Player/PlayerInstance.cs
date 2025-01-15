@@ -18,6 +18,7 @@ using EggLink.DanhengServer.GameServer.Game.Gacha;
 using EggLink.DanhengServer.GameServer.Game.Inventory;
 using EggLink.DanhengServer.GameServer.Game.Lineup;
 using EggLink.DanhengServer.GameServer.Game.Mail;
+using EggLink.DanhengServer.GameServer.Game.MatchThree;
 using EggLink.DanhengServer.GameServer.Game.Message;
 using EggLink.DanhengServer.GameServer.Game.Mission;
 using EggLink.DanhengServer.GameServer.Game.Quest;
@@ -29,6 +30,7 @@ using EggLink.DanhengServer.GameServer.Game.Scene;
 using EggLink.DanhengServer.GameServer.Game.Scene.Entity;
 using EggLink.DanhengServer.GameServer.Game.Shop;
 using EggLink.DanhengServer.GameServer.Game.Task;
+using EggLink.DanhengServer.GameServer.Game.TrainParty;
 using EggLink.DanhengServer.GameServer.Server;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.Lineup;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.Player;
@@ -45,30 +47,59 @@ public class PlayerInstance(PlayerData data)
 {
     #region Managers
 
-    public ActivityManager? ActivityManager { get; private set; }
+    #region Basic Managers
+
     public AvatarManager? AvatarManager { get; private set; }
     public LineupManager? LineupManager { get; private set; }
     public InventoryManager? InventoryManager { get; private set; }
     public BattleManager? BattleManager { get; private set; }
     public BattleInstance? BattleInstance { get; set; }
+
+    #endregion
+
+    #region Shopping Managers
+
+    public GachaManager? GachaManager { get; private set; }
+    public ShopService? ShopService { get; private set; }
+
+    #endregion
+
+
+    #region Quest & Mission Managers
+
     public MissionManager? MissionManager { get; private set; }
     public QuestManager? QuestManager { get; private set; }
-    public GachaManager? GachaManager { get; private set; }
-    public MessageManager? MessageManager { get; private set; }
-    public MailManager? MailManager { get; private set; }
-
     public RaidManager? RaidManager { get; private set; }
     public StoryLineManager? StoryLineManager { get; private set; }
+    public MessageManager? MessageManager { get; private set; }
+    public TaskManager? TaskManager { get; private set; }
 
-    public FriendManager? FriendManager { get; private set; }
+    #endregion
+
+    #region Rogue Managers
+
     public RogueManager? RogueManager { get; private set; }
     public ChessRogueManager? ChessRogueManager { get; private set; }
     public RogueTournManager? RogueTournManager { get; private set; }
     public RogueMagicManager? RogueMagicManager { get; internal set; }
-    public ShopService? ShopService { get; private set; }
+
+    #endregion
+
+    #region Activity Managers
+
+    public ActivityManager? ActivityManager { get; private set; }
+    public MatchThreeManager? MatchThreeManager { get; private set; }
+    public TrainPartyManager? TrainPartyManager { get; private set; }
+
+    #endregion
+
+    #region Others
+
+    public MailManager? MailManager { get; private set; }
+    public FriendManager? FriendManager { get; private set; }
     public ChallengeManager? ChallengeManager { get; private set; }
 
-    public TaskManager? TaskManager { get; private set; }
+    #endregion
 
     #endregion
 
@@ -150,6 +181,8 @@ public class PlayerInstance(PlayerData data)
         RaidManager = new RaidManager(this);
         StoryLineManager = new StoryLineManager(this);
         QuestManager = new QuestManager(this);
+        TrainPartyManager = new TrainPartyManager(this);
+        MatchThreeManager = new MatchThreeManager(this);
 
         PlayerUnlockData = InitializeDatabase<PlayerUnlockData>();
         SceneData = InitializeDatabase<SceneData>();
@@ -430,13 +463,49 @@ public class PlayerInstance(PlayerData data)
                 if (newState == PropStateEnum.Closed) await prop.SetState(PropStateEnum.Open);
                 break;
             case PropTypeEnum.PROP_MAZE_JIGSAW:
+                switch (newState)
+                {
+                    case PropStateEnum.Closed:
+                    {
+                        foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID))
+                        {
+                            if (p.Excel.PropType == PropTypeEnum.PROP_TREASURE_CHEST)
+                            {
+                                await p.SetState(PropStateEnum.ChestClosed);
+                            }
+                            else if (p.Excel.PropType == prop.Excel.PropType)
+                            {
+                                // Skip
+                            }
+                            else
+                            {
+                                await p.SetState(PropStateEnum.Open);
+                            }
+                        }
+
+                        break;
+                    }
+                    case PropStateEnum.Open:
+                    {
+                        foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID).Where(p =>
+                                     p.Excel.PropType is not PropTypeEnum.PROP_TREASURE_CHEST &&
+                                     p.Excel.PropType != prop.Excel.PropType))
+                        {
+                            await p.SetState(PropStateEnum.Open);
+                        }
+
+                        break;
+                    }
+                }
+
+                break;
             case PropTypeEnum.PROP_MAZE_PUZZLE:
-                if (newState == PropStateEnum.Closed || newState == PropStateEnum.Open)
+                if (newState is PropStateEnum.Closed or PropStateEnum.Open)
                     foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID))
                     {
                         if (p.Excel.PropType == PropTypeEnum.PROP_TREASURE_CHEST)
                         {
-                            await p.SetState(PropStateEnum.ChestUsed);
+                            await p.SetState(PropStateEnum.ChestClosed);
                         }
                         else if (p.Excel.PropType == prop.Excel.PropType)
                         {
@@ -460,6 +529,23 @@ public class PlayerInstance(PlayerData data)
 
                         await MissionManager!.OnPlayerInteractWithProp();
                     }
+
+                if (prop.PropInfo.Name.Contains("Piece"))
+                {
+                    var pieceDone = SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID)
+                        .Where(p => p.PropInfo.Name.Contains("Piece")).All(p => p.State == PropStateEnum.Closed);
+
+                    if (pieceDone)
+                    {
+                        // set JigsawSir to open
+                        foreach (var p in SceneInstance.GetEntitiesInGroup<EntityProp>(prop.GroupID)
+                                     .Where(p => p.PropInfo.Name.Contains("JigsawSir") &&
+                                                 p.State != PropStateEnum.Closed))
+                        {
+                            await p.SetState(PropStateEnum.TriggerEnable);
+                        }
+                    }
+                }
 
                 break;
         }
@@ -493,7 +579,7 @@ public class PlayerInstance(PlayerData data)
                 $"JG_ML_{splits[3]}_Puzzle{(config.TargetState == PropStateEnum.Open ? "Started" : "Complete")}";
         }
 
-        if (SceneInstance?.FloorInfo?.SavedValues.Find(x => x.Name == key) != null)
+        if (SceneInstance?.FloorInfo?.FloorSavedValue.Find(x => x.Name == key) != null)
         {
             // should save
             var plane = SceneInstance.PlaneId;
@@ -506,7 +592,7 @@ public class PlayerInstance(PlayerData data)
             }
 
             value[key] = 1; // ParamString[2] is the key
-            await SendPacket(new PacketUpdateFloorSavedValueNotify(key, 1));
+            await SendPacket(new PacketUpdateFloorSavedValueNotify(key, 1, this));
 
             TaskManager?.SceneTaskTrigger.TriggerFloor(plane, floor);
             MissionManager?.HandleFinishType(MissionFinishTypeEnum.FloorSavedValue);
@@ -639,6 +725,7 @@ public class PlayerInstance(PlayerData data)
         Data.Rot = rot;
         var notSendMove = true;
         SceneInstance instance = new(this, plane, floorId, entryId);
+        InvokeOnPlayerLoadScene(this, instance);
         if (planeId != Data.PlaneId || floorId != Data.FloorId || entryId != Data.EntryId)
         {
             Data.PlaneId = planeId;

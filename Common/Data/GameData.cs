@@ -27,6 +27,12 @@ public static class GameData
 
     #endregion
 
+    #region Pam
+
+    public static Dictionary<int, PamSkinConfigExcel> PamSkinConfigData { get; private set; } = [];
+
+    #endregion
+
     #region Avatar
 
     public static Dictionary<int, AvatarConfigExcel> AvatarConfigData { get; private set; } = [];
@@ -125,6 +131,24 @@ public static class GameData
     public static Dictionary<int, MusicRhythmTrackExcel> MusicRhythmTrackData { get; private set; } = [];
 
     public static Dictionary<string, AdventureModifierConfig> AdventureModifierData { get; set; } = [];
+
+    #endregion
+
+    #region TrainParty
+
+    public static Dictionary<int, TrainPartyPassengerConfigExcel> TrainPartyPassengerConfigData { get; private set; } =
+        [];
+
+    public static Dictionary<int, TrainPartyAreaConfigExcel> TrainPartyAreaConfigData { get; private set; } = [];
+
+    public static Dictionary<int, TrainPartyAreaGoalConfigExcel> TrainPartyAreaGoalConfigData { get; private set; } =
+        [];
+
+    public static Dictionary<int, TrainPartyTeamExcel> TrainPartyTeamData { get; private set; } = [];
+    public static Dictionary<int, TrainPartyStepConfigExcel> TrainPartyStepConfigData { get; private set; } = [];
+    public static Dictionary<int, TrainPartyDynamicConfigExcel> TrainPartyDynamicConfigData { get; private set; } = [];
+    public static Dictionary<int, TrainPartyGridConfigExcel> TrainPartyGridConfigData { get; private set; } = [];
+    public static Dictionary<int, TrainPartyCardConfigExcel> TrainPartyCardConfigData { get; private set; } = [];
 
     #endregion
 
@@ -284,6 +308,13 @@ public static class GameData
         [];
 
     public static Dictionary<int, int> RogueMagicLayerIdRoomCountDict { get; set; } = [];
+
+    #endregion
+
+    #region MatchThree
+
+    public static Dictionary<int, MatchThreeLevelExcel> MatchThreeLevelData { get; private set; } = [];
+    public static Dictionary<int, MatchThreeBirdExcel> MatchThreeBirdData { get; private set; } = [];
 
     #endregion
 

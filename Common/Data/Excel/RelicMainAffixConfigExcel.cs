@@ -7,6 +7,7 @@ public class RelicMainAffixConfigExcel : ExcelResource
     public int AffixID { get; set; }
 
     public bool IsAvailable { get; set; }
+    public string? Property { get; set; }
 
     public override int GetId()
     {

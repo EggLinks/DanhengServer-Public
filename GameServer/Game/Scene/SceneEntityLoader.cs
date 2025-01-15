@@ -25,6 +25,7 @@ public class SceneEntityLoader(SceneInstance scene)
                  where @group.LoadSide != GroupLoadSideEnum.Client
                  where !@group.GroupName.Contains("DeployPuzzle_Repeat_Area")
                  where !@group.GroupName.Contains("TrainVisitor")
+                 where !@group.GroupName.Contains("TrainVisiter")
                  select @group) await LoadGroup(group);
 
         Scene.IsLoaded = true;
@@ -43,12 +44,15 @@ public class SceneEntityLoader(SceneInstance scene)
         foreach (var group in Scene.FloorInfo!.Groups.Values
                      .Where(group => group.LoadSide != GroupLoadSideEnum.Client)
                      .Where(group => !group.GroupName.Contains("TrainVisitor"))
-                     .Where(group => !group.GroupName.Contains("DeployPuzzle_Repeat_Area")))
+                     .Where(group => !group.GroupName.Contains("DeployPuzzle_Repeat_Area"))
+                     .Where(group => !group.GroupName.Contains("TrainVisiter")))
 
             if (oldGroupId.Contains(group.Id)) // check if it should be unloaded
             {
-                if (group.ForceUnloadCondition.IsTrue(Scene.Player.MissionManager!.Data, false) ||
-                    group.UnloadCondition.IsTrue(Scene.Player.MissionManager!.Data, false))
+                if (group.ForceUnloadCondition.IsTrue(Scene.Player.MissionManager!.Data,
+                        false) || // condition: Force Unload Condition
+                    group.UnloadCondition.IsTrue(Scene.Player.MissionManager!.Data,
+                        false)) // condition: Unload Condition  anyone of the conditions is true then unload
                 {
                     foreach (var entity in Scene.Entities.Values.Where(entity => entity.GroupID == group.Id))
                     {
@@ -61,7 +65,7 @@ public class SceneEntityLoader(SceneInstance scene)
                 }
                 else if (group.OwnerMainMissionID != 0 &&
                          Scene.Player.MissionManager!.GetMainMissionStatus(group.OwnerMainMissionID) !=
-                         MissionPhaseEnum.Accept)
+                         MissionPhaseEnum.Accept) // condition: Owner Main Mission ID
                 {
                     foreach (var entity in Scene.Entities.Values.Where(entity => entity.GroupID == group.Id))
                     {
@@ -86,20 +90,22 @@ public class SceneEntityLoader(SceneInstance scene)
 
     public virtual async ValueTask<List<IGameEntity>?> LoadGroup(GroupInfo info, bool forceLoad = false)
     {
-        if (!LoadGroups.Contains(info.Id)) return null;
-        var missionData = Scene.Player.MissionManager!.Data;
-        if (info.LoadSide == GroupLoadSideEnum.Client) return null;
-        if (info.GroupName.Contains("TrainVisitor")) return null;
+        if (!LoadGroups.Contains(info.Id)) return null; // check if group should be loaded in this dimension
+        var missionData = Scene.Player.MissionManager!.Data; // get mission data
+        if (info.LoadSide == GroupLoadSideEnum.Client) return null; // check if group should be loaded on client side
+        if (info.GroupName.Contains("TrainVisitor")) return null; // certain group name
         if (info.GroupName.Contains("DeployPuzzle_Repeat_Area")) return null;
+        if (info.GroupName.Contains("TrainVisiter")) return null;
 
-        if (info.SystemUnlockCondition != null)
+        if (info.SystemUnlockCondition != null) // condition: System Unlock Condition
         {
-            var result = info.SystemUnlockCondition.Operation != OperationEnum.Or;
+            var result = info.SystemUnlockCondition.Operation != OperationEnum.Or; // operation
             foreach (var conditionId in info.SystemUnlockCondition.Conditions)
             {
                 GameData.GroupSystemUnlockDataData.TryGetValue(conditionId, out var unlockExcel);
                 if (unlockExcel == null) continue;
-                var part = Scene.Player.QuestManager?.UnlockHandler.GetUnlockStatus(unlockExcel.UnlockID) ?? false;
+                var part = Scene.Player.QuestManager?.UnlockHandler.GetUnlockStatus(unlockExcel.UnlockID) ??
+                           false; // check if unlock condition is met
                 if (info.SystemUnlockCondition.Operation == OperationEnum.Or && part)
                 {
                     result = true;
@@ -120,24 +126,32 @@ public class SceneEntityLoader(SceneInstance scene)
             if (!result) return null;
         }
 
-        if (!(info.OwnerMainMissionID == 0 ||
+        if (!(info.OwnerMainMissionID == 0 || // condition: Owner Main Mission ID
               Scene.Player.MissionManager!.GetMainMissionStatus(info.OwnerMainMissionID) ==
-              MissionPhaseEnum.Accept)) return null;
+              MissionPhaseEnum.Accept)) return null; // check if main mission is accepted
 
-        if (Scene.FloorId == 20332001 && info.Id == 109)
+        if (Scene.FloorId == 20332001 && info.Id == 109) // certain group id
             if (Scene.Player.SceneData?.FloorSavedData.GetValueOrDefault(20332001, [])
                     .GetValueOrDefault("ShowFeather", 0) != 1)
                 return null; // a temp solution for Sunday
 
-        if ((!info.LoadCondition.IsTrue(missionData) || info.UnloadCondition.IsTrue(missionData, false) ||
-             info.ForceUnloadCondition.IsTrue(missionData, false)) && !forceLoad) return null;
+        if ((!info.LoadCondition.IsTrue(missionData) ||
+             info.UnloadCondition.IsTrue(missionData,
+                 false) || // condition: Load Condition, Unload Condition, Force Unload Condition
+             info.ForceUnloadCondition.IsTrue(missionData, false)) &&
+            !forceLoad) return null; // check if group should be loaded forcefully
+
+        if (!info.SavedValueCondition.IsTrue(
+                Scene.Player.SceneData!.FloorSavedData.GetValueOrDefault(Scene.FloorId, [])) &&
+            !forceLoad) // condition: Saved Value Condition
+            return null;
 
         if (Scene.Entities.Values.ToList().FindIndex(x => x.GroupID == info.Id) !=
             -1) // check if group is already loaded
             return null;
 
         // load
-        Scene.Groups.Add(info.Id);
+        Scene.Groups.Add(info.Id); // add group to loaded groups
 
         var entityList = new List<IGameEntity>();
         foreach (var npc in info.NPCList)

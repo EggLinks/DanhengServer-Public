@@ -9,5 +9,6 @@ public class HandlerGetAllServerPrefsDataCsReq : Handler
     {
         var infos = connection.Player?.ServerPrefsData?.ServerPrefsDict.Values.ToList() ?? [];
         //await connection.SendPacket(new PacketGetAllServerPrefsDataScRsp(infos));
+        await ValueTask.CompletedTask;
     }
 }

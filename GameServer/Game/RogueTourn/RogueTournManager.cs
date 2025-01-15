@@ -106,7 +106,7 @@ public class RogueTournManager(PlayerInstance player) : BasePlayerManager(player
                 where areaExcel.Value.AreaGroupID != RogueTournAreaGroupIDEnum.WeekChallenge
                 select new RogueTournAreaInfo
                 {
-                    AreaId = (uint)areaExcel.Value.AreaID, IsTournFinish = true, IsTakenReward = true, IsUnlocked = true
+                    AreaId = (uint)areaExcel.Value.AreaID, Completed = true, IsTakenReward = true, IsUnlocked = true
                 })
             .ToList();
     }
@@ -134,15 +134,15 @@ public class RogueTournManager(PlayerInstance player) : BasePlayerManager(player
     {
         var proto = new RogueTournHandbookInfo
         {
-            LMIJCPOICHI = 1
+            RogueTournHandbookConst = 1
         };
 
         //foreach (var hexAvatar in GameData.RogueTournHexAvatarBaseTypeData.Keys)
         //    proto.HandbookAvatarBaseList.Add((uint)hexAvatar);
 
-        foreach (var buff in GameData.RogueBuffData.Values)
-            if (buff is RogueTournBuffExcel { IsInHandbook: true })
-                proto.HandbookBuffList.Add((uint)buff.MazeBuffID);
+        //foreach (var buff in GameData.RogueBuffData.Values)
+        //    if (buff is RogueTournBuffExcel { IsInHandbook: true })
+        //        proto.HandbookBuffList.Add((uint)buff.MazeBuffID);
 
         //foreach (var formulaId in GameData.RogueTournFormulaData.Keys) proto.HandbookFormulaList.Add((uint)formulaId);
 

@@ -24,9 +24,11 @@
     <Reference Include="DanhengProto">
       <HintPath>..\Proto\DanhengProto.dll</HintPath>
     </Reference>
+    <PackageReference Include="Google.Protobuf" Version="3.29.1" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.29.1" />
     <PackageReference Include="McMaster.NETCore.Plugins" Version="1.4.0" />
     <PackageReference Include="McMaster.NETCore.Plugins.Mvc" Version="1.4.0" />
-    <PackageReference Include="System.IO.Pipelines" Version="8.0.0" />
+    <PackageReference Include="System.IO.Pipelines" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +39,6 @@
     <Folder Include="Server\Packet\Send\Message\" />
     <Folder Include="Server\Packet\Send\Phone\" />
     <Folder Include="Server\Packet\Send\PlayerBoard\" />
-    <Folder Include="Server\Packet\Send\RogueCommon\" />
     <Folder Include="Server\Packet\Send\RollShop\" />
     <Folder Include="Server\Packet\Send\StoryLine\" />
     <Folder Include="Server\Packet\Send\PlayerSync\" />

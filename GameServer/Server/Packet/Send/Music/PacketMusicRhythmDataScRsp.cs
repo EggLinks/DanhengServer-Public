@@ -17,7 +17,7 @@ public class PacketMusicRhythmDataScRsp : BasePacket
             proto.MusicLevel.Add(new MusicRhythmLevel
             {
                 LevelId = (uint)level.GetId(),
-                IsFullCombo = true,
+                FullCombo = true,
                 UnlockLevel = 3
             });
 

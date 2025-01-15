@@ -532,7 +532,7 @@ public class RogueMagicInstance : BaseRogueInstance
             GameDifficultyInfo = ToDifficultyInfo(),
             MagicItem = ToMagicItemInfo(),
             BasicInfo = ToCurAreaInfo(),
-            JDMGJDBMHEJ = new LKJMDOAHGIN()
+            IGGNGJGPCLK = new CJOIECNKEGD()
         };
 
         return proto;

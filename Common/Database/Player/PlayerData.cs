@@ -17,6 +17,7 @@ public class PlayerData : BaseDatabaseDataHelper
     public int PhoneTheme { get; set; } = 221000;
     public int ChatBubble { get; set; } = 220000;
     public int CurrentBgm { get; set; } = 210007;
+    public int CurrentPamSkin { get; set; } = 252000;
     public bool IsGenderSet { get; set; } = false;
     public Gender CurrentGender { get; set; } = Gender.Man;
     public int Level { get; set; } = 1;

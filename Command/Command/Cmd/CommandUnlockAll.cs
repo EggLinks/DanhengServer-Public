@@ -39,7 +39,8 @@ public class CommandUnlockAll : ICommand
             player.AvatarManager!.GetHero()!.PathId = 8002;
         }
 
-        await arg.SendMsg(I18NManager.Translate("Game.Command.UnlockAll.UnlockedAll", I18NManager.Translate("Word.Mission")));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.UnlockAll.UnlockedAll",
+            I18NManager.Translate("Word.Mission")));
         await arg.Target!.Player!.SendPacket(new PacketPlayerKickOutScNotify());
         arg.Target!.Stop();
     }
@@ -56,16 +57,13 @@ public class CommandUnlockAll : ICommand
         var player = arg.Target!.Player!;
 
         foreach (var data in GameData.TutorialDataData)
-        {
             player.TutorialData!.Tutorials[data.Key] = TutorialStatus.TutorialFinish;
-        }
 
         foreach (var data in GameData.TutorialGuideDataData)
-        {
             player.TutorialGuideData!.Tutorials[data.Key] = TutorialStatus.TutorialFinish;
-        }
 
-        await arg.SendMsg(I18NManager.Translate("Game.Command.UnlockAll.UnlockedAll", I18NManager.Translate("Word.Tutorial")));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.UnlockAll.UnlockedAll",
+            I18NManager.Translate("Word.Tutorial")));
         await arg.Target!.Player!.SendPacket(new PacketPlayerKickOutScNotify());
         arg.Target!.Stop();
     }
@@ -80,7 +78,8 @@ public class CommandUnlockAll : ICommand
         }
 
         var player = arg.Target!.Player!;
-        List<int> swarmList = [8013101, 8013102, 8013103, 8013104, 8013105, 8013106, 8013107, 8013108, 8013109, 8013110];
+        List<int> swarmList =
+            [8013101, 8013102, 8013103, 8013104, 8013105, 8013106, 8013107, 8013108, 8013109, 8013110];
         List<int> ggList = [8016101, 8016102, 8016103, 8016104, 8016105, 8016106];
         List<int> duList = [8023401, 8023501, 8023601];
         List<int> udList = [8026401, 8026402];
@@ -94,7 +93,8 @@ public class CommandUnlockAll : ICommand
             await player.MissionManager!.FinishMainMission(id);
         }
 
-        await arg.SendMsg(I18NManager.Translate("Game.Command.UnlockAll.UnlockedAll", I18NManager.Translate("Word.TypesOfRogue")));
+        await arg.SendMsg(I18NManager.Translate("Game.Command.UnlockAll.UnlockedAll",
+            I18NManager.Translate("Word.TypesOfRogue")));
         await arg.Target!.Player!.SendPacket(new PacketPlayerKickOutScNotify());
         arg.Target!.Stop();
     }

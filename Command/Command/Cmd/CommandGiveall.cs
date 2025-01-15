@@ -3,6 +3,7 @@ using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.Enums.Avatar;
 using EggLink.DanhengServer.Enums.Item;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.PlayerSync;
+using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Internationalization;
 
 namespace EggLink.DanhengServer.Command.Command.Cmd;
@@ -235,6 +236,46 @@ public class CommandGiveall : ICommand
 
         await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
             I18NManager.Translate("Word.Unlock"), "1"));
+    }
+
+    [CommandMethod("0 train")]
+    public async ValueTask GiveAllTrainItem(CommandArg arg)
+    {
+        var player = arg.Target?.Player;
+        if (player == null)
+        {
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Notice.PlayerNotFound"));
+            return;
+        }
+
+        foreach (var grid in GameData.TrainPartyGridConfigData.Keys) await player.TrainPartyManager!.AddGrid(grid);
+
+        foreach (var card in GameData.TrainPartyCardConfigData.Keys) await player.TrainPartyManager!.AddCard(card);
+
+        foreach (var area in player.TrainPartyManager!.TrainPartyData.Areas)
+        foreach (var step in GameData.TrainPartyStepConfigData.Values.Where(stepExcel => GameData
+                     .TrainPartyAreaGoalConfigData.First(x => x.Value.AreaID == area.Value.AreaId).Value
+                     .StepGroupList.Contains(stepExcel.GroupID)))
+            area.Value.StepList.Add(step.ID);
+
+        Dictionary<string, int> update = [];
+        player.SceneData!.FloorSavedData[player.SceneInstance!.FloorId] = [];
+        foreach (var savedValue in player.SceneInstance!.FloorInfo!.FloorSavedValue)
+            if (savedValue.Name.StartsWith("Build_") || savedValue.Name == "Onboarded")
+            {
+                player.SceneData!.FloorSavedData[player.SceneInstance!.FloorId][savedValue.Name] = 1;
+                update.TryAdd(savedValue.Name, 1);
+            }
+            else if (savedValue.Name.StartsWith("Progress_"))
+            {
+                player.SceneData!.FloorSavedData[player.SceneInstance!.FloorId][savedValue.Name] = 100;
+                update.TryAdd(savedValue.Name, 100);
+            }
+
+        await player.SendPacket(new PacketUpdateFloorSavedValueNotify(update, player));
+
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems",
+            I18NManager.Translate("Word.TrainItem"), "1"));
     }
 
     [CommandMethod("0 path")]

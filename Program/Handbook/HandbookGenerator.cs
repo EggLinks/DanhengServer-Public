@@ -71,12 +71,12 @@ public static class HandbookGenerator
         builder.AppendLine();
         builder.AppendLine("#Avatar");
         builder.AppendLine();
-        GenerateAvatar(builder, textMap, fallbackTextMap);
+        GenerateAvatar(builder, textMap, fallbackTextMap, lang == config.ServerOption.Language);
 
         builder.AppendLine();
         builder.AppendLine("#Item");
         builder.AppendLine();
-        GenerateItem(builder, textMap, fallbackTextMap);
+        GenerateItem(builder, textMap, fallbackTextMap, lang == config.ServerOption.Language);
 
         builder.AppendLine();
         builder.AppendLine("#MainMission");
@@ -91,12 +91,12 @@ public static class HandbookGenerator
         builder.AppendLine();
         builder.AppendLine("#RogueBuff");
         builder.AppendLine();
-        GenerateRogueBuff(builder, textMap, fallbackTextMap);
+        GenerateRogueBuff(builder, textMap, fallbackTextMap, lang == config.ServerOption.Language);
 
         builder.AppendLine();
         builder.AppendLine("#RogueMiracle");
         builder.AppendLine();
-        GenerateRogueMiracleDisplay(builder, textMap, fallbackTextMap);
+        GenerateRogueMiracleDisplay(builder, textMap, fallbackTextMap, lang == config.ServerOption.Language);
 
 #if DEBUG
         builder.AppendLine();
@@ -120,7 +120,7 @@ public static class HandbookGenerator
     }
 
     public static void GenerateItem(StringBuilder builder, Dictionary<long, string> map,
-        Dictionary<long, string> fallback)
+        Dictionary<long, string> fallback, bool setName)
     {
         foreach (var item in GameData.ItemConfigData.Values)
         {
@@ -128,12 +128,12 @@ public static class HandbookGenerator
                 fallback.TryGetValue(item.ItemName.Hash, out value) ? value : $"[{item.ItemName.Hash}]";
             builder.AppendLine(item.ID + ": " + name);
 
-            if (name != $"[{item.ItemName.Hash}]") item.Name = name;
+            if (setName && name != $"[{item.ItemName.Hash}]") item.Name = name;
         }
     }
 
     public static void GenerateAvatar(StringBuilder builder, Dictionary<long, string> map,
-        Dictionary<long, string> fallback)
+        Dictionary<long, string> fallback, bool setName)
     {
         foreach (var avatar in GameData.AvatarConfigData.Values)
         {
@@ -141,7 +141,7 @@ public static class HandbookGenerator
                 fallback.TryGetValue(avatar.AvatarName.Hash, out value) ? value : $"[{avatar.AvatarName.Hash}]";
             builder.AppendLine(avatar.AvatarID + ": " + name);
 
-            if (name != $"[{avatar.AvatarName.Hash}]") avatar.Name = name;
+            if (setName && name != $"[{avatar.AvatarName.Hash}]") avatar.Name = name;
         }
     }
 
@@ -168,7 +168,7 @@ public static class HandbookGenerator
     }
 
     public static void GenerateRogueBuff(StringBuilder builder, Dictionary<long, string> map,
-        Dictionary<long, string> fallback)
+        Dictionary<long, string> fallback, bool setName)
     {
         foreach (var buff in GameData.RogueMazeBuffData)
         {
@@ -179,12 +179,12 @@ public static class HandbookGenerator
                     : $"[{buff.Value.BuffName.Hash}]";
             builder.AppendLine(buff.Key + ": " + name + " --- Level:" + buff.Value.Lv);
 
-            if (name != $"[{buff.Value.BuffName.Hash}]") buff.Value.Name = name;
+            if (setName && name != $"[{buff.Value.BuffName.Hash}]") buff.Value.Name = name;
         }
     }
 
     public static void GenerateRogueMiracleDisplay(StringBuilder builder, Dictionary<long, string> map,
-        Dictionary<long, string> fallback)
+        Dictionary<long, string> fallback, bool setName)
     {
         foreach (var display in GameData.RogueMiracleData.Values)
         {
@@ -195,7 +195,7 @@ public static class HandbookGenerator
                     : $"[{display.MiracleName.Hash}]";
             builder.AppendLine(display.MiracleID + ": " + name);
 
-            if (name != $"[{display.MiracleName.Hash}]") display.Name = name;
+            if (setName && name != $"[{display.MiracleName.Hash}]") display.Name = name;
         }
     }
 

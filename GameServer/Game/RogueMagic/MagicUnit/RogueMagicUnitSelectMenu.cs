@@ -92,8 +92,8 @@ public class RogueMagicUnitSelectMenu(BaseRogueInstance rogue) : BaseRogueSelect
                 })
             },
             SelectHintId = 260002,
-            ABHPIGOGACI = 1,
-            OMPAAKLLLFD = 1
+            LGOAHPCLIFI = 1,
+            BOIEEFIPNEG = 1
         };
     }
 }

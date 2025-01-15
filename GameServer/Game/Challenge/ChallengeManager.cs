@@ -5,6 +5,7 @@ using EggLink.DanhengServer.Database.Inventory;
 using EggLink.DanhengServer.GameServer.Game.Player;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.Challenge;
 using EggLink.DanhengServer.Proto;
+using static EggLink.DanhengServer.GameServer.Plugin.Event.PluginEvent;
 
 namespace EggLink.DanhengServer.GameServer.Game.Challenge;
 
@@ -118,6 +119,8 @@ public class ChallengeManager(PlayerInstance player) : BasePlayerManager(player)
             instance.BossBuffs.Add((int)bossBuffs.BuffOne);
             instance.BossBuffs.Add((int)bossBuffs.BuffTwo);
         }
+
+        InvokeOnPlayerEnterChallenge(Player, instance);
 
         // Send packet
         await Player.SendPacket(new PacketStartChallengeScRsp(Player));

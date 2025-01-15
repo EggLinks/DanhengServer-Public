@@ -13,5 +13,6 @@ public class HandlerUpdateServerPrefsDataCsReq : Handler
         //connection.Player?.ServerPrefsData?.SetData((int)req.ServerPrefs.ServerPrefsId,
         //    req.ServerPrefs.Data.ToBase64());
         //await connection.SendPacket(new PacketUpdateServerPrefsDataScRsp(req.ServerPrefs.ServerPrefsId));
+        await ValueTask.CompletedTask;
     }
 }

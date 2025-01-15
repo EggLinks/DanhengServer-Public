@@ -2,6 +2,7 @@
 
 public enum MissionFinishTypeEnum
 {
+
     Unknown = 0,
     AutoFinish = 1,
     Talk = 2,
@@ -561,5 +562,23 @@ public enum MissionFinishTypeEnum
     RogueMagicFinishWithAllScepterFuncType = 260031,
     MusicRhythmFinishAllLevel = 260032,
     MusicRhythmFinishAnyLevel = 260033,
-    RogueMagicFinishExtraLayerWithDifficulty = 260034
+    RogueMagicFinishExtraLayerWithDifficulty = 260034,
+    RogueMagicPassAreaCnt = 260035,
+    TrainPartyBuildStepFinish = 270000,
+    TrainPartyBuildAreaUnlock = 270001,
+    TrainPartyBuildRoomLevel = 270002,
+    TrainPartyPlaceDynamicProp = 270003,
+    TrainPartyBuildAreaFinish = 270004,
+    TrainPartyBuildAreaProgress = 270005,
+    GroupPropertyValue = 270006,
+    TrainPartyBuildAreaIdListFinish = 270007,
+    TrainPartyUseCard = 270008,
+    TrainPartyPassengerStatRank = 270009,
+    TrainPartyTrigerGridType = 270010,
+    TrainPartyGetMeetingSkillCnt = 270011,
+    TrainPartyMettingScore = 270012,
+    TrainPartyPassengerChallengeTimes = 270013,
+    TrainPartyUnlockPassengerNum = 270014,
+    TrainPartyTrigerEvent = 270015,
+    RogueTournFinishWithDifficultyCompExCnt = 270016
 }

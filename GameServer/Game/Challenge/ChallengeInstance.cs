@@ -169,7 +169,7 @@ public class ChallengeInstance
                 {
                     BuffId = (uint)BossBuffs[1]
                 },
-                CPNMHNAFDJM = true
+                BCMDAAKCNBA = true
             };
 
             foreach (var lineupAvatar in Player.LineupManager?.GetExtraLineup(ExtraLineupType.LineupChallenge)
@@ -201,7 +201,7 @@ public class ChallengeInstance
             {
                 var avatar = Player.AvatarManager?.GetAvatar(lineupAvatar.BaseAvatarId);
                 if (avatar == null) continue;
-                proto.BossInfo.FirstLineup.Add((uint)avatar.GetAvatarId());
+                proto.BossInfo.SecondLineup.Add((uint)avatar.GetAvatarId());
                 var equip = Player.InventoryManager?.GetItem(0, avatar.GetCurPathInfo().EquipId,
                     ItemMainTypeEnum.Equipment);
                 if (equip != null)

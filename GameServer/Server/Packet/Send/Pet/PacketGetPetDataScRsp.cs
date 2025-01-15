@@ -14,7 +14,7 @@ public class PacketGetPetDataScRsp : BasePacket
             CurPetId = (uint)player.Data.Pet
         };
 
-        foreach (var pet in GameData.PetData.Values) proto.PetIdList.Add((uint)pet.PetID);
+        foreach (var pet in GameData.PetData.Values) proto.UnlockedPetId.Add((uint)pet.PetID);
 
         SetData(proto);
     }

@@ -253,7 +253,7 @@ public class RogueInstance : BaseRogueInstance
             RogueLineupInfo = ToLineupInfo(),
             RogueBuffInfo = ToBuffInfo(),
             VirtualItemInfo = ToVirtualItemInfo(),
-            RoomMap = ToMapInfo(),
+            RogueMap = ToMapInfo(),
             ModuleInfo = new RogueModuleInfo
             {
                 ModuleIdList = { 1, 2, 3, 4, 5 }

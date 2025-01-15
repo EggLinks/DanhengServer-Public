@@ -7,6 +7,7 @@ public class RelicSubAffixConfigExcel : ExcelResource
     public int AffixID { get; set; }
 
     public int StepNum { get; set; }
+    public string? Property { get; set; }
 
     public override int GetId()
     {

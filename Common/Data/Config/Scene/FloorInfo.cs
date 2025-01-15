@@ -25,6 +25,8 @@ public class FloorInfo
 
     [JsonIgnore] public int StartGroupID { get; set; }
 
+    [JsonIgnore] public List<FloorSavedValueInfo> FloorSavedValue { get; set; } = [];
+
     public AnchorInfo? GetAnchorInfo(int groupId, int anchorId)
     {
         Groups.TryGetValue(groupId, out var group);
@@ -41,37 +43,49 @@ public class FloorInfo
 
         foreach (var dimension in DimensionList) dimension.OnLoad(this);
 
+        FloorSavedValue.AddRange(SavedValues);
         // Cache anchors
         foreach (var group in Groups.Values)
-        foreach (var prop in group.PropList)
-            // Check if prop can be teleported to
-            if (prop.AnchorID > 0)
-            {
-                // Put inside cached teleport list to send to client when they request map info
-                CachedTeleports.TryAdd(prop.MappingInfoID, prop);
-                UnlockedCheckpoints.Add(prop);
-
-                // Force prop to be in the unlocked state
-                prop.State = PropStateEnum.CheckPointEnable;
-            }
-            else if (!string.IsNullOrEmpty(prop.InitLevelGraph))
-            {
-                var json = prop.InitLevelGraph;
-
-                // Hacky way to setup prop triggers
-                if (json.Contains("Maze_GroupProp_OpenTreasure_WhenMonsterDie"))
+        {
+            foreach (var condition in group.SavedValueCondition.Conditions.Where(x =>
+                         SavedValues.Find(s => s.Name == x.SavedValueName) == null))
+                FloorSavedValue.Add(new FloorSavedValueInfo
                 {
-                    //prop.Trigger = new TriggerOpenTreasureWhenMonsterDie(group.Id);
-                }
-                else if (json.Contains("Common_Console"))
-                {
-                    prop.CommonConsole = true;
-                }
+                    DefaultValue = 0,
+                    ID = -1,
+                    Name = condition.SavedValueName
+                });
 
-                // Clear for garbage collection
-                prop.ValueSource = null;
-                prop.InitLevelGraph = null;
-            }
+            foreach (var prop in group.PropList)
+                // Check if prop can be teleported to
+                if (prop.AnchorID > 0)
+                {
+                    // Put inside cached teleport list to send to client when they request map info
+                    CachedTeleports.TryAdd(prop.MappingInfoID, prop);
+                    UnlockedCheckpoints.Add(prop);
+
+                    // Force prop to be in the unlocked state
+                    prop.State = PropStateEnum.CheckPointEnable;
+                }
+                else if (!string.IsNullOrEmpty(prop.InitLevelGraph))
+                {
+                    var json = prop.InitLevelGraph;
+
+                    // Hacky way to setup prop triggers
+                    if (json.Contains("Maze_GroupProp_OpenTreasure_WhenMonsterDie"))
+                    {
+                        //prop.Trigger = new TriggerOpenTreasureWhenMonsterDie(group.Id);
+                    }
+                    else if (json.Contains("Common_Console"))
+                    {
+                        prop.CommonConsole = true;
+                    }
+
+                    // Clear for garbage collection
+                    prop.ValueSource = null;
+                    prop.InitLevelGraph = null;
+                }
+        }
 
         Loaded = true;
     }

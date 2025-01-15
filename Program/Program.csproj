@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.29.1" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.29.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Command\Command.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\GameServer\GameServer.csproj" />
@@ -26,5 +31,4 @@
       <HintPath>..\DanhengKcpSharp\DanhengKcpSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
-
 </Project>

@@ -11,6 +11,7 @@ using EggLink.DanhengServer.GameServer.Server.Packet.Send.Lineup;
 using EggLink.DanhengServer.GameServer.Server.Packet.Send.Scene;
 using EggLink.DanhengServer.Proto;
 using EggLink.DanhengServer.Util;
+using static EggLink.DanhengServer.GameServer.Plugin.Event.PluginEvent;
 
 namespace EggLink.DanhengServer.GameServer.Game.Battle;
 
@@ -188,6 +189,8 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
             hitMonsterInstance.AddRange(targetList.Where(x => !x.IsAlive).Select(entityMonster =>
                 new HitMonsterInstance(entityMonster.EntityID, MonsterBattleType.DirectDieSkipBattle)));
 
+            InvokeOnPlayerEnterBattle(Player, battleInstance);
+
             await Player.SendPacket(new PacketSceneCastSkillScRsp(req.CastEntityId, battleInstance,
                 hitMonsterInstance));
             Player.SceneInstance?.ClearSummonUnit();
@@ -235,6 +238,8 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
         Player.QuestManager!.OnBattleStart(battleInstance);
 
         Player.BattleInstance = battleInstance;
+
+        InvokeOnPlayerEnterBattle(Player, battleInstance);
 
         await Player.SendPacket(new PacketSceneEnterStageScRsp(battleInstance));
         Player.SceneInstance?.ClearSummonUnit();
@@ -293,6 +298,8 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
         Player.BattleInstance = battleInstance;
         Player.QuestManager!.OnBattleStart(battleInstance);
 
+        InvokeOnPlayerEnterBattle(Player, battleInstance);
+
         await Player.SendPacket(new PacketStartCocoonStageScRsp(battleInstance, cocoonId, wave));
         Player.SceneInstance?.ClearSummonUnit();
     }
@@ -328,6 +335,8 @@ public class BattleManager(PlayerInstance player) : BasePlayerManager(player)
 
     public async ValueTask EndBattle(PVEBattleResultCsReq req)
     {
+        InvokeOnPlayerQuitBattle(Player, req);
+
         if (Player.BattleInstance == null)
         {
             await Player.SendPacket(new PacketPVEBattleResultScRsp());
