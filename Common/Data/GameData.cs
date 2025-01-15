@@ -357,4 +357,18 @@ public static class GameData
     }
 
     #endregion
+
+    #region TextMap
+
+    public static Dictionary<long, string> DefaultTextMapData { get; set; } = [];
+
+    public static Dictionary<long, string> FallbackTextMapData { get; set; } = [];
+
+    public static string GetText(long key)
+    {
+        return DefaultTextMapData.TryGetValue(key, out var value) ? value :
+                FallbackTextMapData.TryGetValue(key, out value) ? value : $"[{key}]";
+    }
+
+    #endregion
 }

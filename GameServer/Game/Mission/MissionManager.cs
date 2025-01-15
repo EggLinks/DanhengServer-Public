@@ -581,6 +581,20 @@ public class MissionManager : BasePlayerManager
         return subMission.SubMissionInfo;
     }
 
+    public string? GetMainMissionName(int missionId)
+    {
+        GameData.MainMissionData.TryGetValue(missionId, out var mainMission);
+        if(mainMission == null) return null;
+        return GameData.GetText(mainMission.Name.Hash);
+    }
+
+    public string? GetSubMissionName(int missionId)
+    {
+        GameData.SubMissionData.TryGetValue(missionId, out var subMission);
+        if(subMission == null) return null;
+        return GameData.GetText(subMission.TargetText.Hash);
+    }
+
     public List<int> GetRunningSubMissionIdList()
     {
         if (!ConfigManager.Config.ServerOption.EnableMission) return [];

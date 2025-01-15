@@ -93,6 +93,7 @@ public class WordTextEN
     public string RogueDiceSurfaceInfo => "Dice Surface Effect File";
     public string AdventureModifier => "AdventureModifier";
     public string AdventureModifierInfo => "AdventureModifier File";
+    public string TextMap => "TextMap";
 
     public string DatabaseAccount => "Database Account";
     public string Tutorial => "Tutorial";

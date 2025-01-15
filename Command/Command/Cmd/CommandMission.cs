@@ -84,11 +84,11 @@ public class CommandMission : ICommand
 
         foreach (var list in missionMap)
         {
-            await arg.SendMsg($"{I18NManager.Translate("Game.Command.Mission.MainMission")} {list.Key}：");
+            await arg.SendMsg($"{I18NManager.Translate("Game.Command.Mission.MainMission")} {list.Key}({mission.GetMainMissionName(list.Key)})：");
             var sb = new StringBuilder();
             foreach (var id in list.Value)
             {
-                sb.Append($"{id}、");
+                sb.Append($"{id}({mission.GetSubMissionName(id)})、");
 
                 if (!id.ToString().StartsWith("10")) continue;
                 possibleStuckIds.Add(id);
@@ -107,7 +107,7 @@ public class CommandMission : ICommand
             await arg.SendMsg(I18NManager.Translate("Game.Command.Mission.PossibleStuckMissions"));
 
             var sb = new StringBuilder();
-            foreach (var id in morePossibleStuckIds) sb.Append($"{id}、");
+            foreach (var id in morePossibleStuckIds) sb.Append($"{id}({mission.GetSubMissionName(id)})、");
 
             sb.Remove(sb.Length - 1, 1);
 
@@ -118,7 +118,7 @@ public class CommandMission : ICommand
             await arg.SendMsg(I18NManager.Translate("Game.Command.Mission.PossibleStuckMissions"));
 
             var sb = new StringBuilder();
-            foreach (var id in possibleStuckIds) sb.Append($"{id}、");
+            foreach (var id in possibleStuckIds) sb.Append($"{id}({mission.GetSubMissionName(id)})、");
 
             sb.Remove(sb.Length - 1, 1);
 

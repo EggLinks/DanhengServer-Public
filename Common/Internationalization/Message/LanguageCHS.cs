@@ -93,6 +93,7 @@ public class WordTextCHS
     public string RogueDiceSurfaceInfo => "骰面效果文件";
     public string AdventureModifier => "AdventureModifier";
     public string AdventureModifierInfo => "AdventureModifier文件";
+    public string TextMap => "TextMap文件";
 
     public string DatabaseAccount => "数据库账号";
     public string Tutorial => "教程";

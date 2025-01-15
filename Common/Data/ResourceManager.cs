@@ -51,6 +51,7 @@ public class ResourceManager
         LoadRogueTournRoomData();
         LoadChessRogueDiceSurfaceEffectData();
         LoadRogueMagicRoomData();
+        LoadTextMapData();
 
         Task.WaitAll(t1, t2, t3, t4, t5, t6, t7, t8);
     }
@@ -923,5 +924,53 @@ public class ResourceManager
             list.Add(room);
         else
             GameData.ChessRogueRoomData.Add(type, [room]);
+    }
+
+    public static void LoadTextMapData()
+    {
+        Logger.Info(I18NManager.Translate("Server.ServerInfo.LoadingItem",
+            I18NManager.Translate("Word.TextMap")));
+
+        var config = ConfigManager.Config;
+        var textMapPath = config.Path.ResourcePath + "/TextMap/TextMap" + config.ServerOption.Language + ".json";
+        var fallbackTextMapPath = config.Path.ResourcePath + "/TextMap/TextMap" + config.ServerOption.FallbackLanguage +
+                                  ".json";
+        Dictionary<long, string>? textMap = null;
+        Dictionary<long, string>? fallbackTextMap = null;
+
+        if(!File.Exists(textMapPath))
+        {
+            Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
+                I18NManager.Translate("Word.NotFound")));
+        }
+        else
+        {
+            try
+            {
+                textMap = JsonConvert.DeserializeObject<Dictionary<long, string>>(File.ReadAllText(textMapPath));
+            }
+            catch(Exception ex)
+            {
+                Logger.Error("Error in reading " + textMapPath, ex);
+            }
+        }
+        
+        if(!File.Exists(fallbackTextMapPath))
+        {
+            Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", fallbackTextMapPath,
+                I18NManager.Translate("Word.NotFound")));
+        }
+        else
+        {
+            try
+            {
+                fallbackTextMap = JsonConvert.DeserializeObject<Dictionary<long, string>>(File.ReadAllText(fallbackTextMapPath));
+            }
+            catch(Exception ex)
+            {
+                Logger.Error("Error in reading " + fallbackTextMapPath, ex);
+            }
+        }
+        return;
     }
 }
