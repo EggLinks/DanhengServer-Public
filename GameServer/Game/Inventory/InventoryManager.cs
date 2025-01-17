@@ -54,7 +54,7 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         switch (itemConfig.ItemMainType)
         {
             case ItemMainTypeEnum.Equipment:
-                if (Data.RelicItems.Count + 1 > GameConstants.INVENTORY_MAX_EQUIPMENT) // get the max equipment
+                if (Data.EquipmentItems.Count + 1 > GameConstants.INVENTORY_MAX_EQUIPMENT) // get the max equipment
                 {
                     await Player.SendPacket(new PacketRetcodeNotify(Retcode.RetEquipmentExceedLimit));
                     break;
